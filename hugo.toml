@@ -1,0 +1,64 @@
+baseURL = "https://dcorneschi.github.io/blog/"
+locale = "en"
+defaultContentLanguage = "en"
+title = "The Homelab Notebook"
+theme = "bootstrap-bp-hugo-theme"
+copyright = "Daniel Corneschi"
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+summaryLength = 70 # words in automatic summaries (default 70)
+
+[pagination]
+  pagerSize = 6
+
+[params]
+  description = "Notes on DevOps, infrastructure as code and the command line: Terraform, tmux and the tools I use every day."
+  startPageColumns = true
+  showPostSummary = true
+  alwaysExpandMenu = true
+  customDateFormat = "2006-01-02"
+  csscdn = ["https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@400;600;700&display=swap"]
+
+  [params.author]
+    name = "Daniel Corneschi"
+
+  [params.social]
+    github = "dcorneschi"
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    pageRef = "/posts"
+    weight = 10
+    [menu.main.params]
+      icon = "newspaper"
+
+  [[menu.footer]]
+    identifier = "categories"
+    name = "Categories"
+    pageRef = "/categories"
+    weight = 20
+    [menu.footer.params]
+      icon = "folder"
+
+  [[menu.footer]]
+    identifier = "tags"
+    name = "Tags"
+    pageRef = "/tags"
+    weight = 30
+    [menu.footer.params]
+      icon = "tags"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    style = "gruvbox-light"

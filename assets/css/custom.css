@@ -1,0 +1,59 @@
+/* Fonts (same as spech.de): Roboto for text, Oswald for headings */
+body {
+  font-family: "Roboto", sans-serif;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "Oswald", sans-serif;
+  font-weight: 500;
+}
+h5, h6, .h5, .h6 {
+  font-weight: 600;
+}
+
+/* Markdown tables, styled like Bootstrap's .table (Markdown can't add the class) */
+.card-text table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+}
+.card-text th, .card-text td {
+  padding: .5rem .75rem;
+  border: 1px solid var(--bs-border-color);
+  vertical-align: top;
+}
+.card-text thead th {
+  background-color: var(--bs-tertiary-bg);
+}
+.card-text tbody tr:nth-of-type(odd) {
+  background-color: rgba(var(--bs-emphasis-color-rgb), .03);
+}
+.card-text td code { word-break: break-word; }
+
+/* Narrow screens: scroll wide tables sideways instead of squeezing them */
+@media (max-width: 767.98px) {
+  .card-text table { display: block; overflow-x: auto; }
+  .card-text td code { white-space: nowrap; word-break: normal; }
+}
+
+/* Show more of each post on list pages (theme default: 4 lines) */
+.card-summary {
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+}
+
+/* Home page: every post box has the same content height. Short posts (Hello World)
+   show in full; longer ones are cut at that height and fade out. */
+.gridcards .card-text {
+  height: 12rem;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent);
+}
+
+/* Code blocks: light grey box with a dashed border (syntax colors: gruvbox-light) */
+pre, div.highlight > pre {
+  background-color: #f5f5f5 !important;
+  border: 1px dashed #adb5bd;
+  border-radius: .25rem;
+  padding: .75rem 1rem;
+}
