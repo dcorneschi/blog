@@ -22,7 +22,7 @@ It also calculates a new `h1:` hash for that package, because Terraform has a "h
 
 Both are **platform-specific**: the `linux_amd64` and `darwin_arm64` builds of the same provider version have different `zh:` and different `h1:` hashes.
 
-The dirhash (`h1`) is created from the list of `sha256sum` filenames. Once this list is sha256sum'd again, the resulting hash is taken in binary representation and then converted to Base64.
+The dirhash (`h1`) is created from the `sha256sum` output for all files. Once this list is sha256sum'd again, the resulting hash is taken in binary representation and then converted to Base64.
 
 
 ## Calculate h1 Hash
@@ -105,7 +105,7 @@ Using `xxd` and `base64` instead of the Ruby one-liner:
 cd .terraform/providers/registry.terraform.io/bpg/proxmox/0.116.0/linux_amd64
 
 # Generate the sorted sha256sum list and hash it
-sha256sum $(ls | sort) | sha256sum | awk '{print $1}' \
+sha256sum $(ls | LC_ALL=C sort) | sha256sum | awk '{print $1}' \
   | xxd -r -p | base64
 # 6E3NlPgUs+EPAeL/XcsjTRXqQH1kwTmaW8wI8kdv7LM=
 ```
@@ -113,7 +113,7 @@ sha256sum $(ls | sort) | sha256sum | awk '{print $1}' \
 Or using Python:
 
 ```sh
-sha256sum $(ls | sort) | sha256sum | awk '{print $1}' \
+sha256sum $(ls | LC_ALL=C sort) | sha256sum | awk '{print $1}' \
   | python3 -c "import sys,base64,binascii; print(base64.b64encode(binascii.unhexlify(sys.stdin.read().strip())).decode())"
 # 6E3NlPgUs+EPAeL/XcsjTRXqQH1kwTmaW8wI8kdv7LM=
 ```
@@ -150,7 +150,7 @@ The algorithm (`Hash1`) works as follows:
 1. List all files in the directory recursively
 2. Sort the file list alphabetically
 3. For each file, compute SHA256 of its content
-4. Write a line in the format: `<hex-sha256>  <filename>\n` (two spaces separator)
+4. Write a line in the format: `<hex-sha256>  <filename>\n` (two-space separator)
 5. SHA256 the entire concatenated output from step 4
 6. Base64-encode the final hash
 7. Prefix with `h1:`
@@ -185,7 +185,7 @@ The `zh:` scheme is simpler — it's a plain SHA256 of the `.zip` file:
 
 ```go
 func PackageHashLegacyZipSHA(loc PackageLocalArchive) (Hash, error) {
-    f, _ := os.Open(archivePath)
+    f, _ := os.Open(string(loc))
     defer f.Close()
     h := sha256.New()
     io.Copy(h, f)
@@ -193,7 +193,7 @@ func PackageHashLegacyZipSHA(loc PackageLocalArchive) (Hash, error) {
 }
 ```
 
-The result is `zh:` followed by the lowercase hex-encoded SHA256, which is designed to exactly match the format used in the registry API's `SHA256SUMS` file.
+The result is `zh:` followed by the lowercase hex-encoded SHA256, which is designed to exactly match the format used in the provider's `SHA256SUMS` file.
 
 ### Hash Verification Logic
 
@@ -317,9 +317,9 @@ terraform providers lock \
   -platform=linux_amd64 \
   -platform=darwin_arm64 \
   -platform=darwin_amd64
-# - Obtained bpg/proxmox checksums for linux_amd64; Additional checksums for this platform are now tracked in the lock file
-# - Obtained bpg/proxmox checksums for darwin_arm64; Additional checksums for this platform are now tracked in the lock file
-# - Obtained bpg/proxmox checksums for darwin_amd64; Additional checksums for this platform are now tracked in the lock file
+# - Obtained bpg/proxmox checksums for linux_amd64; This was a new provider and the checksums for this platform are now tracked in the lock file
+# - Obtained bpg/proxmox checksums for darwin_arm64; This was a new provider and the checksums for this platform are now tracked in the lock file
+# - Obtained bpg/proxmox checksums for darwin_amd64; This was a new provider and the checksums for this platform are now tracked in the lock file
 #
 # Success! Terraform has updated the lock file.
 ```

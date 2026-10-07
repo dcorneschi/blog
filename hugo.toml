@@ -25,6 +25,7 @@ summaryLength = 70 # words in automatic summaries (default 70)
 
   [params.social]
     github = "dcorneschi"
+    twitter = "dcorneschi" # X: https://x.com/dcorneschi
 
 [menu]
   [[menu.main]]

@@ -1,6 +1,7 @@
 ---
 title: "About"
 type: page
+author: "" # no byline on this page (hugo.toml sets one for every post)
 description: "Daniel Corneschi: Linux systems engineer at NTT Data, writing about homelab infrastructure, automation and the tools behind them."
 menus:
   main:
@@ -49,10 +50,11 @@ Topics I care about:
 ## Currently Reading
 
 <div class="d-flex flex-column flex-sm-row align-items-start gap-3 mb-3">
-<img src="book-learning-git.jpg" alt="Cover of Learning Git by Anna Skoulikari" width="220" height="289" class="border" style="flex-shrink: 0">
+<img src="book.jpg" alt="Book I am currently reading" width="220" height="271" class="border" style="flex-shrink: 0">
 </div>
 
 ## Get in Touch
 
 - GitHub: [@dcorneschi](https://github.com/dcorneschi)
+- X: [@dcorneschi](https://x.com/dcorneschi)
 - If something here saved you some time, you can [buy me a coffee](https://www.buymeacoffee.com/dcorneschi).
