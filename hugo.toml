@@ -51,6 +51,13 @@ summaryLength = 70 # words in automatic summaries (default 70)
     [menu.footer.params]
       icon = "tags"
 
+# Byline under the title of every post (date · author · reading time)
+[[cascade]]
+  [cascade.params]
+    author = "Daniel Corneschi"
+  [cascade.target]
+    path = "/posts/**"
+
 [taxonomies]
   category = "categories"
   tag = "tags"
