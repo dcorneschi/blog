@@ -1,7 +1,7 @@
 baseURL = "https://blog.corneschi.ro/"
 locale = "en"
 defaultContentLanguage = "en"
-title = "The Homelab Notebook"
+title = "Daniel Corneschi"
 theme = "bootstrap-bp-hugo-theme"
 copyright = "Daniel Corneschi"
 enableRobotsTXT = true
