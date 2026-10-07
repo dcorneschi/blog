@@ -56,6 +56,7 @@ jobs:
           key: hugo-${{ env.HUGO_VERSION }}-${{ hashFiles('assets/**', 'themes/**/assets/**') }}
           restore-keys: hugo-${{ env.HUGO_VERSION }}-
 
+      # baseURL comes from hugo.toml (the Pages base_url output is http:// until HTTPS is enforced)
       - name: Build
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
@@ -63,8 +64,7 @@ jobs:
           hugo build \
             --gc \
             --minify \
-            --panicOnWarning \
-            --baseURL "${{ steps.pages.outputs.base_url || 'https://blog.corneschi.ro' }}/"
+            --panicOnWarning
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
