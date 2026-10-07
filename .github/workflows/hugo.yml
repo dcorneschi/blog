@@ -64,7 +64,7 @@ jobs:
             --gc \
             --minify \
             --panicOnWarning \
-            --baseURL "${{ steps.pages.outputs.base_url || 'https://dcorneschi.github.io/blog' }}/"
+            --baseURL "${{ steps.pages.outputs.base_url || 'https://blog.corneschi.ro' }}/"
 
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'

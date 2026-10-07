@@ -1,4 +1,4 @@
-baseURL = "https://dcorneschi.github.io/blog/"
+baseURL = "https://blog.corneschi.ro/"
 locale = "en"
 defaultContentLanguage = "en"
 title = "The Homelab Notebook"
