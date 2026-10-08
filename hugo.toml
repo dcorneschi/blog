@@ -36,6 +36,14 @@ summaryLength = 70 # words in automatic summaries (default 70)
     [menu.main.params]
       icon = "newspaper"
 
+  [[menu.main]]
+    identifier = "cheatsheet"
+    name = "Cheatsheet"
+    pageRef = "/cheatsheet"
+    weight = 15
+    [menu.main.params]
+      icon = "book"
+
   [[menu.footer]]
     identifier = "categories"
     name = "Categories"
@@ -57,7 +65,7 @@ summaryLength = 70 # words in automatic summaries (default 70)
   [cascade.params]
     author = "Daniel Corneschi"
   [cascade.target]
-    path = "/posts/**"
+    path = "/{posts,cheatsheet}/**"
 
 [taxonomies]
   category = "categories"
