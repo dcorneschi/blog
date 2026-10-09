@@ -24,13 +24,13 @@ summaryLength = 70 # words in automatic summaries (default 70)
     name = "Daniel Corneschi"
 
   # Comments via giscus (GitHub Discussions), see layouts/_partials/comments.html.
-  # Off until categoryId is set: enable Discussions on the repo, install the giscus app,
-  # then take the category ID from https://giscus.app. Hide on one post with `comments: false`.
+  # Needs Discussions enabled and the giscus app installed on the repo; the category IDs
+  # are listed at https://giscus.app. Hide on one post with `comments: false`.
   [params.giscus]
     repo = "dcorneschi/blog"
     repoId = "R_kgDOU__bRQ"
-    category = "Comments"
-    categoryId = ""
+    category = "Announcements"
+    categoryId = "DIC_kwDOU__bRc4DHca3"
     mapping = "pathname"
 
   [params.social]
