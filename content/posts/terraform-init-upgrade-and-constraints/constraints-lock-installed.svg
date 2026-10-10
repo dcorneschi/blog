@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Constraints, lock file and installed providers</title>
+  <desc id="d">The version constraint in the .tf files (version = "~> 5.40") is what you allow. terraform init -upgrade resolves the newest version within the constraint and records it in .terraform.lock.hcl (version = "5.100.0" with its hashes); that is what was chosen, and it is committed. Plain terraform init downloads exactly the locked version into .terraform/providers (terraform-provider-aws_v5.100.0_x5); that is what is installed, and the directory is gitignored. Plain terraform init never changes a locked version: if the constraint no longer allows it, init fails and asks for -upgrade. It does add providers that are new in the configuration to the lock file.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .tb   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; fill: #212529; }
+      .cmd  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 12px; fill: #495057; }
+      .big  { font-size: 16px; font-weight: 700; }
+      .lne  { stroke: #495057; stroke-width: 2; fill: none; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#ffffff"/>
+
+  <!-- 1: constraints -->
+  <rect class="box" x="40" y="20" width="520" height="104" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tb" x="60" y="46">.tf files: required_providers</text>
+  <text class="m" x="60" y="74">aws = {</text>
+  <text class="m" x="84" y="92">source  = "hashicorp/aws"</text>
+  <text class="m" x="84" y="110">version = "~&gt; 5.40"</text>
+  <text class="big" x="590" y="62" style="fill:#495057">What you ALLOW</text>
+  <text class="d" x="590" y="84">any 5.x from 5.40 on, never 6.0</text>
+  <text class="d" x="590" y="102">you edit it · committed</text>
+
+  <path class="lne" d="M140,126 V198"/>
+  <text class="cmd" x="160" y="152">terraform init -upgrade</text>
+  <text class="d" x="160" y="172">picks the newest version the constraint allows</text>
+  <text class="d" x="160" y="188">and rewrites the lock file entry</text>
+
+  <!-- 2: lock file -->
+  <rect class="box" x="40" y="200" width="520" height="104" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="60" y="226">.terraform.lock.hcl</text>
+  <text class="m" x="60" y="254">provider "registry.terraform.io/hashicorp/aws" {</text>
+  <text class="m" x="84" y="272">version     = "5.100.0"</text>
+  <text class="m" x="84" y="290">constraints = "~&gt; 5.40"</text>
+  <text class="big" x="590" y="242" style="fill:#0a58ca">What was CHOSEN</text>
+  <text class="d" x="590" y="264">exact version + checksums</text>
+  <text class="d" x="590" y="282">written by Terraform · committed</text>
+
+  <path class="lne" d="M140,306 V378"/>
+  <text class="cmd" x="160" y="332">terraform init</text>
+  <text class="d" x="160" y="352">downloads exactly the locked version, every time,</text>
+  <text class="d" x="160" y="368">on every machine and in CI</text>
+
+  <!-- 3: installed -->
+  <rect class="box" x="40" y="380" width="520" height="86" rx="8" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="tb" x="60" y="406">.terraform/providers/</text>
+  <text class="m" x="60" y="432">registry.terraform.io/hashicorp/aws/5.100.0/</text>
+  <text class="m" x="84" y="452">linux_amd64/terraform-provider-aws_v5.100.0_x5</text>
+  <text class="big" x="590" y="422" style="fill:#146c43">What's INSTALLED</text>
+  <text class="d" x="590" y="444">the provider binary · local cache</text>
+  <text class="d" x="590" y="462">gitignored · rebuilt by terraform init</text>
+
+  <!-- notes -->
+  <rect class="box" x="40" y="486" width="820" height="60" rx="8" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="d" x="60" y="510" style="fill:#212529">Plain terraform init never changes a locked version. If the constraint no longer allows it, init fails with</text>
+  <text class="d" x="60" y="528" style="fill:#212529">"locked provider … does not match configured version constraint; must use terraform init -upgrade". It does add new providers to the lock file.</text>
+</svg>

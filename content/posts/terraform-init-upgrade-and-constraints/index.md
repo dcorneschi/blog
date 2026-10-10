@@ -406,28 +406,7 @@ New syntax features, state format changes, and provider protocol versions can al
 
 ## Relationship Between Constraints, Lock File, and -upgrade
 
-```
-┌─────────────────────────────────┐
-│  .tf files (constraints)        │  ← What you ALLOW
-│  version = "~> 5.40"            │
-└────────────────┬────────────────┘
-                 │
-                 │  terraform init -upgrade
-                 │  (resolves newest within constraints)
-                 ▼
-┌─────────────────────────────────┐
-│  .terraform.lock.hcl            │  ← What was CHOSEN
-│  version = "5.100.0"            │
-└────────────────┬────────────────┘
-                 │
-                 │  terraform init
-                 │  (downloads exactly what's locked)
-                 ▼
-┌─────────────────────────────────┐
-│  .terraform/providers/          │  ← What's INSTALLED
-│  terraform-provider-aws_v5.100.0│
-└─────────────────────────────────┘
-```
+[![The constraint in the .tf files (version = "~> 5.40") is what you allow; terraform init -upgrade records the newest allowed version (5.100.0) in .terraform.lock.hcl, what was chosen; plain terraform init installs exactly that version into .terraform/providers, what is installed](constraints-lock-installed.svg)](constraints-lock-installed.svg "Open the diagram full size")
 
 
 ## Key Takeaways

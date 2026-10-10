@@ -300,24 +300,7 @@ Even after `init -upgrade`, module versions are not recorded in `.terraform.lock
 
 ## Decision Flowchart
 
-```
-Need to refresh dependencies?
-│
-├── Only modules changed?
-│   ├── Yes → terraform get -update
-│   └── No  ↓
-│
-├── Providers need updating?
-│   ├── Yes → terraform init -upgrade
-│   └── No  ↓
-│
-├── Backend config changed?
-│   ├── Yes → terraform init -reconfigure (or -migrate-state)
-│   └── No  ↓
-│
-└── Just need to install what's locked?
-    └── Yes → terraform init
-```
+[![Which command: only modules need refreshing, terraform get -update; providers need updating, terraform init -upgrade; backend configuration changed, terraform init -migrate-state, or -reconfigure only if the new location already has the state; otherwise plain terraform init](which-command.svg)](which-command.svg "Open the diagram full size")
 
 
 ## Key Takeaways
