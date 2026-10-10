@@ -29,10 +29,31 @@ h5, h6, .h5, .h6 {
 }
 .card-text td code { word-break: break-word; }
 
-/* Narrow screens: scroll wide tables sideways instead of squeezing them */
+/* Narrow screens.
+   Tables with 3+ columns (comparisons) scroll sideways instead of being squeezed.
+   2-column tables (Command | Details in the cheatsheets) become one block per row:
+   the first cell (the command) on top, the second (its description) below it. */
 @media (max-width: 767.98px) {
-  .card-text table { display: block; overflow-x: auto; }
-  .card-text td code { white-space: nowrap; word-break: normal; }
+  .card-text table:has(th:nth-child(3)) { display: block; overflow-x: auto; }
+  .card-text table:has(th:nth-child(3)) td code { white-space: nowrap; word-break: normal; }
+
+  .card-text table:not(:has(th:nth-child(3))),
+  .card-text table:not(:has(th:nth-child(3))) tbody,
+  .card-text table:not(:has(th:nth-child(3))) tr,
+  .card-text table:not(:has(th:nth-child(3))) td { display: block; width: 100%; }
+  .card-text table:not(:has(th:nth-child(3))) thead { display: none; }
+  .card-text table:not(:has(th:nth-child(3))) tr {
+    border: 1px solid var(--bs-border-color);
+    border-bottom: none;
+  }
+  .card-text table:not(:has(th:nth-child(3))) tr:last-child { border-bottom: 1px solid var(--bs-border-color); }
+  .card-text table:not(:has(th:nth-child(3))) td { border: none; padding: .35rem .75rem; }
+  .card-text table:not(:has(th:nth-child(3))) td:first-child { padding-bottom: 0; }
+  /* Long commands wrap (at spaces, or after a hyphen when a part doesn't fit); copying is unaffected */
+  .card-text table:not(:has(th:nth-child(3))) td:first-child code {
+    white-space: normal; overflow-wrap: break-word; word-break: normal; font-size: .8125em;
+  }
+  .card-text table:not(:has(th:nth-child(3))) td + td { color: var(--bs-secondary-color); }
 }
 
 /* Show more of each post on list pages (theme default: 4 lines) */
