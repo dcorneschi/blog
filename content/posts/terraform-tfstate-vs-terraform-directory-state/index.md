@@ -384,7 +384,7 @@ terraform {
 
 During a run, Terraform creates `prod/terraform.tfstate.tflock` next to the state object and deletes it when done. The bucket needs no extra setup and no DynamoDB table.
 
-The older `dynamodb_table` argument still works, but now produces:
+The older `dynamodb_table` argument still works, but since Terraform 1.15 it produces:
 
 ```
 Warning: Deprecated Parameter
