@@ -309,6 +309,4 @@ Keep the single quotes around the `$wgSVGConverters` value: `$path`, `$width`, `
 
 ## Links
 
-- [Install MediaWiki on Ubuntu (ubuntushell.com)](https://ubuntushell.com/install-mediawiki-on-ubuntu)
 - [Manual:Installation guide](https://www.mediawiki.org/wiki/Manual:Installation_guide)
-- [Manual:$wgSVGConverters](https://www.mediawiki.org/wiki/Manual:$wgSVGConverters)
