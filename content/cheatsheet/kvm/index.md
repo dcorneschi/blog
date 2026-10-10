@@ -9,13 +9,13 @@ categories: ["Cheatsheet"]
 
 ## Architecture
 
-[![KVM architecture: libvirt starts one QEMU process per VM. An emulated e1000 NIC sends packets through QEMU in user space to a tap device; virtio-net with vhost-net sends them from the guest's virtqueues straight to the vhost-net thread in the host kernel. Tap devices are ports of a Linux bridge: br0 has the physical NIC as a port, virbr0 is routed and NATed by the host. QEMU uses the KVM module through /dev/kvm](kvm-architecture.svg)](kvm-architecture.svg "Open the diagram full size")
-
 - **libvirt** (`virsh`, `virt-install`, `virt-manager`) starts and manages one **QEMU** process per VM.
 - QEMU runs the guest's CPU through the **KVM** kernel module, via `ioctl()` calls on `/dev/kvm`. KVM uses the CPU's VT-x or AMD-V extensions.
 - **Emulated NIC (e1000, VM 1):** every packet goes through the NIC emulated by QEMU in user space, then to the VM's **tap** device in the host (`vnet0`, … in `virsh domiflist`).
 - **virtio-net (VM 2):** with **vhost-net**, which libvirt uses by default when `/dev/vhost-net` exists, packets go from the guest's virtqueues straight to a vhost-net kernel thread and the tap device. QEMU only sets it up, which is why virtio is much faster (see Recommended Settings).
 - **Bridge:** the tap devices are ports of a Linux bridge. With your own **`br0`**, the physical NIC is a port of the same bridge. libvirt's NAT network **`virbr0`** (`virsh net-info default`) has no physical port: the host routes and NATs its traffic (nftables or iptables) before it reaches the NIC.
+
+[![KVM architecture: libvirt starts one QEMU process per VM. An emulated e1000 NIC sends packets through QEMU in user space to a tap device; virtio-net with vhost-net sends them from the guest's virtqueues straight to the vhost-net thread in the host kernel. Tap devices are ports of a Linux bridge: br0 has the physical NIC as a port, virbr0 is routed and NATed by the host. QEMU uses the KVM module through /dev/kvm](kvm-architecture.svg)](kvm-architecture.svg "Open the diagram full size")
 
 ## Host Check
 
