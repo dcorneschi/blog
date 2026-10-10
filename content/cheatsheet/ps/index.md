@@ -19,6 +19,10 @@ categories: ["Cheatsheet"]
 
 > Mixing styles works but can change the output: `ps -fp 310,311` prints the UNIX full format, while `ps -fp 310 311` treats the second PID as a BSD-style argument and the columns change (a `STAT` column appears, `TIME` gets shorter). Stick to one style per command when possible.
 
+### Reading the Output
+
+[![A real ps aux line with every column labeled: USER, PID, %CPU (CPU time divided by run time), %MEM (RSS divided by total RAM), VSZ and RSS in KiB, TTY (? means no terminal), STAT (state letter plus flags, here Ss: a sleeping session leader), START, TIME (CPU time used) and COMMAND](ps-aux-columns.svg)](ps-aux-columns.svg "Open the diagram full size")
+
 ---
 
 ## Process I/O and Return Codes
@@ -34,6 +38,8 @@ Some processes don't read STDIN (they read files or data from the kernel), and s
 ---
 
 ## Signals
+
+[![Who sends each signal and its default action: Ctrl-c SIGINT, kill SIGTERM, kill -9 SIGKILL and a closed terminal SIGHUP terminate the process; Ctrl-backslash SIGQUIT ends it with a core dump; Ctrl-z SIGTSTP and kill -STOP SIGSTOP stop it; fg, bg and kill -CONT send SIGCONT to resume it. SIGKILL and SIGSTOP can't be caught](signals.svg)](signals.svg "Open the diagram full size")
 
 Each signal has a default action:
 
@@ -86,6 +92,8 @@ Background processes, or processes in another session, need a command:
 ---
 
 ## Process States
+
+[![Linux process states: fork creates a process in R (running or runnable); it moves to S while waiting for an event, to D during disk or NFS I/O, to T on SIGSTOP or Ctrl-z and back to R on SIGCONT; exit makes it a zombie (Z) until the parent calls wait](process-states.svg)](process-states.svg "Open the diagram full size")
 
 | State | Meaning |
 |-------|---------|
@@ -333,6 +341,8 @@ awk '/^Name/ {n=$2} /^VmSwap/ {print $2, n}' /proc/[0-9]*/status | sort -rn | he
 RSS counts shared memory (libraries, shared buffers) in every process that maps it, so a sum over many processes is higher than the memory really used.
 
 ### Zombies and Parents
+
+[![Process lifecycle: the parent calls fork, the child runs execve under the same PID, exits and stays a zombie until the parent's wait returns its exit status; if the parent exits first, the child is re-parented to PID 1, which reaps it when it exits](process-lifecycle.svg)](process-lifecycle.svg "Open the diagram full size")
 
 | Command | Description |
 |---------|-------------|
