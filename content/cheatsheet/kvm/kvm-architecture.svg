@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 754" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">KVM architecture with libvirt and network I/O</title>
+  <desc id="d">libvirt starts one QEMU process per VM. VM 1 has an emulated e1000 NIC: its packets go through the NIC emulated by QEMU in user space to a tap device (vnet0). VM 2 uses virtio-net with vhost-net: packets go from the guest's virtqueues straight to the vhost-net thread in the host kernel and its tap device (vnet1); QEMU only sets it up. Both tap devices are ports of a Linux bridge. With br0 the physical NIC is a port of the same bridge; with libvirt's NAT network virbr0, traffic is routed and NATed by the host (nftables or iptables) before the host NIC driver. QEMU uses the KVM kernel module through ioctl calls on /dev/kvm; KVM uses the CPU virtualization extensions VT-x or AMD-V.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#198754"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .t    { font-size: 13px; fill: #212529; text-anchor: middle; }
+      .tb   { font-size: 15px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .side { font-size: 14px; font-weight: 700; fill: #212529; }
+      .small{ font-size: 11px; fill: #495057; text-anchor: middle; }
+      .cmd  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #6c757d; }
+      .ln   { stroke: #495057; stroke-width: 1.5; fill: none; }
+      .lnd  { stroke: #495057; stroke-width: 1.5; fill: none; marker-start: url(#a); marker-end: url(#a); }
+      .lne  { stroke: #495057; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+      .fast { stroke: #198754; stroke-width: 2; fill: none; marker-start: url(#g); marker-end: url(#g); }
+      .ctl  { stroke: #6c757d; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="754" fill="#ffffff"/>
+
+  <!-- management layer -->
+  <rect class="box" x="300" y="14" width="300" height="34" rx="6" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="t" x="450" y="36">virsh · virt-install · virt-manager</text>
+  <path class="lne" d="M450,48 V68"/>
+  <rect class="box" x="270" y="70" width="360" height="40" rx="6" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="t" x="450" y="88" font-weight="700">libvirt daemon (libvirtd / virtqemud)</text>
+  <text class="small" x="450" y="103">starts and manages one QEMU process per VM</text>
+  <path class="lne" d="M330,110 V124 H280 V140"/>
+  <path class="lne" d="M570,110 V124 H720 V140"/>
+
+  <!-- VM 1: emulated e1000, data path through QEMU -->
+  <rect class="box" x="130" y="142" width="300" height="248" rx="10" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="280" y="163">QEMU process (VM 1)</text>
+  <rect class="box" x="146" y="174" width="268" height="152" rx="8" fill="#d1e7dd" stroke="#75b798"/>
+  <text class="tb" x="280" y="194">Guest OS</text>
+  <ellipse class="box" cx="206" cy="220" rx="34" ry="14" fill="#f8f9fa" stroke="#6c757d"/>
+  <text class="t" x="206" y="225">Apps</text>
+  <text class="small" x="404" y="232" style="text-anchor:end">user space</text>
+  <path d="M154,240 H406" stroke="#6c757d" stroke-width="1" stroke-dasharray="4 3"/>
+  <text class="small" x="404" y="254" style="text-anchor:end">kernel</text>
+  <rect class="box" x="180" y="264" width="200" height="46" rx="4" fill="#cfe2ff" stroke="#6ea8fe"/>
+  <text class="t" x="280" y="283">e1000 driver</text>
+  <text class="small" x="280" y="299">for an emulated Intel NIC</text>
+  <path class="lnd" d="M206,236 V262"/>
+  <rect class="box" x="180" y="338" width="200" height="40" rx="4" fill="#cfe2ff" stroke="#6ea8fe"/>
+  <text class="t" x="280" y="355">Emulated e1000 NIC</text>
+  <text class="small" x="280" y="370">QEMU, in user space</text>
+  <path class="lnd" d="M280,312 V336"/>
+
+  <!-- VM 2: virtio-net with vhost-net, data path in the host kernel -->
+  <rect class="box" x="570" y="142" width="300" height="248" rx="10" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="720" y="163">QEMU process (VM 2)</text>
+  <rect class="box" x="586" y="174" width="268" height="152" rx="8" fill="#d1e7dd" stroke="#75b798"/>
+  <text class="tb" x="720" y="194">Guest OS</text>
+  <ellipse class="box" cx="646" cy="220" rx="34" ry="14" fill="#f8f9fa" stroke="#6c757d"/>
+  <text class="t" x="646" y="225">Apps</text>
+  <text class="small" x="844" y="232" style="text-anchor:end">user space</text>
+  <path d="M594,240 H846" stroke="#6c757d" stroke-width="1" stroke-dasharray="4 3"/>
+  <text class="small" x="844" y="254" style="text-anchor:end">kernel</text>
+  <rect class="box" x="620" y="264" width="200" height="46" rx="4" fill="#cfe2ff" stroke="#6ea8fe"/>
+  <text class="t" x="720" y="283">virtio-net driver</text>
+  <text class="small" x="720" y="299">paravirtual, virtqueues</text>
+  <path class="lnd" d="M646,236 V262"/>
+  <rect class="box" x="590" y="338" width="160" height="40" rx="4" fill="#f8f9fa" stroke="#6ea8fe" stroke-dasharray="4 3"/>
+  <text class="t" x="670" y="355">virtio-net device</text>
+  <text class="small" x="670" y="370">QEMU: setup only</text>
+
+  <!-- ioctl to /dev/kvm -->
+  <text class="small" x="450" y="262">ioctl()</text>
+  <path class="ln" d="M430,276 H441 V408" marker-end="url(#a)"/>
+  <path class="ln" d="M570,276 H459 V408" marker-end="url(#a)"/>
+
+  <!-- user space / kernel boundary -->
+  <path d="M10,400 H890" stroke="#495057" stroke-width="2" stroke-dasharray="10 6"/>
+  <text class="side" x="14" y="392">User space</text>
+  <text class="side" x="14" y="424">Kernel</text>
+
+  <rect class="box" x="400" y="410" width="100" height="28" rx="4" fill="#f8f9fa" stroke="#6c757d" stroke-dasharray="4 3"/>
+  <text class="t" x="450" y="429" font-weight="700">/dev/kvm</text>
+  <text class="cmd" x="508" y="428">← virt-host-validate</text>
+
+  <!-- host kernel -->
+  <rect class="box" x="130" y="446" width="740" height="214" rx="10" fill="#f1f4e4" stroke="#b5c48a"/>
+  <text class="tb" x="854" y="648" style="text-anchor:end">Host OS (Linux kernel)</text>
+
+  <rect class="box" x="360" y="462" width="180" height="48" rx="4" fill="#e3b93c" stroke="#b8901e"/>
+  <text class="t" x="450" y="481" font-weight="700">KVM module</text>
+  <text class="small" x="450" y="499" fill="#343a40">kvm + kvm_intel / kvm_amd</text>
+  <path class="lne" d="M450,438 V460"/>
+
+  <!-- VM 1 tap -->
+  <rect class="box" x="220" y="470" width="120" height="36" rx="4" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="t" x="280" y="493">tap: vnet0</text>
+  <text class="cmd" x="258" y="526">virsh domiflist</text>
+  <path class="lnd" d="M280,380 V468"/>
+
+  <!-- VM 2: vhost-net + tap -->
+  <rect class="box" x="700" y="462" width="140" height="40" rx="4" fill="#d1e7dd" stroke="#198754"/>
+  <text class="t" x="770" y="479" font-weight="700">vhost-net</text>
+  <text class="small" x="770" y="495">kernel thread</text>
+  <path class="fast" d="M800,312 V460"/>
+  <text class="small" x="808" y="352" style="text-anchor:start" fill="#198754">virtqueues</text>
+  <path class="ctl" d="M670,380 V482 H698"/>
+  <text class="small" x="676" y="452" style="text-anchor:start">setup</text>
+  <rect class="box" x="700" y="536" width="140" height="28" rx="4" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="t" x="770" y="555">tap: vnet1</text>
+  <path class="fast" d="M770,504 V534"/>
+  <text class="cmd" x="692" y="534" style="text-anchor:end">virsh domiflist</text>
+
+  <!-- bridge: br0 (NIC is a port) or virbr0 (routed + NAT) -->
+  <rect class="box" x="360" y="560" width="180" height="32" rx="4" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="t" x="450" y="581">Linux bridge: br0 or virbr0</text>
+  <path class="ln" d="M250,508 V574 H358" marker-start="url(#a)" marker-end="url(#a)"/>
+  <path class="ln" d="M770,566 V580 H542" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text class="cmd" x="548" y="566">virsh net-info default</text>
+
+  <rect class="box" x="360" y="620" width="180" height="28" rx="4" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="t" x="450" y="639">Host NIC driver</text>
+  <path class="lnd" d="M450,594 V618"/>
+  <text class="small" x="458" y="611" style="text-anchor:start">br0: the NIC is a bridge port</text>
+
+  <rect class="box" x="150" y="604" width="150" height="44" rx="4" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="t" x="225" y="622">routing + NAT</text>
+  <text class="small" x="225" y="639">nftables / iptables</text>
+  <path class="ln" d="M358,586 H225 V602" marker-start="url(#a)" marker-end="url(#a)"/>
+  <path class="ln" d="M302,634 H358" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text class="small" x="292" y="598">virbr0 (NAT)</text>
+
+  <!-- hardware -->
+  <text class="side" x="14" y="714">Hardware</text>
+  <rect class="box" x="130" y="680" width="740" height="60" rx="8" fill="#ece6f5" stroke="#a993c9"/>
+  <ellipse class="box" cx="450" cy="710" rx="88" ry="18" fill="#ffffff" stroke="#6c757d"/>
+  <text class="t" x="450" y="715" font-weight="700">Physical NIC</text>
+  <text class="t" x="720" y="706">x86 CPU with</text>
+  <text class="t" x="720" y="723">VT-x / AMD-V</text>
+  <path class="lnd" d="M450,650 V690"/>
+</svg>
