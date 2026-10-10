@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 690" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Lightsail container service vs ECS on Fargate</title>
+  <desc id="d">Side by side, layer by layer. Entry: Lightsail has a built-in HTTPS endpoint, load balancer and TLS with up to four custom domains; on ECS you create the ALB or NLB, listener, target group and ACM certificate. Compute: Lightsail nodes are a power (nano 0.25 vCPU 0.5 GB to xlarge 4 vCPU 8 GB) times a scale of 1 to 20 nodes; ECS uses a service and task definition with CPU and memory per task. Scaling: manual on Lightsail, service auto scaling on ECS. Images: Lightsail's own registry or private ECR; ECS uses an ECR repository. Network: AWS-managed and not visible on Lightsail; your VPC, subnets and security groups on ECS. Storage: none on Lightsail; EFS and EBS volumes on ECS. Permissions: no IAM role for the app on Lightsail; task role and execution role on ECS. Price: fixed per node per month on Lightsail ($7 to $160 in eu-west-1); per vCPU-second and GB-second on ECS, plus the load balancer.</desc>
+  <style>
+    .box  { stroke-width: 1.5; }
+    .h    { font-size: 16px; font-weight: 700; fill: #212529; text-anchor: middle; }
+    .row  { font-size: 12px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+    .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+    .d    { font-size: 11px; fill: #495057; }
+    .mg   { fill: #d1e7dd; stroke: #75b798; }
+    .you  { fill: #fff8e1; stroke: #e0c46c; }
+    .na   { fill: #f8f9fa; stroke: #adb5bd; }
+  </style>
+
+  <rect width="900" height="690" fill="#ffffff"/>
+
+  <text class="h" x="322" y="30">Lightsail container service</text>
+  <text class="h" x="702" y="30">ECS on Fargate</text>
+
+  <!-- legend -->
+  <rect class="box mg" x="140" y="44" width="16" height="12" rx="2"/>
+  <text class="d" x="162" y="54">managed for you</text>
+  <rect class="box you" x="270" y="44" width="16" height="12" rx="2"/>
+  <text class="d" x="292" y="54">you configure</text>
+  <rect class="box na" x="380" y="44" width="16" height="12" rx="2"/>
+  <text class="d" x="402" y="54">limit or cost</text>
+
+  <!-- 1 entry -->
+  <text class="row" x="20" y="102">ENTRY</text>
+  <rect class="box mg" x="140" y="76" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="98">HTTPS endpoint, load balancer, TLS</text>
+  <text class="d" x="154" y="118">built in · up to 4 custom domains with a certificate</text>
+  <rect class="box you" x="520" y="76" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="98">ALB or NLB, listener, target group</text>
+  <text class="d" x="534" y="118">plus an ACM certificate · you create and wire them</text>
+
+  <!-- 2 compute -->
+  <text class="row" x="20" y="170">COMPUTE</text>
+  <rect class="box you" x="140" y="144" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="166">Nodes: power × scale</text>
+  <text class="d" x="154" y="186">nano 0.25 vCPU / 0.5 GB … xlarge 4 vCPU / 8 GB · 1–20 nodes</text>
+  <rect class="box you" x="520" y="144" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="166">ECS service + task definition</text>
+  <text class="d" x="534" y="186">CPU and memory per task, desired count, health checks</text>
+
+  <!-- 3 scaling -->
+  <text class="row" x="20" y="238">SCALING</text>
+  <rect class="box na" x="140" y="212" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="234">Manual</text>
+  <text class="d" x="154" y="254">change --power or --scale with update-container-service</text>
+  <rect class="box you" x="520" y="212" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="234">Service auto scaling</text>
+  <text class="d" x="534" y="254">target tracking on CPU, memory or request count</text>
+
+  <!-- 4 images -->
+  <text class="row" x="20" y="306">IMAGES</text>
+  <rect class="box mg" x="140" y="280" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="302">The service's own registry</text>
+  <text class="d" x="154" y="322">push-container-image · can also pull private ECR images</text>
+  <rect class="box you" x="520" y="280" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="302">Amazon ECR repository</text>
+  <text class="d" x="534" y="322">pulled with the task execution role</text>
+
+  <!-- 5 network -->
+  <text class="row" x="20" y="374">NETWORK</text>
+  <rect class="box mg" x="140" y="348" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="370">AWS-managed, not visible</text>
+  <text class="d" x="154" y="390">no VPC, subnets or security groups to set up</text>
+  <rect class="box you" x="520" y="348" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="370">Your VPC</text>
+  <text class="d" x="534" y="390">subnets, security groups, one ENI per task (awsvpc)</text>
+
+  <!-- 6 storage -->
+  <text class="row" x="20" y="442">STORAGE</text>
+  <rect class="box na" x="140" y="416" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="438">None: ephemeral only</text>
+  <text class="d" x="154" y="458">keep data in the managed database or a bucket</text>
+  <rect class="box you" x="520" y="416" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="438">EFS and EBS volumes</text>
+  <text class="d" x="534" y="458">mounted into the tasks</text>
+
+  <!-- 7 permissions -->
+  <text class="row" x="20" y="510">IAM</text>
+  <rect class="box na" x="140" y="484" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="506">No IAM role for your app</text>
+  <text class="d" x="154" y="526">AWS access means credentials in environment variables</text>
+  <rect class="box you" x="520" y="484" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="506">Task role + execution role</text>
+  <text class="d" x="534" y="526">AWS access without keys</text>
+
+  <!-- 8 price -->
+  <text class="row" x="20" y="578">PRICE</text>
+  <rect class="box na" x="140" y="552" width="365" height="56" rx="6"/>
+  <text class="tb" x="154" y="574">Fixed per node per month</text>
+  <text class="d" x="154" y="594">$7 (nano) … $160 (xlarge) in eu-west-1, × nodes</text>
+  <rect class="box na" x="520" y="552" width="365" height="56" rx="6"/>
+  <text class="tb" x="534" y="574">Per vCPU-second and GB-second</text>
+  <text class="d" x="534" y="594">plus the load balancer and data transfer</text>
+
+  <text class="d" x="140" y="640" style="fill:#212529">Lightsail: few decisions, a fixed price, but no VPC, volumes, IAM roles or auto scaling.</text>
+  <text class="d" x="140" y="660" style="fill:#212529">ECS on Fargate: every layer is yours to configure, and to pay for separately.</text>
+</svg>

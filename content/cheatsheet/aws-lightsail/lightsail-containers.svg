@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Deploying a container to a Lightsail container service</title>
+  <desc id="d">Build a local image (my-app:latest). aws lightsail push-container-image, which needs the lightsailctl plugin, uploads it to the container service's own registry and returns a reference such as :my-app.my-app.1; the number goes up with every push. create-container-service-deployment runs that image on the service's nodes (power small, scale 2) and publishes one container port on the public endpoint. The endpoint is an HTTPS URL on cs.amazonlightsail.com with a built-in load balancer and TLS.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .tb   { font-size: 14px; font-weight: 700; fill: #212529; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; fill: #212529; }
+      .cmd  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .lne  { stroke: #495057; stroke-width: 1.8; fill: none; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="420" fill="#ffffff"/>
+
+  <!-- row 1 -->
+  <rect class="box" x="20" y="20" width="230" height="90" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tb" x="36" y="44">1 · Local image</text>
+  <text class="m" x="36" y="68">my-app:latest</text>
+  <text class="d" x="36" y="90">built with docker build</text>
+
+  <path class="lne" d="M250,65 H408"/>
+  <text class="cmd" x="262" y="44">push-container-image</text>
+  <text class="d" x="262" y="88">--service-name my-app</text>
+  <text class="d" x="262" y="102">--label my-app</text>
+  <text class="d" x="262" y="126" style="fill:#b02a37;font-weight:700">needs the lightsailctl plugin</text>
+
+  <rect class="box" x="410" y="20" width="470" height="90" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="426" y="44">2 · Image in the service's own registry (not ECR)</text>
+  <text class="m" x="426" y="68" style="font-weight:700">:my-app.my-app.1</text>
+  <text class="d" x="426" y="90">:&lt;service&gt;.&lt;label&gt;.&lt;N&gt; — N goes up with every push</text>
+
+  <!-- arrow down -->
+  <path class="lne" d="M850,110 V170"/>
+  <text class="cmd" x="838" y="138" style="text-anchor:end">create-container-service-deployment</text>
+  <text class="d" x="838" y="156" style="text-anchor:end">containers: image ":my-app.my-app.1", ports {"80": "HTTP"}</text>
+
+  <!-- row 2 -->
+  <rect class="box" x="410" y="172" width="470" height="110" rx="8" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="tb" x="426" y="196">3 · Container service my-app</text>
+  <text class="d" x="426" y="216">create-container-service --power small --scale 2</text>
+  <rect class="box" x="426" y="228" width="140" height="40" rx="5" fill="#ffffff" stroke="#75b798"/>
+  <text class="d" x="440" y="246" style="font-weight:700;fill:#212529">node 1</text>
+  <text class="d" x="440" y="260">container "app"</text>
+  <rect class="box" x="580" y="228" width="140" height="40" rx="5" fill="#ffffff" stroke="#75b798"/>
+  <text class="d" x="594" y="246" style="font-weight:700;fill:#212529">node 2</text>
+  <text class="d" x="594" y="260">container "app"</text>
+  <text class="d" x="736" y="246">same image</text>
+  <text class="d" x="736" y="260">on every node</text>
+
+  <path class="lne" d="M408,227 H252"/>
+  <text class="d" x="262" y="214">--public-endpoint</text>
+  <text class="d" x="262" y="246">containerName "app",</text>
+  <text class="d" x="262" y="260">containerPort 80</text>
+
+  <rect class="box" x="20" y="172" width="230" height="110" rx="8" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="tb" x="36" y="196">4 · Public HTTPS endpoint</text>
+  <text class="m" x="36" y="220" style="font-size:11px">https://my-app.&lt;id&gt;.eu-west-1</text>
+  <text class="m" x="36" y="236" style="font-size:11px">.cs.amazonlightsail.com</text>
+  <text class="d" x="36" y="258">built-in load balancer + TLS,</text>
+  <text class="d" x="36" y="272">custom domains with a certificate</text>
+
+  <!-- notes -->
+  <rect class="box" x="20" y="306" width="860" height="96" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="d" x="36" y="330" style="fill:#212529;font-weight:700">Good to know</text>
+  <text class="d" x="36" y="350">• Each deployment replaces the running containers; a new push is only used after a new deployment that names the new :…N image.</text>
+  <text class="d" x="36" y="368">• Nodes have no persistent storage: keep data in the managed database, a bucket or another AWS service.</text>
+  <text class="d" x="36" y="386">• Scaling is manual: change --scale (number of nodes) or --power (size of each node) with update-container-service.</text>
+</svg>

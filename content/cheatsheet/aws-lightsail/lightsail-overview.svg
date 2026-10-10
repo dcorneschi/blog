@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 740" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How the Lightsail pieces fit together</title>
+  <desc id="d">A Lightsail DNS zone (created with create-domain, us-east-1 only) resolves names to a CDN distribution, a load balancer, an instance or a container service. A distribution (create-distribution) uses a load balancer, instance, bucket or container service as its origin. A load balancer with a TLS certificate (create-load-balancer) sends traffic to instances. Each instance (create-instances) can have a static IP, a firewall, attached disks and snapshots. Instances reach the managed database (create-relational-database) on its private endpoint and an object storage bucket (create-bucket) after set-resource-access-for-bucket. A container service (create-container-service) has its own HTTPS endpoint. peer-vpc connects Lightsail to your default VPC (EC2, RDS, ElastiCache) over private IPs, and export-snapshot moves an instance to EC2 as an AMI.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .tb   { font-size: 14px; font-weight: 700; fill: #212529; }
+      .tc   { font-size: 14px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .cmd  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #495057; }
+      .cmdc { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #495057; text-anchor: middle; }
+      .d    { font-size: 11px; fill: #495057; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .lne  { stroke: #495057; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+      .dsh  { stroke: #6c757d; stroke-width: 1.3; fill: none; stroke-dasharray: 5 4; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="740" fill="#ffffff"/>
+
+  <!-- internet + DNS -->
+  <rect class="box" x="330" y="12" width="240" height="30" rx="15" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tc" x="450" y="32">Internet: your users</text>
+  <path class="lne" d="M450,42 V60"/>
+  <rect class="box" x="310" y="62" width="280" height="46" rx="6" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tc" x="450" y="82">DNS zone</text>
+  <text class="cmdc" x="450" y="99">create-domain (us-east-1 only)</text>
+  <path class="dsh" d="M330,108 V124 H195 V138"/>
+  <path class="dsh" d="M570,108 V124 H705 V138"/>
+  <text class="dc" x="450" y="128">names resolve to</text>
+
+  <!-- CDN + load balancer -->
+  <rect class="box" x="60" y="140" width="270" height="56" rx="6" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="76" y="162">CDN distribution</text>
+  <text class="cmd" x="76" y="182">create-distribution</text>
+  <text class="d" x="60" y="214">origin: load balancer, instance,</text>
+  <text class="d" x="60" y="228">bucket or container service</text>
+
+  <rect class="box" x="570" y="140" width="270" height="56" rx="6" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="586" y="162">Load balancer + TLS certificate</text>
+  <text class="cmd" x="586" y="182">create-load-balancer</text>
+  <path class="lne" d="M330,168 H568"/>
+  <text class="dc" x="450" y="160">origin</text>
+
+  <!-- Lightsail region -->
+  <rect class="box" x="20" y="242" width="860" height="360" rx="10" fill="#f1f4e4" stroke="#b5c48a"/>
+  <text class="tb" x="36" y="264">Lightsail · one Region (e.g. eu-west-1)</text>
+
+  <!-- container service + bucket (left) -->
+  <rect class="box" x="40" y="282" width="260" height="70" rx="6" fill="#ffffff" stroke="#6ea8fe"/>
+  <text class="tb" x="56" y="304">Container service</text>
+  <text class="cmd" x="56" y="322">create-container-service</text>
+  <text class="d" x="56" y="340">nodes behind its own HTTPS endpoint</text>
+
+  <rect class="box" x="40" y="378" width="260" height="70" rx="6" fill="#ffffff" stroke="#adb5bd"/>
+  <text class="tb" x="56" y="400">Object storage bucket</text>
+  <text class="cmd" x="56" y="418">create-bucket</text>
+  <text class="d" x="56" y="436">files, media, backups</text>
+  <path class="dsh" d="M300,413 H348"/>
+  <text class="d" x="40" y="468">instance access:</text>
+  <text class="cmd" x="40" y="483">set-resource-access-for-bucket</text>
+
+  <!-- instances -->
+  <path class="lne" d="M705,196 V214 H470 V280"/>
+  <path class="lne" d="M705,196 V280"/>
+  <text class="cmd" x="482" y="236">attach-instances-to-load-balancer</text>
+
+  <rect class="box" x="350" y="282" width="240" height="196" rx="8" fill="#ffffff" stroke="#75b798"/>
+  <text class="tb" x="366" y="304">Instance</text>
+  <text class="cmd" x="366" y="320">create-instances</text>
+  <text class="d" x="366" y="346" style="font-weight:700">static IP</text>
+  <text class="cmd" x="366" y="360">allocate-static-ip</text>
+  <text class="d" x="366" y="382" style="font-weight:700">firewall</text>
+  <text class="cmd" x="366" y="396">open-instance-public-ports</text>
+  <text class="d" x="366" y="418" style="font-weight:700">extra disk</text>
+  <text class="cmd" x="366" y="432">create-disk + attach-disk</text>
+  <text class="d" x="366" y="454" style="font-weight:700">snapshots</text>
+  <text class="cmd" x="366" y="468">create-instance-snapshot</text>
+
+  <rect class="box" x="610" y="282" width="240" height="196" rx="8" fill="#ffffff" stroke="#75b798"/>
+  <text class="tb" x="626" y="304">Instance</text>
+  <text class="cmd" x="626" y="320">create-instances</text>
+  <text class="d" x="626" y="346">same building blocks:</text>
+  <text class="d" x="626" y="362">static IP, firewall, disks,</text>
+  <text class="d" x="626" y="378">snapshots, key pair</text>
+  <text class="d" x="626" y="410" style="font-weight:700">automatic snapshots</text>
+  <text class="cmd" x="626" y="424">enable-add-on AutoSnapshot</text>
+  <text class="d" x="626" y="446" style="font-weight:700">metrics and alarms</text>
+  <text class="cmd" x="626" y="460">put-alarm</text>
+
+  <!-- database -->
+  <path class="lne" d="M470,478 V514"/>
+  <path class="lne" d="M730,478 V514"/>
+  <text class="d" x="480" y="500">private endpoint</text>
+  <rect class="box" x="350" y="516" width="500" height="64" rx="6" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="tb" x="366" y="538">Managed database (MySQL 8.4 or PostgreSQL 13–18)</text>
+  <text class="cmd" x="366" y="556">create-relational-database</text>
+  <text class="d" x="366" y="572">private by default; can be made public</text>
+
+  <!-- outside Lightsail -->
+  <path class="lne" d="M600,602 V638"/>
+  <text class="cmd" x="610" y="624">peer-vpc</text>
+  <text class="d" x="670" y="624">private IPs</text>
+  <rect class="box" x="470" y="640" width="390" height="80" rx="8" fill="#ece6f5" stroke="#a993c9"/>
+  <text class="tb" x="486" y="662">Your default VPC in the same Region</text>
+  <text class="d" x="486" y="682">EC2 instances, RDS, ElastiCache, …</text>
+  <text class="d" x="486" y="700">reachable from Lightsail after peering</text>
+
+  <path class="lne" d="M200,602 V638"/>
+  <text class="cmd" x="210" y="624">export-snapshot</text>
+  <rect class="box" x="40" y="640" width="380" height="80" rx="8" fill="#ece6f5" stroke="#a993c9"/>
+  <text class="tb" x="56" y="662">Amazon EC2</text>
+  <text class="d" x="56" y="682">an instance snapshot becomes an AMI</text>
+  <text class="d" x="56" y="700">when you outgrow Lightsail</text>
+</svg>
