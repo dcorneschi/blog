@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 690" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">Lightsail container service vs ECS on Fargate</title>
-  <desc id="d">Side by side, layer by layer. Entry: Lightsail has a built-in HTTPS endpoint, load balancer and TLS with up to four custom domains; on ECS you create the ALB or NLB, listener, target group and ACM certificate. Compute: Lightsail nodes are a power (nano 0.25 vCPU 0.5 GB to xlarge 4 vCPU 8 GB) times a scale of 1 to 20 nodes; ECS uses a service and task definition with CPU and memory per task. Scaling: manual on Lightsail, service auto scaling on ECS. Images: Lightsail's own registry or private ECR; ECS uses an ECR repository. Network: AWS-managed and not visible on Lightsail; your VPC, subnets and security groups on ECS. Storage: none on Lightsail; EFS and EBS volumes on ECS. Permissions: no IAM role for the app on Lightsail; task role and execution role on ECS. Price: fixed per node per month on Lightsail ($7 to $160 in eu-west-1); per vCPU-second and GB-second on ECS, plus the load balancer.</desc>
+  <desc id="d">Side by side, layer by layer. Entry: Lightsail has a built-in HTTPS endpoint, load balancer and TLS with up to four custom domains; on ECS you create the ALB or NLB, listener, target group and ACM certificate. Compute: Lightsail nodes are a power (nano 0.25 vCPU 0.5 GB to xlarge 4 vCPU 8 GB) times a scale of 1 to 20 nodes; ECS uses a service and task definition with CPU and memory per task. Scaling: manual on Lightsail, service auto scaling on ECS. Images: Lightsail's own registry or private ECR; ECS uses an ECR repository. Network: AWS-managed and not visible on Lightsail; your VPC, subnets and security groups on ECS. Storage: none on Lightsail; EFS and EBS volumes on ECS. Permissions: no IAM role for the app on Lightsail; task role and execution role on ECS. Price: fixed per node per month on Lightsail ($7 to $160 in us-east-1); per vCPU-second and GB-second on ECS, plus the load balancer.</desc>
   <style>
     .box  { stroke-width: 1.5; }
     .h    { font-size: 16px; font-weight: 700; fill: #212529; text-anchor: middle; }
@@ -92,7 +92,7 @@
   <text class="row" x="20" y="578">PRICE</text>
   <rect class="box na" x="140" y="552" width="365" height="56" rx="6"/>
   <text class="tb" x="154" y="574">Fixed per node per month</text>
-  <text class="d" x="154" y="594">$7 (nano) … $160 (xlarge) in eu-west-1, × nodes</text>
+  <text class="d" x="154" y="594">$7 (nano) … $160 (xlarge) in us-east-1, × nodes</text>
   <rect class="box na" x="520" y="552" width="365" height="56" rx="6"/>
   <text class="tb" x="534" y="574">Per vCPU-second and GB-second</text>
   <text class="d" x="534" y="594">plus the load balancer and data transfer</text>

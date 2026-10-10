@@ -46,7 +46,7 @@
 
   <!-- Lightsail region -->
   <rect class="box" x="20" y="242" width="860" height="360" rx="10" fill="#f1f4e4" stroke="#b5c48a"/>
-  <text class="tb" x="36" y="264">Lightsail · one Region (e.g. eu-west-1)</text>
+  <text class="tb" x="36" y="264">Lightsail · one Region (e.g. us-east-1)</text>
 
   <!-- container service + bucket (left) -->
   <rect class="box" x="40" y="282" width="260" height="70" rx="6" fill="#ffffff" stroke="#6ea8fe"/>

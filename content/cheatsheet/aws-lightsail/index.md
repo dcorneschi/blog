@@ -23,6 +23,18 @@ Amazon Lightsail is a simplified compute service offering virtual private server
 | VPC peering | Yes (to full AWS VPC) | Native |
 | Instance types | Predefined bundles | Hundreds of types |
 
+## Region
+
+The examples use **us-east-1** (zones `us-east-1a` to `us-east-1f`). Lightsail commands go to your CLI's default region, so if that is another region, set it first, or a zone like `us-east-1a` is rejected with `The given Availability Zone is invalid`:
+
+```bash
+export AWS_REGION=us-east-1            # this shell only
+aws configure set region us-east-1     # or change the profile's default
+aws configure get region               # check
+```
+
+Alternatively, add `--region us-east-1` to each command. Blueprint and bundle IDs can differ between regions: list them with `get-blueprints` and `get-bundles` in the region you use.
+
 ## Instances
 
 ### Create Instance
@@ -34,24 +46,36 @@ aws lightsail get-blueprints --query 'blueprints[].{id:blueprintId,name:name,typ
 # List available bundles (instance plans)
 aws lightsail get-bundles --query 'bundles[].{id:bundleId,cpu:cpuCount,ram:ramSizeInGb,disk:diskSizeInGb,price:price}' --output table
 
-# Create instance
+# Create instance (nano_3_0 is the cheapest plan with a public IPv4: $5/month in us-east-1;
+# nano_ipv6_3_0 is $3.50 but IPv6-only, so you need IPv6 to reach it)
 aws lightsail create-instances \
   --instance-names my-instance \
-  --availability-zone eu-west-1a \
+  --availability-zone us-east-1a \
   --blueprint-id ubuntu_22_04 \
-  --bundle-id medium_3_0 \
+  --bundle-id nano_3_0 \
   --key-pair-name my-keypair
 
-# Create instance with user-data
+# Create instance with user-data (single quotes: in double quotes an interactive
+# bash expands the ! in #!/bin/bash and fails with "event not found")
 aws lightsail create-instances \
   --instance-names web-server \
-  --availability-zone eu-west-1a \
+  --availability-zone us-east-1a \
   --blueprint-id ubuntu_22_04 \
-  --bundle-id small_3_0 \
-  --user-data "#!/bin/bash
+  --bundle-id nano_3_0 \
+  --user-data '#!/bin/bash
 apt update && apt install -y nginx
-systemctl enable --now nginx"
+systemctl enable --now nginx'
+
+# Or keep the script in a file
+aws lightsail create-instances \
+  --instance-names web-server \
+  --availability-zone us-east-1a \
+  --blueprint-id ubuntu_22_04 \
+  --bundle-id nano_3_0 \
+  --user-data file://user-data.sh
 ```
+
+The script runs once as root on the first boot; its output is in `/var/log/cloud-init-output.log` on the instance.
 
 ### Manage Instances
 
@@ -87,7 +111,7 @@ aws lightsail get-instance-access-details --instance-name my-instance
 | xlarge | 4 | 16 GB | 320 GB | 6 TB | $84 | $80 |
 | 2xlarge | 8 | 32 GB | 640 GB | 7 TB | $164 | $160 |
 
-> Linux prices for eu-west-1 from the AWS price list (October 2026), region-dependent. Transfer is included in the monthly cost.
+> Linux prices for us-east-1 from the AWS price list (October 2026), region-dependent. Transfer is included in the monthly cost.
 
 ## Static IPs
 
@@ -169,9 +193,9 @@ aws lightsail get-instance-snapshots --query 'instanceSnapshots[].{name:name,sta
 # Create instance from snapshot
 aws lightsail create-instances-from-snapshot \
   --instance-names restored-instance \
-  --availability-zone eu-west-1a \
+  --availability-zone us-east-1a \
   --instance-snapshot-name my-snapshot-20240101 \
-  --bundle-id medium_3_0
+  --bundle-id nano_3_0
 
 # Delete snapshot
 aws lightsail delete-instance-snapshot --instance-snapshot-name my-snapshot-20240101
@@ -191,7 +215,7 @@ aws lightsail disable-add-on --resource-name my-instance --add-on-type AutoSnaps
 # Create additional disk
 aws lightsail create-disk \
   --disk-name my-data-disk \
-  --availability-zone eu-west-1a \
+  --availability-zone us-east-1a \
   --size-in-gb 64
 
 # Attach disk to instance
@@ -221,7 +245,7 @@ aws lightsail delete-disk --disk-name my-data-disk
 # Create database
 aws lightsail create-relational-database \
   --relational-database-name my-db \
-  --availability-zone eu-west-1a \
+  --availability-zone us-east-1a \
   --relational-database-blueprint-id mysql_8_4 \
   --relational-database-bundle-id micro_2_0 \
   --master-database-name myapp \
@@ -256,7 +280,7 @@ aws lightsail delete-relational-database --relational-database-name my-db
 | PostgreSQL 14 | `postgres_14` |
 | PostgreSQL 13 | `postgres_13` |
 
-Offered in eu-west-1 in October 2026; MySQL 8.0 and 5.7 are no longer available. The list changes as engine versions reach end of support, so check it with:
+Offered in us-east-1 in October 2026; MySQL 8.0 and 5.7 are no longer available. The list changes as engine versions reach end of support, so check it with:
 
 ```bash
 aws lightsail get-relational-database-blueprints --query 'blueprints[].[blueprintId,engineVersion]' --output table
@@ -414,17 +438,17 @@ If your workload needs persistent volumes, shared filesystems, IAM roles for ser
 
 ```bash
 # Authenticate Docker to ECR
-aws ecr get-login-password --region eu-west-1 | \
-  docker login --username AWS --password-stdin 123456789012.dkr.ecr.eu-west-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | \
+  docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
 
 # Create repository
-aws ecr create-repository --repository-name my-app --region eu-west-1
+aws ecr create-repository --repository-name my-app --region us-east-1
 
 # Tag image
-docker tag my-app:latest 123456789012.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest
+docker tag my-app:latest 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
 
 # Push
-docker push 123456789012.dkr.ecr.eu-west-1.amazonaws.com/my-app:latest
+docker push 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-app:latest
 ```
 
 ### Lightsail (Internal Registry)
@@ -453,7 +477,7 @@ aws lightsail push-container-image \
 # Create distribution (CDN)
 aws lightsail create-distribution \
   --distribution-name my-cdn \
-  --origin "name=my-instance,regionName=eu-west-1,protocolPolicy=http-only" \
+  --origin "name=my-instance,regionName=us-east-1,protocolPolicy=http-only" \
   --default-cache-behavior "behavior=cache" \
   --bundle-id small_1_0
 
@@ -618,7 +642,7 @@ Either let Lightsail create it through a CloudFormation stack:
 
 ```bash
 aws lightsail create-cloud-formation-stack \
-  --instances "sourceName=ExportSnapshotRecord-…,instanceType=t3.small,portInfoSource=DEFAULT,availabilityZone=eu-west-1a"
+  --instances "sourceName=ExportSnapshotRecord-…,instanceType=t3.small,portInfoSource=DEFAULT,availabilityZone=us-east-1a"
 
 # Follow the stack; destinationInfo.id is the CloudFormation stack
 aws lightsail get-cloud-formation-stack-records \
