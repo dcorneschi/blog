@@ -135,6 +135,8 @@ Pass credentials through the environment, and treat `.terraform/` as sensitive o
 | In version control | No | No (entire `.terraform/` dir is gitignored) |
 
 
+[![What lives where: the project directory with terraform.tfstate (the state, local backend only), .terraform.lock.hcl and the .terraform cache whose terraform.tfstate points to the S3 bucket holding prod/terraform.tfstate, env:/dev/prod/terraform.tfstate and the .tflock lock file](state-files.svg)](state-files.svg "Open the diagram full size")
+
 ## Why terraform init -reconfigure Is Required
 
 ### The Problem
@@ -242,6 +244,8 @@ init -upgrade to allow selection of new versions
 | `-reconfigure` | Drops old backend cache, re-initializes fresh. No state migration. |
 | `-migrate-state` | Copies state from old backend to new backend, then updates cache. |
 | `-migrate-state -force-copy` | Same, but answers "yes" to the copy prompts. Needed in CI. |
+
+[![After changing the backend key from prod/ to prod2/: -migrate-state copies the state to prod2/ and plan shows no changes; -reconfigure only points the backend cache at the empty prod2/ and plan wants to create everything again](reconfigure-vs-migrate.svg)](reconfigure-vs-migrate.svg "Open the diagram full size")
 
 Use `-migrate-state` when you're moving an existing project's state to a new location and need to preserve it. Use `-reconfigure` when you're pointing to an already-existing state or starting fresh.
 

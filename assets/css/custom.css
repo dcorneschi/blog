@@ -56,6 +56,22 @@ h5, h6, .h5, .h6 {
   .card-text table:not(:has(th:nth-child(3))) td + td { color: var(--bs-secondary-color); }
 }
 
+/* Diagrams: SVGs linked to themselves ([![…](x.svg)](x.svg)) are shown smaller in the article
+   and open full size when clicked */
+.card-text a:has(> img[src$=".svg"]) {
+  display: block;
+  max-width: 860px;
+  margin: 0 auto 1rem;
+  cursor: zoom-in;
+}
+.card-text a > img[src$=".svg"] {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--bs-border-color);
+  border-radius: .375rem;
+}
+
 /* Show more of each post on list pages (theme default: 4 lines) */
 .card-summary {
   -webkit-line-clamp: 8;

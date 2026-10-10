@@ -25,6 +25,8 @@ Both are **platform-specific**: the `linux_amd64` and `darwin_arm64` builds of t
 The dirhash (`h1`) is created from the `sha256sum` output for all files. Once this list is sha256sum'd again, the resulting hash is taken in binary representation and then converted to Base64.
 
 
+[![How zh: and h1: are computed: zh: is the SHA256 of a provider zip, listed in the signed SHA256SUMS for every platform; h1: is a dirhash of the files inside the zip, computed locally only for the platforms you ran init or providers lock on](lock-file-hashes.svg)](lock-file-hashes.svg "Open the diagram full size")
+
 ## Calculate h1 Hash
 
 Navigate to the extracted provider directory and compute the hash step by step:

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 900 760" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How the zh: and h1: hashes in .terraform.lock.hcl are computed</title>
+  <desc id="d">A provider release has one zip per platform and a GPG-signed SHA256SUMS file. zh: is the SHA256 of a zip file; SHA256SUMS lists it for every platform zip plus manifest.json, so the lock file gets 14 zh: entries. h1: is a dirhash of the files inside the zip: the SHA256 of each file, written as one line per file sorted by path, then the SHA256 of that list, Base64 encoded. Terraform computes h1: locally, so it is only recorded for the platforms you ran terraform init or terraform providers lock on. terraform init accepts a package that matches any one recorded hash. Example values: bpg/proxmox 0.116.0, linux_amd64.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .t    { font-size: 13px; fill: #212529; text-anchor: middle; }
+      .tb   { font-size: 15px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .small{ font-size: 11px; fill: #495057; text-anchor: middle; }
+      .m    { white-space: pre; font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; fill: #212529; }
+      .mc   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; fill: #212529; text-anchor: middle; }
+      .lbl  { font-size: 12px; fill: #495057; }
+      .lne  { stroke: #495057; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+      .dsh  { stroke: #495057; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="760" fill="#ffffff"/>
+
+  <!-- release -->
+  <rect class="box" x="150" y="14" width="600" height="58" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tb" x="450" y="37">Provider release: bpg/proxmox 0.116.0</text>
+  <text class="small" x="450" y="58">one zip per platform (13) · SHA256SUMS + SHA256SUMS.sig (GPG-signed)</text>
+
+  <text class="tb" x="240" y="100" style="fill:#9a6b00">zh: = SHA256 of the zip</text>
+  <text class="tb" x="660" y="100" style="fill:#146c43">h1: = dirhash of the files inside</text>
+  <path class="lne" d="M240,72 V80"/>
+  <path class="lne" d="M660,72 V80"/>
+
+  <!-- zh: column -->
+  <rect class="box" x="60" y="112" width="360" height="48" rx="6" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="t" x="240" y="131">provider zip for one platform</text>
+  <text class="mc" x="240" y="150">…_0.116.0_linux_amd64.zip</text>
+  <path class="lne" d="M240,160 V196"/>
+  <text class="lbl" x="250" y="183">sha256sum of the whole file</text>
+  <rect class="box" x="60" y="198" width="360" height="48" rx="6" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="t" x="240" y="217">SHA256 of the zip (hex)</text>
+  <text class="mc" x="240" y="236">9c83aa1ed438e0f4…</text>
+  <path class="lne" d="M240,246 V282"/>
+  <text class="lbl" x="250" y="269">prefix it with zh:</text>
+  <rect class="box" x="60" y="284" width="360" height="40" rx="6" fill="#fff3cd" stroke="#c99a1e"/>
+  <text class="mc" x="240" y="309" style="font-weight:700">zh:9c83aa1ed438e0f4…</text>
+
+  <rect class="box" x="60" y="352" width="360" height="74" rx="6" fill="#f8f9fa" stroke="#adb5bd" stroke-dasharray="5 4"/>
+  <text class="t" x="240" y="373" style="font-weight:700">The signed SHA256SUMS lists this hash</text>
+  <text class="t" x="240" y="392">for every platform zip and manifest.json:</text>
+  <text class="t" x="240" y="411">14 zh: entries, all platforms</text>
+  <path class="dsh" d="M240,426 V492"/>
+
+  <!-- h1: column -->
+  <rect class="box" x="480" y="112" width="360" height="66" rx="6" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="t" x="660" y="131">files inside the zip (= the unpacked directory)</text>
+  <text class="mc" x="660" y="150">CHANGELOG.md · LICENSE · README.md</text>
+  <text class="mc" x="660" y="167">terraform-provider-proxmox_v0.116.0</text>
+  <path class="lne" d="M660,178 V204"/>
+  <text class="lbl" x="670" y="196">SHA256 of each file, sorted by path</text>
+  <rect class="box" x="480" y="206" width="360" height="94" rx="6" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="t" x="660" y="224">one line per file: &lt;sha256&gt;␣␣&lt;path&gt;</text>
+  <text class="m" x="494" y="243">680686c6…<tspan x="572">CHANGELOG.md</tspan></text>
+  <text class="m" x="494" y="258">1f256eca…<tspan x="572">LICENSE</tspan></text>
+  <text class="m" x="494" y="273">d557df85…<tspan x="572">README.md</tspan></text>
+  <text class="m" x="494" y="288">a2caac93…<tspan x="572">terraform-provider-proxmox_v0.116.0</tspan></text>
+  <path class="lne" d="M660,300 V326"/>
+  <text class="lbl" x="670" y="318">SHA256 of that list</text>
+  <rect class="box" x="480" y="328" width="360" height="34" rx="6" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="mc" x="660" y="350">e84dcd94f814b3e1… (hex)</text>
+  <path class="lne" d="M660,362 V388"/>
+  <text class="lbl" x="670" y="380">hex → bytes → Base64, prefix h1:</text>
+  <rect class="box" x="480" y="390" width="360" height="40" rx="6" fill="#d1e7dd" stroke="#198754"/>
+  <text class="mc" x="660" y="415" style="font-weight:700">h1:6E3NlPgUs+EPAeL/XcsjTRXq…</text>
+  <text class="small" x="640" y="452">computed locally: only for the platforms you ran</text>
+  <text class="small" x="640" y="466">terraform init or terraform providers lock on</text>
+  <path class="lne" d="M800,430 V492"/>
+
+  <!-- lock file -->
+  <rect class="box" x="100" y="494" width="740" height="210" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="470" y="518">.terraform.lock.hcl</text>
+  <text class="m" x="130" y="548">provider "registry.terraform.io/bpg/proxmox" {</text>
+  <text class="m" x="148" y="568">version     = "0.116.0"</text>
+  <text class="m" x="148" y="588">hashes = [</text>
+  <text class="m" x="166" y="608">"h1:6E3NlPgUs+EPAeL/XcsjTRXq…",</text>
+  <text class="lbl" x="440" y="608" style="fill:#146c43">← h1: for your platform(s) only</text>
+  <text class="m" x="166" y="628">"zh:09b19a92eded796b…",</text>
+  <text class="lbl" x="440" y="628" style="fill:#9a6b00">← zh: for every platform</text>
+  <text class="m" x="166" y="648">… 13 more zh: entries</text>
+  <text class="m" x="148" y="668">]</text>
+  <text class="m" x="130" y="688">}</text>
+
+  <text class="t" x="450" y="738">terraform init installs a provider package when it matches any one of the recorded hashes</text>
+</svg>

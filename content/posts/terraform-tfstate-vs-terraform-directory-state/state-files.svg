@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What lives where: terraform.tfstate, .terraform/ and the remote backend</title>
+  <desc id="d">In the project directory: main.tf and .terraform.lock.hcl are committed. terraform.tfstate is the real state, used only with the local backend, and terraform.tfstate.d holds local workspaces. The .terraform directory is a gitignored cache: .terraform/terraform.tfstate records which backend is configured (type, configuration, hash), environment holds the selected workspace, plus providers and modules. With an S3 backend the state lives in the bucket: prod/terraform.tfstate for the default workspace, env:/dev/prod/terraform.tfstate for workspace dev, and prod/terraform.tfstate.tflock while a run holds the lock. The backend cache points to that bucket and key.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .tb   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; fill: #212529; }
+      .d    { font-size: 12px; fill: #495057; }
+      .small{ font-size: 11px; fill: #495057; }
+      .lne  { stroke: #495057; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="470" fill="#ffffff"/>
+
+  <!-- project directory -->
+  <rect class="box" x="16" y="16" width="560" height="438" rx="10" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tb" x="36" y="44">Project directory</text>
+
+  <!-- highlights for the two files with the same name -->
+  <rect x="28" y="125" width="536" height="28" rx="5" fill="#fff3cd" stroke="#e0c46c"/>
+  <rect x="28" y="237" width="536" height="28" rx="5" fill="#e7f1ff" stroke="#6ea8fe"/>
+
+  <text class="m" x="40" y="80">my-project/</text>
+  <text class="m" x="40" y="112">├─ main.tf</text>
+  <text class="d" x="306" y="112">configuration · commit</text>
+  <text class="m" x="40" y="140">├─ terraform.tfstate</text>
+  <text class="d" x="306" y="140" style="font-weight:700">the state · local backend only</text>
+  <text class="m" x="40" y="168">├─ terraform.tfstate.d/dev/</text>
+  <text class="d" x="306" y="168">state of workspace dev · local</text>
+  <text class="m" x="40" y="196">├─ .terraform.lock.hcl</text>
+  <text class="d" x="306" y="196">provider versions + hashes · commit</text>
+  <text class="m" x="40" y="224">└─ .terraform/</text>
+  <text class="d" x="306" y="224">working cache · gitignore</text>
+  <text class="m" x="72" y="252">├─ terraform.tfstate</text>
+  <text class="d" x="306" y="252" style="font-weight:700">backend cache: type + config + hash</text>
+  <text class="m" x="72" y="280">├─ environment</text>
+  <text class="d" x="306" y="280">selected workspace</text>
+  <text class="m" x="72" y="308">├─ providers/</text>
+  <text class="d" x="306" y="308">provider binaries</text>
+  <text class="m" x="72" y="336">└─ modules/</text>
+  <text class="d" x="306" y="336">module source code</text>
+
+  <text class="small" x="36" y="380">With a remote backend, ./terraform.tfstate is not used: the state is in the bucket</text>
+  <text class="small" x="36" y="396">(after -migrate-state the local file is left at 0 bytes, its old content in terraform.tfstate.backup).</text>
+  <text class="small" x="36" y="420" style="font-weight:700">Both files can hold secrets in plain text: the state always, the backend cache</text>
+  <text class="small" x="36" y="436" style="font-weight:700">when credentials were passed with -backend-config.</text>
+
+  <!-- the backend cache points to the bucket -->
+  <path class="lne" d="M564,251 H604"/>
+
+  <!-- S3 bucket -->
+  <rect class="box" x="606" y="16" width="278" height="438" rx="10" fill="#f1f4e4" stroke="#b5c48a"/>
+  <text class="tb" x="626" y="44">S3 bucket: my-tf-state</text>
+
+  <rect class="box" x="620" y="64" width="250" height="52" rx="5" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="m" x="632" y="86" style="font-size:11px">prod/terraform.tfstate</text>
+  <text class="d" x="632" y="105">state of the default workspace</text>
+
+  <rect class="box" x="620" y="128" width="250" height="52" rx="5" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="m" x="632" y="150" style="font-size:11px">env:/dev/prod/terraform.tfstate</text>
+  <text class="d" x="632" y="169">state of workspace dev</text>
+
+  <rect class="box" x="620" y="192" width="250" height="52" rx="5" fill="#ffffff" stroke="#adb5bd" stroke-dasharray="4 3"/>
+  <text class="m" x="632" y="214" style="font-size:11px">prod/terraform.tfstate.tflock</text>
+  <text class="d" x="632" y="233">only while a run holds the lock</text>
+
+  <text class="d" x="620" y="276">← the backend cache only points here:</text>
+  <text class="d" x="634" y="293">backend type, bucket, key, region</text>
+  <text class="d" x="620" y="324">terraform plan / apply read and</text>
+  <text class="d" x="620" y="341">write the state objects above</text>
+  <text class="d" x="620" y="372">terraform state pull prints the</text>
+  <text class="d" x="620" y="389">current state</text>
+</svg>
