@@ -49,7 +49,7 @@
                 {{- $seen = $seen | append .Width -}}
             {{- end -}}
         {{- end }}
-            <img class="card-img-top" src="{{ $thumb.RelPermalink }}"{{ if gt (len $srcset) 1 }} srcset="{{ delimit $srcset ", " }}" sizes="{{ $sizes }}"{{ end }}{{ with $thumb.Width }} width="{{ . }}" height="{{ $thumb.Height }}"{{ end }} alt="{{ $title }}" title="{{ $title }}"{{ if $eager }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}>
+            <img class="card-img-top" src="{{ $thumb.RelPermalink }}"{{ if gt (len $srcset) 1 }} srcset="{{ delimit $srcset ", " }}" sizes="{{ $sizes }}"{{ end }}{{ if reflect.IsImageResourceWithMeta $thumb }}{{ with $thumb.Width }} width="{{ . }}" height="{{ $thumb.Height }}"{{ end }}{{ end }} alt="{{ $title }}" title="{{ $title }}"{{ if $eager }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}>
     {{ end }}
 {{ end }}
 {{- end -}}

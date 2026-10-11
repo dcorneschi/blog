@@ -27,7 +27,9 @@ h5, h6, .h5, .h6 {
 .card-text tbody tr:nth-of-type(odd) {
   background-color: rgba(var(--bs-emphasis-color-rgb), .03);
 }
-.card-text td code { word-break: break-word; }
+/* Long code wraps at spaces; a word is only split when it can't fit on a line by itself
+   (word-break: break-word let tables squeeze short names like "postStart" onto two lines) */
+.card-text td code { overflow-wrap: break-word; }
 
 /* Narrow screens.
    Tables with 3+ columns (comparisons) scroll sideways instead of being squeezed.
