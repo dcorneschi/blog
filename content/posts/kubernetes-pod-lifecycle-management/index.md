@@ -80,6 +80,12 @@ kubectl get events --field-selector involvedObject.name=nginx-pod --sort-by=.las
 
 The events show each step: `Scheduled`, `Pulling`, `Pulled`, `Created`, `Started`. A pod stuck in `Pending` usually has a `FailedScheduling` event that says why (not enough CPU or memory, no node matches, an unbound PersistentVolumeClaim).
 
+### From kubectl apply to Running
+
+The flow below follows those steps in detail, with the decisions along the way: scheduling, init containers, image pulls and the startup probe. The grey chips show what `kubectl get pod` reports at each step, the red boxes the statuses you see when a step fails, and the table at the bottom explains every `STATUS` value. Click it to open it full size.
+
+[![Pod creation to running flow: kubectl apply, the API server validates and writes to etcd, the scheduler finds a node (otherwise Pending, Unschedulable), the kubelet mounts volumes, creates the sandbox and network, runs the init containers in order (Init:N/M, or Init:ErrImagePull and Init:CrashLoopBackOff on failure), pulls the main images (ErrImagePull, ImagePullBackOff), starts the containers, waits for the startup probe, and the pod becomes Running and receives traffic once readiness passes; with a reference table of kubectl STATUS values](kubernetes-pod-lifecycle-overview.svg)](kubernetes-pod-lifecycle-overview.svg "Open the diagram full size")
+
 ## 3. Init Containers
 
 Init containers run **before** the main containers:
