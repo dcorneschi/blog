@@ -7,7 +7,97 @@ tags: ["docker", "compose", "containers"]
 categories: ["Cheatsheet"]
 ---
 
-Commands are for Compose v2 (`docker compose`, no hyphen). They were checked against `--help` of **Compose v5.2.0** with Docker Engine 29.5, and the less obvious ones were run on a test project. The default file name is `compose.yaml`; `docker-compose.yml` still works.
+## Installation
+
+Compose v2 is a Docker CLI plugin (`docker-compose-plugin`), installed next to Docker Engine.
+
+### Ubuntu and Debian
+
+```bash
+# Docker's apt repository
+sudo apt update
+sudo apt install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+# Docker Engine, CLI, Buildx and Compose
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+On Debian, replace `ubuntu` with `debian` in both URLs. The `Suites:` line fills in the release codename (`noble`, `trixie`).
+
+The distributions' own packages are older: `docker-compose-v2` on Ubuntu 24.04 is 2.40.3, `docker-compose` on Debian 13 is 2.26.1.
+
+### RHEL, Rocky, AlmaLinux and Fedora
+
+```bash
+# RHEL 9 and rebuilds (dnf 4)
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
+
+# Fedora 41 and later (dnf 5 changed the syntax)
+sudo dnf -y install dnf-plugins-core
+sudo dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+
+# Then, on both
+sudo dnf -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+### After Installing (Linux)
+
+```bash
+sudo systemctl enable --now docker      # start Docker now and at boot
+sudo usermod -aG docker "$USER"          # use docker without sudo (log out and back in)
+docker compose version                   # Docker Compose version v5.6.0
+docker run --rm hello-world              # check that the daemon works
+```
+
+> Members of the `docker` group can start a container that mounts `/` from the host, so the group is equivalent to root. Only add trusted users, or use rootless Docker.
+
+### Only the Compose Plugin
+
+When Docker Engine is already installed (for example the distribution's `docker.io`) but `docker compose` says `unknown command`, download the plugin binary from the GitHub releases:
+
+```bash
+DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+mkdir -p "$DOCKER_CONFIG/cli-plugins"
+curl -fsSL "https://github.com/docker/compose/releases/download/v5.6.0/docker-compose-linux-$(uname -m)" \
+  -o "$DOCKER_CONFIG/cli-plugins/docker-compose"
+chmod +x "$DOCKER_CONFIG/cli-plugins/docker-compose"
+docker compose version
+```
+
+`$(uname -m)` picks `x86_64` or `aarch64`. This installs it for your user only; for everyone, use `/usr/local/lib/docker/cli-plugins` with `sudo`. Update by downloading a newer release over it.
+
+### macOS
+
+- **Docker Desktop** includes Compose: install it and `docker compose` works.
+- **Colima** (no Docker Desktop) with Homebrew:
+
+```bash
+brew install colima docker docker-compose
+colima start
+```
+
+Docker only finds the Homebrew plugin after you add this to `~/.docker/config.json` (Homebrew prints it after the install):
+
+```json
+{
+  "cliPluginsExtraDirs": ["/opt/homebrew/lib/docker/cli-plugins"]
+}
+```
+
+On Intel Macs the path is `/usr/local/lib/docker/cli-plugins`.
 
 ## Start and Stop
 
