@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Helm release revisions and rollback</title>
+  <desc id="d">Release app: helm install creates revision 1 (now superseded), helm upgrade creates revision 2 (now superseded), a failing helm upgrade creates revision 3 (failed), and helm rollback app 2 creates revision 4 (deployed), a copy of revision 2's chart and values. A rollback never goes back in place: it adds a revision. Each revision is a Secret named sh.helm.release.v1.app.vN in the release namespace. Helm writes a new revision as pending-install, pending-upgrade or pending-rollback before it changes the cluster; if helm is killed the release stays pending and the next upgrade fails with another operation is in progress. --atomic (Helm 4: --rollback-on-failure) rolls a failed upgrade back automatically. --history-max (default 10) deletes the oldest revision Secrets beyond the limit.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .rev  { font-size: 12px; font-weight: 700; fill: #495057; letter-spacing: .05em; }
+      .tb   { font-size: 14px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .pill { font-size: 11px; font-weight: 700; text-anchor: middle; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh  { stroke: #6f42c1; stroke-width: 1.6; fill: none; stroke-dasharray: 6 4; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Release "app": every install, upgrade and rollback adds a revision</text>
+
+  <!-- commands -->
+  <text class="mb" x="20" y="64">helm install</text>
+  <text class="mb" x="240" y="64">helm upgrade</text>
+  <text class="mb" x="460" y="64">helm upgrade</text>
+  <text class="d" x="560" y="64" style="fill:#b02a37;font-weight:700">fails</text>
+  <text class="mb" x="680" y="64">helm rollback app 2</text>
+
+  <!-- rev 1 -->
+  <rect class="box" x="20" y="76" width="200" height="118" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="rev" x="36" y="100">REVISION 1</text>
+  <rect x="36" y="110" width="96" height="22" rx="11" fill="#e9ecef" stroke="#adb5bd"/>
+  <text class="pill" x="84" y="125" style="fill:#495057">superseded</text>
+  <text class="d" x="36" y="154">Install complete</text>
+  <text class="d" x="36" y="172">chart 1.0.0 · your values A</text>
+
+  <!-- rev 2 -->
+  <rect class="box" x="240" y="76" width="200" height="118" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="rev" x="256" y="100">REVISION 2</text>
+  <rect x="256" y="110" width="96" height="22" rx="11" fill="#e9ecef" stroke="#adb5bd"/>
+  <text class="pill" x="304" y="125" style="fill:#495057">superseded</text>
+  <text class="d" x="256" y="154">Upgrade complete</text>
+  <text class="d" x="256" y="172">chart 1.1.0 · values B</text>
+
+  <!-- rev 3 -->
+  <rect class="box" x="460" y="76" width="200" height="118" rx="8" fill="#fff5f5" stroke="#e48b93"/>
+  <text class="rev" x="476" y="100">REVISION 3</text>
+  <rect x="476" y="110" width="70" height="22" rx="11" fill="#f8d7da" stroke="#e48b93"/>
+  <text class="pill" x="511" y="125" style="fill:#b02a37">failed</text>
+  <text class="d" x="476" y="154">Upgrade failed</text>
+  <text class="d" x="476" y="172">chart 1.2.0 · values C</text>
+
+  <!-- rev 4 -->
+  <rect class="box" x="680" y="76" width="200" height="118" rx="8" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="rev" x="696" y="100">REVISION 4</text>
+  <rect x="696" y="110" width="80" height="22" rx="11" fill="#d1e7dd" stroke="#75b798"/>
+  <text class="pill" x="736" y="125" style="fill:#146c43">deployed</text>
+  <text class="d" x="696" y="154">Rollback to 2</text>
+  <text class="d" x="696" y="172">chart 1.1.0 · values B</text>
+
+  <path class="lne" d="M220,135 H238"/>
+  <path class="lne" d="M440,135 H458"/>
+  <path class="lne" d="M660,135 H678"/>
+
+  <!-- secrets -->
+  <text class="m" x="20" y="216">sh.helm.release.v1.app.v1</text>
+  <text class="m" x="240" y="216">sh.helm.release.v1.app.v2</text>
+  <text class="m" x="460" y="216">sh.helm.release.v1.app.v3</text>
+  <text class="m" x="680" y="216">sh.helm.release.v1.app.v4</text>
+  <text class="d" x="20" y="236">One Secret per revision: kubectl get secrets -l owner=helm</text>
+
+  <!-- copy arrow -->
+  <path class="dsh" d="M428,194 V262 H868 V196"/>
+  <text class="d" x="448" y="282" style="fill:#6f42c1;font-weight:700">rollback copies revision 2 into a NEW revision 4: it never goes back in place</text>
+
+  <!-- notes -->
+  <rect class="box" x="20" y="306" width="280" height="236" rx="8" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="tb" x="36" y="332">Stuck in pending-*</text>
+  <text class="d" x="36" y="356">A new revision is written as pending-install,</text>
+  <text class="d" x="36" y="372">pending-upgrade or pending-rollback before</text>
+  <text class="d" x="36" y="388">Helm changes anything. If helm is killed</text>
+  <text class="d" x="36" y="404">(Ctrl-C, CI timeout), it stays pending and</text>
+  <text class="d" x="36" y="420">the next command fails with</text>
+  <text class="m" x="36" y="440" style="font-size:10.5px">another operation (install/upgrade/</text>
+  <text class="m" x="36" y="456" style="font-size:10.5px">rollback) is in progress</text>
+  <text class="d" x="36" y="482">Fix: helm rollback (pending-upgrade),</text>
+  <text class="d" x="36" y="498">helm uninstall (pending-install).</text>
+  <text class="d" x="36" y="522">See it with helm history app.</text>
+
+  <rect class="box" x="310" y="306" width="280" height="236" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="326" y="332">--atomic</text>
+  <text class="d" x="326" y="350">Helm 4: --rollback-on-failure</text>
+  <text class="d" x="326" y="376">The same rollback, automatic: when the</text>
+  <text class="d" x="326" y="392">upgrade fails, Helm marks revision 3</text>
+  <text class="d" x="326" y="408">failed and creates revision 4 from the</text>
+  <text class="d" x="326" y="424">last deployed one, in one command.</text>
+  <text class="d" x="326" y="452">It also turns on waiting: the upgrade only</text>
+  <text class="d" x="326" y="468">counts as successful when the resources</text>
+  <text class="d" x="326" y="484">are ready within --timeout (default 5m).</text>
+
+  <rect class="box" x="600" y="306" width="280" height="236" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tb" x="616" y="332">--history-max</text>
+  <text class="d" x="616" y="350">default 10 · 0 = no limit</text>
+  <text class="d" x="616" y="376">After each upgrade or rollback, Helm</text>
+  <text class="d" x="616" y="392">deletes the oldest revision Secrets</text>
+  <text class="d" x="616" y="408">beyond the limit.</text>
+  <text class="d" x="616" y="436">You can only roll back to a revision</text>
+  <text class="d" x="616" y="452">that still exists: helm history shows</text>
+  <text class="d" x="616" y="468">which ones are left.</text>
+  <text class="d" x="616" y="496">helm uninstall --keep-history keeps</text>
+  <text class="d" x="616" y="512">them as status uninstalled.</text>
+</svg>

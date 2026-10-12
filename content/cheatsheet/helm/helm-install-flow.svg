@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 850" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What helm install does</title>
+  <desc id="d">Steps of helm install app ./chart. On your machine: 1 load the chart (Chart.yaml, templates, dependencies in charts/), 2 merge the values. In the cluster: 3 install CRDs from crds/ (first install only). On your machine: 4 render the templates with .Values, .Release, .Chart and the cluster's .Capabilities. In the cluster: 5 record revision 1 as a Secret with status pending-install, 6 run pre-install hooks sorted by weight and wait for them, 7 create the resources in kind order (Namespace, ServiceAccount, Secret, ConfigMap, Service, Deployment and so on), waiting for readiness with --wait, 8 run post-install hooks, 9 mark the release deployed (or failed) and print NOTES.txt. Then the Kubernetes controllers take over: Deployments create ReplicaSets and Pods, Services get EndpointSlices. helm template runs steps 1, 2 and 4 only; helm install --dry-run renders the chart and creates nothing.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .n    { font-size: 15px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .ldr  { stroke: #adb5bd; stroke-width: 1.2; fill: none; stroke-dasharray: 3 3; }
+      .loc  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .k8s  { fill: #e8f5ee; stroke: #75b798; }
+    </style>
+  </defs>
+
+  <rect width="900" height="850" fill="#ffffff"/>
+  <text class="h" x="20" y="28">helm install app ./chart, step by step</text>
+  <rect class="box loc" x="20" y="40" width="14" height="12" rx="2"/>
+  <text class="d" x="40" y="50">on your machine</text>
+  <rect class="box k8s" x="140" y="40" width="14" height="12" rx="2"/>
+  <text class="d" x="160" y="50">API calls that change the cluster</text>
+
+  <!-- step boxes: x 20, w 520, h 54, step 72 -->
+  <rect class="box loc" x="20" y="66" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="93" r="13" fill="#3d7fe0"/><text class="n" x="44" y="98">1</text>
+  <text class="tb" x="68" y="88">Load the chart</text>
+  <text class="d" x="68" y="106">Chart.yaml, templates/, dependencies in charts/ · from a directory, .tgz, repo or OCI</text>
+
+  <rect class="box loc" x="20" y="138" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="165" r="13" fill="#3d7fe0"/><text class="n" x="44" y="170">2</text>
+  <text class="tb" x="68" y="160">Merge the values</text>
+  <text class="d" x="68" y="178">values.yaml, then -f files left to right, then --set (see "Which value wins")</text>
+
+  <rect class="box k8s" x="20" y="210" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="237" r="13" fill="#2f9e66"/><text class="n" x="44" y="242">3</text>
+  <text class="tb" x="68" y="232">Install CRDs from crds/</text>
+  <text class="d" x="68" y="250">only if they don't exist yet; skipped with --skip-crds</text>
+
+  <rect class="box loc" x="20" y="282" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="309" r="13" fill="#3d7fe0"/><text class="n" x="44" y="314">4</text>
+  <text class="tb" x="68" y="304">Render the templates</text>
+  <text class="d" x="68" y="322">.Values, .Release, .Chart and the cluster's .Capabilities · checked against the API schema</text>
+
+  <rect class="box k8s" x="20" y="354" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="381" r="13" fill="#2f9e66"/><text class="n" x="44" y="386">5</text>
+  <text class="tb" x="68" y="376">Record revision 1: pending-install</text>
+  <text class="m" x="68" y="395">Secret sh.helm.release.v1.app.v1</text>
+
+  <rect class="box k8s" x="20" y="426" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="453" r="13" fill="#2f9e66"/><text class="n" x="44" y="458">6</text>
+  <text class="tb" x="68" y="448">pre-install hooks</text>
+  <text class="d" x="68" y="466">sorted by helm.sh/hook-weight (lowest first); Helm waits for each Job to complete</text>
+
+  <rect class="box k8s" x="20" y="498" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="525" r="13" fill="#2f9e66"/><text class="n" x="44" y="530">7</text>
+  <text class="tb" x="68" y="520">Create the resources</text>
+  <text class="d" x="68" y="538">in kind order: Namespace, ServiceAccount, Secret, ConfigMap, … Service, Deployment …</text>
+
+  <rect class="box k8s" x="20" y="570" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="597" r="13" fill="#2f9e66"/><text class="n" x="44" y="602">8</text>
+  <text class="tb" x="68" y="592">post-install hooks</text>
+  <text class="d" x="68" y="610">same rules as pre-install: by weight, waited for</text>
+
+  <rect class="box k8s" x="20" y="642" width="520" height="54" rx="8"/>
+  <circle cx="44" cy="669" r="13" fill="#2f9e66"/><text class="n" x="44" y="674">9</text>
+  <text class="tb" x="68" y="664">Mark revision 1 deployed, print NOTES.txt</text>
+  <text class="d" x="68" y="682">a failure in steps 6–8 marks it failed instead</text>
+
+  <rect class="box" x="20" y="722" width="520" height="70" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tb" x="36" y="744">Then Kubernetes takes over, without Helm</text>
+  <text class="d" x="36" y="764">Deployment → ReplicaSet → Pods → scheduler → kubelet</text>
+  <text class="d" x="36" y="780">Service → EndpointSlices with the ready Pod IPs · LoadBalancer → cloud load balancer</text>
+
+  <path class="lne" d="M280,120 V136"/>
+  <path class="lne" d="M280,192 V208"/>
+  <path class="lne" d="M280,264 V280"/>
+  <path class="lne" d="M280,336 V352"/>
+  <path class="lne" d="M280,408 V424"/>
+  <path class="lne" d="M280,480 V496"/>
+  <path class="lne" d="M280,552 V568"/>
+  <path class="lne" d="M280,624 V640"/>
+  <path class="lne" d="M280,696 V720"/>
+
+  <!-- notes -->
+  <path class="ldr" d="M540,165 H570"/>
+  <rect class="box" x="570" y="66" width="310" height="126" rx="8" fill="#ffffff" stroke="#6ea8fe"/>
+  <text class="tb" x="584" y="88" style="font-size:12px">Without touching the cluster</text>
+  <text class="m" x="584" y="110">helm template</text>
+  <text class="d" x="680" y="110">steps 1, 2, 4 only</text>
+  <text class="m" x="584" y="130">helm install --dry-run</text>
+  <text class="d" x="750" y="130">renders, creates nothing</text>
+  <text class="d" x="584" y="152">helm template uses default Capabilities:</text>
+  <text class="d" x="584" y="168">--kube-version / --api-versions set them.</text>
+  <text class="d" x="584" y="184">--dry-run=server also asks the API server.</text>
+
+  <path class="ldr" d="M540,237 H570"/>
+  <rect class="box" x="570" y="210" width="310" height="54" rx="8" fill="#ffffff" stroke="#75b798"/>
+  <text class="d" x="584" y="232">CRDs in crds/ are never upgraded or deleted</text>
+  <text class="d" x="584" y="250">by Helm: update them with kubectl apply.</text>
+
+  <path class="ldr" d="M540,381 H570"/>
+  <rect class="box" x="570" y="354" width="310" height="54" rx="8" fill="#ffffff" stroke="#75b798"/>
+  <text class="d" x="584" y="376">The record comes first: if helm is killed now,</text>
+  <text class="d" x="584" y="394">the release stays pending-install.</text>
+
+  <path class="ldr" d="M540,453 H570"/>
+  <rect class="box" x="570" y="426" width="310" height="126" rx="8" fill="#ffffff" stroke="#75b798"/>
+  <text class="tb" x="584" y="448" style="font-size:12px">Hooks</text>
+  <text class="d" x="584" y="468">Annotations on a normal resource (usually a Job):</text>
+  <text class="m" x="584" y="488">helm.sh/hook: pre-install</text>
+  <text class="m" x="584" y="504">helm.sh/hook-weight: "-5"</text>
+  <text class="d" x="584" y="524">Hooks are not part of the release: uninstall</text>
+  <text class="d" x="584" y="540">doesn't delete them (use hook-delete-policy).</text>
+
+  <path class="ldr" d="M540,525 H556 V600 H570"/>
+  <rect class="box" x="570" y="570" width="310" height="126" rx="8" fill="#ffffff" stroke="#75b798"/>
+  <text class="tb" x="584" y="592" style="font-size:12px">Waiting</text>
+  <text class="d" x="584" y="612">Helm 3: returns once the resources are created,</text>
+  <text class="d" x="584" y="628">unless --wait (until ready, up to --timeout).</text>
+  <text class="d" x="584" y="648">Helm 4: waits for hooks by default (hookOnly);</text>
+  <text class="d" x="584" y="664">--wait = watcher (until resources are ready).</text>
+  <text class="d" x="584" y="684">--atomic / --rollback-on-failure implies waiting.</text>
+
+  <rect class="box" x="570" y="722" width="310" height="70" rx="8" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="tb" x="584" y="744" style="font-size:12px">helm upgrade</text>
+  <text class="d" x="584" y="764">Same steps with pre-/post-upgrade hooks; changed</text>
+  <text class="d" x="584" y="780">resources are patched, removed ones deleted.</text>
+
+  <text class="d" x="20" y="822">Hook and resource order and the CRD rules are from the Helm documentation (Charts → Chart Hooks, Custom Resource Definitions).</text>
+</svg>
