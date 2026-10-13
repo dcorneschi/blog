@@ -972,9 +972,9 @@ Helm 4 (November 2025) renamed or removed a few flags and changed some defaults.
 | `--atomic` | `--rollback-on-failure`; `--atomic` still works but warns `Flag --atomic has been deprecated` |
 | `--force` | `--force-replace`, and only with `--server-side=false` (see below) |
 | `helm template --validate` | `helm template --dry-run=server` (needs a cluster); `--validate` still works but is deprecated |
-| `helm list --all` | Removed (`unknown flag`): combine `--deployed`, `--failed`, `--pending`, `--superseded`, `--uninstalled` |
-| `helm status --show-resources` | Removed (`unknown flag`) |
-| `helm repo update --fail-on-repo-update-fail` | Removed (`unknown flag`) |
+| `helm list --all` (every status) | Removed in Helm 4. `helm list -A` (`--all-namespaces`) is a different flag and still works |
+| `helm status --show-resources` | Removed in Helm 4 |
+| `helm repo update --fail-on-repo-update-fail` | Removed in Helm 4 |
 | `--post-renderer ./script.sh` | `--post-renderer <plugin-name>`: a script fails with `plugin: {Name:./script.sh Type:postrenderer/v1} not found` |
 | `helm plugin install <url>` | Verifies signatures by default: add `--verify=false` for unsigned plugins |
 | Changes applied client-side | Server-side apply by default (`--server-side=auto`) |
