@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Rolling update without and with a readiness probe</title>
+  <desc id="d">K3s v1.35.9, a Deployment of 2 replicas whose app needs about 20 seconds before it listens, and a client sending one request per second. Without a probe, a new pod counts as available as soon as its container runs, so both old pods are removed within about 2 seconds while the new pods are still starting: rollout status reported success after 2 seconds, and 19 of the next 32 requests failed with Connection refused. With a readiness probe (tcpSocket 8080, periodSeconds 2), each new pod becomes available only when the app listens, so an old pod is removed only after its replacement is ready: the rollout took 44 seconds, with 0 failed and 52 successful requests.</desc>
+  <defs>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#fff3cd"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#e0c46c" stroke-width="2"/>
+    </pattern>
+    <style>
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .lab  { font-size: 12px; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .big  { font-size: 13px; font-weight: 700; }
+      .ax   { stroke: #adb5bd; stroke-width: 1; }
+      .tick { stroke: #dee2e6; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="900" height="640" fill="#ffffff"/>
+
+  <!-- legend -->
+  <rect x="150" y="14" width="16" height="12" rx="2" style="fill:#75b798"/><text class="d" x="172" y="24">serving</text>
+  <rect x="232" y="14" width="16" height="12" rx="2" style="fill:url(#hatch);stroke:#e0c46c"/><text class="d" x="254" y="24">running, app not listening yet</text>
+  <rect x="430" y="14" width="10" height="12" rx="1" style="fill:#2f9e66"/><text class="d" x="446" y="24">request OK</text>
+  <rect x="520" y="14" width="10" height="12" rx="1" style="fill:#dc3545"/><text class="d" x="536" y="24">request failed</text>
+  <text class="d" x="640" y="24">one request per second</text>
+
+  <!-- ===== A: without probe  (x = 150 + t*14, t in s) ===== -->
+  <text class="h" x="20" y="60">Without a readiness probe</text>
+  <text class="d" x="246" y="60">new pods count as available as soon as the container runs</text>
+
+  <text class="lab" x="20" y="92">old pod 1</text>
+  <rect x="150" y="80" width="14" height="18" rx="3" style="fill:#75b798"/>
+  <text class="lab" x="20" y="120">old pod 2</text>
+  <rect x="150" y="108" width="28" height="18" rx="3" style="fill:#75b798"/>
+  <text class="lab" x="20" y="148">new pod 1</text>
+  <rect x="150" y="136" width="294" height="18" rx="3" style="fill:url(#hatch);stroke:#e0c46c"/>
+  <rect x="444" y="136" width="406" height="18" rx="3" style="fill:#75b798"/>
+  <text class="lab" x="20" y="176">new pod 2</text>
+  <rect x="164" y="164" width="294" height="18" rx="3" style="fill:url(#hatch);stroke:#e0c46c"/>
+  <rect x="458" y="164" width="392" height="18" rx="3" style="fill:#75b798"/>
+
+  <text class="lab" x="20" y="206">requests</text>
+  <g id="reqA">
+    <!-- 19 failed, then 13 OK: 1 per second -->
+    <rect x="151" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="165" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="179" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="193" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="207" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="221" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="235" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="249" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="263" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="277" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="291" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="305" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="319" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="333" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="347" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="361" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="375" y="194" width="10" height="16" style="fill:#dc3545"/><rect x="389" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="403" y="194" width="10" height="16" style="fill:#dc3545"/>
+    <rect x="417" y="194" width="10" height="16" style="fill:#2f9e66"/><rect x="431" y="194" width="10" height="16" style="fill:#2f9e66"/>
+    <rect x="445" y="194" width="10" height="16" style="fill:#2f9e66"/><rect x="459" y="194" width="10" height="16" style="fill:#2f9e66"/>
+    <rect x="473" y="194" width="10" height="16" style="fill:#2f9e66"/><rect x="487" y="194" width="10" height="16" style="fill:#2f9e66"/>
+    <rect x="501" y="194" width="10" height="16" style="fill:#2f9e66"/><rect x="515" y="194" width="10" height="16" style="fill:#2f9e66"/>
+    <rect x="529" y="194" width="10" height="16" style="fill:#2f9e66"/><rect x="543" y="194" width="10" height="16" style="fill:#2f9e66"/>
+    <rect x="557" y="194" width="10" height="16" style="fill:#2f9e66"/><rect x="571" y="194" width="10" height="16" style="fill:#2f9e66"/>
+    <rect x="585" y="194" width="10" height="16" style="fill:#2f9e66"/>
+  </g>
+
+  <line x1="178" y1="72" x2="178" y2="214" style="stroke:#212529;stroke-width:1.5;stroke-dasharray:4 3"/>
+  <text class="d" x="184" y="76" style="fill:#212529;font-weight:700">rollout status: done after 2 s</text>
+
+  <rect x="610" y="190" width="270" height="24" rx="5" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="big" x="620" y="207" style="fill:#b02a37">19 of 32 requests failed</text>
+  <text class="d" x="780" y="207" style="fill:#b02a37">Connection refused</text>
+
+  <!-- axis A -->
+  <line class="ax" x1="150" y1="226" x2="850" y2="226"/>
+  <g class="dc">
+    <text x="150" y="240">0 s</text><text x="290" y="240">10</text><text x="430" y="240">20</text><text x="570" y="240">30</text><text x="710" y="240">40</text><text x="850" y="240">50 s</text>
+  </g>
+
+  <!-- ===== B: with probe ===== -->
+  <text class="h" x="20" y="290">With a readiness probe</text>
+  <text class="d" x="200" y="290">tcpSocket 8080, periodSeconds 2: a new pod is available only when the app listens</text>
+
+  <text class="lab" x="20" y="322">old pod 1</text>
+  <rect x="150" y="310" width="308" height="18" rx="3" style="fill:#75b798"/>
+  <text class="lab" x="20" y="350">old pod 2</text>
+  <rect x="150" y="338" width="616" height="18" rx="3" style="fill:#75b798"/>
+  <text class="lab" x="20" y="378">new pod 1</text>
+  <rect x="150" y="366" width="294" height="18" rx="3" style="fill:url(#hatch);stroke:#e0c46c"/>
+  <rect x="444" y="366" width="406" height="18" rx="3" style="fill:#75b798"/>
+  <text class="lab" x="20" y="406">new pod 2</text>
+  <rect x="458" y="394" width="294" height="18" rx="3" style="fill:url(#hatch);stroke:#e0c46c"/>
+  <rect x="752" y="394" width="98" height="18" rx="3" style="fill:#75b798"/>
+
+  <text class="d" x="462" y="322" style="fill:#212529">removed once new pod 1 is Ready</text>
+  <text class="d" x="770" y="350" style="fill:#212529">removed</text>
+
+  <text class="lab" x="20" y="436">requests</text>
+  <rect x="150" y="424" width="700" height="16" rx="2" style="fill:#2f9e66"/>
+  <text class="d" x="160" y="436" style="fill:#ffffff;font-weight:700">every request answered by a pod that is listening</text>
+
+  <line x1="766" y1="302" x2="766" y2="444" style="stroke:#212529;stroke-width:1.5;stroke-dasharray:4 3"/>
+  <text class="d" x="760" y="306" style="fill:#212529;font-weight:700;text-anchor:end">rollout status: done after 44 s</text>
+
+  <rect x="610" y="450" width="270" height="24" rx="5" style="fill:#d1e7dd;stroke:#75b798"/>
+  <text class="big" x="620" y="467" style="fill:#146c43">0 failed, 52 successful</text>
+
+  <line class="ax" x1="150" y1="486" x2="850" y2="486"/>
+  <g class="dc">
+    <text x="150" y="500">0 s</text><text x="290" y="500">10</text><text x="430" y="500">20</text><text x="570" y="500">30</text><text x="710" y="500">40</text><text x="850" y="500">50 s</text>
+  </g>
+
+  <!-- notes -->
+  <rect x="20" y="520" width="860" height="104" rx="8" style="fill:#f8f9fa;stroke:#adb5bd"/>
+  <text class="d" x="34" y="542" style="fill:#212529;font-weight:700">Why</text>
+  <text class="d" x="34" y="562">• The default rolling update (2 replicas: maxSurge 1, maxUnavailable 0) removes an old pod only when a new one is available.</text>
+  <text class="d" x="34" y="580">• Without a probe "available" means "container running", so the old pods go after about 2 s while the app needs ~20 s to listen.</text>
+  <text class="d" x="34" y="598">• With the probe, Kubernetes waits for each new pod to answer: slower (44 s), but users never hit a pod that isn't ready.</text>
+  <text class="d" x="34" y="616">K3s v1.35.9, 2 replicas, one request per second; the bar positions in between are approximate.</text>
+</svg>

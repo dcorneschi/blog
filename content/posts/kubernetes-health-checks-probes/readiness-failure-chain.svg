@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What a readiness failure sets off</title>
+  <desc id="d">1. On the node, the kubelet sees the readiness probe fail failureThreshold times and sets the container's ready to false. 2. The kubelet reports the pod condition Ready=False to the API server. 3. The API server stores the new status. 4. The EndpointSlice controller in the control plane marks the pod's endpoint ready=false and serving=false; the address stays in the EndpointSlice, and the legacy Endpoints object lists it under notReadyAddresses. 5. kube-proxy on every node updates its iptables, IPVS or nftables rules to use only ready endpoints. 6. New connections to the Service go to the other pods; established connections are not cut by Kubernetes. Ingress controllers and cloud load balancers that watch EndpointSlices react on their own schedule. With two replicas, the not-ready endpoint shows ready=false/serving=false and new requests go to the remaining pod.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .n    { font-size: 13px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .who  { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; }
+      .d    { font-size: 11px; fill: #495057; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .node { fill: #e7f1ff; stroke: #6ea8fe; }
+      .cp   { fill: #ece6f5; stroke: #a993c9; }
+      .net  { fill: #e8f5ee; stroke: #75b798; }
+    </style>
+  </defs>
+
+  <rect width="900" height="440" fill="#ffffff"/>
+  <text class="h" x="20" y="28">A readiness probe fails: what happens, in order</text>
+  <rect class="box node" x="430" y="16" width="14" height="12" rx="2"/><text class="d" x="450" y="26">node (kubelet)</text>
+  <rect class="box cp" x="550" y="16" width="14" height="12" rx="2"/><text class="d" x="570" y="26">control plane</text>
+  <rect class="box net" x="660" y="16" width="14" height="12" rx="2"/><text class="d" x="680" y="26">every node (kube-proxy)</text>
+
+  <!-- row 1 -->
+  <rect class="box node" x="20" y="48" width="260" height="104" rx="8"/>
+  <circle cx="42" cy="72" r="12" fill="#3d7fe0"/><text class="n" x="42" y="77">1</text>
+  <text class="who" x="62" y="69" style="fill:#1f5fbf">KUBELET</text>
+  <text class="tb" x="62" y="86">Probe fails N times</text>
+  <text class="d" x="34" y="108">failureThreshold consecutive failures</text>
+  <text class="m" x="34" y="128">containerStatus.ready = false</text>
+  <text class="d" x="34" y="144">The container keeps running.</text>
+
+  <rect class="box node" x="320" y="48" width="260" height="104" rx="8"/>
+  <circle cx="342" cy="72" r="12" fill="#3d7fe0"/><text class="n" x="342" y="77">2</text>
+  <text class="who" x="362" y="69" style="fill:#1f5fbf">KUBELET → API SERVER</text>
+  <text class="tb" x="362" y="86">Pod status update</text>
+  <text class="m" x="334" y="112">condition Ready = False</text>
+  <text class="m" x="334" y="130">ContainersReady = False</text>
+
+  <rect class="box cp" x="620" y="48" width="260" height="104" rx="8"/>
+  <circle cx="642" cy="72" r="12" fill="#7c5cc4"/><text class="n" x="642" y="77">3</text>
+  <text class="who" x="662" y="69" style="fill:#6f42c1">API SERVER</text>
+  <text class="tb" x="662" y="86">Stores the new status</text>
+  <text class="d" x="634" y="110">Written to etcd; every watcher</text>
+  <text class="d" x="634" y="126">of pods is notified.</text>
+
+  <path class="lne" d="M280,100 H318"/>
+  <path class="lne" d="M580,100 H618"/>
+  <path class="lne" d="M750,152 V176 H150 V196"/>
+
+  <!-- row 2 -->
+  <rect class="box cp" x="20" y="198" width="260" height="124" rx="8"/>
+  <circle cx="42" cy="222" r="12" fill="#7c5cc4"/><text class="n" x="42" y="227">4</text>
+  <text class="who" x="62" y="219" style="fill:#6f42c1">ENDPOINTSLICE CONTROLLER</text>
+  <text class="tb" x="62" y="236">Endpoint marked not ready</text>
+  <text class="m" x="34" y="258">ready: false, serving: false</text>
+  <text class="d" x="34" y="278">The address stays in the slice;</text>
+  <text class="d" x="34" y="294">legacy Endpoints: notReadyAddresses.</text>
+  <text class="d" x="34" y="312">(not removed)</text>
+
+  <rect class="box net" x="320" y="198" width="260" height="124" rx="8"/>
+  <circle cx="342" cy="222" r="12" fill="#2f9e66"/><text class="n" x="342" y="227">5</text>
+  <text class="who" x="362" y="219" style="fill:#146c43">KUBE-PROXY, EVERY NODE</text>
+  <text class="tb" x="362" y="236">Rules rewritten</text>
+  <text class="d" x="334" y="258">iptables / IPVS / nftables now</text>
+  <text class="d" x="334" y="274">send Service traffic only to</text>
+  <text class="d" x="334" y="290">ready endpoints.</text>
+
+  <rect class="box net" x="620" y="198" width="260" height="124" rx="8"/>
+  <circle cx="642" cy="222" r="12" fill="#2f9e66"/><text class="n" x="642" y="227">6</text>
+  <text class="who" x="662" y="219" style="fill:#146c43">RESULT</text>
+  <text class="tb" x="662" y="236">No new connections</text>
+  <text class="d" x="634" y="258">New connections go to other pods.</text>
+  <text class="d" x="634" y="274">Established connections are not cut</text>
+  <text class="d" x="634" y="290">by Kubernetes: they end when the</text>
+  <text class="d" x="634" y="306">client or the app closes them.</text>
+
+  <path class="lne" d="M280,260 H318"/>
+  <path class="lne" d="M580,260 H618"/>
+
+  <!-- notes -->
+  <rect class="box" x="20" y="342" width="430" height="82" rx="8" style="fill:#fff8e1;stroke:#e0c46c"/>
+  <text class="tb" x="34" y="364" style="font-size:12px">Others watch the EndpointSlices too</text>
+  <text class="d" x="34" y="384">Ingress controllers and cloud load balancers with IP</text>
+  <text class="d" x="34" y="400">targets update on their own schedule (deregistration</text>
+  <text class="d" x="34" y="416">delays), so "out of rotation" isn't instant everywhere.</text>
+
+  <rect class="box" x="460" y="342" width="420" height="82" rx="8" style="fill:#f8f9fa;stroke:#adb5bd"/>
+  <text class="tb" x="474" y="364" style="font-size:12px">In practice (2 replicas)</text>
+  <text class="d" x="474" y="384">The unready pod: ready=false/serving=false, still listed.</text>
+  <text class="d" x="474" y="400">New requests all go to the other pod.</text>
+  </svg>
