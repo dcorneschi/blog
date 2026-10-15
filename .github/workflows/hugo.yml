@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "17 5 * * *" # daily rebuild, keeps "Recently Watched" on the About page current
 
 permissions:
   contents: read

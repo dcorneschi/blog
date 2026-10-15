@@ -12,6 +12,14 @@ summaryLength = 70 # words in automatic summaries (default 70)
 [pagination]
   pagerSize = 6
 
+# Files fetched with resources.GetRemote (the Letterboxd feed and its posters) are cached
+# forever by default, and CI keeps the cache between runs: expire them so the
+# scheduled daily build picks up new diary entries.
+[caches]
+  [caches.getresource]
+    dir = ":cacheDir/:project"
+    maxAge = "6h"
+
 [params]
   description = "Notes on DevOps, infrastructure as code and the command line: Terraform, tmux and the tools I use every day."
   startPageColumns = true
@@ -19,6 +27,7 @@ summaryLength = 70 # words in automatic summaries (default 70)
   alwaysExpandMenu = true
   customDateFormat = "2006-01-02"
   csscdn = ["https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@400;600;700&display=swap"]
+  letterboxd = "dcorneschi" # Recently Watched on the About page, see layouts/_shortcodes/letterboxd.html
 
   [params.author]
     name = "Daniel Corneschi"

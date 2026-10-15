@@ -53,6 +53,8 @@ Topics I care about:
 <img src="book.jpg" alt="Book I am currently reading" width="220" height="271" class="border" style="flex-shrink: 0">
 </div>
 
+{{< letterboxd count="4" >}}
+
 ## Get in Touch
 
 - GitHub: [@dcorneschi](https://github.com/dcorneschi)
