@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 730" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Identity-based vs resource-based policies</title>
+  <desc id="d">Role AppRole in account 111111111111 calls s3:GetObject on my-bucket. The identity-based policy on the role allows s3:GetObject on arn:aws:s3:::my-bucket/* and has no Principal, because the principal is the role itself; it answers what this identity can do. The resource-based policy on the bucket has the same Effect, Action and Resource plus a Principal naming the role; it answers who can use this resource. In the same account an Allow in either policy is enough; across accounts both must allow; an explicit Deny in either wins. Role trust policies and KMS key policies must always allow, an identity policy alone is never enough. Comparison: identity-based policies attach to users, groups and roles, may not use Principal, need a Resource element, can be AWS managed, customer managed or inline, can't grant cross-account access alone, are limited to 6,144 characters (managed) or 2,048 to 10,240 (inline), and are set with attach-role-policy or put-role-policy. Resource-based policies attach to buckets, keys, queues, topics, functions and roles, require Principal, refer to the resource itself (a trust policy has no Resource), are always inline, can grant cross-account access together with the caller's own allow, are limited to 20 KB for buckets, 32 KB for keys and 2,048 characters for trust policies (up to 8,192), and are set with put-bucket-policy, put-key-policy or update-assume-role-policy.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .q    { font-size: 12px; font-weight: 700; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .ldr  { stroke: #adb5bd; stroke-width: 1.2; fill: none; stroke-dasharray: 3 3; }
+      .idn  { fill: #e8f5ee; stroke: #75b798; }
+      .res  { fill: #fff3e0; stroke: #fd9843; }
+      .card { fill: #ffffff; }
+      .hl   { fill: #ffe5cc; }
+      .ok   { fill: #f8f9fa; stroke: #adb5bd; }
+      .dn   { fill: #f8d7da; stroke: #ea868f; }
+      .rowA { fill: #f8f9fa; }
+      .th   { font-size: 12px; font-weight: 700; fill: #212529; }
+    </style>
+  </defs>
+
+  <rect width="900" height="730" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Identity-based vs resource-based policies: one request, two places to allow it</text>
+
+  <!-- caller and resource -->
+  <rect class="box idn" x="20" y="44" width="390" height="54" rx="8"/>
+  <text class="tb" x="36" y="66">Caller: role AppRole</text>
+  <text class="m" x="36" y="85">arn:aws:iam::111111111111:role/AppRole</text>
+  <rect class="box res" x="490" y="44" width="390" height="54" rx="8"/>
+  <text class="tb" x="506" y="66">Resource: S3 bucket my-bucket</text>
+  <text class="m" x="506" y="85">arn:aws:s3:::my-bucket</text>
+  <path class="lne" d="M410,71 H486"/>
+  <text class="d" x="418" y="64">GetObject</text>
+
+  <!-- policy cards -->
+  <rect class="box idn card" x="20" y="112" width="390" height="214" rx="8"/>
+  <text class="tb" x="36" y="134">Identity-based policy, on the role</text>
+  <text class="q" x="36" y="152" fill="#146c43">What can this identity do?</text>
+  <text class="m" x="36" y="180">{</text>
+  <text class="m" x="50" y="196">"Effect": "Allow",</text>
+  <text class="m" x="50" y="212">"Action": "s3:GetObject",</text>
+  <text class="m" x="50" y="228">"Resource": "arn:aws:s3:::my-bucket/*"</text>
+  <text class="m" x="36" y="244">}</text>
+  <text class="d" x="36" y="274">No Principal: the principal is the role it is attached to.</text>
+  <text class="d" x="36" y="290">Adding one makes IAM reject the policy.</text>
+  <text class="d" x="36" y="312">Also on users and groups (users inherit group policies).</text>
+
+  <rect class="box res card" x="490" y="112" width="390" height="214" rx="8"/>
+  <text class="tb" x="506" y="134">Resource-based policy, on the bucket</text>
+  <text class="q" x="506" y="152" fill="#b35c00">Who can use this resource?</text>
+  <rect class="hl" x="502" y="185" width="366" height="50" rx="3"/>
+  <text class="m" x="506" y="180">{</text>
+  <text class="m" x="520" y="196">"Principal": {</text>
+  <text class="m" x="534" y="212">"AWS": "arn:aws:iam::111111111111:role/AppRole"</text>
+  <text class="m" x="520" y="228">},</text>
+  <text class="m" x="520" y="244">"Effect": "Allow",</text>
+  <text class="m" x="520" y="260">"Action": "s3:GetObject",</text>
+  <text class="m" x="520" y="276">"Resource": "arn:aws:s3:::my-bucket/*"</text>
+  <text class="m" x="506" y="292">}</text>
+  <text class="d" x="506" y="314">Principal is required: the bucket is called by many identities.</text>
+
+  <!-- how they combine -->
+  <text class="tb" x="20" y="356">Do both have to allow it?</text>
+  <rect class="box ok" x="20" y="366" width="280" height="70" rx="8"/>
+  <text class="tb" x="34" y="388">Same account</text>
+  <text class="d" x="34" y="406">An Allow in either policy is enough.</text>
+  <text class="d" x="34" y="422">Boundaries and session policies still apply.</text>
+  <rect class="box ok" x="310" y="366" width="280" height="70" rx="8"/>
+  <text class="tb" x="324" y="388">Different accounts</text>
+  <text class="d" x="324" y="406">Both must allow: the identity policy in the</text>
+  <text class="d" x="324" y="422">caller's account and the resource policy.</text>
+  <rect class="box dn" x="600" y="366" width="280" height="70" rx="8"/>
+  <text class="tb" x="614" y="388" fill="#b02a37">Explicit Deny</text>
+  <text class="d" x="614" y="406">A Deny in either policy wins, in the same</text>
+  <text class="d" x="614" y="422">account or across accounts.</text>
+  <text class="d" x="20" y="456">Exceptions: a role trust policy and a KMS key policy must always allow; an identity policy alone is never enough for them.</text>
+
+  <!-- comparison table: label x 20, identity x 190, resource x 520 -->
+  <rect x="20" y="472" width="860" height="26" fill="#e9ecef"/>
+  <text class="th" x="30" y="490">Aspect</text>
+  <text class="th" x="190" y="490" fill="#146c43">Identity-based</text>
+  <text class="th" x="520" y="490" fill="#b35c00">Resource-based</text>
+
+  <rect class="rowA" x="20" y="498" width="860" height="26"/>
+  <text class="tb" x="30" y="515" style="font-size:12px">Attached to</text>
+  <text class="d" x="190" y="515">IAM users, groups, roles</text>
+  <text class="d" x="520" y="515">S3 buckets, KMS keys, SQS / SNS, Lambda, roles (trust policy) …</text>
+
+  <text class="tb" x="30" y="541" style="font-size:12px">Principal element</text>
+  <text class="d" x="190" y="541">not allowed</text>
+  <text class="d" x="520" y="541">required</text>
+
+  <rect class="rowA" x="20" y="550" width="860" height="26"/>
+  <text class="tb" x="30" y="567" style="font-size:12px">Resource element</text>
+  <text class="d" x="190" y="567">required: which resources it covers</text>
+  <text class="d" x="520" y="567">the resource itself or its parts (a trust policy has none)</text>
+
+  <text class="tb" x="30" y="593" style="font-size:12px">Kinds</text>
+  <text class="d" x="190" y="593">AWS managed, customer managed, inline</text>
+  <text class="d" x="520" y="593">always inline, part of the resource</text>
+
+  <rect class="rowA" x="20" y="602" width="860" height="26"/>
+  <text class="tb" x="30" y="619" style="font-size:12px">Cross-account</text>
+  <text class="d" x="190" y="619">can't grant it alone</text>
+  <text class="d" x="520" y="619">can grant it, with the caller's own Allow</text>
+
+  <text class="tb" x="30" y="645" style="font-size:12px">Size limit</text>
+  <text class="d" x="190" y="645">6,144 (managed); 2,048 / 5,120 / 10,240 (inline)</text>
+  <text class="d" x="520" y="645">bucket 20 KB, key 32 KB, trust 2,048 chars (up to 8,192)</text>
+
+  <rect class="rowA" x="20" y="654" width="860" height="52"/>
+  <text class="tb" x="30" y="671" style="font-size:12px">Set with</text>
+  <text class="m" x="190" y="671">attach-role-policy, put-role-policy</text>
+  <text class="m" x="520" y="671">put-bucket-policy, put-key-policy,</text>
+  <text class="m" x="520" y="696">update-assume-role-policy</text>
+  <rect x="20" y="472" width="860" height="234" fill="none" stroke="#dee2e6"/>
+  <text class="d" x="20" y="724">Both use the same JSON grammar (Effect, Action, Resource, Condition); only resource-based policies name a Principal.</text>
+</svg>

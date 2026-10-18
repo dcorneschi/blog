@@ -149,6 +149,8 @@ A managed policy is a standalone object with its own ARN, versioning, and can be
 
 Resource-based policies support cross-account access without assuming a role.
 
+[![Identity-based vs resource-based policies: role AppRole calls s3:GetObject on my-bucket; the identity-based policy on the role has no Principal and answers what the identity can do, the bucket policy names the role as Principal and answers who can use the bucket; in the same account an Allow in either is enough, across accounts both must allow, an explicit Deny in either wins; comparison of attachment, Principal and Resource elements, kinds, cross-account use, size limits and CLI commands](iam-identity-vs-resource.svg)](iam-identity-vs-resource.svg "Open the diagram full size")
+
 A resource-based policy must say *who* it applies to, so it uses the `Principal` element: an account, IAM user, role, role session, federated user, AWS service or `"*"` (everyone, including anonymous users). An IAM group can't be a principal. An identity-based policy can't use `Principal` at all, because its principal is the user, group or role it is attached to. A bucket policy that lets another account read objects:
 
 ```json
