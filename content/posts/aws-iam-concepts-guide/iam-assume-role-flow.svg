@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AssumeRole flow</title>
+  <desc id="d">ProdDeployRole in account 222222222222 assumes CrossAccountRole in account 111111111111. 1 The caller calls sts:AssumeRole with the role ARN and a session name, optionally an external ID and an MFA code; the caller's own identity policy must allow sts:AssumeRole on that role. 2 STS checks the role's trust policy: is the caller a trusted principal, do conditions such as sts:ExternalId and aws:MultiFactorAuthPresent match. 3 STS returns temporary credentials: an access key ID starting with ASIA, a secret access key, a session token and an expiration, by default 1 hour; from a user up to the role's MaxSessionDuration of 12 hours, from a role session (role chaining) at most 1 hour. 4 The caller signs API calls with them and acts as arn:aws:sts::111111111111:assumed-role/CrossAccountRole/deploy. 5 The request is evaluated against the role's permission policies, plus permission boundary, session policy, SCPs and the resource's own policy. 6 The resource answers with the result or AccessDenied.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .n    { font-size: 13px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .tc   { font-size: 13px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .d    { font-size: 11px; fill: #495057; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .ret  { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; marker-end: url(#a); }
+      .life { stroke: #adb5bd; stroke-width: 1.2; stroke-dasharray: 3 3; }
+      .acA  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .acB  { fill: #e8f5ee; stroke: #75b798; }
+      .sts  { fill: #fff3cd; stroke: #ffc107; }
+      .chk  { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+
+  <rect width="900" height="700" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Assuming a role in another account</text>
+
+  <!-- account areas -->
+  <rect x="20" y="44" width="200" height="560" rx="10" fill="#f5f9ff" stroke="#cfe2ff"/>
+  <text class="d" x="30" y="62">Account A · 222222222222</text>
+  <rect x="460" y="44" width="420" height="560" rx="10" fill="#f4faf6" stroke="#c7e6d4"/>
+  <text class="d" x="470" y="62">Account B · 111111111111</text>
+
+  <!-- actors: centres 120, 340, 570, 780 -->
+  <rect class="box acA" x="40" y="74" width="160" height="50" rx="8"/>
+  <text class="tc" x="120" y="96">Caller</text><text class="dc" x="120" y="113">ProdDeployRole session</text>
+  <rect class="box sts" x="260" y="74" width="160" height="50" rx="8"/>
+  <text class="tc" x="340" y="96">AWS STS</text><text class="dc" x="340" y="113">sts.amazonaws.com</text>
+  <rect class="box acB" x="490" y="74" width="160" height="50" rx="8"/>
+  <text class="tc" x="570" y="96">CrossAccountRole</text><text class="dc" x="570" y="113">trust + permission policies</text>
+  <rect class="box acB" x="700" y="74" width="160" height="50" rx="8"/>
+  <text class="tc" x="780" y="96">Resource</text><text class="dc" x="780" y="113">e.g. S3 bucket</text>
+
+  <line class="life" x1="120" y1="124" x2="120" y2="596"/>
+  <line class="life" x1="340" y1="124" x2="340" y2="596"/>
+  <line class="life" x1="570" y1="124" x2="570" y2="596"/>
+  <line class="life" x1="780" y1="124" x2="780" y2="596"/>
+
+  <!-- 1 AssumeRole -->
+  <circle cx="140" cy="152" r="10" fill="#3d7fe0"/><text class="n" x="140" y="157">1</text>
+  <text class="tb" x="156" y="157">sts:AssumeRole</text>
+  <path class="lne" d="M120,170 H336"/>
+  <text class="m" x="128" y="188">--role-arn</text>
+  <text class="m" x="128" y="202">--role-session-name</text>
+  <text class="d" x="128" y="216">optional: --external-id,</text>
+  <text class="d" x="128" y="230">--serial-number --token-code</text>
+
+  <!-- 2 trust policy -->
+  <circle cx="360" cy="214" r="10" fill="#e0a800"/><text class="n" x="360" y="219">2</text>
+  <text class="tb" x="376" y="219">Check the trust policy</text>
+  <path class="lne" d="M340,232 H566"/>
+  <rect class="box chk" x="350" y="244" width="300" height="56" rx="6"/>
+  <text class="d" x="360" y="262">Is the caller a trusted Principal?</text>
+  <text class="d" x="360" y="276">Do the conditions match?</text>
+  <text class="m" x="360" y="291">sts:ExternalId, aws:MultiFactorAuthPresent</text>
+  <path class="ret" d="M570,316 H344"/>
+  <text class="d" x="480" y="330">trusted</text>
+
+  <!-- 3 credentials -->
+  <circle cx="140" cy="352" r="10" fill="#e0a800"/><text class="n" x="140" y="357">3</text>
+  <text class="tb" x="156" y="357">Temporary credentials</text>
+  <path class="ret" d="M340,370 H124"/>
+  <text class="m" x="128" y="388">AccessKeyId     ASIA…</text>
+  <text class="m" x="128" y="402">SecretAccessKey</text>
+  <text class="m" x="128" y="416">SessionToken</text>
+  <text class="m" x="128" y="430">Expiration</text>
+  <text class="d" x="210" y="430">1 h by default</text>
+
+  <!-- 4 call -->
+  <circle cx="140" cy="458" r="10" fill="#3d7fe0"/><text class="n" x="140" y="463">4</text>
+  <text class="tb" x="156" y="463">s3:GetObject, signed with the temporary credentials</text>
+  <path class="lne" d="M120,476 H776"/>
+  <text class="d" x="128" y="494">acting as</text>
+  <text class="m" x="182" y="494">arn:aws:sts::111111111111:assumed-role/CrossAccountRole/deploy</text>
+
+  <!-- 5 evaluation -->
+  <rect class="box chk" x="490" y="508" width="370" height="44" rx="6"/>
+  <circle cx="508" cy="530" r="10" fill="#2f9e66"/><text class="n" x="508" y="535">5</text>
+  <text class="d" x="526" y="526">Decided by the role's permission policies, plus boundary,</text>
+  <text class="d" x="526" y="541">session policy, SCPs/RCPs and the bucket policy</text>
+
+  <!-- 6 answer -->
+  <circle cx="140" cy="568" r="10" fill="#2f9e66"/><text class="n" x="140" y="573">6</text>
+  <text class="tb" x="156" y="573">Object, or AccessDenied</text>
+  <path class="ret" d="M780,584 H124"/>
+
+  <!-- notes -->
+  <text class="d" x="20" y="628">Both accounts must agree: an identity policy in A allows sts:AssumeRole on the role ARN, and B's trust policy trusts the caller.</text>
+  <text class="d" x="20" y="646">When the credentials expire (ExpiredToken), call AssumeRole again. A CLI profile with role_arn + source_profile does this for you.</text>
+  <text class="d" x="20" y="664">Sessions last up to the role's MaxSessionDuration (max 12 h), but role chaining (a role session assuming a role, as here) is capped at 1 hour.</text>
+  <text class="d" x="20" y="682">The session name shows up in CloudTrail, so name it after the person or job (e.g. deploy, github-run).</text>
+</svg>
