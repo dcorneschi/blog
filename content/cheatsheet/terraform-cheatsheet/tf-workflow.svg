@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What each Terraform command reads and writes</title>
+  <desc id="d">The core workflow init, validate, plan, apply, destroy, and what each command touches. init reads the configuration, downloads providers and modules into .terraform, writes .terraform.lock.hcl and configures the backend. validate reads the configuration and the provider schemas from .terraform; it never touches state or the cloud. plan reads configuration and state, takes the state lock, reads the real objects through the provider API (refresh), and writes a plan file with -out. apply reads configuration and state or a saved plan file, creates, updates and deletes objects through the API, and writes the new state. destroy reads state and deletes every object it tracks, then writes an empty state.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .ths { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .cmd { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .n   { fill: #f8f9fa; stroke: #e9ecef; }
+      .pill{ fill: #ffffff; stroke: #495057; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The core workflow: what each command reads and writes</text>
+
+  <!-- flow -->
+  <rect class="pill" x="20" y="44" width="110" height="32" rx="16"/><text class="cmd" x="75" y="65" text-anchor="middle">init</text>
+  <rect class="pill" x="170" y="44" width="110" height="32" rx="16"/><text class="cmd" x="225" y="65" text-anchor="middle">validate</text>
+  <rect class="pill" x="320" y="44" width="110" height="32" rx="16"/><text class="cmd" x="375" y="65" text-anchor="middle">plan</text>
+  <rect class="pill" x="470" y="44" width="110" height="32" rx="16"/><text class="cmd" x="525" y="65" text-anchor="middle">apply</text>
+  <rect class="pill" x="620" y="44" width="110" height="32" rx="16"/><text class="cmd" x="675" y="65" text-anchor="middle">destroy</text>
+  <path class="lne" d="M130,60 H166"/><path class="lne" d="M280,60 H316"/><path class="lne" d="M430,60 H466"/>
+  <text class="d" x="750" y="57">plan -destroy +</text>
+  <text class="d" x="750" y="71">apply, in one step</text>
+
+  <!-- matrix: label col x20..140, 6 columns from x150, width 120 -->
+  <text class="th" x="210" y="104">configuration</text><text class="ths" x="210" y="118">*.tf, *.tfvars</text>
+  <text class="th" x="330" y="104">.terraform/ + lock</text><text class="ths" x="330" y="118">providers, modules</text>
+  <text class="th" x="450" y="104">state</text><text class="ths" x="450" y="118">local or backend</text>
+  <text class="th" x="570" y="104">state lock</text><text class="ths" x="570" y="118">.tflock, DynamoDB</text>
+  <text class="th" x="690" y="104">real infrastructure</text><text class="ths" x="690" y="118">via provider API</text>
+  <text class="th" x="810" y="104">plan file</text><text class="ths" x="810" y="118">-out=tfplan</text>
+
+  <!-- rows: y 128, step 52, cells h 44 -->
+  <text class="cmd" x="24" y="155">init</text>
+  <rect class="r"  x="152" y="128" width="116" height="44" rx="5"/><text class="c" x="210" y="146">reads</text><text class="c" x="210" y="161">backend, required_*</text>
+  <rect class="w"  x="272" y="128" width="116" height="44" rx="5"/><text class="c" x="330" y="146">writes</text><text class="c" x="330" y="161">downloads, lock file</text>
+  <rect class="n"  x="392" y="128" width="116" height="44" rx="5"/><text class="c" x="450" y="146">configures backend</text><text class="c" x="450" y="161">-migrate-state</text>
+  <rect class="n"  x="512" y="128" width="116" height="44" rx="5"/><text class="c" x="570" y="155">–</text>
+  <rect class="n"  x="632" y="128" width="116" height="44" rx="5"/><text class="c" x="690" y="155">–</text>
+  <rect class="n"  x="752" y="128" width="116" height="44" rx="5"/><text class="c" x="810" y="155">–</text>
+
+  <text class="cmd" x="24" y="207">validate</text>
+  <rect class="r"  x="152" y="180" width="116" height="44" rx="5"/><text class="c" x="210" y="207">reads</text>
+  <rect class="r"  x="272" y="180" width="116" height="44" rx="5"/><text class="c" x="330" y="198">reads</text><text class="c" x="330" y="213">provider schemas</text>
+  <rect class="n"  x="392" y="180" width="116" height="44" rx="5"/><text class="c" x="450" y="207">–</text>
+  <rect class="n"  x="512" y="180" width="116" height="44" rx="5"/><text class="c" x="570" y="207">–</text>
+  <rect class="n"  x="632" y="180" width="116" height="44" rx="5"/><text class="c" x="690" y="207">–</text>
+  <rect class="n"  x="752" y="180" width="116" height="44" rx="5"/><text class="c" x="810" y="207">–</text>
+
+  <text class="cmd" x="24" y="259">plan</text>
+  <rect class="r"  x="152" y="232" width="116" height="44" rx="5"/><text class="c" x="210" y="259">reads</text>
+  <rect class="r"  x="272" y="232" width="116" height="44" rx="5"/><text class="c" x="330" y="259">reads</text>
+  <rect class="r"  x="392" y="232" width="116" height="44" rx="5"/><text class="c" x="450" y="250">reads</text><text class="c" x="450" y="265">(not saved)</text>
+  <rect class="rw" x="512" y="232" width="116" height="44" rx="5"/><text class="c" x="570" y="250">takes, then</text><text class="c" x="570" y="265">releases</text>
+  <rect class="r"  x="632" y="232" width="116" height="44" rx="5"/><text class="c" x="690" y="250">reads</text><text class="c" x="690" y="265">(refresh)</text>
+  <rect class="w"  x="752" y="232" width="116" height="44" rx="5"/><text class="c" x="810" y="250">writes</text><text class="c" x="810" y="265">with -out</text>
+
+  <text class="cmd" x="24" y="311">apply</text>
+  <rect class="r"  x="152" y="284" width="116" height="44" rx="5"/><text class="c" x="210" y="302">reads</text><text class="c" x="210" y="317">(unless plan file)</text>
+  <rect class="r"  x="272" y="284" width="116" height="44" rx="5"/><text class="c" x="330" y="311">reads</text>
+  <rect class="rw" x="392" y="284" width="116" height="44" rx="5"/><text class="c" x="450" y="302">reads and</text><text class="c" x="450" y="317">writes</text>
+  <rect class="rw" x="512" y="284" width="116" height="44" rx="5"/><text class="c" x="570" y="302">takes, then</text><text class="c" x="570" y="317">releases</text>
+  <rect class="rw" x="632" y="284" width="116" height="44" rx="5"/><text class="c" x="690" y="302">creates, updates,</text><text class="c" x="690" y="317">deletes</text>
+  <rect class="r"  x="752" y="284" width="116" height="44" rx="5"/><text class="c" x="810" y="302">reads</text><text class="c" x="810" y="317">apply tfplan</text>
+
+  <text class="cmd" x="24" y="363">destroy</text>
+  <rect class="r"  x="152" y="336" width="116" height="44" rx="5"/><text class="c" x="210" y="363">reads</text>
+  <rect class="r"  x="272" y="336" width="116" height="44" rx="5"/><text class="c" x="330" y="363">reads</text>
+  <rect class="rw" x="392" y="336" width="116" height="44" rx="5"/><text class="c" x="450" y="354">reads, then</text><text class="c" x="450" y="369">writes it empty</text>
+  <rect class="rw" x="512" y="336" width="116" height="44" rx="5"/><text class="c" x="570" y="354">takes, then</text><text class="c" x="570" y="369">releases</text>
+  <rect class="rw" x="632" y="336" width="116" height="44" rx="5"/><text class="c" x="690" y="354">deletes everything</text><text class="c" x="690" y="369">the state tracks</text>
+  <rect class="n"  x="752" y="336" width="116" height="44" rx="5"/><text class="c" x="810" y="363">–</text>
+
+  <!-- legend + notes -->
+  <rect class="r"  x="20" y="396" width="14" height="12" rx="2"/><text class="d" x="40" y="406">reads</text>
+  <rect class="w"  x="100" y="396" width="14" height="12" rx="2"/><text class="d" x="120" y="406">writes</text>
+  <rect class="rw" x="180" y="396" width="14" height="12" rx="2"/><text class="d" x="200" y="406">reads and changes</text>
+  <text class="d" x="20" y="432">Only apply and destroy change real infrastructure. plan refreshes what it reads but saves nothing to the state; apply -refresh-only saves it.</text>
+  <text class="d" x="20" y="450">A saved plan is applied exactly as it was made: if the state changed in between, apply refuses it ("Saved plan is stale").</text>
+</svg>
