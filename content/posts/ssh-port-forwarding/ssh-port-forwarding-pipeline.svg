@@ -1,0 +1,258 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1212" font-family="Inter, Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">SSH port forwarding as pipelines</title>
+  <desc id="d">Four SSH port forwards drawn as left-to-right pipelines in traffic order: caller, listener, encrypted tunnel, the process that dials, destination. 1: ssh -L localhost:8080:localhost:80 user@server; curl and the ssh client listening on 127.0.0.1:8080 run on the client, sshd on the server dials its own localhost:80. 2: ssh -L localhost:8080:server:80 user@bastion; sshd on the bastion dials server:80 on the private network. 3: ssh -R 0.0.0.0:8080:localhost:80 user@gateway; curl from the internet hits sshd listening on the gateway at 0.0.0.0:8080, and the ssh client on the private machine dials its own localhost:80; the tunnel connection is opened by the client from the right. 4: ssh -R 0.0.0.0:8080:server:80 user@gateway; the ssh client dials server:80 on its private network. With -L the listener is the ssh client; with -R it is sshd. Binding 0.0.0.0 with -R needs GatewayPorts clientspecified or yes in sshd_config.</desc>
+  <defs>
+    <marker id="h" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/>
+    </marker>
+    <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#155e75"/><stop offset="0.5" stop-color="#0e7490"/><stop offset="1" stop-color="#164e63"/>
+    </linearGradient>
+    <style>
+      .bg   { fill: #0b1120; }
+      .H    { font-size: 26px; font-weight: 800; fill: #f8fafc; letter-spacing: -0.3px; }
+      .sub  { font-size: 13px; fill: #94a3b8; }
+      .num  { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 24px; font-weight: 700; fill: #334155; }
+      .ti   { font-size: 17px; font-weight: 700; fill: #f1f5f9; }
+      .flag { stroke-width: 1.2; }
+      .fL   { fill: #1e3a5f; stroke: #60a5fa; }
+      .fR   { fill: #3b2a5c; stroke: #c084fc; }
+      .fl   { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 13px; font-weight: 700; fill: #f8fafc; text-anchor: middle; }
+      .cmd  { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 16px; font-weight: 600; }
+      .pr   { fill: #475569; }
+      .k    { fill: #cbd5e1; }
+      .cl   { fill: #fbbf24; }
+      .cd   { fill: #fb7185; }
+      .cs   { fill: #22d3ee; }
+      .note { font-size: 12px; font-style: italic; fill: #64748b; text-anchor: end; }
+      .sep  { stroke: #1e293b; stroke-width: 1; }
+      .band { fill: #111a2e; stroke: #1e293b; }
+      .out  { fill: none; stroke: #334155; stroke-dasharray: 2 4; }
+      .bn   { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 12px; font-weight: 700; fill: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+      .bs   { font-family: Inter, Roboto, Arial, sans-serif; font-size: 11px; font-weight: 400; fill: #64748b; letter-spacing: 0; text-transform: none; }
+      .priv { fill: none; stroke: #475569; stroke-width: 1.2; stroke-dasharray: 7 5; }
+      .pl   { font-size: 11px; font-style: italic; fill: #64748b; text-anchor: end; }
+      .node { fill: #0f172a; stroke-width: 1.6; }
+      .n    { stroke: #475569; }
+      .l    { stroke: #fbbf24; fill: #1f1a0c; }
+      .d    { stroke: #fb7185; fill: #22101a; }
+      .tag  { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 1.4px; text-anchor: middle; }
+      .tn   { fill: #64748b; }
+      .tl   { fill: #fbbf24; }
+      .td   { fill: #fb7185; }
+      .nm   { font-size: 14px; font-weight: 700; fill: #f1f5f9; text-anchor: middle; }
+      .ns   { fill: #22d3ee; }
+      .ad   { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 11.5px; fill: #cbd5e1; text-anchor: middle; }
+      .hop  { stroke: #94a3b8; stroke-width: 1.6; marker-end: url(#h); }
+      .pipe { fill: url(#pg); stroke: #22d3ee; stroke-width: 1.2; stroke-opacity: 0.6; }
+      .chev { fill: none; stroke: #a5f3fc; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.85; }
+      .pt   { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1.6px; fill: #22d3ee; text-anchor: middle; }
+      .conn { stroke: #22d3ee; stroke-width: 1.2; stroke-dasharray: 3 3; marker-end: url(#c); opacity: 0.8; }
+      .ct   { font-size: 11px; fill: #67e8f9; text-anchor: middle; opacity: 0.85; }
+      .lg   { font-size: 12px; fill: #94a3b8; }
+      .lgm  { font-family: 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace; font-size: 12px; font-weight: 700; }
+    </style>
+  </defs>
+  <rect class="bg" width="1200" height="1212"/>
+  <text class="H" x="40" y="50">SSH port forwarding, as a pipeline</text>
+  <text class="sub" x="40" y="78">Traffic always flows left to right. Between -L and -R only two things change: which machine each step runs on, and which end opened the tunnel.</text>
+  <text class="sub" x="40" y="98"><tspan>Read every command as </tspan><tspan class="lgm cl">listen</tspan><tspan class="lgm k">:</tspan><tspan class="lgm cd">destination</tspan><tspan class="lgm k"> user@</tspan><tspan class="lgm cs">sshd-host</tspan><tspan>. The destination is always dialed by the far end of the tunnel.</tspan></text>
+<g transform="translate(0,120)">
+<text class="num" x="40" y="34">01</text>
+<rect class="flag fL" x="84" y="16" width="34" height="22" rx="5"/>
+<text class="fl" x="101" y="32">-L</text>
+<text class="ti" x="130" y="33">Local forward to the server’s own loopback</text>
+<text class="cmd" x="40" y="68"><tspan class="pr">$ </tspan><tspan class="k">ssh -L </tspan><tspan class="cl">localhost:8080</tspan><tspan class="k">:</tspan><tspan class="cd">localhost:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">server</tspan></text>
+<text class="note" x="1160" y="68">port 80 never leaves the server</text>
+<rect class="band" x="40" y="98" width="390" height="128" rx="10"/>
+<text class="bn" x="52" y="117">client<tspan class="bs" dx="8">your laptop</tspan></text>
+<rect class="band" x="690" y="98" width="460" height="128" rx="10"/>
+<text class="bn" x="702" y="117">server<tspan class="bs" dx="8">only :22 reachable</tspan></text>
+<rect class="node n" x="50" y="132" width="140" height="66" rx="8"/>
+<text class="tag tn" x="120.0" y="149">CALLER</text>
+<text class="nm " x="120.0" y="169">curl</text>
+<text class="ad" x="120.0" y="187">localhost:8080</text>
+<rect class="node l" x="250" y="132" width="160" height="66" rx="8"/>
+<text class="tag tl" x="330.0" y="149">LISTENS</text>
+<text class="nm " x="330.0" y="169">ssh client</text>
+<text class="ad" x="330.0" y="187">127.0.0.1:8080</text>
+<rect class="node n" x="710" y="132" width="160" height="66" rx="8"/>
+<text class="tag tn" x="790.0" y="149">DIALS</text>
+<text class="nm ns" x="790.0" y="169">sshd</text>
+<text class="ad" x="790.0" y="187">→ localhost:80</text>
+<rect class="node d" x="960" y="132" width="170" height="66" rx="8"/>
+<text class="tag td" x="1045.0" y="149">DESTINATION</text>
+<text class="nm " x="1045.0" y="169">web server</text>
+<text class="ad" x="1045.0" y="187">127.0.0.1:80</text>
+<line class="hop" x1="192" y1="165.0" x2="246" y2="165.0"/>
+<line class="hop" x1="872" y1="165.0" x2="956" y2="165.0"/>
+<rect class="pipe" x="410" y="151.0" width="300" height="28" rx="14"/>
+<path class="chev" d="M444,159.0 L451,165.0 L444,171.0"/>
+<path class="chev" d="M473,159.0 L480,165.0 L473,171.0"/>
+<path class="chev" d="M502,159.0 L509,165.0 L502,171.0"/>
+<path class="chev" d="M531,159.0 L538,165.0 L531,171.0"/>
+<path class="chev" d="M560,159.0 L567,165.0 L560,171.0"/>
+<path class="chev" d="M589,159.0 L596,165.0 L589,171.0"/>
+<path class="chev" d="M618,159.0 L625,165.0 L618,171.0"/>
+<path class="chev" d="M647,159.0 L654,165.0 L647,171.0"/>
+<path class="chev" d="M676,159.0 L683,165.0 L676,171.0"/>
+<text class="pt" x="560.0" y="143.0">ENCRYPTED SSH TUNNEL</text>
+<line class="conn" x1="450" y1="195.0" x2="670" y2="195.0"/>
+<text class="ct" x="560.0" y="213.0">connection opened by the ssh client, on the left</text>
+</g>
+<g transform="translate(0,378)">
+<line class="sep" x1="40" y1="-4" x2="1160" y2="-4"/>
+<text class="num" x="40" y="34">02</text>
+<rect class="flag fL" x="84" y="16" width="34" height="22" rx="5"/>
+<text class="fl" x="101" y="32">-L</text>
+<text class="ti" x="130" y="33">Local forward through a bastion</text>
+<text class="cmd" x="40" y="68"><tspan class="pr">$ </tspan><tspan class="k">ssh -L </tspan><tspan class="cl">localhost:8080</tspan><tspan class="k">:</tspan><tspan class="cd">server:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">bastion</tspan></text>
+<text class="note" x="1160" y="68">“server” is resolved by the bastion</text>
+<rect class="priv" x="790" y="92" width="372" height="140" rx="13"/>
+<text class="pl" x="1150" y="246">private network</text>
+<rect class="band" x="40" y="98" width="390" height="128" rx="10"/>
+<text class="bn" x="52" y="117">client<tspan class="bs" dx="8">your laptop</tspan></text>
+<rect class="band" x="690" y="98" width="200" height="128" rx="10"/>
+<text class="bn" x="702" y="117">bastion<tspan class="bs" dx="8">public + private</tspan></text>
+<rect class="band" x="930" y="98" width="220" height="128" rx="10"/>
+<text class="bn" x="942" y="117">server<tspan class="bs" dx="8">private IP only</tspan></text>
+<rect class="node n" x="50" y="132" width="140" height="66" rx="8"/>
+<text class="tag tn" x="120.0" y="149">CALLER</text>
+<text class="nm " x="120.0" y="169">curl</text>
+<text class="ad" x="120.0" y="187">localhost:8080</text>
+<rect class="node l" x="250" y="132" width="160" height="66" rx="8"/>
+<text class="tag tl" x="330.0" y="149">LISTENS</text>
+<text class="nm " x="330.0" y="169">ssh client</text>
+<text class="ad" x="330.0" y="187">127.0.0.1:8080</text>
+<rect class="node n" x="710" y="132" width="160" height="66" rx="8"/>
+<text class="tag tn" x="790.0" y="149">DIALS</text>
+<text class="nm ns" x="790.0" y="169">sshd</text>
+<text class="ad" x="790.0" y="187">→ server:80</text>
+<rect class="node d" x="960" y="132" width="170" height="66" rx="8"/>
+<text class="tag td" x="1045.0" y="149">DESTINATION</text>
+<text class="nm " x="1045.0" y="169">web server</text>
+<text class="ad" x="1045.0" y="187">0.0.0.0:80</text>
+<line class="hop" x1="192" y1="165.0" x2="246" y2="165.0"/>
+<line class="hop" x1="872" y1="165.0" x2="956" y2="165.0"/>
+<rect class="pipe" x="410" y="151.0" width="300" height="28" rx="14"/>
+<path class="chev" d="M444,159.0 L451,165.0 L444,171.0"/>
+<path class="chev" d="M473,159.0 L480,165.0 L473,171.0"/>
+<path class="chev" d="M502,159.0 L509,165.0 L502,171.0"/>
+<path class="chev" d="M531,159.0 L538,165.0 L531,171.0"/>
+<path class="chev" d="M560,159.0 L567,165.0 L560,171.0"/>
+<path class="chev" d="M589,159.0 L596,165.0 L589,171.0"/>
+<path class="chev" d="M618,159.0 L625,165.0 L618,171.0"/>
+<path class="chev" d="M647,159.0 L654,165.0 L647,171.0"/>
+<path class="chev" d="M676,159.0 L683,165.0 L676,171.0"/>
+<text class="pt" x="560.0" y="143.0">ENCRYPTED SSH TUNNEL</text>
+<line class="conn" x1="450" y1="195.0" x2="670" y2="195.0"/>
+<text class="ct" x="560.0" y="213.0">connection opened by the ssh client, on the left</text>
+</g>
+<g transform="translate(0,636)">
+<line class="sep" x1="40" y1="-4" x2="1160" y2="-4"/>
+<text class="num" x="40" y="34">03</text>
+<rect class="flag fR" x="84" y="16" width="34" height="22" rx="5"/>
+<text class="fl" x="101" y="32">-R</text>
+<text class="ti" x="130" y="33">Remote forward: publish your own machine</text>
+<text class="cmd" x="40" y="68"><tspan class="pr">$ </tspan><tspan class="k">ssh -R </tspan><tspan class="cl">0.0.0.0:8080</tspan><tspan class="k">:</tspan><tspan class="cd">localhost:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">gateway</tspan></text>
+<text class="note" x="1160" y="68">needs GatewayPorts clientspecified in sshd_config</text>
+<rect class="priv" x="680" y="92" width="482" height="140" rx="13"/>
+<text class="pl" x="1150" y="246">private network</text>
+<rect class="band out" x="40" y="98" width="160" height="128" rx="10"/>
+<text class="bn" x="52" y="117">internet<tspan class="bs" dx="8"></tspan></text>
+<rect class="band" x="230" y="98" width="200" height="128" rx="10"/>
+<text class="bn" x="242" y="117">gateway<tspan class="bs" dx="8">public IP</tspan></text>
+<rect class="band" x="690" y="98" width="460" height="128" rx="10"/>
+<text class="bn" x="702" y="117">client<tspan class="bs" dx="8">behind NAT, no inbound</tspan></text>
+<rect class="node n" x="50" y="132" width="140" height="66" rx="8"/>
+<text class="tag tn" x="120.0" y="149">CALLER</text>
+<text class="nm " x="120.0" y="169">curl</text>
+<text class="ad" x="120.0" y="187">gateway:8080</text>
+<rect class="node l" x="250" y="132" width="160" height="66" rx="8"/>
+<text class="tag tl" x="330.0" y="149">LISTENS</text>
+<text class="nm ns" x="330.0" y="169">sshd</text>
+<text class="ad" x="330.0" y="187">0.0.0.0:8080</text>
+<rect class="node n" x="710" y="132" width="160" height="66" rx="8"/>
+<text class="tag tn" x="790.0" y="149">DIALS</text>
+<text class="nm " x="790.0" y="169">ssh client</text>
+<text class="ad" x="790.0" y="187">→ localhost:80</text>
+<rect class="node d" x="960" y="132" width="170" height="66" rx="8"/>
+<text class="tag td" x="1045.0" y="149">DESTINATION</text>
+<text class="nm " x="1045.0" y="169">web server</text>
+<text class="ad" x="1045.0" y="187">127.0.0.1:80</text>
+<line class="hop" x1="192" y1="165.0" x2="246" y2="165.0"/>
+<line class="hop" x1="872" y1="165.0" x2="956" y2="165.0"/>
+<rect class="pipe" x="410" y="151.0" width="300" height="28" rx="14"/>
+<path class="chev" d="M444,159.0 L451,165.0 L444,171.0"/>
+<path class="chev" d="M473,159.0 L480,165.0 L473,171.0"/>
+<path class="chev" d="M502,159.0 L509,165.0 L502,171.0"/>
+<path class="chev" d="M531,159.0 L538,165.0 L531,171.0"/>
+<path class="chev" d="M560,159.0 L567,165.0 L560,171.0"/>
+<path class="chev" d="M589,159.0 L596,165.0 L589,171.0"/>
+<path class="chev" d="M618,159.0 L625,165.0 L618,171.0"/>
+<path class="chev" d="M647,159.0 L654,165.0 L647,171.0"/>
+<path class="chev" d="M676,159.0 L683,165.0 L676,171.0"/>
+<text class="pt" x="560.0" y="143.0">ENCRYPTED SSH TUNNEL</text>
+<line class="conn" x1="670" y1="195.0" x2="450" y2="195.0"/>
+<text class="ct" x="560.0" y="213.0">connection opened by the ssh client, on the right</text>
+</g>
+<g transform="translate(0,894)">
+<line class="sep" x1="40" y1="-4" x2="1160" y2="-4"/>
+<text class="num" x="40" y="34">04</text>
+<rect class="flag fR" x="84" y="16" width="34" height="22" rx="5"/>
+<text class="fl" x="101" y="32">-R</text>
+<text class="ti" x="130" y="33">Remote forward: publish a neighbouring host</text>
+<text class="cmd" x="40" y="68"><tspan class="pr">$ </tspan><tspan class="k">ssh -R </tspan><tspan class="cl">0.0.0.0:8080</tspan><tspan class="k">:</tspan><tspan class="cd">server:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">gateway</tspan></text>
+<text class="note" x="1160" y="68">“server” is resolved by the ssh client</text>
+<rect class="priv" x="680" y="92" width="482" height="140" rx="13"/>
+<text class="pl" x="1150" y="246">private network</text>
+<rect class="band out" x="40" y="98" width="160" height="128" rx="10"/>
+<text class="bn" x="52" y="117">internet<tspan class="bs" dx="8"></tspan></text>
+<rect class="band" x="230" y="98" width="200" height="128" rx="10"/>
+<text class="bn" x="242" y="117">gateway<tspan class="bs" dx="8">public IP</tspan></text>
+<rect class="band" x="690" y="98" width="200" height="128" rx="10"/>
+<text class="bn" x="702" y="117">client<tspan class="bs" dx="8">runs ssh</tspan></text>
+<rect class="band" x="930" y="98" width="220" height="128" rx="10"/>
+<text class="bn" x="942" y="117">server<tspan class="bs" dx="8">private IP only</tspan></text>
+<rect class="node n" x="50" y="132" width="140" height="66" rx="8"/>
+<text class="tag tn" x="120.0" y="149">CALLER</text>
+<text class="nm " x="120.0" y="169">curl</text>
+<text class="ad" x="120.0" y="187">gateway:8080</text>
+<rect class="node l" x="250" y="132" width="160" height="66" rx="8"/>
+<text class="tag tl" x="330.0" y="149">LISTENS</text>
+<text class="nm ns" x="330.0" y="169">sshd</text>
+<text class="ad" x="330.0" y="187">0.0.0.0:8080</text>
+<rect class="node n" x="710" y="132" width="160" height="66" rx="8"/>
+<text class="tag tn" x="790.0" y="149">DIALS</text>
+<text class="nm " x="790.0" y="169">ssh client</text>
+<text class="ad" x="790.0" y="187">→ server:80</text>
+<rect class="node d" x="960" y="132" width="170" height="66" rx="8"/>
+<text class="tag td" x="1045.0" y="149">DESTINATION</text>
+<text class="nm " x="1045.0" y="169">web server</text>
+<text class="ad" x="1045.0" y="187">0.0.0.0:80</text>
+<line class="hop" x1="192" y1="165.0" x2="246" y2="165.0"/>
+<line class="hop" x1="872" y1="165.0" x2="956" y2="165.0"/>
+<rect class="pipe" x="410" y="151.0" width="300" height="28" rx="14"/>
+<path class="chev" d="M444,159.0 L451,165.0 L444,171.0"/>
+<path class="chev" d="M473,159.0 L480,165.0 L473,171.0"/>
+<path class="chev" d="M502,159.0 L509,165.0 L502,171.0"/>
+<path class="chev" d="M531,159.0 L538,165.0 L531,171.0"/>
+<path class="chev" d="M560,159.0 L567,165.0 L560,171.0"/>
+<path class="chev" d="M589,159.0 L596,165.0 L589,171.0"/>
+<path class="chev" d="M618,159.0 L625,165.0 L618,171.0"/>
+<path class="chev" d="M647,159.0 L654,165.0 L647,171.0"/>
+<path class="chev" d="M676,159.0 L683,165.0 L676,171.0"/>
+<text class="pt" x="560.0" y="143.0">ENCRYPTED SSH TUNNEL</text>
+<line class="conn" x1="670" y1="195.0" x2="450" y2="195.0"/>
+<text class="ct" x="560.0" y="213.0">connection opened by the ssh client, on the right</text>
+</g>
+  <g transform="translate(40,1174)">
+    <rect x="0" y="0" width="14" height="14" rx="3" fill="#1f1a0c" stroke="#fbbf24" stroke-width="1.5"/><text class="lg" x="22" y="12">listener: the new port (-L: ssh client, -R: sshd)</text>
+    <rect x="320" y="0" width="14" height="14" rx="3" fill="#22101a" stroke="#fb7185" stroke-width="1.5"/><text class="lg" x="342" y="12">destination: host:port dialed by the far end</text>
+    <text class="lgm cs" x="622" y="12">sshd</text><text class="lg" x="658" y="12">the SSH server you log in to</text>
+    <rect x="850" y="1" width="30" height="12" rx="6" fill="url(#pg)" stroke="#22d3ee" stroke-opacity="0.6"/><text class="lg" x="888" y="12">encrypted tunnel; every other hop is plain TCP</text>
+  </g>
+</svg>
