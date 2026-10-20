@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Sum of RSS vs physical RAM</title>
+  <desc id="d">2138 idle sleep processes on a VM with 2006 MB of RAM, kernel 6.8. On Ubuntu 24.04 the sum of RSS was 2653 MB and the sum of PSS 171 MB. On Red Hat Enterprise Linux 9.8 the sum of RSS was 4674 MB and the sum of PSS 390 MB. Both RSS sums are larger than the physical RAM; the PSS sums are what the processes really use. RHEL's sleep is a larger multi-call binary, so each process maps more.</desc>
+  <defs>
+    <style>
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .ax   { font-size: 11px; fill: #6c757d; text-anchor: middle; }
+      .v    { font-size: 12px; font-weight: 700; fill: #212529; }
+      .grid { stroke: #e9ecef; stroke-width: 1; }
+      .rss  { fill: #e8590c; }
+      .pss  { fill: #2f9e66; }
+      .ram  { stroke: #212529; stroke-width: 1.5; stroke-dasharray: 5 4; }
+    </style>
+  </defs>
+
+  <rect width="900" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Sum of RSS vs physical RAM: 2138 idle sleep processes on a 2 GB VM</text>
+
+  <!-- legend -->
+  <rect class="rss" x="20" y="44" width="12" height="12" rx="2"/><text class="d" x="38" y="54">Sum of RSS (shared pages counted once per process)</text>
+  <rect class="pss" x="330" y="44" width="12" height="12" rx="2"/><text class="d" x="348" y="54">Sum of PSS (shared pages split)</text>
+  <line class="ram" x1="540" y1="50" x2="570" y2="50"/><text class="d" x="576" y="54">Physical RAM, 2006 MB</text>
+
+  <!-- scale: 0 MB at x 180, 5000 MB at x 860, 0.136 px per MB -->
+  <line class="grid" x1="180" y1="76" x2="180" y2="300"/>
+  <line class="grid" x1="316" y1="76" x2="316" y2="300"/>
+  <line class="grid" x1="452" y1="76" x2="452" y2="300"/>
+  <line class="grid" x1="588" y1="76" x2="588" y2="300"/>
+  <line class="grid" x1="724" y1="76" x2="724" y2="300"/>
+  <line class="grid" x1="860" y1="76" x2="860" y2="300"/>
+  <text class="ax" x="180" y="316">0</text>
+  <text class="ax" x="316" y="316">1000</text>
+  <text class="ax" x="452" y="316">2000</text>
+  <text class="ax" x="588" y="316">3000</text>
+  <text class="ax" x="724" y="316">4000</text>
+  <text class="ax" x="860" y="316">5000 MB</text>
+
+  <!-- Ubuntu: RSS 2653 -> 361, PSS 171 -> 23 -->
+  <text class="tb" x="20" y="112">Ubuntu 24.04</text>
+  <text class="d" x="20" y="128">procps-ng 4.0.4</text>
+  <path class="rss" d="M180,94 H537 a4,4 0 0 1 4,4 V112 a4,4 0 0 1 -4,4 H180 Z"/>
+  <text class="v" x="549" y="110">2653 MB</text>
+  <path class="pss" d="M180,120 H199 a4,4 0 0 1 4,4 V138 a4,4 0 0 1 -4,4 H180 Z"/>
+  <text class="v" x="211" y="136">171 MB</text>
+
+  <!-- RHEL: RSS 4674 -> 636, PSS 390 -> 53 -->
+  <text class="tb" x="20" y="212">RHEL 9.8</text>
+  <text class="d" x="20" y="228">UBI 9 image, procps-ng 3.3.17</text>
+  <path class="rss" d="M180,194 H812 a4,4 0 0 1 4,4 V212 a4,4 0 0 1 -4,4 H180 Z"/>
+  <text class="v" x="824" y="210">4674 MB</text>
+  <path class="pss" d="M180,220 H229 a4,4 0 0 1 4,4 V238 a4,4 0 0 1 -4,4 H180 Z"/>
+  <text class="v" x="241" y="236">390 MB</text>
+
+  <!-- RAM line at 2006 MB -> x 453 -->
+  <line class="ram" x1="453" y1="80" x2="453" y2="296"/>
+  <text class="d" x="459" y="88">RAM 2006 MB</text>
+
+  <text class="d" x="20" y="344">Both RSS sums are larger than the RAM the VM has; the PSS sums are what the processes really use.</text>
+  <text class="d" x="20" y="362">RHEL's sleep is a larger multi-call binary, so each process maps more. Kernel 6.8, aarch64.</text>
+</svg>

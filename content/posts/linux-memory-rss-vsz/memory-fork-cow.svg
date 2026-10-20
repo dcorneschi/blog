@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Copy-on-write after fork</title>
+  <desc id="d">Three stages. Before fork, the parent maps four pages of RAM. Right after fork, the child maps the same four physical pages; the kernel marks them read-only and nothing is copied, yet both processes report all four pages in RSS. When the child writes to page 3, the write faults, the kernel copies only that page, and the child now maps its own copy 3'; RAM grows by one page. With a bash process holding about 100 MB and a forked subshell on Ubuntu 24.04 (kernel 6.8), RSS was 101.8 MB and 100.0 MB, PSS about 33 to 34 MB each and Private_Dirty about 0.2 MB: adding the two RSS values counts the same pages twice. Redis BGSAVE forks the same way.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .tc   { font-size: 13px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .pn   { font-size: 13px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .d    { font-size: 11px; fill: #495057; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .pl   { stroke: #3d7fe0; stroke-width: 1.4; fill: none; }
+      .cl   { stroke: #8a63d2; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; }
+      .par  { fill: #e7f1ff; stroke: #3d7fe0; }
+      .chi  { fill: #f3effc; stroke: #8a63d2; }
+      .pg   { fill: #ffffff; stroke: #868e96; stroke-width: 1.2; }
+      .ro   { fill: #fff3cd; stroke: #e0a800; stroke-width: 1.2; }
+      .cp   { fill: #f3effc; stroke: #8a63d2; stroke-width: 1.4; }
+      .panel{ fill: #f8f9fa; stroke: #dee2e6; }
+      .n    { font-size: 13px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="900" height="540" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Copy-on-write after fork(): shared until someone writes</text>
+
+  <!-- panel 1 -->
+  <rect class="panel" x="20" y="44" width="280" height="300" rx="10"/>
+  <circle cx="42" cy="66" r="11" fill="#495057"/><text class="n" x="42" y="71">1</text>
+  <text class="tb" x="60" y="71">Before fork()</text>
+  <rect class="box par" x="100" y="90" width="120" height="40" rx="8"/><text class="tc" x="160" y="115">Parent</text>
+  <path class="pl" d="M160,130 L60,210 M160,130 L125,210 M160,130 L195,210 M160,130 L260,210"/>
+  <text class="d" x="34" y="200">RAM</text>
+  <rect class="pg" x="38" y="210" width="44" height="40" rx="5"/><text class="pn" x="60" y="235">1</text>
+  <rect class="pg" x="103" y="210" width="44" height="40" rx="5"/><text class="pn" x="125" y="235">2</text>
+  <rect class="pg" x="173" y="210" width="44" height="40" rx="5"/><text class="pn" x="195" y="235">3</text>
+  <rect class="pg" x="238" y="210" width="44" height="40" rx="5"/><text class="pn" x="260" y="235">4</text>
+  <text class="d" x="34" y="282">Parent RSS: 4 pages</text>
+  <text class="d" x="34" y="300">RAM used: 4 pages</text>
+
+  <!-- panel 2 -->
+  <rect class="panel" x="310" y="44" width="280" height="300" rx="10"/>
+  <circle cx="332" cy="66" r="11" fill="#495057"/><text class="n" x="332" y="71">2</text>
+  <text class="tb" x="350" y="71">Right after fork()</text>
+  <rect class="box par" x="330" y="90" width="110" height="40" rx="8"/><text class="tc" x="385" y="115">Parent</text>
+  <rect class="box chi" x="460" y="90" width="110" height="40" rx="8"/><text class="tc" x="515" y="115">Child</text>
+  <path class="pl" d="M385,130 L350,210 M385,130 L415,210 M385,130 L485,210 M385,130 L550,210"/>
+  <path class="cl" d="M515,130 L350,210 M515,130 L415,210 M515,130 L485,210 M515,130 L550,210"/>
+  <rect class="ro" x="328" y="210" width="44" height="40" rx="5"/><text class="pn" x="350" y="235">1</text>
+  <rect class="ro" x="393" y="210" width="44" height="40" rx="5"/><text class="pn" x="415" y="235">2</text>
+  <rect class="ro" x="463" y="210" width="44" height="40" rx="5"/><text class="pn" x="485" y="235">3</text>
+  <rect class="ro" x="528" y="210" width="44" height="40" rx="5"/><text class="pn" x="550" y="235">4</text>
+  <text class="dc" x="450" y="266">same physical pages, marked read-only</text>
+  <text class="d" x="324" y="290">Parent RSS 4 + child RSS 4 = 8 pages</text>
+  <text class="d" x="324" y="308">RAM used: still 4 pages (PSS 2 each)</text>
+
+  <!-- panel 3 -->
+  <rect class="panel" x="600" y="44" width="280" height="300" rx="10"/>
+  <circle cx="622" cy="66" r="11" fill="#495057"/><text class="n" x="622" y="71">3</text>
+  <text class="tb" x="640" y="71">Child writes to page 3</text>
+  <rect class="box par" x="620" y="90" width="110" height="40" rx="8"/><text class="tc" x="675" y="115">Parent</text>
+  <rect class="box chi" x="750" y="90" width="110" height="40" rx="8"/><text class="tc" x="805" y="115">Child</text>
+  <path class="pl" d="M675,130 L640,210 M675,130 L705,210 M675,130 L775,210 M675,130 L840,210"/>
+  <path class="cl" d="M805,130 L640,210 M805,130 L705,210 M805,130 L840,210"/>
+  <path class="cl" d="M860,118 C884,150 880,296 800,296"/>
+  <rect class="ro" x="618" y="210" width="44" height="40" rx="5"/><text class="pn" x="640" y="235">1</text>
+  <rect class="ro" x="683" y="210" width="44" height="40" rx="5"/><text class="pn" x="705" y="235">2</text>
+  <rect class="pg" x="753" y="210" width="44" height="40" rx="5"/><text class="pn" x="775" y="235">3</text>
+  <rect class="ro" x="818" y="210" width="44" height="40" rx="5"/><text class="pn" x="840" y="235">4</text>
+  <rect class="cp" x="753" y="276" width="44" height="40" rx="5"/><text class="pn" x="775" y="301">3′</text>
+  <text class="d" x="614" y="290">write → page fault</text>
+  <text class="d" x="614" y="306">→ kernel copies page 3</text>
+  <text class="d" x="614" y="332">RAM used: 5 pages, one copied</text>
+
+  <!-- legend -->
+  <rect class="pg" x="20" y="360" width="14" height="14" rx="3"/><text class="d" x="40" y="371">private page</text>
+  <rect class="ro" x="130" y="360" width="14" height="14" rx="3"/><text class="d" x="150" y="371">shared copy-on-write page (read-only until written)</text>
+  <path class="pl" d="M440,367 H470"/><text class="d" x="476" y="371">parent mapping</text>
+  <path class="cl" d="M580,367 H610"/><text class="d" x="616" y="371">child mapping</text>
+
+  <!-- real numbers -->
+  <rect x="20" y="392" width="860" height="134" rx="8" fill="#fff8e1" stroke="#ffc107"/>
+  <text class="tb" x="36" y="416">A bash process holding about 100 MB, and a forked subshell (Ubuntu 24.04, kernel 6.8)</text>
+  <text class="d" x="36" y="440">RSS</text><text class="tb" x="140" y="440" style="font-size:12px">101.8 MB and 100.0 MB</text>
+  <text class="d" x="330" y="440">each looks like it owns the 100 MB</text>
+  <text class="d" x="36" y="462">PSS</text><text class="tb" x="140" y="462" style="font-size:12px">about 33–34 MB each</text>
+  <text class="d" x="330" y="462">the pages are split among the processes sharing them (other forked shells too)</text>
+  <text class="d" x="36" y="484">Private_Dirty</text><text class="tb" x="140" y="484" style="font-size:12px">about 0.2 MB</text>
+  <text class="d" x="330" y="484">almost nothing has been copied yet</text>
+  <text class="d" x="36" y="510">Adding the two RSS values counts the same 100 MB twice. Redis BGSAVE forks the same way: memory grows only as pages get written.</text>
+</svg>
