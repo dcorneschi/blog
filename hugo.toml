@@ -86,6 +86,14 @@ summaryLength = 70 # words in automatic summaries (default 70)
   [cascade.target]
     path = "/{posts,cheatsheet}/**"
 
+# Tag and category pages are noindex (theme head.html), so keep them out of the
+# sitemap too: Search Console reports listed-but-noindex URLs as errors
+[[cascade]]
+  [cascade.sitemap]
+    disable = true
+  [cascade.target]
+    kind = "{taxonomy,term}"
+
 [taxonomies]
   category = "categories"
   tag = "tags"
