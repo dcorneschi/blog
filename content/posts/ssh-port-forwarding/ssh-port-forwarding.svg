@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1460 1072" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">SSH local and remote port forwarding</title>
+  <desc id="d">Four SSH port forwarding setups. In every command, the first address is where the new listening port opens, the second is the destination that the other end of the tunnel dials, and the last is the SSH server you log in to. 1: ssh -L localhost:8080:localhost:80 user@server opens port 8080 on the client; sshd on the server dials its own localhost:80. 2: ssh -L localhost:8080:server:80 user@bastion opens 8080 on the client; sshd on the bastion dials server:80 on the private network. 3: ssh -R 0.0.0.0:8080:localhost:80 user@gateway opens 8080 on the gateway; the ssh client dials its own localhost:80, so anyone running curl gateway:8080 reaches the web server behind NAT. 4: ssh -R 0.0.0.0:8080:server:80 user@gateway opens 8080 on the gateway; the ssh client dials server:80 on its private network. Binding 0.0.0.0 on the gateway requires GatewayPorts clientspecified or yes in sshd_config.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="f" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#e9ecef"/><line x1="0" y1="0" x2="0" y2="8" stroke="#ced4da" stroke-width="3"/>
+    </pattern>
+    <style>
+      .h    { font-size: 17px; font-weight: 700; fill: #212529; }
+      .H    { font-size: 22px; font-weight: 700; fill: #212529; }
+      .s    { font-size: 12.5px; fill: #495057; }
+      .r    { font-size: 12px; fill: #495057; }
+      .hn   { font-size: 14px; font-weight: 700; fill: #212529; }
+      .tc   { font-size: 13px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .d    { font-size: 11px; fill: #6c757d; }
+      .pt   { font-size: 11px; font-weight: 700; fill: #495057; text-anchor: middle; }
+      .pl   { font-size: 11px; font-style: italic; fill: #6c757d; text-anchor: end; }
+      .n    { font-size: 12px; fill: #495057; }
+      .mono, .m, .mc, .ba, .dlm, .nm { font-family: Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', monospace; }
+      .m    { font-size: 16px; font-weight: 700; fill: #343a40; }
+      .mc   { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .nm   { font-size: 11.5px; fill: #495057; }
+      .bl   { font-size: 9.5px; fill: #146c43; text-anchor: middle; }
+      .ba   { font-size: 11px; font-weight: 700; fill: #146c43; text-anchor: middle; }
+      .dl   { font-size: 11px; fill: #b02a37; }
+      .dlm  { font-size: 11px; font-weight: 700; fill: #b02a37; }
+      .k    { fill: #343a40; }
+      .cl   { fill: #198754; font-weight: 700; }
+      .cd   { fill: #dc3545; font-weight: 700; }
+      .cs   { fill: #0d6efd; font-weight: 700; }
+      .card { fill: #ffffff; stroke: #dee2e6; }
+      .cmd  { fill: #f8f9fa; stroke: #dee2e6; }
+      .host { fill: #f8f9fa; stroke: #adb5bd; stroke-width: 1.2; }
+      .priv { fill: none; stroke: #868e96; stroke-width: 1.4; stroke-dasharray: 6 4; }
+      .plain{ fill: #ffffff; stroke: #495057; stroke-width: 1.4; }
+      .ssh  { fill: #e7f1ff; stroke: #0d6efd; stroke-width: 1.5; }
+      .dst  { fill: #f8d7da; stroke: #dc3545; stroke-width: 1.5; }
+      .lis  { fill: #d1e7dd; stroke: #198754; stroke-width: 1.5; }
+      .pipe { fill: url(#hatch); stroke: #868e96; stroke-width: 1.2; }
+      .flow { stroke: #495057; stroke-width: 1.6; stroke-dasharray: 5 4; marker-end: url(#f); }
+      .ln   { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+    </style>
+  </defs>
+  <rect width="1460" height="1072" fill="#f1f3f5"/>
+  <text class="H" x="20" y="38">SSH port forwarding: -L and -R</text>
+  <text class="r" x="20" y="64"><tspan class="k">Read every command as  ssh -L|-R </tspan><tspan class="cl">listen</tspan><tspan class="k">:</tspan><tspan class="cd">destination</tspan><tspan class="k"> user@</tspan><tspan class="cs">sshd-host</tspan><tspan class="k">  ·  -L opens the listener on the client, -R on the SSH server  ·  the destination is always dialed by the </tspan><tspan class="k" font-style="italic">other</tspan><tspan class="k"> end.</tspan></text>
+  <g transform="translate(1180,20)">
+    <rect class="lis" x="0" y="0" width="12" height="12" rx="2"/><text class="r" x="18" y="10">listener</text>
+    <rect class="dst" x="80" y="0" width="12" height="12" rx="2"/><text class="r" x="98" y="10">destination</text>
+    <rect class="ssh" x="176" y="0" width="12" height="12" rx="2"/><text class="r" x="194" y="10">sshd host</text>
+  </g>
+<g transform="translate(20,92)">
+<rect class="card" x="0" y="0" width="700" height="470" rx="12"/>
+<text class="h" x="20" y="32">1 · Local forward to the server itself</text>
+<text class="s" x="20" y="52">Reach a service that only listens on the server’s loopback interface.</text>
+<rect class="cmd" x="16" y="66" width="668" height="40" rx="6"/>
+<text class="m" x="30" y="92"><tspan class="k">ssh -L </tspan><tspan class="cl">localhost:8080</tspan><tspan class="k">:</tspan><tspan class="cd">localhost:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">server</tspan></text>
+<text class="r" x="20" y="128"><tspan class="k">The </tspan><tspan class="cl">listener</tspan><tspan class="k"> opens on the client. </tspan><tspan class="cs">sshd</tspan><tspan class="k"> dials the </tspan><tspan class="cd">destination</tspan><tspan class="k">, so “localhost” means the server.</tspan></text>
+<rect class="host" x="16" y="150" width="240" height="230" rx="10"/>
+<text class="hn" x="28" y="172">Client</text>
+<text class="d" x="28" y="187">your laptop</text>
+<rect class="host" x="444" y="150" width="240" height="230" rx="10"/>
+<text class="hn" x="456" y="172">Server</text>
+<text class="d" x="456" y="187">reachable on port 22 only</text>
+<rect class="pipe" x="236" y="316" width="228" height="22" rx="11"/>
+<line class="flow" x1="250" y1="327" x2="450" y2="327"/>
+<text class="pt" x="350.0" y="308">SSH tunnel</text>
+<text class="dc" x="350.0" y="354">client connects →</text>
+<text class="dc" x="350.0" y="368">to sshd on port 22</text>
+<rect class="plain" x="36" y="196" width="200" height="40" rx="7"/>
+<text class="tc" x="136.0" y="221.0">curl localhost:8080</text>
+<rect class="plain" x="36" y="300" width="200" height="56" rx="7"/>
+<text class="tc" x="136.0" y="325.0">ssh client</text>
+<text class="mc" x="136.0" y="341.0">accepts on :8080</text>
+<rect class="lis" x="56" y="262" width="160" height="34" rx="6"/>
+<text class="bl" x="136.0" y="276">listens on</text>
+<text class="ba" x="136.0" y="290">127.0.0.1:8080</text>
+<path class="ln" d="M136,236 L136,260"/>
+<rect class="dst" x="464" y="196" width="200" height="48" rx="7"/>
+<text class="tc" x="564.0" y="217.0">web server</text>
+<text class="mc" x="564.0" y="233.0">listens on 127.0.0.1:80</text>
+<rect class="ssh" x="464" y="300" width="200" height="56" rx="7"/>
+<text class="tc" x="564.0" y="325.0">sshd</text>
+<text class="mc" x="564.0" y="341.0">user@server</text>
+<path class="ln" d="M564,300 L564,246"/>
+<text class="dl" x="572" y="270">dials</text><text class="dlm" x="572" y="284">localhost:80</text>
+<text class="n" x="20" y="432">Port 80 is never exposed to the network: only processes on the server can reach it.</text>
+<text class="nm" x="20" y="450">Short form: ssh -L 8080:localhost:80 user@server  (listen address defaults to localhost)</text>
+</g>
+<g transform="translate(740,92)">
+<rect class="card" x="0" y="0" width="700" height="470" rx="12"/>
+<text class="h" x="20" y="32">2 · Local forward through a bastion</text>
+<text class="s" x="20" y="52">Reach a host on a private network via a jump box that can see both sides.</text>
+<rect class="cmd" x="16" y="66" width="668" height="40" rx="6"/>
+<text class="m" x="30" y="92"><tspan class="k">ssh -L </tspan><tspan class="cl">localhost:8080</tspan><tspan class="k">:</tspan><tspan class="cd">server:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">bastion</tspan></text>
+<text class="r" x="20" y="128"><tspan class="k">The </tspan><tspan class="cl">listener</tspan><tspan class="k"> opens on the client. The bastion’s </tspan><tspan class="cs">sshd</tspan><tspan class="k"> resolves and dials </tspan><tspan class="cd">server:80</tspan><tspan class="k">.</tspan></text>
+<rect class="priv" x="318" y="140" width="374" height="264" rx="12"/>
+<text class="pl" x="680" y="397">private network</text>
+<rect class="host" x="16" y="150" width="190" height="230" rx="10"/>
+<text class="hn" x="28" y="172">Client</text>
+<text class="d" x="28" y="187">your laptop</text>
+<rect class="host" x="272" y="150" width="160" height="230" rx="10"/>
+<text class="hn" x="284" y="172">Bastion</text>
+<text class="d" x="284" y="187">public + private IP</text>
+<rect class="host" x="486" y="150" width="198" height="230" rx="10"/>
+<text class="hn" x="498" y="172">Server</text>
+<text class="d" x="498" y="187">private IP only</text>
+<rect class="pipe" x="194" y="316" width="94" height="22" rx="11"/>
+<line class="flow" x1="208" y1="327" x2="274" y2="327"/>
+<text class="pt" x="241.0" y="308">SSH tunnel</text>
+<rect class="plain" x="28" y="196" width="166" height="40" rx="7"/>
+<text class="tc" x="111.0" y="221.0">curl localhost:8080</text>
+<rect class="plain" x="28" y="300" width="166" height="56" rx="7"/>
+<text class="tc" x="111.0" y="325.0">ssh client</text>
+<text class="mc" x="111.0" y="341.0">accepts on :8080</text>
+<rect class="lis" x="36" y="262" width="150" height="34" rx="6"/>
+<text class="bl" x="111.0" y="276">listens on</text>
+<text class="ba" x="111.0" y="290">127.0.0.1:8080</text>
+<path class="ln" d="M111,236 L111,260"/>
+<rect class="ssh" x="288" y="300" width="128" height="56" rx="7"/>
+<text class="tc" x="352.0" y="325.0">sshd</text>
+<text class="mc" x="352.0" y="341.0">user@bastion</text>
+<rect class="dst" x="500" y="300" width="170" height="56" rx="7"/>
+<text class="tc" x="585.0" y="325.0">web server</text>
+<text class="mc" x="585.0" y="341.0">listens on 0.0.0.0:80</text>
+<path class="ln" d="M416,328 L498,328"/>
+<text class="dl" x="458" y="300" text-anchor="middle">dials</text>
+<text class="dlm" x="458" y="314" text-anchor="middle">server:80</text>
+<text class="n" x="20" y="432">“server” is resolved by the bastion, so a private DNS name or 10.x address works.</text>
+<text class="n" x="20" y="450">The bastion → server hop is plain TCP, not encrypted by SSH.</text>
+</g>
+<g transform="translate(20,582)">
+<rect class="card" x="0" y="0" width="700" height="470" rx="12"/>
+<text class="h" x="20" y="32">3 · Remote forward from your machine</text>
+<text class="s" x="20" y="52">Publish a service from behind NAT or a firewall on a public host.</text>
+<rect class="cmd" x="16" y="66" width="668" height="40" rx="6"/>
+<text class="m" x="30" y="92"><tspan class="k">ssh -R </tspan><tspan class="cl">0.0.0.0:8080</tspan><tspan class="k">:</tspan><tspan class="cd">localhost:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">gateway</tspan></text>
+<text class="r" x="20" y="128"><tspan class="k">The </tspan><tspan class="cl">listener</tspan><tspan class="k"> opens on the gateway. The </tspan><tspan class="k">ssh client</tspan><tspan class="k"> dials the </tspan><tspan class="cd">destination</tspan><tspan class="k">, so “localhost” means the client.</tspan></text>
+<rect class="priv" x="8" y="140" width="278" height="264" rx="12"/>
+<text class="pl" x="274" y="397">private network</text>
+<rect class="host" x="20" y="150" width="254" height="230" rx="10"/>
+<text class="hn" x="32" y="172">Client</text>
+<text class="d" x="32" y="187">behind NAT, no inbound access</text>
+<rect class="host" x="430" y="150" width="150" height="230" rx="10"/>
+<text class="hn" x="442" y="172">Gateway</text>
+<text class="d" x="442" y="187">public IP</text>
+<rect class="ssh" x="446" y="300" width="118" height="56" rx="7"/>
+<text class="tc" x="505.0" y="325.0">sshd</text>
+<text class="mc" x="505.0" y="341.0">user@gateway</text>
+<rect class="lis" x="451" y="262" width="108" height="34" rx="6"/>
+<text class="bl" x="505.0" y="276">listens on</text>
+<text class="ba" x="505.0" y="290">0.0.0.0:8080</text>
+<rect class="plain" x="596" y="182" width="96" height="54" rx="7"/>
+<text class="tc" x="644" y="204">curl</text><text class="mc" x="644" y="222">gateway:8080</text>
+<text class="dc" x="644" y="254">anyone who</text><text class="dc" x="644" y="268">can reach it</text>
+<path class="ln" d="M644,276 L644,279 L561,279"/>
+<rect class="pipe" x="254" y="316" width="192" height="22" rx="11"/>
+<line class="flow" x1="432" y1="327" x2="268" y2="327"/>
+<text class="pt" x="350.0" y="308">SSH tunnel</text>
+<text class="dc" x="350.0" y="354">client connects →</text>
+<text class="dc" x="350.0" y="368">to sshd on port 22</text>
+<rect class="dst" x="36" y="196" width="222" height="48" rx="7"/>
+<text class="tc" x="147.0" y="217.0">web server</text>
+<text class="mc" x="147.0" y="233.0">listens on 127.0.0.1:80</text>
+<rect class="plain" x="36" y="300" width="222" height="56" rx="7"/>
+<text class="tc" x="147.0" y="325.0">ssh client</text>
+<text class="mc" x="147.0" y="341.0">user@gateway</text>
+<path class="ln" d="M147,300 L147,246"/>
+<text class="dl" x="155" y="270">dials</text><text class="dlm" x="155" y="284">localhost:80</text>
+<text class="n" x="20" y="432">Traffic flows against the connection: the gateway pushes it back down the tunnel.</text>
+<text class="nm" x="20" y="450">Binding 0.0.0.0 needs “GatewayPorts clientspecified” (or yes) in sshd_config.</text>
+</g>
+<g transform="translate(740,582)">
+<rect class="card" x="0" y="0" width="700" height="470" rx="12"/>
+<text class="h" x="20" y="32">4 · Remote forward from another private host</text>
+<text class="s" x="20" y="52">Publish a service on a neighbouring machine the client can reach.</text>
+<rect class="cmd" x="16" y="66" width="668" height="40" rx="6"/>
+<text class="m" x="30" y="92"><tspan class="k">ssh -R </tspan><tspan class="cl">0.0.0.0:8080</tspan><tspan class="k">:</tspan><tspan class="cd">server:80</tspan><tspan class="k"> user@</tspan><tspan class="cs">gateway</tspan></text>
+<text class="r" x="20" y="128"><tspan class="k">The </tspan><tspan class="cl">listener</tspan><tspan class="k"> opens on the gateway. The ssh client resolves and dials </tspan><tspan class="cd">server:80</tspan><tspan class="k">.</tspan></text>
+<rect class="priv" x="8" y="140" width="352" height="264" rx="12"/>
+<text class="pl" x="348" y="397">private network</text>
+<rect class="host" x="20" y="150" width="124" height="230" rx="10"/>
+<text class="hn" x="32" y="172">Server</text>
+<text class="d" x="32" y="187">private IP only</text>
+<rect class="host" x="176" y="150" width="172" height="230" rx="10"/>
+<text class="hn" x="188" y="172">Client</text>
+<text class="d" x="188" y="187">runs ssh</text>
+<rect class="host" x="430" y="150" width="150" height="230" rx="10"/>
+<text class="hn" x="442" y="172">Gateway</text>
+<text class="d" x="442" y="187">public IP</text>
+<rect class="ssh" x="446" y="300" width="118" height="56" rx="7"/>
+<text class="tc" x="505.0" y="325.0">sshd</text>
+<text class="mc" x="505.0" y="341.0">user@gateway</text>
+<rect class="lis" x="451" y="262" width="108" height="34" rx="6"/>
+<text class="bl" x="505.0" y="276">listens on</text>
+<text class="ba" x="505.0" y="290">0.0.0.0:8080</text>
+<rect class="plain" x="596" y="182" width="96" height="54" rx="7"/>
+<text class="tc" x="644" y="204">curl</text><text class="mc" x="644" y="222">gateway:8080</text>
+<text class="dc" x="644" y="254">anyone who</text><text class="dc" x="644" y="268">can reach it</text>
+<path class="ln" d="M644,276 L644,279 L561,279"/>
+<rect class="pipe" x="320" y="316" width="126" height="22" rx="11"/>
+<line class="flow" x1="432" y1="327" x2="334" y2="327"/>
+<text class="pt" x="383.0" y="308">SSH tunnel</text>
+<rect class="dst" x="30" y="300" width="104" height="56" rx="7"/>
+<text class="tc" x="82.0" y="325.0">web server</text>
+<text class="mc" x="82.0" y="341.0">0.0.0.0:80</text>
+<rect class="plain" x="190" y="300" width="140" height="56" rx="7"/>
+<text class="tc" x="260.0" y="325.0">ssh client</text>
+<text class="mc" x="260.0" y="341.0">user@gateway</text>
+<path class="ln" d="M190,328 L136,328"/>
+<text class="dl" x="162" y="286" text-anchor="middle">dials</text>
+<text class="dlm" x="162" y="300" text-anchor="middle">server</text>
+<text class="dlm" x="162" y="314" text-anchor="middle">:80</text>
+<text class="n" x="20" y="432">“server” is resolved on the client, so it can be a name only the private network knows.</text>
+<text class="nm" x="20" y="450">Same sshd_config requirement as panel 3: GatewayPorts clientspecified (or yes).</text>
+</g>
+</svg>
