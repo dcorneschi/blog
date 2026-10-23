@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 506" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">From a slow disk to the line of code</title>
+  <desc id="d">Step 1: iostat -dx 1, read %util, aqu-sz and the await columns. Step 2: iotop -oP or pidstat -d 1 for the process. Step 3: lsof -p or /proc/PID/fd for its files. Step 4: strace -T -y for the calls and their duration. If the disk is busy and no process shows I/O, look for writeback threads, short-lived processes or other machines on the same disk.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="506" fill="#ffffff"/>
+  <text class="h" x="20" y="28">From a slow disk to the line of code</text>
+  <text class="sub" x="20" y="48">One question per step, the tool to answer it and the column to read</text>
+  <circle cx="40" cy="100" r="14" fill="#495057"/>
+  <text class="num" x="40" y="105">1</text>
+  <rect class="n" x="66" y="70" width="230" height="60" rx="6"/>
+  <text class="tb" x="80" y="105">Is a disk busy?</text>
+  <rect class="r" x="310" y="70" width="290" height="60" rx="6"/>
+  <text class="mb" x="322" y="105">iostat -dx 1</text>
+  <rect class="s" x="614" y="70" width="266" height="60" rx="6"/>
+  <text class="d" x="626" y="105">%util, aqu-sz, r_await / w_await</text>
+  <path class="lne" d="M40,114 V146"/>
+  <circle cx="40" cy="180" r="14" fill="#495057"/>
+  <text class="num" x="40" y="185">2</text>
+  <rect class="n" x="66" y="150" width="230" height="60" rx="6"/>
+  <text class="tb" x="80" y="185">Which process?</text>
+  <rect class="r" x="310" y="150" width="290" height="60" rx="6"/>
+  <text class="mb" x="322" y="185">iotop -oP   ·   pidstat -d 1</text>
+  <rect class="s" x="614" y="150" width="266" height="60" rx="6"/>
+  <text class="d" x="626" y="185">DISK READ / WRITE   ·   kB_rd/s, kB_wr/s, iodelay</text>
+  <path class="lne" d="M40,194 V226"/>
+  <circle cx="40" cy="260" r="14" fill="#495057"/>
+  <text class="num" x="40" y="265">3</text>
+  <rect class="n" x="66" y="230" width="230" height="60" rx="6"/>
+  <text class="tb" x="80" y="265">Which files?</text>
+  <rect class="r" x="310" y="230" width="290" height="60" rx="6"/>
+  <text class="mb" x="322" y="265">lsof -p PID   ·   ls -l /proc/PID/fd</text>
+  <rect class="s" x="614" y="230" width="266" height="60" rx="6"/>
+  <text class="d" x="626" y="265">file paths, deleted files, sockets</text>
+  <path class="lne" d="M40,274 V306"/>
+  <circle cx="40" cy="340" r="14" fill="#495057"/>
+  <text class="num" x="40" y="345">4</text>
+  <rect class="n" x="66" y="310" width="230" height="60" rx="6"/>
+  <text class="tb" x="80" y="345">Which calls, how slow?</text>
+  <rect class="r" x="310" y="310" width="290" height="60" rx="6"/>
+  <text class="mb" x="322" y="345">strace -p PID -f -T -y</text>
+  <rect class="s" x="614" y="310" width="266" height="60" rx="6"/>
+  <text class="d" x="626" y="345">time per call &lt;0.000055&gt;, path in &lt;...&gt;</text>
+  <rect class="w" x="20" y="394" width="860" height="92" rx="6"/>
+  <text class="tb" x="34" y="418">Disk busy, but no process in iotop?</text>
+  <text class="d" x="34" y="438">Writeback of earlier buffered writes: kworker ...-flush-MAJ:MIN and jbd2 threads (use --pid=host in a container).</text>
+  <text class="d" x="34" y="455">Short-lived processes that start and exit between two samples: only the Actual/Current line and iostat see their I/O.</text>
+  <text class="d" x="34" y="472">Another VM on the same disk, or other containers when iotop runs in a container without --pid=host: iostat sees the device anyway.</text>
+</svg>

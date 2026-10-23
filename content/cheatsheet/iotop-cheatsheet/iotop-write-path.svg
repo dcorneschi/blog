@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 484" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where each I/O number is counted</title>
+  <desc id="d">A write() goes to the page cache, where iotop's per-process DISK WRITE, Total DISK WRITE, /proc/pid/io write_bytes and pidstat kB_wr/s count it. The dirty pages show in /proc/meminfo. Writeback threads (kworker flush, jbd2) later send them to the block layer, where iotop's Actual or Current line and iostat count them. O_DIRECT skips the page cache and is counted at both ends at the same time.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="484" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where each I/O number is counted</text>
+  <text class="sub" x="20" y="48">A buffered write is counted twice: when the page is dirtied, and when it reaches the disk, seconds later or at sync</text>
+  <rect class="r" x="20" y="70" width="330" height="62" rx="6"/>
+  <text class="tb" x="34" y="96">Process: write()</text>
+  <text class="d" x="34" y="116">dd, a database, python3 w.py ...</text>
+  <rect class="w" x="20" y="170" width="330" height="62" rx="6"/>
+  <text class="tb" x="34" y="196">Page cache (dirty pages)</text>
+  <text class="d" x="34" y="216">in RAM; /proc/meminfo Dirty, Writeback</text>
+  <rect class="rw" x="20" y="270" width="330" height="62" rx="6"/>
+  <text class="tb" x="34" y="296">Writeback threads</text>
+  <text class="d" x="34" y="316">kworker/...-flush-253:16, jbd2/vdb1-8</text>
+  <rect class="g" x="20" y="370" width="330" height="62" rx="6"/>
+  <text class="tb" x="34" y="396">Block layer → disk</text>
+  <text class="d" x="34" y="416">requests sent to the device</text>
+  <path class="lne" d="M185,132 V166"/>
+  <path class="lne" d="M185,232 V266"/>
+  <path class="lne" d="M185,332 V366"/>
+  <path class="lne" d="M350,101 H372 V401 H354"/>
+  <text class="tb" x="380" y="250">O_DIRECT</text>
+  <text class="d" x="380" y="266">skips the</text>
+  <text class="d" x="380" y="281">page cache</text>
+  <text class="d" x="195" y="155">counted here: write_bytes</text>
+  <text class="d" x="195" y="255">dirty_background_ratio,</text>
+  <text class="d" x="195" y="268">dirty_expire_centisecs, sync</text>
+  <text class="d" x="195" y="355"></text>
+  <text class="tb" x="480" y="82">Seen here</text>
+  <rect class="s" x="480" y="92" width="400" height="78" rx="6"/>
+  <text class="m" x="492" y="112">iotop DISK WRITE (per process)</text>
+  <text class="m" x="492" y="129">iotop Total DISK WRITE</text>
+  <text class="m" x="492" y="146">/proc/&lt;pid&gt;/io write_bytes</text>
+  <text class="m" x="492" y="163">pidstat -d kB_wr/s</text>
+  <path class="dash" d="M372,101 H476"/>
+  <rect class="s" x="480" y="188" width="400" height="44" rx="6"/>
+  <text class="m" x="492" y="208">grep Dirty /proc/meminfo</text>
+  <text class="d" x="492" y="224">grows while the disk is still idle</text>
+  <path class="dash" d="M350,201 H476"/>
+  <rect class="s" x="480" y="250" width="400" height="62" rx="6"/>
+  <text class="m" x="492" y="270">iotop: kernel threads, not your process</text>
+  <text class="d" x="492" y="287">your process shows 0 while its data is being written</text>
+  <text class="d" x="492" y="303">(iotop -o with --pid=host in a container)</text>
+  <path class="dash" d="M350,301 H476"/>
+  <rect class="s" x="480" y="330" width="400" height="78" rx="6"/>
+  <text class="m" x="492" y="350">iotop Actual / Current DISK WRITE</text>
+  <text class="m" x="492" y="367">iostat -x wkB/s, %util</text>
+  <text class="d" x="492" y="384">/proc/vmstat and /proc/diskstats</text>
+  <text class="d" x="492" y="400">the only numbers that match the disk</text>
+  <path class="dash" d="M372,401 H476"/>
+  <text class="d" x="20" y="450">In the example below: a writer at 50 MB/s shows 50 MB/s in iotop every second; about 100 MB stays dirty after it stops and</text>
+  <text class="d" x="20" y="466">reaches the disk only at sync, as 102 632 kB/s in iostat, while no process in iotop shows any write.</text>
+</svg>
