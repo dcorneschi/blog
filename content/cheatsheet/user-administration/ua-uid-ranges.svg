@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 444" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">UID ranges on RHEL and Ubuntu</title>
+  <desc id="d">RHEL 6: 0 root, 1-499 system, 500-60000 regular. RHEL 7 to 10: 0 root, 1-200 static system assigned by Red Hat, 201-999 dynamic system for useradd -r, 1000-60000 regular. Ubuntu: 0 root, 1-99 static from base-passwd, 100-999 dynamic system for adduser --system, 1000-59999 regular for adduser, useradd up to 60000. Subordinate IDs, 65536 per user: from 100000 on RHEL 8, 9 and Ubuntu, from 524288 on RHEL 10, up to 600100000.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="444" fill="#ffffff"/>
+  <text class="h" x="20" y="28">UID ranges on RHEL and Ubuntu</text>
+  <text class="sub" x="20" y="48">Not to scale. useradd -r and adduser --system take UIDs from the system range, useradd and adduser from the regular one</text>
+  <text class="tb" x="20" y="90">RHEL 6</text>
+  <text class="d" x="20" y="106">UID_MIN 500</text>
+  <rect class="x" x="170" y="70" width="56" height="46" rx="4"/>
+  <text class="mb" x="180" y="89">0</text>
+  <text class="d" x="180" y="106">root</text>
+  <rect class="rw" x="230" y="70" width="396" height="46" rx="4"/>
+  <text class="mb" x="240" y="89">1–499</text>
+  <text class="d" x="240" y="106">system</text>
+  <rect class="r" x="630" y="70" width="246" height="46" rx="4"/>
+  <text class="mb" x="640" y="89">500–60000</text>
+  <text class="d" x="640" y="106">regular</text>
+  <text class="tb" x="20" y="156">RHEL 7, 8, 9, 10</text>
+  <text class="d" x="20" y="172">SYS_UID_MIN 201</text>
+  <rect class="x" x="170" y="136" width="56" height="46" rx="4"/>
+  <text class="mb" x="180" y="155">0</text>
+  <text class="d" x="180" y="172">root</text>
+  <rect class="n" x="230" y="136" width="196" height="46" rx="4"/>
+  <text class="mb" x="240" y="155">1–200</text>
+  <text class="d" x="240" y="172">static, assigned by Red Hat</text>
+  <rect class="rw" x="430" y="136" width="196" height="46" rx="4"/>
+  <text class="mb" x="440" y="155">201–999</text>
+  <text class="d" x="440" y="172">dynamic system (useradd -r)</text>
+  <rect class="r" x="630" y="136" width="246" height="46" rx="4"/>
+  <text class="mb" x="640" y="155">1000–60000</text>
+  <text class="d" x="640" y="172">regular (useradd)</text>
+  <text class="tb" x="20" y="222">Ubuntu 20.04–26.04</text>
+  <text class="d" x="20" y="238">adduser.conf, login.defs</text>
+  <rect class="x" x="170" y="202" width="56" height="46" rx="4"/>
+  <text class="mb" x="180" y="221">0</text>
+  <text class="d" x="180" y="238">root</text>
+  <rect class="n" x="230" y="202" width="196" height="46" rx="4"/>
+  <text class="mb" x="240" y="221">1–99</text>
+  <text class="d" x="240" y="238">static (base-passwd)</text>
+  <rect class="rw" x="430" y="202" width="196" height="46" rx="4"/>
+  <text class="mb" x="440" y="221">100–999</text>
+  <text class="d" x="440" y="238">dynamic (adduser --system)</text>
+  <rect class="r" x="630" y="202" width="246" height="46" rx="4"/>
+  <text class="mb" x="640" y="221">1000–59999</text>
+  <text class="d" x="640" y="238">regular (adduser; useradd to 60000)</text>
+  <text class="tb" x="20" y="290">Subordinate IDs for rootless containers (/etc/subuid, /etc/subgid): 65536 per user</text>
+  <text class="tb" x="20" y="324">RHEL 8, 9, Ubuntu</text>
+  <text class="d" x="20" y="340">SUB_UID_MIN 100000</text>
+  <rect class="r" x="170" y="304" width="236" height="42" rx="4"/>
+  <text class="mb" x="180" y="323">100000–165535</text>
+  <text class="d" x="180" y="340">first user</text>
+  <rect class="r" x="410" y="304" width="236" height="42" rx="4"/>
+  <text class="mb" x="420" y="323">165536–231071</text>
+  <text class="d" x="420" y="340">second user</text>
+  <rect class="n" x="650" y="304" width="226" height="42" rx="4"/>
+  <text class="mb" x="660" y="323">…</text>
+  <text class="d" x="660" y="340">up to 600100000</text>
+  <text class="tb" x="20" y="376">RHEL 10</text>
+  <text class="d" x="20" y="392">SUB_UID_MIN 524288</text>
+  <rect class="rw" x="170" y="356" width="236" height="42" rx="4"/>
+  <text class="mb" x="180" y="375">524288–589823</text>
+  <text class="d" x="180" y="392">first user</text>
+  <rect class="rw" x="410" y="356" width="236" height="42" rx="4"/>
+  <text class="mb" x="420" y="375">589824–655359</text>
+  <text class="d" x="420" y="392">second user</text>
+  <rect class="n" x="650" y="356" width="226" height="42" rx="4"/>
+  <text class="mb" x="660" y="375">…</text>
+  <text class="d" x="660" y="392">up to 600100000</text>
+  <text class="d" x="20" y="426">RHEL 6 to 7 moved UID_MIN from 500 to 1000: accounts carried over keep their old UIDs (see Changing UID/GID for an Account). GIDs use the same ranges.</text>
+</svg>

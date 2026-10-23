@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 464" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which hash ends up in /etc/shadow</title>
+  <desc id="d">ENCRYPT_METHOD, the pam_unix option and the resulting hash per release. RHEL 7, 8, 9: SHA512, sha512, $6$. RHEL 10: YESCRYPT, yescrypt, $y$. Ubuntu 20.04: SHA512, sha512, $6$. Ubuntu 22.04 and 24.04: login.defs says SHA512 but PAM says yescrypt and $y$ is written. Ubuntu 26.04: YESCRYPT, yescrypt, $y$. Ways to make a $y$ hash: none on RHEL 7 and 8, python3 crypt on RHEL 9, chpasswd -c YESCRYPT and python3 crypt on RHEL 10, python3 crypt on Ubuntu 20.04, mkpasswd and python3 crypt on 22.04, mkpasswd, chpasswd -c YESCRYPT and python3 crypt on 24.04, mkpasswd and chpasswd -c YESCRYPT on 26.04.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="920" height="464" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which hash ends up in /etc/shadow</text>
+  <text class="sub" x="20" y="48">passwd, chpasswd and newusers hash through PAM, so the pam_unix option wins over ENCRYPT_METHOD in login.defs</text>
+  <text class="th" x="28" y="74">Release</text>
+  <text class="ths" x="28" y="89"></text>
+  <text class="th" x="158" y="74">login.defs</text>
+  <text class="ths" x="158" y="89">ENCRYPT_METHOD</text>
+  <text class="th" x="308" y="74">PAM pam_unix</text>
+  <text class="ths" x="308" y="89">password line</text>
+  <text class="th" x="448" y="74">/etc/shadow</text>
+  <text class="ths" x="448" y="89">passwd, chpasswd</text>
+  <text class="th" x="588" y="74">Ways to make a $y$ hash yourself</text>
+  <text class="ths" x="588" y="89">outside passwd and chpasswd</text>
+  <rect class="n" x="20" y="100" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="120">RHEL 7.9</text>
+  <rect class="r" x="150" y="100" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="120" text-anchor="middle">SHA512</text>
+  <rect class="r" x="300" y="100" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="120" text-anchor="middle">sha512</text>
+  <rect class="r" x="440" y="100" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="120" text-anchor="middle">$6$</text>
+  <rect class="n" x="580" y="100" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="120">none: glibc crypt has no yescrypt</text>
+  <rect class="n" x="20" y="134" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="154">RHEL 8.10</text>
+  <rect class="r" x="150" y="134" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="154" text-anchor="middle">SHA512</text>
+  <rect class="r" x="300" y="134" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="154" text-anchor="middle">sha512</text>
+  <rect class="r" x="440" y="134" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="154" text-anchor="middle">$6$</text>
+  <rect class="n" x="580" y="134" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="154">none: libxcrypt 4.1.1 has no yescrypt</text>
+  <rect class="n" x="20" y="168" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="188">RHEL 9.8</text>
+  <rect class="r" x="150" y="168" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="188" text-anchor="middle">SHA512</text>
+  <rect class="r" x="300" y="168" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="188" text-anchor="middle">sha512</text>
+  <rect class="r" x="440" y="168" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="188" text-anchor="middle">$6$</text>
+  <rect class="n" x="580" y="168" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="188">python3 crypt (libxcrypt 4.4.18)</text>
+  <rect class="n" x="20" y="202" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="222">RHEL 10.2</text>
+  <rect class="rw" x="150" y="202" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="222" text-anchor="middle">YESCRYPT</text>
+  <rect class="rw" x="300" y="202" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="222" text-anchor="middle">yescrypt</text>
+  <rect class="rw" x="440" y="202" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="222" text-anchor="middle">$y$</text>
+  <rect class="n" x="580" y="202" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="222">chpasswd -c YESCRYPT, python3 crypt</text>
+  <rect class="n" x="20" y="248" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="268">Ubuntu 20.04</text>
+  <rect class="r" x="150" y="248" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="268" text-anchor="middle">SHA512</text>
+  <rect class="r" x="300" y="248" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="268" text-anchor="middle">sha512</text>
+  <rect class="r" x="440" y="248" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="268" text-anchor="middle">$6$</text>
+  <rect class="n" x="580" y="248" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="268">python3 crypt (mkpasswd: Invalid method)</text>
+  <rect class="n" x="20" y="282" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="302">Ubuntu 22.04</text>
+  <rect class="w" x="150" y="282" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="302" text-anchor="middle">SHA512</text>
+  <rect class="rw" x="300" y="282" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="302" text-anchor="middle">yescrypt</text>
+  <rect class="rw" x="440" y="282" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="302" text-anchor="middle">$y$</text>
+  <rect class="n" x="580" y="282" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="302">mkpasswd, python3 crypt</text>
+  <rect class="n" x="20" y="316" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="336">Ubuntu 24.04</text>
+  <rect class="w" x="150" y="316" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="336" text-anchor="middle">SHA512</text>
+  <rect class="rw" x="300" y="316" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="336" text-anchor="middle">yescrypt</text>
+  <rect class="rw" x="440" y="316" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="336" text-anchor="middle">$y$</text>
+  <rect class="n" x="580" y="316" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="336">mkpasswd, chpasswd -c YESCRYPT, python3 crypt</text>
+  <rect class="n" x="20" y="350" width="126" height="30" rx="4"/>
+  <text class="tb" x="30" y="370">Ubuntu 26.04</text>
+  <rect class="rw" x="150" y="350" width="146" height="30" rx="4"/>
+  <text class="mb" x="223" y="370" text-anchor="middle">YESCRYPT</text>
+  <rect class="rw" x="300" y="350" width="136" height="30" rx="4"/>
+  <text class="mb" x="368" y="370" text-anchor="middle">yescrypt</text>
+  <rect class="rw" x="440" y="350" width="136" height="30" rx="4"/>
+  <text class="mb" x="508" y="370" text-anchor="middle">$y$</text>
+  <rect class="n" x="580" y="350" width="320" height="30" rx="4"/>
+  <text class="c" x="590" y="370">mkpasswd, chpasswd -c YESCRYPT</text>
+  <rect class="r" x="20" y="391" width="14" height="14" rx="3"/>
+  <text class="d" x="40" y="402">SHA-512 ($6$)</text>
+  <rect class="rw" x="140" y="391" width="14" height="14" rx="3"/>
+  <text class="d" x="160" y="402">yescrypt ($y$)</text>
+  <rect class="w" x="260" y="391" width="14" height="14" rx="3"/>
+  <text class="d" x="280" y="402">set, but passwd and chpasswd follow PAM and write yescrypt</text>
+  <text class="d" x="20" y="428">openssl passwd -6 makes a $6$ hash on every release. RHEL 7 and 8 can't compute $y$ hashes at all.</text>
+  <text class="d" x="20" y="444">mkpasswd comes from Ubuntu's whois package; RHEL has no such mkpasswd. Python's crypt module was removed in Python 3.13 (Ubuntu 26.04).</text>
+</svg>
