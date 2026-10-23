@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 544" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which commands exist where</title>
+  <desc id="d">apt on Ubuntu 20.04, 22.04, 24.04 and 26.04 against apt-get and apt-cache. All have install, remove, purge, autoremove, update, upgrade, search, show, policy, depends, rdepends, showsrc, download, source, build-dep, changelog, satisfy, clean and autoclean. distclean exists from 24.04. Only apt has list and edit-sources; only apt on 26.04 has why, why-not, history-list, history-undo and modernize-sources. Only apt-get has check and dselect-upgrade; only apt-cache has showpkg, unmet, stats, pkgnames and dump.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="544" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which commands exist where</text>
+  <text class="sub" x="20" y="48">apt on each Ubuntu release, and apt-get / apt-cache (the same on all four)</text>
+  <text class="th" x="388" y="84" text-anchor="middle">20.04</text>
+  <text class="th" x="466" y="84" text-anchor="middle">22.04</text>
+  <text class="th" x="544" y="84" text-anchor="middle">24.04</text>
+  <text class="th" x="622" y="84" text-anchor="middle">26.04</text>
+  <text class="th" x="776" y="84" text-anchor="middle">apt-get / apt-cache</text>
+  <text class="th" x="505" y="66" text-anchor="middle">apt</text>
+  <line x1="350" y1="72" x2="656" y2="72" stroke="#adb5bd"/>
+  <text class="m" x="20" y="114">install remove purge autoremove update</text>
+  <rect class="g" x="350" y="96" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="113" text-anchor="middle">yes</text>
+  <rect class="g" x="428" y="96" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="113" text-anchor="middle">yes</text>
+  <rect class="g" x="506" y="96" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="113" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="96" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="113" text-anchor="middle">yes</text>
+  <rect class="g" x="668" y="96" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="113" text-anchor="middle">yes</text>
+  <text class="m" x="20" y="144">upgrade, full-upgrade</text>
+  <rect class="g" x="350" y="126" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="143" text-anchor="middle">yes</text>
+  <rect class="g" x="428" y="126" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="143" text-anchor="middle">yes</text>
+  <rect class="g" x="506" y="126" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="143" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="126" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="143" text-anchor="middle">yes</text>
+  <rect class="g" x="668" y="126" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="143" text-anchor="middle">upgrade, dist-upgrade</text>
+  <text class="m" x="20" y="174">search show policy depends rdepends showsrc</text>
+  <rect class="g" x="350" y="156" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="173" text-anchor="middle">yes</text>
+  <rect class="g" x="428" y="156" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="173" text-anchor="middle">yes</text>
+  <rect class="g" x="506" y="156" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="173" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="156" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="173" text-anchor="middle">yes</text>
+  <rect class="g" x="668" y="156" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="173" text-anchor="middle">apt-cache</text>
+  <text class="m" x="20" y="204">download source build-dep changelog satisfy</text>
+  <rect class="g" x="350" y="186" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="203" text-anchor="middle">yes</text>
+  <rect class="g" x="428" y="186" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="203" text-anchor="middle">yes</text>
+  <rect class="g" x="506" y="186" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="203" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="186" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="203" text-anchor="middle">yes</text>
+  <rect class="g" x="668" y="186" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="203" text-anchor="middle">apt-get</text>
+  <text class="m" x="20" y="234">clean autoclean</text>
+  <rect class="g" x="350" y="216" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="233" text-anchor="middle">yes</text>
+  <rect class="g" x="428" y="216" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="233" text-anchor="middle">yes</text>
+  <rect class="g" x="506" y="216" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="233" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="216" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="233" text-anchor="middle">yes</text>
+  <rect class="g" x="668" y="216" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="233" text-anchor="middle">apt-get</text>
+  <text class="m" x="20" y="264">distclean</text>
+  <rect class="x" x="350" y="246" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="263" text-anchor="middle">–</text>
+  <rect class="x" x="428" y="246" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="263" text-anchor="middle">–</text>
+  <rect class="g" x="506" y="246" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="263" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="246" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="263" text-anchor="middle">yes</text>
+  <rect class="g" x="668" y="246" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="263" text-anchor="middle">apt-get (24.04+)</text>
+  <text class="m" x="20" y="294">list --installed / --upgradable</text>
+  <rect class="g" x="350" y="276" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="293" text-anchor="middle">yes</text>
+  <rect class="g" x="428" y="276" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="293" text-anchor="middle">yes</text>
+  <rect class="g" x="506" y="276" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="293" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="276" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="293" text-anchor="middle">yes</text>
+  <rect class="x" x="668" y="276" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="293" text-anchor="middle">– (dpkg -l, apt-get -s upgrade)</text>
+  <text class="m" x="20" y="324">edit-sources</text>
+  <rect class="g" x="350" y="306" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="323" text-anchor="middle">yes</text>
+  <rect class="g" x="428" y="306" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="323" text-anchor="middle">yes</text>
+  <rect class="g" x="506" y="306" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="323" text-anchor="middle">yes</text>
+  <rect class="g" x="584" y="306" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="323" text-anchor="middle">yes</text>
+  <rect class="x" x="668" y="306" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="323" text-anchor="middle">–</text>
+  <text class="m" x="20" y="354">why, why-not</text>
+  <rect class="x" x="350" y="336" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="353" text-anchor="middle">–</text>
+  <rect class="x" x="428" y="336" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="353" text-anchor="middle">–</text>
+  <rect class="x" x="506" y="336" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="353" text-anchor="middle">–</text>
+  <rect class="g" x="584" y="336" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="353" text-anchor="middle">yes</text>
+  <rect class="x" x="668" y="336" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="353" text-anchor="middle">–</text>
+  <text class="m" x="20" y="384">history-list / -info / -undo / -redo / -rollback</text>
+  <rect class="x" x="350" y="366" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="383" text-anchor="middle">–</text>
+  <rect class="x" x="428" y="366" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="383" text-anchor="middle">–</text>
+  <rect class="x" x="506" y="366" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="383" text-anchor="middle">–</text>
+  <rect class="g" x="584" y="366" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="383" text-anchor="middle">yes</text>
+  <rect class="x" x="668" y="366" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="383" text-anchor="middle">–</text>
+  <text class="m" x="20" y="414">modernize-sources</text>
+  <rect class="x" x="350" y="396" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="413" text-anchor="middle">–</text>
+  <rect class="x" x="428" y="396" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="413" text-anchor="middle">–</text>
+  <rect class="x" x="506" y="396" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="413" text-anchor="middle">–</text>
+  <rect class="g" x="584" y="396" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="413" text-anchor="middle">yes</text>
+  <rect class="x" x="668" y="396" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="413" text-anchor="middle">–</text>
+  <text class="m" x="20" y="444">check, dselect-upgrade</text>
+  <rect class="x" x="350" y="426" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="443" text-anchor="middle">–</text>
+  <rect class="x" x="428" y="426" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="443" text-anchor="middle">–</text>
+  <rect class="x" x="506" y="426" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="443" text-anchor="middle">–</text>
+  <rect class="x" x="584" y="426" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="443" text-anchor="middle">–</text>
+  <rect class="g" x="668" y="426" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="443" text-anchor="middle">apt-get</text>
+  <text class="m" x="20" y="474">showpkg unmet stats pkgnames dump</text>
+  <rect class="x" x="350" y="456" width="72" height="26" rx="4"/>
+  <text class="c" x="386" y="473" text-anchor="middle">–</text>
+  <rect class="x" x="428" y="456" width="72" height="26" rx="4"/>
+  <text class="c" x="464" y="473" text-anchor="middle">–</text>
+  <rect class="x" x="506" y="456" width="72" height="26" rx="4"/>
+  <text class="c" x="542" y="473" text-anchor="middle">–</text>
+  <rect class="x" x="584" y="456" width="72" height="26" rx="4"/>
+  <text class="c" x="620" y="473" text-anchor="middle">–</text>
+  <rect class="g" x="668" y="456" width="212" height="26" rx="4"/>
+  <text class="c" x="774" y="473" text-anchor="middle">apt-cache</text>
+  <rect class="g" x="20" y="489" width="14" height="14" rx="3"/>
+  <text class="d" x="40" y="500">available</text>
+  <rect class="x" x="120" y="489" width="14" height="14" rx="3"/>
+  <text class="d" x="140" y="500">missing: apt answers "E: Invalid operation ..." ("Error:" on 26.04)</text>
+  <text class="d" x="20" y="524">apt --help lists only the main commands; depends, rdepends, policy, showsrc, download, source, build-dep and changelog work anyway.</text>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 406" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What each upgrade command does with the same four packages</title>
+  <desc id="d">Four installed packages with a 2.0 version available. plain needs nothing new: all three commands upgrade it. needsnew needs a new package newdep: apt-get upgrade keeps it back, apt upgrade and full-upgrade upgrade it and install newdep. swaps needs newlib and conflicts with the installed oldlib: apt-get upgrade and apt upgrade keep it back, full-upgrade upgrades it, installs newlib and removes oldlib. holdme is on hold: all three keep it back.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="406" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What each upgrade command does with the same four packages</text>
+  <text class="sub" x="20" y="48">Local repository, every package installed at 1.0 and 2.0 available. Same result on Ubuntu 20.04, 22.04, 24.04 and 26.04</text>
+  <text class="th" x="28" y="78">Package 1.0 → 2.0</text>
+  <text class="ths" x="28" y="94">what 2.0 needs</text>
+  <text class="mb" x="284" y="78">apt-get upgrade</text>
+  <text class="mb" x="484" y="78">apt upgrade</text>
+  <text class="ths" x="484" y="94">= apt-get upgrade --with-new-pkgs</text>
+  <text class="mb" x="684" y="78">apt full-upgrade</text>
+  <text class="ths" x="684" y="94">= apt-get dist-upgrade</text>
+  <rect class="n" x="20" y="106" width="246" height="50" rx="4"/>
+  <text class="mb" x="30" y="127">plain</text>
+  <text class="d" x="30" y="144">nothing new</text>
+  <rect class="g" x="276" y="106" width="190" height="50" rx="4"/>
+  <text class="tb" x="371" y="136" text-anchor="middle">upgraded</text>
+  <rect class="g" x="476" y="106" width="190" height="50" rx="4"/>
+  <text class="tb" x="571" y="136" text-anchor="middle">upgraded</text>
+  <rect class="g" x="676" y="106" width="198" height="50" rx="4"/>
+  <text class="tb" x="775" y="136" text-anchor="middle">upgraded</text>
+  <rect class="n" x="20" y="162" width="246" height="50" rx="4"/>
+  <text class="mb" x="30" y="183">needsnew</text>
+  <text class="d" x="30" y="200">Depends: newdep (not installed)</text>
+  <rect class="w" x="276" y="162" width="190" height="50" rx="4"/>
+  <text class="tb" x="371" y="192" text-anchor="middle">kept back</text>
+  <rect class="g" x="476" y="162" width="190" height="50" rx="4"/>
+  <text class="tb" x="571" y="184" text-anchor="middle">upgraded</text>
+  <text class="d" x="571" y="201" text-anchor="middle">+ installs newdep</text>
+  <rect class="g" x="676" y="162" width="198" height="50" rx="4"/>
+  <text class="tb" x="775" y="184" text-anchor="middle">upgraded</text>
+  <text class="d" x="775" y="201" text-anchor="middle">+ installs newdep</text>
+  <rect class="n" x="20" y="218" width="246" height="50" rx="4"/>
+  <text class="mb" x="30" y="239">swaps</text>
+  <text class="d" x="30" y="256">Depends: newlib, Conflicts: oldlib</text>
+  <rect class="w" x="276" y="218" width="190" height="50" rx="4"/>
+  <text class="tb" x="371" y="248" text-anchor="middle">kept back</text>
+  <rect class="w" x="476" y="218" width="190" height="50" rx="4"/>
+  <text class="tb" x="571" y="240" text-anchor="middle">kept back</text>
+  <text class="d" x="571" y="257" text-anchor="middle">would need a removal</text>
+  <rect class="rw" x="676" y="218" width="198" height="50" rx="4"/>
+  <text class="tb" x="775" y="240" text-anchor="middle">upgraded</text>
+  <text class="d" x="775" y="257" text-anchor="middle">+ newlib, removes oldlib</text>
+  <rect class="n" x="20" y="274" width="246" height="50" rx="4"/>
+  <text class="mb" x="30" y="295">holdme</text>
+  <text class="d" x="30" y="312">nothing new, but apt-mark hold</text>
+  <rect class="w" x="276" y="274" width="190" height="50" rx="4"/>
+  <text class="tb" x="371" y="304" text-anchor="middle">kept back</text>
+  <rect class="w" x="476" y="274" width="190" height="50" rx="4"/>
+  <text class="tb" x="571" y="304" text-anchor="middle">kept back</text>
+  <rect class="w" x="676" y="274" width="198" height="50" rx="4"/>
+  <text class="tb" x="775" y="304" text-anchor="middle">kept back</text>
+  <rect class="g" x="20" y="333" width="14" height="14" rx="3"/>
+  <text class="d" x="40" y="344">upgraded</text>
+  <rect class="w" x="120" y="333" width="14" height="14" rx="3"/>
+  <text class="d" x="140" y="344">kept back ("The following packages have been kept back"; apt 3: "Not upgrading")</text>
+  <rect class="rw" x="560" y="333" width="14" height="14" rx="3"/>
+  <text class="d" x="580" y="344">upgraded with a removal</text>
+  <text class="d" x="20" y="370">Neither upgrade removes packages that are no longer needed: that is apt autoremove. A held package changes only when you name it,</text>
+  <text class="d" x="20" y="386">and with -y even then only with --allow-change-held-packages ("E: Held packages were changed and -y was used without ...").</text>
+</svg>
