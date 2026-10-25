@@ -96,6 +96,17 @@ pre, div.highlight > pre {
   border-radius: .25rem;
   padding: .75rem 1rem;
 }
+/* Diff blocks: gruvbox-light puts dark text on dark red / olive, so removed and added lines
+   get Claude Code's pink and light green instead, across the whole line. Hugo writes the
+   colors inline (noClasses), hence the attribute selectors and !important. */
+code[data-lang="diff"] > span > span { flex-grow: 1; }
+code[data-lang="diff"] span[style*="background-color:#9d0006"],
+code[data-lang="diff"] span[style*="background-color:#79740e"] {
+  display: block;
+  color: #24292f !important;
+}
+code[data-lang="diff"] span[style*="background-color:#9d0006"] { background-color: #fdd2d8 !important; }
+code[data-lang="diff"] span[style*="background-color:#79740e"] { background-color: #c7e1cb !important; }
 
 /* Recent activity (Letterboxd) on the About page: the row of a Letterboxd profile */
 .letterboxd-row { display: grid; grid-template-columns: repeat(var(--lb-cols, 4), minmax(0, 150px)); gap: 1rem; margin-bottom: .5rem; } /* 150x225 like on letterboxd.com */
