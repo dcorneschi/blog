@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Configuration, state and real infrastructure</title>
+  <desc id="d">Terraform works with three copies of the truth: the configuration (what you want), the state (what Terraform last recorded) and the real infrastructure (what exists). apply changes the real infrastructure to match the configuration and records the result in the state. apply -refresh-only copies the real values into the state without changing anything, which is how drift made outside Terraform is accepted. An import block copies an existing object into the state, and with -generate-config-out it also writes configuration for it. plan reads all three and saves nothing. A moved block or terraform state mv renames an address inside the state; a removed block with destroy = false, or terraform state rm, makes the state forget an object while the real object stays; -replace destroys and recreates one real object.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b02a37"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb  { font-size: 14px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .dc  { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .d   { font-size: 11px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .mc  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .drf { stroke: #b02a37; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; marker-end: url(#ar); }
+      .cfg { fill: #e7f1ff; stroke: #3d7fe0; stroke-width: 1.5; }
+      .st  { fill: #f3effc; stroke: #8a63d2; stroke-width: 1.5; }
+      .rl  { fill: #e8f5ee; stroke: #2f9e66; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Three copies of the truth, and which command moves what</text>
+
+  <!-- top lane: apply -->
+  <path class="lne" d="M120,170 V96 H780 V166"/>
+  <path class="lne" d="M450,96 V166"/>
+  <text class="m" x="140" y="86">apply</text>
+  <text class="d" x="186" y="86">makes the real objects match the configuration …</text>
+  <text class="d" x="462" y="132">… and records the result</text>
+  <text class="d" x="462" y="146">in the state</text>
+
+  <!-- boxes -->
+  <rect class="cfg" x="20" y="170" width="200" height="104" rx="10"/>
+  <text class="tb" x="120" y="200">Configuration</text>
+  <text class="dc" x="120" y="222">*.tf files in Git</text>
+  <text class="dc" x="120" y="240">what you want</text>
+
+  <rect class="st" x="350" y="170" width="200" height="104" rx="10"/>
+  <text class="tb" x="450" y="200">State</text>
+  <text class="dc" x="450" y="222">terraform.tfstate or a backend</text>
+  <text class="dc" x="450" y="240">what Terraform last recorded:</text>
+  <text class="dc" x="450" y="256">address → real object ID</text>
+
+  <rect class="rl" x="680" y="170" width="200" height="104" rx="10"/>
+  <text class="tb" x="780" y="200">Real infrastructure</text>
+  <text class="dc" x="780" y="222">AWS, Azure, Kubernetes …</text>
+  <text class="dc" x="780" y="240">what actually exists</text>
+
+  <!-- real -> state -->
+  <path class="lne" d="M680,206 H554"/>
+  <text class="mc" x="615" y="186">apply</text>
+  <text class="mc" x="615" y="199">-refresh-only</text>
+  <path class="lne" d="M680,244 H554"/>
+  <text class="mc" x="615" y="262">import</text>
+  <text class="mc" x="615" y="275">block</text>
+
+  <!-- bottom lane: import + generate config -->
+  <path class="lne" d="M760,274 V316 H120 V278"/>
+  <text class="m" x="200" y="308">import block + plan -generate-config-out</text>
+  <text class="d" x="200" y="336">also writes the configuration for the imported object (review it, then move it into your files)</text>
+
+  <!-- drift -->
+  <path class="drf" d="M860,346 V280"/>
+  <text class="d" x="880" y="362" text-anchor="end" fill="#b02a37">drift: someone changes the object outside Terraform;</text>
+  <text class="d" x="880" y="376" text-anchor="end" fill="#b02a37">plan shows it, then apply reverts it or -refresh-only accepts it</text>
+
+  <!-- plan -->
+  <rect x="20" y="396" width="860" height="40" rx="8" fill="#fff8e1" stroke="#ffc107"/>
+  <text class="m" x="36" y="421">plan</text>
+  <text class="d" x="80" y="421">reads all three, compares them, and shows what apply would do. It changes nothing and saves nothing (except a plan file with -out).</text>
+
+  <!-- state-only operations -->
+  <text class="m" x="20" y="464">moved block / state mv</text>
+  <text class="d" x="220" y="464">renames an address inside the state; nothing real changes</text>
+  <text class="m" x="20" y="484">removed block / state rm</text>
+  <text class="d" x="220" y="484">the state forgets the object; with destroy = false the real object stays</text>
+  <text class="m" x="20" y="504">-replace=ADDR</text>
+  <text class="d" x="220" y="504">destroys and recreates one real object on the next apply</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where the swap went</title>
+  <desc id="d">768.7 MiB of swap used on an Ubuntu 24.04 VM with kernel 6.8. 179.9 MiB is the VmSwap of all processes, the only part per-process tools show. 287.6 MiB is a System V shared memory segment attached to a process, which shows only 3.1 MiB of VmSwap. 150.0 MiB is a System V segment with no process attached. 151.2 MiB is a 150 MiB file in /dev/shm plus swap cache. In total 588.8 MiB of the swap is in no process's VmSwap.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .v   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .br  { stroke: #495057; stroke-width: 1.3; fill: none; }
+      .ld  { stroke: #adb5bd; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="900" height="330" fill="#ffffff"/>
+  <text class="h" x="40" y="28">768.7 MiB of swap used: where it actually is</text>
+  <text class="m" x="860" y="28" text-anchor="end">swapon --show: USED 768.7M</text>
+
+  <!-- brackets: scale 820 px / 768.7 MiB -->
+  <path class="br" d="M41,76 V68 H231 V76"/>
+  <text class="tb" x="136" y="60" text-anchor="middle">in processes' VmSwap: 179.9 MiB</text>
+  <path class="br" d="M234,76 V68 H859 V76"/>
+  <text class="tb" x="546" y="60" text-anchor="middle">in no process's VmSwap: 588.8 MiB</text>
+
+  <!-- stacked bar with 2px gaps -->
+  <path d="M44,84 H231 V128 H44 a4,4 0 0 1 -4,-4 V88 a4,4 0 0 1 4,-4 Z" fill="#3d7fe0"/>
+  <rect x="233" y="84" width="305" height="44" fill="#e8590c"/>
+  <rect x="540" y="84" width="158" height="44" fill="#8a63d2"/>
+  <path d="M700,84 H856 a4,4 0 0 1 4,4 V124 a4,4 0 0 1 -4,4 H700 Z" fill="#2f9e66"/>
+
+  <!-- labels -->
+  <line class="ld" x1="136" y1="128" x2="136" y2="146"/>
+  <line class="ld" x1="385" y1="128" x2="385" y2="146"/>
+  <line class="ld" x1="619" y1="128" x2="619" y2="146"/>
+  <line class="ld" x1="780" y1="128" x2="780" y2="146"/>
+
+  <rect x="40" y="154" width="10" height="10" rx="2" fill="#3d7fe0"/>
+  <text class="tb" x="56" y="163">Private memory of processes</text>
+  <text class="v" x="56" y="182">179.9 MiB</text>
+  <text class="m" x="56" y="200">VmSwap in /proc/*/status</text>
+  <text class="d" x="56" y="216">the only part ps-style tools see</text>
+
+  <rect x="240" y="154" width="10" height="10" rx="2" fill="#e8590c"/>
+  <text class="tb" x="256" y="163">SysV segment, attached (nattch 1)</text>
+  <text class="v" x="256" y="182">287.6 MiB</text>
+  <text class="m" x="256" y="200">/proc/sysvipc/shm, ipcs -mu</text>
+  <text class="d" x="256" y="216">its process shows only 3.1 MiB of VmSwap;</text>
+  <text class="d" x="256" y="230">Swap in its smaps shows the 287.6 MiB</text>
+
+  <rect x="545" y="154" width="10" height="10" rx="2" fill="#8a63d2"/>
+  <text class="tb" x="561" y="163">SysV, nattch 0</text>
+  <text class="v" x="561" y="182">150.0 MiB</text>
+  <text class="m" x="561" y="200">/proc/sysvipc/shm</text>
+  <text class="d" x="561" y="216">no process attached;</text>
+  <text class="d" x="561" y="230">freed only by ipcrm</text>
+
+  <rect x="705" y="154" width="10" height="10" rx="2" fill="#2f9e66"/>
+  <text class="tb" x="721" y="163">/dev/shm + swap cache</text>
+  <text class="v" x="721" y="182">151.2 MiB</text>
+  <text class="m" x="721" y="200">df, SwapCached</text>
+  <text class="d" x="721" y="216">a 150 MiB tmpfs file,</text>
+  <text class="d" x="721" y="230">listed nowhere per process</text>
+
+  <line x1="40" y1="252" x2="860" y2="252" stroke="#dee2e6"/>
+  <text class="d" x="40" y="274">179.9 + 287.6 + 150.0 + 151.2 = 768.7 MiB. Ubuntu 24.04, kernel 6.8, 956 MiB of RAM, a 1 GiB swap file, after a 900 MiB allocation pushed</text>
+  <text class="d" x="40" y="290">two System V segments (300 and 150 MiB), a 150 MiB file in /dev/shm and a process with 150 MiB of private memory out to swap.</text>
+  <text class="d" x="40" y="312">On a database server the orange part is the database's shared memory, such as the Oracle SGA.</text>
+</svg>

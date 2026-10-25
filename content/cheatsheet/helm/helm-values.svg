@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Helm values: which one wins, and what an upgrade starts from</title>
+  <desc id="d">Left: values are merged from lowest to highest priority: the chart's own values.yaml, the parent chart's values under the subchart's key (subcharts only), -f files from left to right, then the --set family (--set, --set-string, --set-json, --set-file, --set-literal). Maps merge key by key, lists are replaced whole, and key: null removes a default. Right: what helm upgrade starts from. Without -f or --set, the previous user values are copied onto the new chart's defaults. With -f or --set (the default, same as --reset-values), the new chart's defaults plus only the new values: previous --set values are lost. --reuse-values: the previous release's merged values (old defaults plus old user values) plus the new values, so new chart defaults are ignored. --reset-then-reuse-values (Helm 3.14+): new chart defaults, then the old user values, then the new values.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; fill: #212529; }
+      .mb   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .p    { font-size: 11px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.8; fill: none; marker-end: url(#a); }
+      .nv   { fill: #d1e7dd; stroke: #75b798; }
+      .ou   { fill: #ffe8cc; stroke: #e0a24a; }
+      .nd   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .od   { fill: #e9ecef; stroke: #adb5bd; }
+      .lost { fill: #ffffff; stroke: #dc3545; stroke-dasharray: 4 3; }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#ffffff"/>
+
+  <!-- left: precedence stack -->
+  <text class="h" x="20" y="28">Which value wins</text>
+  <text class="d" x="20" y="46">top = highest priority</text>
+
+  <rect class="box" x="20" y="60" width="370" height="56" rx="6" fill="#d1e7dd" stroke="#75b798"/>
+  <text class="mb" x="34" y="82">--set  --set-string  --set-json</text>
+  <text class="mb" x="34" y="100">--set-file  --set-literal</text>
+
+  <rect class="box" x="20" y="124" width="370" height="44" rx="6" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="mb" x="34" y="144">-f values-prod.yaml</text>
+  <text class="d" x="34" y="159">the last -f file</text>
+
+  <rect class="box" x="20" y="176" width="370" height="44" rx="6" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="mb" x="34" y="196">-f values-base.yaml</text>
+  <text class="d" x="34" y="211">the first -f file: files merge left to right</text>
+
+  <rect class="box" x="20" y="228" width="370" height="44" rx="6" fill="#ece6f5" stroke="#a993c9"/>
+  <text class="tb" x="34" y="248" style="font-size:12px">Parent chart's values.yaml</text>
+  <text class="d" x="34" y="263">under the subchart's key (only for subcharts)</text>
+
+  <rect class="box" x="20" y="280" width="370" height="44" rx="6" fill="#e9ecef" stroke="#adb5bd"/>
+  <text class="tb" x="34" y="300" style="font-size:12px">The chart's own values.yaml</text>
+  <text class="d" x="34" y="315">defaults: helm show values</text>
+
+  <path class="lne" d="M405,322 V64"/>
+  <text class="d" x="420" y="200" transform="rotate(-90 420 200)" style="text-anchor:middle">higher wins</text>
+
+  <rect class="box" x="20" y="340" width="370" height="122" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tb" x="34" y="362" style="font-size:12px">How they merge</text>
+  <text class="d" x="34" y="382">• Maps merge key by key: a file only overrides the keys it sets.</text>
+  <text class="d" x="34" y="400">• Lists are replaced whole, never merged.</text>
+  <text class="d" x="34" y="418">• key: null in a values file removes a default.</text>
+  <text class="d" x="34" y="436">• global: values are visible in the chart and all subcharts.</text>
+  <text class="d" x="34" y="454">• See the result: helm get values app --all</text>
+
+  <!-- right: upgrade -->
+  <text class="h" x="440" y="28">What helm upgrade starts from</text>
+  <text class="d" x="440" y="46">top wins · <tspan style="fill:#146c43;font-weight:700">new values</tspan> · <tspan style="fill:#b5650d;font-weight:700">old user values</tspan> · <tspan style="fill:#1f5fbf;font-weight:700">defaults</tspan></text>
+
+  <!-- panel 1 -->
+  <rect class="box" x="440" y="60" width="215" height="196" rx="8" fill="#ffffff" stroke="#adb5bd"/>
+  <text class="mb" x="452" y="80">helm upgrade app ./chart</text>
+  <text class="d" x="452" y="96">no -f, no --set</text>
+  <rect class="box ou" x="452" y="108" width="191" height="30" rx="5"/>
+  <text class="p" x="462" y="127">old user values (copied)</text>
+  <rect class="box nd" x="452" y="144" width="191" height="30" rx="5"/>
+  <text class="p" x="462" y="163">new chart defaults</text>
+  <text class="d" x="452" y="196" style="fill:#146c43;font-weight:700">✓ keeps your settings</text>
+  <text class="d" x="452" y="212">and picks up new defaults</text>
+
+  <!-- panel 2 -->
+  <rect class="box" x="665" y="60" width="215" height="196" rx="8" fill="#ffffff" stroke="#e48b93"/>
+  <text class="mb" x="677" y="80">helm upgrade ... -f / --set</text>
+  <text class="d" x="677" y="96">the default; same as --reset-values</text>
+  <rect class="box nv" x="677" y="108" width="191" height="30" rx="5"/>
+  <text class="p" x="687" y="127">new values</text>
+  <rect class="box lost" x="677" y="144" width="191" height="30" rx="5"/>
+  <text class="p" x="687" y="163" style="fill:#b02a37;text-decoration:line-through">old user values</text>
+  <rect class="box nd" x="677" y="180" width="191" height="30" rx="5"/>
+  <text class="p" x="687" y="199">new chart defaults</text>
+  <text class="d" x="677" y="232" style="fill:#b02a37;font-weight:700">✗ earlier --set values are lost</text>
+
+  <!-- panel 3 -->
+  <rect class="box" x="440" y="266" width="215" height="196" rx="8" fill="#ffffff" stroke="#e0a24a"/>
+  <text class="mb" x="452" y="286">--reuse-values</text>
+  <text class="d" x="452" y="302">previous release, merged</text>
+  <rect class="box nv" x="452" y="314" width="191" height="30" rx="5"/>
+  <text class="p" x="462" y="333">new values</text>
+  <rect class="box ou" x="452" y="350" width="191" height="30" rx="5"/>
+  <text class="p" x="462" y="369">old user values</text>
+  <rect class="box od" x="452" y="386" width="191" height="30" rx="5"/>
+  <text class="p" x="462" y="405">OLD chart defaults</text>
+  <text class="d" x="452" y="434" style="fill:#b5650d;font-weight:700">⚠ new chart defaults ignored:</text>
+  <text class="d" x="452" y="450">new keys in a chart upgrade stay unset</text>
+
+  <!-- panel 4 -->
+  <rect class="box" x="665" y="266" width="215" height="196" rx="8" fill="#ffffff" stroke="#75b798"/>
+  <text class="mb" x="677" y="286">--reset-then-reuse-values</text>
+  <text class="d" x="677" y="302">Helm 3.14+</text>
+  <rect class="box nv" x="677" y="314" width="191" height="30" rx="5"/>
+  <text class="p" x="687" y="333">new values</text>
+  <rect class="box ou" x="677" y="350" width="191" height="30" rx="5"/>
+  <text class="p" x="687" y="369">old user values</text>
+  <rect class="box nd" x="677" y="386" width="191" height="30" rx="5"/>
+  <text class="p" x="687" y="405">new chart defaults</text>
+  <text class="d" x="677" y="434" style="fill:#146c43;font-weight:700">✓ new defaults, your old</text>
+  <text class="d" x="677" y="450">settings and the new ones</text>
+
+  <rect class="box" x="20" y="480" width="860" height="62" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="d" x="34" y="502" style="fill:#212529;font-weight:700">Safest habit: keep every value in files and pass all of them on each upgrade (-f base.yaml -f prod.yaml).</text>
+  <text class="d" x="34" y="522">Then the result doesn't depend on what the previous revision had: helm get values app shows your values, --all adds the defaults.</text>
+</svg>

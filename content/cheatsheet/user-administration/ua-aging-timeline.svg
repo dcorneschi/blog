@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Password aging: the /etc/shadow fields on a time line</title>
+  <desc id="d">With chage -m 7 -M 90 -W 14 -I 30, counted from the last change (field 3, day 0): days 0 to 7 the password can't be changed (field 4 min), until day 76 it works, days 76 to 90 the user is warned (field 6 warn 14), day 90 is max (field 5) and the password must be changed at login, after 30 more inactive days (field 7) at day 120 the account is locked. Field 8 is a separate calendar expire date set with chage -E or usermod -e; after it no login works, SSH keys included.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="440" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Password aging: the /etc/shadow fields on a time line</text>
+  <text class="sub" x="20" y="48">Example: chage -m 7 -M 90 -W 14 -I 30 jsmith, counted in days from the last password change (day 0)</text>
+  <text class="tb" x="20" y="80">Password</text>
+  <rect class="n" x="60" y="90" width="40" height="38" rx="0"/>
+  <text class="c" x="80" y="113" text-anchor="middle">min</text>
+  <rect class="g" x="100" y="90" width="394.286" height="38" rx="0"/>
+  <text class="c" x="297.143" y="113" text-anchor="middle">works; the user may change it</text>
+  <rect class="w" x="494.286" y="90" width="80" height="38" rx="0"/>
+  <text class="c" x="534.286" y="113" text-anchor="middle">warned</text>
+  <rect class="rw" x="574.286" y="90" width="171.429" height="38" rx="0"/>
+  <text class="c" x="660" y="113" text-anchor="middle">expired: change at login</text>
+  <rect class="x" x="745.714" y="90" width="114.286" height="38" rx="0"/>
+  <text class="c" x="802.857" y="113" text-anchor="middle">account locked</text>
+  <path class="lne" d="M860,109 H882"/>
+  <line class="tick" x1="60" y1="128" x2="60" y2="140"/>
+  <text class="d" x="57" y="153" text-anchor="end">day 0</text>
+  <line class="dash" x1="60" y1="158" x2="60" y2="242"/>
+  <text class="m" x="65" y="224" text-anchor="start">field 3: lastchange</text>
+  <text class="d" x="65" y="240" text-anchor="start">chage -d; every password change resets it</text>
+  <line class="tick" x1="100" y1="128" x2="100" y2="140"/>
+  <text class="d" x="100" y="153" text-anchor="middle">day 7</text>
+  <line class="dash" x1="100" y1="158" x2="100" y2="200"/>
+  <text class="m" x="105" y="182" text-anchor="start">field 4: min = 7</text>
+  <text class="d" x="105" y="198" text-anchor="start">chage -m, passwd -n</text>
+  <line class="tick" x1="494.286" y1="128" x2="494.286" y2="140"/>
+  <text class="d" x="494.286" y="153" text-anchor="middle">day 76</text>
+  <line class="dash" x1="494.286" y1="158" x2="494.286" y2="200"/>
+  <text class="m" x="489.286" y="182" text-anchor="end">field 6: warn = 14</text>
+  <text class="d" x="489.286" y="198" text-anchor="end">chage -W, passwd -w (90 − 14)</text>
+  <line class="tick" x1="574.286" y1="128" x2="574.286" y2="140"/>
+  <text class="d" x="574.286" y="153" text-anchor="middle">day 90</text>
+  <line class="dash" x1="574.286" y1="158" x2="574.286" y2="242"/>
+  <text class="m" x="579.286" y="224" text-anchor="start">field 5: max = 90</text>
+  <text class="d" x="579.286" y="240" text-anchor="start">chage -M, passwd -x</text>
+  <line class="tick" x1="745.714" y1="128" x2="745.714" y2="140"/>
+  <text class="d" x="745.714" y="153" text-anchor="middle">day 120</text>
+  <line class="dash" x1="745.714" y1="158" x2="745.714" y2="200"/>
+  <text class="m" x="740.714" y="182" text-anchor="end">field 7: inactive = 30</text>
+  <text class="d" x="740.714" y="198" text-anchor="end">chage -I (days after max)</text>
+  <text class="tb" x="20" y="284">Account</text>
+  <text class="d" x="84" y="284">field 8, independent of the password</text>
+  <rect class="g" x="60" y="294" width="600" height="34" rx="0"/>
+  <text class="c" x="360" y="315" text-anchor="middle">account valid</text>
+  <rect class="x" x="660" y="294" width="200" height="34" rx="0"/>
+  <text class="c" x="760" y="315" text-anchor="middle">expired: no login, SSH keys too</text>
+  <line class="tick" x1="660" y1="328" x2="660" y2="340"/>
+  <text class="m" x="660" y="356" text-anchor="middle">field 8: expire = a calendar date</text>
+  <text class="d" x="660" y="372" text-anchor="middle">chage -E &lt;date&gt;, usermod -e &lt;date&gt;; it can fall anywhere on the line</text>
+  <text class="d" x="20" y="404">chage -d 0 (or passwd -e) sets field 3 to 0: the password counts as expired at the next login.</text>
+  <text class="d" x="20" y="420">chage -m 0 -M 99999 -I -1 -E -1 turns aging off. The values in /etc/login.defs only apply to accounts created afterwards.</text>
+</svg>

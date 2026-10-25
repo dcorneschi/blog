@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">S3 state locking with use_lockfile</title>
+  <desc id="d">Two Terraform runs share a state in S3 with use_lockfile = true. Run A creates prod/terraform.tfstate.tflock with a conditional write that only succeeds if the object doesn't exist, reads the state, applies, and writes the new state. Run B starts during the apply; its conditional write of the same lock object fails with HTTP 412 PreconditionFailed and Terraform reports Error acquiring the state lock, showing who holds it. When A finishes it deletes the lock object, and the bucket holds only prod/terraform.tfstate. The deprecated alternative is a DynamoDB table with a LockID item.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b02a37"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tc  { font-size: 13px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .dc  { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .d   { font-size: 11px; fill: #495057; }
+      .e   { font-size: 11px; font-weight: 700; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .lne { stroke: #495057; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+      .bad { stroke: #b02a37; stroke-width: 1.5; fill: none; marker-end: url(#ar); }
+      .ret { stroke: #495057; stroke-width: 1.3; fill: none; stroke-dasharray: 5 4; marker-end: url(#a); }
+      .life{ stroke: #adb5bd; stroke-width: 1.2; stroke-dasharray: 3 3; }
+      .n   { font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="900" height="520" fill="#ffffff"/>
+  <text class="h" x="20" y="28">S3 state locking with use_lockfile = true (Terraform 1.10+)</text>
+
+  <!-- actors -->
+  <rect x="40" y="46" width="180" height="46" rx="8" fill="#e7f1ff" stroke="#3d7fe0" stroke-width="1.5"/>
+  <text class="tc" x="130" y="66">Run A</text><text class="dc" x="130" y="83">terraform apply</text>
+  <rect x="360" y="46" width="180" height="46" rx="8" fill="#e8f5ee" stroke="#2f9e66" stroke-width="1.5"/>
+  <text class="tc" x="450" y="66">S3 bucket</text><text class="dc" x="450" y="83">my-terraform-state</text>
+  <rect x="680" y="46" width="180" height="46" rx="8" fill="#f3effc" stroke="#8a63d2" stroke-width="1.5"/>
+  <text class="tc" x="770" y="66">Run B</text><text class="dc" x="770" y="83">terraform plan, a bit later</text>
+  <line class="life" x1="130" y1="92" x2="130" y2="420"/>
+  <line class="life" x1="450" y1="92" x2="450" y2="420"/>
+  <line class="life" x1="770" y1="92" x2="770" y2="420"/>
+
+  <!-- 1 lock -->
+  <circle cx="148" cy="118" r="9" fill="#3d7fe0"/><text class="n" x="148" y="122">1</text>
+  <text class="e" x="162" y="122">create the lock object</text>
+  <path class="lne" d="M130,132 H446"/>
+  <text class="m" x="140" y="148">PUT prod/terraform.tfstate.tflock</text>
+  <text class="d" x="140" y="162">only if it doesn't exist yet (conditional write)</text>
+  <path class="ret" d="M450,176 H134"/><text class="d" x="280" y="190" text-anchor="middle">200 OK: A holds the lock</text>
+
+  <!-- 2 read/apply -->
+  <circle cx="148" cy="214" r="9" fill="#3d7fe0"/><text class="n" x="148" y="218">2</text>
+  <text class="e" x="162" y="218">read the state, apply the changes</text>
+
+  <!-- 3 B tries -->
+  <circle cx="752" cy="246" r="9" fill="#8a63d2"/><text class="n" x="752" y="250">3</text>
+  <text class="e" x="660" y="250" text-anchor="end">same conditional write</text>
+  <path class="lne" d="M770,262 H454"/>
+  <text class="m" x="470" y="278">PUT prod/terraform.tfstate.tflock</text>
+  <path class="bad" d="M450,290 H766"/>
+  <text class="d" x="470" y="306" fill="#b02a37">412 PreconditionFailed: the object exists</text>
+  <rect x="560" y="316" width="320" height="56" rx="6" fill="#f8d7da" stroke="#ea868f"/>
+  <text class="m" x="570" y="334" style="fill:#b02a37">Error: Error acquiring the state lock</text>
+  <text class="d" x="570" y="350">Lock Info shows the ID, who holds it (user@host),</text>
+  <text class="d" x="570" y="364">the operation (Apply) and when it was taken</text>
+
+  <!-- 4 write state + unlock -->
+  <circle cx="148" cy="342" r="9" fill="#3d7fe0"/><text class="n" x="148" y="346">4</text>
+  <text class="e" x="162" y="346">write the new state</text>
+  <path class="lne" d="M130,356 H446"/><text class="m" x="140" y="372">PUT prod/terraform.tfstate</text>
+  <circle cx="148" cy="392" r="9" fill="#3d7fe0"/><text class="n" x="148" y="396">5</text>
+  <text class="e" x="162" y="396">release the lock</text>
+  <path class="lne" d="M130,408 H446"/><text class="m" x="140" y="424">DELETE prod/terraform.tfstate.tflock</text>
+
+  <!-- notes -->
+  <line x1="20" y1="440" x2="880" y2="440" stroke="#dee2e6"/>
+  <text class="d" x="20" y="460">Bucket during the apply: prod/terraform.tfstate.tflock. After it: prod/terraform.tfstate only. Use -lock-timeout=5m to make run B wait instead of failing.</text>
+  <text class="d" x="20" y="478">A lock left behind by a crashed run: terraform force-unlock LOCK_ID (the ID from the error). Make sure nobody is still running first.</text>
+  <text class="d" x="20" y="496">The older way, a DynamoDB table (dynamodb_table) with a LockID item, still works but is deprecated: init warns "Use parameter use_lockfile".</text>
+  <text class="d" x="20" y="514">Shown on Terraform 1.16.6 against a local S3 mock; the 412 is S3's answer to a conditional write that finds the object already there.</text>
+</svg>

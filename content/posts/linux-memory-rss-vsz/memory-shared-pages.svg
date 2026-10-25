@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">RSS, PSS and USS for shared pages</title>
+  <desc id="d">Three processes share one copy of libc.so, 30 pages in RAM. Process A has 4 private pages, B has 6, C has 2. RSS counts every resident page, shared ones in full: A 34, B 36, C 32, summing to 102 pages, 2.4 times the 42 pages really in RAM. PSS splits each shared page among its sharers, 10 library pages each: A 14, B 16, C 12, summing to 42, exactly what is in RAM. USS counts only private pages: A 4, B 6, C 2, summing to 12, which leaves out the library. USS is what killing one process frees; the library stays for the other two. Killing all three frees 42 pages, the sum of PSS.</desc>
+  <defs>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .tc   { font-size: 13px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .d    { font-size: 11px; fill: #495057; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .num  { font-size: 15px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .ldr  { stroke: #adb5bd; stroke-width: 1.4; fill: none; }
+      .pa   { fill: #cfe2ff; stroke: #3d7fe0; stroke-width: 1; }
+      .pb   { fill: #e5dbff; stroke: #8a63d2; stroke-width: 1; }
+      .pc   { fill: #d3f0e0; stroke: #2f9e66; stroke-width: 1; }
+      .ps   { fill: #ffe5cc; stroke: #fd9843; stroke-width: 1; }
+      .proc { fill: #ffffff; stroke: #adb5bd; }
+      .lib  { fill: #fff8f0; stroke: #fd9843; }
+      .bad  { fill: #b02a37; font-size: 12px; font-weight: 700; }
+      .good { fill: #146c43; font-size: 12px; font-weight: 700; }
+      .mid  { fill: #495057; font-size: 12px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text class="h" x="20" y="28">One shared library, three processes: how RSS, PSS and USS count it</text>
+
+  <!-- processes: x 20 / 315 / 610, w 270; pages 14px, step 17 -->
+  <rect class="box proc" x="20" y="46" width="270" height="70" rx="8"/>
+  <text class="tb" x="36" y="68">Process A</text>
+  <text class="d" x="36" y="104">4 private pages</text>
+  <rect class="pa" x="150" y="57" width="14" height="14" rx="2"/><rect class="pa" x="167" y="57" width="14" height="14" rx="2"/><rect class="pa" x="184" y="57" width="14" height="14" rx="2"/><rect class="pa" x="201" y="57" width="14" height="14" rx="2"/>
+
+  <rect class="box proc" x="315" y="46" width="270" height="70" rx="8"/>
+  <text class="tb" x="331" y="68">Process B</text>
+  <text class="d" x="331" y="104">6 private pages</text>
+  <rect class="pb" x="445" y="57" width="14" height="14" rx="2"/><rect class="pb" x="462" y="57" width="14" height="14" rx="2"/><rect class="pb" x="479" y="57" width="14" height="14" rx="2"/><rect class="pb" x="496" y="57" width="14" height="14" rx="2"/><rect class="pb" x="513" y="57" width="14" height="14" rx="2"/><rect class="pb" x="530" y="57" width="14" height="14" rx="2"/>
+
+  <rect class="box proc" x="610" y="46" width="270" height="70" rx="8"/>
+  <text class="tb" x="626" y="68">Process C</text>
+  <text class="d" x="626" y="104">2 private pages</text>
+  <rect class="pc" x="740" y="57" width="14" height="14" rx="2"/><rect class="pc" x="757" y="57" width="14" height="14" rx="2"/>
+
+  <!-- links to the library -->
+  <path class="ldr" d="M155,116 L360,160 M450,116 V160 M745,116 L540,160"/>
+  <text class="d" x="196" y="146">maps libc.so</text>
+  <text class="d" x="456" y="144">maps libc.so</text>
+  <text class="d" x="640" y="146">maps libc.so</text>
+
+  <!-- shared library: 30 pages, 15 per row, start x 322 -->
+  <rect class="box lib" x="200" y="160" width="500" height="96" rx="8"/>
+  <text class="tc" x="450" y="182">libc.so in RAM: 30 pages, one physical copy</text>
+  <g>
+    <rect class="ps" x="322" y="194" width="14" height="14" rx="2"/><rect class="ps" x="339" y="194" width="14" height="14" rx="2"/><rect class="ps" x="356" y="194" width="14" height="14" rx="2"/><rect class="ps" x="373" y="194" width="14" height="14" rx="2"/><rect class="ps" x="390" y="194" width="14" height="14" rx="2"/><rect class="ps" x="407" y="194" width="14" height="14" rx="2"/><rect class="ps" x="424" y="194" width="14" height="14" rx="2"/><rect class="ps" x="441" y="194" width="14" height="14" rx="2"/><rect class="ps" x="458" y="194" width="14" height="14" rx="2"/><rect class="ps" x="475" y="194" width="14" height="14" rx="2"/><rect class="ps" x="492" y="194" width="14" height="14" rx="2"/><rect class="ps" x="509" y="194" width="14" height="14" rx="2"/><rect class="ps" x="526" y="194" width="14" height="14" rx="2"/><rect class="ps" x="543" y="194" width="14" height="14" rx="2"/><rect class="ps" x="560" y="194" width="14" height="14" rx="2"/>
+    <rect class="ps" x="322" y="211" width="14" height="14" rx="2"/><rect class="ps" x="339" y="211" width="14" height="14" rx="2"/><rect class="ps" x="356" y="211" width="14" height="14" rx="2"/><rect class="ps" x="373" y="211" width="14" height="14" rx="2"/><rect class="ps" x="390" y="211" width="14" height="14" rx="2"/><rect class="ps" x="407" y="211" width="14" height="14" rx="2"/><rect class="ps" x="424" y="211" width="14" height="14" rx="2"/><rect class="ps" x="441" y="211" width="14" height="14" rx="2"/><rect class="ps" x="458" y="211" width="14" height="14" rx="2"/><rect class="ps" x="475" y="211" width="14" height="14" rx="2"/><rect class="ps" x="492" y="211" width="14" height="14" rx="2"/><rect class="ps" x="509" y="211" width="14" height="14" rx="2"/><rect class="ps" x="526" y="211" width="14" height="14" rx="2"/><rect class="ps" x="543" y="211" width="14" height="14" rx="2"/><rect class="ps" x="560" y="211" width="14" height="14" rx="2"/>
+  </g>
+  <text class="dc" x="450" y="244">RAM really used: 4 + 6 + 2 private + 30 shared = 42 pages</text>
+
+  <!-- table: metric x 30, A 340, B 440, C 540, sum 650, verdict 720 -->
+  <rect x="20" y="276" width="860" height="28" fill="#e9ecef"/>
+  <text class="tb" x="30" y="295">Metric</text>
+  <text class="tc" x="340" y="295">A</text>
+  <text class="tc" x="440" y="295">B</text>
+  <text class="tc" x="540" y="295">C</text>
+  <text class="tc" x="650" y="295">Sum</text>
+  <text class="tb" x="720" y="295">vs 42 pages in RAM</text>
+
+  <text class="tb" x="30" y="328">RSS</text>
+  <text class="d" x="30" y="345">private + every shared page in full</text>
+  <text class="num" x="340" y="336">34</text><text class="num" x="440" y="336">36</text><text class="num" x="540" y="336">32</text><text class="num" x="650" y="336">102</text>
+  <text class="bad" x="720" y="336">2.4× too high</text>
+  <text class="dc" x="340" y="352">4 + 30</text><text class="dc" x="440" y="352">6 + 30</text><text class="dc" x="540" y="352">2 + 30</text><text class="dc" x="650" y="352">12 + 3 × 30</text>
+
+  <rect x="20" y="356" width="860" height="52" fill="#f8f9fa"/>
+  <text class="tb" x="30" y="380">PSS</text>
+  <text class="d" x="30" y="397">private + shared ÷ number of sharers</text>
+  <text class="num" x="340" y="388">14</text><text class="num" x="440" y="388">16</text><text class="num" x="540" y="388">12</text><text class="num" x="650" y="388">42</text>
+  <text class="good" x="720" y="388">matches RAM</text>
+  <text class="dc" x="340" y="404">4 + 10</text><text class="dc" x="440" y="404">6 + 10</text><text class="dc" x="540" y="404">2 + 10</text><text class="dc" x="650" y="404">12 + 30</text>
+
+  <text class="tb" x="30" y="432">USS</text>
+  <text class="d" x="30" y="449">private pages only</text>
+  <text class="num" x="340" y="440">4</text><text class="num" x="440" y="440">6</text><text class="num" x="540" y="440">2</text><text class="num" x="650" y="440">12</text>
+  <text class="mid" x="720" y="440">leaves out the library</text>
+  <rect x="20" y="276" width="860" height="184" fill="none" stroke="#dee2e6"/>
+
+  <!-- notes -->
+  <text class="d" x="20" y="490">Kill A only: its 4 private pages are freed (its USS). The library stays in RAM for B and C.</text>
+  <text class="d" x="20" y="508">Kill all three: 42 pages are freed, the sum of their PSS.</text>
+  <text class="d" x="20" y="526">Sum of RSS across all processes counts each shared page once per process, which is how it ends up larger than the RAM.</text>
+  <text class="d" x="20" y="544">The same split applies to copy-on-write pages after fork() and to file pages several processes have mapped.</text>
+</svg>

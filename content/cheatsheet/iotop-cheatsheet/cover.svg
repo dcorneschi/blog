@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">iotop Cheatsheet</title>
+  <desc id="d">iotop Cheatsheet: Per-process disk I/O on RHEL and Ubuntu. iotop, iotop-c, batch mode, delay accounting, pidstat, ionice, cgroup limits. Small drawings: process, page cache, disk; a terminal running sudo iotop -o and cat /proc/self/io; I/O, per process, disk; icons for iotop, batch mode, delay accounting, pidstat, ionice, cgroups, disks.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #1c7ed6; }
+      .a2  { fill: #e8590c; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #1c7ed6; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #1c7ed6; }
+  .vs   { stroke: #1c7ed6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #1c7ed6; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #1c7ed6; stroke-width: 9; }
+  .vl   { fill: #1c7ed6; fill-opacity: .18; }
+  .vl2  { fill: #1c7ed6; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #1c7ed6; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #1c7ed6; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-14.8,57.8) scale(0.852)"><rect class="vpn" x="170" y="170" width="213" height="84" rx="42"/><text class="vink" x="276" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">process</text><path class="var" d="M391,212 H437 M417,196 L437,212 L417,228"/><rect class="vpg" x="447" y="170" width="282" height="84" rx="42"/><text class="vink" x="588" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">page cache</text><path class="var" d="M737,212 H783 M763,196 L783,212 L763,228"/><rect class="vpv" x="793" y="170" width="144" height="84" rx="42"/><text class="vink" x="865" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">disk</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ sudo iotop -o</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ cat /proc/self/io<tspan class="vcur"> █</tspan></text></g><g transform="translate(288.2,30.0) scale(0.909)"><g transform="translate(1795,190) scale(1.150)"><path class="vg" d="M24,150 A76,76 0 0 1 176,150" stroke-width="20"/><path class="vs" d="M24,150 A76,76 0 0 1 130,79" stroke-width="20"/><path class="vink" d="M100,150 L146,92" stroke-width="10"/><circle class="vf" cx="100" cy="150" r="14"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">I/O</text><g transform="translate(2065,190) scale(1.150)"><path class="vg" d="M20,180 H184" stroke-width="8"/><rect class="vf" x="30" y="102" width="22" height="70" rx="4" opacity="0.5"/><rect class="vf" x="62" y="52" width="22" height="120" rx="4" opacity="0.6"/><rect class="vf" x="94" y="122" width="22" height="50" rx="4" opacity="0.7"/><rect class="vf" x="126" y="22" width="22" height="150" rx="4" opacity="0.8"/><rect class="vf" x="158" y="77" width="22" height="95" rx="4" opacity="0.9"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">per process</text><g transform="translate(2335,190) scale(1.150)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">disk</text></g><g transform="translate(546.0,1290) scale(0.500)"><path class="vg" d="M20,180 H184" stroke-width="8"/><rect class="vf" x="30" y="102" width="22" height="70" rx="4" opacity="0.5"/><rect class="vf" x="62" y="52" width="22" height="120" rx="4" opacity="0.6"/><rect class="vf" x="94" y="122" width="22" height="50" rx="4" opacity="0.7"/><rect class="vf" x="126" y="22" width="22" height="150" rx="4" opacity="0.8"/><rect class="vf" x="158" y="77" width="22" height="95" rx="4" opacity="0.9"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">iotop</text><g transform="translate(806.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">batch mode</text><g transform="translate(1066.0,1290) scale(0.500)"><circle class="vp vsw" cx="100" cy="100" r="78"/><path class="vs" d="M100,52 V100 L136,124" stroke-width="14"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="30">delay accounting</text><g transform="translate(1326.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">pidstat</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vg" d="M24,150 A76,76 0 0 1 176,150" stroke-width="20"/><path class="vs" d="M24,150 A76,76 0 0 1 130,79" stroke-width="20"/><path class="vink" d="M100,150 L146,92" stroke-width="10"/><circle class="vf" cx="100" cy="150" r="14"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">ionice</text><g transform="translate(1846.0,1290) scale(0.500)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">cgroups</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">disks</text></g><!-- /vignettes -->
+  <rect class="a" x="1046" y="400" width="300" height="220" rx="20"/><circle class="wt" cx="1196" cy="500" r="72" opacity="0.9"/><circle class="a" cx="1196" cy="500" r="16"/><path class="ink" d="M1196,500 L1266,440" stroke="#343a40" stroke-width="10" opacity="0.7"/><rect class="a" x="1396" y="530" width="46" height="90" rx="8"/><rect class="a2" x="1466" y="450" width="46" height="170" rx="8"/><rect class="a" x="1536" y="370" width="46" height="250" rx="8"/><rect class="a2" x="1606" y="480" width="46" height="140" rx="8"/><rect class="a" x="1676" y="410" width="46" height="210" rx="8"/><rect class="ln" x="1386" y="620" width="1" height="1"/><path class="ln" d="M1386,630 H1756"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="210">iotop Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Per-process disk I/O on RHEL and Ubuntu</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">iotop · iotop-c · batch mode · delay accounting · pidstat · ionice · cgroup limits</text>
+</svg>

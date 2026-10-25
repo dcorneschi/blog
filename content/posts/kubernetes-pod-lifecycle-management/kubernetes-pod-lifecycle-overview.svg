@@ -1,0 +1,213 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 2032" width="900" height="2032">
+<title>Kubernetes Pod Creation to Running Flow</title>
+<defs><filter id="sh" x="-5%" y="-5%" width="110%" height="120%"><feGaussianBlur in="SourceAlpha" stdDeviation="2" result="b"/><feOffset in="b" dy="2" result="o"/><feComponentTransfer in="o"><feFuncA type="linear" slope="0.13"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#374151"/></marker></defs>
+<rect width="900" height="2032" fill="#ffffff"/>
+<g transform="translate(0,-464)">
+<text x="40.0" y="508.0" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Pod Creation to Running Flow</text>
+<rect x="255.0" y="553.0" width="230" height="34" rx="17" fill="#dcebfd" stroke="#2b6fe0" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="574.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">kubectl apply -f pod.yaml</text>
+<rect x="255.0" y="612.0" width="230" height="56" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="627.6" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">API Server</text>
+<text x="370.0" y="644.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Validates YAML</text>
+<text x="370.0" y="660.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Writes to etcd</text>
+<polygon points="370,697.0 485.0,745 370,793.0 255.0,745" fill="#f4f0ff" stroke="#a58be6" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="740.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Scheduler finds</text>
+<text x="370.0" y="757.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">suitable node?</text>
+<rect x="20.0" y="689.0" width="210" height="112" rx="10" fill="#fff3e6" stroke="#f0b36a" stroke-width="1.6" filter="url(#sh)"/>
+<text x="125.0" y="716.1" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Status: Pending</text>
+<text x="125.0" y="732.6" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Reason: Unschedulable</text>
+<text x="125.0" y="749.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Insufficient resources</text>
+<text x="125.0" y="765.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Node selector mismatch</text>
+<text x="125.0" y="782.3" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Taints/tolerations</text>
+<rect x="255.0" y="832.0" width="230" height="46" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="850.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Pod assigned to Node</text>
+<text x="370.0" y="867.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Update: spec.nodeName</text>
+<rect x="255.0" y="912.0" width="230" height="46" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="930.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Kubelet on target node</text>
+<text x="370.0" y="947.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">receives Pod spec</text>
+<rect x="245.0" y="994.0" width="250" height="62" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1012.6" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Mount volumes</text>
+<text x="370.0" y="1029.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Create Pod sandbox</text>
+<text x="370.0" y="1045.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Setup networking</text>
+<polygon points="370,1095.0 485.0,1140 370,1185.0 255.0,1140" fill="#f4f0ff" stroke="#a58be6" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1135.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Init containers</text>
+<text x="370.0" y="1152.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">defined?</text>
+<rect x="600.0" y="1109.0" width="230" height="62" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="715.0" y="1127.6" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">For each init container, in order:</text>
+<text x="715.0" y="1144.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">pull its image, then run it</text>
+<text x="715.0" y="1160.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">(must exit 0)</text>
+<polygon points="715,1207.0 835.0,1255 715,1303.0 595.0,1255" fill="#f4f0ff" stroke="#a58be6" stroke-width="1.6" filter="url(#sh)"/>
+<text x="715.0" y="1250.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Image pulled and</text>
+<text x="715.0" y="1267.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">init container exited 0?</text>
+<rect x="590.0" y="1334.0" width="250" height="92" rx="10" fill="#fff0ee" stroke="#ee9a94" stroke-width="1.6" filter="url(#sh)"/>
+<text x="715.0" y="1359.4" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Status: Init:ErrImagePull or</text>
+<text x="715.0" y="1375.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Init:ImagePullBackOff (bad image),</text>
+<text x="715.0" y="1392.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">or Init:Error / Init:CrashLoopBackOff</text>
+<text x="715.0" y="1409.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">(Never: Pod goes to Failed)</text>
+<polygon points="370,1275.0 485.0,1320 370,1365.0 255.0,1320" fill="#f4f0ff" stroke="#a58be6" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1315.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Pull main</text>
+<text x="370.0" y="1332.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">container images</text>
+<rect x="20.0" y="1262.0" width="210" height="116" rx="10" fill="#fff0ee" stroke="#ee9a94" stroke-width="1.6" filter="url(#sh)"/>
+<text x="125.0" y="1282.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Status: Pending</text>
+<text x="125.0" y="1299.4" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Reason: ErrImagePull,</text>
+<text x="125.0" y="1315.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">then ImagePullBackOff</text>
+<text x="125.0" y="1332.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Image doesn't exist</text>
+<text x="125.0" y="1349.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Registry auth failed</text>
+<text x="125.0" y="1365.6" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Network issues</text>
+<rect x="255.0" y="1422.0" width="230" height="46" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1449.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Create main containers</text>
+<rect x="255.0" y="1508.0" width="230" height="34" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1529.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Start all containers in Pod</text>
+<polygon points="370,1575.0 485.0,1620 370,1665.0 255.0,1620" fill="#f4f0ff" stroke="#a58be6" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1615.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Startup probe</text>
+<text x="370.0" y="1632.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">defined?</text>
+<rect x="610.0" y="1603.0" width="210" height="34" rx="10" fill="#eef5ff" stroke="#8db4ee" stroke-width="1.6" filter="url(#sh)"/>
+<text x="715.0" y="1624.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Execute startup probe</text>
+<polygon points="715,1675.0 815.0,1720 715,1765.0 615.0,1720" fill="#f4f0ff" stroke="#a58be6" stroke-width="1.6" filter="url(#sh)"/>
+<text x="715.0" y="1715.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Probe</text>
+<text x="715.0" y="1732.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">passed?</text>
+<rect x="595.0" y="1804.0" width="240" height="62" rx="10" fill="#f4f5f7" stroke="#aab0ba" stroke-width="1.6" filter="url(#sh)"/>
+<text x="715.0" y="1822.6" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Container not ready</text>
+<text x="715.0" y="1839.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">If it keeps failing: restarted,</text>
+<text x="715.0" y="1855.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">then CrashLoopBackOff</text>
+<rect x="255.0" y="1797.0" width="230" height="76" rx="10" fill="#eef9f1" stroke="#7cc79a" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1814.4" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="800" fill="#1f2937" text-anchor="middle" xml:space="preserve">Status: Running</text>
+<text x="370.0" y="1830.9" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Container started</text>
+<text x="370.0" y="1847.5" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Liveness probe active</text>
+<text x="370.0" y="1864.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">- Readiness probe active</text>
+<rect x="255.0" y="1907.0" width="230" height="56" rx="10" fill="#eef9f1" stroke="#7cc79a" stroke-width="1.6" filter="url(#sh)"/>
+<text x="370.0" y="1922.6" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Pod receives traffic</text>
+<text x="370.0" y="1939.2" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">Added to Service endpoints</text>
+<text x="370.0" y="1955.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="400" fill="#1f2937" text-anchor="middle" xml:space="preserve">(once readiness passes)</text>
+<path d="M370 587 L370 612" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M370 668 L370 697" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M255 745 L230 745" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="218.0" y="721" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="235.0" y="733.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">No</text>
+<path d="M370 793 L370 832" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="383.0" y="802" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="400.0" y="814.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">Yes</text>
+<path d="M370 878 L370 912" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M370 958 L370 994" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M370 1056 L370 1095" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M485 1140 L600 1140" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="503.0" y="1116" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="520.0" y="1128.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">Yes</text>
+<path d="M715 1171 L715 1207" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M595 1255 L370 1255" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="533.0" y="1231" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="550.0" y="1243.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">Yes</text>
+<path d="M715 1303 L715 1334" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="728.0" y="1308" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="745.0" y="1320.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">No</text>
+<path d="M370 1185 L370 1275" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="383.0" y="1200" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="400.0" y="1212.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">No</text>
+<path d="M255 1320 L230 1320" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="209.4" y="1296" width="51.2" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="235.0" y="1308.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">Failed</text>
+<path d="M370 1365 L370 1422" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="377.3" y="1382" width="57.4" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="406.0" y="1394.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">Success</text>
+<path d="M370 1468 L370 1508" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M370 1542 L370 1575" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M485 1620 L610 1620" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="503.0" y="1596" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="520.0" y="1608.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">Yes</text>
+<path d="M715 1637 L715 1675" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M615 1720 L370 1720" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="543.0" y="1696" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="560.0" y="1708.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">Yes</text>
+<path d="M715 1765 L715 1804" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="728.0" y="1775" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="745.0" y="1787.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">No</text>
+<path d="M370 1665 L370 1797" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<rect x="383.0" y="1675" width="34.0" height="16" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+<text x="400.0" y="1687.5" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="800" fill="#374151" text-anchor="middle" xml:space="preserve">No</text>
+<path d="M370 1873 L370 1907" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" marker-end="url(#ar)"/>
+<path d="M835 1835 L865 1835 L865 1620 L820 1620" fill="none" stroke="#374151" stroke-width="1.8" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+<rect x="520" y="620.0" width="250" height="40" rx="8" fill="#f8fafc" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="530" y="636.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Pending</text>
+<text x="530" y="650.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">phase: Pending, not scheduled yet</text>
+<line x1="510" y1="640" x2="520" y2="640" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="520" y="835.0" width="250" height="40" rx="8" fill="#f8fafc" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="530" y="851.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Pending</text>
+<text x="530" y="865.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">PodScheduled = True</text>
+<line x1="510" y1="855" x2="520" y2="855" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="520" y="1005.0" width="250" height="40" rx="8" fill="#f8fafc" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="530" y="1021.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">ContainerCreating</text>
+<text x="530" y="1035.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">containers: Waiting</text>
+<line x1="510" y1="1025" x2="520" y2="1025" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="20" y="1113.0" width="225" height="54" rx="8" fill="#f8fafc" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="30" y="1129.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Init:0/1 ... Init:N/M</text>
+<text x="30" y="1143.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">Initialized = False</text>
+<text x="30" y="1157.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">init container: Running</text>
+<line x1="245" y1="1140" x2="255" y2="1140" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="20" y="1386" width="225" height="54" rx="8" fill="#eef5ff" stroke="#2b6fe0" stroke-width="1.8"/>
+<text x="30" y="1402" font-family="Helvetica, Arial, sans-serif" font-size="12.5" font-weight="800" fill="#1d4ed8" text-anchor="start">PodInitializing</text>
+<text x="30" y="1416" font-family="Helvetica, Arial, sans-serif" font-size="10.8" fill="#374151" text-anchor="start">init done; main images pulling,</text>
+<text x="30" y="1430" font-family="Helvetica, Arial, sans-serif" font-size="10.8" fill="#374151" text-anchor="start">containers starting (Initialized = True)</text>
+<line x1="245" y1="1432" x2="256" y2="1432" stroke="#2b6fe0" stroke-width="1.4" stroke-dasharray="3 3"/>
+<rect x="20" y="1498.0" width="225" height="54" rx="8" fill="#f8fafc" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="30" y="1514.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Running (0/1)</text>
+<text x="30" y="1528.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">phase: Running, Ready = False</text>
+<text x="30" y="1542.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">container: Running</text>
+<line x1="245" y1="1525" x2="255" y2="1525" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="3 3"/>
+<rect x="20" y="1808.0" width="225" height="54" rx="8" fill="#f8fafc" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="30" y="1824.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Running (1/1)</text>
+<text x="30" y="1838.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">Ready = True</text>
+<text x="30" y="1852.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#4b5563" text-anchor="start" xml:space="preserve">ContainersReady = True</text>
+<line x1="245" y1="1835" x2="255" y2="1835" stroke="#9fb3d1" stroke-width="1.2" stroke-dasharray="3 3"/>
+<text x="520" y="690.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#6b7280" text-anchor="start" xml:space="preserve">Grey dashed chips: what kubectl get pod</text>
+<text x="520" y="704.0" font-family="Helvetica, Arial, sans-serif" font-size="10.8" font-weight="400" fill="#6b7280" text-anchor="start" xml:space="preserve">STATUS and the conditions show at that step.</text>
+<text x="40" y="2000.0" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Pod and Container States Reference</text>
+<rect x="40" y="2016" width="820" height="26" rx="4" fill="#e8edf3" stroke="#d1d9e3"/>
+<text x="52" y="2033.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">kubectl STATUS</text>
+<text x="300" y="2033.0" font-family="Helvetica, Arial, sans-serif" font-size="11.5" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Meaning</text>
+<rect x="40" y="2042" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2059.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Pending</text>
+<text x="300" y="2059.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Accepted, not running yet: scheduling, image pull (phase Pending)</text>
+<rect x="40" y="2068" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2085.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">ContainerCreating</text>
+<text x="300" y="2085.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Scheduled; volumes, sandbox and network being set up (container Waiting)</text>
+<rect x="40" y="2094" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2111.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Init:N/M</text>
+<text x="300" y="2111.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">N of M init containers have finished (phase Pending)</text>
+<rect x="40" y="2120" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2137.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">PodInitializing</text>
+<text x="300" y="2137.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Init containers done; main containers are starting (phase Pending)</text>
+<rect x="40" y="2146" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2163.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Init:ErrImagePull, Init:ImagePullBackOff</text>
+<text x="300" y="2163.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">An init container image cannot be pulled</text>
+<rect x="40" y="2172" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2189.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Init:Error, Init:CrashLoopBackOff</text>
+<text x="300" y="2189.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">An init container exited non-zero or keeps failing</text>
+<rect x="40" y="2198" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2215.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">ErrImagePull, ImagePullBackOff</text>
+<text x="300" y="2215.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">A main container image cannot be pulled (phase Pending)</text>
+<rect x="40" y="2224" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2241.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Running</text>
+<text x="300" y="2241.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">At least one container is running (phase Running); READY shows ready/total</text>
+<rect x="40" y="2250" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2267.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">CrashLoopBackOff</text>
+<text x="300" y="2267.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">A container keeps crashing; restart delay doubles up to 5 min (Waiting)</text>
+<rect x="40" y="2276" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2293.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Completed</text>
+<text x="300" y="2293.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">All containers exited 0 (phase Succeeded)</text>
+<rect x="40" y="2302" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2319.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Error</text>
+<text x="300" y="2319.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">A container exited non-zero and is not restarted (phase Failed)</text>
+<rect x="40" y="2328" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2345.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">OOMKilled, Evicted</text>
+<text x="300" y="2345.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Killed for exceeding memory (Terminated reason) / evicted by the node (Failed)</text>
+<rect x="40" y="2354" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2371.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Terminating</text>
+<text x="300" y="2371.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Deletion in progress: preStop, SIGTERM, grace period (phase unchanged)</text>
+<rect x="40" y="2380" width="820" height="26" fill="#ffffff" stroke="#d9e0ea"/>
+<text x="52" y="2397.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="800" fill="#14284b" text-anchor="start" xml:space="preserve">Unknown (phase)</text>
+<text x="300" y="2397.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Node cannot be reached, state not known</text>
+<text x="40" y="2420.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Container states: Waiting (with a reason such as ContainerCreating, PodInitializing, CrashLoopBackOff), Running, Terminated (exit code and reason).</text>
+<text x="40" y="2438.0" font-family="Helvetica, Arial, sans-serif" font-size="11" font-weight="400" fill="#1f2937" text-anchor="start" xml:space="preserve">Pod conditions: PodScheduled, Initialized, ContainersReady, Ready.   Pod phases: Pending, Running, Succeeded, Failed, Unknown.</text>
+<text x="450" y="2472.0" font-family="Helvetica, Arial, sans-serif" font-size="10.5" font-weight="400" fill="#6b7280" text-anchor="middle" xml:space="preserve">Dashed line: the container is restarted per restartPolicy and the probe starts again. Each image is pulled just before its container starts.</text>
+</g>
+</svg>

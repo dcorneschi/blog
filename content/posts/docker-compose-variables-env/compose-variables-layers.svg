@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Two layers: interpolation, then the container environment</title>
+  <desc id="d">The shell environment and the project .env file fill the ${...} placeholders in compose.yaml; the shell wins over .env, and docker compose config shows the result. The container environment is then built from image ENV, env_file, environment and docker compose run -e, highest last. Build args exist only during the build unless promoted to ENV. The project .env file is never passed into a container by itself.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; white-space: pre; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; white-space: pre; }
+      .d   { font-size: 11px; fill: #495057; }
+      .cb  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .bad { font-size: 11px; font-weight: 700; fill: #b02a37; }
+      .num { font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .no  { stroke: #e35d6a; stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .t   { fill: #212529; }
+      .tx  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #e9ecef; }
+    </style>
+  </defs>
+  <rect width="920" height="520" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Two layers: interpolation, then the container environment</text>
+  <text class="sub" x="20" y="44">Where TZ comes from, and why the project .env alone never reaches the container</text>
+
+  <!-- column headers -->
+  <text class="tb" x="20" y="76">where values come from</text>
+  <text class="tb" x="310" y="76">1. interpolation: ${...} in the file</text>
+  <text class="tb" x="660" y="76">2. container environment</text>
+
+  <!-- sources -->
+  <rect class="rw" x="20" y="96" width="230" height="56" rx="4"/>
+  <text class="cb" x="32" y="116">shell environment</text>
+  <text class="m" x="32" y="138">export TZ=America/New_York</text>
+  <rect class="r" x="20" y="176" width="230" height="56" rx="4"/>
+  <text class="cb" x="32" y="196">.env  (project directory)</text>
+  <text class="m" x="32" y="218">TZ=Europe/London</text>
+  <text class="d" x="20" y="168">read automatically; the shell wins over .env</text>
+
+  <path class="lne" d="M250,124 H306"/>
+  <path class="lne" d="M250,204 H306"/>
+
+  <!-- compose.yaml -->
+  <rect class="s" x="310" y="88" width="300" height="172" rx="4"/>
+  <text class="m" x="324" y="108">services:</text>
+  <text class="m" x="324" y="126">  app:</text>
+  <text class="m" x="324" y="144">    image: nginx:${IMAGE_TAG}</text>
+  <text class="m" x="324" y="162">    environment:</text>
+  <text class="mb" x="324" y="180">      - TZ=${TZ:-UTC}</text>
+  <text class="m" x="324" y="198">    env_file: [app.env]</text>
+  <text class="m" x="324" y="216">    build:</text>
+  <text class="m" x="324" y="234">      args: [TIMEZONE=${TZ:-UTC}]</text>
+  <text class="d" x="324" y="252">compose.yaml</text>
+  <text class="d" x="310" y="280">docker compose config shows the result</text>
+
+  <!-- container layers, highest first -->
+  <text class="d" x="660" y="90">highest wins</text>
+  <rect class="rw" x="660" y="98" width="240" height="38" rx="4"/>
+  <circle cx="676" cy="117" r="9" fill="#8a6fc7"/><text class="num" x="676" y="121">1</text>
+  <text class="m" x="692" y="121">docker compose run -e TZ=…</text>
+  <rect class="g" x="660" y="142" width="240" height="38" rx="4"/>
+  <circle cx="676" cy="161" r="9" fill="#479f76"/><text class="num" x="676" y="165">2</text>
+  <text class="m" x="692" y="165">environment:</text>
+  <rect class="g" x="660" y="186" width="240" height="38" rx="4"/>
+  <circle cx="676" cy="205" r="9" fill="#479f76"/><text class="num" x="676" y="209">3</text>
+  <text class="m" x="692" y="209">env_file:</text>
+  <text class="d" x="770" y="209">later files win</text>
+  <rect class="n" x="660" y="230" width="240" height="38" rx="4"/>
+  <circle cx="676" cy="249" r="9" fill="#868e96"/><text class="num" x="676" y="253">4</text>
+  <text class="m" x="692" y="253">image ENV</text>
+  <text class="d" x="760" y="253">Dockerfile defaults</text>
+
+  <path class="lne" d="M610,176 H632 V161 H656"/>
+  <path class="lne" d="M610,194 H640 V205 H656"/>
+
+  <!-- build args -->
+  <path class="lne" d="M580,260 V296"/>
+  <rect class="w" x="310" y="300" width="300" height="56" rx="4"/>
+  <text class="cb" x="324" y="320">build args</text>
+  <text class="d" x="324" y="340">only while the image builds; not in the container</text>
+  <text class="d" x="310" y="374">unless the Dockerfile promotes it: ENV TZ=$TIMEZONE</text>
+  <path class="lne" d="M610,328 H644 V249 H656"/>
+
+  <!-- container -->
+  <path class="lne" d="M780,268 V314"/>
+  <rect class="t" x="660" y="318" width="240" height="70" rx="8"/>
+  <text class="tx" x="674" y="342">$ docker compose exec app env</text>
+  <text class="tx" x="674" y="360">TZ=Europe/London</text>
+  <text class="tx" x="674" y="378">…</text>
+
+  <!-- .env does not go straight in -->
+  <path class="no" d="M135,232 V420 H780 V392"/>
+  <circle cx="470" cy="420" r="11" fill="#ffffff" stroke="#e35d6a" stroke-width="1.6"/>
+  <path d="M464,414 L476,426 M476,414 L464,426" stroke="#e35d6a" stroke-width="2" stroke-linecap="round"/>
+  <text class="bad" x="470" y="446" text-anchor="middle">.env is not passed into containers: only what environment or env_file names gets in</text>
+
+  <text class="d" x="20" y="482">Interpolation runs first and only rewrites the Compose file. A key listed without a value (- TZ) and build args read the shell and .env too.</text>
+  <text class="d" x="20" y="498">Without the TZ=${TZ:-UTC} line, a service gets no TZ even though .env defines it.</text>
+</svg>

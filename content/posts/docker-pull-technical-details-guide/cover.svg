@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How docker pull Works</title>
+  <desc id="d">The Docker whale above the title How docker pull Works and the subtitle From registry to running layers, with three steps: ask the registry for the digest, download three layers at a time, and unpack the layers in order.</desc>
+  <defs>
+    <style>
+      .bg   { fill: #f8f9fa; }
+      .wh   { fill: #2496ed; }
+      .box  { fill: #2496ed; stroke: #f8f9fa; stroke-width: 6; }
+      .h    { font-size: 190px; font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s    { font-size: 84px; fill: #495057; }
+      .card { fill: #ffffff; stroke: #dee2e6; stroke-width: 4; }
+      .ct   { font-size: 64px; font-weight: 700; fill: #212529; }
+      .cs   { font-size: 44px; fill: #868e96; }
+      .num  { font-size: 52px; font-weight: 700; fill: #ffffff; }
+      .dot  { fill: #2496ed; }
+      .on   { fill: #2496ed; }
+      .off  { fill: #dee2e6; }
+      .reg  { fill: #8250df; }
+      .lay  { fill: #2496ed; }
+      .arr  { stroke: #adb5bd; stroke-width: 12; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .mono { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 40px; fill: #495057; }
+      @media (prefers-color-scheme: dark) {
+        .bg   { fill: #161b22; }
+        .box  { stroke: #161b22; }
+        .h    { fill: #f0f6fc; }
+        .s    { fill: #c9d1d9; }
+        .card { fill: #0d1117; stroke: #30363d; }
+        .ct   { fill: #f0f6fc; }
+        .cs   { fill: #8b949e; }
+        .off  { fill: #30363d; }
+        .arr  { stroke: #484f58; }
+        .mono { fill: #c9d1d9; }
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- mark: the Docker whale with its containers -->
+  <g>
+    <rect class="box" x="1164" y="290" width="64" height="64" rx="6"/>
+    <rect class="box" x="1234" y="290" width="64" height="64" rx="6"/>
+    <rect class="box" x="1304" y="290" width="64" height="64" rx="6"/>
+    <rect class="box" x="1374" y="290" width="64" height="64" rx="6"/>
+    <rect class="box" x="1444" y="290" width="64" height="64" rx="6"/>
+    <rect class="box" x="1234" y="220" width="64" height="64" rx="6"/>
+    <rect class="box" x="1304" y="220" width="64" height="64" rx="6"/>
+    <rect class="box" x="1374" y="220" width="64" height="64" rx="6"/>
+    <rect class="box" x="1304" y="150" width="64" height="64" rx="6"/>
+    <path class="wh" d="M1126,354 H1566 C1590,326 1628,316 1668,324 C1658,354 1638,366 1614,372 C1590,452 1500,510 1354,510 C1206,510 1124,444 1126,354 Z"/>
+    <circle cx="1226" cy="404" r="12" fill="#ffffff"/>
+  </g>
+
+  <text class="h" x="1376" y="690" text-anchor="middle">How docker pull Works</text>
+  <text class="s" x="1376" y="800" text-anchor="middle">From registry to running layers</text>
+
+  <rect class="card" x="136" y="900" width="720" height="440" rx="28"/>
+  <circle class="dot" cx="206" cy="970" r="40"/>
+  <text class="num" x="206" y="988" text-anchor="middle">1</text>
+  <text class="ct" x="496" y="1230" text-anchor="middle">Ask the registry</text>
+  <text class="cs" x="496" y="1290" text-anchor="middle">HEAD manifest → digest</text>
+  <path class="arr" d="M886,1120 H986 M956,1090 L986,1120 L956,1150"/>
+  <rect class="card" x="1016" y="900" width="720" height="440" rx="28"/>
+  <circle class="dot" cx="1086" cy="970" r="40"/>
+  <text class="num" x="1086" y="988" text-anchor="middle">2</text>
+  <text class="ct" x="1376" y="1230" text-anchor="middle">Download 3 at a time</text>
+  <text class="cs" x="1376" y="1290" text-anchor="middle">the other layers wait</text>
+  <path class="arr" d="M1766,1120 H1866 M1836,1090 L1866,1120 L1836,1150"/>
+  <rect class="card" x="1896" y="900" width="720" height="440" rx="28"/>
+  <circle class="dot" cx="1966" cy="970" r="40"/>
+  <text class="num" x="1966" y="988" text-anchor="middle">3</text>
+  <text class="ct" x="2256" y="1230" text-anchor="middle">Unpack in order</text>
+  <text class="cs" x="2256" y="1290" text-anchor="middle">layer 1 first, then 2, …</text>
+  <g>
+    <ellipse class="reg" cx="376" cy="1010" rx="70" ry="22"/>
+    <rect class="reg" x="306" y="1010" width="140" height="110"/>
+    <ellipse class="reg" cx="376" cy="1120" rx="70" ry="22"/>
+    <path class="arr" d="M466,1065 H516 M496,1045 L516,1065 L496,1085"/>
+    <text class="mono" x="536" y="1078">sha256:…</text>
+  </g>
+  <rect class="on" x="1176" y="1000" width="56" height="56" rx="8"/>
+  <rect class="on" x="1246" y="1000" width="56" height="56" rx="8"/>
+  <rect class="on" x="1316" y="1000" width="56" height="56" rx="8"/>
+  <rect class="off" x="1386" y="1000" width="56" height="56" rx="8"/>
+  <rect class="off" x="1456" y="1000" width="56" height="56" rx="8"/>
+  <rect class="off" x="1526" y="1000" width="56" height="56" rx="8"/>
+  <text class="cs" x="1376" y="1120" text-anchor="middle" style="font-size:38px">3 downloading · 3 waiting</text>
+  <rect class="lay" x="2106" y="1130" width="300" height="22" rx="6" opacity="1.00"/>
+  <rect class="lay" x="2110" y="1100" width="292" height="22" rx="6" opacity="0.88"/>
+  <rect class="lay" x="2114" y="1070" width="284" height="22" rx="6" opacity="0.76"/>
+  <rect class="lay" x="2118" y="1040" width="276" height="22" rx="6" opacity="0.64"/>
+  <rect class="lay" x="2122" y="1010" width="268" height="22" rx="6" opacity="0.52"/>
+  <rect class="lay" x="2126" y="980" width="260" height="22" rx="6" opacity="0.40"/>
+</svg>

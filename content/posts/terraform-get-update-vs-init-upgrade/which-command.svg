@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which terraform command do I need?</title>
+  <desc id="d">Decision tree. Only modules need refreshing (a newer registry version within its constraint, or new commits on a git branch)? Use terraform get -update; providers and the lock file stay untouched. Otherwise, do providers need updating (a newer version within the constraint, or you changed a constraint)? Use terraform init -upgrade, which also refreshes modules and rewrites the lock file. Otherwise, did the backend configuration change (bucket, key or -backend-config values)? Use terraform init -migrate-state to copy the existing state to the new location, or terraform init -reconfigure only when the new location already has the state. Otherwise (fresh clone, CI, an added provider or module, a changed module source or version) use plain terraform init, which installs exactly what is locked.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .q    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 12px; fill: #495057; }
+      .cmd  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 14px; font-weight: 700; fill: #212529; }
+      .yes  { font-size: 12px; font-weight: 700; fill: #146c43; }
+      .no   { font-size: 12px; font-weight: 700; fill: #6c757d; }
+      .lne  { stroke: #495057; stroke-width: 1.8; fill: none; marker-end: url(#a); }
+    </style>
+  </defs>
+
+  <rect width="900" height="640" fill="#ffffff"/>
+
+  <!-- start -->
+  <rect class="box" x="40" y="16" width="400" height="40" rx="20" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="q" x="240" y="41" style="text-anchor:middle">Need to refresh dependencies?</text>
+  <path class="lne" d="M240,56 V78"/>
+
+  <!-- Q1 modules -->
+  <rect class="box" x="40" y="80" width="400" height="64" rx="8" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="q" x="60" y="104">Only modules need refreshing?</text>
+  <text class="d" x="60" y="124">a newer registry version within its constraint,</text>
+  <text class="d" x="60" y="138">or new commits on a git branch</text>
+  <path class="lne" d="M440,112 H516"/>
+  <text class="yes" x="458" y="104">yes</text>
+  <rect class="box" x="518" y="86" width="350" height="52" rx="8" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="cmd" x="536" y="108">terraform get -update</text>
+  <text class="d" x="536" y="127">providers and the lock file stay untouched</text>
+  <path class="lne" d="M240,144 V184"/>
+  <text class="no" x="250" y="168">no</text>
+
+  <!-- Q2 providers -->
+  <rect class="box" x="40" y="186" width="400" height="64" rx="8" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="q" x="60" y="210">Providers need updating?</text>
+  <text class="d" x="60" y="230">a newer version within the constraint,</text>
+  <text class="d" x="60" y="244">or you changed a version constraint</text>
+  <path class="lne" d="M440,218 H516"/>
+  <text class="yes" x="458" y="210">yes</text>
+  <rect class="box" x="518" y="192" width="350" height="52" rx="8" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="cmd" x="536" y="214">terraform init -upgrade</text>
+  <text class="d" x="536" y="233">also refreshes modules, rewrites the lock file</text>
+  <path class="lne" d="M240,250 V290"/>
+  <text class="no" x="250" y="274">no</text>
+
+  <!-- Q3 backend -->
+  <rect class="box" x="40" y="292" width="400" height="64" rx="8" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="q" x="60" y="316">Backend configuration changed?</text>
+  <text class="d" x="60" y="336">bucket, key or -backend-config values</text>
+  <path class="lne" d="M440,324 H470 V316 H516"/>
+  <path class="lne" d="M470,324 V396 H516"/>
+  <text class="yes" x="446" y="316">yes</text>
+  <rect class="box" x="518" y="290" width="350" height="52" rx="8" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="cmd" x="536" y="312">terraform init -migrate-state</text>
+  <text class="d" x="536" y="331">copies the existing state to the new location</text>
+  <rect class="box" x="518" y="370" width="350" height="52" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="cmd" x="536" y="392">terraform init -reconfigure</text>
+  <text class="d" x="536" y="411">only if the new location already has the state</text>
+  <path class="lne" d="M240,356 V456"/>
+  <text class="no" x="250" y="410">no</text>
+
+  <!-- Q4 everything else -->
+  <rect class="box" x="40" y="458" width="400" height="80" rx="8" fill="#fff8e1" stroke="#e0c46c"/>
+  <text class="q" x="60" y="482">None of these?</text>
+  <text class="d" x="60" y="502">fresh clone, CI, an added provider or module,</text>
+  <text class="d" x="60" y="516">a changed module source or version</text>
+  <path class="lne" d="M440,498 H516"/>
+  <rect class="box" x="518" y="472" width="350" height="52" rx="8" fill="#e8f5ee" stroke="#75b798"/>
+  <text class="cmd" x="536" y="494">terraform init</text>
+  <text class="d" x="536" y="513">installs exactly what the lock file records</text>
+
+  <text class="d" x="40" y="580" style="fill:#212529">After any of them: run terraform plan, and commit .terraform.lock.hcl if it changed.</text>
+  <text class="d" x="40" y="600">-reconfigure on an empty location makes plan want to create everything again; check for "No changes".</text>
+</svg>

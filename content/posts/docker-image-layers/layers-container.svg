@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">A container is one more layer on top</title>
+  <desc id="d">Container c1 stacks a writable upperdir and an init layer on top of the six read-only image layers. Its new file and a whiteout for the deleted random.bin live in the upperdir; the merged view shows new.txt and hides random.bin, which still occupies its image layer.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">A container is one more layer on top</text>
+  <text class="sub" x="20" y="48">Container c1 from demo:1 after writing /app/new.txt and deleting /app/random.bin (classic overlay2 store)</text>
+  <rect class="rw" x="20" y="70" width="470" height="36" rx="4"/>
+  <text class="tb" x="32" y="93">upperdir (read-write)</text>
+  <text class="d" x="480" y="93" text-anchor="end">new.txt (8 B) · random.bin as c 0,0 (whiteout)</text>
+  <rect class="n" x="20" y="110" width="470" height="36" rx="4"/>
+  <text class="c" x="32" y="133">…-init: hostname, hosts, resolv.conf</text>
+  <text class="d" x="480" y="133" text-anchor="end">created by Docker for every container</text>
+  <rect class="r" x="20" y="150" width="470" height="36" rx="4"/>
+  <text class="c" x="32" y="173">RUN chmod +x /app/app.sh</text>
+  <text class="d" x="480" y="173" text-anchor="end">read-only</text>
+  <rect class="r" x="20" y="190" width="470" height="36" rx="4"/>
+  <text class="c" x="32" y="213">COPY app.sh</text>
+  <text class="d" x="480" y="213" text-anchor="end">read-only</text>
+  <rect class="r" x="20" y="230" width="470" height="36" rx="4"/>
+  <text class="c" x="32" y="253">COPY data.bin</text>
+  <text class="d" x="480" y="253" text-anchor="end">read-only</text>
+  <rect class="r" x="20" y="270" width="470" height="36" rx="4"/>
+  <text class="c" x="32" y="293">RUN … &gt; /app/random.bin</text>
+  <text class="d" x="480" y="293" text-anchor="end">read-only, still holds the 21 MB</text>
+  <rect class="r" x="20" y="310" width="470" height="36" rx="4"/>
+  <text class="c" x="32" y="333">WORKDIR /app</text>
+  <text class="d" x="480" y="333" text-anchor="end">read-only</text>
+  <rect class="r" x="20" y="350" width="470" height="36" rx="4"/>
+  <text class="c" x="32" y="373">Alpine 3.20</text>
+  <text class="d" x="480" y="373" text-anchor="end">read-only</text>
+  <text class="d" x="510" y="92">UpperDir</text>
+  <text class="d" x="510" y="132">LowerDir: 7 entries</text>
+  <text class="d" x="510" y="148">(6 image layers + init)</text>
+  <path class="dash" d="M500,112 V384"/>
+  <rect class="g" x="560" y="160" width="320" height="96" rx="6"/>
+  <text class="tb" x="576" y="184">merged: what the container sees</text>
+  <text class="m" x="576" y="206">/app/new.txt</text>
+  <text class="m" x="576" y="224">/app/data.bin  /app/app.sh</text>
+  <text class="d" x="576" y="244">random.bin is gone</text>
+  <path class="lne" d="M492,220 H556"/>
+  <text class="m" x="20" y="410">$ docker diff c1</text>
+  <text class="m" x="20" y="428">C /app   A /app/new.txt   D /app/random.bin</text>
+  <text class="d" x="20" y="452">docker ps -s: size=8B (virtual 40.3MB). Deleting a file from an image layer hides it but frees nothing.</text>
+</svg>

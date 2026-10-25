@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 790" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">IAM policy evaluation</title>
+  <desc id="d">How AWS decides a request within one account. 1 an explicit Deny in any policy denies. 2 if the resource is in a member account and a resource control policy does not allow, deny. 3 if the principal is in a member account and a service control policy does not allow, deny. 4 if a resource-based policy allows, allow. 5 if no identity-based policy allows, deny. 6 if a permission boundary is set and does not allow, deny. 7 if a session policy is set and does not allow, deny. Otherwise allow. A request that nothing allows is an implicit deny. Cross-account requests need an Allow on both sides.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .n    { font-size: 15px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .yn   { font-size: 11px; font-weight: 700; fill: #495057; }
+      .out  { font-size: 13px; font-weight: 700; text-anchor: middle; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q    { fill: #e7f1ff; stroke: #6ea8fe; }
+      .org  { fill: #f3effc; stroke: #a98eda; }
+      .deny { fill: #f8d7da; stroke: #ea868f; }
+      .allw { fill: #d1e7dd; stroke: #75b798; }
+    </style>
+  </defs>
+
+  <rect width="900" height="790" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How IAM decides a request (within one account)</text>
+  <rect class="box q" x="20" y="40" width="14" height="12" rx="2"/>
+  <text class="d" x="40" y="50">policies in the account</text>
+  <rect class="box org" x="170" y="40" width="14" height="12" rx="2"/>
+  <text class="d" x="190" y="50">AWS Organizations (member accounts only)</text>
+
+  <!-- decision boxes: x 20, w 540, h 58, step 80; outcome boxes at x 650 -->
+  <!-- 1 explicit deny -->
+  <rect class="box q" x="20" y="70" width="540" height="58" rx="8"/>
+  <circle cx="44" cy="99" r="13" fill="#3d7fe0"/><text class="n" x="44" y="104">1</text>
+  <text class="tb" x="68" y="94">Explicit Deny in any applicable policy?</text>
+  <text class="d" x="68" y="112">identity, resource, boundary, session, SCP or RCP: a Deny always wins</text>
+  <path class="lne" d="M560,99 H646"/><text class="yn" x="590" y="93">Yes</text>
+  <rect class="box deny" x="650" y="80" width="140" height="38" rx="19"/><text class="out" x="720" y="104" fill="#b02a37">Deny</text>
+  <path class="lne" d="M290,128 V146"/><text class="yn" x="298" y="141">No</text>
+
+  <!-- 2 RCP -->
+  <rect class="box org" x="20" y="150" width="540" height="58" rx="8"/>
+  <circle cx="44" cy="179" r="13" fill="#8a63d2"/><text class="n" x="44" y="184">2</text>
+  <text class="tb" x="68" y="174">Resource control policies (RCPs) allow it?</text>
+  <text class="d" x="68" y="192">checked when the resource is in a member account</text>
+  <path class="lne" d="M560,179 H646"/><text class="yn" x="590" y="173">No</text>
+  <rect class="box deny" x="650" y="160" width="140" height="38" rx="19"/><text class="out" x="720" y="184" fill="#b02a37">Deny</text>
+  <path class="lne" d="M290,208 V226"/><text class="yn" x="298" y="221">Yes</text>
+
+  <!-- 3 SCP -->
+  <rect class="box org" x="20" y="230" width="540" height="58" rx="8"/>
+  <circle cx="44" cy="259" r="13" fill="#8a63d2"/><text class="n" x="44" y="264">3</text>
+  <text class="tb" x="68" y="254">Service control policies (SCPs) allow it?</text>
+  <text class="d" x="68" y="272">checked when the principal is in a member account (not the management account)</text>
+  <path class="lne" d="M560,259 H646"/><text class="yn" x="590" y="253">No</text>
+  <rect class="box deny" x="650" y="240" width="140" height="38" rx="19"/><text class="out" x="720" y="264" fill="#b02a37">Deny</text>
+  <path class="lne" d="M290,288 V306"/><text class="yn" x="298" y="301">Yes</text>
+
+  <!-- 4 resource-based -->
+  <rect class="box q" x="20" y="310" width="540" height="58" rx="8"/>
+  <circle cx="44" cy="339" r="13" fill="#3d7fe0"/><text class="n" x="44" y="344">4</text>
+  <text class="tb" x="68" y="334">Resource-based policy allows it?</text>
+  <text class="d" x="68" y="352">bucket policy, KMS key policy, SQS queue policy, role trust policy …</text>
+  <path class="lne" d="M560,339 H646"/><text class="yn" x="590" y="333">Yes</text>
+  <rect class="box allw" x="650" y="320" width="140" height="38" rx="19"/><text class="out" x="720" y="344" fill="#146c43">Allow *</text>
+  <path class="lne" d="M290,368 V386"/><text class="yn" x="298" y="381">No / none</text>
+
+  <!-- 5 identity-based -->
+  <rect class="box q" x="20" y="390" width="540" height="58" rx="8"/>
+  <circle cx="44" cy="419" r="13" fill="#3d7fe0"/><text class="n" x="44" y="424">5</text>
+  <text class="tb" x="68" y="414">Identity-based policy allows it?</text>
+  <text class="d" x="68" y="432">managed and inline policies of the user, its groups, or the role</text>
+  <path class="lne" d="M560,419 H646"/><text class="yn" x="590" y="413">No</text>
+  <rect class="box deny" x="650" y="400" width="140" height="38" rx="19"/><text class="out" x="720" y="424" fill="#b02a37">Implicit deny</text>
+  <path class="lne" d="M290,448 V466"/><text class="yn" x="298" y="461">Yes</text>
+
+  <!-- 6 boundary -->
+  <rect class="box q" x="20" y="470" width="540" height="58" rx="8"/>
+  <circle cx="44" cy="499" r="13" fill="#3d7fe0"/><text class="n" x="44" y="504">6</text>
+  <text class="tb" x="68" y="494">Permission boundary allows it?</text>
+  <text class="d" x="68" y="512">only if a boundary is set on the user or role</text>
+  <path class="lne" d="M560,499 H646"/><text class="yn" x="590" y="493">No</text>
+  <rect class="box deny" x="650" y="480" width="140" height="38" rx="19"/><text class="out" x="720" y="504" fill="#b02a37">Implicit deny</text>
+  <path class="lne" d="M290,528 V546"/><text class="yn" x="298" y="541">Yes / not set</text>
+
+  <!-- 7 session -->
+  <rect class="box q" x="20" y="550" width="540" height="58" rx="8"/>
+  <circle cx="44" cy="579" r="13" fill="#3d7fe0"/><text class="n" x="44" y="584">7</text>
+  <text class="tb" x="68" y="574">Session policy allows it?</text>
+  <text class="d" x="68" y="592">only for sessions created with --policy / --policy-arns (AssumeRole, federation)</text>
+  <path class="lne" d="M560,579 H646"/><text class="yn" x="590" y="573">No</text>
+  <rect class="box deny" x="650" y="560" width="140" height="38" rx="19"/><text class="out" x="720" y="584" fill="#b02a37">Implicit deny</text>
+  <path class="lne" d="M290,608 V626"/><text class="yn" x="298" y="621">Yes / not set</text>
+
+  <rect class="box allw" x="220" y="630" width="140" height="38" rx="19"/><text class="out" x="290" y="654" fill="#146c43">Allow</text>
+
+  <!-- notes -->
+  <text class="d" x="20" y="700">* A resource-based policy that names the user or the role session ARN allows on its own. If it names the role ARN,</text>
+  <text class="d" x="20" y="716">   steps 6 and 7 still apply. SCPs and RCPs still apply either way.</text>
+  <text class="d" x="20" y="740">Cross-account request: the caller's account must allow it (steps 5–7) and the other account's resource-based policy must allow it too.</text>
+  <text class="d" x="20" y="764">Find out which step blocked a call: the AccessDenied message names the policy type, e.g.</text>
+  <text class="m" x="20" y="780">… because no identity-based policy allows the s3:GetObject action</text>
+</svg>

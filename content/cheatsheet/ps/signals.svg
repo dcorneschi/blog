@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 610" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Signals and their default actions</title>
+  <desc id="d">Who sends each signal and what it does by default. Term: Ctrl-c sends SIGINT (2), kill sends SIGTERM (15), kill -9 sends SIGKILL (9), a closed terminal sends SIGHUP (1). Core: Ctrl-backslash sends SIGQUIT (3), which ends the process with a core dump. Stop: Ctrl-z sends SIGTSTP (20), kill -STOP sends SIGSTOP (19), and the process is suspended in state T. Cont: fg, bg or kill -CONT send SIGCONT (18) and the process resumes. A program can catch or ignore every signal except SIGKILL and SIGSTOP.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .hd   { font-size: 12px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; fill: #212529; }
+      .sg   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .lne  { stroke: #495057; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+      .src  { fill: #f8f9fa; stroke: #adb5bd; }
+      .sig  { fill: #ffffff; stroke: #6c757d; }
+      .hard { fill: #f8d7da; stroke: #dc3545; }
+    </style>
+  </defs>
+
+  <rect width="900" height="610" fill="#ffffff"/>
+
+  <text class="hd" x="20" y="34">WHO SENDS IT</text>
+  <text class="hd" x="300" y="34">SIGNAL · NUMBER</text>
+  <text class="hd" x="620" y="34">DEFAULT ACTION</text>
+
+  <!-- Term group -->
+  <rect class="box src" x="20" y="52" width="210" height="36" rx="5"/>
+  <text class="m" x="34" y="75">Ctrl-c</text>
+  <rect class="box sig" x="300" y="52" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="75">SIGINT · 2</text>
+
+  <rect class="box src" x="20" y="102" width="210" height="36" rx="5"/>
+  <text class="m" x="34" y="125">kill &lt;pid&gt;</text>
+  <rect class="box sig" x="300" y="102" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="125">SIGTERM · 15</text>
+
+  <rect class="box src" x="20" y="152" width="210" height="36" rx="5"/>
+  <text class="m" x="34" y="175">kill -9 &lt;pid&gt;</text>
+  <rect class="box hard" x="300" y="152" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="175">SIGKILL · 9</text>
+  <text class="d" x="420" y="175" style="fill:#b02a37;font-weight:700">can't be caught</text>
+
+  <rect class="box src" x="20" y="202" width="210" height="36" rx="5"/>
+  <text class="d" x="34" y="225" style="font-size:13px;fill:#212529">terminal closes</text>
+  <rect class="box sig" x="300" y="202" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="225">SIGHUP · 1</text>
+
+  <rect class="box" x="620" y="52" width="260" height="186" rx="8" fill="#f8d7da" stroke="#e48b93"/>
+  <text class="tb" x="636" y="80">Term</text>
+  <text class="d" x="636" y="102">the process ends</text>
+  <text class="d" x="636" y="124">SIGTERM lets it clean up first;</text>
+  <text class="d" x="636" y="140">SIGKILL ends it at once, no cleanup</text>
+  <text class="d" x="636" y="162">many daemons catch SIGHUP and</text>
+  <text class="d" x="636" y="178">reload their config instead</text>
+
+  <!-- Core -->
+  <rect class="box src" x="20" y="266" width="210" height="36" rx="5"/>
+  <text class="m" x="34" y="289">Ctrl-\</text>
+  <rect class="box sig" x="300" y="266" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="289">SIGQUIT · 3</text>
+  <rect class="box" x="620" y="258" width="260" height="52" rx="8" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="tb" x="636" y="280">Core</text>
+  <text class="d" x="636" y="298">ends and writes a core dump (if enabled)</text>
+
+  <!-- Stop -->
+  <rect class="box src" x="20" y="338" width="210" height="36" rx="5"/>
+  <text class="m" x="34" y="361">Ctrl-z</text>
+  <rect class="box sig" x="300" y="338" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="361">SIGTSTP · 20</text>
+
+  <rect class="box src" x="20" y="388" width="210" height="36" rx="5"/>
+  <text class="m" x="34" y="411">kill -STOP &lt;pid&gt;</text>
+  <rect class="box hard" x="300" y="388" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="411">SIGSTOP · 19</text>
+  <text class="d" x="420" y="411" style="fill:#b02a37;font-weight:700">can't be caught</text>
+
+  <rect class="box" x="620" y="330" width="260" height="102" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="636" y="356">Stop</text>
+  <text class="d" x="636" y="378">suspended, state T</text>
+  <text class="d" x="636" y="396">keeps its memory and open files</text>
+  <text class="d" x="636" y="414">the shell lists it in jobs</text>
+
+  <!-- Cont -->
+  <rect class="box src" x="20" y="460" width="210" height="36" rx="5"/>
+  <text class="m" x="34" y="483">fg · bg · kill -CONT</text>
+  <rect class="box sig" x="300" y="460" width="210" height="36" rx="5"/>
+  <text class="sg" x="314" y="483">SIGCONT · 18</text>
+  <rect class="box" x="620" y="452" width="260" height="52" rx="8" fill="#d1e7dd" stroke="#75b798"/>
+  <text class="tb" x="636" y="474">Cont</text>
+  <text class="d" x="636" y="492">resumes a stopped process</text>
+
+  <!-- arrows source -> signal -->
+  <path class="lne" d="M230,70 H298"/>
+  <path class="lne" d="M230,120 H298"/>
+  <path class="lne" d="M230,170 H298"/>
+  <path class="lne" d="M230,220 H298"/>
+  <path class="lne" d="M230,284 H298"/>
+  <path class="lne" d="M230,356 H298"/>
+  <path class="lne" d="M230,406 H298"/>
+  <path class="lne" d="M230,478 H298"/>
+
+  <!-- arrows signal -> action -->
+  <path class="lne" d="M510,70 H618"/>
+  <path class="lne" d="M510,120 H618"/>
+  <path class="lne" d="M510,170 H618"/>
+  <path class="lne" d="M510,220 H618"/>
+  <path class="lne" d="M510,284 H618"/>
+  <path class="lne" d="M510,356 H618"/>
+  <path class="lne" d="M510,406 H618"/>
+  <path class="lne" d="M510,478 H618"/>
+
+  <!-- notes -->
+  <rect class="box" x="20" y="524" width="860" height="72" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="d" x="34" y="546">• Default actions apply when the program has no handler: it can catch or ignore every signal except SIGKILL and SIGSTOP.</text>
+  <text class="d" x="34" y="564">• Try SIGTERM first and SIGKILL only if the process doesn't end: SIGKILL skips cleanup (temp files, locks, buffers).</text>
+  <text class="d" x="34" y="582">• Numbers are for x86 and ARM Linux;</text>
+  <text class="d" x="232" y="582" style="font-family:Menlo, Consolas, 'Liberation Mono', monospace;fill:#212529">kill -l</text>
+  <text class="d" x="282" y="582">lists them on your system.</text>
+</svg>

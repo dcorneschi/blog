@@ -1,0 +1,31 @@
+{{- /*
+  Comments under a post via giscus (GitHub Discussions of the blog repo).
+  Settings in hugo.toml [params.giscus]; nothing is rendered until repoId and categoryId are set.
+  Not shown on pages with type "page" (About) or with `comments: false` in the front matter.
+  One discussion per page, matched by its path (mapping "pathname").
+*/ -}}
+{{- with site.Params.giscus -}}
+{{- if and .repoId .categoryId (ne $.Type "page") (ne $.Params.comments false) }}
+<section class="card comments mt-3" aria-labelledby="comments-title">
+    <div class="card-body">
+        <h2 class="related-posts-title" id="comments-title">{{ .title | default "Comments" }}</h2>
+        <script src="https://giscus.app/client.js"
+            data-repo="{{ .repo }}"
+            data-repo-id="{{ .repoId }}"
+            data-category="{{ .category }}"
+            data-category-id="{{ .categoryId }}"
+            data-mapping="{{ .mapping | default "pathname" }}"
+            data-strict="1"
+            data-reactions-enabled="{{ cond (eq .reactions false) "0" "1" }}"
+            data-emit-metadata="0"
+            data-input-position="{{ .inputPosition | default "bottom" }}"
+            data-theme="{{ .theme | default "light" }}"
+            data-lang="{{ .lang | default "en" }}"
+            data-loading="lazy"
+            crossorigin="anonymous"
+            async>
+        </script>
+    </div>
+</section>
+{{- end }}
+{{- end -}}

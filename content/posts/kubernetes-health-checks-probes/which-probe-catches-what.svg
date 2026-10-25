@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which mechanism handles which problem</title>
+  <desc id="d">Rows are problems, columns are restartPolicy without probes, startupProbe, livenessProbe and readinessProbe. Process crash: restartPolicy restarts it, no probe needed; readiness drops the pod while it is down. Slow startup: the startup probe gives it time and readiness keeps traffic away; liveness without a startup probe may kill it before it is up. Hung but alive: restartPolicy sees nothing; liveness restarts it and readiness takes it out of traffic. Dependency down: readiness takes the pod out of traffic; liveness must not check the dependency, or every pod restarts in a loop and nothing improves. Overloaded for a moment: readiness takes it out until it recovers; a strict liveness probe restarts busy pods and makes the overload worse.</desc>
+  <defs>
+    <style>
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .col  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .cs   { font-size: 10.5px; fill: #6c757d; text-anchor: middle; }
+      .row  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .rs   { font-size: 10.5px; fill: #6c757d; }
+      .c    { font-size: 11px; fill: #212529; text-anchor: middle; }
+      .good { fill: #d1e7dd; stroke: #75b798; stroke-width: 1.2; }
+      .bad  { fill: #f8d7da; stroke: #e48b93; stroke-width: 1.2; }
+      .na   { fill: #f8f9fa; stroke: #dee2e6; stroke-width: 1.2; }
+      .help { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 1.2; }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which mechanism handles which problem</text>
+  <rect x="440" y="16" width="14" height="12" rx="2" class="good"/><text class="rs" x="460" y="26">the right tool</text>
+  <rect x="540" y="16" width="14" height="12" rx="2" class="help"/><text class="rs" x="560" y="26">helps</text>
+  <rect x="610" y="16" width="14" height="12" rx="2" class="bad"/><text class="rs" x="630" y="26">trap: makes it worse</text>
+  <rect x="760" y="16" width="14" height="12" rx="2" class="na"/><text class="rs" x="780" y="26">not involved</text>
+
+  <!-- column headers: x centers 312, 462, 612, 782 ; widths 140,140,140,180 -->
+  <text class="col" x="312" y="62">restartPolicy</text><text class="cs" x="312" y="78">no probe at all</text>
+  <text class="col" x="462" y="62">startupProbe</text><text class="cs" x="462" y="78">during startup</text>
+  <text class="col" x="612" y="62">livenessProbe</text><text class="cs" x="612" y="78">restarts</text>
+  <text class="col" x="782" y="62">readinessProbe</text><text class="cs" x="782" y="78">moves traffic</text>
+
+  <!-- row 1: crash -->
+  <text class="row" x="20" y="116">Process crashes</text><text class="rs" x="20" y="132">PID 1 exits</text>
+  <rect x="242" y="94" width="140" height="56" rx="6" class="good"/><text class="c" x="312" y="118">✓ restarts it</text><text class="c" x="312" y="134">at once</text>
+  <rect x="392" y="94" width="140" height="56" rx="6" class="na"/><text class="c" x="462" y="126">—</text>
+  <rect x="542" y="94" width="140" height="56" rx="6" class="na"/><text class="c" x="612" y="118">— not needed</text><text class="c" x="612" y="134">for a crash</text>
+  <rect x="692" y="94" width="180" height="56" rx="6" class="help"/><text class="c" x="782" y="118">not ready while down</text><text class="c" x="782" y="134">(no running container)</text>
+
+  <!-- row 2: slow startup -->
+  <text class="row" x="20" y="186">Slow startup</text><text class="rs" x="20" y="202">loads data, warms caches</text>
+  <rect x="242" y="164" width="140" height="56" rx="6" class="na"/><text class="c" x="312" y="196">—</text>
+  <rect x="392" y="164" width="140" height="56" rx="6" class="good"/><text class="c" x="462" y="188">✓ gives it time</text><text class="c" x="462" y="204">period × threshold</text>
+  <rect x="542" y="164" width="140" height="56" rx="6" class="bad"/><text class="c" x="612" y="188">✗ without a startup</text><text class="c" x="612" y="204">probe: killed early</text>
+  <rect x="692" y="164" width="180" height="56" rx="6" class="good"/><text class="c" x="782" y="188">✓ no traffic until</text><text class="c" x="782" y="204">the app answers</text>
+
+  <!-- row 3: hung -->
+  <text class="row" x="20" y="256">Hung, still alive</text><text class="rs" x="20" y="272">deadlock, blocked loop</text>
+  <rect x="242" y="234" width="140" height="56" rx="6" class="bad"/><text class="c" x="312" y="258">✗ sees nothing:</text><text class="c" x="312" y="274">PID 1 is alive</text>
+  <rect x="392" y="234" width="140" height="56" rx="6" class="na"/><text class="c" x="462" y="266">—</text>
+  <rect x="542" y="234" width="140" height="56" rx="6" class="good"/><text class="c" x="612" y="258">✓ restarts it</text><text class="c" x="612" y="274">the only fix</text>
+  <rect x="692" y="234" width="180" height="56" rx="6" class="help"/><text class="c" x="782" y="258">takes it out of traffic</text><text class="c" x="782" y="274">until the restart</text>
+
+  <!-- row 4: dependency down -->
+  <text class="row" x="20" y="326">Dependency down</text><text class="rs" x="20" y="342">database, Redis, upstream API</text>
+  <rect x="242" y="304" width="140" height="56" rx="6" class="na"/><text class="c" x="312" y="336">—</text>
+  <rect x="392" y="304" width="140" height="56" rx="6" class="na"/><text class="c" x="462" y="336">—</text>
+  <rect x="542" y="304" width="140" height="56" rx="6" class="bad"/><text class="c" x="612" y="328">✗ if it checks the</text><text class="c" x="612" y="344">dependency: restart loop</text>
+  <rect x="692" y="304" width="180" height="56" rx="6" class="good"/><text class="c" x="782" y="328">✓ out of rotation,</text><text class="c" x="782" y="344">back when it recovers</text>
+
+  <!-- row 5: overloaded -->
+  <text class="row" x="20" y="396">Briefly overloaded</text><text class="rs" x="20" y="412">slow answers, timeouts</text>
+  <rect x="242" y="374" width="140" height="56" rx="6" class="na"/><text class="c" x="312" y="406">—</text>
+  <rect x="392" y="374" width="140" height="56" rx="6" class="na"/><text class="c" x="462" y="406">—</text>
+  <rect x="542" y="374" width="140" height="56" rx="6" class="bad"/><text class="c" x="612" y="398">✗ strict liveness</text><text class="c" x="612" y="414">restarts busy pods</text>
+  <rect x="692" y="374" width="180" height="56" rx="6" class="good"/><text class="c" x="782" y="398">✓ sheds load,</text><text class="c" x="782" y="414">rejoins on recovery</text>
+
+  <!-- rules -->
+  <rect x="20" y="450" width="860" height="94" rx="8" style="fill:#f8f9fa;stroke:#adb5bd;stroke-width:1.5"/>
+  <text class="row" x="34" y="472" style="font-size:12px">Rules that follow from the table</text>
+  <text class="rs" x="34" y="492" style="fill:#495057;font-size:11px">• Liveness checks only the process itself (a cheap /healthz/live), never databases or other services.</text>
+  <text class="rs" x="34" y="510" style="fill:#495057;font-size:11px">• Readiness checks whether the pod can serve right now, dependencies included; it never restarts anything.</text>
+  <text class="rs" x="34" y="528" style="fill:#495057;font-size:11px">• Slow starters get a startup probe instead of a long initialDelaySeconds, so liveness can stay strict afterwards.</text>
+</svg>

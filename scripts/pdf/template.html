@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>$title$</title>
+<meta name="author" content="$author$">
+<meta name="description" content="$description$">
+<style>
+$highlighting-css$
+</style>
+<link rel="stylesheet" href="$css$">
+</head>
+<body>
+<header id="title-block-header">
+$if(cover)$<img class="cover" src="$cover$" alt="">$endif$
+$for(categories)$<p class="kicker">$categories$</p>$endfor$
+<h1 class="title">$title$</h1>
+$if(description)$<p class="description">$description$</p>$endif$
+<p class="meta">$date$ · $author$ · <a href="$url$">$url$</a></p>
+</header>
+$if(toc)$
+<nav id="TOC">
+$table-of-contents$
+</nav>
+$endif$
+$body$
+</body>
+</html>

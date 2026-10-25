@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Restart back-off: how long the kubelet waits between restarts</title>
+  <desc id="d">Default restart back-off of a container that keeps failing: the kubelet waits 10 seconds before restart 2, then 20, 40, 80 and 160 seconds, and 300 seconds (5 minutes) before restart 7 and every restart after. During each wait the pod shows CrashLoopBackOff. The delay resets once the container has run for 10 minutes without failing. A fix takes effect at the next restart, so deleting the pod is faster than waiting.</desc>
+  <defs>
+    <style>
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .lab  { font-size: 12px; fill: #212529; }
+      .lb   { font-size: 12px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .v    { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ax   { stroke: #adb5bd; stroke-width: 1; }
+      .grid { stroke: #e9ecef; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="900" height="500" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Wait before each restart of a container that keeps failing</text>
+  <text class="d" x="560" y="26">default delays: 10 s, doubling, capped at 300 s</text>
+
+  <!-- x = 170 + s*2 (0..330 s) -->
+  <line class="grid" x1="270" y1="50" x2="270" y2="300"/>
+  <line class="grid" x1="370" y1="50" x2="370" y2="300"/>
+  <line class="grid" x1="470" y1="50" x2="470" y2="300"/>
+  <line class="grid" x1="570" y1="50" x2="570" y2="300"/>
+  <line class="grid" x1="670" y1="50" x2="670" y2="300"/>
+  <line x1="770" y1="44" x2="770" y2="300" style="stroke:#b02a37;stroke-width:1.5;stroke-dasharray:5 4"/>
+  <text class="d" x="776" y="58" style="fill:#b02a37;font-weight:700">cap: 300 s (5 min)</text>
+
+  <!-- rows: y step 40 -->
+  <text class="lab" x="20" y="79">before restart 2</text>
+  <rect x="170" y="64" width="20" height="22" rx="3" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="v" x="198" y="80">10 s</text>
+
+  <text class="lab" x="20" y="119">before restart 3</text>
+  <rect x="170" y="104" width="40" height="22" rx="3" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="v" x="218" y="120">20 s</text>
+
+  <text class="lab" x="20" y="159">before restart 4</text>
+  <rect x="170" y="144" width="80" height="22" rx="3" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="v" x="258" y="160">40 s</text>
+
+  <text class="lab" x="20" y="199">before restart 5</text>
+  <rect x="170" y="184" width="160" height="22" rx="3" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="v" x="338" y="200">80 s</text>
+
+  <text class="lab" x="20" y="239">before restart 6</text>
+  <rect x="170" y="224" width="320" height="22" rx="3" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="v" x="498" y="240">160 s</text>
+
+  <text class="lab" x="20" y="279">before restart 7</text>
+  <rect x="170" y="264" width="600" height="22" rx="3" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="v" x="778" y="280">300 s</text>
+  <text class="d" x="20" y="295">and every restart after</text>
+
+  <line class="ax" x1="170" y1="300" x2="830" y2="300"/>
+  <g class="dc">
+    <text x="170" y="314">0 s</text><text x="270" y="314">50</text><text x="370" y="314">100</text><text x="470" y="314">150</text>
+    <text x="570" y="314">200</text><text x="670" y="314">250</text><text x="770" y="314">300</text>
+  </g>
+
+  <!-- notes -->
+  <rect x="20" y="334" width="420" height="150" rx="8" style="fill:#fff3e6;stroke:#e0a24a"/>
+  <text class="lb" x="34" y="356">What you see</text>
+  <text class="d" x="34" y="376">• During each wait the pod's STATUS is CrashLoopBackOff;</text>
+  <text class="d" x="34" y="392">  between waits it shows the exit (Error, Completed).</text>
+  <text class="d" x="34" y="410">• The RESTARTS count grows slower and slower: the first</text>
+  <text class="d" x="34" y="426">  six waits add up to 610 s, more than 10 minutes.</text>
+  <text class="d" x="34" y="444">• Event: "Back-off restarting failed container ...",</text>
+  <text class="d" x="34" y="460">  also when the container exited with code 0.</text>
+
+  <rect x="460" y="334" width="420" height="150" rx="8" style="fill:#e7f1ff;stroke:#6ea8fe"/>
+  <text class="lb" x="474" y="356">What it means for a fix</text>
+  <text class="d" x="474" y="376">• A new image or config takes effect only at the next</text>
+  <text class="d" x="474" y="392">  restart: up to 5 minutes away once the delay is capped.</text>
+  <text class="d" x="474" y="410">• Deleting the pod starts over at once (a Deployment</text>
+  <text class="d" x="474" y="426">  creates a new pod with no back-off history).</text>
+  <text class="d" x="474" y="444">• The delay resets after the container has run for</text>
+  <text class="d" x="474" y="460">  10 minutes without failing.</text>
+  <text class="d" x="474" y="476">• Same rules for crashes, liveness failures and exit code 0.</text>
+</svg>

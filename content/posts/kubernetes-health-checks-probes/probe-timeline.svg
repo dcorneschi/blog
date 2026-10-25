@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Probe timeline of one container</title>
+  <desc id="d">Illustrative timeline with startupProbe periodSeconds 5 and failureThreshold 30, readinessProbe periodSeconds 5 and failureThreshold 3, livenessProbe periodSeconds 10 and failureThreshold 3. The app starts listening after 25 seconds: the startup probe fails at 5, 10, 15 and 20 seconds and passes at 25; only then do readiness and liveness start. The pod becomes Ready at 25 seconds. At 70 seconds the app hangs: readiness fails at 70, 75 and 80 seconds, and after the third failure the pod is Ready=False and leaves the Service endpoints, without a restart. Liveness fails at 75, 85 and 95 seconds; after the third failure the kubelet sends SIGTERM, waits up to terminationGracePeriodSeconds, sends SIGKILL and starts a new container, which goes through the startup probe again.</desc>
+  <defs>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="6" height="6" fill="#fff3cd"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#e0c46c" stroke-width="2"/>
+    </pattern>
+    <style>
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .lab  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .sub  { font-size: 10.5px; fill: #6c757d; }
+      .d    { font-size: 11px; fill: #495057; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .ok   { font-size: 13px; font-weight: 700; fill: #2f9e66; text-anchor: middle; }
+      .no   { font-size: 13px; font-weight: 700; fill: #dc3545; text-anchor: middle; }
+      .ax   { stroke: #adb5bd; stroke-width: 1; }
+      .mark { stroke: #212529; stroke-width: 1.5; stroke-dasharray: 4 3; }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text class="h" x="20" y="28">One container, three probes (x = time; ✓ pass, ✗ fail)</text>
+
+  <!-- x = 160 + t*5.2 ; t from 0 to 130 s -->
+
+  <!-- container state -->
+  <text class="lab" x="20" y="66">container</text>
+  <rect x="160" y="52" width="130" height="20" rx="3" style="fill:url(#hatch);stroke:#e0c46c"/>
+  <text class="d" x="166" y="66">starting</text>
+  <rect x="290" y="52" width="234" height="20" rx="3" style="fill:#75b798"/>
+  <text class="d" x="298" y="66" style="fill:#ffffff">healthy</text>
+  <rect x="524" y="52" width="130" height="20" rx="3" style="fill:#f8d7da;stroke:#e48b93"/>
+  <text class="d" x="530" y="66" style="fill:#b02a37">hung (process alive)</text>
+  <rect x="654" y="52" width="100" height="20" rx="3" style="fill:#e9ecef;stroke:#adb5bd"/>
+  <text class="d" x="660" y="66">SIGTERM → grace</text>
+  <rect x="754" y="52" width="106" height="20" rx="3" style="fill:url(#hatch);stroke:#e0c46c"/>
+  <text class="d" x="760" y="66">new container</text>
+
+  <!-- startup probe: every 5 s, fails 5..20, passes 25 -->
+  <text class="lab" x="20" y="112">startupProbe</text>
+  <text class="sub" x="20" y="126">every 5 s, up to 30 failures</text>
+  <text class="no" x="186" y="114">✗</text><text class="no" x="212" y="114">✗</text><text class="no" x="238" y="114">✗</text><text class="no" x="264" y="114">✗</text>
+  <text class="ok" x="290" y="114">✓</text>
+  <text class="d" x="304" y="113">passed: stops, hands over</text>
+  <text class="d" x="762" y="113">runs again</text>
+
+  <!-- readiness: every 5 s from 25; fails 70,75,80 -->
+  <text class="lab" x="20" y="162">readinessProbe</text>
+  <text class="sub" x="20" y="176">every 5 s, failureThreshold 3</text>
+  <g>
+    <text class="ok" x="290" y="164">✓</text><text class="ok" x="316" y="164">✓</text><text class="ok" x="342" y="164">✓</text><text class="ok" x="368" y="164">✓</text>
+    <text class="ok" x="394" y="164">✓</text><text class="ok" x="420" y="164">✓</text><text class="ok" x="446" y="164">✓</text><text class="ok" x="472" y="164">✓</text>
+    <text class="ok" x="498" y="164">✓</text>
+    <text class="no" x="524" y="164">✗</text><text class="no" x="550" y="164">✗</text><text class="no" x="576" y="164">✗</text>
+    <text class="no" x="602" y="164">✗</text><text class="no" x="628" y="164">✗</text>
+  </g>
+
+  <!-- liveness: every 10 s from 25; fails 75,85,95 -->
+  <text class="lab" x="20" y="212">livenessProbe</text>
+  <text class="sub" x="20" y="226">every 10 s, failureThreshold 3</text>
+  <text class="ok" x="290" y="214">✓</text><text class="ok" x="342" y="214">✓</text><text class="ok" x="394" y="214">✓</text>
+  <text class="ok" x="446" y="214">✓</text><text class="ok" x="498" y="214">✓</text>
+  <text class="no" x="550" y="214">✗</text><text class="no" x="602" y="214">✗</text><text class="no" x="654" y="214">✗</text>
+
+  <!-- Ready condition -->
+  <text class="lab" x="20" y="262">Ready / endpoints</text>
+  <rect x="160" y="248" width="130" height="20" rx="3" style="fill:#e9ecef;stroke:#adb5bd"/>
+  <text class="d" x="166" y="262">False: no traffic</text>
+  <rect x="290" y="248" width="286" height="20" rx="3" style="fill:#75b798"/>
+  <text class="d" x="298" y="262" style="fill:#ffffff">True: in the Service endpoints</text>
+  <rect x="576" y="248" width="284" height="20" rx="3" style="fill:#e9ecef;stroke:#adb5bd"/>
+  <text class="d" x="582" y="262">False: removed, no new connections</text>
+
+  <!-- markers -->
+  <line class="mark" x1="290" y1="40" x2="290" y2="284"/>
+  <line class="mark" x1="576" y1="140" x2="576" y2="246" style="stroke:#b5650d"/>
+  <line class="mark" x1="654" y1="190" x2="654" y2="246" style="stroke:#b02a37"/>
+
+  <!-- axis -->
+  <line class="ax" x1="160" y1="292" x2="860" y2="292"/>
+  <g class="dc">
+    <text x="160" y="306">0 s</text><text x="264" y="306">20</text><text x="368" y="306">40</text><text x="472" y="306">60</text>
+    <text x="576" y="306">80</text><text x="680" y="306">100</text><text x="784" y="306">120</text>
+  </g>
+
+  <!-- explanation boxes -->
+  <rect x="20" y="326" width="270" height="118" rx="8" style="fill:#fff8e1;stroke:#e0c46c"/>
+  <text class="lab" x="34" y="348">① Startup (0–25 s)</text>
+  <text class="d" x="34" y="368">Liveness and readiness don't run until</text>
+  <text class="d" x="34" y="384">the startup probe passes. Budget:</text>
+  <text class="d" x="34" y="404" style="font-weight:700;fill:#212529">periodSeconds × failureThreshold</text>
+  <text class="d" x="34" y="420">5 × 30 = 150 s before a restart, then</text>
+  <text class="d" x="34" y="436">liveness can stay strict for the rest.</text>
+
+  <rect x="304" y="326" width="276" height="118" rx="8" style="fill:#fff3e6;stroke:#e0a24a"/>
+  <text class="lab" x="318" y="348" style="fill:#b5650d">② Readiness fails (80 s)</text>
+  <text class="d" x="318" y="368">Third failure: Ready=False, the pod</text>
+  <text class="d" x="318" y="384">leaves the endpoints. No restart.</text>
+  <text class="d" x="318" y="404" style="font-weight:700;fill:#212529">detection: 5 s × 3 = 15 s</text>
+  <text class="d" x="318" y="420">If the app recovers, the next pass</text>
+  <text class="d" x="318" y="436">puts it back in the endpoints.</text>
+
+  <rect x="594" y="326" width="286" height="118" rx="8" style="fill:#fff5f5;stroke:#e48b93"/>
+  <text class="lab" x="608" y="348" style="fill:#b02a37">③ Liveness fails (95 s)</text>
+  <text class="d" x="608" y="368">Third failure: SIGTERM, wait up to</text>
+  <text class="d" x="608" y="384">terminationGracePeriodSeconds, SIGKILL,</text>
+  <text class="d" x="608" y="400">start a new container (startup again).</text>
+  <text class="d" x="608" y="420" style="font-weight:700;fill:#212529">detection: 10 s × 3 = 30 s</text>
+  <text class="d" x="608" y="436">impact ≈ detection + grace + startup</text>
+
+  <rect x="20" y="460" width="860" height="84" rx="8" style="fill:#f8f9fa;stroke:#adb5bd"/>
+  <text class="d" x="34" y="482" style="fill:#212529;font-weight:700">Reading it</text>
+  <text class="d" x="34" y="502">• Readiness reacts first (15 s) and only moves traffic; liveness reacts later (30 s) and restarts. That order is what you want.</text>
+  <text class="d" x="34" y="520">• A crash (PID 1 exits) needs no probe: restartPolicy restarts it at once. Liveness is for the hung case shown here.</text>
+  <text class="d" x="34" y="538">• Timing is illustrative: probes don't start exactly on the second, and failures count only if they are consecutive.</text>
+</svg>

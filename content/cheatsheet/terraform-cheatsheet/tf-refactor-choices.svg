@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">I want to … : which Terraform tool to use</title>
+  <desc id="d">Six goals and the tool for each. Rename a resource or move it into or out of a module: a moved block (Terraform 1.1+), instead of terraform state mv. Stop managing an object but keep it: a removed block with destroy = false (1.7+), instead of terraform state rm. Start managing something that already exists: an import block, optionally with plan -generate-config-out (1.5+), instead of terraform import. Rebuild one object: plan or apply -replace=ADDR, instead of terraform taint. Accept changes made outside Terraform: apply -refresh-only, instead of terraform refresh. Delete an object: remove it from the configuration and apply. The blocks and flags show up in the plan for review; the old commands change the state immediately.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #146c43; }
+      .mo  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; fill: #868e96; }
+      .lne { stroke: #adb5bd; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .goal{ fill: #e7f1ff; stroke: #6ea8fe; }
+      .use { fill: #e8f5ee; stroke: #75b798; }
+      .old { fill: #f8f9fa; stroke: #dee2e6; }
+    </style>
+  </defs>
+
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">I want to … : the reviewable way, and the old command it replaces</text>
+  <text class="th" x="20" y="56">I want to …</text>
+  <text class="th" x="330" y="56">Use (shows up in the plan)</text>
+  <text class="th" x="700" y="56">Instead of (edits state at once)</text>
+
+  <!-- rows: y start 66, step 62, h 50 -->
+  <rect class="goal" x="20" y="66" width="270" height="50" rx="8"/>
+  <text class="tb" x="34" y="87">Rename it, or move it into</text><text class="tb" x="34" y="104">or out of a module</text>
+  <path class="lne" d="M290,91 H326"/>
+  <rect class="use" x="330" y="66" width="350" height="50" rx="8"/>
+  <text class="m" x="344" y="87">moved { from = … to = … }</text>
+  <text class="d" x="344" y="104">plan: "has moved to", 0 to destroy · 1.1+</text>
+  <rect class="old" x="700" y="66" width="180" height="50" rx="8"/><text class="mo" x="714" y="95">terraform state mv</text>
+
+  <rect class="goal" x="20" y="128" width="270" height="50" rx="8"/>
+  <text class="tb" x="34" y="149">Stop managing it,</text><text class="tb" x="34" y="166">but keep the real object</text>
+  <path class="lne" d="M290,153 H326"/>
+  <rect class="use" x="330" y="128" width="350" height="50" rx="8"/>
+  <text class="m" x="344" y="149">removed { … destroy = false }</text>
+  <text class="d" x="344" y="166">plan: "will no longer be managed … not destroyed" · 1.7+</text>
+  <rect class="old" x="700" y="128" width="180" height="50" rx="8"/><text class="mo" x="714" y="157">terraform state rm</text>
+
+  <rect class="goal" x="20" y="190" width="270" height="50" rx="8"/>
+  <text class="tb" x="34" y="211">Manage something that</text><text class="tb" x="34" y="228">already exists</text>
+  <path class="lne" d="M290,215 H326"/>
+  <rect class="use" x="330" y="190" width="350" height="50" rx="8"/>
+  <text class="m" x="344" y="211">import { to = … id = … }</text>
+  <text class="d" x="344" y="228">+ plan -generate-config-out=generated.tf · 1.5+</text>
+  <rect class="old" x="700" y="190" width="180" height="50" rx="8"/><text class="mo" x="714" y="219">terraform import</text>
+
+  <rect class="goal" x="20" y="252" width="270" height="50" rx="8"/>
+  <text class="tb" x="34" y="273">Rebuild one object</text><text class="d" x="34" y="290">corrupted, or to test a fresh create</text>
+  <path class="lne" d="M290,277 H326"/>
+  <rect class="use" x="330" y="252" width="350" height="50" rx="8"/>
+  <text class="m" x="344" y="273">apply -replace=ADDR</text>
+  <text class="d" x="344" y="290">plan: "will be replaced, as requested"</text>
+  <rect class="old" x="700" y="252" width="180" height="50" rx="8"/><text class="mo" x="714" y="281">terraform taint</text>
+
+  <rect class="goal" x="20" y="314" width="270" height="50" rx="8"/>
+  <text class="tb" x="34" y="335">Accept a change made</text><text class="tb" x="34" y="352">outside Terraform</text>
+  <path class="lne" d="M290,339 H326"/>
+  <rect class="use" x="330" y="314" width="350" height="50" rx="8"/>
+  <text class="m" x="344" y="335">apply -refresh-only</text>
+  <text class="d" x="344" y="352">then update the configuration to match</text>
+  <rect class="old" x="700" y="314" width="180" height="50" rx="8"/><text class="mo" x="714" y="343">terraform refresh</text>
+
+  <rect class="goal" x="20" y="376" width="270" height="50" rx="8"/>
+  <text class="tb" x="34" y="397">Delete it</text><text class="d" x="34" y="414">the real object too</text>
+  <path class="lne" d="M290,401 H326"/>
+  <rect class="use" x="330" y="376" width="350" height="50" rx="8"/>
+  <text class="m" x="344" y="397">delete the block, plan, apply</text>
+  <text class="d" x="344" y="414">or a removed block with destroy = true</text>
+  <rect class="old" x="700" y="376" width="180" height="50" rx="8"/><text class="mo" x="714" y="405">destroy -target</text>
+
+  <text class="d" x="20" y="452">The blocks live in the configuration, so the change is reviewed in Git and shown by plan for everyone sharing the state. The old commands edit the state directly.</text>
+</svg>

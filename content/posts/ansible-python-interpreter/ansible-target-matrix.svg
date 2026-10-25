@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which ansible-core manages which OS</title>
+  <desc id="d">Results of ansible -m setup with interpreter discovery on auto, for ansible-core 2.14, 2.16, 2.17, 2.19 and 2.21 against RHEL 7.9 (Python 2.7.5), RHEL 8.10 (3.6.8), RHEL 8.10 with python39 and the interpreter set, RHEL 9.8 (3.9.25), RHEL 10.2 (3.12.15), Ubuntu 20.04 (3.8.10), 22.04 (3.10.12), 24.04 (3.12.3) and 26.04 (3.14.4). 2.14 and 2.16 work everywhere, with Ubuntu 26.04 outside their supported range. 2.17 and 2.19 fail on RHEL 7 and 8 because they find no /usr/bin/python3, and on RHEL 8 platform-python fails with a SyntaxError; Ubuntu 26.04 runs but is outside their range. 2.21 fails on RHEL 7, RHEL 8 without python39 and Ubuntu 20.04, which needs Python 3.9, and supports everything else including Ubuntu 26.04.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .ch  { font-size: 13px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .cs  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .rl  { font-size: 12.5px; font-weight: 700; fill: #212529; }
+      .rs  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; text-anchor: middle; }
+      .ok  { fill: #d3f0e0; stroke: #2f9e66; }
+      .warn{ fill: #fff3cd; stroke: #e0a800; }
+      .bad { fill: #f8d7da; stroke: #ea868f; }
+      .eol { font-size: 10px; font-weight: 700; fill: #b02a37; text-anchor: middle; }
+      .cur { font-size: 10px; font-weight: 700; fill: #146c43; text-anchor: middle; }
+      .d   { font-size: 11px; fill: #495057; }
+    </style>
+  </defs>
+
+  <rect width="900" height="560" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which ansible-core can manage which OS, with its default Python</text>
+
+  <!-- columns: label 20..250, cells 260 + i*126, w 118 -->
+  <text class="ch" x="319" y="58">2.14</text><text class="cs" x="319" y="73">target 2.7, 3.5–3.11</text><text class="eol" x="319" y="87">end of life</text>
+  <text class="ch" x="445" y="58">2.16</text><text class="cs" x="445" y="73">target 2.7, 3.6–3.12</text><text class="eol" x="445" y="87">end of life</text>
+  <text class="ch" x="571" y="58">2.17</text><text class="cs" x="571" y="73">target 3.7–3.12</text><text class="eol" x="571" y="87">end of life</text>
+  <text class="ch" x="697" y="58">2.18 / 2.19</text><text class="cs" x="697" y="73">target 3.8–3.13</text><text class="eol" x="697" y="87">2.19 EOL Nov 2026</text>
+  <text class="ch" x="823" y="58">2.20 / 2.21</text><text class="cs" x="823" y="73">target 3.9–3.14</text><text class="cur" x="823" y="87">supported</text>
+
+  <!-- rows: y start 96, step 44, h 38 -->
+  <text class="rl" x="20" y="114">RHEL 7.9</text><text class="rs" x="20" y="128">python 2.7.5</text>
+  <rect class="ok" x="260" y="96" width="118" height="38" rx="5"/><text class="c" x="319" y="119">works</text>
+  <rect class="ok" x="386" y="96" width="118" height="38" rx="5"/><text class="c" x="445" y="119">works</text>
+  <rect class="bad" x="512" y="96" width="118" height="38" rx="5"/><text class="c" x="571" y="113">no python3</text><text class="c" x="571" y="127">rh-python38 → ok</text>
+  <rect class="bad" x="638" y="96" width="118" height="38" rx="5"/><text class="c" x="697" y="113">no python3</text><text class="c" x="697" y="127">rh-python38 → ok</text>
+  <rect class="bad" x="764" y="96" width="118" height="38" rx="5"/><text class="c" x="823" y="113">not possible</text><text class="c" x="823" y="127">no 3.9 for RHEL 7</text>
+
+  <text class="rl" x="20" y="158">RHEL 8.10</text><text class="rs" x="20" y="172">platform-python 3.6.8</text>
+  <rect class="ok" x="260" y="140" width="118" height="38" rx="5"/><text class="c" x="319" y="163">works</text>
+  <rect class="ok" x="386" y="140" width="118" height="38" rx="5"/><text class="c" x="445" y="163">works</text>
+  <rect class="bad" x="512" y="140" width="118" height="38" rx="5"/><text class="c" x="571" y="157">fails: 3.6 gives</text><text class="c" x="571" y="171">SyntaxError</text>
+  <rect class="bad" x="638" y="140" width="118" height="38" rx="5"/><text class="c" x="697" y="157">no python3</text><text class="c" x="697" y="171">install python39</text>
+  <rect class="bad" x="764" y="140" width="118" height="38" rx="5"/><text class="c" x="823" y="157">no python3</text><text class="c" x="823" y="171">install python39</text>
+
+  <text class="rl" x="20" y="202">RHEL 8.10 + python39</text><text class="rs" x="20" y="216">interpreter set, 3.9.25</text>
+  <rect class="ok" x="260" y="184" width="118" height="38" rx="5"/><text class="c" x="319" y="207">works</text>
+  <rect class="ok" x="386" y="184" width="118" height="38" rx="5"/><text class="c" x="445" y="207">works</text>
+  <rect class="ok" x="512" y="184" width="118" height="38" rx="5"/><text class="c" x="571" y="207">works</text>
+  <rect class="ok" x="638" y="184" width="118" height="38" rx="5"/><text class="c" x="697" y="207">works</text>
+  <rect class="ok" x="764" y="184" width="118" height="38" rx="5"/><text class="c" x="823" y="207">works</text>
+
+  <text class="rl" x="20" y="246">RHEL 9.8</text><text class="rs" x="20" y="260">python 3.9.25</text>
+  <rect class="ok" x="260" y="228" width="118" height="38" rx="5"/><text class="c" x="319" y="251">works</text>
+  <rect class="ok" x="386" y="228" width="118" height="38" rx="5"/><text class="c" x="445" y="251">works</text>
+  <rect class="ok" x="512" y="228" width="118" height="38" rx="5"/><text class="c" x="571" y="251">works</text>
+  <rect class="ok" x="638" y="228" width="118" height="38" rx="5"/><text class="c" x="697" y="251">works</text>
+  <rect class="ok" x="764" y="228" width="118" height="38" rx="5"/><text class="c" x="823" y="251">works</text>
+
+  <text class="rl" x="20" y="290">RHEL 10.2</text><text class="rs" x="20" y="304">python 3.12.15</text>
+  <rect class="ok" x="260" y="272" width="118" height="38" rx="5"/><text class="c" x="319" y="295">works</text>
+  <rect class="ok" x="386" y="272" width="118" height="38" rx="5"/><text class="c" x="445" y="295">works</text>
+  <rect class="ok" x="512" y="272" width="118" height="38" rx="5"/><text class="c" x="571" y="295">works</text>
+  <rect class="ok" x="638" y="272" width="118" height="38" rx="5"/><text class="c" x="697" y="295">works</text>
+  <rect class="ok" x="764" y="272" width="118" height="38" rx="5"/><text class="c" x="823" y="295">works</text>
+
+  <text class="rl" x="20" y="334">Ubuntu 20.04</text><text class="rs" x="20" y="348">python 3.8.10</text>
+  <rect class="ok" x="260" y="316" width="118" height="38" rx="5"/><text class="c" x="319" y="339">works</text>
+  <rect class="ok" x="386" y="316" width="118" height="38" rx="5"/><text class="c" x="445" y="339">works</text>
+  <rect class="ok" x="512" y="316" width="118" height="38" rx="5"/><text class="c" x="571" y="339">works</text>
+  <rect class="ok" x="638" y="316" width="118" height="38" rx="5"/><text class="c" x="697" y="339">works</text>
+  <rect class="bad" x="764" y="316" width="118" height="38" rx="5"/><text class="c" x="823" y="333">needs 3.9</text><text class="c" x="823" y="347">+ 2 apt symlinks</text>
+
+  <text class="rl" x="20" y="378">Ubuntu 22.04</text><text class="rs" x="20" y="392">python 3.10.12</text>
+  <rect class="ok" x="260" y="360" width="118" height="38" rx="5"/><text class="c" x="319" y="383">works</text>
+  <rect class="ok" x="386" y="360" width="118" height="38" rx="5"/><text class="c" x="445" y="383">works</text>
+  <rect class="ok" x="512" y="360" width="118" height="38" rx="5"/><text class="c" x="571" y="383">works</text>
+  <rect class="ok" x="638" y="360" width="118" height="38" rx="5"/><text class="c" x="697" y="383">works</text>
+  <rect class="ok" x="764" y="360" width="118" height="38" rx="5"/><text class="c" x="823" y="383">works</text>
+
+  <text class="rl" x="20" y="422">Ubuntu 24.04</text><text class="rs" x="20" y="436">python 3.12.3</text>
+  <rect class="ok" x="260" y="404" width="118" height="38" rx="5"/><text class="c" x="319" y="427">works</text>
+  <rect class="ok" x="386" y="404" width="118" height="38" rx="5"/><text class="c" x="445" y="427">works</text>
+  <rect class="ok" x="512" y="404" width="118" height="38" rx="5"/><text class="c" x="571" y="427">works</text>
+  <rect class="ok" x="638" y="404" width="118" height="38" rx="5"/><text class="c" x="697" y="427">works</text>
+  <rect class="ok" x="764" y="404" width="118" height="38" rx="5"/><text class="c" x="823" y="427">works</text>
+
+  <text class="rl" x="20" y="466">Ubuntu 26.04</text><text class="rs" x="20" y="480">python 3.14.4</text>
+  <rect class="warn" x="260" y="448" width="118" height="38" rx="5"/><text class="c" x="319" y="465">ran, but 3.14 is</text><text class="c" x="319" y="479">not supported</text>
+  <rect class="warn" x="386" y="448" width="118" height="38" rx="5"/><text class="c" x="445" y="465">ran, but 3.14 is</text><text class="c" x="445" y="479">not supported</text>
+  <rect class="warn" x="512" y="448" width="118" height="38" rx="5"/><text class="c" x="571" y="465">ran, but 3.14 is</text><text class="c" x="571" y="479">not supported</text>
+  <rect class="warn" x="638" y="448" width="118" height="38" rx="5"/><text class="c" x="697" y="465">ran, but 3.14 is</text><text class="c" x="697" y="479">not supported</text>
+  <rect class="ok" x="764" y="448" width="118" height="38" rx="5"/><text class="c" x="823" y="471">works</text>
+
+  <!-- legend -->
+  <rect class="ok" x="20" y="502" width="14" height="12" rx="2"/><text class="d" x="40" y="512">works, supported</text>
+  <rect class="warn" x="160" y="502" width="14" height="12" rx="2"/><text class="d" x="180" y="512">ran, outside the supported range</text>
+  <rect class="bad" x="390" y="502" width="14" height="12" rx="2"/><text class="d" x="410" y="512">fails with the default Python; the fix is below the reason</text>
+  <text class="d" x="20" y="536">ansible -m setup, discovery on auto, against Red Hat UBI and official Ubuntu images. Columns 2.14, 2.16, 2.17, 2.19 and 2.21 were run;</text>
+  <text class="d" x="20" y="552">2.18 and 2.20 share the target range of the release next to them. The rh-python38 cells for RHEL 7 come from Red Hat's documentation.</text>
+</svg>

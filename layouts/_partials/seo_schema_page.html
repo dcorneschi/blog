@@ -1,0 +1,55 @@
+{{- /*
+  Overrides the theme's hook (see themes/.../seo_schema_page.html): structured data for
+  posts and cheatsheets, the theme's BlogPosting plus an image. The theme only adds an image
+  when featured_image is set; here it comes from the cover file the cards already use
+  (*feature*, then *cover* / *thumbnail*), as 16:9, 4:3 and 1:1 crops of 1200 px, the sizes
+  Google recommends for article results. The About page (type: page) is an AboutPage.
+  Anything else returns an empty dict, so the theme's default (WebSite/Person on home) is kept.
+*/ -}}
+{{- $schema := dict -}}
+{{- $authorName := site.Params.author.name | default site.Params.Author -}}
+{{- if and .IsPage (in (slice "posts" "cheatsheet") .Section) -}}
+  {{- if eq .Type "page" -}}
+    {{- $schema = dict
+        "@context" "https://schema.org"
+        "@type" "AboutPage"
+        "name" .Title
+        "url" .Permalink
+        "description" (or .Description (.Summary | plainify | chomp))
+        "inLanguage" .Lang
+    -}}
+  {{- else -}}
+    {{- $schema = dict
+        "@context" "https://schema.org"
+        "@type" "BlogPosting"
+        "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+        "headline" .Title
+        "description" (or .Description (.Summary | plainify | chomp))
+        "inLanguage" .Lang
+        "datePublished" (.Date.UTC.Format "2006-01-02T15:04:05Z")
+        "dateModified" (.Lastmod.UTC.Format "2006-01-02T15:04:05Z")
+        "url" .Permalink
+        "wordCount" .WordCount
+        "keywords" (.Params.tags | default (slice))
+    -}}
+    {{- with $authorName -}}
+      {{- $schema = merge $schema (dict "author" (dict "@type" "Person" "name" . "url" site.BaseURL) "publisher" (dict "@type" "Person" "name" .)) -}}
+    {{- end -}}
+    {{- $images := .Resources.ByType "image" -}}
+    {{- $cover := $images.GetMatch "*feature*" -}}
+    {{- $cover = cond (ne $cover nil) $cover ($images.GetMatch "{*cover*,*thumbnail*}") -}}
+    {{- with .Params.featured_image }}{{ $cover = $.Resources.GetMatch (printf "*%s" .) }}{{ end -}}
+    {{- with $cover -}}
+      {{- if reflect.IsImageResourceProcessable . -}}
+        {{- $urls := slice -}}
+        {{- range slice "1200x675" "1200x900" "1200x1200" -}}
+          {{- $urls = $urls | append ($cover.Fill (printf "%s Center jpg q80" .)).Permalink -}}
+        {{- end -}}
+        {{- $schema = merge $schema (dict "image" $urls) -}}
+      {{- else -}}
+        {{- $schema = merge $schema (dict "image" (slice .Permalink)) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $schema -}}

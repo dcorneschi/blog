@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">tmux Cheatsheet</title>
+  <desc id="d">tmux Cheatsheet: Sessions, windows and panes in one terminal. sessions, windows, panes, copy mode, mouse, session sharing, ~/.tmux.conf. Small drawings: session, window, pane; a terminal running tmux -V and tmux new -s session_name; panes, sessions, sharing; icons for sessions, panes, copy mode, prefix, sharing, .tmux.conf.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #40c057; }
+      .a2  { fill: #343a40; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #40c057; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #40c057; }
+  .vs   { stroke: #40c057; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #40c057; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #40c057; stroke-width: 9; }
+  .vl   { fill: #40c057; fill-opacity: .18; }
+  .vl2  { fill: #40c057; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #40c057; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #40c057; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-16.3,54.3) scale(0.861)"><rect class="vpn" x="170" y="170" width="213" height="84" rx="42"/><text class="vink" x="276" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">session</text><path class="var" d="M391,212 H437 M417,196 L437,212 L417,228"/><rect class="vpg" x="447" y="170" width="190" height="84" rx="42"/><text class="vink" x="542" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">window</text><path class="var" d="M645,212 H691 M671,196 L691,212 L671,228"/><rect class="vpv" x="701" y="170" width="144" height="84" rx="42"/><text class="vink" x="773" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">pane</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ tmux -V</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ tmux new -s session_name<tspan class="vcur"> █</tspan></text></g><g transform="translate(61.7,0.9) scale(0.997)"><g transform="translate(1795,190) scale(1.150)"><rect class="vterm" x="12" y="26" width="176" height="148" rx="14"/><path d="M100,40 V160 M100,100 H176" stroke="#40c057" stroke-width="8"/><path d="M28,58 H80 M28,82 H64 M116,58 H160 M116,122 H164" stroke="#e9ecef" stroke-width="9" stroke-linecap="round"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">panes</text><g transform="translate(2065,190) scale(1.150)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">sessions</text><g transform="translate(2335,190) scale(1.150)"><circle class="vf" cx="52" cy="78" r="26" opacity=".6"/><path class="vf" d="M8,170 C8,130 28,114 52,114 C76,114 96,130 96,170 Z" opacity=".6"/><circle class="vf" cx="148" cy="78" r="26" opacity=".6"/><path class="vf" d="M104,170 C104,130 124,114 148,114 C172,114 192,130 192,170 Z" opacity=".6"/><circle class="vf" cx="100" cy="66" r="32"/><path class="vf" d="M46,186 C46,138 70,118 100,118 C130,118 154,138 154,186 Z"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">sharing</text></g><g transform="translate(676.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="726" y="1450" text-anchor="middle" font-size="34">sessions</text><g transform="translate(936.0,1290) scale(0.500)"><rect class="vterm" x="12" y="26" width="176" height="148" rx="14"/><path d="M100,40 V160 M100,100 H176" stroke="#40c057" stroke-width="8"/><path d="M28,58 H80 M28,82 H64 M116,58 H160 M116,122 H164" stroke="#e9ecef" stroke-width="9" stroke-linecap="round"/></g><text class="vn" x="986" y="1450" text-anchor="middle" font-size="34">panes</text><g transform="translate(1196.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="1246" y="1450" text-anchor="middle" font-size="34">copy mode</text><g transform="translate(1456.0,1290) scale(0.500)"><circle class="vs" cx="62" cy="100" r="36" stroke-width="18"/><path class="vs" d="M98,100 H182 M150,100 V132 M174,100 V124" stroke-width="18"/></g><text class="vn" x="1506" y="1450" text-anchor="middle" font-size="34">prefix</text><g transform="translate(1716.0,1290) scale(0.500)"><circle class="vf" cx="52" cy="78" r="26" opacity=".6"/><path class="vf" d="M8,170 C8,130 28,114 52,114 C76,114 96,130 96,170 Z" opacity=".6"/><circle class="vf" cx="148" cy="78" r="26" opacity=".6"/><path class="vf" d="M104,170 C104,130 124,114 148,114 C172,114 192,130 192,170 Z" opacity=".6"/><circle class="vf" cx="100" cy="66" r="32"/><path class="vf" d="M46,186 C46,138 70,118 100,118 C130,118 154,138 154,186 Z"/></g><text class="vn" x="1766" y="1450" text-anchor="middle" font-size="34">sharing</text><g transform="translate(1976.0,1290) scale(0.500)"><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(0 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(45 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(90 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(135 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(180 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(225 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(270 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(315 100 100)"/><circle class="vf" cx="100" cy="100" r="60"/><circle class="vp" cx="100" cy="100" r="26"/></g><text class="vn" x="2026" y="1450" text-anchor="middle" font-size="34">.tmux.conf</text></g><!-- /vignettes -->
+  <rect class="ink" x="1056" y="320" width="640" height="330" rx="20"/><rect class="a2" x="1056" y="320" width="640" height="46" rx="20"/><rect class="a2" x="1056" y="346" width="640" height="20"/><circle cx="1092" cy="343" r="9" fill="#fa5252"/><circle cx="1122" cy="343" r="9" fill="#fab005"/><circle cx="1152" cy="343" r="9" fill="#40c057"/><line x1="1376" y1="380" x2="1376" y2="634" stroke="#40c057" stroke-width="8"/><line x1="1384" y1="510" x2="1680" y2="510" stroke="#40c057" stroke-width="8"/><rect class="a" x="1096" y="410" width="200" height="16" rx="8"/><rect class="a" x="1096" y="450" width="140" height="16" rx="8" opacity="0.7"/><rect class="a" x="1416" y="410" width="160" height="16" rx="8"/><rect class="a" x="1416" y="550" width="200" height="16" rx="8"/><rect class="a2" x="1056" y="610" width="640" height="40" rx="0" opacity="0.9"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="210">tmux Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Sessions, windows and panes in one terminal</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">sessions · windows · panes · copy mode · mouse · session sharing · ~/.tmux.conf</text>
+</svg>
