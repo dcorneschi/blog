@@ -12,7 +12,7 @@ Docker Compose has several ways to configure a service, and they operate at two 
 - **Interpolation** substitutes `${VAR}` inside the Compose file itself, before the file is parsed. Values come from your shell or the project `.env` file.
 - **Container environment** sets variables inside the running container, using `environment` or `env_file`.
 
-This guide walks through both layers using timezone (`TZ`) as the running example, then covers build arguments, precedence, and debugging. Every `docker compose config` result described here was checked with Docker Compose v5.6.1.
+This guide walks through both layers using timezone (`TZ`) as the running example, then covers build arguments, precedence, and debugging. Every example and command here was run with Docker Compose v5.6.1 and Docker Engine 29.9.2.
 
 > **The most common mistake:** assuming the project `.env` file is passed into containers. It is not. `.env` feeds `${...}` interpolation in the Compose file. To put a value inside the container you must reference it under `environment`, or load a file with `env_file`.
 
@@ -54,6 +54,8 @@ services:
       LOG_LEVEL: "debug"
 ```
 
+Both put `TZ=America/New_York` in the container, but on `alpine:3.20` `date` still prints `UTC`: the image has no timezone database. See [the timezone example](#a-environment-variable-recommended-most-portable) below.
+
 ### With defaults from interpolation
 
 `${TZ:-UTC}` is resolved by Compose before the container starts, using the shell or project `.env`. If `TZ` is unset or empty, the default `UTC` is used:
@@ -76,6 +78,7 @@ Interpolation default forms:
 | `${VAR:-default}` | `default` if `VAR` is unset **or empty** |
 | `${VAR-default}` | `default` only if `VAR` is **unset** |
 | `${VAR:?error}` | Fail with `error` if `VAR` is unset or empty |
+| `${VAR:+value}` | `value` if `VAR` is set and not empty, otherwise empty |
 
 ### Passing a variable through from the shell
 
@@ -139,6 +142,15 @@ services:
 | Purpose | Interpolation in the Compose file | Variables inside the container |
 | Loaded | Automatically, one file | Explicitly, one or more files |
 | Reaches container | Only if referenced under `environment` | Directly |
+
+Every listed file must exist, or Compose stops with `env file .../secrets.env not found`. Mark a file as optional with the long syntax:
+
+```yaml
+    env_file:
+      - path: app.env
+      - path: secrets.env
+        required: false
+```
 
 When multiple `env_file` entries define the same key, later files win. Values set under `environment` override values from `env_file`.
 
@@ -210,32 +222,32 @@ services:
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:16.11.0
+    image: gitlab/gitlab-runner:v16.11.0
     environment:
       - TZ=${TZ:-UTC}
 ```
 
-Most applications and language runtimes honor `TZ`. This requires the image to include the timezone database (`tzdata`); minimal images such as `alpine` may need it installed.
+Most applications and language runtimes honor `TZ`. This requires the image to include the timezone database (`tzdata`). Minimal images such as `alpine` don't have it: with `TZ=America/New_York`, `alpine:3.20` prints `UTC`, and the same image with `tzdata` installed prints `EDT`.
 
 ### B. Volume mount of host timezone files
 
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:16.11.0
+    image: gitlab/gitlab-runner:v16.11.0
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
 ```
 
-This mirrors the host clock configuration into the container. Mount the files read-only. Note `/etc/timezone` is Debian-family specific and may not exist on all hosts, so mounting it can fail on non-Debian systems.
+This mirrors the host clock configuration into the container. Mount the files read-only. `/etc/timezone` is Debian-family specific. If the host doesn't have it, the mount doesn't fail: Docker creates an empty directory at that host path and mounts it, so `/etc/timezone` in the container is a directory (`cat: read error: Is a directory`). Only mount it on hosts that have the file.
 
 ### C. Both (belt and suspenders)
 
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:16.11.0
+    image: gitlab/gitlab-runner:v16.11.0
     environment:
       - TZ=${TZ:-UTC}
     volumes:
@@ -249,7 +261,7 @@ services:
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:16.11.0
+    image: gitlab/gitlab-runner:v16.11.0
     network_mode: host
 ```
 
@@ -257,7 +269,7 @@ services:
 
 ## Advanced Interpolation Patterns
 
-Compose supports only a subset of Bash's operators (no replacement, case or substring), and a literal `$` must be written as `$$`.
+Compose supports only a subset of Bash's operators (no pattern replacement, case conversion or substrings: `${VAR/a/b}`, `${VAR^^}` and `${VAR:0:2}` fail with `invalid interpolation format`), and a literal `$` must be written as `$$`.
 
 ### Compose nested defaults
 
@@ -332,7 +344,7 @@ docker compose config --quiet
 docker compose config --format json | jq '.services.app.environment'
 ```
 
-Check what actually reached a running container:
+Check what actually reached a running container. `exec` needs the service to be running: the `alpine` examples above exit at once, so give them a long-running command such as `command: sleep infinity` to try this.
 
 ```bash
 # Environment inside the container
@@ -349,7 +361,7 @@ If `docker compose config` shows an empty value, the variable was unset during i
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:16.11.0
+    image: gitlab/gitlab-runner:v16.11.0
     container_name: gitlab-runner
     restart: always
     environment:
@@ -364,7 +376,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-This combines interpolation defaults (`${TZ:-UTC}`), a container variable file (`env_file`), and a read-only timezone mount. The top-level `version:` key is intentionally omitted; it is obsolete in current Compose and now only produces a warning.
+This combines interpolation defaults (`${TZ:-UTC}`), a container variable file (`env_file`), and a read-only timezone mount. `.env.runner` and `config.toml` must exist next to the Compose file, and an unset `CI_SERVER_URL` only gives a warning (`The "CI_SERVER_URL" variable is not set. Defaulting to a blank string.`); use `${CI_SERVER_URL:?}` to make it required. The top-level `version:` key is intentionally omitted; it is obsolete in current Compose and now only produces a warning.
 
 ## Quick Reference
 
