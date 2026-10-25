@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 408" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Two ways to lock the S3 backend</title>
+  <desc id="d">With dynamodb_table, an apply writes a lock item tf-state/demo/terraform.tfstate to the DynamoDB table and keeps a checksum item tf-state/demo/terraform.tfstate-md5, which stays after the run; a second run fails with ConditionalCheckFailedException. With use_lockfile, an apply writes demo/terraform.tfstate.tflock next to the state in the bucket and deletes it at the end; a second run fails with PreconditionFailed, status 412, because the lock object is written with If-None-Match.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="408" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Two ways to lock the S3 backend</text>
+  <text class="sub" x="20" y="48">What each lock leaves in DynamoDB and S3 during and after an apply (Terraform 1.16.4)</text>
+  <rect class="n" x="20" y="62" width="390" height="330" rx="6"/>
+  <text class="tb" x="32" y="84">DynamoDB lock (dynamodb_table, deprecated)</text>
+  <text class="d" x="32" y="100">table "tf-locks"</text>
+  <text class="lb" x="32" y="124">DURING AN APPLY</text>
+  <text class="lb" x="32" y="238">AFTER THE APPLY</text>
+  <text class="lb" x="32" y="304">A SECOND RUN DURING THE APPLY</text>
+  <rect class="n" x="430" y="62" width="390" height="330" rx="6"/>
+  <text class="tb" x="442" y="84">S3 lock file (use_lockfile = true)</text>
+  <text class="d" x="442" y="100">bucket "tf-state", next to the state</text>
+  <text class="lb" x="442" y="124">DURING AN APPLY</text>
+  <text class="lb" x="442" y="238">AFTER THE APPLY</text>
+  <text class="lb" x="442" y="304">A SECOND RUN DURING THE APPLY</text>
+  <rect class="w" x="30" y="132" width="370" height="42" rx="6"/>
+  <text class="m" x="42" y="150">tf-state/demo/terraform.tfstate</text>
+  <text class="d" x="42" y="166">lock item (LockID): removed when the run ends</text>
+  <rect class="r" x="30" y="180" width="370" height="42" rx="6"/>
+  <text class="m" x="42" y="198">tf-state/demo/terraform.tfstate-md5</text>
+  <text class="d" x="42" y="214">checksum of the state (Digest): stays</text>
+  <rect class="r" x="30" y="246" width="370" height="42" rx="6"/>
+  <text class="m" x="42" y="264">tf-state/demo/terraform.tfstate-md5</text>
+  <text class="d" x="42" y="280">the checksum item is the only one left</text>
+  <rect class="x" x="30" y="312" width="370" height="60" rx="6"/>
+  <text class="c" x="42" y="332">Error acquiring the state lock</text>
+  <text class="m" x="42" y="348">ConditionalCheckFailedException:</text>
+  <text class="m" x="42" y="363">The conditional request failed</text>
+  <rect class="s" x="440" y="132" width="370" height="42" rx="6"/>
+  <text class="m" x="452" y="150">demo/terraform.tfstate</text>
+  <text class="d" x="452" y="166">the state</text>
+  <rect class="w" x="440" y="180" width="370" height="42" rx="6"/>
+  <text class="m" x="452" y="198">demo/terraform.tfstate.tflock</text>
+  <text class="d" x="452" y="214">lock object: JSON with ID, Operation, Who, Created</text>
+  <rect class="s" x="440" y="246" width="370" height="42" rx="6"/>
+  <text class="m" x="452" y="264">demo/terraform.tfstate</text>
+  <text class="d" x="452" y="280">the .tflock object is deleted, no lock data stays</text>
+  <rect class="x" x="440" y="312" width="370" height="60" rx="6"/>
+  <text class="c" x="452" y="332">Error acquiring the state lock</text>
+  <text class="m" x="452" y="348">StatusCode: 412, PreconditionFailed</text>
+  <text class="d" x="452" y="364">the .tflock is written with If-None-Match: *, so it fails while it exists</text>
+</svg>
