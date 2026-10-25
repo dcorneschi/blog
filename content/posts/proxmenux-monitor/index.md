@@ -1,6 +1,6 @@
 ---
 title: "ProxMenux Monitor: A Web Dashboard for Proxmox VE"
-date: 2026-10-15T00:00:00+03:00
+date: 2026-10-25T15:30:00+02:00
 draft: false
 description: "What ProxMenux Monitor is, how it runs on a Proxmox VE host, how to install and secure it, put it behind a reverse proxy, and use its Health Monitor, notifications and REST API with Prometheus, Homepage and Uptime Kuma."
 tags: ["proxmox", "monitoring", "homelab"]
