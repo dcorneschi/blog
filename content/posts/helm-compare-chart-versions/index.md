@@ -17,6 +17,7 @@ How to see exactly what changes between two versions of a chart, using metrics-s
 | What changed between chart version A and B, regardless of what is deployed? | `helm template` for both, then `diff` |
 | What changed between two revisions of a release? | `helm diff revision` (plugin) |
 | Did the default values change between versions? | `helm show values` for both, then `diff` |
+| What changed in the chart's templates, including paths my values don't use? | `helm pull --untar` for both, then `diff -r` |
 | Which app version ships in which chart version? | `helm search repo --versions` |
 
 `helm diff upgrade ... --allow-unreleased` on a chart that isn't installed does **not** compare two versions. It shows the whole chart as added. For version-to-version comparison without a release, use `helm template`.
@@ -100,6 +101,29 @@ diff -u ms-3.12.2.yaml ms-3.13.0.yaml
 
 Pass the same `-n` and `--values` to both renders, or the output differs for the wrong reasons. Without `-n`, `helm template` renders into `default` (visible as `namespace: default` in the output).
 
+### Render Like the Cluster Would
+
+`helm template` doesn't ask the cluster which Kubernetes version and APIs it has. It uses Helm's built-in defaults, so templates that branch on `.Capabilities` (`semverCompare` on the Kubernetes version, `.Capabilities.APIVersions.Has "monitoring.coreos.com/v1"` and so on) can render differently from a real install. Tell it what the cluster has:
+
+```bash
+kubectl version                                  # server version, e.g. v1.35.9+k3s1
+kubectl api-versions | grep monitoring           # optional APIs the chart may check for
+
+helm template metrics-server metrics-server/metrics-server --version 3.13.0 -n kube-system \
+  --kube-version 1.35.9 \
+  --api-versions monitoring.coreos.com/v1 \
+  --is-upgrade > ms-3.13.0.yaml
+```
+
+| Flag | Effect |
+|------|--------|
+| `--kube-version <version>` | Sets `.Capabilities.KubeVersion` |
+| `--api-versions <group/version>` | Adds to `.Capabilities.APIVersions` (repeat the flag for each API) |
+| `--is-upgrade` | Sets `.Release.IsUpgrade` to true, for templates that behave differently on upgrade |
+| `--validate` | Validates the manifests against the cluster instead (needs cluster access) |
+
+Use the same flags for both versions.
+
 Other viewers for the same two files:
 
 ```bash
@@ -137,6 +161,26 @@ The whole diff is 20 changed lines: the two version labels on each of the 9 reso
 
 Note that label changes on the Deployment's `spec.selector` would be a problem (selectors are immutable). Here only the Deployment's metadata labels change, so the upgrade is safe.
 
+### Compare the Chart Sources
+
+A render diff only shows what your values produce. A feature you haven't turned on (an Ingress, a ServiceMonitor, a new `tls:` mode) can change in the templates without a single line of rendered output changing. To see everything, download both charts and diff the source:
+
+```bash
+helm pull metrics-server/metrics-server --version 3.12.2 --untar --untardir src-3.12.2
+helm pull metrics-server/metrics-server --version 3.13.0 --untar --untardir src-3.13.0
+
+diff -ru src-3.12.2/metrics-server src-3.13.0/metrics-server
+diff -rq src-3.12.2/metrics-server src-3.13.0/metrics-server     # only the names of changed files
+```
+
+The chart lands in `<untardir>/<chart name>/`: `Chart.yaml`, `values.yaml`, `templates/` and, if the chart has them, `crds/`, a `README.md` and a `CHANGELOG.md`.
+
+Many charts also describe their changes in `Chart.yaml`, in the Artifact Hub annotation:
+
+```bash
+helm show chart metrics-server/metrics-server --version 3.13.0 | grep -A 20 'artifacthub.io/changes'
+```
+
 ## 5. Method 3: Compare Values
 
 Chart defaults can change between versions, and your overrides may no longer match.
@@ -153,6 +197,22 @@ helm get values metrics-server -n kube-system --all      # overrides merged with
 For 3.12.2 to 3.13.0 the defaults gained `podDisruptionBudget.unhealthyPodEvictionPolicy` and a new `tls:` section (certificate source: `metrics-server`, `helm`, `cert-manager` or `existingSecret`, default `metrics-server`), and the addon-resizer image moved from 1.8.21 to 1.8.23.
 
 A release installed without overrides prints `null` for `helm get values ... -o yaml`.
+
+### Values on Upgrade: Don't Use --reuse-values
+
+Which values `helm upgrade` uses depends on the flags:
+
+| Upgrade with | Chart defaults from | Your overrides from |
+|--------------|---------------------|---------------------|
+| `-f values.yaml` / `--set` | New chart | The files and flags you pass |
+| No `-f` or `--set` at all | New chart | The previous release |
+| `--reuse-values` | **Old chart** | Previous release, plus any `-f` / `--set` |
+| `--reset-then-reuse-values` | New chart | Previous release, plus any `-f` / `--set` |
+| `--reset-values` | New chart | Only the `-f` / `--set` you pass |
+
+`--reuse-values` brings the old chart's defaults along, so keys the new version added (here `tls:` and `podDisruptionBudget.unhealthyPodEvictionPolicy`) don't exist during the upgrade. A template that reads them gets empty values or fails with `nil pointer evaluating interface {}`. Use `-f` with your values file, or `--reset-then-reuse-values` (Helm 3.14 and later).
+
+Preview with the same values flags you will upgrade with: `helm diff upgrade` accepts `-f`, `--set`, `--reuse-values` and `--reset-values` too.
 
 ## 6. Chart Version to App Version
 
@@ -175,6 +235,9 @@ The image tag adds a `v`: app version 0.8.0 runs `metrics-server:v0.8.0`. New ve
 ## 7. Upgrade Checklist
 
 ```bash
+diff -rq src-3.12.2/metrics-server src-3.13.0/metrics-server   # new or changed crds/? apply them first
+
+# same values flags on both commands; no --reuse-values
 helm diff upgrade metrics-server metrics-server/metrics-server --version 3.13.0 -n kube-system
 helm upgrade metrics-server metrics-server/metrics-server --version 3.13.0 -n kube-system
 
@@ -210,6 +273,7 @@ REVISION  STATUS      CHART                  APP VERSION  DESCRIPTION
 - `helm diff` talks to the cluster and fails without access (`kubernetes cluster unreachable`). Offline, use `helm template` (or `--dry-run`, which shows everything as added).
 - `helm template` doesn't run hooks or validate against live API versions, and `lookup` functions return empty.
 - Secrets are shown in the diff by default unless you pass `--suppress-secrets`.
+- CRDs in a chart's `crds/` directory are installed on the first `helm install` and then never upgraded or deleted by Helm. A new chart version can ship new CRDs that `helm upgrade` silently skips. `helm template` leaves them out unless you pass `--include-crds`, so compare them with the source diff (`diff -ru src-A/<chart>/crds src-B/<chart>/crds`) and apply them yourself with `kubectl apply --server-side -f`. CRDs that a chart puts in `templates/` instead are upgraded like any other resource. metrics-server ships no CRDs.
 
 ## See Also
 
