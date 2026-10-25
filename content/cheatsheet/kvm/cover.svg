@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">KVM / virsh Cheatsheet</title>
+  <desc id="d">KVM / virsh Cheatsheet: Virtual machines with libvirt. virsh, virt-install, snapshots, cloning, networks, storage pools, migration, libguestfs.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #1c7ed6; }
+      .a2  { fill: #343a40; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #1c7ed6; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <rect class="a2" x="1076" y="330" width="600" height="300" rx="24"/><rect class="a" x="1116" y="380" width="160" height="200" rx="14"/><rect class="wt" x="1136" y="400" width="120" height="16" rx="8" opacity="0.7"/><rect class="wt" x="1136" y="430" width="80" height="16" rx="8" opacity="0.5"/><circle class="wt" cx="1196" cy="530" r="18" opacity="0.8"/><rect class="a" x="1296" y="380" width="160" height="200" rx="14"/><rect class="wt" x="1316" y="400" width="120" height="16" rx="8" opacity="0.7"/><rect class="wt" x="1316" y="430" width="80" height="16" rx="8" opacity="0.5"/><circle class="wt" cx="1376" cy="530" r="18" opacity="0.8"/><rect class="a" x="1476" y="380" width="160" height="200" rx="14"/><rect class="wt" x="1496" y="400" width="120" height="16" rx="8" opacity="0.7"/><rect class="wt" x="1496" y="430" width="80" height="16" rx="8" opacity="0.5"/><circle class="wt" cx="1556" cy="530" r="18" opacity="0.8"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="198">KVM / virsh Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Virtual machines with libvirt</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="52">virsh · virt-install · snapshots · cloning · networks · storage pools · migration · libguestfs</text>
+</svg>

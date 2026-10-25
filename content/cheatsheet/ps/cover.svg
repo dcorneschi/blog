@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Linux Processes and Signals</title>
+  <desc id="d">Linux Processes and Signals: ps, pgrep, pkill, pstree and top. process states, signals, threads, sorting, format specifiers, kill, pgrep, pstree.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #40c057; }
+      .a2  { fill: #343a40; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #40c057; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <rect class="ink" x="1056" y="320" width="640" height="330" rx="20"/><rect class="a2" x="1056" y="320" width="640" height="46" rx="20"/><rect class="a2" x="1056" y="346" width="640" height="20"/><circle cx="1092" cy="343" r="9" fill="#fa5252"/><circle cx="1122" cy="343" r="9" fill="#fab005"/><circle cx="1152" cy="343" r="9" fill="#40c057"/><rect class="a" x="1106" y="410" width="200" height="18" rx="9"/><path d="M1126,426 V464 H1148" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1156" y="456" width="240" height="18" rx="9"/><path d="M1176,472 V510 H1198" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1206" y="502" width="160" height="18" rx="9"/><path d="M1126,518 V556 H1148" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1156" y="548" width="280" height="18" rx="9"/><path d="M1176,564 V602 H1198" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1206" y="594" width="190" height="18" rx="9"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="162">Linux Processes and Signals</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">ps, pgrep, pkill, pstree and top</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">process states · signals · threads · sorting · format specifiers · kill · pgrep · pstree</text>
+</svg>

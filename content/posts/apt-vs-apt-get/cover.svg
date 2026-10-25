@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">apt vs apt-get</title>
+  <desc id="d">apt vs apt-get: Differences and when to use each. upgrade, full-upgrade, held packages, dpkg lock, conffiles, exit codes, APT 3.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #e8590c; }
+      .a2  { fill: #c2410c; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #e8590c; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <path class="a" d="M1376,330 L1576,430 L1376,530 L1176,430 Z"/><path class="a2" d="M1176,430 L1376,530 L1376,660 L1176,560 Z"/><path class="a" d="M1576,430 L1376,530 L1376,660 L1576,560 Z" opacity="0.75"/><path class="wt" d="M1276,380 L1476,480 L1476,515 L1276,415 Z" opacity="0.6"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="210">apt vs apt-get</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Differences and when to use each</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">upgrade · full-upgrade · held packages · dpkg lock · conffiles · exit codes · APT 3</text>
+</svg>

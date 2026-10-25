@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Installing MediaWiki on Ubuntu</title>
+  <desc id="d">Installing MediaWiki on Ubuntu: MediaWiki 1.43 LTS with Apache, PHP 8.3 and MariaDB. Apache, PHP 8.3, MariaDB, Let's Encrypt, VisualEditor, MsUpload, SyntaxHighlight.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #1c7ed6; }
+      .a2  { fill: #495057; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #1c7ed6; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <path class="pap" d="M1376,360 C1296,320 1156,320 1076,350 V620 C1156,590 1296,590 1376,630 Z"/><path class="pap" d="M1376,360 C1456,320 1596,320 1676,350 V620 C1596,590 1456,590 1376,630 Z"/><text class="ink" x="1226" y="530" text-anchor="middle" font-size="150" font-family="Georgia, serif">W</text><rect class="a" x="1426" y="410" width="200" height="14" rx="7" opacity="0.6"/><rect class="a" x="1426" y="450" width="180" height="14" rx="7" opacity="0.6"/><rect class="a" x="1426" y="490" width="160" height="14" rx="7" opacity="0.6"/><rect class="a" x="1426" y="530" width="140" height="14" rx="7" opacity="0.6"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="145">Installing MediaWiki on Ubuntu</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="94">MediaWiki 1.43 LTS with Apache, PHP 8.3 and MariaDB</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">Apache · PHP 8.3 · MariaDB · Let's Encrypt · VisualEditor · MsUpload · SyntaxHighlight</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How Docker Images Are Built</title>
+  <desc id="d">How Docker Images Are Built: Layers, build cache and the container on top. RUN, COPY, whiteouts, cache order, multi-stage, shared layers, overlay2.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #1c7ed6; }
+      .a2  { fill: #2496ed; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #1c7ed6; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <path class="a" d="M1376,520 L1636,590 L1376,660 L1116,590 Z" opacity="1.00"/><path class="a" d="M1376,458 L1636,528 L1376,598 L1116,528 Z" opacity="0.85"/><path class="a" d="M1376,396 L1636,466 L1376,536 L1116,466 Z" opacity="0.70"/><path class="a" d="M1376,334 L1636,404 L1376,474 L1116,404 Z" opacity="0.55"/><path class="a" d="M1376,272 L1636,342 L1376,412 L1116,342 Z" opacity="0.40"/><path class="a2" d="M1376,210 L1636,280 L1376,350 L1116,280 Z"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="162">How Docker Images Are Built</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Layers, build cache and the container on top</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">RUN · COPY · whiteouts · cache order · multi-stage · shared layers · overlay2</text>
+</svg>

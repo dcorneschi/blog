@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Docker Compose Cheatsheet</title>
+  <desc id="d">Docker Compose Cheatsheet: Multi-container apps with Compose v2. up, down, logs, exec, run, build, config, profiles, watch, environment variables.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #2496ed; }
+      .a2  { fill: #1c7ed6; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #2496ed; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <path class="ln" d="M1166,440 L1376,560 L1586,440 M1256,420 H1496" style="stroke-width:12"/><rect class="a" x="1076" y="360" width="180" height="140" rx="16"/><rect class="wt" x="1104" y="390" width="30" height="80" rx="6" opacity="0.55"/><rect class="wt" x="1148" y="390" width="30" height="80" rx="6" opacity="0.55"/><rect class="wt" x="1192" y="390" width="30" height="80" rx="6" opacity="0.55"/><rect class="a" x="1496" y="360" width="180" height="140" rx="16"/><rect class="wt" x="1524" y="390" width="30" height="80" rx="6" opacity="0.55"/><rect class="wt" x="1568" y="390" width="30" height="80" rx="6" opacity="0.55"/><rect class="wt" x="1612" y="390" width="30" height="80" rx="6" opacity="0.55"/><rect class="a" x="1286" y="520" width="180" height="140" rx="16"/><rect class="wt" x="1314" y="550" width="30" height="80" rx="6" opacity="0.55"/><rect class="wt" x="1358" y="550" width="30" height="80" rx="6" opacity="0.55"/><rect class="wt" x="1402" y="550" width="30" height="80" rx="6" opacity="0.55"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="174">Docker Compose Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Multi-container apps with Compose v2</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">up · down · logs · exec · run · build · config · profiles · watch · environment variables</text>
+</svg>
