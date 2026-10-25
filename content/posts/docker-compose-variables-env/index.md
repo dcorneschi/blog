@@ -222,7 +222,7 @@ services:
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:v16.11.0
+    image: gitlab/gitlab-runner:v19.5.1
     environment:
       - TZ=${TZ:-UTC}
 ```
@@ -234,7 +234,7 @@ Most applications and language runtimes honor `TZ`. This requires the image to i
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:v16.11.0
+    image: gitlab/gitlab-runner:v19.5.1
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
@@ -247,7 +247,7 @@ This mirrors the host clock configuration into the container. Mount the files re
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:v16.11.0
+    image: gitlab/gitlab-runner:v19.5.1
     environment:
       - TZ=${TZ:-UTC}
     volumes:
@@ -261,7 +261,7 @@ services:
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:v16.11.0
+    image: gitlab/gitlab-runner:v19.5.1
     network_mode: host
 ```
 
@@ -361,7 +361,7 @@ If `docker compose config` shows an empty value, the variable was unset during i
 ```yaml
 services:
   gitlab-runner:
-    image: gitlab/gitlab-runner:v16.11.0
+    image: gitlab/gitlab-runner:v19.5.1
     container_name: gitlab-runner
     restart: always
     environment:
