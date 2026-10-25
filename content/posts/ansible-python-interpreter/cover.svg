@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">Ansible and the Target's Python</title>
-  <desc id="d">Ansible and the Target's Python: Which Python each OS ships and which Ansible can use it. RHEL 7–10, Ubuntu 20.04–26.04, ansible-core 2.14–2.21, interpreter discovery.</desc>
+  <desc id="d">Ansible and the Target's Python: Which Python each OS ships and which Ansible can use it. RHEL 7–10, Ubuntu 20.04–26.04, ansible-core 2.14–2.21, interpreter discovery. Small drawings: ansible, ssh, python3; a terminal running python3 --version and pip install ansible-core; target, discovery, inventory; icons for RHEL, Ubuntu, discovery, inventory, ansible.cfg, ansible-core.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -28,6 +28,41 @@
     </style>
   </defs>
   <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #c92a2a; }
+  .vs   { stroke: #c92a2a; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #c92a2a; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #c92a2a; stroke-width: 9; }
+  .vl   { fill: #c92a2a; fill-opacity: .18; }
+  .vl2  { fill: #c92a2a; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #c92a2a; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #c92a2a; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-22.0,0.0) scale(1.000)"><rect class="vpn" x="170" y="170" width="213" height="84" rx="42"/><text class="vink" x="276" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">ansible</text><path class="var" d="M391,212 H437 M417,196 L437,212 L417,228"/><rect class="vpg" x="447" y="170" width="121" height="84" rx="42"/><text class="vink" x="508" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">ssh</text><path class="var" d="M576,212 H622 M602,196 L622,212 L602,228"/><rect class="vpv" x="632" y="170" width="213" height="84" rx="42"/><text class="vink" x="738" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">python3</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ python3 --version</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ pip install ansible-core<tspan class="vcur"> █</tspan></text></g><g transform="translate(-24.0,0.0) scale(1.000)"><g transform="translate(1795,190) scale(1.150)"><rect class="vp vsw" x="25" y="22" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="44" r="7"/><rect class="vf" x="90" y="39" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="78" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="100" r="7"/><rect class="vf" x="90" y="95" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="134" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="156" r="7"/><rect class="vf" x="90" y="151" width="66" height="10" rx="5" opacity=".45"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">target</text><g transform="translate(2065,190) scale(1.150)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">discovery</text><g transform="translate(2335,190) scale(1.150)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">inventory</text></g><g transform="translate(676.0,1290) scale(0.500)"><rect class="vp vsw" x="25" y="22" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="44" r="7"/><rect class="vf" x="90" y="39" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="78" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="100" r="7"/><rect class="vf" x="90" y="95" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="134" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="156" r="7"/><rect class="vf" x="90" y="151" width="66" height="10" rx="5" opacity=".45"/></g><text class="vn" x="726" y="1450" text-anchor="middle" font-size="34">RHEL</text><g transform="translate(936.0,1290) scale(0.500)"><rect class="vp vsw" x="25" y="22" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="44" r="7"/><rect class="vf" x="90" y="39" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="78" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="100" r="7"/><rect class="vf" x="90" y="95" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="134" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="156" r="7"/><rect class="vf" x="90" y="151" width="66" height="10" rx="5" opacity=".45"/></g><text class="vn" x="986" y="1450" text-anchor="middle" font-size="34">Ubuntu</text><g transform="translate(1196.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="1246" y="1450" text-anchor="middle" font-size="34">discovery</text><g transform="translate(1456.0,1290) scale(0.500)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="1506" y="1450" text-anchor="middle" font-size="34">inventory</text><g transform="translate(1716.0,1290) scale(0.500)"><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(0 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(45 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(90 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(135 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(180 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(225 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(270 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(315 100 100)"/><circle class="vf" cx="100" cy="100" r="60"/><circle class="vp" cx="100" cy="100" r="26"/></g><text class="vn" x="1766" y="1450" text-anchor="middle" font-size="34">ansible.cfg</text><g transform="translate(1976.0,1290) scale(0.500)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="2026" y="1450" text-anchor="middle" font-size="34">ansible-core</text></g><!-- /vignettes -->
   <circle class="a" cx="1376" cy="470" r="160"/><text class="wt" x="1376" y="548" text-anchor="middle" font-size="230" font-weight="700">A</text>
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="141">Ansible and the Target's Python</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="87">Which Python each OS ships and which Ansible can use it</text>

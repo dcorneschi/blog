@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">apt vs apt-get</title>
-  <desc id="d">apt vs apt-get: Differences and when to use each. upgrade, full-upgrade, held packages, dpkg lock, conffiles, exit codes, APT 3.</desc>
+  <desc id="d">apt vs apt-get: Differences and when to use each. upgrade, full-upgrade, held packages, dpkg lock, conffiles, exit codes, APT 3. Small drawings: update, upgrade, full-upgrade; a terminal running apt update and apt upgrade; packages, dpkg lock, conffiles; icons for update, upgrade, full-upgrade, held, dpkg lock, conffiles, exit codes.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -28,6 +28,41 @@
     </style>
   </defs>
   <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #e8590c; }
+  .vs   { stroke: #e8590c; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #e8590c; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #e8590c; stroke-width: 9; }
+  .vl   { fill: #e8590c; fill-opacity: .18; }
+  .vl2  { fill: #e8590c; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #e8590c; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #e8590c; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-39.2,1.8) scale(0.996)"><rect class="vpn" x="170" y="170" width="190" height="84" rx="42"/><text class="vink" x="265" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">update</text><path class="var" d="M368,212 H414 M394,196 L414,212 L394,228"/><rect class="vpg" x="424" y="170" width="213" height="84" rx="42"/><text class="vink" x="530" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">upgrade</text><path class="var" d="M645,212 H691 M671,196 L691,212 L671,228"/><rect class="vpv" x="701" y="170" width="328" height="84" rx="42"/><text class="vink" x="865" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">full-upgrade</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ apt update</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ apt upgrade<tspan class="vcur"> █</tspan></text></g><g transform="translate(-4.0,0.0) scale(1.000)"><g transform="translate(1795,190) scale(1.150)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">packages</text><g transform="translate(2065,190) scale(1.150)"><path class="vs" d="M60,92 V64 A40,40 0 0 1 140,64 V92" stroke-width="18"/><rect class="vf" x="36" y="88" width="128" height="100" rx="16"/><circle cx="100" cy="128" r="14" fill="#fff"/><rect x="93" y="134" width="14" height="32" rx="5" fill="#fff"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">dpkg lock</text><g transform="translate(2335,190) scale(1.150)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">conffiles</text></g><g transform="translate(546.0,1290) scale(0.500)"><path class="vs" d="M166,88 A68,68 0 0 0 44,62 M34,112 A68,68 0 0 0 156,138" stroke-width="16"/><path class="vs" d="M30,30 L44,64 L78,52 M170,170 L156,136 L122,148" stroke-width="16"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">update</text><g transform="translate(806.0,1290) scale(0.500)"><path class="vs" d="M100,182 V28 M44,84 L100,28 L156,84" stroke-width="26"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">upgrade</text><g transform="translate(1066.0,1290) scale(0.500)"><path class="vf vbg" d="M20,150 L100,112 L180,150 L100,188 Z" opacity="1"/><path class="vf vbg" d="M20,116 L100,78 L180,116 L100,154 Z" opacity="0.78"/><path class="vf vbg" d="M20,82 L100,44 L180,82 L100,120 Z" opacity="0.56"/><path class="vf vbg" d="M20,48 L100,10 L180,48 L100,86 Z" opacity="0.36"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="34">full-upgrade</text><g transform="translate(1326.0,1290) scale(0.500)"><circle class="vs" cx="62" cy="100" r="36" stroke-width="18"/><path class="vs" d="M98,100 H182 M150,100 V132 M174,100 V124" stroke-width="18"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">held</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vs" d="M60,92 V64 A40,40 0 0 1 140,64 V92" stroke-width="18"/><rect class="vf" x="36" y="88" width="128" height="100" rx="16"/><circle cx="100" cy="128" r="14" fill="#fff"/><rect x="93" y="134" width="14" height="32" rx="5" fill="#fff"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">dpkg lock</text><g transform="translate(1846.0,1290) scale(0.500)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">conffiles</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vs" d="M76,22 L60,178 M140,22 L124,178 M30,70 H178 M22,130 H170" stroke-width="18"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">exit codes</text></g><!-- /vignettes -->
   <path class="a" d="M1376,330 L1576,430 L1376,530 L1176,430 Z"/><path class="a2" d="M1176,430 L1376,530 L1376,660 L1176,560 Z"/><path class="a" d="M1576,430 L1376,530 L1376,660 L1576,560 Z" opacity="0.75"/><path class="wt" d="M1276,380 L1476,480 L1476,515 L1276,415 Z" opacity="0.6"/>
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="210">apt vs apt-get</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Differences and when to use each</text>

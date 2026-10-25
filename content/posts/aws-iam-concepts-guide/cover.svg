@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">AWS IAM Concepts Guide</title>
-  <desc id="d">AWS IAM Concepts Guide: Users, roles, policies and how access is decided. users, groups, roles, policies, Principal, STS, trust policies, evaluation.</desc>
+  <desc id="d">AWS IAM Concepts Guide: Users, roles, policies and how access is decided. users, groups, roles, policies, Principal, STS, trust policies, evaluation. Small drawings: request, policies, allow; a terminal running aws sts get-caller-identity; principal, policy, decision; icons for users, groups, roles, policies, STS, evaluation.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -28,6 +28,41 @@
     </style>
   </defs>
   <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #f59f00; }
+  .vs   { stroke: #f59f00; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #f59f00; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #f59f00; stroke-width: 9; }
+  .vl   { fill: #f59f00; fill-opacity: .18; }
+  .vl2  { fill: #f59f00; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #f59f00; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #f59f00; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-26.0,0.0) scale(1.000)"><rect class="vpn" x="170" y="170" width="213" height="84" rx="42"/><text class="vink" x="276" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">request</text><path class="var" d="M391,212 H437 M417,196 L437,212 L417,228"/><rect class="vpg" x="447" y="170" width="236" height="84" rx="42"/><text class="vink" x="565" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">policies</text><path class="var" d="M691,212 H737 M717,196 L737,212 L717,228"/><rect class="vpv" x="747" y="170" width="167" height="84" rx="42"/><text class="vink" x="830" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">allow</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ aws sts get-caller-identity<tspan class="vcur"> █</tspan></text></g><g transform="translate(461.4,52.3) scale(0.842)"><g transform="translate(1795,190) scale(1.150)"><circle class="vf" cx="100" cy="64" r="40"/><path class="vf" d="M30,188 C30,130 60,112 100,112 C140,112 170,130 170,188 Z"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">principal</text><g transform="translate(2065,190) scale(1.150)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">policy</text><g transform="translate(2335,190) scale(1.150)"><path class="vf" d="M100,12 L172,38 V96 C172,142 140,176 100,190 C60,176 28,142 28,96 V38 Z"/><path d="M64,100 L90,126 L138,76" stroke="#fff" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">decision</text></g><g transform="translate(676.0,1290) scale(0.500)"><circle class="vf" cx="100" cy="64" r="40"/><path class="vf" d="M30,188 C30,130 60,112 100,112 C140,112 170,130 170,188 Z"/></g><text class="vn" x="726" y="1450" text-anchor="middle" font-size="34">users</text><g transform="translate(936.0,1290) scale(0.500)"><circle class="vf" cx="52" cy="78" r="26" opacity=".6"/><path class="vf" d="M8,170 C8,130 28,114 52,114 C76,114 96,130 96,170 Z" opacity=".6"/><circle class="vf" cx="148" cy="78" r="26" opacity=".6"/><path class="vf" d="M104,170 C104,130 124,114 148,114 C172,114 192,130 192,170 Z" opacity=".6"/><circle class="vf" cx="100" cy="66" r="32"/><path class="vf" d="M46,186 C46,138 70,118 100,118 C130,118 154,138 154,186 Z"/></g><text class="vn" x="986" y="1450" text-anchor="middle" font-size="34">groups</text><g transform="translate(1196.0,1290) scale(0.500)"><circle class="vs" cx="62" cy="100" r="36" stroke-width="18"/><path class="vs" d="M98,100 H182 M150,100 V132 M174,100 V124" stroke-width="18"/></g><text class="vn" x="1246" y="1450" text-anchor="middle" font-size="34">roles</text><g transform="translate(1456.0,1290) scale(0.500)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="1506" y="1450" text-anchor="middle" font-size="34">policies</text><g transform="translate(1716.0,1290) scale(0.500)"><path class="vs" d="M166,88 A68,68 0 0 0 44,62 M34,112 A68,68 0 0 0 156,138" stroke-width="16"/><path class="vs" d="M30,30 L44,64 L78,52 M170,170 L156,136 L122,148" stroke-width="16"/></g><text class="vn" x="1766" y="1450" text-anchor="middle" font-size="34">STS</text><g transform="translate(1976.0,1290) scale(0.500)"><circle class="vf" cx="100" cy="100" r="82"/><path d="M58,102 L88,132 L144,72" stroke="#fff" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="2026" y="1450" text-anchor="middle" font-size="34">evaluation</text></g><!-- /vignettes -->
   <path class="a" d="M1376,320 L1546,380 V490 C1546,580 1466,640 1376,670 C1286,640 1206,580 1206,490 V380 Z"/><circle class="wt" cx="1376" cy="470" r="46"/><rect class="wt" x="1358" y="490" width="36" height="90" rx="12"/><circle class="a2" cx="1636" cy="430" r="50"/><rect class="a2" x="1676" y="420" width="140" height="22" rx="8"/><rect class="a2" x="1776" y="440" width="22" height="40" rx="6"/><rect class="a2" x="1736" y="440" width="22" height="30" rx="6"/><circle class="bg" cx="1636" cy="430" r="20"/>
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="198">AWS IAM Concepts Guide</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Users, roles, policies and how access is decided</text>

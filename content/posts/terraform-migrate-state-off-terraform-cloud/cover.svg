@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">Migrating State Off HCP Terraform</title>
-  <desc id="d">Migrating State Off HCP Terraform: From Terraform Cloud to a backend you run. terraform state pull, local, S3, AzureRM, GCS, workspaces, plan.</desc>
+  <desc id="d">Migrating State Off HCP Terraform: From Terraform Cloud to a backend you run. terraform state pull, local, S3, AzureRM, GCS, workspaces, plan. Small drawings: HCP, local, S3; a terminal running terraform state pull and terraform init; HCP Terraform, migrate, your backend; icons for HCP, state pull, local, S3, AzureRM, GCS, workspaces.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -28,6 +28,41 @@
     </style>
   </defs>
   <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #7b42bc; }
+  .vs   { stroke: #7b42bc; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #7b42bc; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #7b42bc; stroke-width: 9; }
+  .vl   { fill: #7b42bc; fill-opacity: .18; }
+  .vl2  { fill: #7b42bc; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #7b42bc; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #7b42bc; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-9.4,70.1) scale(0.820)"><rect class="vpn" x="170" y="170" width="121" height="84" rx="42"/><text class="vink" x="230" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">HCP</text><path class="var" d="M299,212 H345 M325,196 L345,212 L325,228"/><rect class="vpg" x="355" y="170" width="167" height="84" rx="42"/><text class="vink" x="438" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">local</text><path class="var" d="M530,212 H576 M556,196 L576,212 L556,228"/><rect class="vpv" x="586" y="170" width="98" height="84" rx="42"/><text class="vink" x="635" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">S3</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ terraform state pull</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ terraform init<tspan class="vcur"> █</tspan></text></g><g transform="translate(128.3,9.4) scale(0.971)"><g transform="translate(1795,190) scale(1.150)"><path class="vf" d="M46,150 A40,40 0 0 1 52,72 A56,56 0 0 1 152,70 A42,42 0 0 1 156,150 Z"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">HCP Terraform</text><g transform="translate(2065,190) scale(1.150)"><path class="vs" d="M30,68 H166 M132,34 L166,68 L132,102" stroke-width="18"/><path class="vs2" d="M170,138 H34 M68,104 L34,138 L68,172" stroke-width="18"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">migrate</text><g transform="translate(2335,190) scale(1.150)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">your backend</text></g><g transform="translate(546.0,1290) scale(0.500)"><path class="vf" d="M46,150 A40,40 0 0 1 52,72 A56,56 0 0 1 152,70 A42,42 0 0 1 156,150 Z"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">HCP</text><g transform="translate(806.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">state pull</text><g transform="translate(1066.0,1290) scale(0.500)"><path class="vf" d="M16,44 H80 L98,64 H184 V176 H16 Z"/><path d="M16,84 H184" stroke="#fff" stroke-width="6" opacity=".5"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="34">local</text><g transform="translate(1326.0,1290) scale(0.500)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">S3</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">AzureRM</text><g transform="translate(1846.0,1290) scale(0.500)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">GCS</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vf vbg" d="M20,150 L100,112 L180,150 L100,188 Z" opacity="1"/><path class="vf vbg" d="M20,116 L100,78 L180,116 L100,154 Z" opacity="0.78"/><path class="vf vbg" d="M20,82 L100,44 L180,82 L100,120 Z" opacity="0.56"/><path class="vf vbg" d="M20,48 L100,10 L180,48 L100,86 Z" opacity="0.36"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">workspaces</text></g><!-- /vignettes -->
   <g transform="translate(1002,330) scale(12)"><path class="a" d="M1.44 0v7.575l6.561 3.79V3.787z"/><path class="a" d="M8.72 4.23v7.575l6.561 3.787V8.018z"/><path class="a" d="M8.72 12.635v7.575L15.28 24v-7.578z"/><path class="a2" d="M22.56 4.227l-6.561 3.791v7.574l6.56-3.787z"/></g><path d="M1466,470 a60,60 0 0 1 40,-105 a85,85 0 0 1 160,10 a55,55 0 0 1 30,95 z" fill="#adb5bd"/><path class="al" d="M1626,490 V560 M1596,530 L1626,560 L1656,530" style="stroke:#495057"/><ellipse cx="1626" cy="590" rx="80" ry="22" fill="#495057"/><rect x="1546" y="590" width="160" height="40" fill="#495057"/><ellipse cx="1626" cy="630" rx="80" ry="22" fill="#495057"/>
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="132">Migrating State Off HCP Terraform</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">From Terraform Cloud to a backend you run</text>

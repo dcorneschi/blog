@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">Terraform Cheatsheet</title>
-  <desc id="d">Terraform Cheatsheet: Mastering Infrastructure as Code. init, plan, apply, state, workspaces, variables, modules, S3 backend, CI/CD.</desc>
+  <desc id="d">Terraform Cheatsheet: Mastering Infrastructure as Code. init, plan, apply, state, workspaces, variables, modules, S3 backend, CI/CD. Small drawings: init, plan, apply; a terminal running terraform init and terraform plan; .tf files, state, providers; icons for init, plan, apply, state, workspaces, modules, S3 backend.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -28,6 +28,41 @@
     </style>
   </defs>
   <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #7b42bc; }
+  .vs   { stroke: #7b42bc; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #7b42bc; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #7b42bc; stroke-width: 9; }
+  .vl   { fill: #7b42bc; fill-opacity: .18; }
+  .vl2  { fill: #7b42bc; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #7b42bc; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #7b42bc; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-4.0,0.0) scale(1.000)"><rect class="vpn" x="170" y="170" width="144" height="84" rx="42"/><text class="vink" x="242" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">init</text><path class="var" d="M322,212 H368 M348,196 L368,212 L348,228"/><rect class="vpg" x="378" y="170" width="144" height="84" rx="42"/><text class="vink" x="450" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">plan</text><path class="var" d="M530,212 H576 M556,196 L576,212 L556,228"/><rect class="vpv" x="586" y="170" width="167" height="84" rx="42"/><text class="vink" x="670" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">apply</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ terraform init</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ terraform plan<tspan class="vcur"> █</tspan></text></g><g transform="translate(-40.0,0.0) scale(1.000)"><g transform="translate(1795,190) scale(1.150)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">.tf files</text><g transform="translate(2065,190) scale(1.150)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">state</text><g transform="translate(2335,190) scale(1.150)"><path class="vf" d="M46,150 A40,40 0 0 1 52,72 A56,56 0 0 1 152,70 A42,42 0 0 1 156,150 Z"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">providers</text></g><g transform="translate(546.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">init</text><g transform="translate(806.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">plan</text><g transform="translate(1066.0,1290) scale(0.500)"><circle class="vf" cx="100" cy="100" r="82"/><path d="M58,102 L88,132 L144,72" stroke="#fff" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="34">apply</text><g transform="translate(1326.0,1290) scale(0.500)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">state</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vf vbg" d="M20,150 L100,112 L180,150 L100,188 Z" opacity="1"/><path class="vf vbg" d="M20,116 L100,78 L180,116 L100,154 Z" opacity="0.78"/><path class="vf vbg" d="M20,82 L100,44 L180,82 L100,120 Z" opacity="0.56"/><path class="vf vbg" d="M20,48 L100,10 L180,48 L100,86 Z" opacity="0.36"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">workspaces</text><g transform="translate(1846.0,1290) scale(0.500)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">modules</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vf" d="M46,150 A40,40 0 0 1 52,72 A56,56 0 0 1 152,70 A42,42 0 0 1 156,150 Z"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">S3 backend</text></g><!-- /vignettes -->
   <g transform="translate(1232,330) scale(12)"><path class="a" d="M1.44 0v7.575l6.561 3.79V3.787z"/><path class="a" d="M8.72 4.23v7.575l6.561 3.787V8.018z"/><path class="a" d="M8.72 12.635v7.575L15.28 24v-7.578z"/><path class="a2" d="M22.56 4.227l-6.561 3.791v7.574l6.56-3.787z"/></g>
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="210">Terraform Cheatsheet</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Mastering Infrastructure as Code</text>

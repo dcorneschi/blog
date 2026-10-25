@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">Kubernetes Pod Lifecycle</title>
-  <desc id="d">Kubernetes Pod Lifecycle: From creation to deletion. phases, conditions, init containers, probes, hooks, graceful shutdown, restart policies.</desc>
+  <desc id="d">Kubernetes Pod Lifecycle: From creation to deletion. phases, conditions, init containers, probes, hooks, graceful shutdown, restart policies. Small drawings: Pending, Running, Succeeded; a terminal running kubectl apply -f pod.yaml and kubectl get pods; pod, init containers, shutdown; icons for phases, conditions, init containers, probes, hooks, shutdown, restarts.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -28,6 +28,41 @@
     </style>
   </defs>
   <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #326ce5; }
+  .vs   { stroke: #326ce5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #326ce5; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #326ce5; stroke-width: 9; }
+  .vl   { fill: #326ce5; fill-opacity: .18; }
+  .vl2  { fill: #326ce5; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #326ce5; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #326ce5; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-40.0,0.0) scale(1.000)"><rect class="vpn" x="170" y="170" width="213" height="84" rx="42"/><text class="vink" x="276" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">Pending</text><path class="var" d="M391,212 H437 M417,196 L437,212 L417,228"/><rect class="vpg" x="447" y="170" width="213" height="84" rx="42"/><text class="vink" x="554" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">Running</text><path class="var" d="M668,212 H714 M694,196 L714,212 L694,228"/><rect class="vpv" x="724" y="170" width="259" height="84" rx="42"/><text class="vink" x="854" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">Succeeded</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ kubectl apply -f pod.yaml</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ kubectl get pods<tspan class="vcur"> █</tspan></text></g><g transform="translate(-4.0,0.0) scale(1.000)"><g transform="translate(1795,190) scale(1.150)"><polygon class="vf" points="100,14 174,57 174,143 100,186 26,143 26,57"/><rect x="64" y="64" width="72" height="72" rx="10" fill="#fff" opacity=".9"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">pod</text><g transform="translate(2065,190) scale(1.150)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">init containers</text><g transform="translate(2335,190) scale(1.150)"><circle class="vp vsw" cx="100" cy="100" r="78"/><path class="vs" d="M100,52 V100 L136,124" stroke-width="14"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">shutdown</text></g><g transform="translate(546.0,1290) scale(0.500)"><polygon class="vf" points="100,14 174,57 174,143 100,186 26,143 26,57"/><rect x="64" y="64" width="72" height="72" rx="10" fill="#fff" opacity=".9"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">phases</text><g transform="translate(806.0,1290) scale(0.500)"><circle class="vf" cx="100" cy="100" r="82"/><path d="M58,102 L88,132 L144,72" stroke="#fff" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">conditions</text><g transform="translate(1066.0,1290) scale(0.500)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="30">init containers</text><g transform="translate(1326.0,1290) scale(0.500)"><path class="vf" d="M100,180 C30,130 8,80 40,48 C64,24 92,36 100,58 C108,36 136,24 160,48 C192,80 170,130 100,180 Z"/><path d="M8,104 H62 L78,78 L98,134 L118,92 L128,104 H192" stroke="#fff" stroke-width="10" fill="none" stroke-linejoin="round" stroke-linecap="round"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">probes</text><g transform="translate(1586.0,1290) scale(0.500)"><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(0 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(45 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(90 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(135 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(180 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(225 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(270 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(315 100 100)"/><circle class="vf" cx="100" cy="100" r="60"/><circle class="vp" cx="100" cy="100" r="26"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">hooks</text><g transform="translate(1846.0,1290) scale(0.500)"><circle class="vp vsw" cx="100" cy="100" r="78"/><path class="vs" d="M100,52 V100 L136,124" stroke-width="14"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">shutdown</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vs" d="M166,88 A68,68 0 0 0 44,62 M34,112 A68,68 0 0 0 156,138" stroke-width="16"/><path class="vs" d="M30,30 L44,64 L78,52 M170,170 L156,136 L122,148" stroke-width="16"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">restarts</text></g><!-- /vignettes -->
   <polygon class="a" points="1471,530 1376,585 1281,530 1281,420 1376,365 1471,420"/><path class="al" d="M1566,435 A195,195 0 0 0 1256,325" style="stroke:#868e96"/><path class="al" d="M1186,515 A195,195 0 0 0 1496,625" style="stroke:#868e96"/><path class="al" d="M1216,285 L1256,325 L1206,355" style="stroke:#868e96"/><path class="al" d="M1536,665 L1496,625 L1546,595" style="stroke:#868e96"/><rect class="wt" x="1331" y="430" width="90" height="90" rx="12" opacity="0.85"/>
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="182">Kubernetes Pod Lifecycle</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">From creation to deletion</text>

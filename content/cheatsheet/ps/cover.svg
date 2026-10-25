@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">Linux Processes and Signals</title>
-  <desc id="d">Linux Processes and Signals: ps, pgrep, pkill, pstree and top. process states, signals, threads, sorting, format specifiers, kill, pgrep, pstree.</desc>
+  <desc id="d">Linux Processes and Signals: ps, pgrep, pkill, pstree and top. process states, signals, threads, sorting, format specifiers, kill, pgrep, pstree. Small drawings: fork, running, zombie; a terminal running pgrep -af '&lt;pattern&gt;' and pkill -u username; pstree, signals, top; icons for ps, pgrep, kill, pstree, top, threads, format.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -28,6 +28,41 @@
     </style>
   </defs>
   <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #40c057; }
+  .vs   { stroke: #40c057; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #40c057; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #40c057; stroke-width: 9; }
+  .vl   { fill: #40c057; fill-opacity: .18; }
+  .vl2  { fill: #40c057; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #40c057; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #40c057; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-16.3,54.3) scale(0.861)"><rect class="vpn" x="170" y="170" width="144" height="84" rx="42"/><text class="vink" x="242" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">fork</text><path class="var" d="M322,212 H368 M348,196 L368,212 L348,228"/><rect class="vpg" x="378" y="170" width="213" height="84" rx="42"/><text class="vink" x="484" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">running</text><path class="var" d="M599,212 H645 M625,196 L645,212 L625,228"/><rect class="vpv" x="655" y="170" width="190" height="84" rx="42"/><text class="vink" x="750" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">zombie</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ pgrep -af '&lt;pattern&gt;'</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ pkill -u username<tspan class="vcur"> █</tspan></text></g><g transform="translate(61.7,0.9) scale(0.997)"><g transform="translate(1795,190) scale(1.150)"><path class="vg" d="M44,46 V160 M44,94 H92 M44,160 H92 M108,120 V140 H140" stroke-width="8"/><rect class="vf" x="24" y="22" width="74" height="34" rx="10"/><rect class="vf" x="92" y="76" width="88" height="34" rx="10"/><rect class="vf" x="92" y="142" width="88" height="34" rx="10"/><rect class="vf" x="140" y="128" width="46" height="34" rx="10"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">pstree</text><g transform="translate(2065,190) scale(1.150)"><path class="vf" d="M118,10 L40,116 H96 L80,190 L162,80 H106 Z"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">signals</text><g transform="translate(2335,190) scale(1.150)"><path class="vg" d="M20,180 H184" stroke-width="8"/><rect class="vf" x="30" y="102" width="22" height="70" rx="4" opacity="0.5"/><rect class="vf" x="62" y="52" width="22" height="120" rx="4" opacity="0.6"/><rect class="vf" x="94" y="122" width="22" height="50" rx="4" opacity="0.7"/><rect class="vf" x="126" y="22" width="22" height="150" rx="4" opacity="0.8"/><rect class="vf" x="158" y="77" width="22" height="95" rx="4" opacity="0.9"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">top</text></g><g transform="translate(546.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">ps</text><g transform="translate(806.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">pgrep</text><g transform="translate(1066.0,1290) scale(0.500)"><path class="vf" d="M118,10 L40,116 H96 L80,190 L162,80 H106 Z"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="34">kill</text><g transform="translate(1326.0,1290) scale(0.500)"><path class="vg" d="M44,46 V160 M44,94 H92 M44,160 H92 M108,120 V140 H140" stroke-width="8"/><rect class="vf" x="24" y="22" width="74" height="34" rx="10"/><rect class="vf" x="92" y="76" width="88" height="34" rx="10"/><rect class="vf" x="92" y="142" width="88" height="34" rx="10"/><rect class="vf" x="140" y="128" width="46" height="34" rx="10"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">pstree</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vg" d="M20,180 H184" stroke-width="8"/><rect class="vf" x="30" y="102" width="22" height="70" rx="4" opacity="0.5"/><rect class="vf" x="62" y="52" width="22" height="120" rx="4" opacity="0.6"/><rect class="vf" x="94" y="122" width="22" height="50" rx="4" opacity="0.7"/><rect class="vf" x="126" y="22" width="22" height="150" rx="4" opacity="0.8"/><rect class="vf" x="158" y="77" width="22" height="95" rx="4" opacity="0.9"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">top</text><g transform="translate(1846.0,1290) scale(0.500)"><path class="vf vbg" d="M20,150 L100,112 L180,150 L100,188 Z" opacity="1"/><path class="vf vbg" d="M20,116 L100,78 L180,116 L100,154 Z" opacity="0.78"/><path class="vf vbg" d="M20,82 L100,44 L180,82 L100,120 Z" opacity="0.56"/><path class="vf vbg" d="M20,48 L100,10 L180,48 L100,86 Z" opacity="0.36"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">threads</text><g transform="translate(2106.0,1290) scale(0.500)"><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(0 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(45 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(90 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(135 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(180 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(225 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(270 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(315 100 100)"/><circle class="vf" cx="100" cy="100" r="60"/><circle class="vp" cx="100" cy="100" r="26"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">format</text></g><!-- /vignettes -->
   <rect class="ink" x="1056" y="320" width="640" height="330" rx="20"/><rect class="a2" x="1056" y="320" width="640" height="46" rx="20"/><rect class="a2" x="1056" y="346" width="640" height="20"/><circle cx="1092" cy="343" r="9" fill="#fa5252"/><circle cx="1122" cy="343" r="9" fill="#fab005"/><circle cx="1152" cy="343" r="9" fill="#40c057"/><rect class="a" x="1106" y="410" width="200" height="18" rx="9"/><path d="M1126,426 V464 H1148" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1156" y="456" width="240" height="18" rx="9"/><path d="M1176,472 V510 H1198" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1206" y="502" width="160" height="18" rx="9"/><path d="M1126,518 V556 H1148" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1156" y="548" width="280" height="18" rx="9"/><path d="M1176,564 V602 H1198" stroke="#868e96" stroke-width="6" fill="none"/><rect class="a" x="1206" y="594" width="190" height="18" rx="9"/>
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="162">Linux Processes and Signals</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">ps, pgrep, pkill, pstree and top</text>
