@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Layer digest vs DiffID</title>
+  <desc id="d">A layer's digest is the sha256 of the compressed tarball, used in the manifest, the blob URL and the checksum check after download. Its DiffID is the sha256 of the uncompressed tarball, listed in the image config and docker image inspect. For the example layer they are sha256:2714a90c and sha256:8737af7d.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="880" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Layer digest vs DiffID</text>
+  <text class="sub" x="20" y="48">One layer of pulltest:1, hashed by hand after downloading it with curl</text>
+  <rect class="r" x="20" y="76" width="300" height="92" rx="6"/>
+  <text class="tb" x="36" y="100">layer.tar.gz (compressed)</text>
+  <text class="d" x="36" y="120">what the registry stores and sends</text>
+  <text class="d" x="36" y="138">31 467 048 bytes</text>
+  <rect class="g" x="560" y="76" width="300" height="92" rx="6"/>
+  <text class="tb" x="576" y="100">layer.tar (uncompressed)</text>
+  <text class="d" x="576" y="120">what gets unpacked: one file, l1</text>
+  <text class="d" x="576" y="138">the filesystem changes of the layer</text>
+  <path class="lne" d="M320,122 H556"/>
+  <text class="m" x="438" y="114" text-anchor="middle">zcat</text>
+  <path class="lne" d="M170,168 V204"/>
+  <path class="lne" d="M710,168 V204"/>
+  <rect class="s" x="20" y="208" width="300" height="150" rx="6"/>
+  <text class="tb" x="36" y="232">digest = sha256 of the .tar.gz</text>
+  <text class="m" x="36" y="254">sha256:2714a90c…</text>
+  <text class="d" x="36" y="280">in the manifest's layers list</text>
+  <text class="d" x="36" y="297">in the URL /v2/&lt;repo&gt;/blobs/&lt;digest&gt;</text>
+  <text class="d" x="36" y="314">docker manifest inspect</text>
+  <text class="d" x="36" y="331">checked after download (Verifying Checksum)</text>
+  <rect class="s" x="560" y="208" width="300" height="150" rx="6"/>
+  <text class="tb" x="576" y="232">DiffID = sha256 of the .tar</text>
+  <text class="m" x="576" y="254">sha256:8737af7d…</text>
+  <text class="d" x="576" y="280">in the image config's diff_ids list</text>
+  <text class="d" x="576" y="297">docker image inspect … .RootFS.Layers</text>
+  <text class="d" x="576" y="314">computed while unpacking</text>
+  <text class="d" x="576" y="331">stays the same if the layer is recompressed</text>
+  <text class="d" x="20" y="384">Same layer, two identities: the registry and the download work with digests, the local image with DiffIDs.</text>
+</svg>

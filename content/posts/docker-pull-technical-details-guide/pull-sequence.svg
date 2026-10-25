@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 490" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">docker pull on the wire</title>
+  <desc id="d">The daemon sends GET /v2/, HEAD of the tag's manifest to get the digest, GET of the manifest by digest, GET of the config blob, then GET of each layer blob, three at a time on the classic store. A repeat pull stops after the HEAD, a digest pull of a local image after the ping, and the containerd image store skips the ping.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="1140" height="490" fill="#ffffff"/>
+  <text class="h" x="20" y="28">docker pull on the wire</text>
+  <text class="sub" x="20" y="48">Registry requests for reg:5000/pulltest:1, from the registry's access log (classic image store)</text>
+  <rect class="r" x="60" y="66" width="180" height="40" rx="6"/>
+  <text class="tb" x="150" y="91" text-anchor="middle">Docker daemon</text>
+  <rect class="rw" x="660" y="66" width="180" height="40" rx="6"/>
+  <text class="tb" x="750" y="91" text-anchor="middle">Registry</text>
+  <line class="dash" x1="150" y1="106" x2="150" y2="470"/>
+  <line class="dash" x1="750" y1="106" x2="750" y2="470"/>
+  <path class="lne" d="M150,140 H746"/>
+  <text class="m" x="162" y="132">GET /v2/</text>
+  <path class="lne" d="M750,166 H154" style="stroke-dasharray:4 3"/>
+  <text class="d" x="738" y="160" text-anchor="end">200 · auth starts here when it's 401</text>
+  <circle cx="124" cy="150" r="11" fill="#495057"/>
+  <text class="num" x="124" y="154">1</text>
+  <path class="lne" d="M150,206 H746"/>
+  <text class="m" x="162" y="198">HEAD /v2/pulltest/manifests/1</text>
+  <path class="lne" d="M750,232 H154" style="stroke-dasharray:4 3"/>
+  <text class="d" x="738" y="226" text-anchor="end">200 · Docker-Content-Digest: sha256:8d92…</text>
+  <circle cx="124" cy="216" r="11" fill="#495057"/>
+  <text class="num" x="124" y="220">2</text>
+  <path class="lne" d="M150,272 H746"/>
+  <text class="m" x="162" y="264">GET /v2/pulltest/manifests/sha256:8d92…</text>
+  <path class="lne" d="M750,298 H154" style="stroke-dasharray:4 3"/>
+  <text class="d" x="738" y="292" text-anchor="end">200 · manifest, 1446 bytes</text>
+  <circle cx="124" cy="282" r="11" fill="#495057"/>
+  <text class="num" x="124" y="286">3</text>
+  <path class="lne" d="M150,338 H746"/>
+  <text class="m" x="162" y="330">GET /v2/pulltest/blobs/sha256:6610… (config)</text>
+  <path class="lne" d="M750,364 H154" style="stroke-dasharray:4 3"/>
+  <text class="d" x="738" y="358" text-anchor="end">200 · 1793 bytes, DiffIDs inside</text>
+  <circle cx="124" cy="348" r="11" fill="#495057"/>
+  <text class="num" x="124" y="352">4</text>
+  <path class="lne" d="M150,404 H746"/>
+  <text class="m" x="162" y="396">GET /v2/pulltest/blobs/&lt;layer&gt;  × 6, 3 at a time</text>
+  <path class="lne" d="M750,430 H154" style="stroke-dasharray:4 3"/>
+  <text class="d" x="738" y="424" text-anchor="end">200 · 4 MB + 5 × 30 MB</text>
+  <circle cx="124" cy="414" r="11" fill="#495057"/>
+  <text class="num" x="124" y="418">5</text>
+  <text class="tb" x="860" y="140">Repeat pull, image local</text>
+  <text class="d" x="860" y="158">only 1 and 2: the HEAD returns the same</text>
+  <text class="d" x="860" y="173">digest, so nothing else is fetched</text>
+  <text class="tb" x="860" y="210">Pull by digest, image local</text>
+  <text class="d" x="860" y="228">only 1</text>
+  <text class="tb" x="860" y="266">containerd image store</text>
+  <text class="d" x="860" y="284">no 1: starts with the HEAD</text>
+  <text class="tb" x="860" y="322">Multi-platform image</text>
+  <text class="d" x="860" y="340">3 returns an index; one more GET</text>
+  <text class="d" x="860" y="355">fetches the manifest for the platform</text>
+  <text class="tb" x="860" y="393">Tag doesn't exist</text>
+  <text class="d" x="860" y="411">classic: 2 and a GET of the tag, both 404</text>
+  <text class="d" x="860" y="426">containerd: only 2, 404</text>
+</svg>
