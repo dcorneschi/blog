@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 456" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Ports and networks</title>
+  <desc id="d">Publishing a port: a client connects to host port 8080, an iptables DNAT rule forwards it over the docker0 bridge to port 80 of the nginx container. Name resolution: on the default bridge the name web does not resolve (NXDOMAIN, bad address 'web'); on a user-defined network the embedded DNS server at 127.0.0.11 resolves web to the container's IP. Host network: the container shares the host's network stack, nginx listens on host port 80 directly and -p is discarded with a warning.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="456" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Ports and networks</text>
+  <text class="sub" x="20" y="48">How traffic reaches a container, and how containers find each other (Docker 29.9.2)</text>
+  <rect class="n" x="20" y="64" width="800" height="140" rx="6"/>
+  <text class="lb" x="32" y="82">PUBLISHING A PORT</text>
+  <rect class="s" x="36" y="96" width="136" height="52" rx="6"/>
+  <text class="mb" x="104" y="118" text-anchor="middle">client</text>
+  <text class="d" x="104" y="136" text-anchor="middle">curl localhost:8080</text>
+  <rect class="s" x="194" y="96" width="136" height="52" rx="6"/>
+  <text class="mb" x="262" y="118" text-anchor="middle">host :8080</text>
+  <text class="d" x="262" y="136" text-anchor="middle">published port</text>
+  <path class="lne" d="M172,122 L192,122"/>
+  <rect class="rw" x="352" y="96" width="136" height="52" rx="6"/>
+  <text class="mb" x="420" y="118" text-anchor="middle">iptables DNAT</text>
+  <text class="d" x="420" y="136" text-anchor="middle">to container IP:80</text>
+  <path class="lne" d="M330,122 L350,122"/>
+  <rect class="r" x="510" y="96" width="136" height="52" rx="6"/>
+  <text class="mb" x="578" y="118" text-anchor="middle">docker0</text>
+  <text class="d" x="578" y="136" text-anchor="middle">default bridge</text>
+  <path class="lne" d="M488,122 L508,122"/>
+  <rect class="g" x="668" y="96" width="136" height="52" rx="6"/>
+  <text class="mb" x="736" y="118" text-anchor="middle">web :80</text>
+  <text class="d" x="736" y="136" text-anchor="middle">nginx container</text>
+  <path class="lne" d="M646,122 L666,122"/>
+  <text class="m" x="36" y="184">docker run -d --name web -p 8080:80 nginx</text>
+  <rect class="n" x="20" y="222" width="520" height="214" rx="6"/>
+  <text class="lb" x="32" y="240">NAME RESOLUTION</text>
+  <text class="tb" x="36" y="264">default bridge (docker0)</text>
+  <rect class="s" x="36" y="274" width="110" height="44" rx="6"/>
+  <text class="mb" x="91" y="301" text-anchor="middle">alpine</text>
+  <path class="lnx" d="M146,296 L388,296"/>
+  <text class="m" x="266" y="288" text-anchor="middle">http://web</text>
+  <rect class="x" x="390" y="274" width="136" height="44" rx="6"/>
+  <text class="mb" x="458" y="293" text-anchor="middle">NXDOMAIN</text>
+  <text class="ms" x="458" y="309" text-anchor="middle">bad address 'web'</text>
+  <text class="tb" x="36" y="344">user-defined network appnet (br-…)</text>
+  <rect class="s" x="36" y="354" width="110" height="44" rx="6"/>
+  <text class="mb" x="91" y="381" text-anchor="middle">app</text>
+  <path class="lne" d="M146,376 L196,376"/>
+  <rect class="r" x="198" y="354" width="150" height="44" rx="6"/>
+  <text class="mb" x="273" y="373" text-anchor="middle">embedded DNS</text>
+  <text class="ms" x="273" y="389" text-anchor="middle">127.0.0.11</text>
+  <path class="lne" d="M348,376 L388,376"/>
+  <rect class="g" x="390" y="354" width="136" height="44" rx="6"/>
+  <text class="mb" x="458" y="373" text-anchor="middle">web</text>
+  <text class="ms" x="458" y="389" text-anchor="middle">container IP</text>
+  <text class="d" x="36" y="422">Containers on a network you create find each other by name; the default bridge does not resolve container names.</text>
+  <rect class="n" x="556" y="222" width="264" height="214" rx="6"/>
+  <text class="lb" x="568" y="240">HOST NETWORK</text>
+  <rect class="g" x="572" y="254" width="232" height="54" rx="6"/>
+  <text class="mb" x="688" y="277" text-anchor="middle">nginx on host :80</text>
+  <text class="d" x="688" y="295" text-anchor="middle">shares the host's network stack</text>
+  <text class="m" x="572" y="330">docker run -d --network host nginx</text>
+  <text class="c" x="572" y="352">No bridge, no NAT, no port mapping.</text>
+  <text class="c" x="572" y="370">-p is ignored with a warning:</text>
+  <text class="ms" x="572" y="390">Published ports are discarded</text>
+  <text class="ms" x="572" y="405">when using host network mode</text>
+</svg>
