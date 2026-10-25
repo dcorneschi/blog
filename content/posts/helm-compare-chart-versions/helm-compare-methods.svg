@@ -3,7 +3,7 @@
   <desc id="d">helm diff upgrade compares the deployed release with a new chart version; helm template twice and diff compares two chart versions without a cluster; helm diff revision compares two revisions; helm diff rollback compares the deployed release with an older revision; helm show values twice and diff compares the default values. helm diff upgrade with --allow-unreleased and no release does not compare versions: every resource shows as added.</desc>
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c6f64"/>
     </marker>
     <style>
       .h   { font-size: 15px; font-weight: 700; fill: #212529; }
@@ -14,7 +14,7 @@
       .c   { font-size: 12px; fill: #212529; }
       .cb  { font-size: 12px; font-weight: 700; fill: #212529; }
       .bad { font-size: 11px; font-weight: 700; fill: #9d0006; }
-      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lne { stroke: #7c6f64; stroke-width: 1.6; fill: none; marker-end: url(#a); }
       .o   { fill: #da905e; stroke: #af3a03; }
       .ol  { fill: #c8b661; stroke: #79740e; }
       .cr  { fill: #fae9ba; stroke: #d5c4a1; }
@@ -23,8 +23,8 @@
       .g   { fill: #e8f5ee; stroke: #75b798; }
       .w   { fill: #ffe5cc; stroke: #fd9843; }
       .x   { fill: #f8d7da; stroke: #e35d6a; }
-      .n   { fill: #f8f9fa; stroke: #dee2e6; }
-      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .n   { fill: #f8f9fa; stroke: #d5c4a1; }
+      .s   { fill: #ffffff; stroke: #bdae93; }
     </style>
   </defs>
   <rect width="920" height="530" fill="#ffffff"/>
@@ -105,7 +105,7 @@
   <text class="c" x="870" y="338" text-anchor="middle">no</text>
 
   <!-- trap -->
-  <line x1="20" y1="376" x2="900" y2="376" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="20" y1="376" x2="900" y2="376" stroke="#d5c4a1" stroke-width="1"/>
   <text class="tb" x="20" y="398">Not a version comparison</text>
   <rect class="cr" x="20" y="410" width="200" height="44" rx="4" stroke-dasharray="4 3"/>
   <text class="cb" x="32" y="428">no release</text>

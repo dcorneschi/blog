@@ -14,8 +14,8 @@
       .g   { fill: #c8b661; stroke: #79740e; }
       .w   { fill: #da905e; stroke: #af3a03; }
       .n   { fill: #fae9ba; stroke: #d5c4a1; }
-      .s   { fill: #ffffff; stroke: #adb5bd; }
-      .card{ fill: #ffffff; stroke: #adb5bd; }
+      .s   { fill: #ffffff; stroke: #bdae93; }
+      .card{ fill: #ffffff; stroke: #bdae93; }
       .hot { fill: #ffffff; stroke: #79740e; stroke-width: 2; }
     </style>
   </defs>
@@ -83,7 +83,7 @@
   <rect class="n" x="624" y="320" width="264" height="22" rx="11"/><text class="m" x="756" y="335" text-anchor="middle">+ annotations: (empty)</text>
 
   <!-- legend -->
-  <line x1="20" y1="368" x2="900" y2="368" stroke="#dee2e6" stroke-width="1"/>
+  <line x1="20" y1="368" x2="900" y2="368" stroke="#d5c4a1" stroke-width="1"/>
   <rect class="w" x="20" y="382" width="22" height="22" rx="11"/>
   <text class="cb" x="50" y="398">18 lines</text>
   <text class="c" x="112" y="398">version labels, 2 per resource: cosmetic</text>

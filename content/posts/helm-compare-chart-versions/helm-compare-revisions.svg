@@ -3,7 +3,7 @@
   <desc id="d">Revision 1 installs chart 3.12.2 (app 0.7.2). helm diff upgrade previews the move to 3.13.0; helm upgrade creates revision 2 (app 0.8.0). helm diff revision 1 2 compares the two afterwards. helm diff rollback 1 previews the rollback, and helm rollback creates revision 3 with the same chart and values as revision 1. Revision 3 is deployed, 1 and 2 are superseded.</desc>
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c6f64"/>
     </marker>
     <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#8f3f71"/>
@@ -16,9 +16,9 @@
       .mp  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #8f3f71; }
       .d   { font-size: 11px; fill: #3c3836; }
       .c   { font-size: 12px; fill: #212529; }
-      .lne { stroke: #495057; stroke-width: 1.8; fill: none; marker-end: url(#a); }
+      .lne { stroke: #7c6f64; stroke-width: 1.8; fill: none; marker-end: url(#a); }
       .prv { stroke: #8f3f71; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#p); }
-      .same{ stroke: #868e96; stroke-width: 1; fill: none; stroke-dasharray: 3 3; }
+      .same{ stroke: #a89984; stroke-width: 1; fill: none; stroke-dasharray: 3 3; }
       .r   { fill: #da905e; stroke: #af3a03; }
       .g   { fill: #c8b661; stroke: #79740e; }
       .n   { fill: #fae9ba; stroke: #d5c4a1; }
