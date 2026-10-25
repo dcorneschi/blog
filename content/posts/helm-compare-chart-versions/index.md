@@ -21,6 +21,8 @@ How to see exactly what changes between two versions of a chart, using metrics-s
 
 `helm diff upgrade ... --allow-unreleased` on a chart that isn't installed does **not** compare two versions. It shows the whole chart as added. For version-to-version comparison without a release, use `helm template`.
 
+[![What each method compares: helm diff upgrade compares the deployed release with a new chart version, helm template twice and diff compares two chart versions offline, helm diff revision compares two revisions, helm diff rollback compares the deployed release with an older revision, helm show values twice and diff compares the defaults; --allow-unreleased or --dry-run without a release shows every resource as added](helm-compare-methods.svg)](helm-compare-methods.svg "Open the diagram full size")
+
 ## 2. Install the Plugin and Add the Repository
 
 ```bash
@@ -131,6 +133,8 @@ The whole diff is 20 changed lines: the two version labels on each of the 9 reso
 | Empty `annotations:` key on the APIService | None |
 | Image `v0.7.2` to `v0.8.0` | The only functional change: read the app release notes (Go and client library bumps, server run options wired to flags) |
 
+[![metrics-server 3.12.2 to 3.13.0: all 9 resources change their helm.sh/chart and app version labels (18 lines, cosmetic), the APIService gains an empty annotations key (1 line, no effect) and the Deployment image moves from v0.7.2 to v0.8.0 (1 line, the only functional change)](helm-compare-result.svg)](helm-compare-result.svg "Open the diagram full size")
+
 Note that label changes on the Deployment's `spec.selector` would be a problem (selectors are immutable). Here only the Deployment's metadata labels change, so the upgrade is safe.
 
 ## 5. Method 3: Compare Values
@@ -192,6 +196,8 @@ REVISION  STATUS      CHART                  APP VERSION  DESCRIPTION
 2         superseded  metrics-server-3.13.0  0.8.0        Upgrade complete
 3         deployed    metrics-server-3.12.2  0.7.2        Rollback to 1
 ```
+
+[![Revision 1 installs chart 3.12.2, helm upgrade creates revision 2 with 3.13.0 and helm rollback 1 creates revision 3 with the same chart and values as revision 1; helm diff upgrade and helm diff rollback preview each step, helm diff revision 1 2 compares afterwards](helm-compare-revisions.svg)](helm-compare-revisions.svg "Open the diagram full size")
 
 - Read the release notes of the app version: <https://github.com/kubernetes-sigs/metrics-server/releases>.
 - Test in a non-production cluster first.

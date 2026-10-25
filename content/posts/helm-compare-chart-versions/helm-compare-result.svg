@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">metrics-server 3.12.2 to 3.13.0: what the diff contains</title>
+  <desc id="d">The chart renders 9 resources. All 9 change their helm.sh/chart and app.kubernetes.io/version labels, which is cosmetic. The APIService gains an empty annotations key, which has no effect. The Deployment's image moves from v0.7.2 to v0.8.0, the only functional change. The Deployment's spec.selector does not change, so the upgrade is safe.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 12px; fill: #212529; }
+      .cb  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .card{ fill: #ffffff; stroke: #adb5bd; }
+      .hot { fill: #ffffff; stroke: #198754; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="920" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">metrics-server 3.12.2 to 3.13.0: what the diff contains</text>
+  <text class="sub" x="20" y="44">diff -u of the two helm template renders: 9 resources, 20 changed lines</text>
+
+  <!-- row 1 -->
+  <rect class="card" x="20" y="64" width="288" height="88" rx="6"/>
+  <text class="cb" x="32" y="86">ServiceAccount</text>
+  <text class="d" x="140" y="86">metrics-server</text>
+  <rect class="w" x="32" y="98" width="124" height="22" rx="11"/><text class="m" x="94" y="113" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="162" y="98" width="134" height="22" rx="11"/><text class="m" x="229" y="113" text-anchor="middle">app version label</text>
+
+  <rect class="card" x="316" y="64" width="288" height="88" rx="6"/>
+  <text class="cb" x="328" y="86">ClusterRole</text>
+  <text class="d" x="410" y="86">…-aggregated-reader</text>
+  <rect class="w" x="328" y="98" width="124" height="22" rx="11"/><text class="m" x="390" y="113" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="458" y="98" width="134" height="22" rx="11"/><text class="m" x="525" y="113" text-anchor="middle">app version label</text>
+
+  <rect class="card" x="612" y="64" width="288" height="88" rx="6"/>
+  <text class="cb" x="624" y="86">ClusterRole</text>
+  <text class="d" x="706" y="86">system:metrics-server</text>
+  <rect class="w" x="624" y="98" width="124" height="22" rx="11"/><text class="m" x="686" y="113" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="754" y="98" width="134" height="22" rx="11"/><text class="m" x="821" y="113" text-anchor="middle">app version label</text>
+
+  <!-- row 2 -->
+  <rect class="card" x="20" y="162" width="288" height="88" rx="6"/>
+  <text class="cb" x="32" y="184">RoleBinding</text>
+  <text class="d" x="112" y="184">…-auth-reader</text>
+  <rect class="w" x="32" y="196" width="124" height="22" rx="11"/><text class="m" x="94" y="211" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="162" y="196" width="134" height="22" rx="11"/><text class="m" x="229" y="211" text-anchor="middle">app version label</text>
+
+  <rect class="card" x="316" y="162" width="288" height="88" rx="6"/>
+  <text class="cb" x="328" y="184">ClusterRoleBinding</text>
+  <text class="d" x="452" y="184">…:system:auth-delegator</text>
+  <rect class="w" x="328" y="196" width="124" height="22" rx="11"/><text class="m" x="390" y="211" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="458" y="196" width="134" height="22" rx="11"/><text class="m" x="525" y="211" text-anchor="middle">app version label</text>
+
+  <rect class="card" x="612" y="162" width="288" height="88" rx="6"/>
+  <text class="cb" x="624" y="184">ClusterRoleBinding</text>
+  <text class="d" x="748" y="184">system:metrics-server</text>
+  <rect class="w" x="624" y="196" width="124" height="22" rx="11"/><text class="m" x="686" y="211" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="754" y="196" width="134" height="22" rx="11"/><text class="m" x="821" y="211" text-anchor="middle">app version label</text>
+
+  <!-- row 3 -->
+  <rect class="card" x="20" y="260" width="288" height="88" rx="6"/>
+  <text class="cb" x="32" y="282">Service</text>
+  <text class="d" x="86" y="282">metrics-server</text>
+  <rect class="w" x="32" y="294" width="124" height="22" rx="11"/><text class="m" x="94" y="309" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="162" y="294" width="134" height="22" rx="11"/><text class="m" x="229" y="309" text-anchor="middle">app version label</text>
+
+  <rect class="hot" x="316" y="260" width="288" height="88" rx="6"/>
+  <text class="cb" x="328" y="282">Deployment</text>
+  <text class="d" x="404" y="282">metrics-server</text>
+  <rect class="w" x="328" y="294" width="124" height="22" rx="11"/><text class="m" x="390" y="309" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="458" y="294" width="134" height="22" rx="11"/><text class="m" x="525" y="309" text-anchor="middle">app version label</text>
+  <rect class="g" x="328" y="320" width="264" height="22" rx="11"/><text class="m" x="460" y="335" text-anchor="middle">image v0.7.2 → v0.8.0</text>
+
+  <rect class="card" x="612" y="260" width="288" height="88" rx="6"/>
+  <text class="cb" x="624" y="282">APIService</text>
+  <text class="d" x="698" y="282">v1beta1.metrics.k8s.io</text>
+  <rect class="w" x="624" y="294" width="124" height="22" rx="11"/><text class="m" x="686" y="309" text-anchor="middle">helm.sh/chart</text>
+  <rect class="w" x="754" y="294" width="134" height="22" rx="11"/><text class="m" x="821" y="309" text-anchor="middle">app version label</text>
+  <rect class="n" x="624" y="320" width="264" height="22" rx="11"/><text class="m" x="756" y="335" text-anchor="middle">+ annotations: (empty)</text>
+
+  <!-- legend -->
+  <line x1="20" y1="368" x2="900" y2="368" stroke="#dee2e6" stroke-width="1"/>
+  <rect class="w" x="20" y="382" width="22" height="22" rx="11"/>
+  <text class="cb" x="50" y="398">18 lines</text>
+  <text class="c" x="112" y="398">version labels, 2 per resource: cosmetic</text>
+  <rect class="n" x="400" y="382" width="22" height="22" rx="11"/>
+  <text class="cb" x="430" y="398">1 line</text>
+  <text class="c" x="476" y="398">empty annotations: none</text>
+  <rect class="g" x="660" y="382" width="22" height="22" rx="11"/>
+  <text class="cb" x="690" y="398">1 line</text>
+  <text class="c" x="736" y="398">image: functional</text>
+
+  <text class="d" x="20" y="432">Only the Deployment's metadata labels change; its spec.selector stays the same, so Helm can patch it in place (selectors are immutable).</text>
+  <text class="d" x="20" y="448">The one change that matters is the app itself: read the metrics-server v0.8.0 release notes before upgrading.</text>
+</svg>
