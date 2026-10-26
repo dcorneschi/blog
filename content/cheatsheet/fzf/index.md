@@ -2,14 +2,14 @@
 title: "fzf Cheatsheet"
 date: 2026-10-26T16:30:00+02:00
 draft: false
-description: "fzf, the command-line fuzzy finder: install on RHEL, Ubuntu and macOS, shell key bindings, search syntax, options, environment variables, and ready-made aliases and functions for files, git, processes, AWS, Kubernetes, SSH and Docker, one block each, that work in bash and zsh."
+description: "fzf, the command-line fuzzy finder: install on RHEL, Ubuntu and macOS, shell key bindings, search syntax, options, environment variables, and ready-made aliases and functions for files, git, AWS, Kubernetes, SSH, ports and Docker, one block each, that work in bash and zsh."
 tags: ["fzf", "bash", "zsh", "shell"]
 categories: ["Cheatsheet"]
 ---
 
 `fzf` is an interactive filter for the command line. It reads a list of lines (files, processes, branches, history), lets you narrow it by typing, and prints the line you choose. It works with any command that prints lines, so it is the glue behind many small shell helpers.
 
-The commands and functions below ran with fzf 0.74.5 on macOS, under bash 3.2.57 (the macOS `/bin/bash`, the oldest bash they have to work with) and zsh 5.9, with ripgrep 15.2.0, fd 10.5.0 and bat 0.26.1.
+The commands and functions below ran with fzf 0.74.5 on macOS, under bash 3.2.57 (the macOS `/bin/bash`, the oldest bash they have to work with) and zsh 5.9, with fd 10.5.0 and bat 0.26.1.
 
 ## 1. Install
 
@@ -46,17 +46,17 @@ Ubuntu 25.04 and 25.10 both have 0.60.3. The `~/.fzf.bash` file of the legacy li
 
 ### The helper tools: versions and command names
 
-The article uses `fd`, `rg` (ripgrep) and `bat` as optional helpers. None of them is in the base RHEL repositories of any version. The packages are `fd-find`, `ripgrep` and `bat`.
+The article uses `fd` and `bat` as optional helpers. Neither is in the base RHEL repositories of any version. The packages are `fd-find` and `bat`.
 
-| OS | fd | ripgrep | bat |
-|----|----|---------|-----|
-| RHEL 7 | not found | not found | not found |
-| RHEL 8 (EPEL) | 8.7.0, command `fd` | 14.1.1, command `rg` | 0.24.0, command `bat` |
-| RHEL 9 (EPEL) | 10.4.2, command `fd` | 15.2.0, command `rg` | 0.26.1, command `bat` |
-| RHEL 10 (EPEL) | 10.4.2, command `fd` | 15.2.0, command `rg` | 0.26.1, command `bat` |
-| Ubuntu 22.04 | 8.3.1, command **`fdfind`** | 13.0.0, command `rg` | 0.19.0, command **`batcat`** |
-| Ubuntu 24.04 | 9.0.0, command **`fdfind`** | 14.1.0, command `rg` | 0.24.0, command **`batcat`** |
-| Ubuntu 26.04 | 10.3.0, command **`fdfind`** | 15.1.0, command `rg` | 0.25.0, command **`batcat`** |
+| OS | fd | bat |
+|----|----|-----|
+| RHEL 7 | not found | not found |
+| RHEL 8 (EPEL) | 8.7.0, command `fd` | 0.24.0, command `bat` |
+| RHEL 9 (EPEL) | 10.4.2, command `fd` | 0.26.1, command `bat` |
+| RHEL 10 (EPEL) | 10.4.2, command `fd` | 0.26.1, command `bat` |
+| Ubuntu 22.04 | 8.3.1, command **`fdfind`** | 0.19.0, command **`batcat`** |
+| Ubuntu 24.04 | 9.0.0, command **`fdfind`** | 0.24.0, command **`batcat`** |
+| Ubuntu 26.04 | 10.3.0, command **`fdfind`** | 0.25.0, command **`batcat`** |
 
 On Debian and Ubuntu the commands are `fdfind` and `batcat`, because the names `fd` and `bat` were already taken by other packages. The preview of `fp` in section 6 tries both names, so it works on Ubuntu without symlinks.
 
@@ -340,6 +340,5 @@ fds() { local sel c cs=(); sel=$(_fdc -m) || return; while IFS= read -r c; do [ 
 - A plain `fzf` lists files, not directories. Use `find . -type d | fzf` or `ALT-C`. (`CTRL-T` lists files and directories.)
 - `{}` in a preview is quoted for the shell by fzf, but a line that contains single quotes can still confuse a complex preview command. Prefer `{1}`, `{2}` fields for tabular input.
 - Old fzf versions (below 0.48.0) have no `--bash` and `--zsh`. Use the installer script, which writes `~/.fzf.bash`.
-- macOS has no `timeout`, and the BSD `xargs` has no `-d`. The functions above avoid both.
 
 The commands and options come from the tutorial at penguin-gym-linux.com and were rewritten and extended here, not copied.
