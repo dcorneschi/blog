@@ -199,6 +199,28 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"      # CTRL-T does not read FZF
 
 When `FZF_CTRL_T_COMMAND` and `FZF_ALT_C_COMMAND` are not set, `CTRL-T` and `ALT-C` use fzf's built-in walker (files and directories for `CTRL-T`, directories for `ALT-C`), so setting only `FZF_DEFAULT_COMMAND` changes a plain `fzf` and nothing else. `FZF_DEFAULT_COMMAND` must be a **real binary**. An alias does not work there, and if the binary is missing the list is empty.
 
+### Themes
+
+```bash
+fzf --color=light            # built-in schemes: dark (default), light, base16 (the terminal's 16 colors), bw
+fzf --style=full:rounded     # style presets (fzf 0.58+): default, minimal, full[:border style]
+fzf --color=dark,hl:#ff5f87,pointer:#ff5f87   # a base scheme with single elements changed
+```
+
+The main elements are `fg`, `bg`, `hl` (matched letters), `fg+`, `bg+` and `hl+` (the current line), `prompt`, `pointer`, `marker`, `info`, `border` and `header`; `man fzf` lists all of them under COLOR NAMES.
+
+Themes from the editor color schemes, added to your own options instead of replacing them:
+
+```bash
+# Dracula (github.com/dracula/fzf)
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4"
+
+# Catppuccin Mocha (github.com/catppuccin/fzf, also Latte, Frappé and Macchiato)
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 --color=selected-bg:#45475A --color=border:#6C7086,label:#CDD6F4"
+```
+
+The projects' own snippets assign `FZF_DEFAULT_OPTS='...'` directly, which drops the options you set above (`--height`, `--layout`, `--border`); `"$FZF_DEFAULT_OPTS ..."` keeps them. Tokyo Night has its file in `extras/fzf/` of github.com/folke/tokyonight.nvim.
+
 ## 6. Aliases and Functions
 
 Every alias and function below has its own block, so you can copy only the ones you want into `~/.bashrc` or `~/.zshrc`. To take all of them at once, use [All in One Block](#all-in-one-block) at the end of this section. All of them work in bash and zsh, and each one works on its own, except where the text says it needs another block. The key bindings come from section 2 and the default options from section 5.
