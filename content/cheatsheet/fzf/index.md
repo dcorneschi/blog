@@ -146,15 +146,11 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fm` | alias | `fzf --multi`, multi-select |
 | `fp` | alias | File picker with a `bat` or `batcat` preview (the first 50 lines if neither exists) |
 | `fgl` | alias | Browse commits, preview the diff of the highlighted one |
-| `fvim` | alias | `vim "$(fzf)"`: open the picked file in vim |
 | `fkill9` | alias | `kill -9` the picked process |
-| `fco` | alias | `git checkout` the picked branch (a remote branch gives a detached HEAD) |
-| `fdir` | alias | `cd` into the picked directory |
 | `frmi` | alias | `rm -i` the picked files (breaks on names with spaces) |
-| `fpcat` | alias | File picker with a `cat` preview |
-| `fe [query]` | function | Open a file in `$EDITOR`, jump straight to it if only one matches (a safer `fvim`) |
-| `fcd [dir]` | function | `cd` into a subdirectory, skipping `.git` (a safer `fdir`) |
-| `fgb` | function | Check out a local or remote branch, strips `remotes/origin/` (a safer `fco`) |
+| `fe [query]` | function | Open a file in `$EDITOR`, jump straight to it if only one matches |
+| `fcd [dir]` | function | `cd` into a subdirectory, skipping `.git` |
+| `fgb` | function | Check out a local or remote branch, strips `remotes/origin/` |
 | `fga` | function | Stage files picked from the modified and untracked ones (`TAB` for several), safe for names with spaces |
 | `fgc [message]` | function | Stage **everything** (modified, deleted, new and untracked files) and commit it, after a yes/no check |
 | `fgs` | function | Browse stashes with a diff preview, then show the chosen one |
@@ -169,7 +165,7 @@ Every alias and function below has its own block, so you can copy only the ones 
 
 ### Aliases
 
-> **Warning:** the quick aliases `fkill9`, `frmi` and `fco` act on whatever you select. `kill -9` cannot be handled by the process, so unsaved data is lost. `rm` removes files for good (there is no trash), and the unquoted `$(fzf -m)` in `frmi` breaks a file name with a space into several arguments. `fco` on a remote branch leaves a detached HEAD. If you press ESC, fzf prints nothing and some of them then run with an empty argument. For branches, the function `fgb` does the same job without these problems.
+> **Warning:** the quick aliases `fkill9` and `frmi` act on whatever you select. `kill -9` cannot be handled by the process, so unsaved data is lost. `rm` removes files for good (there is no trash), and the unquoted `$(fzf -m)` in `frmi` breaks a file name with a space into several arguments. If you press ESC, fzf prints nothing and some of them then run with an empty argument.
 
 #### fm: multi-select
 
@@ -192,40 +188,16 @@ alias fp="fzf --preview 'if command -v bat >/dev/null; then bat --color=always -
 alias fgl="git log --oneline --color=always | fzf --ansi --preview 'git show --color=always {1}'"   # browse commits
 ```
 
-#### fvim: open a file in vim
-
-```bash
-alias fvim='vim "$(fzf)"'                                # open a file in vim
-```
-
 #### fkill9: kill -9 a process
 
 ```bash
 alias fkill9='kill -9 "$(ps -ef | fzf | awk "{print \$2}")"'   # pick a process, kill -9 it
 ```
 
-#### fco: check out a branch
-
-```bash
-alias fco='git checkout "$(git branch --all | fzf | tr -d " *")"'  # pick a branch and check it out
-```
-
-#### fdir: cd into a directory
-
-```bash
-alias fdir='cd "$(find . -type d | fzf)"'                # pick a directory and cd into it
-```
-
 #### frmi: delete files with a prompt
 
 ```bash
 alias frmi='rm -i $(fzf -m)'                             # pick files, delete them with a prompt
-```
-
-#### fpcat: file picker with a cat preview
-
-```bash
-alias fpcat="fzf --preview 'cat {}'"                     # file picker with a plain cat preview
 ```
 
 ### Functions
