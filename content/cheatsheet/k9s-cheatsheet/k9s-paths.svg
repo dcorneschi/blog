@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 410" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where k9s keeps its files</title>
+  <desc id="d">On macOS, k9s 0.51.0 keeps its configuration, skins, per-cluster settings, log, benchmarks and screen dumps in ~/Library/Application Support/k9s. On Linux they are split into ~/.config/k9s for the configuration and skins, ~/.local/share/k9s for the per-cluster settings, and ~/.local/state/k9s for the log, benchmarks and screen dumps. K9S_CONFIG_DIR moves everything except the log to another directory.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="410" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where k9s keeps its files</text>
+  <text class="sub" x="20" y="48">From k9s info on macOS and on Linux (k9s 0.51.0)</text>
+  <text class="lb" x="20" y="80">WHAT</text>
+  <text class="lb" x="220" y="80">MACOS</text>
+  <text class="lb" x="520" y="80">LINUX</text>
+  <text class="tb" x="20" y="110">Configuration</text>
+  <text class="d" x="20" y="126">config.yaml, hotkeys.yaml, plugins.yaml,</text>
+  <text class="d" x="20" y="140">aliases.yaml, views.yaml, skins/</text>
+  <rect class="r" x="220" y="94" width="280" height="52" rx="6"/>
+  <text class="m" x="232" y="124">~/Library/Application Support/k9s/</text>
+  <rect class="r" x="520" y="94" width="300" height="52" rx="6"/>
+  <text class="m" x="532" y="116">~/.config/k9s/</text>
+  <text class="d" x="532" y="134">$XDG_CONFIG_HOME</text>
+  <text class="tb" x="20" y="180">Per-cluster settings</text>
+  <text class="d" x="20" y="196">clusters/</text>
+  <text class="d" x="20" y="210"></text>
+  <rect class="r" x="220" y="164" width="280" height="52" rx="6"/>
+  <text class="m" x="232" y="194">~/Library/Application Support/k9s/</text>
+  <rect class="g" x="520" y="164" width="300" height="52" rx="6"/>
+  <text class="m" x="532" y="186">~/.local/share/k9s/</text>
+  <text class="d" x="532" y="204">$XDG_DATA_HOME</text>
+  <text class="tb" x="20" y="250">Logs and output</text>
+  <text class="d" x="20" y="266">k9s.log, benchmarks/,</text>
+  <text class="d" x="20" y="280">screen-dumps/ (Ctrl+s)</text>
+  <rect class="r" x="220" y="234" width="280" height="52" rx="6"/>
+  <text class="m" x="232" y="264">~/Library/Application Support/k9s/</text>
+  <rect class="w" x="520" y="234" width="300" height="52" rx="6"/>
+  <text class="m" x="532" y="256">~/.local/state/k9s/</text>
+  <text class="d" x="532" y="274">$XDG_STATE_HOME</text>
+  <text class="d" x="220" y="312">macOS: one directory for everything</text>
+  <text class="d" x="520" y="312">Linux: three XDG directories</text>
+  <rect class="n" x="20" y="330" width="800" height="64" rx="4"/>
+  <text class="m" x="32" y="352">K9S_CONFIG_DIR=/some/dir k9s</text>
+  <text class="c" x="32" y="370">moves config, skins, clusters/, benchmarks/ and screen-dumps/ to /some/dir; k9s.log went to the system temp directory.</text>
+  <text class="c" x="32" y="386">k9s info prints all of these paths for the current system.</text>
+</svg>

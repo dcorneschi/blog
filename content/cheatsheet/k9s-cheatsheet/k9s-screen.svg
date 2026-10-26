@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 528" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The k9s screen</title>
+  <desc id="d">A pods view in k9s 0.51.0 with its parts numbered: the header with context, read-write mode, cluster, user and versions; the namespace shortcuts 0 all, 1 demo, 2 default; the key hints of the view; the logo; the table title pods(demo)[2] with the filter &lt;/fred&gt;; the sorted NAME column; the crumbs &lt;pod&gt;; and the message line.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="528" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The k9s screen</text>
+  <text class="sub" x="20" y="48">Pods view in namespace demo with the filter /fred (k9s 0.51.0)</text>
+  <rect class="n" x="20" y="62" width="800" height="300" rx="8"/>
+  <text class="m" x="44" y="84">Context: default [RW]</text>
+  <text class="m" x="44" y="98">Cluster: default</text>
+  <text class="m" x="44" y="112">User:    default</text>
+  <text class="m" x="44" y="126">K9s Rev: v0.51.0</text>
+  <text class="m" x="44" y="140">K8s Rev: v1.35.9+k3s1</text>
+  <text class="m" x="44" y="154">CPU:     0%</text>
+  <text class="m" x="44" y="168">MEM:     0%</text>
+  <text class="m" x="224" y="84">&lt;0&gt; all</text>
+  <text class="m" x="224" y="98">&lt;1&gt; demo</text>
+  <text class="m" x="224" y="112">&lt;2&gt; default</text>
+  <text class="m" x="330" y="84">&lt;a&gt; Attach</text>
+  <text class="m" x="470" y="84">&lt;l&gt; Logs</text>
+  <text class="m" x="630" y="84">&lt;o&gt; Show Node</text>
+  <text class="m" x="330" y="98">&lt;ctrl-d&gt; Delete</text>
+  <text class="m" x="470" y="98">&lt;p&gt; Logs Previous</text>
+  <text class="m" x="630" y="98">&lt;f&gt; Show PortForward</text>
+  <text class="m" x="330" y="112">&lt;d&gt; Describe</text>
+  <text class="m" x="470" y="112">&lt;shift-f&gt; Port-Forward</text>
+  <text class="m" x="630" y="112">&lt;t&gt; Transfer</text>
+  <text class="m" x="330" y="126">&lt;e&gt; Edit</text>
+  <text class="m" x="470" y="126">&lt;z&gt; Sanitize</text>
+  <text class="m" x="630" y="126">&lt;y&gt; YAML</text>
+  <text class="m" x="330" y="140">&lt;?&gt; Help</text>
+  <text class="m" x="470" y="140">&lt;s&gt; Shell</text>
+  <text class="m" x="630" y="140">&lt;w&gt; Warp To Namespace</text>
+  <rect class="s" x="726" y="146" width="82" height="30" rx="6"/>
+  <text class="mb" x="767" y="166" text-anchor="middle">K9s</text>
+  <rect class="s" x="32" y="186" width="776" height="120" rx="4"/>
+  <rect x="32" y="186" width="776" height="20" rx="4" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="mb" x="420" y="200" text-anchor="middle">pods(demo)[2] &lt;/fred&gt;</text>
+  <text class="mb" x="44" y="224">NAME↑</text>
+  <text class="m" x="250" y="224">READY</text>
+  <text class="m" x="320" y="224">STATUS</text>
+  <text class="m" x="410" y="224">RESTARTS</text>
+  <text class="m" x="500" y="224">IP</text>
+  <text class="m" x="600" y="224">NODE</text>
+  <rect x="36" y="231" width="768" height="17" fill="#cfe2ff"/>
+  <text class="m" x="44" y="244">fred-f9f96d9c6-9wkqb</text>
+  <text class="m" x="250" y="244">1/1</text>
+  <text class="m" x="320" y="244">Running</text>
+  <text class="m" x="410" y="244">0</text>
+  <text class="m" x="500" y="244">10.42.0.8</text>
+  <text class="m" x="600" y="244">10cfc8f5722e</text>
+  <text class="m" x="44" y="262">fred-f9f96d9c6-bssj4</text>
+  <text class="m" x="250" y="262">1/1</text>
+  <text class="m" x="320" y="262">Running</text>
+  <text class="m" x="410" y="262">0</text>
+  <text class="m" x="500" y="262">10.42.0.9</text>
+  <text class="m" x="600" y="262">10cfc8f5722e</text>
+  <text class="mb" x="46" y="326">&lt;pod&gt;</text>
+  <text class="c" x="46" y="350">Viewing v1/pods in namespace demo</text>
+  <circle cx="30" cy="80" r="9" fill="#326ce5"/>
+  <text x="30" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">1</text>
+  <circle cx="212" cy="80" r="9" fill="#326ce5"/>
+  <text x="212" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">2</text>
+  <circle cx="318" cy="80" r="9" fill="#326ce5"/>
+  <text x="318" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">3</text>
+  <circle cx="716" cy="161" r="9" fill="#326ce5"/>
+  <text x="716" y="165" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">4</text>
+  <circle cx="330" cy="196" r="9" fill="#326ce5"/>
+  <text x="330" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">5</text>
+  <circle cx="92" cy="220" r="9" fill="#326ce5"/>
+  <text x="92" y="224" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">6</text>
+  <circle cx="30" cy="322" r="9" fill="#326ce5"/>
+  <text x="30" y="326" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">7</text>
+  <circle cx="30" cy="346" r="9" fill="#326ce5"/>
+  <text x="30" y="350" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">8</text>
+  <circle cx="30" cy="380" r="9" fill="#326ce5"/>
+  <text x="30" y="384" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">1</text>
+  <text class="c" x="46" y="384">Header: context and mode ([RW] read-write, [R] with --readonly), cluster, user, versions, CPU and memory</text>
+  <circle cx="30" cy="398" r="9" fill="#326ce5"/>
+  <text x="30" y="402" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">2</text>
+  <text class="c" x="46" y="402">Namespace shortcuts: 0 = all namespaces, 1, 2, ... = recently used ones</text>
+  <circle cx="30" cy="416" r="9" fill="#326ce5"/>
+  <text x="30" y="420" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">3</text>
+  <text class="c" x="46" y="420">Keys of the current view (the pods view here); ? lists all of them</text>
+  <circle cx="30" cy="434" r="9" fill="#326ce5"/>
+  <text x="30" y="438" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">4</text>
+  <text class="c" x="46" y="438">Logo; --logoless hides it, --headless hides the whole header</text>
+  <circle cx="30" cy="452" r="9" fill="#326ce5"/>
+  <text x="30" y="456" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">5</text>
+  <text class="c" x="46" y="456">View title: resource(namespace)[number of rows], then the active filter &lt;/fred&gt;</text>
+  <circle cx="30" cy="470" r="9" fill="#326ce5"/>
+  <text x="30" y="474" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">6</text>
+  <text class="c" x="46" y="474">Sorted column, marked with an arrow (Shift+n, Shift+a, ... change it)</text>
+  <circle cx="30" cy="488" r="9" fill="#326ce5"/>
+  <text x="30" y="492" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">7</text>
+  <text class="c" x="46" y="492">Crumbs: the views you came through; Esc goes back one</text>
+  <circle cx="30" cy="506" r="9" fill="#326ce5"/>
+  <text x="30" y="510" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">8</text>
+  <text class="c" x="46" y="510">Message line: what k9s just did, or an error</text>
+</svg>
