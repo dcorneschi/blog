@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 900 640" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">A page's trip through swap</title>
+  <desc id="d">Four states of an anonymous page, with the numbers for a process holding 300 MiB on Ubuntu 24.04, kernel 6.8. In RAM only: counted in VmRSS. Pushed out: written to swap, counted in VmSwap and swap used. Read back by a read: copied into RAM while the copy in swap is kept; this is the swap cache, so VmRSS and SwapCached are about 306 MiB and swap used does not change. Pushed out again unchanged, nothing needs to be written: the same pressure wrote 142 MiB instead of 467 MiB. Modified while in RAM, the copy in swap is stale but still counted; it is written again only when the page is pushed out. Swapped in by a write, the swap slot is freed at once and swap used dropped by 300 MiB. When swap is more than half full the kernel drops swap cache copies more eagerly.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .e    { font-size: 11px; font-weight: 700; fill: #212529; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh  { stroke: #868e96; stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; marker-end: url(#a); }
+      .ram  { fill: #e7f1ff; stroke: #3d7fe0; }
+      .swp  { fill: #f3effc; stroke: #8a63d2; }
+      .both { fill: #e8f5ee; stroke: #2f9e66; }
+      .stale{ fill: #fff3cd; stroke: #e0a800; }
+      .n    { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="900" height="640" fill="#ffffff"/>
+  <text class="h" x="20" y="28">A page's trip through swap, and when "swap used" goes down</text>
+
+  <!-- A: in RAM only (left middle) -->
+  <rect class="box ram" x="20" y="230" width="240" height="118" rx="10"/>
+  <circle cx="40" cy="252" r="10" fill="#3d7fe0"/><text class="n" x="40" y="256">A</text>
+  <text class="tb" x="58" y="257">In RAM only</text>
+  <text class="d" x="34" y="278">the normal state of a page</text>
+  <text class="m" x="34" y="302">VmRSS       308 MiB</text>
+  <text class="m" x="34" y="318">VmSwap        0</text>
+  <text class="m" x="34" y="334">swap used     0</text>
+
+  <!-- B: in swap only (top center) -->
+  <rect class="box swp" x="330" y="50" width="240" height="118" rx="10"/>
+  <circle cx="350" cy="72" r="10" fill="#8a63d2"/><text class="n" x="350" y="76">B</text>
+  <text class="tb" x="368" y="77">In swap only</text>
+  <text class="d" x="344" y="98">RAM freed, the data is on disk</text>
+  <text class="m" x="344" y="122">VmRSS         6 MiB</text>
+  <text class="m" x="344" y="138">VmSwap      302 MiB</text>
+  <text class="m" x="344" y="154">swap used   counted</text>
+
+  <!-- C: RAM + copy in swap (right middle) -->
+  <rect class="box both" x="640" y="230" width="240" height="118" rx="10"/>
+  <circle cx="660" cy="252" r="10" fill="#2f9e66"/><text class="n" x="660" y="256">C</text>
+  <text class="tb" x="678" y="257">In RAM + copy in swap</text>
+  <text class="d" x="654" y="278">the swap cache</text>
+  <text class="m" x="654" y="302">VmRSS       306 MiB</text>
+  <text class="m" x="654" y="318">SwapCached  306 MiB</text>
+  <text class="m" x="654" y="334">swap used   unchanged</text>
+
+  <!-- D: copy in swap is stale (bottom center) -->
+  <rect class="box stale" x="330" y="420" width="240" height="118" rx="10"/>
+  <circle cx="350" cy="442" r="10" fill="#e0a800"/><text class="n" x="350" y="446">D</text>
+  <text class="tb" x="368" y="447">Modified, old copy kept</text>
+  <text class="d" x="344" y="468">the copy in swap is out of date</text>
+  <text class="m" x="344" y="492">VmRSS       306 MiB</text>
+  <text class="m" x="344" y="508">SwapCached  305 MiB</text>
+  <text class="m" x="344" y="524">swap used   unchanged</text>
+
+  <!-- A -> B: pushed out -->
+  <path class="lne" d="M150,230 C150,150 220,110 326,104"/>
+  <text class="e" x="40" y="150">memory pressure:</text>
+  <text class="d" x="40" y="165">written to swap</text>
+  <text class="d" x="40" y="180">(467 MiB written in total)</text>
+
+  <!-- B -> A: swapped in by a write -->
+  <path class="lne" d="M330,140 C260,150 215,180 210,226"/>
+  <text class="e" x="226" y="200">written to:</text>
+  <text class="d" x="226" y="214">slot freed at once,</text>
+  <text class="d" x="226" y="228">swap used −300 MiB</text>
+
+  <!-- B -> C: read -->
+  <path class="lne" d="M570,96 C680,100 740,150 750,226"/>
+  <text class="e" x="770" y="130">read:</text>
+  <text class="d" x="770" y="144">copied into RAM,</text>
+  <text class="d" x="770" y="158">swap copy kept</text>
+
+  <!-- C -> B: pushed out unchanged -->
+  <path class="lne" d="M700,230 C690,190 640,155 574,148"/>
+  <text class="e" x="470" y="200">pushed out unchanged:</text>
+  <text class="d" x="470" y="214">nothing to write (142 MiB</text>
+  <text class="d" x="470" y="228">written instead of 467)</text>
+
+  <!-- C -> D: modified -->
+  <path class="lne" d="M760,348 C760,430 680,470 574,474"/>
+  <text class="e" x="776" y="404">modified:</text>
+  <text class="d" x="776" y="418">old copy stays</text>
+  <text class="d" x="776" y="432">in swap, still</text>
+  <text class="d" x="776" y="446">counted as used</text>
+
+  <!-- D -> B: pushed out, written again -->
+  <path class="lne" d="M450,420 V172"/>
+  <text class="e" x="442" y="290" text-anchor="end">pushed out:</text>
+  <text class="d" x="442" y="304" text-anchor="end">written again</text>
+  <text class="d" x="442" y="318" text-anchor="end">(431 MiB in total)</text>
+
+  <!-- C -> A: swap > 50% full -->
+  <path class="dsh" d="M640,330 C560,370 340,370 264,330"/>
+  <text class="e" x="40" y="400">swap more than half full:</text>
+  <text class="d" x="40" y="414">the kernel drops swap cache</text>
+  <text class="d" x="40" y="428">copies sooner, and swap</text>
+  <text class="d" x="40" y="442">used goes down</text>
+
+  <!-- notes -->
+  <line x1="20" y1="560" x2="880" y2="560" stroke="#dee2e6"/>
+  <text class="d" x="20" y="580">A process holding 300 MiB on Ubuntu 24.04 (kernel 6.8, 956 MiB of RAM, 1 GiB of swap), pushed out each time by a 900 MiB allocation.</text>
+  <text class="d" x="20" y="596">The "written in total" values are pswpout from /proc/vmstat for the whole push, including the 900 MiB process itself.</text>
+  <text class="d" x="20" y="616">So after a read-back, swap used doesn't go down. It goes down when a page comes back by being written, when the process exits, or under swap pressure.</text>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where MemTotal goes</title>
+  <desc id="d">/proc/meminfo of a 2 GB Ubuntu 24.04 VM, kernel 6.8, MemTotal 1959.6 MiB. MemFree 629.9 MiB. Page cache (Cached minus Shmem) 1115.7 MiB. The remaining 213.3 MiB, enlarged: Buffers 19.2, AnonPages 69.3, SReclaimable 38.1, SUnreclaim 39.9, KernelStack plus PageTables plus Percpu plus ShadowCallStack 5.4, and 41.4 MiB that no field names (vmalloc, drivers, CMA and other kernel allocations). Shmem is 0.7 MiB and part of Cached. MemAvailable is 1723.2 MiB: MemFree minus the reserves, plus the page cache minus the part kept, plus half of the reclaimable slab.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .tw  { font-size: 12px; font-weight: 700; fill: #ffffff; }
+      .d   { font-size: 11px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .zoom{ stroke: #adb5bd; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .ld  { stroke: #adb5bd; stroke-width: 1; }
+      .br  { stroke: #495057; stroke-width: 1.3; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text class="h" x="40" y="28">Where MemTotal goes: /proc/meminfo of a 2 GB VM</text>
+  <text class="m" x="860" y="28" text-anchor="end">MemTotal 2006616 kB = 1959.6 MiB</text>
+
+  <!-- main bar: 820 px = 1959.6 MiB -->
+  <path d="M44,56 H302 V96 H44 a4,4 0 0 1 -4,-4 V60 a4,4 0 0 1 4,-4 Z" fill="#ced4da"/>
+  <rect x="304" y="56" width="465" height="40" fill="#3d7fe0"/>
+  <rect x="771" y="56" width="89" height="40" fill="#868e96"/>
+  <path d="M856,56 a4,4 0 0 1 4,4 V92 a4,4 0 0 1 -4,4 H771 V56 Z" fill="#868e96"/>
+  <text class="tb" x="52" y="74">MemFree</text>
+  <text class="tb" x="52" y="89">629.9 MiB</text>
+  <text class="tw" x="312" y="74">Page cache (Cached − Shmem)</text>
+  <text class="tw" x="312" y="89">1115.7 MiB</text>
+  <text class="tw" x="778" y="74">the rest</text>
+  <text class="tw" x="778" y="89">213.3 MiB</text>
+
+  <!-- zoom lines -->
+  <path class="zoom" d="M771,96 L300,150 M860,96 L860,150"/>
+
+  <!-- zoom bar: 560 px = 213.3 MiB -->
+  <rect x="300" y="150" width="49" height="34" rx="3" fill="#74c0fc"/>
+  <rect x="351" y="150" width="180" height="34" fill="#e8590c"/>
+  <rect x="533" y="150" width="98" height="34" fill="#2f9e66"/>
+  <rect x="633" y="150" width="103" height="34" fill="#8a63d2"/>
+  <rect x="738" y="150" width="12" height="34" fill="#343a40"/>
+  <rect x="752" y="150" width="108" height="34" rx="3" fill="#adb5bd"/>
+  <text class="tw" x="358" y="171">AnonPages 69.3</text>
+  <text class="tw" x="540" y="171">SReclaim. 38.1</text>
+  <text class="tw" x="640" y="171">SUnreclaim 39.9</text>
+  <text class="tb" x="759" y="171">other 41.4</text>
+
+  <line class="ld" x1="324" y1="184" x2="324" y2="232"/>
+  <text class="tb" x="300" y="246">Buffers 19.2</text>
+  <text class="d" x="300" y="260">block-device cache</text>
+  <text class="d" x="358" y="200">process memory with no file</text>
+  <text class="d" x="358" y="214">behind it (heap, stack)</text>
+  <line class="ld" x1="744" y1="184" x2="744" y2="248"/>
+  <text class="tb" x="744" y="262" text-anchor="middle">5.4</text>
+  <text class="d" x="744" y="276" text-anchor="middle">KernelStack + PageTables</text>
+  <text class="d" x="744" y="290" text-anchor="middle">+ Percpu + ShadowCallStack</text>
+  <text class="d" x="540" y="200">slab that</text>
+  <text class="d" x="540" y="214">can be freed</text>
+  <text class="d" x="640" y="200">slab that</text>
+  <text class="d" x="640" y="214">can't be freed</text>
+  <text class="d" x="800" y="200" text-anchor="middle">no field: vmalloc,</text>
+  <text class="d" x="800" y="214" text-anchor="middle">drivers, CMA…</text>
+  <text class="d" x="40" y="160">The right-hand 213.3 MiB,</text>
+  <text class="d" x="40" y="174">enlarged. Shmem (0.7 MiB)</text>
+  <text class="d" x="40" y="188">is part of Cached and too</text>
+  <text class="d" x="40" y="202">small to draw here.</text>
+
+  <!-- MemAvailable -->
+  <text class="tb" x="40" y="322">MemAvailable, about 1723 MiB: what can be handed out without swapping</text>
+  <rect x="40" y="332" width="721" height="26" rx="4" fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2"/>
+  <text class="d" x="50" y="349">MemFree 628.9 − reserves 33.1 + page cache 1135.0 − 27.6 kept + reclaimable slab 38.1 − 19.1 kept = 1722.3 MiB</text>
+  <text class="d" x="40" y="380">Recomputed from /proc/zoneinfo with the kernel 6.8 formula (si_mem_available) it came to 1763588 kB; the kernel reported 1763716 kB a moment later.</text>
+  <text class="d" x="40" y="398">Page cache here is Active(file) + Inactive(file), Buffers included; the kernel leaves out half of it, at most the low watermarks (27.6 MiB).</text>
+
+  <line x1="40" y1="414" x2="860" y2="414" stroke="#dee2e6"/>
+  <text class="d" x="40" y="434">free -m on the same machine: total 1959, used 236, free 629, buff/cache 1173 (Buffers + Cached + SReclaimable), available 1723.</text>
+  <text class="d" x="40" y="452">Ubuntu 24.04, kernel 6.8, 2 GB VM, after reading a 400 MiB file. Fields overlap: Mapped is part of Cached or AnonPages, Shmem is part of Cached.</text>
+</svg>

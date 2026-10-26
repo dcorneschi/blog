@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 394" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where a host's variables come from</title>
+  <desc id="d">The same variable color is set in group_vars/all/main.yml, group_vars/production.yml (parent group), group_vars/webservers.yml (child group), host_vars/web01.yml and with -e. web01 gets host from host_vars, and extra when -e is passed. Each row wins over the rows below it. group_vars/all.yml is ignored when a group_vars/all/ directory also exists. Values in group_vars and host_vars files win over inline INI values, and of two groups at the same level the alphabetically later one wins unless ansible_group_priority is set.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="394" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where a host's variables come from</text>
+  <text class="sub" x="20" y="48">color is set at every level; ansible-core 2.21.4 picks the highest one</text>
+  <text class="lb" x="20" y="80">SOURCES, HIGHEST PRECEDENCE FIRST</text>
+  <rect class="x" x="20" y="90" width="330" height="40" rx="6"/>
+  <text class="m" x="32" y="107">-e color=extra</text>
+  <text class="d" x="32" y="122">extra vars on the command line</text>
+  <text class="m" x="362" y="115">color: extra</text>
+  <rect class="w" x="20" y="138" width="330" height="40" rx="6"/>
+  <text class="m" x="32" y="155">host_vars/web01.yml</text>
+  <text class="d" x="32" y="170">the host itself</text>
+  <text class="m" x="362" y="163">color: host</text>
+  <rect class="rw" x="20" y="186" width="330" height="40" rx="6"/>
+  <text class="m" x="32" y="203">group_vars/webservers.yml</text>
+  <text class="d" x="32" y="218">child group</text>
+  <text class="m" x="362" y="211">color: webservers</text>
+  <rect class="r" x="20" y="234" width="330" height="40" rx="6"/>
+  <text class="m" x="32" y="251">group_vars/production.yml</text>
+  <text class="d" x="32" y="266">parent group ([production:children])</text>
+  <text class="m" x="362" y="259">color: production</text>
+  <rect class="n" x="20" y="282" width="330" height="40" rx="6"/>
+  <text class="m" x="32" y="299">group_vars/all/main.yml</text>
+  <text class="d" x="32" y="314">every host</text>
+  <text class="m" x="362" y="307">color: all</text>
+  <path class="lne" d="M496,322 L496,96"/>
+  <text class="d" x="504" y="200">wins</text>
+  <text class="d" x="504" y="214">over</text>
+  <text class="d" x="504" y="228">the rows</text>
+  <text class="d" x="504" y="242">below</text>
+  <rect class="sd" x="20" y="338" width="330" height="40" rx="6"/>
+  <text class="m" x="32" y="355">group_vars/all.yml</text>
+  <text class="d" x="32" y="370">ignored when group_vars/all/ also exists</text>
+  <text class="lb" x="560" y="80">WHAT WEB01 GETS</text>
+  <rect class="g" x="560" y="90" width="260" height="72" rx="6"/>
+  <text class="m" x="572" y="112">ansible-inventory --host web01</text>
+  <text class="mb" x="572" y="136">"color": "host"</text>
+  <text class="d" x="572" y="153">with -e color=extra: extra</text>
+  <text class="lb" x="560" y="190">SAME LEVEL, OTHER RULES</text>
+  <text class="c" x="560" y="212">Files beat inline INI:</text>
+  <text class="d" x="560" y="230">host_vars/web01.yml &gt; web01 color=…</text>
+  <text class="d" x="560" y="248">group_vars/webservers.yml &gt; [webservers:vars]</text>
+  <text class="c" x="560" y="284">Two groups at one level:</text>
+  <text class="d" x="560" y="302">the later name wins (beta &gt; alpha),</text>
+  <text class="d" x="560" y="320">unless ansible_group_priority is set</text>
+</svg>

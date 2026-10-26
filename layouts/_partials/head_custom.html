@@ -1,0 +1,10 @@
+{{- /*
+  Overrides the theme's empty hook. The theme links an RSS feed only on pages that have
+  one (home, sections, taxonomies); posts and cheatsheets get the site feed here, so
+  browsers and feed readers can find it from any page.
+*/ -}}
+{{- if not (.OutputFormats.Get "RSS") -}}
+  {{- with site.Home.OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+  {{- end -}}
+{{- end -}}

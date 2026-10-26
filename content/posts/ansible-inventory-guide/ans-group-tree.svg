@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 468" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Groups of groups</title>
+  <desc id="d">The inventory from this guide as a tree: all contains ungrouped, production and web. production has the children webservers, databases and loadbalancers; web has webservers and loadbalancers again, so those groups have two parents. Variables set on a parent group reach every host below it.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="468" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Groups of groups</text>
+  <text class="sub" x="20" y="48">ansible-inventory --graph, drawn as a tree</text>
+  <rect class="n" x="20" y="196" width="90" height="30" rx="6"/>
+  <text class="mb" x="32" y="216">@all</text>
+  <rect class="n" x="170" y="96" width="140" height="30" rx="6"/>
+  <text class="mb" x="182" y="116">@ungrouped</text>
+  <path class="lne" d="M110,211 L168,111"/>
+  <rect class="rw" x="170" y="196" width="140" height="30" rx="6"/>
+  <text class="mb" x="182" y="216">@production</text>
+  <path class="lne" d="M110,211 L168,211"/>
+  <rect class="rw" x="170" y="316" width="140" height="30" rx="6"/>
+  <text class="mb" x="182" y="336">@web</text>
+  <path class="lne" d="M110,211 L168,331"/>
+  <rect class="r" x="370" y="130" width="150" height="30" rx="6"/>
+  <text class="mb" x="382" y="150">@webservers</text>
+  <path class="lne" d="M310,211 L368,145"/>
+  <rect class="s" x="580" y="116" width="240" height="20" rx="4"/>
+  <text class="m" x="592" y="131">web01.example.com</text>
+  <rect class="s" x="580" y="138" width="240" height="20" rx="4"/>
+  <text class="m" x="592" y="153">web02.example.com</text>
+  <rect class="s" x="580" y="160" width="240" height="20" rx="4"/>
+  <text class="m" x="592" y="175">web03.example.com</text>
+  <path class="dash" d="M520,145 H578"/>
+  <rect class="r" x="370" y="226" width="150" height="30" rx="6"/>
+  <text class="mb" x="382" y="246">@databases</text>
+  <path class="lne" d="M310,211 L368,241"/>
+  <rect class="s" x="580" y="212" width="240" height="20" rx="4"/>
+  <text class="m" x="592" y="227">db01.example.com</text>
+  <rect class="s" x="580" y="234" width="240" height="20" rx="4"/>
+  <text class="m" x="592" y="249">db-server</text>
+  <path class="dash" d="M520,241 H578"/>
+  <rect class="r" x="370" y="302" width="150" height="30" rx="6"/>
+  <text class="mb" x="382" y="322">@loadbalancers</text>
+  <path class="lne" d="M310,211 L368,317"/>
+  <rect class="s" x="580" y="288" width="240" height="20" rx="4"/>
+  <text class="m" x="592" y="303">lb01.example.com</text>
+  <rect class="s" x="580" y="310" width="240" height="20" rx="4"/>
+  <text class="m" x="592" y="325">lb02.example.com</text>
+  <path class="dash" d="M520,317 H578"/>
+  <path class="lnx" d="M310,331 C340,331 340,145 368,145"/>
+  <path class="lnx" d="M310,331 L368,317"/>
+  <text class="d" x="170" y="368">[web:children] lists webservers and loadbalancers again:</text>
+  <text class="d" x="170" y="383">a group can have more than one parent (red lines)</text>
+  <rect class="n" x="20" y="400" width="800" height="52" rx="4"/>
+  <text class="c" x="32" y="420">Variables flow down: [all:vars] reaches every host, [production:vars] every host in webservers, databases and loadbalancers.</text>
+  <text class="c" x="32" y="437">Every group listed under :children must exist in the same inventory, or the whole file fails to load.</text>
+</svg>

@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 650" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How the k9s views connect</title>
+  <desc id="d">Enter on a context opens the pods view; Enter on the namespace demo opens pods(demo). From deployments, Enter on fred opens pods(demo/fred) filtered by app=fred, Enter on a pod opens its containers, and l opens the logs. Esc goes back one view. Shift+j on a pod jumps to its ReplicaSet, and Enter there lists the pods with its labels. The crumbs show the path. :xray deploy shows deployments, namespace, pods, containers and service accounts as a tree.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="650" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How the k9s views connect</text>
+  <text class="sub" x="20" y="48">Real view titles from k9s 0.51.0 on a cluster with two Deployments, fred and blee</text>
+  <rect class="n" x="20" y="70" width="200" height="46" rx="6"/>
+  <text class="mb" x="30" y="89">:ctx</text>
+  <text class="d" x="30" y="106">contexts(all)</text>
+  <rect class="n" x="250" y="70" width="200" height="46" rx="6"/>
+  <text class="mb" x="260" y="89">:ns</text>
+  <text class="d" x="260" y="106">namespaces(all)</text>
+  <rect class="n" x="20" y="196" width="170" height="46" rx="6"/>
+  <text class="mb" x="30" y="215">:deploy</text>
+  <text class="d" x="30" y="232">deployments(demo)</text>
+  <rect class="r" x="240" y="196" width="180" height="46" rx="6"/>
+  <text class="mb" x="250" y="215">pods(demo/fred)</text>
+  <text class="d" x="250" y="232">&lt;/app=fred&gt;, 2 pods</text>
+  <rect class="rw" x="470" y="196" width="170" height="46" rx="6"/>
+  <text class="mb" x="480" y="215">containers</text>
+  <text class="d" x="480" y="232">(demo/fred-…-9wkqb)</text>
+  <rect class="w" x="690" y="196" width="130" height="46" rx="6"/>
+  <text class="mb" x="700" y="215">Logs</text>
+  <text class="d" x="700" y="232">(…:alpine)[tail]</text>
+  <path class="lne" d="M190,219 L238,219"/>
+  <text class="m" x="214" y="211" text-anchor="middle">Enter</text>
+  <path class="lne" d="M420,219 L468,219"/>
+  <text class="m" x="444" y="211" text-anchor="middle">Enter</text>
+  <path class="lne" d="M640,219 L688,219"/>
+  <text class="m" x="664" y="211" text-anchor="middle">l</text>
+  <path class="lne" d="M120,116 L300,194"/>
+  <text class="m" x="30" y="150">Enter on a context</text>
+  <text class="d" x="30" y="164">back to pods(demo)</text>
+  <path class="lne" d="M350,116 L340,194"/>
+  <text class="m" x="360" y="150">Enter on demo</text>
+  <text class="d" x="360" y="164">pods(demo)</text>
+  <path class="dash" d="M755,244 C755,276 555,276 555,246"/>
+  <path class="dash" d="M555,244 C555,286 330,286 330,246"/>
+  <text class="d" x="640" y="290" text-anchor="middle">Esc goes back one view at a time</text>
+  <rect class="g" x="240" y="320" width="180" height="46" rx="6"/>
+  <text class="mb" x="250" y="339">replicasets(demo)</text>
+  <text class="d" x="250" y="356">fred-f9f96d9c6</text>
+  <rect class="r" x="470" y="320" width="350" height="46" rx="6"/>
+  <text class="mb" x="480" y="339">pods(demo/fred-f9f96d9c6)</text>
+  <text class="d" x="480" y="356">&lt;/app=fred,pod-template-hash=f9f96d9c6&gt;</text>
+  <path class="lne" d="M270,244 L270,318"/>
+  <text class="m" x="278" y="296">Shift+j</text>
+  <path class="lne" d="M420,343 L468,343"/>
+  <text class="m" x="444" y="335" text-anchor="middle">Enter</text>
+  <text class="lb" x="20" y="336">OWNER</text>
+  <text class="d" x="20" y="352">pod to its ReplicaSet</text>
+  <rect class="n" x="20" y="384" width="800" height="44" rx="4"/>
+  <text class="c" x="32" y="402">Crumbs after deploy, Enter, Enter, l:</text>
+  <text class="m" x="32" y="419">&lt;deployment&gt; &lt;pod&gt; &lt;containers&gt; &lt;logs&gt;</text>
+  <text class="c" x="330" y="402">[ and ] move through the command history,</text>
+  <text class="c" x="330" y="419">- repeats the last command.</text>
+  <text class="lb" x="20" y="452">:XRAY DEPLOY SHOWS THE SAME CHAIN AS A TREE</text>
+  <rect class="s" x="20" y="462" width="800" height="172" rx="4"/>
+  <text class="m" x="32" y="480" xml:space="preserve">deployments(1)</text>
+  <text class="m" x="32" y="494" xml:space="preserve">└── demo(2)</text>
+  <text class="m" x="32" y="508" xml:space="preserve">    ├── blee(1) [1/1/0]</text>
+  <text class="m" x="32" y="522" xml:space="preserve">    │   └── demo(1)</text>
+  <text class="m" x="32" y="536" xml:space="preserve">    │       └── blee-6b7586665d-fqw4m(2) [1/1]</text>
+  <text class="m" x="32" y="550" xml:space="preserve">    │           ├── alpine            (container)</text>
+  <text class="m" x="32" y="564" xml:space="preserve">    │           └── default           (service account)</text>
+  <text class="m" x="32" y="578" xml:space="preserve">    └── fred(1) [2/2/0]</text>
+  <text class="m" x="32" y="592" xml:space="preserve">        └── demo(2)</text>
+  <text class="m" x="32" y="606" xml:space="preserve">            ├── fred-f9f96d9c6-9wkqb(2) [1/1]</text>
+  <text class="m" x="32" y="620" xml:space="preserve">            └── fred-f9f96d9c6-bssj4(2) [1/1]</text>
+</svg>

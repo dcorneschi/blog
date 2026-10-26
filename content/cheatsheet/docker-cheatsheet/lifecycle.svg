@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Container lifecycle</title>
+  <desc id="d">The states a container goes through and the command for each step. docker create makes a created container, docker run creates and starts it. start moves created or exited to running, pause and unpause switch between running and paused, stop and kill move running (and stop also paused) to exited, start and restart bring an exited container back. docker rm removes created and exited containers; running and paused ones need docker rm -f.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Container lifecycle</text>
+  <text class="sub" x="20" y="48">States from docker inspect -f '{{.State.Status}}', commands on the arrows (Docker 29.9.2)</text>
+  <rect class="n" x="60" y="120" width="170" height="58" rx="6"/>
+  <text class="mb" x="145.0" y="145" text-anchor="middle">created</text>
+  <text class="d" x="145.0" y="163" text-anchor="middle">.State.Status = created</text>
+  <rect class="g" x="335" y="120" width="170" height="58" rx="6"/>
+  <text class="mb" x="420.0" y="145" text-anchor="middle">running</text>
+  <text class="d" x="420.0" y="163" text-anchor="middle">.State.Status = running</text>
+  <rect class="w" x="610" y="120" width="170" height="58" rx="6"/>
+  <text class="mb" x="695.0" y="145" text-anchor="middle">paused</text>
+  <text class="d" x="695.0" y="163" text-anchor="middle">.State.Status = paused</text>
+  <rect class="rw" x="335" y="300" width="170" height="58" rx="6"/>
+  <text class="mb" x="420.0" y="325" text-anchor="middle">exited</text>
+  <text class="d" x="420.0" y="343" text-anchor="middle">.State.Status = exited</text>
+  <rect class="sd" x="60" y="300" width="170" height="58" rx="6"/>
+  <text class="mb" x="145.0" y="325" text-anchor="middle">removed</text>
+  <text class="d" x="145.0" y="343" text-anchor="middle">gone: no container left</text>
+  <path class="lne" d="M145,76 L145,118"/>
+  <text class="m" x="153" y="92">docker create</text>
+  <path class="lne" d="M420,76 L420,118"/>
+  <text class="m" x="428" y="92">docker run</text>
+  <text class="d" x="428" y="106">create + start</text>
+  <path class="lne" d="M230,149 L333,149"/>
+  <text class="m" x="281" y="141" text-anchor="middle">start</text>
+  <path class="lne" d="M505,138 L608,138"/>
+  <text class="m" x="557" y="130" text-anchor="middle">pause</text>
+  <path class="lne" d="M610,162 L507,162"/>
+  <text class="m" x="557" y="176" text-anchor="middle">unpause</text>
+  <path class="lne" d="M395,178 L395,298"/>
+  <text class="m" x="387" y="228" text-anchor="end">stop · kill</text>
+  <text class="d" x="387" y="243" text-anchor="end">or the process exits</text>
+  <path class="lne" d="M450,298 L450,180"/>
+  <text class="m" x="458" y="228">start</text>
+  <text class="m" x="458" y="243">restart</text>
+  <path class="lne" d="M660,178 L507,302"/>
+  <text class="m" x="600" y="236">stop</text>
+  <text class="d" x="600" y="250">works while paused</text>
+  <path class="lne" d="M145,178 L145,298"/>
+  <text class="m" x="153" y="243">rm</text>
+  <path class="lne" d="M333,329 L232,329"/>
+  <text class="m" x="282" y="321" text-anchor="middle">rm</text>
+  <path class="lnx" d="M335,172 L232,300"/>
+  <text class="m" x="262" y="222" text-anchor="middle">rm -f</text>
+  <rect class="n" x="20" y="392" width="800" height="64" rx="4"/>
+  <text class="c" x="32" y="412">docker rm on a running container: “container is running: stop the container before removing or force remove”</text>
+  <text class="c" x="32" y="429">On a paused one: “container is paused and must be unpaused first”. docker rm -f removes both.</text>
+  <text class="c" x="32" y="446">docker kill leaves exit code 137; docker restart works from running and from exited.</text>
+</svg>

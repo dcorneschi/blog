@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 596" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What VSZ and RSS count</title>
+  <desc id="d">The address space of one process, region by region, drawn as pages. Program code is file-backed and loaded page by page on first use. The heap is reserved by malloc and gets RAM only for pages that are written; some heap pages are swapped out. Shared libraries are mapped whole, with only the pages in use in RAM. A memory-mapped file is page cache shared with other readers. The stack is reserved up to its limit with only the top in use. VSZ counts every mapped page (108). RSS counts resident pages, 9 private and 17 shared, shared ones in full. PSS splits shared pages among the processes using them. USS counts the 9 private pages, what killing the process would free. Swapped and never-touched pages are in VSZ only.</desc>
+  <defs>
+    <style>
+      .h  { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d  { font-size: 11px; fill: #495057; }
+      .m  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+    </style>
+  </defs>
+  <rect width="900" height="596" fill="#ffffff"/>
+  <text class="h" x="20" y="28">One process's address space, page by page: what VSZ and RSS count</text>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="20" y="58" width="16" height="16" rx="3"/>
+  <text class="tb" x="42" y="70" style="font-size:12px">resident, private</text>
+  <text class="d" x="42" y="86">in RSS, PSS and USS</text>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="240" y="58" width="16" height="16" rx="3"/>
+  <text class="tb" x="262" y="70" style="font-size:12px">resident, shared</text>
+  <text class="d" x="262" y="86">in RSS in full, in PSS split</text>
+  <rect fill="#e5dbff" stroke="#8a63d2" stroke-width="1.2" x="460" y="58" width="16" height="16" rx="3"/>
+  <text class="tb" x="482" y="70" style="font-size:12px">swapped out</text>
+  <text class="d" x="482" y="86">VSZ only</text>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="680" y="58" width="16" height="16" rx="3"/>
+  <text class="tb" x="702" y="70" style="font-size:12px">mapped, never touched</text>
+  <text class="d" x="702" y="86">VSZ only</text>
+  <text class="tb" x="20" y="126">Program code</text>
+  <text class="d" x="20" y="143">/usr/bin/app, file-backed</text>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="250" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="272" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="294" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="316" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="338" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="360" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="382" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="404" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="426" y="112" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="448" y="112" width="18" height="18" rx="3"/>
+  <text class="d" x="250" y="148">loaded page by page on first use; shared by every copy of the program</text>
+  <text class="tb" x="20" y="188">Heap</text>
+  <text class="d" x="20" y="205">malloc(), anonymous memory</text>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="250" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="272" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="294" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="316" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="338" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="360" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="382" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#e5dbff" stroke="#8a63d2" stroke-width="1.2" x="404" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#e5dbff" stroke="#8a63d2" stroke-width="1.2" x="426" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#e5dbff" stroke="#8a63d2" stroke-width="1.2" x="448" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="470" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="492" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="514" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="536" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="558" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="580" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="602" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="624" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="646" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="668" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="690" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="712" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="734" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="756" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="778" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="800" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="822" y="174" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="844" y="174" width="18" height="18" rx="3"/>
+  <text class="d" x="250" y="210">malloc() reserves address space; a page gets RAM only when written</text>
+  <text class="tb" x="20" y="250">Shared libraries</text>
+  <text class="d" x="20" y="267">libc.so, libssl.so …</text>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="250" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="272" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="294" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="316" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="338" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="360" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="382" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="404" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="426" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="448" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="470" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="492" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="514" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="536" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="558" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="580" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="602" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="624" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="646" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="668" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="690" y="236" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="712" y="236" width="18" height="18" rx="3"/>
+  <text class="d" x="250" y="272">the whole library is mapped; only the pages in use are in RAM</text>
+  <text class="tb" x="20" y="312">Memory-mapped file</text>
+  <text class="d" x="20" y="329">mmap() of a data file</text>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="250" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="272" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffe5cc" stroke="#fd9843" stroke-width="1.2" x="294" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="316" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="338" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="360" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="382" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="404" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="426" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="448" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="470" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="492" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="514" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="536" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="558" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="580" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="602" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="624" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="646" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="668" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="690" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="712" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="734" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="756" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="778" y="298" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="800" y="298" width="18" height="18" rx="3"/>
+  <text class="d" x="250" y="334">page cache: shared with other readers, the kernel can drop it</text>
+  <text class="tb" x="20" y="374">Stack</text>
+  <text class="d" x="20" y="391">grows down</text>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="250" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="272" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="294" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="316" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="338" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="360" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="382" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="404" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="426" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="448" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="470" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="492" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="514" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="536" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="558" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="580" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="602" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="624" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="646" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#ffffff" stroke="#ced4da" stroke-dasharray="2 2" stroke-width="1.2" x="668" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="690" y="360" width="18" height="18" rx="3"/>
+  <rect fill="#d3f0e0" stroke="#2f9e66" stroke-width="1.2" x="712" y="360" width="18" height="18" rx="3"/>
+  <text class="d" x="250" y="396">reserved up to the limit (ulimit -s), only the top is used</text>
+  <rect x="20" y="428" width="860" height="128" rx="8" fill="#f8f9fa" stroke="#dee2e6"/>
+  <text class="tb" x="36" y="452">Counting the 108 pages above</text>
+  <text class="m" x="36" y="476">VSZ</text><text class="d" x="90" y="476">every page that is mapped: 108 pages, whether or not it is in RAM</text>
+  <text class="m" x="36" y="496">RSS</text><text class="d" x="90" y="496">resident pages: 9 private + 17 shared = 26, shared pages counted in full</text>
+  <text class="m" x="36" y="516">PSS</text><text class="d" x="90" y="516">9 private + each shared page divided by the number of processes using it</text>
+  <text class="m" x="36" y="536">USS</text><text class="d" x="90" y="536">9 private pages: what killing this process would free</text>
+  <text class="d" x="20" y="578">A sketch, not to scale: a real heap or mmap region can be thousands of times larger than the code, and VSZ grows with it.</text>
+</svg>

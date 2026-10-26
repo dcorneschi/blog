@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 298" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">emptyDir lifecycle</title>
+  <desc id="d">The kubelet creates an empty directory when the Pod is scheduled. The containers write and read it while they run. When a container restarts, the files stay: output.log kept its 9 lines after a restart. When the Pod is deleted, the directory is removed within 5 seconds. A new Pod gets a new, empty directory.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="298" fill="#ffffff"/>
+  <text class="h" x="20" y="28">emptyDir lifecycle</text>
+  <text class="sub" x="20" y="48">From a two-container Pod on k3s v1.35.9</text>
+  <rect class="g" x="20" y="90" width="185" height="92" rx="6"/>
+  <text class="tb" x="32" y="114">Pod scheduled</text>
+  <text class="d" x="32" y="136">kubelet creates</text>
+  <text class="m" x="32" y="160">log-volume/, empty</text>
+  <rect class="r" x="225" y="90" width="185" height="92" rx="6"/>
+  <text class="tb" x="237" y="114">Containers run</text>
+  <text class="d" x="237" y="136">both write and read</text>
+  <text class="m" x="237" y="160">output.log grows</text>
+  <path class="lne" d="M207,136 L223,136"/>
+  <rect class="r" x="430" y="90" width="185" height="92" rx="6"/>
+  <text class="tb" x="442" y="114">Container restarts</text>
+  <text class="d" x="442" y="136">crictl stop app; restartCount 1</text>
+  <text class="m" x="442" y="160">output.log kept 9 lines</text>
+  <path class="lne" d="M412,136 L428,136"/>
+  <rect class="x" x="635" y="90" width="185" height="92" rx="6"/>
+  <text class="tb" x="647" y="114">Pod deleted</text>
+  <text class="d" x="647" y="136">kubectl delete pod share</text>
+  <text class="m" x="647" y="160">directory gone within 5 s</text>
+  <path class="lne" d="M617,136 L633,136"/>
+  <text class="lb" x="20" y="80">WHAT HAPPENS TO THE DATA</text>
+  <rect class="g" x="20" y="200" width="595" height="18" rx="4"/>
+  <rect class="x" x="635" y="200" width="185" height="18" rx="4"/>
+  <text class="c" x="30" y="213">data exists: survives container restarts and crashes</text>
+  <text class="c" x="645" y="213">data deleted</text>
+  <rect class="n" x="20" y="236" width="800" height="46" rx="4"/>
+  <text class="c" x="32" y="255">The volume belongs to the Pod, not to a container: a restarted container finds the files its predecessor wrote.</text>
+  <text class="c" x="32" y="272">The path contains the Pod UID, so every Pod, including a replacement from a Deployment, has its own directory.</text>
+</svg>

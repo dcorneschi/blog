@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">terraform init -migrate-state vs -reconfigure after a backend key change</title>
+  <desc id="d">The backend key changes from prod/ to prod2/. With terraform init -migrate-state, Terraform copies the state from prod/terraform.tfstate to prod2/terraform.tfstate and points the backend cache at prod2/; terraform plan shows no changes. With terraform init -reconfigure, Terraform only points the backend cache at prod2/; no state is copied, prod2/ is empty, and terraform plan wants to create every resource again (Plan: 1 to add in a test with one resource), while the real state stays in prod/.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#198754"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .t    { font-size: 13px; fill: #212529; text-anchor: middle; }
+      .tb   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; fill: #212529; text-anchor: middle; }
+      .mt   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 14px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 12px; fill: #495057; text-anchor: middle; }
+      .lne  { stroke: #495057; stroke-width: 1.5; fill: none; marker-end: url(#a); }
+      .copy { stroke: #198754; stroke-width: 2.5; fill: none; marker-end: url(#g); }
+    </style>
+  </defs>
+
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text class="t" x="450" y="26" style="font-size:15px;font-weight:700">The backend key changed from prod/ to prod2/</text>
+
+  <!-- row 1: -migrate-state -->
+  <rect class="box" x="16" y="42" width="868" height="196" rx="10" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="mt" x="32" y="68">terraform init -migrate-state</text>
+
+  <rect class="box" x="40" y="86" width="250" height="62" rx="6" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="m" x="165" y="110">prod/terraform.tfstate</text>
+  <text class="d" x="165" y="132">the state (old key)</text>
+
+  <rect class="box" x="610" y="86" width="250" height="62" rx="6" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="m" x="735" y="110">prod2/terraform.tfstate</text>
+  <text class="d" x="735" y="132">a copy of the state (new key)</text>
+
+  <path class="copy" d="M292,117 H606"/>
+  <text class="t" x="450" y="108" style="font-weight:700;fill:#146c43">copies the state</text>
+
+  <rect class="box" x="330" y="166" width="240" height="40" rx="6" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="m" x="450" y="184">.terraform/terraform.tfstate</text>
+  <text class="d" x="450" y="200">backend cache</text>
+  <path class="lne" d="M570,186 H735 V150"/>
+  <text class="d" x="660" y="180">now points to prod2/</text>
+
+  <text class="t" x="735" y="222" style="font-weight:700;fill:#146c43">terraform plan: No changes ✓</text>
+
+  <!-- row 2: -reconfigure -->
+  <rect class="box" x="16" y="256" width="868" height="200" rx="10" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="mt" x="32" y="282">terraform init -reconfigure</text>
+
+  <rect class="box" x="40" y="300" width="250" height="62" rx="6" fill="#fff3cd" stroke="#e0c46c"/>
+  <text class="m" x="165" y="324">prod/terraform.tfstate</text>
+  <text class="d" x="165" y="346">the state stays here, untouched</text>
+
+  <rect class="box" x="610" y="300" width="250" height="62" rx="6" fill="#ffffff" stroke="#dc3545" stroke-dasharray="5 4"/>
+  <text class="m" x="735" y="324">prod2/terraform.tfstate</text>
+  <text class="d" x="735" y="346">empty: no state at the new key</text>
+
+  <text class="t" x="450" y="331" style="fill:#6c757d">nothing is copied</text>
+
+  <rect class="box" x="330" y="380" width="240" height="40" rx="6" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="m" x="450" y="398">.terraform/terraform.tfstate</text>
+  <text class="d" x="450" y="414">backend cache</text>
+  <path class="lne" d="M570,400 H735 V364"/>
+  <text class="d" x="660" y="394">now points to prod2/</text>
+
+  <text class="t" x="735" y="430" style="font-weight:700;fill:#b02a37">terraform plan: 1 to add ✗</text>
+  <text class="d" x="735" y="446">would create everything a second time</text>
+  <text class="d" x="165" y="400">switch back to prod/, or</text>
+  <text class="d" x="165" y="416">use -migrate-state instead</text>
+</svg>

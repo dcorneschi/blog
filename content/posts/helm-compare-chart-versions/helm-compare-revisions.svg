@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 430" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Upgrade, compare, roll back: the revision history</title>
+  <desc id="d">Revision 1 installs chart 3.12.2 (app 0.7.2). helm diff upgrade previews the move to 3.13.0; helm upgrade creates revision 2 (app 0.8.0). helm diff revision 1 2 compares the two afterwards. helm diff rollback 1 previews the rollback, and helm rollback creates revision 3 with the same chart and values as revision 1. Revision 3 is deployed, 1 and 2 are superseded.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a6fc7"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mp  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #5a3d99; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 12px; fill: #212529; }
+      .lne { stroke: #495057; stroke-width: 1.8; fill: none; marker-end: url(#a); }
+      .prv { stroke: #8a6fc7; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#p); }
+      .same{ stroke: #868e96; stroke-width: 1; fill: none; stroke-dasharray: 3 3; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .dep { fill: #d1e7dd; stroke: #198754; }
+    </style>
+  </defs>
+  <rect width="920" height="430" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Upgrade, compare, roll back: the revision history</text>
+  <text class="sub" x="20" y="44">helm history metrics-server -n kube-system after an upgrade and a rollback</text>
+
+  <!-- previews above -->
+  <text class="d" x="40" y="78">preview before acting (helm-diff plugin, changes nothing)</text>
+  <path class="prv" d="M150,146 V112 H440 V142"/>
+  <text class="mp" x="295" y="104" text-anchor="middle">helm diff upgrade … --version 3.13.0</text>
+  <path class="prv" d="M480,146 V112 H770 V142"/>
+  <text class="mp" x="625" y="104" text-anchor="middle">helm diff rollback metrics-server 1</text>
+
+  <!-- revision 1 -->
+  <rect class="r" x="40" y="150" width="220" height="120" rx="6"/>
+  <text class="tb" x="54" y="172">revision 1</text>
+  <text class="m" x="54" y="192">metrics-server-3.12.2</text>
+  <text class="d" x="54" y="210">app 0.7.2 · image v0.7.2</text>
+  <text class="d" x="54" y="228">Install complete</text>
+  <rect class="n" x="54" y="238" width="86" height="22" rx="11"/>
+  <text class="c" x="97" y="253" text-anchor="middle">superseded</text>
+
+  <!-- upgrade arrow -->
+  <path class="lne" d="M260,210 H346"/>
+  <text class="d" x="303" y="202" text-anchor="middle">helm upgrade</text>
+
+  <!-- revision 2 -->
+  <rect class="g" x="350" y="150" width="220" height="120" rx="6"/>
+  <text class="tb" x="364" y="172">revision 2</text>
+  <text class="m" x="364" y="192">metrics-server-3.13.0</text>
+  <text class="d" x="364" y="210">app 0.8.0 · image v0.8.0</text>
+  <text class="d" x="364" y="228">Upgrade complete</text>
+  <rect class="n" x="364" y="238" width="86" height="22" rx="11"/>
+  <text class="c" x="407" y="253" text-anchor="middle">superseded</text>
+
+  <!-- rollback arrow -->
+  <path class="lne" d="M570,210 H656"/>
+  <text class="d" x="613" y="202" text-anchor="middle">helm rollback 1</text>
+
+  <!-- revision 3 -->
+  <rect class="r" x="660" y="150" width="220" height="120" rx="6"/>
+  <text class="tb" x="674" y="172">revision 3</text>
+  <text class="m" x="674" y="192">metrics-server-3.12.2</text>
+  <text class="d" x="674" y="210">app 0.7.2 · image v0.7.2</text>
+  <text class="d" x="674" y="228">Rollback to 1</text>
+  <rect class="dep" x="674" y="238" width="86" height="22" rx="11"/>
+  <text class="c" x="717" y="253" text-anchor="middle">deployed</text>
+
+  <!-- compare after -->
+  <path class="prv" d="M150,274 V302 H460 V278"/>
+  <text class="mp" x="305" y="320" text-anchor="middle">helm diff revision metrics-server 1 2</text>
+  <text class="d" x="305" y="336" text-anchor="middle">compare after the fact</text>
+
+  <!-- same content -->
+  <path class="same" d="M90,274 V358 H770 V274"/>
+  <text class="d" x="485" y="374" text-anchor="middle">same chart and values as revision 1, under a new revision number</text>
+
+  <text class="d" x="20" y="404">A rollback never deletes revision 2: it adds revision 3. Pass the revision number you want back, from helm history.</text>
+  <text class="d" x="20" y="420">Repeat -n kube-system on every command; without it Helm looks for the release in default.</text>
+</svg>

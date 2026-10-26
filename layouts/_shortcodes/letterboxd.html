@@ -1,0 +1,62 @@
+{{- /*
+  Recent films from a Letterboxd diary, read from the profile's RSS feed at build time,
+  laid out like the "Recent activity" row of a Letterboxd profile: four posters, rating below.
+  Usage: {{< letterboxd >}} or {{< letterboxd count="4" title="Film Diary" >}}; the username
+  comes from params.letterboxd. The heading is part of the output, so nothing is left behind
+  when the feed can't be fetched (no warning either: CI builds with --panicOnWarning).
+  The feed has no CORS headers, so this can't run in the browser; a scheduled rebuild keeps it current.
+*/ -}}
+{{- $user := site.Params.letterboxd -}}
+{{- $count := int (.Get "count" | default 4) -}}
+{{- with $user -}}
+{{- $url := printf "https://letterboxd.com/%s/rss/" . -}}
+{{- $opts := dict "headers" (dict "User-Agent" (printf "Hugo (%s)" site.BaseURL)) -}}
+{{- with try (resources.GetRemote $url $opts) -}}
+  {{- with .Err -}}
+<!-- letterboxd: feed not available: {{ . }} -->
+  {{- else with .Value -}}
+    {{- $items := (. | transform.Unmarshal).channel.item -}}
+    {{- if reflect.IsMap $items }}{{ $items = slice $items }}{{ end -}}
+    {{- with first $count $items }}
+<h2 id="film-diary">{{ $.Get "title" | default "Film Diary" }}</h2>
+<div class="letterboxd-row" style="--lb-cols: {{ $count }}">
+      {{- range . }}
+        {{- $film := . -}}
+        {{- $poster := "" -}}
+        {{- with index (findRESubmatch `<img src="([^"]+)"` .description 1) 0 }}{{ $poster = index . 1 }}{{ end -}}
+        {{- $rating := float (.memberRating | default 0) -}}
+        {{- $stars := "" -}}
+        {{- range seq (int (math.Floor $rating)) }}{{ $stars = print $stars "★" }}{{ end -}}
+        {{- if gt (sub $rating (math.Floor $rating)) 0 }}{{ $stars = print $stars "½" }}{{ end -}}
+        {{- $label := printf "%s (%s)" .filmTitle .filmYear -}}
+        {{- with .watchedDate }}{{ $label = printf "%s, watched %s" $label ((time.AsTime .) | time.Format "2 Jan 2006") }}{{ end }}
+  <div class="letterboxd-item">
+    <a class="letterboxd-poster" href="{{ .link }}" title="{{ $label }}" rel="noopener">
+      {{- $img := "" -}}
+      {{- with $poster }}{{ with try (resources.GetRemote .) }}{{ with .Value }}{{ $img = .Process "resize 300x webp q80" }}{{ end }}{{ end }}{{ end -}}
+      {{- if $img }}
+      <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $film.filmTitle }} ({{ $film.filmYear }})" loading="lazy">
+      {{- else }}
+      <span class="letterboxd-noposter">{{ $film.filmTitle }}</span>
+      {{- end }}
+    </a>
+    <div class="letterboxd-rating">
+      {{- with $stars }}<span title="{{ $rating }} out of 5">{{ . }}</span>{{ end -}}
+      {{- if eq .memberLike "Yes" }}<span class="letterboxd-like" title="Liked">♥</span>{{ end -}}
+      {{- if eq .rewatch "Yes" }}<svg class="letterboxd-rewatch" viewBox="0 0 24 24" width="16" height="16" aria-label="Rewatch" role="img"><title>Rewatch</title><path d="M20 11a8 8 0 0 0-14.3-4.9M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9M20 20v-4h-4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ end -}}
+    </div>
+    <div class="letterboxd-dates">
+      {{- with .filmYear }}<span title="Release year">{{ . }}</span>{{ end -}}
+      {{- with .watchedDate }}<span title="Watched">Watched {{ (time.AsTime .) | time.Format "2 Jan 2006" }}</span>{{ end -}}
+    </div>
+  </div>
+      {{- end }}
+      {{- range seq (sub $count (len .)) }}
+  <div class="letterboxd-item"><span class="letterboxd-poster letterboxd-empty" aria-hidden="true"></span></div>
+      {{- end }}
+</div>
+<p class="small text-body-secondary">From my <a href="https://letterboxd.com/{{ $user }}/" rel="noopener">Letterboxd diary</a>.</p>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- end -}}

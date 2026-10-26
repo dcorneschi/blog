@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">KVM / virsh Cheatsheet</title>
+  <desc id="d">KVM / virsh Cheatsheet: Virtual machines with libvirt. virsh, virt-install, snapshots, cloning, networks, storage pools, migration, libguestfs. Small drawings: shut off, running, paused; a terminal running virt-host-validate qemu and ls -l /dev/kvm; host, networks, storage pools; icons for virsh, virt-install, snapshots, cloning, networks, storage pools, migration.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #1c7ed6; }
+      .a2  { fill: #343a40; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #1c7ed6; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #1c7ed6; }
+  .vs   { stroke: #1c7ed6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #1c7ed6; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #1c7ed6; stroke-width: 9; }
+  .vl   { fill: #1c7ed6; fill-opacity: .18; }
+  .vl2  { fill: #1c7ed6; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #1c7ed6; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #1c7ed6; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-20.1,45.6) scale(0.883)"><rect class="vpn" x="170" y="170" width="236" height="84" rx="42"/><text class="vink" x="288" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">shut off</text><path class="var" d="M414,212 H460 M440,196 L460,212 L440,228"/><rect class="vpg" x="470" y="170" width="213" height="84" rx="42"/><text class="vink" x="576" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">running</text><path class="var" d="M691,212 H737 M717,196 L737,212 L717,228"/><rect class="vpv" x="747" y="170" width="190" height="84" rx="42"/><text class="vink" x="842" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">paused</text><path class="var" d="M842,258 C842,330 576,330 576,266 M560,282 L576,264 L592,282"/><text class="vn" x="709" y="350" text-anchor="middle" font-size="32" font-family="Menlo, Consolas, 'Liberation Mono', monospace">resume</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ virt-host-validate qemu</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ ls -l /dev/kvm<tspan class="vcur"> █</tspan></text></g><g transform="translate(46.0,0.0) scale(1.000)"><g transform="translate(1795,190) scale(1.150)"><rect class="vp vsw" x="25" y="22" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="44" r="7"/><rect class="vf" x="90" y="39" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="78" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="100" r="7"/><rect class="vf" x="90" y="95" width="66" height="10" rx="5" opacity=".45"/><rect class="vp vsw" x="25" y="134" width="150" height="44" rx="8"/><circle class="vf" cx="50" cy="156" r="7"/><rect class="vf" x="90" y="151" width="66" height="10" rx="5" opacity=".45"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">host</text><g transform="translate(2065,190) scale(1.150)"><path class="vs" d="M58,24 V176 M58,48 H112 M58,100 H112 M58,152 H112" stroke-width="11"/><rect class="vp vsw" x="112" y="28" width="56" height="40" rx="7"/><rect class="vp vsw" x="112" y="80" width="56" height="40" rx="7"/><rect class="vp vsw" x="112" y="132" width="56" height="40" rx="7"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">networks</text><g transform="translate(2335,190) scale(1.150)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">storage pools</text></g><g transform="translate(546.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">virsh</text><g transform="translate(806.0,1290) scale(0.500)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">virt-install</text><g transform="translate(1066.0,1290) scale(0.500)"><path class="vf" d="M20,64 H62 L76,40 H124 L138,64 H180 V172 H20 Z"/><circle cx="100" cy="114" r="38" fill="#fff"/><circle class="vf" cx="100" cy="114" r="22"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="34">snapshots</text><g transform="translate(1326.0,1290) scale(0.500)"><path class="vf vbg" d="M20,150 L100,112 L180,150 L100,188 Z" opacity="1"/><path class="vf vbg" d="M20,116 L100,78 L180,116 L100,154 Z" opacity="0.78"/><path class="vf vbg" d="M20,82 L100,44 L180,82 L100,120 Z" opacity="0.56"/><path class="vf vbg" d="M20,48 L100,10 L180,48 L100,86 Z" opacity="0.36"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">cloning</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vs" d="M58,24 V176 M58,48 H112 M58,100 H112 M58,152 H112" stroke-width="11"/><rect class="vp vsw" x="112" y="28" width="56" height="40" rx="7"/><rect class="vp vsw" x="112" y="80" width="56" height="40" rx="7"/><rect class="vp vsw" x="112" y="132" width="56" height="40" rx="7"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">networks</text><g transform="translate(1846.0,1290) scale(0.500)"><path class="vl vsw" d="M36,46 V154 A64,22 0 0 0 164,154 V46"/><ellipse class="vl2 vsw" cx="100" cy="46" rx="64" ry="22"/><path class="vs" d="M36,82 A64,22 0 0 0 164,82 M36,118 A64,22 0 0 0 164,118" stroke-width="8"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">storage pools</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vs" d="M30,68 H166 M132,34 L166,68 L132,102" stroke-width="18"/><path class="vs2" d="M170,138 H34 M68,104 L34,138 L68,172" stroke-width="18"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">migration</text></g><!-- /vignettes -->
+  <rect class="a2" x="1076" y="330" width="600" height="300" rx="24"/><rect class="a" x="1116" y="380" width="160" height="200" rx="14"/><rect class="wt" x="1136" y="400" width="120" height="16" rx="8" opacity="0.7"/><rect class="wt" x="1136" y="430" width="80" height="16" rx="8" opacity="0.5"/><circle class="wt" cx="1196" cy="530" r="18" opacity="0.8"/><rect class="a" x="1296" y="380" width="160" height="200" rx="14"/><rect class="wt" x="1316" y="400" width="120" height="16" rx="8" opacity="0.7"/><rect class="wt" x="1316" y="430" width="80" height="16" rx="8" opacity="0.5"/><circle class="wt" cx="1376" cy="530" r="18" opacity="0.8"/><rect class="a" x="1476" y="380" width="160" height="200" rx="14"/><rect class="wt" x="1496" y="400" width="120" height="16" rx="8" opacity="0.7"/><rect class="wt" x="1496" y="430" width="80" height="16" rx="8" opacity="0.5"/><circle class="wt" cx="1556" cy="530" r="18" opacity="0.8"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="198">KVM / virsh Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Virtual machines with libvirt</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="52">virsh · virt-install · snapshots · cloning · networks · storage pools · migration · libguestfs</text>
+</svg>

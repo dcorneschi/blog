@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 426" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Volumes, bind mounts and tmpfs</title>
+  <desc id="d">Four mounts in one container and where their data lives on the host. A named volume is stored in /var/lib/docker/volumes/vol/_data and survives docker rm. A bind mount is a host path such as /srv/data and survives. An anonymous volume gets a 64-character id under /var/lib/docker/volumes; docker rm keeps it, docker rm -v and docker run --rm delete it. A tmpfs mount lives in memory and is empty again after the container stops.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="426" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Volumes, bind mounts and tmpfs</text>
+  <text class="sub" x="20" y="48">docker run -v vol:/vol -v /srv/data:/bind -v /anon --tmpfs /tmp alpine ...</text>
+  <rect class="n" x="20" y="64" width="800" height="118" rx="6"/>
+  <text class="lb" x="32" y="82">CONTAINER</text>
+  <rect class="n" x="20" y="214" width="800" height="104" rx="6"/>
+  <text class="lb" x="32" y="232">HOST</text>
+  <text class="lb" x="20" y="344">AFTER DOCKER RM</text>
+  <rect class="r" x="36" y="92" width="176" height="76" rx="6"/>
+  <text class="mb" x="124" y="114" text-anchor="middle">/vol</text>
+  <text class="ms" x="124" y="132" text-anchor="middle">-v vol:/vol</text>
+  <text class="d" x="124" y="152" text-anchor="middle">named volume</text>
+  <path class="lne" d="M124,168 L124,246"/>
+  <rect class="s" x="36" y="248" width="176" height="56" rx="6"/>
+  <text class="m" x="124" y="271" text-anchor="middle">/var/lib/docker/</text>
+  <text class="m" x="124" y="288" text-anchor="middle">volumes/vol/_data</text>
+  <rect class="g" x="36" y="354" width="176" height="52" rx="6"/>
+  <text class="tb" x="124" y="375" text-anchor="middle">docker rm: kept</text>
+  <text class="d" x="124" y="393" text-anchor="middle">removed by docker volume rm</text>
+  <rect class="rw" x="234" y="92" width="176" height="76" rx="6"/>
+  <text class="mb" x="322" y="114" text-anchor="middle">/bind</text>
+  <text class="ms" x="322" y="132" text-anchor="middle">-v /srv/data:/bind</text>
+  <text class="d" x="322" y="152" text-anchor="middle">bind mount</text>
+  <path class="lne" d="M322,168 L322,246"/>
+  <rect class="s" x="234" y="248" width="176" height="56" rx="6"/>
+  <text class="m" x="322" y="271" text-anchor="middle">/srv/data</text>
+  <text class="m" x="322" y="288" text-anchor="middle">(any host path)</text>
+  <rect class="g" x="234" y="354" width="176" height="52" rx="6"/>
+  <text class="tb" x="322" y="375" text-anchor="middle">docker rm: kept</text>
+  <text class="d" x="322" y="393" text-anchor="middle">the files are yours</text>
+  <rect class="r" x="432" y="92" width="176" height="76" rx="6"/>
+  <text class="mb" x="520" y="114" text-anchor="middle">/anon</text>
+  <text class="ms" x="520" y="132" text-anchor="middle">-v /anon</text>
+  <text class="d" x="520" y="152" text-anchor="middle">anonymous volume</text>
+  <path class="lne" d="M520,168 L520,246"/>
+  <rect class="s" x="432" y="248" width="176" height="56" rx="6"/>
+  <text class="m" x="520" y="271" text-anchor="middle">/var/lib/docker/volumes/</text>
+  <text class="m" x="520" y="288" text-anchor="middle">&lt;64-hex id&gt;/_data</text>
+  <rect class="w" x="432" y="354" width="176" height="52" rx="6"/>
+  <text class="tb" x="520" y="375" text-anchor="middle">docker rm: kept</text>
+  <text class="d" x="520" y="393" text-anchor="middle">rm -v and run --rm delete it</text>
+  <rect class="w" x="630" y="92" width="176" height="76" rx="6"/>
+  <text class="mb" x="718" y="114" text-anchor="middle">/tmp</text>
+  <text class="ms" x="718" y="132" text-anchor="middle">--tmpfs /tmp</text>
+  <text class="d" x="718" y="152" text-anchor="middle">tmpfs</text>
+  <path class="lne" d="M718,168 L718,246"/>
+  <rect class="s" x="630" y="248" width="176" height="56" rx="6"/>
+  <text class="m" x="718" y="271" text-anchor="middle">memory</text>
+  <text class="d" x="718" y="288" text-anchor="middle">(not written to disk)</text>
+  <rect class="x" x="630" y="354" width="176" height="52" rx="6"/>
+  <text class="tb" x="718" y="375" text-anchor="middle">gone on stop</text>
+  <text class="d" x="718" y="393" text-anchor="middle">empty again after a restart</text>
+</svg>

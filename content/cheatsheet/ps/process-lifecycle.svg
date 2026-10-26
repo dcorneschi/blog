@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Process lifecycle: fork, exec, exit, wait</title>
+  <desc id="d">Normal case: the parent (bash, PID 100) calls fork; the child (PID 101, parent PID 100) starts as a copy of bash, calls execve to run ps under the same PID, runs, and calls exit(0). The kernel sends SIGCHLD to the parent; until the parent calls wait the child is a zombie (Z). wait returns the exit status 0 and the PID is freed. Orphan case: the parent exits first; the child is re-parented to PID 1 (init or systemd, or the nearest subreaper), its PPID becomes 1, and when it exits PID 1 reaps it.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .tc   { font-size: 12px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .dc   { font-size: 11px; fill: #495057; text-anchor: middle; }
+      .d    { font-size: 11px; fill: #495057; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh  { stroke: #6c757d; stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; marker-end: url(#a); }
+      .ev   { fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect width="900" height="600" fill="#ffffff"/>
+
+  <!-- normal case -->
+  <text class="h" x="20" y="28">Normal case: the parent waits</text>
+
+  <rect class="box" x="20" y="42" width="860" height="76" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="34" y="72">Parent</text>
+  <text class="d" x="34" y="90">bash · PID 100</text>
+
+  <rect class="box ev" x="190" y="56" width="100" height="48" rx="5" stroke="#6ea8fe"/>
+  <text class="tc" x="240" y="78">fork()</text>
+  <text class="dc" x="240" y="94">returns 101</text>
+
+  <rect class="box" x="300" y="56" width="410" height="48" rx="5" fill="#f8f9fa" stroke="#adb5bd" style="stroke-dasharray:4 3"/>
+  <text class="tc" x="505" y="78">goes on, then calls wait() and sleeps (S)</text>
+  <text class="dc" x="505" y="94">a shell waits for a foreground command like this</text>
+
+  <rect class="box ev" x="720" y="56" width="150" height="48" rx="5" stroke="#6ea8fe"/>
+  <text class="tc" x="795" y="78">wait() returns</text>
+  <text class="dc" x="795" y="94">exit status 0 ($?)</text>
+
+  <rect class="box" x="20" y="168" width="860" height="76" rx="8" fill="#d1e7dd" stroke="#75b798"/>
+  <text class="tb" x="34" y="198">Child</text>
+  <text class="d" x="34" y="216">PID 101 · PPID 100</text>
+
+  <rect class="box ev" x="190" y="182" width="100" height="48" rx="5" stroke="#75b798"/>
+  <text class="tc" x="240" y="204">copy of bash</text>
+  <text class="dc" x="240" y="220">same memory</text>
+
+  <rect class="box ev" x="300" y="182" width="130" height="48" rx="5" stroke="#75b798"/>
+  <text class="tc" x="365" y="204">execve("ps")</text>
+  <text class="dc" x="365" y="220">same PID, new program</text>
+
+  <rect class="box ev" x="440" y="182" width="70" height="48" rx="5" stroke="#75b798"/>
+  <text class="tc" x="475" y="204">runs</text>
+  <text class="dc" x="475" y="220">R / S / D</text>
+
+  <rect class="box ev" x="520" y="182" width="90" height="48" rx="5" stroke="#75b798"/>
+  <text class="tc" x="565" y="204">exit(0)</text>
+  <text class="dc" x="565" y="220">memory freed</text>
+
+  <rect class="box" x="620" y="182" width="90" height="48" rx="5" fill="#ece6f5" stroke="#a993c9"/>
+  <text class="tc" x="665" y="204">Z zombie</text>
+  <text class="dc" x="665" y="220">keeps status</text>
+
+  <rect class="box" x="720" y="182" width="150" height="48" rx="5" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tc" x="795" y="204">reaped</text>
+  <text class="dc" x="795" y="220">PID 101 is free again</text>
+
+  <!-- arrows normal case -->
+  <path class="lne" d="M240,104 V180"/>
+  <text class="d" x="248" y="146">new process</text>
+  <path class="lne" d="M565,182 V106"/>
+  <text class="d" x="573" y="146">SIGCHLD</text>
+  <path class="lne" d="M795,104 V180"/>
+  <text class="d" x="803" y="146">reaps it</text>
+
+  <!-- orphan case -->
+  <text class="h" x="20" y="300">Orphan: the parent exits first</text>
+
+  <rect class="box" x="20" y="314" width="460" height="76" rx="8" fill="#e7f1ff" stroke="#6ea8fe"/>
+  <text class="tb" x="34" y="344">Parent</text>
+  <text class="d" x="34" y="362">PID 200</text>
+  <rect class="box ev" x="190" y="328" width="100" height="48" rx="5" stroke="#6ea8fe"/>
+  <text class="tc" x="240" y="350">fork()</text>
+  <text class="dc" x="240" y="366">returns 201</text>
+  <rect class="box ev" x="300" y="328" width="170" height="48" rx="5" stroke="#6ea8fe"/>
+  <text class="tc" x="385" y="350">exits first</text>
+  <text class="dc" x="385" y="366">its own parent reaps it</text>
+
+  <rect class="box" x="20" y="440" width="860" height="76" rx="8" fill="#d1e7dd" stroke="#75b798"/>
+  <text class="tb" x="34" y="470">Child</text>
+  <text class="d" x="34" y="488">PID 201</text>
+  <rect class="box ev" x="190" y="454" width="280" height="48" rx="5" stroke="#75b798"/>
+  <text class="tc" x="330" y="476">runs · PPID 200</text>
+  <text class="dc" x="330" y="492">e.g. a command started with &amp; or nohup</text>
+  <rect class="box ev" x="480" y="454" width="230" height="48" rx="5" stroke="#75b798"/>
+  <text class="tc" x="595" y="476">keeps running · PPID 1</text>
+  <text class="dc" x="595" y="492">adopted by init / systemd</text>
+  <rect class="box" x="720" y="454" width="150" height="48" rx="5" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="tc" x="795" y="476">exit() → PID 1 reaps</text>
+  <text class="dc" x="795" y="492">no zombie left behind</text>
+
+  <path class="lne" d="M240,376 V452"/>
+  <path class="dsh" d="M470,352 H520 V452"/>
+  <text class="d" x="528" y="414">re-parented to PID 1</text>
+  <text class="d" x="528" y="428">(or the nearest subreaper)</text>
+
+  <!-- notes -->
+  <rect class="box" x="20" y="536" width="860" height="52" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text class="d" x="34" y="557">• A zombie stays while its parent lives without calling wait(): restart the parent and PID 1 reaps the zombie.</text>
+  <text class="d" x="34" y="576">• See the family:</text>
+  <text class="m" x="126" y="576">ps -o pid,ppid,stat,cmd -p &lt;pid&gt;</text>
+  <text class="d" x="350" y="576">·</text>
+  <text class="m" x="360" y="576">pstree -s &lt;pid&gt;</text>
+  <text class="d" x="470" y="576">· in containers the first process is PID 1 and must reap orphans.</text>
+</svg>

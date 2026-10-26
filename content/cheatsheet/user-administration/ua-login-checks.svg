@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What a password login checks, in order</title>
+  <desc id="d">A password login goes through six checks. 1: the user must exist in NSS (getent passwd). 2: pam_faillock, if enabled, refuses after too many recent failures until unlock_time or faillock --reset. 3: pam_unix compares the hash in /etc/shadow; a ! or !! prefix means locked, * means no password. 4: the account must not be past its expire date or past the inactive days after password expiry. 5: if the last change is 0 or older than max days, a new password is asked first. 6: the shell in /etc/passwd: /sbin/nologin prints This account is currently not available, /bin/false exits. Then the session starts. SSH key logins skip steps 2 and 3, so lock the whole account with usermod -L -e 1.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="700" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What a password login checks, in order</text>
+  <rect class="s" x="20" y="50" width="440" height="72" rx="6"/>
+  <circle cx="44" cy="86" r="13" fill="#495057"/>
+  <text class="num" x="44" y="90">1</text>
+  <text class="tb" x="68" y="74">Does the user exist?</text>
+  <text class="m" x="68" y="93">getent passwd jsmith</text>
+  <text class="d" x="68" y="110">NSS: /etc/passwd, or LDAP / SSSD</text>
+  <rect class="x" x="510" y="50" width="370" height="72" rx="6"/>
+  <path class="lne" d="M460,86 H506"/>
+  <text class="d" x="485" y="80" text-anchor="middle">no</text>
+  <text class="tb" x="526" y="76">Login fails</text>
+  <text class="d" x="526" y="96">no such user in any NSS source</text>
+  <path class="lne" d="M240,122 V138"/>
+  <rect class="s" x="20" y="140" width="440" height="72" rx="6"/>
+  <circle cx="44" cy="176" r="13" fill="#495057"/>
+  <text class="num" x="44" y="180">2</text>
+  <text class="tb" x="68" y="164">Too many recent failures?</text>
+  <text class="m" x="68" y="183">pam_faillock preauth</text>
+  <text class="d" x="68" y="200">only if enabled: authselect enable-feature with-faillock</text>
+  <rect class="x" x="510" y="140" width="370" height="72" rx="6"/>
+  <path class="lne" d="M460,176 H506"/>
+  <text class="d" x="485" y="170" text-anchor="middle">yes</text>
+  <text class="tb" x="526" y="160">Refused, even with the right password</text>
+  <text class="d" x="526" y="178">until unlock_time passes, or after</text>
+  <text class="m" x="526" y="194">faillock --user jsmith --reset</text>
+  <path class="lne" d="M240,212 V228"/>
+  <rect class="s" x="20" y="230" width="440" height="72" rx="6"/>
+  <circle cx="44" cy="266" r="13" fill="#495057"/>
+  <text class="num" x="44" y="270">3</text>
+  <text class="tb" x="68" y="254">Does the password match?</text>
+  <text class="m" x="68" y="273">pam_unix · /etc/shadow field 2</text>
+  <text class="d" x="68" y="290">salt + typed password, hashed with $6$ or $y$, compared</text>
+  <rect class="x" x="510" y="230" width="370" height="72" rx="6"/>
+  <path class="lne" d="M460,266 H506"/>
+  <text class="d" x="485" y="260" text-anchor="middle">no</text>
+  <text class="tb" x="526" y="247">Refused</text>
+  <text class="d" x="526" y="263">! or !! prefix: locked (usermod -L, passwd -l)</text>
+  <text class="d" x="526" y="279">* : no password at all (system accounts)</text>
+  <text class="d" x="526" y="295">wrong password: faillock counts the failure</text>
+  <path class="lne" d="M240,302 V318"/>
+  <rect class="s" x="20" y="320" width="440" height="72" rx="6"/>
+  <circle cx="44" cy="356" r="13" fill="#495057"/>
+  <text class="num" x="44" y="360">4</text>
+  <text class="tb" x="68" y="344">Is the account still valid?</text>
+  <text class="m" x="68" y="363">pam_unix account · shadow fields 7, 8</text>
+  <text class="d" x="68" y="380">expire date (chage -E), inactive days after expiry (chage -I)</text>
+  <rect class="x" x="510" y="320" width="370" height="72" rx="6"/>
+  <path class="lne" d="M460,356 H506"/>
+  <text class="d" x="485" y="350" text-anchor="middle">no</text>
+  <text class="tb" x="526" y="340">Refused: account expired</text>
+  <text class="d" x="526" y="358">past the expire date, or the password has been</text>
+  <text class="d" x="526" y="374">expired for longer than the inactive days</text>
+  <path class="lne" d="M240,392 V408"/>
+  <rect class="s" x="20" y="410" width="440" height="72" rx="6"/>
+  <circle cx="44" cy="446" r="13" fill="#495057"/>
+  <text class="num" x="44" y="450">5</text>
+  <text class="tb" x="68" y="434">Must the password change now?</text>
+  <text class="m" x="68" y="453">shadow fields 3, 5</text>
+  <text class="d" x="68" y="470">lastchange 0 (chage -d 0, passwd -e), or older than max days</text>
+  <rect class="w" x="510" y="410" width="370" height="72" rx="6"/>
+  <path class="lne" d="M460,446 H506"/>
+  <text class="d" x="485" y="440" text-anchor="middle">yes</text>
+  <text class="tb" x="526" y="430">A new password is asked first</text>
+  <text class="d" x="526" y="448">after a successful change the login</text>
+  <text class="d" x="526" y="464">continues with step 6</text>
+  <path class="lne" d="M240,482 V498"/>
+  <rect class="s" x="20" y="500" width="440" height="72" rx="6"/>
+  <circle cx="44" cy="536" r="13" fill="#495057"/>
+  <text class="num" x="44" y="540">6</text>
+  <text class="tb" x="68" y="524">Which shell?</text>
+  <text class="m" x="68" y="543">/etc/passwd field 7</text>
+  <text class="d" x="68" y="560">usermod -s, chsh -s</text>
+  <rect class="x" x="510" y="500" width="370" height="72" rx="6"/>
+  <path class="lne" d="M460,536 H506"/>
+  <text class="d" x="485" y="530" text-anchor="middle">nologin</text>
+  <text class="m" x="526" y="517">/sbin/nologin</text>
+  <text class="d" x="526" y="533">prints "This account is currently not available."</text>
+  <text class="m" x="526" y="549">/bin/false</text>
+  <text class="d" x="526" y="565">exits without a message</text>
+  <path class="lne" d="M240,572 V588"/>
+  <rect class="g" x="20" y="590" width="440" height="44" rx="6"/>
+  <text class="tb" x="240" y="617" text-anchor="middle">Session: home directory, umask, the user's shell</text>
+  <text class="d" x="20" y="666">SSH key logins skip steps 2 and 3, so a ! lock doesn't stop them. To lock the whole account, also set an expire date</text>
+  <text class="d" x="20" y="682">(usermod -L -e 1 jsmith, as usermod(8) suggests) or a nologin shell. Ubuntu's default PAM stack has no step 2.</text>
+</svg>

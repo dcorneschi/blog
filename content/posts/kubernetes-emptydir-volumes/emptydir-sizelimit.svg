@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 434" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What sizeLimit does</title>
+  <desc id="d">Writing 80 MiB into a disk-backed emptyDir with sizeLimit 50Mi succeeds, and about a minute later the kubelet evicts the Pod. Writing 80 MiB into a memory-backed emptyDir with sizeLimit 50Mi stops at 50 MiB with No space left on device, and the Pod keeps running. Writing 100 MiB into a memory-backed emptyDir with a 64Mi container memory limit gets the process killed with exit code 137, and the container cannot start again because the data still counts against the limit.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="434" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What sizeLimit does</text>
+  <text class="sub" x="20" y="48">80–100 MiB written into a 50 MiB or 64 MiB emptyDir on k3s v1.35.9</text>
+  <text class="lb" x="20" y="80">VOLUME</text>
+  <text class="lb" x="250" y="80">DURING THE WRITE</text>
+  <text class="lb" x="440" y="80">AFTERWARDS</text>
+  <rect class="s" x="20" y="92" width="210" height="74" rx="6"/>
+  <text class="tb" x="32" y="114">Disk, sizeLimit: 50Mi</text>
+  <text class="d" x="32" y="152">write 80 MiB</text>
+  <path class="lne" d="M230,129 L248,129"/>
+  <rect class="g" x="250" y="106" width="170" height="46" rx="6"/>
+  <text class="c" x="262" y="134">write succeeds (80 MiB)</text>
+  <path class="lne" d="M420,129 L438,129"/>
+  <rect class="x" x="440" y="92" width="380" height="74" rx="6"/>
+  <text class="tb" x="452" y="116">~1 min later: Pod Evicted</text>
+  <text class="m" x="452" y="138">Usage of EmptyDir volume "ramdisk"</text>
+  <text class="m" x="452" y="154">exceeds the limit "50Mi".</text>
+  <rect class="s" x="20" y="184" width="210" height="74" rx="6"/>
+  <text class="tb" x="32" y="206">Memory, sizeLimit: 50Mi</text>
+  <text class="d" x="32" y="244">write 80 MiB</text>
+  <path class="lne" d="M230,221 L248,221"/>
+  <rect class="w" x="250" y="198" width="170" height="46" rx="6"/>
+  <text class="c" x="262" y="226">stops at 50 MiB</text>
+  <path class="lne" d="M420,221 L438,221"/>
+  <rect class="g" x="440" y="184" width="380" height="74" rx="6"/>
+  <text class="tb" x="452" y="208">Pod keeps running</text>
+  <text class="m" x="452" y="230">dd: error writing '/data/f':</text>
+  <text class="m" x="452" y="246">No space left on device</text>
+  <rect class="s" x="20" y="276" width="210" height="74" rx="6"/>
+  <text class="tb" x="32" y="298">Memory, no sizeLimit,</text>
+  <text class="tb" x="32" y="314">limits.memory: 64Mi</text>
+  <text class="d" x="32" y="336">write 100 MiB</text>
+  <path class="lne" d="M230,313 L248,313"/>
+  <rect class="x" x="250" y="290" width="170" height="46" rx="6"/>
+  <text class="c" x="262" y="318">killed, exit 137</text>
+  <path class="lne" d="M420,313 L438,313"/>
+  <rect class="x" x="440" y="276" width="380" height="74" rx="6"/>
+  <text class="tb" x="452" y="300">container can't start again</text>
+  <text class="m" x="452" y="322">container init was OOM-killed</text>
+  <text class="m" x="452" y="338">(memory limit too low?)</text>
+  <rect class="n" x="20" y="372" width="800" height="46" rx="4"/>
+  <text class="c" x="32" y="391">On disk, the kubelet checks sizeLimit after the fact and evicts the Pod. In memory, the tmpfs is sized to it and simply fills up.</text>
+  <text class="c" x="32" y="408">Files in memory count against the container's memory limit, and they stay there after an OOM kill.</text>
+</svg>

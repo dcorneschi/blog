@@ -1,0 +1,21 @@
+{{- /*
+  Tags of a post. Categories are shown above the title (content_card_body.html),
+  so tags that are also a category are skipped. Lists show at most three tags.
+  Context: dict "page" "summary" (see content.html) or a page.
+*/ -}}
+{{- $page := . -}}
+{{- $summary := false -}}
+{{- if reflect.IsMap . }}{{ $page = .page }}{{ $summary = .summary }}{{ end -}}
+{{- with $page -}}
+{{- if ne .Type "page" -}}
+    {{- $tags := complement (.Params.categories | default slice) (.Params.tags | default slice) -}}
+    {{- if $summary }}{{ $tags = first 3 $tags }}{{ end -}}
+    {{- with $tags }}
+<div class="card-footer card-tags">
+    {{- range . }}
+    <a href="{{ "tags/" | relLangURL }}#{{ . | urlize }}">{{ . }}</a>
+    {{- end }}
+</div>
+    {{- end -}}
+{{- end -}}
+{{- end -}}

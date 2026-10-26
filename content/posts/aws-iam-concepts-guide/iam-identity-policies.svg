@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 690" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Identity-based policies</title>
+  <desc id="d">Identity-based policies attach to IAM users, groups and roles. A statement has Effect (Allow or Deny), Action (which API calls, e.g. s3:GetObject), Resource (which ARN) and an optional Condition; there is no Principal, the principal is whoever the policy is attached to. A user gets its own policies plus those of its groups; allows add up, an explicit Deny wins, anything not allowed is denied. Policies live in two places. Managed policies are standalone objects with their own ARN that can be attached to many identities, by default 10 per user or group and 20 per role: AWS managed policies are written and updated by AWS and can't be edited, for example arn:aws:iam::aws:policy/ReadOnlyAccess and job-function/ViewOnlyAccess; customer managed policies are written by you, exist in one account, keep up to 5 versions and hold 6,144 characters, for example arn:aws:iam::123456789012:policy/AllowS3ReadOnly. They are attached with aws iam attach-user-policy, attach-group-policy or attach-role-policy. Inline policies are embedded in one identity, have no ARN, are deleted with the identity, have no versions and share a total size of 2,048 characters for a user, 5,120 for a group and 10,240 for a role; they are written with aws iam put-user-policy, put-group-policy or put-role-policy.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .box  { stroke-width: 1.5; }
+      .h    { font-size: 15px; font-weight: 700; fill: #212529; }
+      .tb   { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d    { font-size: 11px; fill: #495057; }
+      .m    { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .ms   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10px; fill: #212529; }
+      .lne  { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .bar  { stroke: #495057; stroke-width: 1.6; fill: none; }
+      .id   { fill: #e8f5ee; stroke: #75b798; }
+      .card { fill: #ffffff; stroke: #adb5bd; }
+      .row  { fill: #f8f9fa; stroke: #dee2e6; stroke-width: 1; }
+      .note { fill: #fff8e1; stroke: #ffc107; }
+      .mg   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .awsm { fill: #ffffff; stroke: #fd9843; }
+      .cust { fill: #ffffff; stroke: #3d7fe0; }
+      .inl  { fill: #f1f3f5; stroke: #adb5bd; }
+    </style>
+  </defs>
+
+  <rect width="900" height="690" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Identity-based policies: what they say, who gets them, where they live</text>
+
+  <!-- identities -->
+  <text class="tb" x="20" y="62">Attached to</text>
+  <rect class="box id" x="20" y="74" width="180" height="48" rx="8"/>
+  <text class="tb" x="34" y="94">IAM user</text><text class="d" x="34" y="111">a person or an application</text>
+  <rect class="box id" x="20" y="132" width="180" height="48" rx="8"/>
+  <text class="tb" x="34" y="152">IAM group</text><text class="d" x="34" y="169">its users inherit the policies</text>
+  <rect class="box id" x="20" y="190" width="180" height="48" rx="8"/>
+  <text class="tb" x="34" y="210">IAM role</text><text class="d" x="34" y="227">assumed, temporary credentials</text>
+  <path class="bar" d="M200,98 H216 M200,156 H216 M200,214 H216 M216,98 V214"/>
+  <path class="lne" d="M216,156 H246"/>
+
+  <!-- statement anatomy -->
+  <rect class="box card" x="250" y="50" width="400" height="200" rx="8"/>
+  <text class="tb" x="266" y="72">A statement answers four questions</text>
+  <rect class="row" x="262" y="82" width="376" height="30" rx="4"/>
+  <text class="tb" x="272" y="102">Effect</text><text class="d" x="350" y="101">allow or deny?</text><text class="m" x="460" y="101">"Allow"</text>
+  <rect class="row" x="262" y="116" width="376" height="30" rx="4"/>
+  <text class="tb" x="272" y="136">Action</text><text class="d" x="350" y="135">which API calls?</text><text class="m" x="460" y="135">"s3:GetObject"</text>
+  <rect class="row" x="262" y="150" width="376" height="30" rx="4"/>
+  <text class="tb" x="272" y="170">Resource</text><text class="d" x="350" y="169">on what (ARN)?</text><text class="m" x="460" y="169">arn:aws:s3:::my-bucket/*</text>
+  <rect class="row" x="262" y="184" width="376" height="30" rx="4"/>
+  <text class="tb" x="272" y="204">Condition</text><text class="d" x="350" y="203">only when …?</text><text class="m" x="460" y="203">aws:MultiFactorAuthPresent</text>
+  <text class="d" x="266" y="236">No Principal element: the principal is whoever the policy is attached to.</text>
+
+  <!-- how they combine -->
+  <rect class="box note" x="670" y="50" width="210" height="200" rx="8"/>
+  <text class="tb" x="684" y="72">How they add up</text>
+  <text class="d" x="684" y="96">A user gets its own policies plus</text>
+  <text class="d" x="684" y="111">the policies of all its groups.</text>
+  <text class="d" x="684" y="135">Allows from all of them add up.</text>
+  <text class="d" x="684" y="159">One explicit Deny anywhere wins.</text>
+  <text class="d" x="684" y="183">Not allowed by any policy:</text>
+  <text class="d" x="684" y="198">implicit deny.</text>
+  <text class="d" x="684" y="222">A permission boundary or an SCP</text>
+  <text class="d" x="684" y="237">can cap what they grant.</text>
+
+  <!-- where they live -->
+  <text class="tb" x="20" y="288">Where the policy lives</text>
+
+  <rect class="box mg" x="20" y="300" width="560" height="314" rx="10"/>
+  <text class="tb" x="36" y="324">Managed policy</text>
+  <text class="d" x="36" y="342">standalone, own ARN, attach it to many identities (by default 10 per user or group, 20 per role)</text>
+
+  <rect class="box awsm" x="36" y="356" width="262" height="186" rx="8"/>
+  <text class="tb" x="50" y="378">AWS managed</text>
+  <text class="d" x="50" y="400">written and updated by AWS</text>
+  <text class="d" x="50" y="416">you can attach it, not edit it</text>
+  <text class="d" x="50" y="432">often broader than you need</text>
+  <text class="d" x="50" y="448">includes job-function policies</text>
+  <text class="ms" x="50" y="478">arn:aws:iam::aws:policy/</text>
+  <text class="ms" x="62" y="494">ReadOnlyAccess</text>
+  <text class="ms" x="62" y="510">job-function/ViewOnlyAccess</text>
+  <text class="d" x="50" y="530">a good start, then narrow it down</text>
+
+  <rect class="box cust" x="310" y="356" width="254" height="186" rx="8"/>
+  <text class="tb" x="324" y="378">Customer managed</text>
+  <text class="d" x="324" y="400">written by you, lives in one account</text>
+  <text class="d" x="324" y="416">up to 5 versions, one is the default</text>
+  <text class="d" x="324" y="432">6,144 characters per policy</text>
+  <text class="d" x="324" y="448">the usual choice for least privilege</text>
+  <text class="ms" x="324" y="478">arn:aws:iam::123456789012:</text>
+  <text class="ms" x="336" y="494">policy/AllowS3ReadOnly</text>
+  <text class="d" x="324" y="530">change it once, every identity gets it</text>
+
+  <text class="m" x="36" y="568">aws iam attach-role-policy --role-name … --policy-arn …</text>
+  <text class="m" x="36" y="586">aws iam list-attached-role-policies --role-name …</text>
+  <text class="d" x="36" y="604">also attach-user-policy / attach-group-policy · list-attached-* shows managed policies only</text>
+
+  <rect class="box inl" x="600" y="300" width="280" height="314" rx="10"/>
+  <text class="tb" x="616" y="324">Inline policy</text>
+  <text class="d" x="616" y="342">embedded in exactly one identity</text>
+  <text class="d" x="616" y="372">no ARN, can't be attached elsewhere</text>
+  <text class="d" x="616" y="390">deleted together with the identity</text>
+  <text class="d" x="616" y="408">no versions</text>
+  <text class="d" x="616" y="432">size: all inline policies together</text>
+  <text class="d" x="616" y="448">user 2,048 · group 5,120 · role 10,240</text>
+  <text class="d" x="616" y="472">for permissions that must never</text>
+  <text class="d" x="616" y="488">end up on another identity</text>
+  <text class="m" x="616" y="568">aws iam put-role-policy</text>
+  <text class="m" x="616" y="586">aws iam list-role-policies</text>
+  <text class="d" x="616" y="604">list-*-policies shows inline only</text>
+
+  <!-- footer -->
+  <text class="d" x="20" y="642">Both kinds use the same JSON document. To turn an inline policy into a managed one: create-policy with the same document,</text>
+  <text class="d" x="20" y="658">attach-role-policy with the new ARN, then delete-role-policy to remove the inline copy.</text>
+  <text class="d" x="20" y="680">Policies on the resource itself (bucket policy, key policy) are resource-based, not identity-based, and do name a Principal.</text>
+</svg>

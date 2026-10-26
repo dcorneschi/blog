@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">One library, three front ends</title>
+  <desc id="d">apt, apt-get and apt-cache all use libapt-pkg. The library reads the configuration in /etc/apt (sources, apt.conf.d, preferences), keeps the package indexes in /var/lib/apt/lists and pkgcache.bin, downloads .deb files to /var/cache/apt/archives and hands them to dpkg, which owns /var/lib/dpkg/status and the lock-frontend lock. apt only changes defaults: color, the fancy progress bar, deleting downloaded packages, waiting 120 s for the lock, installing new dependencies on upgrade and showing update stats.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .th  { font-size: 12px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; fill: #495057; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #495057; stroke-width: 1.2; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">One library, three front ends</text>
+  <text class="sub" x="20" y="48">apt, apt-get and apt-cache share libapt-pkg, the configuration and the caches; apt only changes some defaults</text>
+  <rect class="rw" x="250" y="68" width="200" height="58" rx="6"/>
+  <text class="mb" x="350" y="92" text-anchor="middle">apt</text>
+  <text class="d" x="350" y="110" text-anchor="middle">for people at a terminal</text>
+  <rect class="r" x="470" y="68" width="190" height="58" rx="6"/>
+  <text class="mb" x="565" y="92" text-anchor="middle">apt-get</text>
+  <text class="d" x="565" y="110" text-anchor="middle">install, upgrade, scripts</text>
+  <rect class="r" x="680" y="68" width="200" height="58" rx="6"/>
+  <text class="mb" x="780" y="92" text-anchor="middle">apt-cache</text>
+  <text class="d" x="780" y="110" text-anchor="middle">search, show, query</text>
+  <rect class="s" x="20" y="68" width="210" height="150" rx="6"/>
+  <text class="tb" x="32" y="88">apt's own defaults</text>
+  <text class="m" x="32" y="108">APT::Color 1</text>
+  <text class="m" x="32" y="125">DPkg::Progress-Fancy 1</text>
+  <text class="m" x="32" y="142">Keep-Downloaded-Packages 0</text>
+  <text class="m" x="32" y="159">DPkg::Lock::Timeout 120</text>
+  <text class="m" x="32" y="176">Upgrade-Allow-New 1</text>
+  <text class="m" x="32" y="193">Show-Update-Stats 1</text>
+  <text class="d" x="32" y="210">Binary::apt:: (Version:: on 26.04)</text>
+  <path class="lne" d="M230,97 H246"/>
+  <rect class="g" x="250" y="160" width="630" height="58" rx="6"/>
+  <text class="mb" x="565" y="184" text-anchor="middle">libapt-pkg</text>
+  <text class="d" x="565" y="202" text-anchor="middle">dependency resolver (APT 3: new solver)  ·  package cache  ·  downloads</text>
+  <path class="lne" d="M350,126 V156"/>
+  <path class="lne" d="M565,126 V156"/>
+  <path class="lne" d="M780,126 V156"/>
+  <rect class="n" x="20" y="250" width="270" height="96" rx="6"/>
+  <text class="tb" x="32" y="270">Configuration (read)</text>
+  <text class="m" x="32" y="290">/etc/apt/sources.list(.d/)</text>
+  <text class="m" x="32" y="307">/etc/apt/apt.conf.d/</text>
+  <text class="m" x="32" y="324">/etc/apt/preferences.d/</text>
+  <text class="d" x="32" y="340">*.list or deb822 *.sources (26.04)</text>
+  <path class="lne" d="M155,250 V232 H300 V222"/>
+  <rect class="n" x="310" y="250" width="280" height="96" rx="6"/>
+  <text class="tb" x="322" y="270">Indexes (apt update)</text>
+  <text class="m" x="322" y="290">/var/lib/apt/lists/</text>
+  <text class="m" x="322" y="307">/var/cache/apt/pkgcache.bin</text>
+  <text class="d" x="322" y="326">one Packages file per repository</text>
+  <text class="d" x="322" y="340">apt distclean / rm -rf lists empties it</text>
+  <path class="lne" d="M450,222 V246"/>
+  <rect class="n" x="610" y="250" width="270" height="96" rx="6"/>
+  <text class="tb" x="622" y="270">Downloads</text>
+  <text class="m" x="622" y="290">/var/cache/apt/archives/*.deb</text>
+  <text class="d" x="622" y="308">apt-get keeps them</text>
+  <text class="d" x="622" y="324">apt deletes them after install</text>
+  <text class="d" x="622" y="340">apt clean / apt-get clean</text>
+  <path class="lne" d="M745,222 V246"/>
+  <rect class="x" x="250" y="380" width="630" height="70" rx="6"/>
+  <text class="mb" x="565" y="404" text-anchor="middle">dpkg</text>
+  <text class="d" x="565" y="422" text-anchor="middle">unpacks and configures the .deb files  ·  /var/lib/dpkg/status  ·  conffile prompts</text>
+  <text class="d" x="565" y="438" text-anchor="middle">/var/lib/dpkg/lock-frontend: one APT or dpkg process at a time  ·  holds (apt-mark hold)</text>
+  <path class="lne" d="M880,346 V360 H565 V376"/>
+</svg>

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 382" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">When the dynamodb_table warning appears</title>
+  <desc id="d">Terraform 1.10.0 added use_lockfile. 1.11.0 made it generally available and deprecated the DynamoDB arguments in its changelog, but terraform init with a dynamodb_table backend printed no warning on 1.10.5, 1.11.0, 1.12.2, 1.13.5 or 1.14.9. The deprecation warning first appears in 1.15.0 and is still printed by 1.16.4.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="382" fill="#ffffff"/>
+  <text class="h" x="20" y="28">When the dynamodb_table warning appears</text>
+  <text class="sub" x="20" y="48">terraform init with the same dynamodb_table backend, by Terraform version</text>
+  <path class="dash" d="M94.0,96 H746.0"/>
+  <circle class="r" cx="94.0" cy="96" r="9" stroke-width="2"/>
+  <text class="tb" x="94.0" y="78" text-anchor="middle">1.10</text>
+  <rect class="r" x="20" y="120" width="148" height="64" rx="6"/>
+  <text class="c" x="94.0" y="142" text-anchor="middle">use_lockfile added</text>
+  <text class="d" x="94.0" y="158" text-anchor="middle">(1.10.0 changelog)</text>
+  <text class="lb" x="30" y="206">TERRAFORM INIT</text>
+  <rect class="g" x="20" y="216" width="148" height="24" rx="12"/>
+  <text class="m" x="32" y="232">1.10.5</text>
+  <text class="c" x="156" y="232" text-anchor="end">no warning</text>
+  <circle class="r" cx="257.0" cy="96" r="9" stroke-width="2"/>
+  <text class="tb" x="257.0" y="78" text-anchor="middle">1.11</text>
+  <rect class="r" x="183" y="120" width="148" height="64" rx="6"/>
+  <text class="c" x="257.0" y="142" text-anchor="middle">use_lockfile GA,</text>
+  <text class="d" x="257.0" y="158" text-anchor="middle">DynamoDB arguments</text>
+  <text class="d" x="257.0" y="174" text-anchor="middle">deprecated (changelog)</text>
+  <text class="lb" x="193" y="206">TERRAFORM INIT</text>
+  <rect class="g" x="183" y="216" width="148" height="24" rx="12"/>
+  <text class="m" x="195" y="232">1.11.0</text>
+  <text class="c" x="319" y="232" text-anchor="end">no warning</text>
+  <circle class="n" cx="420.0" cy="96" r="9" stroke-width="2"/>
+  <text class="tb" x="420.0" y="78" text-anchor="middle">1.12 – 1.14</text>
+  <rect class="n" x="346" y="120" width="148" height="64" rx="6"/>
+  <text class="c" x="420.0" y="142" text-anchor="middle">deprecated,</text>
+  <text class="d" x="420.0" y="158" text-anchor="middle">still no warning</text>
+  <text class="lb" x="356" y="206">TERRAFORM INIT</text>
+  <rect class="g" x="346" y="216" width="148" height="24" rx="12"/>
+  <text class="m" x="358" y="232">1.12.2</text>
+  <text class="c" x="482" y="232" text-anchor="end">no warning</text>
+  <rect class="g" x="346" y="246" width="148" height="24" rx="12"/>
+  <text class="m" x="358" y="262">1.13.5</text>
+  <text class="c" x="482" y="262" text-anchor="end">no warning</text>
+  <rect class="g" x="346" y="276" width="148" height="24" rx="12"/>
+  <text class="m" x="358" y="292">1.14.9</text>
+  <text class="c" x="482" y="292" text-anchor="end">no warning</text>
+  <circle class="x" cx="583.0" cy="96" r="9" stroke-width="2"/>
+  <text class="tb" x="583.0" y="78" text-anchor="middle">1.15</text>
+  <rect class="x" x="509" y="120" width="148" height="64" rx="6"/>
+  <text class="c" x="583.0" y="142" text-anchor="middle">first version</text>
+  <text class="d" x="583.0" y="158" text-anchor="middle">that warns</text>
+  <text class="lb" x="519" y="206">TERRAFORM INIT</text>
+  <rect class="x" x="509" y="216" width="148" height="24" rx="12"/>
+  <text class="m" x="521" y="232">1.15.0</text>
+  <text class="c" x="645" y="232" text-anchor="end">warning</text>
+  <circle class="x" cx="746.0" cy="96" r="9" stroke-width="2"/>
+  <text class="tb" x="746.0" y="78" text-anchor="middle">1.16</text>
+  <rect class="x" x="672" y="120" width="148" height="64" rx="6"/>
+  <text class="c" x="746.0" y="142" text-anchor="middle">still warns</text>
+  <text class="lb" x="682" y="206">TERRAFORM INIT</text>
+  <rect class="x" x="672" y="216" width="148" height="24" rx="12"/>
+  <text class="m" x="684" y="232">1.16.4</text>
+  <text class="c" x="808" y="232" text-anchor="end">warning</text>
+  <rect class="n" x="20" y="318" width="800" height="48" rx="4"/>
+  <text class="m" x="32" y="338">Warning: Deprecated Parameter</text>
+  <text class="m" x="32" y="355">The parameter "dynamodb_table" is deprecated. Use parameter "use_lockfile" instead.</text>
+</svg>

@@ -1,0 +1,107 @@
+baseURL = "https://blog.corneschi.ro/"
+locale = "en"
+defaultContentLanguage = "en"
+title = "Daniel Corneschi"
+theme = "bootstrap-bp-hugo-theme"
+copyright = "Daniel Corneschi"
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+summaryLength = 70 # words in automatic summaries (default 70)
+
+[pagination]
+  pagerSize = 6
+
+# Files fetched with resources.GetRemote (the Letterboxd feed and its posters) are cached
+# forever by default, and CI keeps the cache between runs: expire them so the
+# scheduled daily build picks up new diary entries.
+[caches]
+  [caches.getresource]
+    dir = ":cacheDir/:project"
+    maxAge = "6h"
+
+[params]
+  description = "Notes on DevOps, infrastructure as code and the command line: Terraform, tmux and the tools I use every day."
+  startPageColumns = true
+  showPostSummary = true
+  alwaysExpandMenu = true
+  customDateFormat = "2006-01-02"
+  csscdn = ["https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Roboto:wght@400;600;700&display=swap"]
+  letterboxd = "dcorneschi" # Recently Watched on the About page, see layouts/_shortcodes/letterboxd.html
+
+  [params.author]
+    name = "Daniel Corneschi"
+
+  # Comments via giscus (GitHub Discussions), see layouts/_partials/comments.html.
+  # Needs Discussions enabled and the giscus app installed on the repo; the category IDs
+  # are listed at https://giscus.app. Hide on one post with `comments: false`.
+  [params.giscus]
+    repo = "dcorneschi/blog"
+    repoId = "R_kgDOU__bRQ"
+    category = "Announcements"
+    categoryId = "DIC_kwDOU__bRc4DHca3"
+    mapping = "pathname"
+
+  [params.social]
+    github = "dcorneschi"
+    twitter = "dcorneschi" # X: https://x.com/dcorneschi
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    pageRef = "/posts"
+    weight = 10
+    [menu.main.params]
+      icon = "newspaper"
+
+  [[menu.main]]
+    identifier = "cheatsheet"
+    name = "Cheatsheet"
+    pageRef = "/cheatsheet"
+    weight = 15
+    [menu.main.params]
+      icon = "book"
+
+  [[menu.footer]]
+    identifier = "categories"
+    name = "Categories"
+    pageRef = "/categories"
+    weight = 20
+    [menu.footer.params]
+      icon = "folder"
+
+  [[menu.footer]]
+    identifier = "tags"
+    name = "Tags"
+    pageRef = "/tags"
+    weight = 30
+    [menu.footer.params]
+      icon = "tags"
+
+# Byline under the title of every post (date · author · reading time)
+[[cascade]]
+  [cascade.params]
+    author = "Daniel Corneschi"
+  [cascade.target]
+    path = "/{posts,cheatsheet}/**"
+
+# Tag and category pages are noindex (theme head.html), so keep them out of the
+# sitemap too: Search Console reports listed-but-noindex URLs as errors
+[[cascade]]
+  [cascade.sitemap]
+    disable = true
+  [cascade.target]
+    kind = "{taxonomy,term}"
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    style = "gruvbox-light"
