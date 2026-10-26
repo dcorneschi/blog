@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 436" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">One emptyDir, two paths</title>
+  <desc id="d">The app container mounts the volume log-volume at /app/logs and writes output.log; the log-agent container mounts the same volume at /fluentd/input and reads it. Both point to one directory on the node, /var/lib/kubelet/pods/&lt;pod-uid&gt;/volumes/kubernetes.io~empty-dir/log-volume/.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="436" fill="#ffffff"/>
+  <text class="h" x="20" y="28">One emptyDir, two paths</text>
+  <text class="sub" x="20" y="48">Two containers of one Pod mounting the same volume at different paths</text>
+  <rect class="n" x="20" y="62" width="800" height="300" rx="10"/>
+  <text class="lb" x="34" y="82">POD share</text>
+  <rect class="r" x="40" y="96" width="240" height="96" rx="6"/>
+  <text class="tb" x="54" y="120">container app</text>
+  <text class="d" x="54" y="138">mountPath:</text>
+  <text class="mb" x="54" y="156">/app/logs</text>
+  <text class="m" x="54" y="180">writes /app/logs/output.log</text>
+  <rect class="r" x="560" y="96" width="240" height="96" rx="6"/>
+  <text class="tb" x="574" y="120">container log-agent</text>
+  <text class="d" x="574" y="138">mountPath:</text>
+  <text class="mb" x="574" y="156">/fluentd/input</text>
+  <text class="m" x="574" y="180">reads …/output.log</text>
+  <rect class="w" x="230" y="240" width="380" height="88" rx="6"/>
+  <text class="lb" x="244" y="260">ON THE NODE (THE EMPTYDIR)</text>
+  <text class="m" x="244" y="280">/var/lib/kubelet/pods/&lt;pod-uid&gt;/volumes/</text>
+  <text class="m" x="244" y="296">  kubernetes.io~empty-dir/log-volume/</text>
+  <text class="m" x="244" y="316">  └── output.log</text>
+  <path class="lne" d="M160,192 L300,238"/>
+  <path class="lne" d="M680,192 L540,238"/>
+  <text class="d" x="60" y="226">name: log-volume</text>
+  <text class="d" x="690" y="226">name: log-volume</text>
+  <rect class="n" x="20" y="376" width="800" height="44" rx="4"/>
+  <text class="c" x="32" y="395">The volume name links the containers; each mountPath is only where that container sees the directory.</text>
+  <text class="c" x="32" y="411">Both containers see the same output.log because there is only one file, in the Pod's directory on the node.</text>
+</svg>
