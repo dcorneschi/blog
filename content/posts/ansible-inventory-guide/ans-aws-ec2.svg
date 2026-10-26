@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 430" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How the aws_ec2 plugin builds the inventory</title>
+  <desc id="d">Four EC2 instances go through the plugin. The filter keeps the three tagged Environment=production and drops test01 (staging). Hosts are named after the Name tag. keyed_groups puts them in role_web or role_db, env_production and az_us_east_1a or az_eu_west_1a. compose sets ansible_host to each instance's private IP, for example 10.204.177.12 for web01.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="430" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How the aws_ec2 plugin builds the inventory</text>
+  <text class="sub" x="20" y="48">aws_ec2.yml from this guide, run against moto with four tagged instances</text>
+  <text class="lb" x="20" y="80">EC2 INSTANCES (TAGS)</text>
+  <text class="lb" x="250" y="80">FILTERS</text>
+  <text class="lb" x="380" y="80">HOSTNAMES</text>
+  <text class="lb" x="500" y="80">KEYED_GROUPS</text>
+  <text class="lb" x="692" y="80">COMPOSE</text>
+  <rect class="s" x="20" y="92" width="210" height="54" rx="6"/>
+  <text class="m" x="32" y="110">Name=web01</text>
+  <text class="d" x="32" y="125">Role=web  Environment=production</text>
+  <text class="d" x="32" y="139">us-east-1a</text>
+  <path class="lne" d="M230,119 L248,119"/>
+  <rect class="g" x="250" y="104" width="110" height="30" rx="6"/>
+  <text class="c" x="262" y="123">kept</text>
+  <path class="lne" d="M360,119 L378,119"/>
+  <rect class="s" x="380" y="104" width="100" height="30" rx="6"/>
+  <text class="mb" x="392" y="124">web01</text>
+  <path class="lne" d="M480,119 L498,119"/>
+  <rect class="r" x="500" y="96" width="174" height="46" rx="6"/>
+  <text class="m" x="510" y="114">role_web env_production</text>
+  <text class="m" x="510" y="132">az_us_east_1a</text>
+  <path class="lne" d="M674,119 L690,119"/>
+  <rect class="rw" x="692" y="96" width="128" height="46" rx="6"/>
+  <text class="m" x="702" y="114">ansible_host:</text>
+  <text class="m" x="702" y="132">10.204.177.12</text>
+  <rect class="s" x="20" y="158" width="210" height="54" rx="6"/>
+  <text class="m" x="32" y="176">Name=db01</text>
+  <text class="d" x="32" y="191">Role=db  Environment=production</text>
+  <text class="d" x="32" y="205">us-east-1a</text>
+  <path class="lne" d="M230,185 L248,185"/>
+  <rect class="g" x="250" y="170" width="110" height="30" rx="6"/>
+  <text class="c" x="262" y="189">kept</text>
+  <path class="lne" d="M360,185 L378,185"/>
+  <rect class="s" x="380" y="170" width="100" height="30" rx="6"/>
+  <text class="mb" x="392" y="190">db01</text>
+  <path class="lne" d="M480,185 L498,185"/>
+  <rect class="r" x="500" y="162" width="174" height="46" rx="6"/>
+  <text class="m" x="510" y="180">role_db env_production</text>
+  <text class="m" x="510" y="198">az_us_east_1a</text>
+  <path class="lne" d="M674,185 L690,185"/>
+  <rect class="rw" x="692" y="162" width="128" height="46" rx="6"/>
+  <text class="m" x="702" y="180">ansible_host:</text>
+  <text class="m" x="702" y="198">10.48.217.53</text>
+  <rect class="s" x="20" y="224" width="210" height="54" rx="6"/>
+  <text class="m" x="32" y="242">Name=web02</text>
+  <text class="d" x="32" y="257">Role=web  Environment=production</text>
+  <text class="d" x="32" y="271">eu-west-1a</text>
+  <path class="lne" d="M230,251 L248,251"/>
+  <rect class="g" x="250" y="236" width="110" height="30" rx="6"/>
+  <text class="c" x="262" y="255">kept</text>
+  <path class="lne" d="M360,251 L378,251"/>
+  <rect class="s" x="380" y="236" width="100" height="30" rx="6"/>
+  <text class="mb" x="392" y="256">web02</text>
+  <path class="lne" d="M480,251 L498,251"/>
+  <rect class="r" x="500" y="228" width="174" height="46" rx="6"/>
+  <text class="m" x="510" y="246">role_web env_production</text>
+  <text class="m" x="510" y="264">az_eu_west_1a</text>
+  <path class="lne" d="M674,251 L690,251"/>
+  <rect class="rw" x="692" y="228" width="128" height="46" rx="6"/>
+  <text class="m" x="702" y="246">ansible_host:</text>
+  <text class="m" x="702" y="264">10.184.144.240</text>
+  <rect class="sd" x="20" y="290" width="210" height="54" rx="6"/>
+  <text class="m" x="32" y="308">Name=test01</text>
+  <text class="d" x="32" y="323">Role=web  Environment=staging</text>
+  <text class="d" x="32" y="337">eu-west-1a</text>
+  <path class="lne" d="M230,317 L248,317"/>
+  <rect class="x" x="250" y="302" width="110" height="30" rx="6"/>
+  <text class="c" x="262" y="321">dropped</text>
+  <text class="d" x="380" y="321">Environment=staging does not match the filter</text>
+  <rect class="n" x="20" y="362" width="800" height="52" rx="4"/>
+  <text class="c" x="32" y="382">Group names are built from the tag or attribute: prefix az + us-east-1a becomes az_us_east_1a (dashes become underscores).</text>
+  <text class="c" x="32" y="399">compose also sets ansible_user and ansible_ssh_private_key_file; ansible-inventory --host web01 shows all of them.</text>
+</svg>
