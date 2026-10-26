@@ -146,8 +146,6 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fm` | alias | `fzf --multi`, multi-select |
 | `fp` | alias | File picker with a `bat` or `batcat` preview (the first 50 lines if neither exists) |
 | `fgl` | alias | Browse commits, preview the diff of the highlighted one |
-| `fkill9` | alias | `kill -9` the picked process |
-| `frmi` | alias | `rm -i` the picked files (breaks on names with spaces) |
 | `fe [query]` | function | Open a file in `$EDITOR`, jump straight to it if only one matches |
 | `fcd [dir]` | function | `cd` into a subdirectory, skipping `.git` |
 | `fgb` | function | Check out a local or remote branch, strips `remotes/origin/` |
@@ -164,8 +162,6 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fds` | function | Stop containers, `TAB` for several (needs `_fdc`) |
 
 ### Aliases
-
-> **Warning:** the quick aliases `fkill9` and `frmi` act on whatever you select. `kill -9` cannot be handled by the process, so unsaved data is lost. `rm` removes files for good (there is no trash), and the unquoted `$(fzf -m)` in `frmi` breaks a file name with a space into several arguments. If you press ESC, fzf prints nothing and some of them then run with an empty argument.
 
 #### fm: multi-select
 
@@ -186,18 +182,6 @@ alias fp="fzf --preview 'if command -v bat >/dev/null; then bat --color=always -
 
 ```bash
 alias fgl="git log --oneline --color=always | fzf --ansi --preview 'git show --color=always {1}'"   # browse commits
-```
-
-#### fkill9: kill -9 a process
-
-```bash
-alias fkill9='kill -9 "$(ps -ef | fzf | awk "{print \$2}")"'   # pick a process, kill -9 it
-```
-
-#### frmi: delete files with a prompt
-
-```bash
-alias frmi='rm -i $(fzf -m)'                             # pick files, delete them with a prompt
 ```
 
 ### Functions
@@ -357,6 +341,5 @@ fds() { local sel c cs=(); sel=$(_fdc -m) || return; while IFS= read -r c; do [ 
 - `{}` in a preview is quoted for the shell by fzf, but a line that contains single quotes can still confuse a complex preview command. Prefer `{1}`, `{2}` fields for tabular input.
 - Old fzf versions (below 0.48.0) have no `--bash` and `--zsh`. Use the installer script, which writes `~/.fzf.bash`.
 - macOS has no `timeout`, and the BSD `xargs` has no `-d`. The functions above avoid both.
-- `ps -ef` output differs by system. On macOS and Linux the PID is the second column, which is what `fkill9` takes.
 
 The commands and options come from the tutorial at penguin-gym-linux.com and were rewritten and extended here, not copied.
