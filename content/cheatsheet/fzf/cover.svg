@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">fzf Cheatsheet</title>
+  <desc id="d">fzf Cheatsheet: The command-line fuzzy finder, with ready-made functions. CTRL-R, CTRL-T, ALT-C, search syntax, --preview, --multi, fd, ripgrep, bat, git, kubectl, docker. Small drawings: list, query, pick; a terminal running eval "$(fzf --bash)" and vim "$(fzf)"; fuzzy match, CTRL-R, ALT-C; icons for CTRL-R, CTRL-T, ALT-C, --preview, git, AWS, docker.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #0ca678; }
+      .a2  { fill: #343a40; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #0ca678; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #0ca678; }
+  .vs   { stroke: #0ca678; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #0ca678; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #0ca678; stroke-width: 9; }
+  .vl   { fill: #0ca678; fill-opacity: .18; }
+  .vl2  { fill: #0ca678; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #0ca678; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #0ca678; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-16.3,54.3) scale(0.861)"><rect class="vpn" x="170" y="170" width="144" height="84" rx="42"/><text class="vink" x="242" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">list</text><path class="var" d="M322,212 H368 M348,196 L368,212 L348,228"/><rect class="vpg" x="378" y="170" width="167" height="84" rx="42"/><text class="vink" x="462" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">query</text><path class="var" d="M553,212 H599 M579,196 L599,212 L579,228"/><rect class="vpv" x="609" y="170" width="144" height="84" rx="42"/><text class="vink" x="681" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">pick</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ eval "$(fzf --bash)"</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ vim "$(fzf)"<tspan class="vcur"> █</tspan></text></g><g transform="translate(61.7,0.9) scale(0.997)"><g transform="translate(1795,190) scale(1.150)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">fuzzy match</text><g transform="translate(2065,190) scale(1.150)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">CTRL-R</text><g transform="translate(2335,190) scale(1.150)"><path class="vf" d="M16,44 H80 L98,64 H184 V176 H16 Z"/><path d="M16,84 H184" stroke="#fff" stroke-width="6" opacity=".5"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">ALT-C</text></g><g transform="translate(546.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">CTRL-R</text><g transform="translate(806.0,1290) scale(0.500)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">CTRL-T</text><g transform="translate(1066.0,1290) scale(0.500)"><path class="vf" d="M16,44 H80 L98,64 H184 V176 H16 Z"/><path d="M16,84 H184" stroke="#fff" stroke-width="6" opacity=".5"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="34">ALT-C</text><g transform="translate(1326.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">--preview</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vs" d="M60,40 V160 M60,128 C60,92 140,108 140,64" stroke-width="12"/><circle class="vf" cx="60" cy="40" r="20"/><circle class="vf" cx="60" cy="164" r="20"/><circle class="vf" cx="140" cy="56" r="20"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">git</text><g transform="translate(1846.0,1290) scale(0.500)"><path class="vf" d="M46,150 A40,40 0 0 1 52,72 A56,56 0 0 1 152,70 A42,42 0 0 1 156,150 Z"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">AWS</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">docker</text></g><!-- /vignettes -->
+  <rect class="ink" x="1056" y="320" width="640" height="330" rx="20"/><rect class="a2" x="1056" y="320" width="640" height="46" rx="20"/><rect class="a2" x="1056" y="346" width="640" height="20"/><circle cx="1092" cy="343" r="9" fill="#fa5252"/><circle cx="1122" cy="343" r="9" fill="#fab005"/><circle cx="1152" cy="343" r="9" fill="#40c057"/><text x="1096" y="420" font-size="34" font-family="Menlo, Consolas, 'Liberation Mono', monospace" fill="#e9ecef"><tspan fill="#0ca678">&gt;</tspan> core<tspan fill="#0ca678">█</tspan></text><text x="1656" y="420" text-anchor="end" font-size="26" font-family="Menlo, Consolas, 'Liberation Mono', monospace" fill="#868e96">3/9</text><line x1="1096" y1="436" x2="1656" y2="436" stroke="#495057" stroke-width="3"/><rect x="1076" y="450" width="600" height="46" rx="6" fill="#0ca678" opacity="0.25"/><text x="1090" y="484" font-size="30" font-family="Menlo, Consolas, 'Liberation Mono', monospace" fill="#0ca678">▌</text><text x="1126" y="484" font-size="30" font-family="Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#ced4da">src/</tspan><tspan fill="#0ca678" font-weight="700">core</tspan><tspan fill="#ced4da">.md</tspan></text><text x="1126" y="536" font-size="30" font-family="Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#ced4da">lib/</tspan><tspan fill="#0ca678" font-weight="700">co</tspan><tspan fill="#ced4da">nfig_</tspan><tspan fill="#0ca678" font-weight="700">re</tspan><tspan fill="#ced4da">.py</tspan></text><text x="1126" y="588" font-size="30" font-family="Menlo, Consolas, 'Liberation Mono', monospace"><tspan fill="#ced4da">docs/</tspan><tspan fill="#0ca678" font-weight="700">c</tspan><tspan fill="#ced4da">hangel</tspan><tspan fill="#0ca678" font-weight="700">o</tspan><tspan fill="#ced4da">g_</tspan><tspan fill="#0ca678" font-weight="700">re</tspan><tspan fill="#ced4da">lease.md</tspan></text>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="210">fzf Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="85">The command-line fuzzy finder, with ready-made functions</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="45">CTRL-R · CTRL-T · ALT-C · search syntax · --preview · --multi · fd · ripgrep · bat · git · kubectl · docker</text>
+</svg>
