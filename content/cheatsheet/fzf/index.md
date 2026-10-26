@@ -2,7 +2,7 @@
 title: "fzf Cheatsheet"
 date: 2026-10-26T16:30:00+02:00
 draft: false
-description: "fzf, the command-line fuzzy finder: install on RHEL, Ubuntu and macOS, shell key bindings, search syntax, options, environment variables, quick aliases and a block of ready-made aliases and functions for files, git, processes, AWS, Kubernetes, SSH and Docker that works in bash and zsh."
+description: "fzf, the command-line fuzzy finder: install on RHEL, Ubuntu and macOS, shell key bindings, search syntax, options, environment variables, and ready-made aliases and functions for files, git, processes, AWS, Kubernetes, SSH and Docker, one block each, that work in bash and zsh."
 tags: ["fzf", "bash", "zsh", "shell"]
 categories: ["Cheatsheet"]
 ---
@@ -58,7 +58,7 @@ The article uses `fd`, `rg` (ripgrep) and `bat` as optional helpers. None of the
 | Ubuntu 24.04 | 9.0.0, command **`fdfind`** | 14.1.0, command `rg` | 0.24.0, command **`batcat`** |
 | Ubuntu 26.04 | 10.3.0, command **`fdfind`** | 15.1.0, command `rg` | 0.25.0, command **`batcat`** |
 
-On Debian and Ubuntu the commands are `fdfind` and `batcat`, because the names `fd` and `bat` were already taken by other packages. The setup block in section 6 looks for both names, so it works on Ubuntu without symlinks.
+On Debian and Ubuntu the commands are `fdfind` and `batcat`, because the names `fd` and `bat` were already taken by other packages. The previews of `fp`, `fa` and `fr` in section 6 try both names, so they work on Ubuntu without symlinks.
 
 The RHEL rows come from the EPEL repository metadata (x86_64); "not in the base repositories" comes from the BaseOS, AppStream and CRB (PowerTools on 8) repositories of Rocky Linux 8, 9 and 10 and the CentOS 7 vault, which carry the same packages as RHEL. The Ubuntu rows come from the Ubuntu archive (Launchpad) and the file lists of the `.deb` packages. Versions move, so check them again before you depend on one.
 
@@ -122,7 +122,7 @@ On macOS, `ALT-C` types a special character unless the terminal treats Option as
 ```bash
 # ~/.bashrc
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'      # Debian and Ubuntu: fdfind instead of fd
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"      # CTRL-T does not read FZF_DEFAULT_COMMAND
 ```
 
@@ -137,42 +137,7 @@ When `FZF_CTRL_T_COMMAND` and `FZF_ALT_C_COMMAND` are not set, `CTRL-T` and `ALT
 
 ## 6. Aliases and Functions
 
-Every alias and function below has its own block, so you can copy only the ones you want into `~/.bashrc` or `~/.zshrc`. All of them work in bash and zsh. Paste the setup block first and the others after it: it turns on the key bindings and the default options, and `fp`, `fa` and `fr` use the preview commands it defines.
-
-### Setup
-
-The setup skips everything if `fzf` is not installed. It finds `bat` or `batcat` and `fd` or `fdfind` for the previews and the candidate list.
-
-```bash
-# ---- fzf setup, works in bash and zsh ----
-if command -v fzf >/dev/null 2>&1; then
-  # key bindings: CTRL-R history, CTRL-T file path, ALT-C cd (fzf 0.48.0 or newer)
-  if [ -n "$ZSH_VERSION" ]; then source <(fzf --zsh); elif [ -n "$BASH_VERSION" ]; then eval "$(fzf --bash)"; fi
-
-  export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-
-  # Debian and Ubuntu install bat as "batcat" and fd as "fdfind": find whichever name exists
-  __fzf_bat=; __fzf_fd=
-  for __c in bat batcat; do command -v "$__c" >/dev/null 2>&1 && { __fzf_bat=$__c; break; }; done
-  for __c in fd fdfind; do command -v "$__c" >/dev/null 2>&1 && { __fzf_fd=$__c; break; }; done
-  unset __c
-
-  # candidate list for plain fzf and CTRL-T, only if the real binary exists (an alias does not work here)
-  if [ -n "$__fzf_fd" ]; then
-    export FZF_DEFAULT_COMMAND="$__fzf_fd --type f --hidden --exclude .git"
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"   # CTRL-T has its own variable
-  fi
-
-  # preview commands: bat when it exists, the first 50 lines otherwise
-  if [ -n "$__fzf_bat" ]; then
-    __fzf_view="$__fzf_bat --color=always --style=numbers {}"
-    __fzf_view_line="$__fzf_bat --color=always --highlight-line {2} {1}"
-  else
-    __fzf_view="head -n 50 {}"
-    __fzf_view_line="head -n 50 {1}"
-  fi
-fi
-```
+Every alias and function below has its own block, so you can copy only the ones you want into `~/.bashrc` or `~/.zshrc`. All of them work in bash and zsh, and each one works on its own, except where the text says it needs another block. The key bindings come from section 2 and the default options from section 5.
 
 ### Overview
 
@@ -220,10 +185,11 @@ alias fm='fzf --multi'                                   # TAB marks rows, one p
 
 #### fp: file picker with preview
 
-Uses `$__fzf_view` from the setup block.
+The preview uses `bat`, or `batcat` on Debian and Ubuntu, and the first 50 lines when neither is installed.
 
 ```bash
-alias fp="fzf --preview '$__fzf_view'"                   # file picker with preview
+# fp: file picker with preview (bat, batcat, or the first 50 lines)
+alias fp="fzf --preview 'if command -v bat >/dev/null; then bat --color=always --style=numbers {}; elif command -v batcat >/dev/null; then batcat --color=always --style=numbers {}; else head -n 50 {}; fi'"
 ```
 
 #### fgl: browse commits
@@ -332,21 +298,22 @@ fh() { fc -rl 1 | fzf --no-sort | sed 's/^[[:space:]]*[0-9]*[[:space:]*]*//'; }
 
 #### fa: open a Markdown file of the repository
 
-Uses `$__fzf_view` from the setup block.
+The preview uses `bat`, `batcat` or the first 50 lines, like `fp`.
 
 ```bash
 # fa [query]: pick a Markdown file of the current git repository (from any folder of it) and open it
 fa() {
   local root f
   root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "not in a git repo" >&2; return 1; }
-  f=$(cd "$root" && git ls-files '*.md' | fzf --query "$1" --preview "$__fzf_view") \
+  f=$(cd "$root" && git ls-files '*.md' | fzf --query "$1" \
+      --preview 'if command -v bat >/dev/null; then bat --color=always --style=numbers {}; elif command -v batcat >/dev/null; then batcat --color=always --style=numbers {}; else head -n 50 {}; fi') \
     && [ -n "$f" ] && ${EDITOR:-vim} "$root/$f"
 }
 ```
 
 #### fr: search file contents
 
-Uses `$__fzf_view_line` from the setup block.
+The preview shows the file with the matching line highlighted (`bat` or `batcat`), or the first 50 lines.
 
 ```bash
 # fr <pattern>: search file contents (ripgrep, or grep if rg is missing), preview the match, open the file at that line
@@ -354,7 +321,7 @@ fr() {
   local sel file line
   sel=$( { if command -v rg >/dev/null 2>&1; then rg --line-number --no-heading --color=always "$@"; else grep -rnI --exclude-dir=.git --color=always -e "$@" .; fi; } \
     | fzf --ansi --delimiter : \
-          --preview "$__fzf_view_line") || return
+          --preview 'if command -v bat >/dev/null; then bat --color=always --highlight-line {2} {1}; elif command -v batcat >/dev/null; then batcat --color=always --highlight-line {2} {1}; else head -n 50 {1}; fi') || return
   [ -n "$sel" ] || return
   file=${sel%%:*}; line=${sel#*:}; line=${line%%:*}
   ${EDITOR:-vim} "+$line" "$file"
@@ -496,7 +463,7 @@ fds() { local sel c cs=(); sel=$(_fdc -m) || return; while IFS= read -r c; do [ 
 ## 7. Gotchas
 
 - fzf reads from a pipe when there is one, and runs `FZF_DEFAULT_COMMAND` (or a built-in `find`) only when there is none. In scripts without a terminal, pipe the list in yourself.
-- **Ubuntu and Debian rename two tools:** `bat` is `batcat` and `fd` is `fdfind`. The setup block in section 6 handles both names. Commands that you type yourself, such as `fzf --preview 'bat {}'`, need the real name or a symlink (`ln -s "$(command -v batcat)" ~/.local/bin/bat`).
+- **Ubuntu and Debian rename two tools:** `bat` is `batcat` and `fd` is `fdfind`. The previews in `fp`, `fa` and `fr` handle both names. Commands that you type yourself, such as `fzf --preview 'bat {}'`, need the real name or a symlink (`ln -s "$(command -v batcat)" ~/.local/bin/bat`).
 - A plain `fzf` lists files, not directories. Use `find . -type d | fzf` or `ALT-C`. (`CTRL-T` lists files and directories.)
 - `{}` in a preview is quoted for the shell by fzf, but a line that contains single quotes can still confuse a complex preview command. Prefer `{1}`, `{2}` fields for tabular input.
 - Old fzf versions (below 0.48.0) have no `--bash` and `--zsh`. Use the installer script, which writes `~/.fzf.bash`.
