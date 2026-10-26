@@ -164,8 +164,7 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fgc [message]` | function | Stage **everything** (modified, deleted, new and untracked files) and commit it, after a yes/no check |
 | `fgs` | function | Browse stashes with a diff preview, then show the chosen one |
 | `faws` | function | Pick an AWS CLI profile and export `AWS_PROFILE` for the current shell |
-| `fkx` | function | Print a kubectl context name, for one command: `kubectl --context "$(fkx)" get pods` |
-| `fkc` | function | Switch the current kubectl context (needs `fkx`) |
+| `fkc` | function | Switch the current kubectl context |
 | `fssh` | function | Pick a host from `~/.ssh/config` (wildcard entries skipped) and connect |
 | `fport` | function | List listening TCP ports and print the chosen line (the PID is the second column) |
 | `_fdc` | function | Helper for the three Docker functions: pick running containers, print their names |
@@ -383,23 +382,14 @@ faws() {
 
 `faws` only exports the profile name. For an SSO profile you still log in with `aws sso login --profile "$AWS_PROFILE"`.
 
-#### fkx: print a kubectl context
-
-```bash
-# fkx: print a kubectl context name, for one-off use: kubectl --context "$(fkx)" get pods
-fkx() { kubectl config get-contexts -o name | fzf --header 'kubectl context'; }
-```
-
 #### fkc: switch the kubectl context
-
-Needs `fkx`.
 
 ```bash
 # fkc: switch the current kubectl context (this edits your kubeconfig for every terminal)
-fkc() { local c; c=$(fkx) && [ -n "$c" ] && kubectl config use-context "$c"; }
+fkc() { local c; c=$(kubectl config get-contexts -o name | fzf --header 'kubectl context') && [ -n "$c" ] && kubectl config use-context "$c"; }
 ```
 
-Prefer `fkx` to `fkc`. `kubectl config use-context` edits the kubeconfig, so the new context applies to every terminal and every later command. If the current context can be a production cluster, a one-off `--context "$(fkx)"` is safer.
+`kubectl config use-context` edits the kubeconfig, so the new context applies to every terminal and every later command. If the current context can be a production cluster, pick the context for one command instead: `kubectl --context "$(kubectl config get-contexts -o name | fzf)" get pods`.
 
 #### fssh: connect to a host from ~/.ssh/config
 
