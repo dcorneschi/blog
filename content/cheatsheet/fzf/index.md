@@ -2,7 +2,7 @@
 title: "fzf Cheatsheet"
 date: 2026-10-26T16:30:00+02:00
 draft: false
-description: "fzf, the command-line fuzzy finder: install on RHEL, Ubuntu and macOS, shell key bindings, search syntax, options, environment variables, and ready-made aliases and functions for files, git, AWS, Kubernetes, SSH, ports and Docker, one block each, that work in bash and zsh."
+description: "fzf, the command-line fuzzy finder: install on RHEL, Ubuntu and macOS, shell key bindings, search syntax, options, environment variables, and ready-made aliases and functions for files, git, AWS, Kubernetes, SSH, ports, systemd and Docker, one block each, that work in bash and zsh."
 tags: ["fzf", "bash", "zsh", "shell"]
 categories: ["Cheatsheet"]
 ---
@@ -220,6 +220,7 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fkc` | function | Switch the current kubectl context |
 | `fssh` | function | Pick a host from `~/.ssh/config` (wildcard entries skipped) and connect |
 | `fport` | function | List listening TCP ports and print the chosen line (the PID is the second column) |
+| `fsys [action]` | function | Pick a systemd service: show its status, follow its logs (`fsys logs`) or run an action (`fsys restart`) |
 | `_fdc` | function | Helper for the three Docker functions: pick running containers, print their names |
 | `fdl` | function | Follow the logs of a container (needs `_fdc`) |
 | `fdx` | function | Open a shell in a container, bash if it exists, else sh (needs `_fdc`) |
@@ -358,6 +359,34 @@ fport() { lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | sed 1d | fzf --header 'COMMA
 
 `fport` only prints a line. To free a port, find the PID with `fport`, then `kill <pid>`.
 
+#### fsys: manage a systemd service
+
+```bash
+# fsys [action]: pick a systemd service; status by default, "logs" follows its journal,
+# any other systemctl action (start, stop, restart, enable, disable, ...) runs with sudo
+fsys() {
+  local act=${1:-status} u
+  u=$( { systemctl list-units --type=service --all --no-legend --plain | awk '$2 != "not-found" {print $1}'
+         systemctl list-unit-files --type=service --no-legend | awk '{print $1}'; } \
+       | grep -v '@\.service$' | sort -u \
+       | fzf --header "systemctl $act" --preview 'SYSTEMD_COLORS=1 systemctl status --no-pager {}') || return
+  [ -n "$u" ] || return
+  case $act in
+    status) systemctl status --no-pager "$u" ;;
+    logs)   journalctl -u "$u" -f -n 100 ;;
+    *)      if [ "$(id -u)" -eq 0 ]; then systemctl "$act" "$u"; else sudo systemctl "$act" "$u"; fi ;;
+  esac
+}
+```
+
+| Run | Does |
+|-----|------|
+| `fsys` | `systemctl status` of the picked service |
+| `fsys logs` | Follow its journal (`journalctl -u <unit> -f`, the last 100 lines first); `CTRL-C` stops |
+| `fsys restart` | `sudo systemctl restart` it; also `start`, `stop`, `enable`, `disable` or any other `systemctl` action |
+
+The list holds the loaded services and the installed ones that are not loaded (so a disabled service can be started too), with a live `systemctl status` preview. It leaves out units that no longer exist (`not-found`) and templates such as `getty@.service`, which can't be started without an instance name. As root it runs the action without `sudo`. `fsys` needs systemd, so it works on Linux, not on macOS; it was tested on Debian 12 with systemd 252.
+
 #### _fdc: pick containers (helper)
 
 The three Docker functions below need this helper.
@@ -461,6 +490,22 @@ fssh() {
 
 # fport: list listening TCP ports and print the chosen line (PID is column 2)
 fport() { lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | sed 1d | fzf --header 'COMMAND PID ... NAME'; }
+
+# fsys [action]: pick a systemd service; status by default, "logs" follows its journal,
+# any other systemctl action (start, stop, restart, enable, disable, ...) runs with sudo
+fsys() {
+  local act=${1:-status} u
+  u=$( { systemctl list-units --type=service --all --no-legend --plain | awk '$2 != "not-found" {print $1}'
+         systemctl list-unit-files --type=service --no-legend | awk '{print $1}'; } \
+       | grep -v '@\.service$' | sort -u \
+       | fzf --header "systemctl $act" --preview 'SYSTEMD_COLORS=1 systemctl status --no-pager {}') || return
+  [ -n "$u" ] || return
+  case $act in
+    status) systemctl status --no-pager "$u" ;;
+    logs)   journalctl -u "$u" -f -n 100 ;;
+    *)      if [ "$(id -u)" -eq 0 ]; then systemctl "$act" "$u"; else sudo systemctl "$act" "$u"; fi ;;
+  esac
+}
 
 # _fdc: pick running containers and print their names (helper for fdl, fdx, fds)
 _fdc() { docker ps --format '{{.Names}}\t{{.Image}}\t{{.Status}}' | fzf "$@" | cut -f1; }
