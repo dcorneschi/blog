@@ -71,6 +71,9 @@ eval "$(fzf --bash)"
 # ~/.zshrc   (fzf 0.48.0 or newer)
 source <(fzf --zsh)
 
+# ~/.config/fish/config.fish
+fzf --fish | source
+
 # Older fzf (below 0.48.0), installed with the git installer (it writes ~/.fzf.bash)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -89,16 +92,46 @@ Reload the shell (`source ~/.bashrc`). Three key bindings are added:
 
 On macOS, `ALT-C` types a special character unless the terminal treats Option as Meta (in iTerm2: Profiles, Keys, "Left Option key: Esc+"; in Terminal.app: "Use Option as Meta key").
 
+### Fuzzy Completion with `**`
+
+The same shell integration adds completion: type `**` where an argument goes and press `TAB`, and fzf picks it.
+
+| Typed | Picks |
+|-------|-------|
+| `vim **<TAB>` | Files under the current directory (works after any command) |
+| `vim ../**<TAB>` | Files under the parent directory |
+| `cd **<TAB>` | Directories |
+| `kill -9 **<TAB>` | A process; inserts its PID |
+| `ssh **<TAB>` | A host from `~/.ssh/config`, `~/.ssh/known_hosts`, `/etc/ssh/ssh_config` or `/etc/hosts` |
+
+To use another trigger than `**`, set it in your shell config, for example `export FZF_COMPLETION_TRIGGER='~~'`.
+
 ## 3. Search Syntax (Typed in the Query Box)
 
 | Typed | Meaning |
 |-------|---------|
 | `git push` | Both terms match, each fuzzy (AND) |
 | `'wild` | Exact match, no fuzzy matching |
+| `'wild'` | Exact match on word boundaries: `wild` and `a wild b`, not `wildcard` |
 | `^core` | Starts with `core` |
 | `.md$` | Ends with `.md` |
 | `!test` | Does not contain `test` |
+| `!^test` | Does not start with `test` |
 | `^src \| ^app` | Starts with `src` or `app` (OR, spaces around the bar) |
+
+Case is smart by default: a query in lowercase ignores case, and one uppercase letter makes it case-sensitive (`core` finds `Core.md` and `core.md`, `Core` only `Core.md`). `-i` always ignores case, `+i` never does. With `-e` every term is exact, and `'` then makes a term fuzzy.
+
+### Keys Inside fzf
+
+| Keys | Action |
+|------|--------|
+| `CTRL-J`, `CTRL-K`, `Down`, `Up` | Move down and up |
+| `CTRL-N`, `CTRL-P` | Move to the next or previous match (with `--history`, browse the query history instead) |
+| `ENTER` | Accept the highlighted line (all marked lines with `-m`) |
+| `ESC`, `CTRL-C`, `CTRL-G`, `CTRL-Q` | Quit without selecting |
+| `TAB`, `Shift-TAB` | Mark or unmark a line and move (with `-m`) |
+| `CTRL-W`, `CTRL-U` | Delete the word before the cursor, or the whole query |
+| `Shift-Up`, `Shift-Down` | Scroll the preview |
 
 ## 4. Options
 
@@ -113,9 +146,40 @@ On macOS, `ALT-C` types a special character unless the terminal treats Option as
 | `-f`, `--filter` | Non-interactive: print the matches for the query and exit (good for scripts and tests) |
 | `--tac` | Reverse the input order |
 | `--no-sort` | Keep the input order instead of sorting by match score |
-| `--select-1` | If only one line matches, select it without asking |
-| `--exit-0` | Exit if nothing matches |
+| `-1`, `--select-1` | If only one line matches, select it without asking |
+| `-0`, `--exit-0` | Exit if nothing matches |
 | `--ansi` | Process ANSI color codes in the input (needed for `git log --color=always`) |
+| `-e`, `--exact` | Exact matching for every term (`'` makes a term fuzzy) |
+| `-i`, `+i` | Always ignore case, or always match case (default: smart case) |
+| `--header '<text>'` | A fixed line of text above the list |
+| `--preview-window right,50%` | Position and size of the preview; `up`, `down`, `left`, sizes in % or lines |
+| `--preview-window hidden` | Start with the preview hidden (show it with a `toggle-preview` binding) |
+| `-d`, `--delimiter :` | Split lines into fields at `:` (default: whitespace) |
+| `-n`, `--nth 2` | Search only field 2 |
+| `--with-nth 2..` | Show only fields 2 and later (the output is still the whole line) |
+| `--print0` | End each output line with NUL instead of a newline, for `xargs -0` |
+
+### Placeholders
+
+Used in `--preview` and in `--bind` commands. fzf puts each value in single quotes.
+
+| Placeholder | Value |
+|-------------|-------|
+| `{}` | The highlighted line |
+| `{1}`, `{2}` | Field 1, field 2 (see `--delimiter`) |
+| `{+}` | Every marked line (the highlighted one if none is marked) |
+| `{q}` | The current query |
+
+### Key Bindings with --bind
+
+```bash
+fzf --preview 'cat {}' --bind 'ctrl-/:toggle-preview'   # CTRL-/ shows and hides the preview
+fzf --bind 'enter:become(vim {})'                        # ENTER replaces fzf with vim on the chosen file
+fzf --bind 'ctrl-o:execute(less {})'                     # CTRL-O opens less, then returns to fzf
+fzf --bind 'ctrl-r:reload(ls)'                           # CTRL-R replaces the list with new output
+```
+
+`become` ends fzf and runs the command in its place, so nothing is printed. `execute` runs it and comes back to the list.
 
 ## 5. Environment Variables
 
