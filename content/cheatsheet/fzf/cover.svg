@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
   <title id="t">fzf Cheatsheet</title>
-  <desc id="d">fzf Cheatsheet: The command-line fuzzy finder, with ready-made functions. CTRL-R, CTRL-T, ALT-C, search syntax, --preview, --multi, fd, bat, git, kubectl, docker. Small drawings: list, query, pick; a terminal running eval "$(fzf --bash)" and vim "$(fzf)"; fuzzy match, CTRL-R, ALT-C; icons for CTRL-R, CTRL-T, ALT-C, --preview, git, AWS, docker.</desc>
+  <desc id="d">fzf Cheatsheet: The command-line fuzzy finder, with ready-made functions. CTRL-R, CTRL-T, ALT-C, search syntax, --preview, --multi, bat, git, kubectl, docker. Small drawings: list, query, pick; a terminal running eval "$(fzf --bash)" and vim "$(fzf)"; fuzzy match, CTRL-R, ALT-C; icons for CTRL-R, CTRL-T, ALT-C, --preview, git, AWS, docker.</desc>
   <defs>
     <style>
       .bg  { fill: #f8f9fa; }
@@ -67,5 +67,5 @@
   <text class="h" x="1376" y="880" text-anchor="middle" font-size="210">fzf Cheatsheet</text>
   <text class="s" x="1376" y="1030" text-anchor="middle" font-size="85">The command-line fuzzy finder, with ready-made functions</text>
   <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
-  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="45">CTRL-R · CTRL-T · ALT-C · search syntax · --preview · --multi · fd · bat · git · kubectl · docker</text>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="45">CTRL-R · CTRL-T · ALT-C · search syntax · --preview · --multi · bat · git · kubectl · docker</text>
 </svg>

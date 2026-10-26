@@ -9,7 +9,7 @@ categories: ["Cheatsheet"]
 
 `fzf` is an interactive filter for the command line. It reads a list of lines (files, processes, branches, history), lets you narrow it by typing, and prints the line you choose. It works with any command that prints lines, so it is the glue behind many small shell helpers.
 
-The commands and functions below ran with fzf 0.74.5 on macOS, under bash 3.2.57 (the macOS `/bin/bash`, the oldest bash they have to work with) and zsh 5.9, with fd 10.5.0 and bat 0.26.1.
+The commands and functions below ran with fzf 0.74.5 on macOS, under bash 3.2.57 (the macOS `/bin/bash`, the oldest bash they have to work with) and zsh 5.9, with bat 0.26.1.
 
 ## 1. Install
 
@@ -44,21 +44,21 @@ Distribution packages can be old. The `--bash` and `--zsh` shell integration bel
 
 Ubuntu 25.04 and 25.10 both have 0.60.3. The `~/.fzf.bash` file of the legacy line in section 2 is **created only by the git installer** (`~/.fzf/install`, unless you pass `--bin`). A package install never creates it, so that line does nothing after `apt install` or `dnf install`.
 
-### The helper tools: versions and command names
+### bat: versions and command names
 
-The article uses `fd` and `bat` as optional helpers. Neither is in the base RHEL repositories of any version. The packages are `fd-find` and `bat`.
+The `fp` preview uses `bat` when it is installed. It is not in the base RHEL repositories of any version; the package is `bat`.
 
-| OS | fd | bat |
-|----|----|-----|
-| RHEL 7 | not found | not found |
-| RHEL 8 (EPEL) | 8.7.0, command `fd` | 0.24.0, command `bat` |
-| RHEL 9 (EPEL) | 10.4.2, command `fd` | 0.26.1, command `bat` |
-| RHEL 10 (EPEL) | 10.4.2, command `fd` | 0.26.1, command `bat` |
-| Ubuntu 22.04 | 8.3.1, command **`fdfind`** | 0.19.0, command **`batcat`** |
-| Ubuntu 24.04 | 9.0.0, command **`fdfind`** | 0.24.0, command **`batcat`** |
-| Ubuntu 26.04 | 10.3.0, command **`fdfind`** | 0.25.0, command **`batcat`** |
+| OS | bat |
+|----|-----|
+| RHEL 7 | not found |
+| RHEL 8 (EPEL) | 0.24.0, command `bat` |
+| RHEL 9 (EPEL) | 0.26.1, command `bat` |
+| RHEL 10 (EPEL) | 0.26.1, command `bat` |
+| Ubuntu 22.04 | 0.19.0, command **`batcat`** |
+| Ubuntu 24.04 | 0.24.0, command **`batcat`** |
+| Ubuntu 26.04 | 0.25.0, command **`batcat`** |
 
-On Debian and Ubuntu the commands are `fdfind` and `batcat`, because the names `fd` and `bat` were already taken by other packages. The preview of `fp` in section 6 tries both names, so it works on Ubuntu without symlinks.
+On Debian and Ubuntu the command is `batcat`, because the name `bat` was already taken by another package. The preview of `fp` in section 6 tries both names, so it works on Ubuntu without a symlink.
 
 The RHEL rows come from the EPEL repository metadata (x86_64); "not in the base repositories" comes from the BaseOS, AppStream and CRB (PowerTools on 8) repositories of Rocky Linux 8, 9 and 10 and the CentOS 7 vault, which carry the same packages as RHEL. The Ubuntu rows come from the Ubuntu archive (Launchpad) and the file lists of the `.deb` packages. Versions move, so check them again before you depend on one.
 
@@ -122,7 +122,7 @@ On macOS, `ALT-C` types a special character unless the terminal treats Option as
 ```bash
 # ~/.bashrc
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'      # Debian and Ubuntu: fdfind instead of fd
+export FZF_DEFAULT_COMMAND="find . -type f -not -path '*/.git/*'"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"      # CTRL-T does not read FZF_DEFAULT_COMMAND
 ```
 
@@ -133,7 +133,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"      # CTRL-T does not read FZF
 | `FZF_CTRL_T_COMMAND` | The command that produces the list for `CTRL-T`. It does **not** fall back to `FZF_DEFAULT_COMMAND` |
 | `FZF_ALT_C_COMMAND` | The same for `ALT-C` (directories) |
 
-When `FZF_CTRL_T_COMMAND` and `FZF_ALT_C_COMMAND` are not set, `CTRL-T` and `ALT-C` use fzf's built-in walker (files and directories for `CTRL-T`, directories for `ALT-C`), so setting only `FZF_DEFAULT_COMMAND` changes a plain `fzf` and nothing else. `FZF_DEFAULT_COMMAND` must be a **real binary**. An alias does not work there, and if the binary is missing the list is empty. `fd` is a separate package (`fd-find`), and on Debian and Ubuntu its command is `fdfind` (see the table in section 1).
+When `FZF_CTRL_T_COMMAND` and `FZF_ALT_C_COMMAND` are not set, `CTRL-T` and `ALT-C` use fzf's built-in walker (files and directories for `CTRL-T`, directories for `ALT-C`), so setting only `FZF_DEFAULT_COMMAND` changes a plain `fzf` and nothing else. `FZF_DEFAULT_COMMAND` must be a **real binary**. An alias does not work there, and if the binary is missing the list is empty.
 
 ## 6. Aliases and Functions
 
@@ -336,7 +336,7 @@ fds() { local sel c cs=(); sel=$(_fdc -m) || return; while IFS= read -r c; do [ 
 ## 7. Gotchas
 
 - fzf reads from a pipe when there is one, and runs `FZF_DEFAULT_COMMAND` (or a built-in `find`) only when there is none. In scripts without a terminal, pipe the list in yourself.
-- **Ubuntu and Debian rename two tools:** `bat` is `batcat` and `fd` is `fdfind`. The preview in `fp` handles both names. Commands that you type yourself, such as `fzf --preview 'bat {}'`, need the real name or a symlink (`ln -s "$(command -v batcat)" ~/.local/bin/bat`).
+- **Ubuntu and Debian rename `bat` to `batcat`.** The preview in `fp` handles both names. Commands that you type yourself, such as `fzf --preview 'bat {}'`, need the real name or a symlink (`ln -s "$(command -v batcat)" ~/.local/bin/bat`).
 - A plain `fzf` lists files, not directories. Use `find . -type d | fzf` or `ALT-C`. (`CTRL-T` lists files and directories.)
 - `{}` in a preview is quoted for the shell by fzf, but a line that contains single quotes can still confuse a complex preview command. Prefer `{1}`, `{2}` fields for tabular input.
 - Old fzf versions (below 0.48.0) have no `--bash` and `--zsh`. Use the installer script, which writes `~/.fzf.bash`.
