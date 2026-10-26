@@ -58,7 +58,7 @@ The article uses `fd`, `rg` (ripgrep) and `bat` as optional helpers. None of the
 | Ubuntu 24.04 | 9.0.0, command **`fdfind`** | 14.1.0, command `rg` | 0.24.0, command **`batcat`** |
 | Ubuntu 26.04 | 10.3.0, command **`fdfind`** | 15.1.0, command `rg` | 0.25.0, command **`batcat`** |
 
-On Debian and Ubuntu the commands are `fdfind` and `batcat`, because the names `fd` and `bat` were already taken by other packages. The previews of `fp`, `fa` and `fr` in section 6 try both names, so they work on Ubuntu without symlinks.
+On Debian and Ubuntu the commands are `fdfind` and `batcat`, because the names `fd` and `bat` were already taken by other packages. The preview of `fp` in section 6 tries both names, so it works on Ubuntu without symlinks.
 
 The RHEL rows come from the EPEL repository metadata (x86_64); "not in the base repositories" comes from the BaseOS, AppStream and CRB (PowerTools on 8) repositories of Rocky Linux 8, 9 and 10 and the CentOS 7 vault, which carry the same packages as RHEL. The Ubuntu rows come from the Ubuntu archive (Launchpad) and the file lists of the `.deb` packages. Versions move, so check them again before you depend on one.
 
@@ -154,12 +154,7 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fpcat` | alias | File picker with a `cat` preview |
 | `fe [query]` | function | Open a file in `$EDITOR`, jump straight to it if only one matches (a safer `fvim`) |
 | `fcd [dir]` | function | `cd` into a subdirectory, skipping `.git` (a safer `fdir`) |
-| `fkill [signal]` | function | Pick processes, send `TERM` (or the signal you give, `fkill 9` for `-9`) (a safer `fkill9`) |
 | `fgb` | function | Check out a local or remote branch, strips `remotes/origin/` (a safer `fco`) |
-| `frm` | function | Delete picked files with `rm -i`, safe for names with spaces (a safer `frmi`) |
-| `fh` | function | Pick a past command and print it (`CTRL-R`) |
-| `fa [query]` | function | Pick a Markdown file of the current git repository (from any folder of it) with a `bat` or `batcat` preview and open it in `$EDITOR` |
-| `fr <pattern>` | function | Search file contents, preview the match, open the file at that line. Uses `rg` when it exists, otherwise `grep -rnI` (skipping `.git`) |
 | `fga` | function | Stage files picked from the modified and untracked ones (`TAB` for several), safe for names with spaces |
 | `fgc [message]` | function | Stage **everything** (modified, deleted, new and untracked files) and commit it, after a yes/no check |
 | `fgs` | function | Browse stashes with a diff preview, then show the chosen one |
@@ -174,7 +169,7 @@ Every alias and function below has its own block, so you can copy only the ones 
 
 ### Aliases
 
-> **Warning:** the quick aliases `fkill9`, `frmi` and `fco` act on whatever you select. `kill -9` cannot be handled by the process, so unsaved data is lost. `rm` removes files for good (there is no trash), and the unquoted `$(fzf -m)` in `frmi` breaks a file name with a space into several arguments. `fco` on a remote branch leaves a detached HEAD. If you press ESC, fzf prints nothing and some of them then run with an empty argument. The functions `fkill`, `frm` and `fgb` do the same jobs without these problems.
+> **Warning:** the quick aliases `fkill9`, `frmi` and `fco` act on whatever you select. `kill -9` cannot be handled by the process, so unsaved data is lost. `rm` removes files for good (there is no trash), and the unquoted `$(fzf -m)` in `frmi` breaks a file name with a space into several arguments. `fco` on a remote branch leaves a detached HEAD. If you press ESC, fzf prints nothing and some of them then run with an empty argument. For branches, the function `fgb` does the same job without these problems.
 
 #### fm: multi-select
 
@@ -249,19 +244,6 @@ fe() { local f; f=$(fzf --query "$1" --select-1 --exit-0) && [ -n "$f" ] && ${ED
 fcd() { local d; d=$(command find "${1:-.}" -type d -not -path '*/.git/*' 2>/dev/null | fzf) && [ -n "$d" ] && cd "$d"; }
 ```
 
-#### fkill: signal processes
-
-```bash
-# fkill [signal]: pick processes (TAB for several) and signal them, default TERM
-fkill() {
-  local pids
-  pids=$(command ps -ef | sed 1d | fzf -m --header 'TAB marks, ENTER kills' | awk '{print $2}')
-  [ -n "$pids" ] && echo "$pids" | xargs kill "-${1:-TERM}"
-}
-```
-
-`fkill` sends `TERM` by default, so the process can shut down cleanly, and it accepts several processes with `TAB`. fzf matches fuzzily, so a short word can highlight unrelated processes: look at the highlighted lines before pressing ENTER, and use the exact form (`'name`) to narrow the list. A process owned by another user answers "Operation not permitted" and nothing happens.
-
 #### fgb: check out a branch
 
 ```bash
@@ -273,61 +255,6 @@ fgb() {
 ```
 
 `fgb` removes the `remotes/<name>/` prefix, because `git checkout origin/x` would give a detached HEAD, while `git checkout x` creates a tracking branch.
-
-#### frm: delete files with a prompt
-
-```bash
-# frm: pick files (TAB for several) and delete them, asking for each (rm -i)
-frm() {
-  local sel f files=()
-  sel=$(fzf -m) || return
-  while IFS= read -r f; do [ -n "$f" ] && files+=("$f"); done <<< "$sel"
-  [ "${#files[@]}" -gt 0 ] && rm -i -- "${files[@]}"
-}
-```
-
-`frm` reads the selection line by line into an array, so a name with spaces stays one argument, and it passes `--` so a name that starts with a dash is not read as an option.
-
-#### fh: pick a command from history
-
-```bash
-# fh: pick a command from history and print it (edit it, then run)
-fh() { fc -rl 1 | fzf --no-sort | sed 's/^[[:space:]]*[0-9]*[[:space:]*]*//'; }
-```
-
-#### fa: open a Markdown file of the repository
-
-The preview uses `bat`, `batcat` or the first 50 lines, like `fp`.
-
-```bash
-# fa [query]: pick a Markdown file of the current git repository (from any folder of it) and open it
-fa() {
-  local root f
-  root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "not in a git repo" >&2; return 1; }
-  f=$(cd "$root" && git ls-files '*.md' | fzf --query "$1" \
-      --preview 'if command -v bat >/dev/null; then bat --color=always --style=numbers {}; elif command -v batcat >/dev/null; then batcat --color=always --style=numbers {}; else head -n 50 {}; fi') \
-    && [ -n "$f" ] && ${EDITOR:-vim} "$root/$f"
-}
-```
-
-#### fr: search file contents
-
-The preview shows the file with the matching line highlighted (`bat` or `batcat`), or the first 50 lines.
-
-```bash
-# fr <pattern>: search file contents (ripgrep, or grep if rg is missing), preview the match, open the file at that line
-fr() {
-  local sel file line
-  sel=$( { if command -v rg >/dev/null 2>&1; then rg --line-number --no-heading --color=always "$@"; else grep -rnI --exclude-dir=.git --color=always -e "$@" .; fi; } \
-    | fzf --ansi --delimiter : \
-          --preview 'if command -v bat >/dev/null; then bat --color=always --highlight-line {2} {1}; elif command -v batcat >/dev/null; then batcat --color=always --highlight-line {2} {1}; else head -n 50 {1}; fi') || return
-  [ -n "$sel" ] || return
-  file=${sel%%:*}; line=${sel#*:}; line=${line%%:*}
-  ${EDITOR:-vim} "+$line" "$file"
-}
-```
-
-`fr` takes one pattern. Extra options for `rg` (for example `-i` or `-g '*.md'`) work when `rg` is installed, but not in the `grep` fallback.
 
 #### fga: stage picked files
 
@@ -409,7 +336,7 @@ fssh() {
 fport() { lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | sed 1d | fzf --header 'COMMAND PID ... NAME'; }
 ```
 
-`fport` only prints a line. To free a port, find the PID with `fport`, then `kill <pid>` (or use `fkill`).
+`fport` only prints a line. To free a port, find the PID with `fport`, then `kill <pid>`.
 
 #### _fdc: pick containers (helper)
 
@@ -445,19 +372,19 @@ fds() { local sel c cs=(); sel=$(_fdc -m) || return; while IFS= read -r c; do [ 
 
 ### How the Functions Are Written
 
-- **They do nothing on ESC.** `fe`, `fcd`, `fgb` and `frm` check that fzf returned something, so they never run a command on an empty selection.
-- **Selections are read with a here-string.** `frm`, `fga` and `fds` first store fzf's output (`sel=$(fzf -m)`) and then read it with `<<< "$sel"`. The shorter `done < <(fzf -m)` works in bash but not in zsh: there fzf never appears, so nothing gets deleted, staged or stopped.
-- **Your aliases leak into functions.** Bash expands aliases when a function is defined, so an alias such as `alias find='find . -name'` or `alias ps='ps aux'` (common in `~/.bash_aliases`) changes the `find` and `ps` calls inside `fcd` and `fkill`: they stop working. That is why those two use `command find` and `command ps`. If you add your own functions, put `command` in front of any command that you have aliased.
-- **In zsh, `$EDITOR` is not split into words.** `fe`, `fa` and `fr` run `${EDITOR:-vim} ...`, which works in bash for `EDITOR='code --wait'` but fails in zsh with `fe: command not found: code --wait`. In zsh use an editor that is a single word, or a small wrapper script.
+- **They do nothing on ESC.** `fe`, `fcd` and `fgb` check that fzf returned something, so they never run a command on an empty selection.
+- **Selections are read with a here-string.** `fga` and `fds` first store fzf's output (`sel=$(fzf -m)`) and then read it with `<<< "$sel"`. The shorter `done < <(fzf -m)` works in bash but not in zsh: there fzf never appears, so nothing gets staged or stopped.
+- **Your aliases leak into functions.** Bash expands aliases when a function is defined, so an alias such as `alias find='find . -name'` (common in `~/.bash_aliases`) changes the `find` call inside `fcd`: it stops working. That is why `fcd` uses `command find`. If you add your own functions, put `command` in front of any command that you have aliased.
+- **In zsh, `$EDITOR` is not split into words.** `fe` runs `${EDITOR:-vim} ...`, which works in bash for `EDITOR='code --wait'` but fails in zsh with `fe: command not found: code --wait`. In zsh use an editor that is a single word, or a small wrapper script.
 
 ## 7. Gotchas
 
 - fzf reads from a pipe when there is one, and runs `FZF_DEFAULT_COMMAND` (or a built-in `find`) only when there is none. In scripts without a terminal, pipe the list in yourself.
-- **Ubuntu and Debian rename two tools:** `bat` is `batcat` and `fd` is `fdfind`. The previews in `fp`, `fa` and `fr` handle both names. Commands that you type yourself, such as `fzf --preview 'bat {}'`, need the real name or a symlink (`ln -s "$(command -v batcat)" ~/.local/bin/bat`).
+- **Ubuntu and Debian rename two tools:** `bat` is `batcat` and `fd` is `fdfind`. The preview in `fp` handles both names. Commands that you type yourself, such as `fzf --preview 'bat {}'`, need the real name or a symlink (`ln -s "$(command -v batcat)" ~/.local/bin/bat`).
 - A plain `fzf` lists files, not directories. Use `find . -type d | fzf` or `ALT-C`. (`CTRL-T` lists files and directories.)
 - `{}` in a preview is quoted for the shell by fzf, but a line that contains single quotes can still confuse a complex preview command. Prefer `{1}`, `{2}` fields for tabular input.
 - Old fzf versions (below 0.48.0) have no `--bash` and `--zsh`. Use the installer script, which writes `~/.fzf.bash`.
 - macOS has no `timeout`, and the BSD `xargs` has no `-d`. The functions above avoid both.
-- `ps -ef` output differs by system. On macOS and Linux the PID is the second column, which is what `fkill` takes.
+- `ps -ef` output differs by system. On macOS and Linux the PID is the second column, which is what `fkill9` takes.
 
 The commands and options come from the tutorial at penguin-gym-linux.com and were rewritten and extended here, not copied.
