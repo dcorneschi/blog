@@ -137,7 +137,7 @@ When `FZF_CTRL_T_COMMAND` and `FZF_ALT_C_COMMAND` are not set, `CTRL-T` and `ALT
 
 ## 6. Aliases and Functions
 
-Every alias and function below has its own block, so you can copy only the ones you want into `~/.bashrc` or `~/.zshrc`. All of them work in bash and zsh, and each one works on its own, except where the text says it needs another block. The key bindings come from section 2 and the default options from section 5.
+Every alias and function below has its own block, so you can copy only the ones you want into `~/.bashrc` or `~/.zshrc`. To take all of them at once, use [All in One Block](#all-in-one-block) at the end of this section. All of them work in bash and zsh, and each one works on its own, except where the text says it needs another block. The key bindings come from section 2 and the default options from section 5.
 
 ### Overview
 
@@ -325,6 +325,91 @@ fds() { local sel c cs=(); sel=$(_fdc -m) || return; while IFS= read -r c; do [ 
 ```
 
 `fdx` and `fds` act on running containers only (`docker ps`). `fds` stops what you mark, so look at the marked rows before pressing ENTER.
+
+### All in One Block
+
+The same aliases and functions as above, in one block to paste into `~/.bashrc` or `~/.zshrc` in a single step.
+
+```bash
+# ---- fzf aliases and functions, works in bash and zsh ----
+
+# ---- aliases ----
+alias fm='fzf --multi'                                   # TAB marks rows, one per line on output
+# fp: file picker with preview (bat, batcat, or the first 50 lines)
+alias fp="fzf --preview 'if command -v bat >/dev/null; then bat --color=always --style=numbers {}; elif command -v batcat >/dev/null; then batcat --color=always --style=numbers {}; else head -n 50 {}; fi'"
+alias fgl="git log --oneline --color=always | fzf --ansi --preview 'git show --color=always {1}'"   # browse commits
+
+# ---- functions ----
+# fe [query]: open the chosen file in $EDITOR
+fe() { local f; f=$(fzf --query "$1" --select-1 --exit-0) && [ -n "$f" ] && ${EDITOR:-vim} "$f"; }
+
+# fcd [dir]: cd into a subdirectory
+fcd() { local d; d=$(command find "${1:-.}" -type d -not -path '*/.git/*' 2>/dev/null | fzf) && [ -n "$d" ] && cd "$d"; }
+
+# fgb: check out a branch (local or remote)
+fgb() {
+  local b
+  b=$(git branch --all | grep -v HEAD | sed 's#^[* ]*##; s#^remotes/[^/]*/##' | sort -u | fzf) && [ -n "$b" ] && git checkout "$b"
+}
+
+# fga: stage files picked from the modified and untracked ones (TAB for several)
+fga() {
+  local sel f files=()
+  sel=$(git ls-files --modified --others --exclude-standard | sort -u | fzf -m) || return
+  while IFS= read -r f; do [ -n "$f" ] && files+=("$f"); done <<< "$sel"
+  [ "${#files[@]}" -gt 0 ] && git add -- "${files[@]}" && git status --short
+}
+
+# fgc [message]: stage ALL changes (modified, deleted, new and untracked) and commit them, after a yes/no check
+fgc() {
+  local msg="$*" answer
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { echo "not in a git repo" >&2; return 1; }
+  [ -n "$(git status --porcelain)" ] || { echo "nothing to commit"; return 0; }
+  git status --short
+  if [ -z "$msg" ]; then printf 'Commit message: '; IFS= read -r msg; fi
+  [ -n "$msg" ] || { echo "empty message, nothing done" >&2; return 1; }
+  answer=$(printf 'yes\nno\n' | fzf --height 20% --header "Stage ALL changes above and commit \"$msg\"?")
+  [ "$answer" = yes ] && git add -A && git commit -m "$msg"
+}
+
+# fgs: pick a stash and show it (use "git stash apply <name>" to restore)
+fgs() {
+  local s
+  s=$(git stash list | fzf --preview 'git stash show -p --color=always $(echo {} | cut -d: -f1)' | cut -d: -f1) \
+    && [ -n "$s" ] && git stash show -p --color=always "$s"
+}
+
+# faws: pick an AWS CLI profile and export it for this shell
+faws() {
+  local p
+  p=$(aws configure list-profiles | fzf --header 'AWS_PROFILE') && [ -n "$p" ] && export AWS_PROFILE="$p" && echo "AWS_PROFILE=$p"
+}
+
+# fkc: switch the current kubectl context (this edits your kubeconfig for every terminal)
+fkc() { local c; c=$(kubectl config get-contexts -o name | fzf --header 'kubectl context') && [ -n "$c" ] && kubectl config use-context "$c"; }
+
+# fssh: pick a host from ~/.ssh/config and connect
+fssh() {
+  local h
+  h=$(awk 'tolower($1)=="host" { for (i=2; i<=NF; i++) if ($i !~ /[*?!]/) print $i }' ~/.ssh/config 2>/dev/null | sort -u | fzf --header 'ssh host') \
+    && [ -n "$h" ] && ssh "$h"
+}
+
+# fport: list listening TCP ports and print the chosen line (PID is column 2)
+fport() { lsof -nP -iTCP -sTCP:LISTEN 2>/dev/null | sed 1d | fzf --header 'COMMAND PID ... NAME'; }
+
+# _fdc: pick running containers and print their names (helper for fdl, fdx, fds)
+_fdc() { docker ps --format '{{.Names}}\t{{.Image}}\t{{.Status}}' | fzf "$@" | cut -f1; }
+
+# fdl: follow the logs of a container
+fdl() { local c; c=$(_fdc) && [ -n "$c" ] && docker logs -f --tail 100 "$c"; }
+
+# fdx: open a shell in a container, bash if it exists, else sh
+fdx() { local c; c=$(_fdc) && [ -n "$c" ] && docker exec -it "$c" sh -c 'command -v bash >/dev/null && exec bash || exec sh'; }
+
+# fds: stop containers (TAB for several)
+fds() { local sel c cs=(); sel=$(_fdc -m) || return; while IFS= read -r c; do [ -n "$c" ] && cs+=("$c"); done <<< "$sel"; [ "${#cs[@]}" -gt 0 ] && docker stop "${cs[@]}"; }
+```
 
 ### How the Functions Are Written
 
