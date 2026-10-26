@@ -210,6 +210,7 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fm` | alias | `fzf --multi`, multi-select |
 | `fp` | alias | File picker with a `bat` or `batcat` preview (the first 50 lines if neither exists) |
 | `fgl` | alias | Browse commits, preview the diff of the highlighted one |
+| `fhelp` | alias | List all the aliases and functions below in fzf; `ENTER` prints the chosen name |
 | `fe [query]` | function | Open a file in `$EDITOR`, jump straight to it if only one matches |
 | `fcd [dir]` | function | `cd` into a subdirectory, skipping `.git` |
 | `fgb` | function | Check out a local or remote branch, strips `remotes/origin/` |
@@ -251,6 +252,36 @@ alias fp="fzf --preview 'if command -v bat >/dev/null; then bat --color=always -
 ```bash
 alias fgl="git log --oneline --color=always | fzf --ansi --preview 'git show --color=always {1}'"   # browse commits
 ```
+
+#### fhelp: list these aliases and functions
+
+```bash
+# fhelp: list the aliases and functions of this cheatsheet, ENTER prints the chosen name
+alias fhelp='printf "%s\n" \
+  "fm               alias      fzf --multi, multi-select" \
+  "fp               alias      file picker with a bat or batcat preview" \
+  "fgl              alias      browse commits with a diff preview" \
+  "fe [query]       function   open a file in EDITOR" \
+  "fcd [dir]        function   cd into a subdirectory" \
+  "fgb              function   check out a local or remote branch" \
+  "fga              function   stage picked files" \
+  "fgc [message]    function   stage everything and commit, after a yes/no check" \
+  "fgs              function   browse stashes" \
+  "faws             function   pick an AWS profile and export AWS_PROFILE" \
+  "fkc              function   switch the kubectl context" \
+  "fssh             function   connect to a host from ~/.ssh/config" \
+  "fport            function   list listening TCP ports" \
+  "fsys [action]    function   systemd service: status, logs, restart, ..." \
+  "fjl [priority]   function   search the journal of this boot" \
+  "fenv             function   look up an environment variable" \
+  "fman [query]     function   open a man page" \
+  "fdl              function   follow the logs of a container" \
+  "fdx              function   open a shell in a container" \
+  "fds              function   stop containers" \
+  | fzf --no-sort --header "fzf aliases and functions" | awk "{print \$1}"'
+```
+
+The list is written into the alias, because the shell keeps neither the comments nor which functions came from here (`declare -F` also shows fzf's own internal functions and anything else you defined). When you add or remove a function, change its line here too.
 
 ### Functions
 
@@ -472,6 +503,29 @@ alias fm='fzf --multi'                                   # TAB marks rows, one p
 # fp: file picker with preview (bat, batcat, or the first 50 lines)
 alias fp="fzf --preview 'if command -v bat >/dev/null; then bat --color=always --style=numbers {}; elif command -v batcat >/dev/null; then batcat --color=always --style=numbers {}; else head -n 50 {}; fi'"
 alias fgl="git log --oneline --color=always | fzf --ansi --preview 'git show --color=always {1}'"   # browse commits
+# fhelp: list the aliases and functions of this cheatsheet, ENTER prints the chosen name
+alias fhelp='printf "%s\n" \
+  "fm               alias      fzf --multi, multi-select" \
+  "fp               alias      file picker with a bat or batcat preview" \
+  "fgl              alias      browse commits with a diff preview" \
+  "fe [query]       function   open a file in EDITOR" \
+  "fcd [dir]        function   cd into a subdirectory" \
+  "fgb              function   check out a local or remote branch" \
+  "fga              function   stage picked files" \
+  "fgc [message]    function   stage everything and commit, after a yes/no check" \
+  "fgs              function   browse stashes" \
+  "faws             function   pick an AWS profile and export AWS_PROFILE" \
+  "fkc              function   switch the kubectl context" \
+  "fssh             function   connect to a host from ~/.ssh/config" \
+  "fport            function   list listening TCP ports" \
+  "fsys [action]    function   systemd service: status, logs, restart, ..." \
+  "fjl [priority]   function   search the journal of this boot" \
+  "fenv             function   look up an environment variable" \
+  "fman [query]     function   open a man page" \
+  "fdl              function   follow the logs of a container" \
+  "fdx              function   open a shell in a container" \
+  "fds              function   stop containers" \
+  | fzf --no-sort --header "fzf aliases and functions" | awk "{print \$1}"'
 
 # ---- functions ----
 # fe [query]: open the chosen file in $EDITOR
