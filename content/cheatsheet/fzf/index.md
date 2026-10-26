@@ -100,16 +100,6 @@ On macOS, `ALT-C` types a special character unless the terminal treats Option as
 | `!test` | Does not contain `test` |
 | `^src \| ^app` | Starts with `src` or `app` (OR, spaces around the bar) |
 
-Fuzzy means the letters must appear in order but not next to each other: `scm` matches `src/core.md`. Use the exact form (`'`) when fuzzy matches are too loose.
-
-```bash
-# Start with a query already typed
-find . -type f | fzf --query "'.log$ !archive"
-fzf -q "query"
-```
-
-With `fzf --filter` on a list of nine file names: `core md` found `src/core.md`, `'wild` found only `wild/wildcard.txt`, `^src` found `src/core.md` and `src/util.py`, `.md$` found `README.md` and `src/core.md`, `!test` removed the one test file, `^src | ^app` found the `src` and `app` entries, and `'.log$ !archive` found `notes.log` and `logs/app.log` but not `archive/old.log`.
-
 ## 4. Options
 
 | Option | Effect |
