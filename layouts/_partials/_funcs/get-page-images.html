@@ -1,0 +1,58 @@
+{{- /* Copy of Hugo 0.167.0's embedded _partials/_funcs/get-page-images.html (used by the
+     opengraph and twitter_cards templates), with one local change marked below. */ -}}
+{{- $imgs := slice }}
+{{- $imgParams := .Params.images }}
+{{- $resources := .Resources.ByType "image" -}}
+{{/* Find featured image resources if the images parameter is empty.
+     Local change: og.png (cover.svg rendered at full size by scripts/og/og.sh) comes first, and
+     SVG covers are skipped, because X, LinkedIn and Facebook ignore SVG in og:image. */}}
+{{- if not $imgParams }}
+	{{- $featured := $resources.GetMatch "og.png" -}}
+	{{- if not $featured }}{{ $featured = $resources.GetMatch "*feature*" }}{{ end -}}
+	{{- if not $featured }}{{ $featured = $resources.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
+	{{- if and $featured (eq $featured.MediaType.SubType "svg") }}{{ $featured = false }}{{ end -}}
+	{{- with $featured }}
+		{{- $imgs = $imgs | append (dict
+			"Image" .
+			"RelPermalink" .RelPermalink
+			"Permalink" .Permalink
+		)
+		}}
+	{{- end }}
+{{- end }}
+{{/* Use the first one of site images as the fallback. */}}
+{{- if and (not $imgParams) (not $imgs) }}
+	{{- with site.Params.images }}
+		{{- $imgParams = first 1 . }}
+	{{- end }}
+{{- end }}
+{{/* Parse page's images parameter. */}}
+{{- range $imgParams }}
+	{{- $img := . }}
+	{{- $url := urls.Parse $img }}
+	{{- if eq $url.Scheme "" }}
+		{{/* Internal image: check page resources first, then global resources. */}}
+		{{- with or ($resources.GetMatch $img) (resources.GetMatch $img) -}}
+			{{- $imgs = $imgs | append (dict
+				"Image" .
+				"RelPermalink" .RelPermalink
+				"Permalink" .Permalink
+			)
+			}}
+		{{- else }}
+			{{- $imgs = $imgs | append (dict
+				"RelPermalink" (relURL $img)
+				"Permalink" (absURL $img)
+			)
+			}}
+		{{- end }}
+	{{- else }}
+		{{/* External image */}}
+		{{- $imgs = $imgs | append (dict
+			"RelPermalink" $img
+			"Permalink" $img
+		)
+		}}
+	{{- end }}
+{{- end }}
+{{- return $imgs }}
