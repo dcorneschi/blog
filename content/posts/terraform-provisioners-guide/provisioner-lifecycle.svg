@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 446" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">When a provisioner runs</title>
+  <desc id="d">Create-time provisioners run after the resource is created. If one fails with on_failure = fail, the apply errors and the resource is tainted, so the next apply replaces it and runs it again; with on_failure = continue the error is ignored. Editing a provisioner runs nothing; triggers, triggers_replace or apply -replace re-run it. Destroy-time provisioners run on terraform destroy but not when the resource block is deleted, and may only reference self, count.index and each.key.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="446" fill="#ffffff"/>
+  <text class="h" x="20" y="28">When a provisioner runs</text>
+  <text class="sub" x="20" y="48">What happened in the test runs (Terraform 1.17.0)</text>
+  <text class="lb" x="20" y="80">CREATE</text>
+  <rect class="r" x="20" y="92" width="150" height="44" rx="6"/>
+  <text class="tb" x="95.0" y="119.0" text-anchor="middle">resource created</text>
+  <path class="lne" d="M170,114 L196,114"/>
+  <rect class="rw" x="198" y="92" width="170" height="44" rx="6"/>
+  <text class="tb" x="283.0" y="111" text-anchor="middle">create-time</text>
+  <text class="d" x="283.0" y="127" text-anchor="middle">provisioners run</text>
+  <path class="lne" d="M368,106 L430,90 L452,90"/>
+  <path class="lnx" d="M368,122 L430,140 L452,140"/>
+  <text class="ms" x="410" y="86" text-anchor="middle">ok</text>
+  <text class="ms" x="410" y="154" text-anchor="middle">fails</text>
+  <rect class="g" x="454" y="70" width="160" height="40" rx="6"/>
+  <text class="tb" x="534.0" y="95.0" text-anchor="middle">resource kept</text>
+  <rect class="x" x="454" y="120" width="166" height="44" rx="6"/>
+  <text class="tb" x="537.0" y="139" text-anchor="middle">on_failure = fail</text>
+  <text class="d" x="537.0" y="155" text-anchor="middle">apply errors, tainted</text>
+  <path class="lne" d="M620,142 L646,142"/>
+  <rect class="w" x="648" y="120" width="172" height="44" rx="6"/>
+  <text class="tb" x="734.0" y="139" text-anchor="middle">next apply</text>
+  <text class="d" x="734.0" y="155" text-anchor="middle">replaces it, runs again</text>
+  <rect class="n" x="454" y="172" width="366" height="30" rx="6"/>
+  <text class="c" x="637.0" y="192.0" text-anchor="middle">on_failure = continue: error ignored, resource kept, next plan clean</text>
+  <text class="lb" x="20" y="236">RE-RUN</text>
+  <rect class="n" x="20" y="248" width="250" height="44" rx="6"/>
+  <text class="tb" x="145.0" y="267" text-anchor="middle">edit the provisioner</text>
+  <text class="d" x="145.0" y="283" text-anchor="middle">plan: no changes, nothing runs</text>
+  <rect class="g" x="290" y="248" width="250" height="44" rx="6"/>
+  <text class="tb" x="415.0" y="267" text-anchor="middle">triggers / triggers_replace</text>
+  <text class="d" x="415.0" y="283" text-anchor="middle">value changed: replace and run</text>
+  <rect class="g" x="560" y="248" width="260" height="44" rx="6"/>
+  <text class="tb" x="690.0" y="267" text-anchor="middle">terraform apply -replace=ADDR</text>
+  <text class="d" x="690.0" y="283" text-anchor="middle">replace and run now</text>
+  <text class="lb" x="20" y="326">DESTROY</text>
+  <rect class="rw" x="20" y="338" width="250" height="44" rx="6"/>
+  <text class="tb" x="145.0" y="357" text-anchor="middle">terraform destroy</text>
+  <text class="d" x="145.0" y="373" text-anchor="middle">when = destroy runs first</text>
+  <rect class="x" x="290" y="338" width="250" height="44" rx="6"/>
+  <text class="tb" x="415.0" y="357" text-anchor="middle">resource block deleted</text>
+  <text class="d" x="415.0" y="373" text-anchor="middle">destroy-time provisioner skipped</text>
+  <rect class="n" x="560" y="338" width="260" height="44" rx="6"/>
+  <text class="tb" x="690.0" y="357" text-anchor="middle">only self, count.index, each.key</text>
+  <text class="d" x="690.0" y="373" text-anchor="middle">var, local, other resources: invalid</text>
+  <rect class="n" x="20" y="398" width="800" height="32" rx="4"/>
+  <text class="c" x="32" y="418">Provisioners only run when their resource is created or destroyed. To run something on update, use an action (Terraform 1.14+).</text>
+</svg>

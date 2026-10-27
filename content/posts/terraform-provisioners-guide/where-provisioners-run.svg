@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 394" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where provisioners run</title>
+  <desc id="d">local-exec runs on the machine that runs terraform apply and needs no connection. remote-exec and file run on the target over SSH (port 22) or WinRM (port 5985), optionally through a bastion host, as the connection user; file cannot use sudo. The connection is retried until its timeout, 5 minutes by default.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="394" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where provisioners run</text>
+  <text class="sub" x="20" y="48">Terraform 1.17.0</text>
+  <rect class="sd" x="20" y="66" width="250" height="250" rx="8"/>
+  <text class="lb" x="34" y="86">YOUR MACHINE OR CI RUNNER</text>
+  <rect class="rw" x="40" y="100" width="210" height="44" rx="6"/>
+  <text class="tb" x="145.0" y="119" text-anchor="middle">terraform apply</text>
+  <text class="d" x="145.0" y="135" text-anchor="middle">reads the provisioners</text>
+  <path class="lne" d="M145,144 L145,168"/>
+  <rect class="r" x="40" y="170" width="210" height="44" rx="6"/>
+  <text class="tb" x="145.0" y="189" text-anchor="middle">local-exec</text>
+  <text class="d" x="145.0" y="205" text-anchor="middle">runs here, /bin/sh -c</text>
+  <text class="d" x="40" y="236">no connection needed</text>
+  <text class="d" x="40" y="252">sees local files and tools</text>
+  <text class="d" x="40" y="268">(aws, kubectl, ansible-playbook)</text>
+  <rect class="sd" x="600" y="66" width="220" height="250" rx="8"/>
+  <text class="lb" x="614" y="86">TARGET MACHINE</text>
+  <rect class="g" x="620" y="100" width="180" height="44" rx="6"/>
+  <text class="tb" x="710.0" y="119" text-anchor="middle">remote-exec</text>
+  <text class="d" x="710.0" y="135" text-anchor="middle">inline, script, scripts</text>
+  <rect class="g" x="620" y="160" width="180" height="44" rx="6"/>
+  <text class="tb" x="710.0" y="179" text-anchor="middle">file</text>
+  <text class="d" x="710.0" y="195" text-anchor="middle">source or content</text>
+  <text class="d" x="620" y="230">runs as the connection user</text>
+  <text class="d" x="620" y="246">file: no sudo, so write to /tmp</text>
+  <text class="d" x="620" y="262">and move with sudo in remote-exec</text>
+  <rect class="n" x="340" y="210" width="170" height="44" rx="6"/>
+  <text class="tb" x="425.0" y="229" text-anchor="middle">bastion (optional)</text>
+  <text class="d" x="425.0" y="245" text-anchor="middle">bastion_host</text>
+  <path class="lne" d="M250,122 L600,122"/>
+  <text class="ms" x="425" y="114" text-anchor="middle">SSH (22) or WinRM (5985)</text>
+  <path class="dash" d="M250,136 L300,136 L300,232 L338,232"/>
+  <path class="lne" d="M512,232 L560,232 L560,152 L598,152"/>
+  <text class="ms" x="425" y="280" text-anchor="middle">host has no public port:</text>
+  <text class="ms" x="425" y="294" text-anchor="middle">connect through the bastion</text>
+  <rect class="n" x="20" y="330" width="800" height="48" rx="4"/>
+  <text class="c" x="32" y="349">The connection is retried until timeout (default 5m): a host that came up 25 s after apply was reached on a later attempt.</text>
+  <text class="c" x="32" y="366">Defaults: user root (SSH) or Administrator (WinRM); bastion_user, bastion_port and bastion_private_key copy the target's values.</text>
+</svg>

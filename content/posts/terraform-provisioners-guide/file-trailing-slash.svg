@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 326" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">file provisioner: directory uploads</title>
+  <desc id="d">Uploading a local scripts directory with five files. With a trailing slash and an existing destination the files land in the destination; with a trailing slash and a missing destination they are all written to one file and four are lost without an error. Without the slash, an existing destination gets a scripts subdirectory and a missing one becomes a copy of the directory.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="326" fill="#ffffff"/>
+  <text class="h" x="20" y="28">file provisioner: directory uploads</text>
+  <text class="sub" x="20" y="48">Five files in scripts/, uploaded over SSH (Terraform 1.17.0)</text>
+  <text class="tb" x="340" y="84" text-anchor="middle">destination exists</text>
+  <text class="tb" x="640" y="84" text-anchor="middle">destination missing</text>
+  <rect class="s" x="20" y="96" width="170" height="64" rx="6"/>
+  <text class="mb" x="105" y="126" text-anchor="middle">source = "scripts/"</text>
+  <text class="d" x="105" y="144" text-anchor="middle">trailing slash</text>
+  <rect class="g" x="210" y="96" width="280" height="64" rx="6"/>
+  <text class="tb" x="350" y="124" text-anchor="middle">the 5 files in destination/</text>
+  <text class="ms" x="350" y="143" text-anchor="middle">/tmp/dest/install-deps.sh, ...</text>
+  <rect class="x" x="510" y="96" width="280" height="64" rx="6"/>
+  <text class="tb" x="650" y="124" text-anchor="middle">ONE file named destination</text>
+  <text class="ms" x="650" y="143" text-anchor="middle">4 files lost, no error</text>
+  <rect class="s" x="20" y="174" width="170" height="64" rx="6"/>
+  <text class="mb" x="105" y="204" text-anchor="middle">source = "scripts"</text>
+  <text class="d" x="105" y="222" text-anchor="middle">no trailing slash</text>
+  <rect class="w" x="210" y="174" width="280" height="64" rx="6"/>
+  <text class="tb" x="350" y="202" text-anchor="middle">destination/scripts/</text>
+  <text class="ms" x="350" y="221" text-anchor="middle">/tmp/dest/scripts/install-deps.sh, ...</text>
+  <rect class="g" x="510" y="174" width="280" height="64" rx="6"/>
+  <text class="tb" x="650" y="202" text-anchor="middle">destination/ gets the 5 files</text>
+  <text class="ms" x="650" y="221" text-anchor="middle">/tmp/dest/install-deps.sh, ...</text>
+  <rect class="n" x="20" y="262" width="800" height="48" rx="4"/>
+  <text class="c" x="32" y="281">Missing destination with a trailing slash: every file is written to the same path, the last one wins (here install-deps.sh).</text>
+  <text class="c" x="32" y="298">Create the directory first: provisioner "remote-exec" { inline = ["mkdir -p /tmp/scripts"] } before the upload.</text>
+</svg>
