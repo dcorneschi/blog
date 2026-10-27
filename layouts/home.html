@@ -3,7 +3,7 @@
 <div class="container mt-3 mb-3">
     {{- /* Slim banner: first page only, hidden on phones (too small to read) */}}
     {{- if not .Paginator.HasPrev }}
-    <img src="{{ "images/home-banner.svg" | relURL }}" alt="Hands-on DevOps notes and cheatsheets: Terraform, Kubernetes, Docker, Ansible and Linux, with every command run for real and its actual output" class="d-none d-md-block w-100 h-auto mb-3" width="2400" height="300">
+    <img src="{{ "images/home-banner.svg" | relURL }}" alt="Hands-on DevOps notes and cheatsheets: Terraform, Kubernetes, Docker, Ansible and Linux, with every command run for real and its actual output. Disclaimer: personal notes, not official guidance. Test everything before using it in production." class="d-none d-md-block w-100 h-auto mb-3" width="2400" height="340">
     {{- end }}
     <h1 class="visually-hidden">{{ .Site.Params.homeTitle | default .Site.Title }}</h1>
     {{ $paginator := .Paginate ( where .Site.RegularPages.ByPublishDate.Reverse "Type" "!=" "page") }}
