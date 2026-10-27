@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 404" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">When handlers run</title>
+  <desc id="d">A play runs pre_tasks, roles, tasks and post_tasks in that order, and each section ends by running the handlers notified in it. In a test play, handler h1 was notified by a pre_task and by tasks a, b and c, and ran three times: after pre_tasks, at meta: flush_handlers, and at the end of tasks.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="404" fill="#ffffff"/>
+  <text class="h" x="20" y="28">When handlers run</text>
+  <text class="sub" x="20" y="48">ansible-core 2.21.4</text>
+  <text class="lb" x="20" y="80">ONE PLAY, IN THIS ORDER</text>
+  <rect class="r" x="20" y="92" width="185" height="46" rx="6"/>
+  <text class="mb" x="112" y="120" text-anchor="middle">pre_tasks</text>
+  <path class="lne" d="M112,138 L112,158"/>
+  <rect class="w" x="42" y="160" width="141" height="30" rx="15"/>
+  <text class="c" x="112" y="179" text-anchor="middle">handlers run</text>
+  <path class="lne" d="M183,175 L225,175 L225,115 L227,115"/>
+  <rect class="rw" x="225" y="92" width="185" height="46" rx="6"/>
+  <text class="mb" x="317" y="120" text-anchor="middle">roles</text>
+  <path class="lne" d="M317,138 L317,158"/>
+  <rect class="w" x="247" y="160" width="141" height="30" rx="15"/>
+  <text class="c" x="317" y="179" text-anchor="middle">handlers run</text>
+  <path class="lne" d="M388,175 L430,175 L430,115 L432,115"/>
+  <rect class="r" x="430" y="92" width="185" height="46" rx="6"/>
+  <text class="mb" x="522" y="120" text-anchor="middle">tasks</text>
+  <path class="lne" d="M522,138 L522,158"/>
+  <rect class="w" x="452" y="160" width="141" height="30" rx="15"/>
+  <text class="c" x="522" y="179" text-anchor="middle">handlers run</text>
+  <path class="lne" d="M593,175 L635,175 L635,115 L637,115"/>
+  <rect class="r" x="635" y="92" width="185" height="46" rx="6"/>
+  <text class="mb" x="727" y="120" text-anchor="middle">post_tasks</text>
+  <path class="lne" d="M727,138 L727,158"/>
+  <rect class="w" x="657" y="160" width="141" height="30" rx="15"/>
+  <text class="c" x="727" y="179" text-anchor="middle">handlers run</text>
+  <text class="d" x="20" y="212">Each section ends by running the handlers notified in it (once each, even if notified several times). meta: flush_handlers runs them earlier.</text>
+  <text class="lb" x="20" y="250">MEASURED: WHAT RAN, IN ORDER</text>
+  <rect class="n" x="20" y="262" width="81" height="44" rx="6"/>
+  <text class="m" x="60.5" y="282" text-anchor="middle">pre change</text>
+  <text class="d" x="60.5" y="297" text-anchor="middle">notify h1</text>
+  <path class="lne" d="M101,284 L108,284"/>
+  <rect class="w" x="109" y="262" width="81" height="44" rx="6"/>
+  <text class="mb" x="149.5" y="282" text-anchor="middle">h1</text>
+  <text class="d" x="149.5" y="297" text-anchor="middle">handler</text>
+  <path class="lne" d="M190,284 L197,284"/>
+  <rect class="n" x="198" y="262" width="81" height="44" rx="6"/>
+  <text class="m" x="238.5" y="282" text-anchor="middle">task a</text>
+  <text class="d" x="238.5" y="297" text-anchor="middle">notify h1</text>
+  <path class="lne" d="M279,284 L286,284"/>
+  <rect class="n" x="287" y="262" width="81" height="44" rx="6"/>
+  <text class="m" x="327.5" y="282" text-anchor="middle">task b</text>
+  <text class="d" x="327.5" y="297" text-anchor="middle">notify h1</text>
+  <path class="lne" d="M368,284 L375,284"/>
+  <rect class="rw" x="376" y="262" width="81" height="44" rx="6"/>
+  <text class="m" x="416.5" y="282" text-anchor="middle">flush</text>
+  <text class="d" x="416.5" y="297" text-anchor="middle">handlers</text>
+  <path class="lne" d="M457,284 L464,284"/>
+  <rect class="w" x="465" y="262" width="81" height="44" rx="6"/>
+  <text class="mb" x="505.5" y="282" text-anchor="middle">h1</text>
+  <text class="d" x="505.5" y="297" text-anchor="middle">handler</text>
+  <path class="lne" d="M546,284 L553,284"/>
+  <rect class="n" x="554" y="262" width="81" height="44" rx="6"/>
+  <text class="m" x="594.5" y="282" text-anchor="middle">task c</text>
+  <text class="d" x="594.5" y="297" text-anchor="middle">notify h1</text>
+  <path class="lne" d="M635,284 L642,284"/>
+  <rect class="n" x="643" y="262" width="81" height="44" rx="6"/>
+  <text class="m" x="683.5" y="282" text-anchor="middle">task d</text>
+  <path class="lne" d="M724,284 L731,284"/>
+  <rect class="w" x="732" y="262" width="81" height="44" rx="6"/>
+  <text class="mb" x="772.5" y="282" text-anchor="middle">h1</text>
+  <text class="d" x="772.5" y="297" text-anchor="middle">handler</text>
+  <path class="dash" d="M20,314 L20,320 L190,320 L190,314"/>
+  <text class="ms" x="105.0" y="334" text-anchor="middle">pre_tasks</text>
+  <path class="dash" d="M198,314 L198,320 L813,320 L813,314"/>
+  <text class="ms" x="505.5" y="334" text-anchor="middle">tasks</text>
+  <rect class="n" x="20" y="342" width="800" height="48" rx="4"/>
+  <text class="c" x="32" y="361">Handler h1 was notified four times and ran three times: after pre_tasks, at meta: flush_handlers, and at the end of tasks.</text>
+  <text class="c" x="32" y="378">task b's notification was merged with task a's: notifying a handler that is already queued does not queue it again.</text>
+</svg>

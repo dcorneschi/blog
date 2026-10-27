@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 456" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Host patterns</title>
+  <desc id="d">Inventory: production contains webservers (web01, web02, web03), databases (db01) and loadbalancers (lb01). webservers:databases selects web01 to web03 and db01; production:&amp;webservers selects web01 to web03; all:!web03 selects all but web03; ~web0[12] and webservers[0:1] select web01 and web02; webservers:&amp;databases selects no host.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="456" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Host patterns</text>
+  <text class="sub" x="20" y="48">Real --list-hosts results, ansible-core 2.21.4</text>
+  <text class="lb" x="20" y="80">THE INVENTORY</text>
+  <rect class="sd" x="20" y="92" width="800" height="82" rx="6"/>
+  <text class="mb" x="32" y="108">production</text>
+  <rect class="r" x="40" y="116" width="380" height="48" rx="6"/>
+  <text class="ms" x="50" y="129">webservers</text>
+  <rect class="s" x="95.0" y="134" width="80" height="24" rx="12"/>
+  <text class="m" x="135.0" y="150" text-anchor="middle">web01</text>
+  <rect class="s" x="190.0" y="134" width="80" height="24" rx="12"/>
+  <text class="m" x="230.0" y="150" text-anchor="middle">web02</text>
+  <rect class="s" x="285.0" y="134" width="80" height="24" rx="12"/>
+  <text class="m" x="325.0" y="150" text-anchor="middle">web03</text>
+  <rect class="r" x="440" y="116" width="170" height="48" rx="6"/>
+  <text class="ms" x="450" y="129">databases</text>
+  <rect class="s" x="485.0" y="134" width="80" height="24" rx="12"/>
+  <text class="m" x="525.0" y="150" text-anchor="middle">db01</text>
+  <rect class="r" x="630" y="116" width="170" height="48" rx="6"/>
+  <text class="ms" x="640" y="129">loadbalancers</text>
+  <rect class="s" x="675.0" y="134" width="80" height="24" rx="12"/>
+  <text class="m" x="715.0" y="150" text-anchor="middle">lb01</text>
+  <text class="lb" x="20" y="206">WHAT EACH PATTERN SELECTED (ansible '&lt;pattern&gt;' --list-hosts)</text>
+  <rect class="n" x="20" y="218" width="260" height="82" rx="6"/>
+  <text class="mb" x="32" y="238">webservers:databases</text>
+  <text class="d" x="268" y="238" text-anchor="end">union</text>
+  <rect class="g" x="25" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="48" y="273" text-anchor="middle">web01</text>
+  <rect class="g" x="76" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="99" y="273" text-anchor="middle">web02</text>
+  <rect class="g" x="127" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="150" y="273" text-anchor="middle">web03</text>
+  <rect class="g" x="178" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="201" y="273" text-anchor="middle">db01</text>
+  <rect class="s" x="229" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="252" y="273" text-anchor="middle">lb01</text>
+  <rect class="n" x="290" y="218" width="260" height="82" rx="6"/>
+  <text class="mb" x="302" y="238">production:&amp;webservers</text>
+  <text class="d" x="538" y="238" text-anchor="end">intersection</text>
+  <rect class="g" x="295" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="318" y="273" text-anchor="middle">web01</text>
+  <rect class="g" x="346" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="369" y="273" text-anchor="middle">web02</text>
+  <rect class="g" x="397" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="420" y="273" text-anchor="middle">web03</text>
+  <rect class="s" x="448" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="471" y="273" text-anchor="middle">db01</text>
+  <rect class="s" x="499" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="522" y="273" text-anchor="middle">lb01</text>
+  <rect class="n" x="560" y="218" width="260" height="82" rx="6"/>
+  <text class="mb" x="572" y="238">all:!web03</text>
+  <text class="d" x="808" y="238" text-anchor="end">exclusion</text>
+  <rect class="g" x="565" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="588" y="273" text-anchor="middle">web01</text>
+  <rect class="g" x="616" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="639" y="273" text-anchor="middle">web02</text>
+  <rect class="s" x="667" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="690" y="273" text-anchor="middle">web03</text>
+  <rect class="g" x="718" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="741" y="273" text-anchor="middle">db01</text>
+  <rect class="g" x="769" y="254" width="46" height="30" rx="15"/>
+  <text class="ms" x="792" y="273" text-anchor="middle">lb01</text>
+  <rect class="n" x="20" y="310" width="260" height="82" rx="6"/>
+  <text class="mb" x="32" y="330">~web0[12]</text>
+  <text class="d" x="268" y="330" text-anchor="end">regex</text>
+  <rect class="g" x="25" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="48" y="365" text-anchor="middle">web01</text>
+  <rect class="g" x="76" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="99" y="365" text-anchor="middle">web02</text>
+  <rect class="s" x="127" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="150" y="365" text-anchor="middle">web03</text>
+  <rect class="s" x="178" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="201" y="365" text-anchor="middle">db01</text>
+  <rect class="s" x="229" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="252" y="365" text-anchor="middle">lb01</text>
+  <rect class="n" x="290" y="310" width="260" height="82" rx="6"/>
+  <text class="mb" x="302" y="330">webservers[0:1]</text>
+  <text class="d" x="538" y="330" text-anchor="end">slice</text>
+  <rect class="g" x="295" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="318" y="365" text-anchor="middle">web01</text>
+  <rect class="g" x="346" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="369" y="365" text-anchor="middle">web02</text>
+  <rect class="s" x="397" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="420" y="365" text-anchor="middle">web03</text>
+  <rect class="s" x="448" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="471" y="365" text-anchor="middle">db01</text>
+  <rect class="s" x="499" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="522" y="365" text-anchor="middle">lb01</text>
+  <rect class="n" x="560" y="310" width="260" height="82" rx="6"/>
+  <text class="mb" x="572" y="330">webservers:&amp;databases</text>
+  <text class="d" x="808" y="330" text-anchor="end">empty</text>
+  <rect class="s" x="565" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="588" y="365" text-anchor="middle">web01</text>
+  <rect class="s" x="616" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="639" y="365" text-anchor="middle">web02</text>
+  <rect class="s" x="667" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="690" y="365" text-anchor="middle">web03</text>
+  <rect class="s" x="718" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="741" y="365" text-anchor="middle">db01</text>
+  <rect class="s" x="769" y="346" width="46" height="30" rx="15"/>
+  <text class="ms" x="792" y="365" text-anchor="middle">lb01</text>
+  <rect class="n" x="20" y="410" width="800" height="30" rx="4"/>
+  <text class="c" x="32" y="429">Slices include both ends: [0:1] is two hosts. Quote patterns in the shell (! and &amp; are shell characters). A comma works like a colon.</text>
+</svg>

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 568" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Variable precedence</title>
+  <desc id="d">The 22 levels of Ansible variable precedence from lowest to highest: command-line values, role defaults, inventory and playbook group_vars and host_vars, host facts, play vars, vars_prompt, vars_files, role vars, block vars, task vars, include_vars, registered vars and set_fact, role and include params, and extra vars, which always win.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="568" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Variable precedence</text>
+  <text class="sub" x="20" y="48">From the Ansible documentation, ansible-core 2.21</text>
+  <text class="lb" x="20" y="70">LOWEST AT THE BOTTOM, HIGHEST AT THE TOP</text>
+  <rect class="n" x="470" y="475" width="350" height="16" rx="4"/>
+  <text class="d" x="482" y="487.0">not variables</text>
+  <rect class="g" x="470" y="456" width="350" height="16" rx="4"/>
+  <text class="d" x="482" y="468.0">role defaults: easiest to override</text>
+  <rect class="r" x="470" y="304" width="350" height="149" rx="4"/>
+  <text class="d" x="482" y="382.5">inventory and playbook group/host vars</text>
+  <rect class="n" x="470" y="285" width="350" height="16" rx="4"/>
+  <text class="d" x="482" y="297.0">facts</text>
+  <rect class="rw" x="470" y="228" width="350" height="54" rx="4"/>
+  <text class="d" x="482" y="259.0">play</text>
+  <rect class="w" x="470" y="152" width="350" height="73" rx="4"/>
+  <text class="d" x="482" y="192.5">role, block, task, include_vars</text>
+  <rect class="w" x="470" y="95" width="350" height="54" rx="4"/>
+  <text class="d" x="482" y="126.0">set at run time</text>
+  <rect class="x" x="470" y="76" width="350" height="16" rx="4"/>
+  <text class="d" x="482" y="88.0">always win</text>
+  <rect class="n" x="20" y="475" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="487" text-anchor="middle">1</text>
+  <text class="c" x="52" y="487">Command-line values (-u, not variables)</text>
+  <rect class="g" x="20" y="456" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="468" text-anchor="middle">2</text>
+  <text class="c" x="52" y="468">Role defaults (defaults/main.yml)</text>
+  <rect class="r" x="20" y="437" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="449" text-anchor="middle">3</text>
+  <text class="c" x="52" y="449">Inventory file or script group vars</text>
+  <rect class="r" x="20" y="418" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="430" text-anchor="middle">4</text>
+  <text class="c" x="52" y="430">Inventory group_vars/all</text>
+  <rect class="r" x="20" y="399" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="411" text-anchor="middle">5</text>
+  <text class="c" x="52" y="411">Playbook group_vars/all</text>
+  <rect class="r" x="20" y="380" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="392" text-anchor="middle">6</text>
+  <text class="c" x="52" y="392">Inventory group_vars/*</text>
+  <rect class="r" x="20" y="361" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="373" text-anchor="middle">7</text>
+  <text class="c" x="52" y="373">Playbook group_vars/*</text>
+  <rect class="r" x="20" y="342" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="354" text-anchor="middle">8</text>
+  <text class="c" x="52" y="354">Inventory file or script host vars</text>
+  <rect class="r" x="20" y="323" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="335" text-anchor="middle">9</text>
+  <text class="c" x="52" y="335">Inventory host_vars/*</text>
+  <rect class="r" x="20" y="304" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="316" text-anchor="middle">10</text>
+  <text class="c" x="52" y="316">Playbook host_vars/*</text>
+  <rect class="n" x="20" y="285" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="297" text-anchor="middle">11</text>
+  <text class="c" x="52" y="297">Host facts, cached set_fact</text>
+  <rect class="rw" x="20" y="266" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="278" text-anchor="middle">12</text>
+  <text class="c" x="52" y="278">Play vars</text>
+  <rect class="rw" x="20" y="247" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="259" text-anchor="middle">13</text>
+  <text class="c" x="52" y="259">Play vars_prompt</text>
+  <rect class="rw" x="20" y="228" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="240" text-anchor="middle">14</text>
+  <text class="c" x="52" y="240">Play vars_files</text>
+  <rect class="w" x="20" y="209" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="221" text-anchor="middle">15</text>
+  <text class="c" x="52" y="221">Role vars (vars/main.yml)</text>
+  <rect class="w" x="20" y="190" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="202" text-anchor="middle">16</text>
+  <text class="c" x="52" y="202">Block vars</text>
+  <rect class="w" x="20" y="171" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="183" text-anchor="middle">17</text>
+  <text class="c" x="52" y="183">Task vars</text>
+  <rect class="w" x="20" y="152" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="164" text-anchor="middle">18</text>
+  <text class="c" x="52" y="164">include_vars</text>
+  <rect class="w" x="20" y="133" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="145" text-anchor="middle">19</text>
+  <text class="c" x="52" y="145">Registered vars, set_fact</text>
+  <rect class="w" x="20" y="114" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="126" text-anchor="middle">20</text>
+  <text class="c" x="52" y="126">Role and include_role params</text>
+  <rect class="w" x="20" y="95" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="107" text-anchor="middle">21</text>
+  <text class="c" x="52" y="107">Include params</text>
+  <rect class="x" x="20" y="76" width="430" height="16" rx="3"/>
+  <text class="ms" x="34" y="88" text-anchor="middle">22</text>
+  <text class="tb" x="52" y="88">Extra vars (-e)</text>
+  <path class="lne" d="M830,489 L830,80"/>
+  <rect class="n" x="20" y="504" width="800" height="48" rx="4"/>
+  <text class="c" x="32" y="523">A higher level replaces the value from a lower one. Role defaults are meant to be overridden; extra vars (-e) override everything.</text>
+  <text class="c" x="32" y="540">Within inventory, host vars beat group vars, and a child group beats its parent group.</text>
+</svg>
