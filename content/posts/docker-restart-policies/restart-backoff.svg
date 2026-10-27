@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 342" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Crash loops and the restart delay</title>
+  <desc id="d">A container under always that exits at once was started 7 times in 20 seconds; the gaps between starts were 0, 0, 1, 2, 3 and 7 seconds. A container under on-failure:3 that exits with code 3 had RestartCount 1 at once and 3 after one second, then stayed exited.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="342" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Crash loops and the restart delay</text>
+  <text class="sub" x="20" y="48">Start times from docker events on Docker 29.9.2</text>
+  <text class="lb" x="20" y="82">ALWAYS, EXITS AT ONCE</text>
+  <line class="tick" x1="200" y1="92" x2="200" y2="250"/>
+  <text class="ax" x="200" y="264">0 s</text>
+  <line class="tick" x1="260" y1="92" x2="260" y2="250"/>
+  <text class="ax" x="260" y="264">2 s</text>
+  <line class="tick" x1="320" y1="92" x2="320" y2="250"/>
+  <text class="ax" x="320" y="264">4 s</text>
+  <line class="tick" x1="380" y1="92" x2="380" y2="250"/>
+  <text class="ax" x="380" y="264">6 s</text>
+  <line class="tick" x1="440" y1="92" x2="440" y2="250"/>
+  <text class="ax" x="440" y="264">8 s</text>
+  <line class="tick" x1="500" y1="92" x2="500" y2="250"/>
+  <text class="ax" x="500" y="264">10 s</text>
+  <line class="tick" x1="560" y1="92" x2="560" y2="250"/>
+  <text class="ax" x="560" y="264">12 s</text>
+  <line class="tick" x1="620" y1="92" x2="620" y2="250"/>
+  <text class="ax" x="620" y="264">14 s</text>
+  <line class="tick" x1="680" y1="92" x2="680" y2="250"/>
+  <text class="ax" x="680" y="264">16 s</text>
+  <line class="tick" x1="740" y1="92" x2="740" y2="250"/>
+  <text class="ax" x="740" y="264">18 s</text>
+  <line class="tick" x1="800" y1="92" x2="800" y2="250"/>
+  <text class="ax" x="800" y="264">20 s</text>
+  <text class="mb" x="20" y="120">7 starts in 20 s</text>
+  <text class="d" x="20" y="136">gaps between starts</text>
+  <circle cx="200" cy="120" r="7" class="r" stroke-width="1.5"/>
+  <circle cx="203" cy="120" r="7" class="r" stroke-width="1.5"/>
+  <circle cx="206" cy="120" r="7" class="r" stroke-width="1.5"/>
+  <circle cx="230" cy="120" r="7" class="r" stroke-width="1.5"/>
+  <circle cx="290" cy="120" r="7" class="r" stroke-width="1.5"/>
+  <circle cx="380" cy="120" r="7" class="r" stroke-width="1.5"/>
+  <circle cx="590" cy="120" r="7" class="r" stroke-width="1.5"/>
+  <path class="dash" d="M208,140 L222,140"/>
+  <text class="ms" x="215" y="156" text-anchor="middle">1 s</text>
+  <path class="dash" d="M238,140 L282,140"/>
+  <text class="ms" x="260" y="156" text-anchor="middle">2 s</text>
+  <path class="dash" d="M298,140 L372,140"/>
+  <text class="ms" x="335" y="156" text-anchor="middle">3 s</text>
+  <path class="dash" d="M388,140 L582,140"/>
+  <text class="ms" x="485" y="156" text-anchor="middle">7 s</text>
+  <text class="ms" x="196" y="104">3 starts at 0 s (gaps 0, 0)</text>
+  <text class="lb" x="20" y="196">ON-FAILURE:3, EXIT 3</text>
+  <text class="mb" x="20" y="226">3 restarts, then exited</text>
+  <text class="d" x="20" y="242">RestartCount 1 at once, 3 after 1 s</text>
+  <rect class="bar" x="200" y="214" width="30" height="14" rx="3"/>
+  <rect class="x" x="238" y="210" width="150" height="22" rx="11"/>
+  <text class="c" x="313" y="225" text-anchor="middle">exited, exit=3, restarts=3</text>
+  <rect class="n" x="20" y="280" width="800" height="46" rx="4"/>
+  <text class="c" x="32" y="299">Docker waits longer before each new start of a container that keeps crashing, so recovery from a tight loop is not instant.</text>
+  <text class="c" x="32" y="316">on-failure:N stops after N restarts; always and unless-stopped keep trying, with the delay growing.</text>
+</svg>

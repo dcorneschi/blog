@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 578" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Will the container restart?</title>
+  <desc id="d">When a container's main process ends, a docker stop or docker kill means no restart while the daemon runs. Otherwise the policy decides: no never restarts; on-failure restarts only after a non-zero exit, until it has restarted N times, then the container stays exited; always restarts even after exit 0; unless-stopped restarts like always while the daemon runs. A failing healthcheck never triggers a restart.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="578" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Will the container restart?</text>
+  <text class="sub" x="20" y="48">While the Docker daemon keeps running (Docker 29.9.2)</text>
+  <rect class="n" x="300" y="64" width="240" height="32" rx="6"/>
+  <text class="tb" x="420.0" y="83" text-anchor="middle">The main process ends</text>
+  <path class="lne" d="M420,96 L420,116"/>
+  <rect class="rw" x="250" y="118" width="340" height="44" rx="6"/>
+  <text class="tb" x="420.0" y="137" text-anchor="middle">Stopped with docker stop or docker kill?</text>
+  <text class="d" x="420.0" y="153" text-anchor="middle">a manual stop</text>
+  <path class="lne" d="M590,140 L628,140"/>
+  <text class="ms" x="609" y="134" text-anchor="middle">yes</text>
+  <rect class="x" x="630" y="116" width="190" height="50" rx="6"/>
+  <text class="tb" x="725.0" y="135" text-anchor="middle">No restart</text>
+  <text class="d" x="725.0" y="151" text-anchor="middle">kill: exit 137, RestartCount 0</text>
+  <path class="lne" d="M420,162 L420,190"/>
+  <text class="ms" x="432" y="180">no</text>
+  <rect class="rw" x="330" y="192" width="180" height="34" rx="6"/>
+  <text class="tb" x="420.0" y="211" text-anchor="middle">Restart policy?</text>
+  <path class="lne" d="M420,226 L420,240 L105,240 L105,260"/>
+  <rect class="s" x="20" y="262" width="170" height="26" rx="6"/>
+  <text class="mb" x="105" y="280" text-anchor="middle">no</text>
+  <path class="lne" d="M420,226 L420,240 L315,240 L315,260"/>
+  <rect class="s" x="230" y="262" width="170" height="26" rx="6"/>
+  <text class="mb" x="315" y="280" text-anchor="middle">on-failure[:N]</text>
+  <path class="lne" d="M420,226 L420,240 L525,240 L525,260"/>
+  <rect class="s" x="440" y="262" width="170" height="26" rx="6"/>
+  <text class="mb" x="525" y="280" text-anchor="middle">always</text>
+  <path class="lne" d="M420,226 L420,240 L735,240 L735,260"/>
+  <rect class="s" x="650" y="262" width="170" height="26" rx="6"/>
+  <text class="mb" x="735" y="280" text-anchor="middle">unless-stopped</text>
+  <path class="lne" d="M105,288 L105,306"/>
+  <rect class="x" x="20" y="308" width="170" height="44" rx="6"/>
+  <text class="tb" x="105.0" y="327" text-anchor="middle">No restart</text>
+  <text class="d" x="105.0" y="343" text-anchor="middle">never restarted</text>
+  <path class="lne" d="M315,288 L315,306"/>
+  <rect class="rw" x="230" y="308" width="170" height="44" rx="6"/>
+  <text class="tb" x="315.0" y="327" text-anchor="middle">Exit code non-zero?</text>
+  <path class="lne" d="M272,352 L230,386"/>
+  <text class="ms" x="238" y="372" text-anchor="end">no (exit 0)</text>
+  <rect class="x" x="160" y="388" width="140" height="44" rx="6"/>
+  <text class="tb" x="230.0" y="407" text-anchor="middle">No restart</text>
+  <text class="d" x="230.0" y="423" text-anchor="middle">clean exit</text>
+  <path class="lne" d="M358,352 L400,386"/>
+  <text class="ms" x="384" y="372">yes</text>
+  <rect class="g" x="320" y="388" width="170" height="44" rx="6"/>
+  <text class="tb" x="405.0" y="407" text-anchor="middle">Restarts</text>
+  <text class="d" x="405.0" y="423" text-anchor="middle">until N restarts</text>
+  <path class="lne" d="M405,432 L405,450"/>
+  <rect class="n" x="320" y="452" width="170" height="44" rx="6"/>
+  <text class="tb" x="405.0" y="471" text-anchor="middle">Then stays exited</text>
+  <text class="d" x="405.0" y="487" text-anchor="middle">on-failure:3: 3 restarts</text>
+  <path class="lne" d="M525,288 L525,306"/>
+  <rect class="g" x="440" y="308" width="170" height="44" rx="6"/>
+  <text class="tb" x="525.0" y="327" text-anchor="middle">Restarts</text>
+  <text class="d" x="525.0" y="343" text-anchor="middle">even after exit 0</text>
+  <path class="lne" d="M735,288 L735,306"/>
+  <rect class="g" x="650" y="308" width="170" height="44" rx="6"/>
+  <text class="tb" x="735.0" y="327" text-anchor="middle">Restarts</text>
+  <text class="d" x="735.0" y="343" text-anchor="middle">like always, while running</text>
+  <rect class="n" x="20" y="512" width="800" height="50" rx="4"/>
+  <text class="c" x="32" y="532">Every restart in a crash loop comes after a growing delay. A failing healthcheck does not end the process, so it never starts a restart.</text>
+  <text class="c" x="32" y="549">After a daemon restart the rules differ: always also brings back stopped and killed containers (next diagram).</text>
+</svg>

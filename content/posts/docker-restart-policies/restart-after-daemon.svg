@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 404" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">After a daemon restart</title>
+  <desc id="d">Twelve nginx containers, three per policy, then a restart of the Docker daemon. no: all stay down. on-failure: only the one stopped with docker kill (exit code 137) is started again. always: all three are started again, including the stopped and the killed one. unless-stopped: only the one that was running is started again.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="404" fill="#ffffff"/>
+  <text class="h" x="20" y="28">After a daemon restart</text>
+  <text class="sub" x="20" y="48">Three containers per policy: left running, stopped with docker stop, stopped with docker kill (Docker 29.9.2)</text>
+  <text class="tb" x="310" y="80" text-anchor="middle">Was running</text>
+  <text class="d" x="310" y="96" text-anchor="middle">nginx exited 0 at shutdown</text>
+  <text class="tb" x="510" y="80" text-anchor="middle">docker stop</text>
+  <text class="d" x="510" y="96" text-anchor="middle">exit 0</text>
+  <text class="tb" x="710" y="80" text-anchor="middle">docker kill</text>
+  <text class="d" x="710" y="96" text-anchor="middle">exit 137</text>
+  <rect class="s" x="20" y="108" width="180" height="40" rx="6"/>
+  <text class="mb" x="110" y="133" text-anchor="middle">no</text>
+  <rect class="n" x="220" y="108" width="180" height="40" rx="6"/>
+  <text class="d" x="310" y="133" text-anchor="middle">stays down</text>
+  <rect class="n" x="420" y="108" width="180" height="40" rx="6"/>
+  <text class="d" x="510" y="133" text-anchor="middle">stays down</text>
+  <rect class="n" x="620" y="108" width="180" height="40" rx="6"/>
+  <text class="d" x="710" y="133" text-anchor="middle">stays down</text>
+  <rect class="s" x="20" y="160" width="180" height="40" rx="6"/>
+  <text class="mb" x="110" y="185" text-anchor="middle">on-failure</text>
+  <rect class="n" x="220" y="160" width="180" height="40" rx="6"/>
+  <text class="d" x="310" y="185" text-anchor="middle">stays down</text>
+  <rect class="n" x="420" y="160" width="180" height="40" rx="6"/>
+  <text class="d" x="510" y="185" text-anchor="middle">stays down</text>
+  <rect class="g" x="620" y="160" width="180" height="40" rx="6"/>
+  <text class="tb" x="710" y="185" text-anchor="middle">started again *</text>
+  <rect class="s" x="20" y="212" width="180" height="40" rx="6"/>
+  <text class="mb" x="110" y="237" text-anchor="middle">always</text>
+  <rect class="g" x="220" y="212" width="180" height="40" rx="6"/>
+  <text class="tb" x="310" y="237" text-anchor="middle">started again</text>
+  <rect class="g" x="420" y="212" width="180" height="40" rx="6"/>
+  <text class="tb" x="510" y="237" text-anchor="middle">started again *</text>
+  <rect class="g" x="620" y="212" width="180" height="40" rx="6"/>
+  <text class="tb" x="710" y="237" text-anchor="middle">started again *</text>
+  <rect class="s" x="20" y="264" width="180" height="40" rx="6"/>
+  <text class="mb" x="110" y="289" text-anchor="middle">unless-stopped</text>
+  <rect class="g" x="220" y="264" width="180" height="40" rx="6"/>
+  <text class="tb" x="310" y="289" text-anchor="middle">started again</text>
+  <rect class="n" x="420" y="264" width="180" height="40" rx="6"/>
+  <text class="d" x="510" y="289" text-anchor="middle">stays down</text>
+  <rect class="n" x="620" y="264" width="180" height="40" rx="6"/>
+  <text class="d" x="710" y="289" text-anchor="middle">stays down</text>
+  <rect class="n" x="20" y="320" width="800" height="68" rx="4"/>
+  <text class="c" x="32" y="340">* differs from what happens while the daemon runs: a stopped or killed container is not restarted then.</text>
+  <text class="c" x="32" y="357">on-failure looks at the last exit code: the killed container (137) comes back, the cleanly stopped ones (0) stay down.</text>
+  <text class="c" x="32" y="374">always brings back every container; unless-stopped keeps the manual stop, including docker kill.</text>
+</svg>
