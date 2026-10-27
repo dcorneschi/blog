@@ -21,7 +21,7 @@ summaryLength = 70 # words in automatic summaries (default 70)
     maxAge = "6h"
 
 [params]
-  description = "Notes on DevOps, infrastructure as code and the command line: Terraform, tmux and the tools I use every day."
+  description = "Hands-on DevOps notes and cheatsheets: Terraform, Kubernetes, Docker, Ansible and Linux, with every command run for real and its actual output."
   startPageColumns = true
   showPostSummary = true
   alwaysExpandMenu = true
