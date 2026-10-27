@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What's New in Terraform</title>
+  <desc id="d">What's New in Terraform: Every release from 1.0 to 1.17. moved, import, terraform test, ephemeral values, actions, query, policy. Small drawings: 1.0, 1.10 and 1.17 pills, a terminal with terraform version and terraform modules -json, and icons for the headline features.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #7b42bc; }
+      .a2  { fill: #4f2b8f; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #7b42bc; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #7b42bc; }
+  .vs   { stroke: #7b42bc; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #7b42bc; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #7b42bc; stroke-width: 9; }
+  .vl   { fill: #7b42bc; fill-opacity: .18; }
+  .vl2  { fill: #7b42bc; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #7b42bc; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #7b42bc; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-17.5,51.7) scale(0.867)"><rect class="vpn" x="170" y="170" width="121" height="84" rx="42"/><text class="vink" x="230" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">1.0</text><path class="var" d="M299,212 H345 M325,196 L345,212 L325,228"/><rect class="vpg" x="355" y="170" width="144" height="84" rx="42"/><text class="vink" x="427" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">1.10</text><path class="var" d="M507,212 H553 M533,196 L553,212 L533,228"/><rect class="vpv" x="563" y="170" width="144" height="84" rx="42"/><text class="vink" x="635" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">1.17</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ terraform version</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ terraform modules -json<tspan class="vcur"> █</tspan></text></g><g transform="translate(254.9,25.7) scale(0.922)"><g transform="translate(1795,190) scale(1.150)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">changelog</text><g transform="translate(2065,190) scale(1.150)"><path class="vs" d="M100,182 V28 M44,84 L100,28 L156,84" stroke-width="26"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">upgrade</text><g transform="translate(2335,190) scale(1.150)"><circle class="vf" cx="100" cy="100" r="82"/><path d="M58,102 L88,132 L144,72" stroke="#fff" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">v1.x promise</text></g><g transform="translate(546.0,1290) scale(0.500)"><path class="vf" d="M100,20 L176,58 L100,96 L24,58 Z" opacity=".55"/><path class="vf" d="M24,58 L100,96 V184 L24,146 Z"/><path class="vf" d="M176,58 L100,96 V184 L176,146 Z" opacity=".75"/></g><text class="vn" x="596" y="1450" text-anchor="middle" font-size="34">moved</text><g transform="translate(806.0,1290) scale(0.500)"><path class="vf" d="M46,150 A40,40 0 0 1 52,72 A56,56 0 0 1 152,70 A42,42 0 0 1 156,150 Z"/></g><text class="vn" x="856" y="1450" text-anchor="middle" font-size="34">import</text><g transform="translate(1066.0,1290) scale(0.500)"><circle class="vf" cx="100" cy="100" r="82"/><path d="M58,102 L88,132 L144,72" stroke="#fff" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="1116" y="1450" text-anchor="middle" font-size="34">test</text><g transform="translate(1326.0,1290) scale(0.500)"><path class="vs" d="M60,92 V64 A40,40 0 0 1 140,64 V92" stroke-width="18"/><rect class="vf" x="36" y="88" width="128" height="100" rx="16"/><circle cx="100" cy="128" r="14" fill="#fff"/><rect x="93" y="134" width="14" height="32" rx="5" fill="#fff"/></g><text class="vn" x="1376" y="1450" text-anchor="middle" font-size="34">ephemeral</text><g transform="translate(1586.0,1290) scale(0.500)"><path class="vf" d="M118,10 L40,116 H96 L80,190 L162,80 H106 Z"/></g><text class="vn" x="1636" y="1450" text-anchor="middle" font-size="34">actions</text><g transform="translate(1846.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="1896" y="1450" text-anchor="middle" font-size="34">query</text><g transform="translate(2106.0,1290) scale(0.500)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="2156" y="1450" text-anchor="middle" font-size="34">policy</text></g><!-- /vignettes -->
+  <g transform="translate(1062,330) scale(12)"><path class="a" d="M1.44 0v7.575l6.561 3.79V3.787z"/><path class="a" d="M8.72 4.23v7.575l6.561 3.787V8.018z"/><path class="a" d="M8.72 12.635v7.575L15.28 24v-7.578z"/><path class="a2" d="M22.56 4.227l-6.561 3.791v7.574l6.56-3.787z"/></g><g transform="translate(1420,360)"><path class="a" d="M60,0 H300 Q330,0 330,30 V230 Q330,260 300,260 H60 L0,130 Z"/><circle cx="62" cy="130" r="20" fill="#f8f9fa"/><text x="200" y="118" text-anchor="middle" font-size="58" font-weight="700" fill="#ffffff" font-family="Menlo, Consolas, 'Liberation Mono', monospace">v1.0</text><text x="200" y="168" text-anchor="middle" font-size="40" fill="#ffffff" opacity="0.8">↓</text><text x="200" y="222" text-anchor="middle" font-size="58" font-weight="700" fill="#ffffff" font-family="Menlo, Consolas, 'Liberation Mono', monospace">v1.17</text></g>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="190">What's New in Terraform</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="96">Every release from 1.0 to 1.17</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">moved · import · terraform test · ephemeral values · actions · query · policy</text>
+</svg>
