@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">iTerm2 vs kitty vs Alacritty vs Ghostty vs Otty vs cmux</title>
+  <desc id="d">iTerm2 vs kitty vs Alacritty vs Ghostty vs Otty vs cmux: Six macOS terminals compared, from classic to agent-focused. GPU rendering, tabs and splits, config, image protocols, scripting, throughput. Small drawings: a pty, parser and GPU pipeline, a terminal with ghostty +list-themes and otty import kitty, and icons for terminal features.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #2496ed; }
+      .a2  { fill: #1c7ed6; }
+      .ink { fill: #343a40; }
+      .pap { fill: #ffffff; stroke: #ced4da; stroke-width: 6; }
+      .ln  { stroke: #adb5bd; stroke-width: 10; stroke-linecap: round; fill: none; }
+      .al  { stroke: #2496ed; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .wt  { fill: #ffffff; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .pap { fill: #0d1117; stroke: #30363d; }
+        .ln  { stroke: #484f58; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+  <g id="vignettes"><style>
+  .vf   { fill: #2496ed; }
+  .vs   { stroke: #2496ed; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vs2  { stroke: #2496ed; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: .6; }
+  .vsw  { stroke: #2496ed; stroke-width: 9; }
+  .vl   { fill: #2496ed; fill-opacity: .18; }
+  .vl2  { fill: #2496ed; fill-opacity: .4; }
+  .vp   { fill: #ffffff; }
+  .vg   { stroke: #ced4da; fill: none; stroke-linecap: round; }
+  .vg2  { fill: #adb5bd; }
+  .vbg  { stroke: #f8f9fa; stroke-width: 6; stroke-linejoin: round; }
+  .vink { fill: #343a40; stroke: #343a40; }
+  .vn   { fill: #868e96; }
+  .var  { stroke: #2496ed; stroke-width: 7; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .vpn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+  .vpg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+  .vpv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+  .vterm{ fill: #212529; }
+  .vtbar{ fill: #343a40; }
+  .vtx  { fill: #e9ecef; }
+  .vcur { fill: #2496ed; }
+  text.vink { stroke: none; }
+  @media (prefers-color-scheme: dark) {
+    .vp   { fill: #0d1117; }
+    .vg   { stroke: #484f58; }
+    .vbg  { stroke: #161b22; }
+    .vink { fill: #c9d1d9; stroke: #c9d1d9; }
+    .vn   { fill: #8b949e; }
+    .vpn  { fill: #0d1117; stroke: #484f58; }
+    .vpg  { fill: #0f2a1d; stroke: #3d8b63; }
+    .vpv  { fill: #231a3a; stroke: #8a6fc7; }
+    .vterm{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+    .vtbar{ fill: #21262d; }
+  }
+</style><g transform="translate(-8.7,71.9) scale(0.816)"><rect class="vpn" x="170" y="170" width="121" height="84" rx="42"/><text class="vink" x="230" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">pty</text><path class="var" d="M299,212 H345 M325,196 L345,212 L325,228"/><rect class="vpg" x="355" y="170" width="190" height="84" rx="42"/><text class="vink" x="450" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">parser</text><path class="var" d="M553,212 H599 M579,196 L599,212 L579,228"/><rect class="vpv" x="609" y="170" width="121" height="84" rx="42"/><text class="vink" x="670" y="224" text-anchor="middle" font-size="38" font-family="Menlo, Consolas, 'Liberation Mono', monospace" font-weight="700">GPU</text><rect class="vterm" x="170" y="400" width="890" height="210" rx="20"/><rect class="vtbar" x="170" y="400" width="890" height="50" rx="20"/><rect class="vtbar" x="170" y="430" width="890" height="20"/><circle cx="210" cy="425" r="11" fill="#ff5f57"/><circle cx="250" cy="425" r="11" fill="#febc2e"/><circle cx="290" cy="425" r="11" fill="#28c840"/><text class="vtx" x="205" y="510" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ ghostty +list-themes</text><text class="vtx" x="205" y="570" font-size="36" font-family="Menlo, Consolas, 'Liberation Mono', monospace">$ otty import kitty<tspan class="vcur"> █</tspan></text></g><g transform="translate(208.2,19.7) scale(0.940)"><g transform="translate(1795,190) scale(1.150)"><path class="vf" d="M118,10 L40,116 H96 L80,190 L162,80 H106 Z"/></g><text class="vn" x="1910" y="470" text-anchor="middle" font-size="36">throughput</text><g transform="translate(2065,190) scale(1.150)"><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(0 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(45 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(90 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(135 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(180 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(225 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(270 100 100)"/><rect class="vf" x="88" y="18" width="24" height="40" rx="5" transform="rotate(315 100 100)"/><circle class="vf" cx="100" cy="100" r="60"/><circle class="vp" cx="100" cy="100" r="26"/></g><text class="vn" x="2180" y="470" text-anchor="middle" font-size="36">profiles</text><g transform="translate(2335,190) scale(1.150)"><path class="vs" d="M60,92 V64 A40,40 0 0 1 140,64 V92" stroke-width="18"/><rect class="vf" x="36" y="88" width="128" height="100" rx="16"/><circle cx="100" cy="128" r="14" fill="#fff"/><rect x="93" y="134" width="14" height="32" rx="5" fill="#fff"/></g><text class="vn" x="2450" y="470" text-anchor="middle" font-size="36">socket</text></g><g transform="translate(676.0,1290) scale(0.500)"><rect class="vterm" x="10" y="30" width="180" height="140" rx="16"/><path d="M42,84 L74,106 L42,128 M90,132 H136" stroke="#e9ecef" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="726" y="1450" text-anchor="middle" font-size="34">tabs</text><g transform="translate(936.0,1290) scale(0.500)"><path class="vf vbg" d="M20,150 L100,112 L180,150 L100,188 Z" opacity="1"/><path class="vf vbg" d="M20,116 L100,78 L180,116 L100,154 Z" opacity="0.78"/><path class="vf vbg" d="M20,82 L100,44 L180,82 L100,120 Z" opacity="0.56"/><path class="vf vbg" d="M20,48 L100,10 L180,48 L100,86 Z" opacity="0.36"/></g><text class="vn" x="986" y="1450" text-anchor="middle" font-size="34">splits</text><g transform="translate(1196.0,1290) scale(0.500)"><circle class="vp vsw" cx="84" cy="84" r="56" stroke-width="18"/><path class="vs" d="M126,126 L182,182" stroke-width="24"/></g><text class="vn" x="1246" y="1450" text-anchor="middle" font-size="34">scrollback</text><g transform="translate(1456.0,1290) scale(0.500)"><path class="vp vsw" d="M44,14 H126 L162,50 V186 H44 Z"/><path class="vl2" d="M126,14 V50 H162 Z"/><path class="vs" d="M66,80 H140 M66,108 H140 M66,136 H120 M66,164 H132" stroke-width="10"/></g><text class="vn" x="1506" y="1450" text-anchor="middle" font-size="34">config</text><g transform="translate(1716.0,1290) scale(0.500)"><path class="vs" d="M166,88 A68,68 0 0 0 44,62 M34,112 A68,68 0 0 0 156,138" stroke-width="16"/><path class="vs" d="M30,30 L44,64 L78,52 M170,170 L156,136 L122,148" stroke-width="16"/></g><text class="vn" x="1766" y="1450" text-anchor="middle" font-size="34">sessions</text><g transform="translate(1976.0,1290) scale(0.500)"><circle class="vf" cx="100" cy="100" r="82"/><path d="M58,102 L88,132 L144,72" stroke="#fff" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><text class="vn" x="2026" y="1450" text-anchor="middle" font-size="34">agents</text></g><!-- /vignettes -->
+  <rect class="pap" x="1046.0" y="255.0" width="360" height="250" rx="22"/><rect class="ln" x="1049.0" y="258.0" width="354" height="44" rx="19"/><circle class="wt" cx="1080.0" cy="280.0" r="8"/><circle class="wt" cx="1110.0" cy="280.0" r="8"/><circle class="wt" cx="1140.0" cy="280.0" r="8"/><path class="ln" d="M1086.0,345.0 H1366.0"/><path class="ln" d="M1086.0,385.0 H1306.0"/><path class="ln" d="M1086.0,425.0 H1366.0"/><rect class="pap" x="1346.0" y="285.0" width="360" height="250" rx="22"/><rect class="ln" x="1349.0" y="288.0" width="354" height="44" rx="19"/><circle class="wt" cx="1380.0" cy="310.0" r="8"/><circle class="wt" cx="1410.0" cy="310.0" r="8"/><circle class="wt" cx="1440.0" cy="310.0" r="8"/><path class="ln" d="M1386.0,375.0 H1666.0"/><path class="ln" d="M1386.0,415.0 H1606.0"/><path class="ln" d="M1386.0,455.0 H1666.0"/><rect class="pap" x="1196.0" y="345.0" width="360" height="250" rx="22"/><rect class="a" x="1199.0" y="348.0" width="354" height="44" rx="19"/><circle class="wt" cx="1230.0" cy="370.0" r="8"/><circle class="wt" cx="1260.0" cy="370.0" r="8"/><circle class="wt" cx="1290.0" cy="370.0" r="8"/><path class="al" d="M1246.0,455.0 L1286.0,487.0 L1246.0,519.0"/><path class="al" d="M1316.0,519.0 H1396.0"/><path class="ln" d="M1246.0,560.0 H1476.0"/>
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="79">iTerm2 vs kitty vs Alacritty vs Ghostty vs Otty vs cmux</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="81">Six macOS terminals compared, from classic to agent-focused</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="54">GPU rendering · tabs and splits · config · image protocols · scripting · throughput</text>
+</svg>

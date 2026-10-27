@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 366" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Terminal throughput</title>
+  <desc id="d">Time to print a 54 MB file with cat, median of five runs with default settings: Ghostty 0.26 s, Alacritty 0.49 s, iTerm2 0.64 s, kitty 1.04 s. Otty and cmux were not measured.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="366" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Terminal throughput</text>
+  <text class="sub" x="20" y="48">Seconds to print 54 MB, lower is better</text>
+  <text class="lb" x="20" y="80">DEFAULT SETTINGS, 120×40 WINDOW</text>
+  <line class="tick" x1="230" y1="92" x2="230" y2="270"/>
+  <text class="ax" x="230" y="284" text-anchor="middle">0 s</text>
+  <line class="tick" x1="330" y1="92" x2="330" y2="270"/>
+  <text class="ax" x="330" y="284" text-anchor="middle">0.25 s</text>
+  <line class="tick" x1="430" y1="92" x2="430" y2="270"/>
+  <text class="ax" x="430" y="284" text-anchor="middle">0.5 s</text>
+  <line class="tick" x1="530" y1="92" x2="530" y2="270"/>
+  <text class="ax" x="530" y="284" text-anchor="middle">0.75 s</text>
+  <line class="tick" x1="630" y1="92" x2="630" y2="270"/>
+  <text class="ax" x="630" y="284" text-anchor="middle">1 s</text>
+  <line class="tick" x1="730" y1="92" x2="730" y2="270"/>
+  <text class="ax" x="730" y="284" text-anchor="middle">1.25 s</text>
+  <text class="tb" x="20" y="121">Ghostty 1.4.0</text>
+  <rect class="bar" x="230" y="104" width="104" height="24" rx="3"/>
+  <circle cx="333.2" cy="116" r="3.5" fill="#495057"/>
+  <circle cx="339.6" cy="116" r="3.5" fill="#495057"/>
+  <circle cx="333.6" cy="116" r="3.5" fill="#495057"/>
+  <circle cx="334.0" cy="116" r="3.5" fill="#495057"/>
+  <circle cx="336.0" cy="116" r="3.5" fill="#495057"/>
+  <text class="mb" x="352" y="121">0.26 s</text>
+  <text class="tb" x="20" y="163">Alacritty 0.17.0</text>
+  <rect class="bar" x="230" y="146" width="195" height="24" rx="3"/>
+  <circle cx="443.2" cy="158" r="3.5" fill="#495057"/>
+  <circle cx="424.8" cy="158" r="3.5" fill="#495057"/>
+  <circle cx="426.4" cy="158" r="3.5" fill="#495057"/>
+  <circle cx="425.2" cy="158" r="3.5" fill="#495057"/>
+  <circle cx="425.2" cy="158" r="3.5" fill="#495057"/>
+  <text class="mb" x="455" y="163">0.49 s</text>
+  <text class="tb" x="20" y="205">iTerm2 3.7.6</text>
+  <rect class="bar" x="230" y="188" width="255" height="24" rx="3"/>
+  <circle cx="485.2" cy="200" r="3.5" fill="#495057"/>
+  <circle cx="485.2" cy="200" r="3.5" fill="#495057"/>
+  <circle cx="514.8" cy="200" r="3.5" fill="#495057"/>
+  <circle cx="479.2" cy="200" r="3.5" fill="#495057"/>
+  <circle cx="493.6" cy="200" r="3.5" fill="#495057"/>
+  <text class="mb" x="527" y="205">0.64 s</text>
+  <text class="tb" x="20" y="247">kitty 0.46.2</text>
+  <rect class="bar" x="230" y="230" width="418" height="24" rx="3"/>
+  <circle cx="652.0" cy="242" r="3.5" fill="#495057"/>
+  <circle cx="647.6" cy="242" r="3.5" fill="#495057"/>
+  <circle cx="647.6" cy="242" r="3.5" fill="#495057"/>
+  <circle cx="647.6" cy="242" r="3.5" fill="#495057"/>
+  <circle cx="646.8" cy="242" r="3.5" fill="#495057"/>
+  <text class="mb" x="664" y="247">1.04 s</text>
+  <rect class="n" x="20" y="302" width="800" height="48" rx="4"/>
+  <text class="c" x="32" y="321">seq 1 5000000 (54 MB) printed with cat, five runs; bar = median, dots = runs. Apple M4, macOS 27.2.</text>
+  <text class="c" x="32" y="338">Otty 1.6.2 and cmux 0.65.2 are not shown: neither accepts a command from an outside script by default.</text>
+</svg>
