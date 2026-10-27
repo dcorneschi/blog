@@ -68,6 +68,10 @@ jobs:
             --minify \
             --panicOnWarning
 
+      # Static search index for /search/ (only elements with data-pagefind-body, see layouts/page.html)
+      - name: Build search index (Pagefind)
+        run: npx --yes pagefind@1.5.2 --site public
+
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v4

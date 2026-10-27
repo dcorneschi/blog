@@ -1,0 +1,21 @@
+{{- /* Search page (content/search/index.md). The index in /pagefind/ is built in CI by
+     "npx pagefind --site public" after "hugo build"; locally it exists only after that step.
+     The navbar form sends ?q=, which is searched on load. */ -}}
+{{ define "main" }}
+
+    <div class="container mt-3 mb-3">
+        <h1 class="mb-3">{{ .Title }}</h1>
+        <link href="{{ "pagefind/pagefind-ui.css" | relURL }}" rel="stylesheet">
+        <div id="search"></div>
+        <noscript><p>Search needs JavaScript.</p></noscript>
+        <script src="{{ "pagefind/pagefind-ui.js" | relURL }}"></script>
+        <script>
+            window.addEventListener("DOMContentLoaded", function () {
+                var ui = new PagefindUI({ element: "#search", showSubResults: true, showImages: false, resetStyles: false });
+                var q = new URLSearchParams(window.location.search).get("q");
+                if (q) { ui.triggerSearch(q); }
+            });
+        </script>
+    </div>
+
+{{ end }}

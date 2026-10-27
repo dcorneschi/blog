@@ -11,7 +11,7 @@
 {{- with $page -}}
 <div class="card-body">
     {{- if and (ne .Type "page") .Params.categories }}
-    <p class="card-kicker">
+    <p class="card-kicker" data-pagefind-ignore>
         {{- range $i, $c := .Params.categories -}}
             {{ if $i }}<span class="sep" aria-hidden="true"> · </span>{{ end }}<a href="{{ "categories/" | relLangURL }}#{{ $c | urlize }}">{{ $c }}</a>
         {{- end -}}
@@ -23,7 +23,7 @@
     {{- else }}
     <h1 class="card-title">{{ $title }}</h1>
     {{- end }}
-    {{ partial "content_card_body_subtitle.html" $ctx }}
+    <div data-pagefind-ignore>{{ partial "content_card_body_subtitle.html" $ctx }}</div>{{/* date and byline stay out of search excerpts */}}
     {{ partial "content_card_body_extra.html" . }}
     {{ if eq .Type "video" }}
     {{ else if eq .Type "audio" }}
