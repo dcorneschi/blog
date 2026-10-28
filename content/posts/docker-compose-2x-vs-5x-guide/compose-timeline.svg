@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 428" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Docker Compose releases, v2.40.3 to v5.6.1</title>
+  <desc id="d">Timeline from October 2025 to October 2026: v2.40.3 (the last 2.x, October 30 2025), no 3.x or 4.x, v5.0.0 on December 2 2025 (Bake only, SDK, start --wait), v5.1.0, v5.2.0 (new reconciliation), v5.3.0, v5.4.0 (running containers recreated once on upgrade), v5.5.0 (digest reconciliation, Engine in ps JSON), v5.6.0 (jobs, provider services) and v5.6.1, the latest.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="428" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Docker Compose releases, v2.40.3 to v5.6.1</text>
+  <text class="sub" x="20" y="48">Release dates from GitHub; filled dots are the versions run in this guide</text>
+  <path class="tick" d="M40,205 L800,205"/>
+  <line x1="40" y1="205" x2="800" y2="205" stroke="#495057" stroke-width="2"/>
+  <line class="tick" x1="40" y1="199" x2="40" y2="211"/>
+  <text class="ax" x="40" y="227" text-anchor="middle">Oct 2025</text>
+  <line class="tick" x1="217" y1="199" x2="217" y2="211"/>
+  <text class="ax" x="217" y="227" text-anchor="middle">Jan 2026</text>
+  <line class="tick" x1="389" y1="199" x2="389" y2="211"/>
+  <text class="ax" x="389" y="227" text-anchor="middle">Apr 2026</text>
+  <line class="tick" x1="564" y1="199" x2="564" y2="211"/>
+  <text class="ax" x="564" y="227" text-anchor="middle">Jul 2026</text>
+  <line class="tick" x1="741" y1="199" x2="741" y2="211"/>
+  <text class="ax" x="741" y="227" text-anchor="middle">Oct 2026</text>
+  <rect x="96" y="191" width="63" height="28" fill="#f8d7da" opacity=".7"/>
+  <text class="ms" x="127" y="183" text-anchor="middle">no 3.x, no 4.x</text>
+  <line x1="96" y1="205" x2="96" y2="283" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="96" cy="205" r="6" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="96" y="307" text-anchor="middle">v2.40.3</text>
+  <text class="d" x="96" y="322" text-anchor="middle">last 2.x</text>
+  <text class="d" x="96" y="335" text-anchor="middle">COMPOSE_BAKE=false still works</text>
+  <line x1="159" y1="205" x2="159" y2="235" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="159" cy="205" r="6" fill="#ffffff" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="159" y="259" text-anchor="middle">v5.0.0</text>
+  <text class="d" x="159" y="274" text-anchor="middle">Bake only, SDK</text>
+  <text class="d" x="159" y="287" text-anchor="middle">start --wait</text>
+  <line x1="320" y1="205" x2="320" y2="175" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="320" cy="205" r="6" fill="#ffffff" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="320" y="157" text-anchor="middle">v5.1.0</text>
+  <text class="d" x="320" y="129" text-anchor="middle">recreate when a mounted</text>
+  <text class="d" x="320" y="142" text-anchor="middle">image digest changes</text>
+  <line x1="549" y1="205" x2="549" y2="235" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="549" cy="205" r="6" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="549" y="259" text-anchor="middle">v5.2.0</text>
+  <text class="d" x="549" y="274" text-anchor="middle">new reconciliation</text>
+  <text class="d" x="549" y="287" text-anchor="middle">algorithm</text>
+  <line x1="566" y1="205" x2="566" y2="175" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="566" cy="205" r="6" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="566" y="157" text-anchor="middle">v5.3.0</text>
+  <line x1="627" y1="205" x2="627" y2="283" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="627" cy="205" r="6" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="627" y="307" text-anchor="middle">v5.4.0</text>
+  <text class="d" x="627" y="322" text-anchor="middle">running containers</text>
+  <text class="d" x="627" y="335" text-anchor="middle">recreated once (measured)</text>
+  <line x1="654" y1="205" x2="654" y2="127" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="654" cy="205" r="6" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="654" y="109" text-anchor="middle">v5.5.0</text>
+  <text class="d" x="654" y="81" text-anchor="middle">digest reconciliation,</text>
+  <text class="d" x="654" y="94" text-anchor="middle">ps JSON gets Engine</text>
+  <line x1="742" y1="205" x2="742" y2="235" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="742" cy="205" r="6" fill="#ffffff" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="742" y="259" text-anchor="middle">v5.6.0</text>
+  <text class="d" x="742" y="274" text-anchor="middle">jobs (manual),</text>
+  <text class="d" x="742" y="287" text-anchor="middle">provider services</text>
+  <line x1="779" y1="205" x2="779" y2="175" stroke="#adb5bd" stroke-width="1"/>
+  <circle cx="779" cy="205" r="6" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+  <text class="mb" x="779" y="157" text-anchor="middle">v5.6.1</text>
+  <text class="d" x="779" y="129" text-anchor="middle">latest</text>
+  <text class="d" x="779" y="142" text-anchor="middle">(docker:cli)</text>
+  <circle cx="40" cy="362" r="6" fill="#212529" stroke="#212529" stroke-width="1.5"/>
+  <text class="c" x="52" y="366">run side by side in this guide</text>
+  <circle cx="250" cy="362" r="6" fill="#ffffff" stroke="#212529" stroke-width="1.5"/>
+  <text class="c" x="262" y="366">from the release notes</text>
+  <rect class="n" x="20" y="380" width="800" height="32" rx="4"/>
+  <text class="c" x="32" y="400">Upgrading from 5.3.0 or older to 5.4.0 or newer recreated every running container once; 2.40.3 -&gt; 5.2.0 and 5.4.0 -&gt; 5.6.1 recreated none.</text>
+</svg>
