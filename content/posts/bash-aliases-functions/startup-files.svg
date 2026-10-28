@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 566" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which startup files bash reads</title>
+  <desc id="d">On Ubuntu a login shell reads /etc/profile, /etc/bash.bashrc, ~/.profile, which sources ~/.bashrc, and ~/.bash_aliases; a non-login shell reads /etc/bash.bashrc, ~/.bashrc and ~/.bash_aliases. On RHEL a login shell reads /etc/profile, ~/.bash_profile, ~/.bashrc, /etc/bashrc and ~/.bashrc.d; a non-login shell reads ~/.bashrc, /etc/bashrc and ~/.bashrc.d. On macOS a login shell reads /etc/profile and ~/.bash_profile only, so ~/.bashrc is read only when ~/.bash_profile sources it; a non-login shell reads ~/.bashrc. Scripts read none of them.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="566" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which startup files bash reads</text>
+  <text class="sub" x="20" y="48">Each file printed its name when read (Ubuntu 24.04, Rocky Linux 9.8, macOS 27.2)</text>
+  <text class="lb" x="20" y="82">UBUNTU 24.04</text>
+  <text class="tb" x="20" y="118">login</text>
+  <rect class="n" x="130" y="96" width="120" height="40" rx="6"/>
+  <text class="mb" x="190.0" y="121" text-anchor="middle">/etc/profile</text>
+  <path class="lne" d="M250,116 L262,116"/>
+  <rect class="n" x="264" y="96" width="130" height="40" rx="6"/>
+  <text class="mb" x="329.0" y="121" text-anchor="middle">/etc/bash.bashrc</text>
+  <path class="lne" d="M394,116 L406,116"/>
+  <rect class="w" x="408" y="96" width="130" height="40" rx="6"/>
+  <text class="mb" x="473.0" y="114" text-anchor="middle">~/.profile</text>
+  <text class="d" x="473.0" y="129" text-anchor="middle">sources ~/.bashrc</text>
+  <path class="lne" d="M538,116 L550,116"/>
+  <rect class="g" x="552" y="96" width="110" height="40" rx="6"/>
+  <text class="mb" x="607.0" y="121" text-anchor="middle">~/.bashrc</text>
+  <path class="lne" d="M662,116 L674,116"/>
+  <rect class="g" x="676" y="96" width="130" height="40" rx="6"/>
+  <text class="mb" x="741.0" y="121" text-anchor="middle">~/.bash_aliases</text>
+  <text class="tb" x="20" y="168">non-login</text>
+  <rect class="n" x="130" y="146" width="130" height="40" rx="6"/>
+  <text class="mb" x="195.0" y="171" text-anchor="middle">/etc/bash.bashrc</text>
+  <path class="lne" d="M260,166 L272,166"/>
+  <rect class="g" x="274" y="146" width="110" height="40" rx="6"/>
+  <text class="mb" x="329.0" y="171" text-anchor="middle">~/.bashrc</text>
+  <path class="lne" d="M384,166 L396,166"/>
+  <rect class="g" x="398" y="146" width="130" height="40" rx="6"/>
+  <text class="mb" x="463.0" y="171" text-anchor="middle">~/.bash_aliases</text>
+  <text class="lb" x="20" y="222">RHEL 9</text>
+  <text class="tb" x="20" y="258">login</text>
+  <rect class="n" x="130" y="236" width="120" height="40" rx="6"/>
+  <text class="mb" x="190.0" y="254" text-anchor="middle">/etc/profile</text>
+  <text class="d" x="190.0" y="269" text-anchor="middle">+ /etc/bashrc</text>
+  <path class="lne" d="M250,256 L262,256"/>
+  <rect class="w" x="264" y="236" width="130" height="40" rx="6"/>
+  <text class="mb" x="329.0" y="254" text-anchor="middle">~/.bash_profile</text>
+  <text class="d" x="329.0" y="269" text-anchor="middle">sources ~/.bashrc</text>
+  <path class="lne" d="M394,256 L406,256"/>
+  <rect class="g" x="408" y="236" width="110" height="40" rx="6"/>
+  <text class="mb" x="463.0" y="261" text-anchor="middle">~/.bashrc</text>
+  <path class="lne" d="M518,256 L530,256"/>
+  <rect class="n" x="532" y="236" width="110" height="40" rx="6"/>
+  <text class="mb" x="587.0" y="261" text-anchor="middle">/etc/bashrc</text>
+  <path class="lne" d="M642,256 L654,256"/>
+  <rect class="g" x="656" y="236" width="120" height="40" rx="6"/>
+  <text class="mb" x="716.0" y="261" text-anchor="middle">~/.bashrc.d/*</text>
+  <text class="tb" x="20" y="308">non-login</text>
+  <rect class="g" x="130" y="286" width="110" height="40" rx="6"/>
+  <text class="mb" x="185.0" y="311" text-anchor="middle">~/.bashrc</text>
+  <path class="lne" d="M240,306 L252,306"/>
+  <rect class="n" x="254" y="286" width="110" height="40" rx="6"/>
+  <text class="mb" x="309.0" y="311" text-anchor="middle">/etc/bashrc</text>
+  <path class="lne" d="M364,306 L376,306"/>
+  <rect class="g" x="378" y="286" width="120" height="40" rx="6"/>
+  <text class="mb" x="438.0" y="311" text-anchor="middle">~/.bashrc.d/*</text>
+  <text class="lb" x="20" y="362">macOS (/bin/bash 3.2)</text>
+  <text class="tb" x="20" y="398">login</text>
+  <rect class="n" x="130" y="376" width="120" height="40" rx="6"/>
+  <text class="mb" x="190.0" y="394" text-anchor="middle">/etc/profile</text>
+  <text class="d" x="190.0" y="409" text-anchor="middle">+ /etc/bashrc</text>
+  <path class="lne" d="M250,396 L262,396"/>
+  <rect class="w" x="264" y="376" width="130" height="40" rx="6"/>
+  <text class="mb" x="329.0" y="394" text-anchor="middle">~/.bash_profile</text>
+  <text class="d" x="329.0" y="409" text-anchor="middle">only this one</text>
+  <path class="lne" d="M394,396 L406,396"/>
+  <rect class="r" x="408" y="376" width="130" height="40" rx="6"/>
+  <text class="mb" x="473.0" y="394" text-anchor="middle">~/.bashrc</text>
+  <text class="d" x="473.0" y="409" text-anchor="middle">only if sourced</text>
+  <text class="tb" x="20" y="448">non-login</text>
+  <rect class="g" x="130" y="426" width="110" height="40" rx="6"/>
+  <text class="mb" x="185.0" y="451" text-anchor="middle">~/.bashrc</text>
+  <text class="d" x="20" y="488">Login: ssh host, bash -l, su - user, a terminal started with --login. Non-login: bash, bash -i. A login shell reads the first of</text>
+  <text class="d" x="20" y="504">~/.bash_profile, ~/.bash_login, ~/.profile; a hand-made ~/.bash_profile on Ubuntu hides ~/.profile and the aliases.</text>
+  <rect class="n" x="20" y="518" width="800" height="32" rx="4"/>
+  <text class="c" x="32" y="538">Scripts and bash -c read none of them. ssh host command reads ~/.bashrc, but aliases are not expanded there.</text>
+</svg>
