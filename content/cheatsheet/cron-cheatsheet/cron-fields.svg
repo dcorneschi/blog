@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 514" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The five fields and the OR rule</title>
+  <desc id="d">A cron line has five fields: minute, hour, day of month, month and day of week, then the command. When both day of month and day of week are restricted, cron runs if either matches: 0 8 1-7 * 1 runs on November 1 to 7 and on every Monday (9, 16, 23, 30). Restricting only the days 1-7 and testing date +%u in the command runs only on the first Monday, November 2.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="514" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The five fields and the OR rule</text>
+  <text class="sub" x="20" y="48">0 8 1-7 * 1 is not "the first Monday" (Ubuntu cron and RHEL cronie)</text>
+  <rect class="r" x="20" y="70" width="120" height="44" rx="6"/>
+  <text class="mb" x="80" y="97" text-anchor="middle">0</text>
+  <text class="tb" x="80" y="132" text-anchor="middle">minute</text>
+  <text class="d" x="80" y="148" text-anchor="middle">0-59</text>
+  <rect class="r" x="152" y="70" width="120" height="44" rx="6"/>
+  <text class="mb" x="212" y="97" text-anchor="middle">8</text>
+  <text class="tb" x="212" y="132" text-anchor="middle">hour</text>
+  <text class="d" x="212" y="148" text-anchor="middle">0-23</text>
+  <rect class="w" x="284" y="70" width="120" height="44" rx="6"/>
+  <text class="mb" x="344" y="97" text-anchor="middle">1-7</text>
+  <text class="tb" x="344" y="132" text-anchor="middle">day of month</text>
+  <text class="d" x="344" y="148" text-anchor="middle">1-31</text>
+  <rect class="r" x="416" y="70" width="120" height="44" rx="6"/>
+  <text class="mb" x="476" y="97" text-anchor="middle">*</text>
+  <text class="tb" x="476" y="132" text-anchor="middle">month</text>
+  <text class="d" x="476" y="148" text-anchor="middle">1-12, jan-dec</text>
+  <rect class="w" x="548" y="70" width="120" height="44" rx="6"/>
+  <text class="mb" x="608" y="97" text-anchor="middle">1</text>
+  <text class="tb" x="608" y="132" text-anchor="middle">day of week</text>
+  <text class="d" x="608" y="148" text-anchor="middle">0-7, sun-sat</text>
+  <rect class="n" x="690" y="70" width="130" height="44" rx="6"/>
+  <text class="m" x="755" y="97" text-anchor="middle">command</text>
+  <path class="dash" d="M164,164 L164,176 L680,176 L680,164"/>
+  <text class="c" x="20" y="196">Day of month (1-7) and day of week (1 = Monday) are both restricted, so cron runs when EITHER matches.</text>
+  <text class="lb" x="20" y="230">0 8 1-7 * 1 — NOVEMBER 2026</text>
+  <text class="ms" x="38" y="250" text-anchor="middle">Mo</text>
+  <text class="ms" x="72" y="250" text-anchor="middle">Tu</text>
+  <text class="ms" x="106" y="250" text-anchor="middle">We</text>
+  <text class="ms" x="140" y="250" text-anchor="middle">Th</text>
+  <text class="ms" x="174" y="250" text-anchor="middle">Fr</text>
+  <text class="ms" x="208" y="250" text-anchor="middle">Sa</text>
+  <text class="ms" x="242" y="250" text-anchor="middle">Su</text>
+  <rect class="g" x="224" y="258" width="30" height="24" rx="4"/>
+  <text class="m" x="239" y="274" text-anchor="middle">1</text>
+  <rect class="g" x="20" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="35" y="304" text-anchor="middle">2</text>
+  <rect class="g" x="54" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="69" y="304" text-anchor="middle">3</text>
+  <rect class="g" x="88" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="103" y="304" text-anchor="middle">4</text>
+  <rect class="g" x="122" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="137" y="304" text-anchor="middle">5</text>
+  <circle cx="148" cy="293" r="3.5" fill="#212529"/>
+  <rect class="g" x="156" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="171" y="304" text-anchor="middle">6</text>
+  <rect class="g" x="190" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="205" y="304" text-anchor="middle">7</text>
+  <rect class="s" x="224" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="239" y="304" text-anchor="middle">8</text>
+  <rect class="g" x="20" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="35" y="334" text-anchor="middle">9</text>
+  <circle cx="46" cy="323" r="3.5" fill="#212529"/>
+  <rect class="s" x="54" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="69" y="334" text-anchor="middle">10</text>
+  <circle cx="80" cy="323" r="3.5" fill="#212529"/>
+  <rect class="s" x="88" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="103" y="334" text-anchor="middle">11</text>
+  <rect class="s" x="122" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="137" y="334" text-anchor="middle">12</text>
+  <rect class="s" x="156" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="171" y="334" text-anchor="middle">13</text>
+  <rect class="s" x="190" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="205" y="334" text-anchor="middle">14</text>
+  <rect class="s" x="224" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="239" y="334" text-anchor="middle">15</text>
+  <rect class="g" x="20" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="35" y="364" text-anchor="middle">16</text>
+  <rect class="s" x="54" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="69" y="364" text-anchor="middle">17</text>
+  <rect class="s" x="88" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="103" y="364" text-anchor="middle">18</text>
+  <rect class="s" x="122" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="137" y="364" text-anchor="middle">19</text>
+  <rect class="s" x="156" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="171" y="364" text-anchor="middle">20</text>
+  <rect class="s" x="190" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="205" y="364" text-anchor="middle">21</text>
+  <rect class="s" x="224" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="239" y="364" text-anchor="middle">22</text>
+  <rect class="g" x="20" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="35" y="394" text-anchor="middle">23</text>
+  <rect class="s" x="54" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="69" y="394" text-anchor="middle">24</text>
+  <rect class="s" x="88" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="103" y="394" text-anchor="middle">25</text>
+  <rect class="s" x="122" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="137" y="394" text-anchor="middle">26</text>
+  <rect class="s" x="156" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="171" y="394" text-anchor="middle">27</text>
+  <rect class="s" x="190" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="205" y="394" text-anchor="middle">28</text>
+  <rect class="s" x="224" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="239" y="394" text-anchor="middle">29</text>
+  <rect class="g" x="20" y="408" width="30" height="24" rx="4"/>
+  <text class="m" x="35" y="424" text-anchor="middle">30</text>
+  <text class="lb" x="440" y="230">0 8 1-7 * * + [ "$(date +\%u)" = 1 ]</text>
+  <text class="ms" x="458" y="250" text-anchor="middle">Mo</text>
+  <text class="ms" x="492" y="250" text-anchor="middle">Tu</text>
+  <text class="ms" x="526" y="250" text-anchor="middle">We</text>
+  <text class="ms" x="560" y="250" text-anchor="middle">Th</text>
+  <text class="ms" x="594" y="250" text-anchor="middle">Fr</text>
+  <text class="ms" x="628" y="250" text-anchor="middle">Sa</text>
+  <text class="ms" x="662" y="250" text-anchor="middle">Su</text>
+  <rect class="s" x="644" y="258" width="30" height="24" rx="4"/>
+  <text class="m" x="659" y="274" text-anchor="middle">1</text>
+  <rect class="g" x="440" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="455" y="304" text-anchor="middle">2</text>
+  <circle cx="466" cy="293" r="3.5" fill="#212529"/>
+  <rect class="s" x="474" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="489" y="304" text-anchor="middle">3</text>
+  <rect class="s" x="508" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="523" y="304" text-anchor="middle">4</text>
+  <rect class="s" x="542" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="557" y="304" text-anchor="middle">5</text>
+  <circle cx="568" cy="293" r="3.5" fill="#212529"/>
+  <rect class="s" x="576" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="591" y="304" text-anchor="middle">6</text>
+  <rect class="s" x="610" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="625" y="304" text-anchor="middle">7</text>
+  <rect class="s" x="644" y="288" width="30" height="24" rx="4"/>
+  <text class="m" x="659" y="304" text-anchor="middle">8</text>
+  <rect class="s" x="440" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="455" y="334" text-anchor="middle">9</text>
+  <circle cx="466" cy="323" r="3.5" fill="#212529"/>
+  <rect class="s" x="474" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="489" y="334" text-anchor="middle">10</text>
+  <rect class="s" x="508" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="523" y="334" text-anchor="middle">11</text>
+  <rect class="s" x="542" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="557" y="334" text-anchor="middle">12</text>
+  <rect class="s" x="576" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="591" y="334" text-anchor="middle">13</text>
+  <rect class="s" x="610" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="625" y="334" text-anchor="middle">14</text>
+  <rect class="s" x="644" y="318" width="30" height="24" rx="4"/>
+  <text class="m" x="659" y="334" text-anchor="middle">15</text>
+  <rect class="s" x="440" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="455" y="364" text-anchor="middle">16</text>
+  <rect class="s" x="474" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="489" y="364" text-anchor="middle">17</text>
+  <rect class="s" x="508" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="523" y="364" text-anchor="middle">18</text>
+  <rect class="s" x="542" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="557" y="364" text-anchor="middle">19</text>
+  <rect class="s" x="576" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="591" y="364" text-anchor="middle">20</text>
+  <rect class="s" x="610" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="625" y="364" text-anchor="middle">21</text>
+  <rect class="s" x="644" y="348" width="30" height="24" rx="4"/>
+  <text class="m" x="659" y="364" text-anchor="middle">22</text>
+  <rect class="s" x="440" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="455" y="394" text-anchor="middle">23</text>
+  <rect class="s" x="474" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="489" y="394" text-anchor="middle">24</text>
+  <rect class="s" x="508" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="523" y="394" text-anchor="middle">25</text>
+  <rect class="s" x="542" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="557" y="394" text-anchor="middle">26</text>
+  <rect class="s" x="576" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="591" y="394" text-anchor="middle">27</text>
+  <rect class="s" x="610" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="625" y="394" text-anchor="middle">28</text>
+  <rect class="s" x="644" y="378" width="30" height="24" rx="4"/>
+  <text class="m" x="659" y="394" text-anchor="middle">29</text>
+  <rect class="s" x="440" y="408" width="30" height="24" rx="4"/>
+  <text class="m" x="455" y="424" text-anchor="middle">30</text>
+  <text class="c" x="20" y="452">green: the job runs; dot: dates actually run (5 and 9 fired, 10 did not; with the fix only 2 fired).</text>
+  <rect class="n" x="20" y="466" width="800" height="32" rx="4"/>
+  <text class="c" x="32" y="486">systemd OnCalendar combines them with AND instead: Mon *-*-1..7 08:00 is the first Monday (Nov 2, Dec 7, Jan 4).</text>
+</svg>

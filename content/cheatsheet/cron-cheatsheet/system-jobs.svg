@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 448" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How system cron jobs run</title>
+  <desc id="d">On Ubuntu, cron reads /etc/crontab, which runs cron.hourly with run-parts at minute 17; the systemd anacron.timer (07..23:30, on AC power) starts anacron, which runs cron.daily, weekly and monthly. On RHEL, crond reads /etc/cron.d/0hourly, which runs cron.hourly at minute 01; 0anacron in cron.hourly starts anacron, which runs the daily, weekly and monthly directories. /etc/crontab on RHEL has no jobs.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="448" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How system cron jobs run</text>
+  <text class="sub" x="20" y="48">Default configuration of the two packages</text>
+  <text class="lb" x="20" y="80">UBUNTU 24.04 (cron 3.0pl1)</text>
+  <rect class="rw" x="20" y="92" width="150" height="50" rx="6"/>
+  <text class="mb" x="95.0" y="113" text-anchor="middle">cron</text>
+  <text class="d" x="95.0" y="130" text-anchor="middle">cron.service</text>
+  <path class="lne" d="M170,117 L184,117"/>
+  <rect class="r" x="186" y="92" width="180" height="50" rx="6"/>
+  <text class="mb" x="276.0" y="113" text-anchor="middle">/etc/crontab</text>
+  <text class="d" x="276.0" y="130" text-anchor="middle">17 * * * * hourly</text>
+  <path class="lne" d="M366,117 L380,117"/>
+  <rect class="g" x="382" y="92" width="200" height="50" rx="6"/>
+  <text class="mb" x="482.0" y="113" text-anchor="middle">run-parts</text>
+  <text class="d" x="482.0" y="130" text-anchor="middle">cron.hourly</text>
+  <rect class="rw" x="20" y="152" width="150" height="50" rx="6"/>
+  <text class="mb" x="95.0" y="173" text-anchor="middle">anacron.timer</text>
+  <text class="d" x="95.0" y="190" text-anchor="middle">systemd, 07..23:30</text>
+  <path class="lne" d="M170,177 L184,177"/>
+  <rect class="w" x="186" y="152" width="180" height="50" rx="6"/>
+  <text class="mb" x="276.0" y="173" text-anchor="middle">anacron</text>
+  <text class="d" x="276.0" y="190" text-anchor="middle">/etc/anacrontab, on AC power</text>
+  <path class="lne" d="M366,177 L380,177"/>
+  <rect class="g" x="382" y="152" width="200" height="50" rx="6"/>
+  <text class="mb" x="482.0" y="173" text-anchor="middle">run-parts</text>
+  <text class="d" x="482.0" y="190" text-anchor="middle">daily, weekly, monthly</text>
+  <text class="d" x="20" y="226">Also read every minute: /etc/cron.d/* and user crontabs in /var/spool/cron/crontabs/. File names with a dot are skipped.</text>
+  <text class="d" x="20" y="242">Without systemd, /etc/cron.d/anacron starts anacron instead; without anacron, /etc/crontab runs the daily/weekly/monthly directories.</text>
+  <text class="lb" x="20" y="282">RHEL 9 (cronie 1.5.7)</text>
+  <rect class="rw" x="20" y="294" width="110" height="50" rx="6"/>
+  <text class="mb" x="75.0" y="315" text-anchor="middle">crond</text>
+  <text class="d" x="75.0" y="332" text-anchor="middle">crond.service</text>
+  <path class="lne" d="M130,319 L144,319"/>
+  <rect class="r" x="146" y="294" width="150" height="50" rx="6"/>
+  <text class="mb" x="221.0" y="315" text-anchor="middle">/etc/cron.d/0hourly</text>
+  <text class="d" x="221.0" y="332" text-anchor="middle">01 * * * * hourly</text>
+  <path class="lne" d="M296,319 L310,319"/>
+  <rect class="r" x="312" y="294" width="120" height="50" rx="6"/>
+  <text class="mb" x="372.0" y="315" text-anchor="middle">run-parts</text>
+  <text class="d" x="372.0" y="332" text-anchor="middle">cron.hourly</text>
+  <path class="lne" d="M432,319 L446,319"/>
+  <rect class="w" x="448" y="294" width="150" height="50" rx="6"/>
+  <text class="mb" x="523.0" y="315" text-anchor="middle">0anacron</text>
+  <text class="d" x="523.0" y="332" text-anchor="middle">in cron.hourly</text>
+  <path class="lne" d="M598,319 L612,319"/>
+  <rect class="g" x="614" y="294" width="218" height="50" rx="6"/>
+  <text class="mb" x="723.0" y="315" text-anchor="middle">anacron</text>
+  <text class="d" x="723.0" y="332" text-anchor="middle">daily, weekly, monthly</text>
+  <text class="d" x="20" y="368">/etc/crontab has no jobs. anacron: RANDOM_DELAY=45, START_HOURS_RANGE=3-22. User crontabs: /var/spool/cron/&lt;user&gt;.</text>
+  <text class="d" x="20" y="384">run-parts skips ~, .rpmsave and non-executable files, but runs names with a dot.</text>
+  <rect class="n" x="20" y="400" width="800" height="32" rx="4"/>
+  <text class="c" x="32" y="420">Both: user crontabs and /etc/cron.d run as soon as their time matches; the daily/weekly/monthly directories go through anacron.</text>
+</svg>
