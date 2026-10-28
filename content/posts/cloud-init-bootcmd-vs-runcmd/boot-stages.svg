@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 540" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where bootcmd and runcmd run</title>
+  <desc id="d">cloud-init runs in four systemd units. Local (cloud-init-local.service) finds the datasource. Network (cloud-init.service) runs bootcmd first, then write_files, mounts, users_groups and ssh. Config (cloud-config.service) configures repositories, ntp and timezone, and the runcmd module writes the script /var/lib/cloud/instance/scripts/runcmd. Final (cloud-final.service) installs packages, runs deferred write_files and per-boot scripts, and scripts_user executes the runcmd script. When bootcmd runs, users, write_files, packages and user-data repositories do not exist yet; when runcmd runs they do. Network is available to both.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="540" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where bootcmd and runcmd run</text>
+  <text class="sub" x="20" y="48">Default module order on Ubuntu 24.04 (cloud-init 26.2) and RHEL 9 (cloud-init 24.4); only some modules shown, by function</text>
+  <rect class="n" x="20" y="66" width="186" height="250" rx="6"/>
+  <text class="lb" x="30" y="84">LOCAL</text>
+  <text class="ms" x="30" y="100">cloud-init-local.service</text>
+  <rect class="s" x="30" y="112" width="166" height="28" rx="6"/>
+  <text class="m" x="38" y="130">finds the datasource</text>
+  <rect class="s" x="30" y="150" width="166" height="28" rx="6"/>
+  <text class="m" x="38" y="168">writes network config</text>
+  <path class="lne" d="M207,190 L223,190"/>
+  <rect class="n" x="224" y="66" width="186" height="250" rx="6"/>
+  <text class="lb" x="234" y="84">NETWORK (INIT)</text>
+  <text class="ms" x="234" y="100">cloud-init.service</text>
+  <rect class="w" x="234" y="112" width="166" height="28" rx="6"/>
+  <text class="mb" x="242" y="130">bootcmd</text>
+  <rect class="s" x="234" y="150" width="166" height="28" rx="6"/>
+  <text class="m" x="242" y="168">write_files</text>
+  <rect class="s" x="234" y="188" width="166" height="28" rx="6"/>
+  <text class="m" x="242" y="206">mounts</text>
+  <rect class="s" x="234" y="226" width="166" height="28" rx="6"/>
+  <text class="m" x="242" y="244">users_groups</text>
+  <rect class="s" x="234" y="264" width="166" height="28" rx="6"/>
+  <text class="m" x="242" y="282">ssh</text>
+  <path class="lne" d="M411,190 L427,190"/>
+  <rect class="n" x="428" y="66" width="186" height="250" rx="6"/>
+  <text class="lb" x="438" y="84">CONFIG</text>
+  <text class="ms" x="438" y="100">cloud-config.service</text>
+  <rect class="s" x="438" y="112" width="166" height="28" rx="6"/>
+  <text class="m" x="446" y="130">repos: apt / yum</text>
+  <rect class="s" x="438" y="150" width="166" height="28" rx="6"/>
+  <text class="m" x="446" y="168">ntp, timezone</text>
+  <rect class="rw" x="438" y="188" width="166" height="28" rx="6"/>
+  <text class="mb" x="446" y="206">runcmd: writes</text>
+  <path class="lne" d="M615,190 L631,190"/>
+  <rect class="n" x="632" y="66" width="186" height="250" rx="6"/>
+  <text class="lb" x="642" y="84">FINAL</text>
+  <text class="ms" x="642" y="100">cloud-final.service</text>
+  <rect class="s" x="642" y="112" width="166" height="28" rx="6"/>
+  <text class="m" x="650" y="130">packages: install</text>
+  <rect class="s" x="642" y="150" width="166" height="28" rx="6"/>
+  <text class="m" x="650" y="168">write_files_deferred</text>
+  <rect class="s" x="642" y="188" width="166" height="28" rx="6"/>
+  <text class="m" x="650" y="206">scripts_per_boot</text>
+  <rect class="rw" x="642" y="226" width="166" height="28" rx="6"/>
+  <text class="mb" x="650" y="244">scripts_user: runs</text>
+  <path class="lne" d="M521.0,216 V290 H725.0 V256"/>
+  <text class="ms" x="529.0" y="304">/var/lib/cloud/instance/scripts/runcmd</text>
+  <text class="lb" x="20" y="340">WHEN THE COMMANDS RUN</text>
+  <text class="tb" x="330" y="340" text-anchor="middle">bootcmd</text>
+  <text class="tb" x="560" y="340" text-anchor="middle">runcmd</text>
+  <text class="c" x="20" y="368">users from users:</text>
+  <rect class="x" x="255" y="352" width="150" height="22" rx="4"/>
+  <text class="m" x="330" y="367" text-anchor="middle">no</text>
+  <rect class="g" x="485" y="352" width="150" height="22" rx="4"/>
+  <text class="m" x="560" y="367" text-anchor="middle">yes</text>
+  <text class="c" x="20" y="394">write_files</text>
+  <rect class="x" x="255" y="378" width="150" height="22" rx="4"/>
+  <text class="m" x="330" y="393" text-anchor="middle">none yet</text>
+  <rect class="g" x="485" y="378" width="150" height="22" rx="4"/>
+  <text class="m" x="560" y="393" text-anchor="middle">all, deferred too</text>
+  <text class="c" x="20" y="420">packages:</text>
+  <rect class="x" x="255" y="404" width="150" height="22" rx="4"/>
+  <text class="m" x="330" y="419" text-anchor="middle">no</text>
+  <rect class="g" x="485" y="404" width="150" height="22" rx="4"/>
+  <text class="m" x="560" y="419" text-anchor="middle">installed</text>
+  <text class="c" x="20" y="446">apt: / yum_repos: from user-data</text>
+  <rect class="x" x="255" y="430" width="150" height="22" rx="4"/>
+  <text class="m" x="330" y="445" text-anchor="middle">no</text>
+  <rect class="g" x="485" y="430" width="150" height="22" rx="4"/>
+  <text class="m" x="560" y="445" text-anchor="middle">yes</text>
+  <text class="c" x="20" y="472">network</text>
+  <rect class="g" x="255" y="456" width="150" height="22" rx="4"/>
+  <text class="m" x="330" y="471" text-anchor="middle">yes</text>
+  <rect class="g" x="485" y="456" width="150" height="22" rx="4"/>
+  <text class="m" x="560" y="471" text-anchor="middle">yes</text>
+  <text class="d" x="660" y="368">Both run as root, in one</text>
+  <text class="d" x="660" y="384">/bin/sh script (dash on</text>
+  <text class="d" x="660" y="400">Ubuntu, bash on RHEL).</text>
+  <text class="d" x="660" y="424">Output of both goes to</text>
+  <text class="ms" x="660" y="440">cloud-init-output.log</text>
+  <rect class="n" x="20" y="492" width="800" height="32" rx="4"/>
+  <text class="c" x="32" y="512">Ubuntu 26.04 names the Network stage unit cloud-init-network.service; Ubuntu 24.04 and RHEL 9 use cloud-init.service.</text>
+</svg>

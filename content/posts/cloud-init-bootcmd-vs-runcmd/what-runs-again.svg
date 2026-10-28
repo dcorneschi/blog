@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 434" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What runs again</title>
+  <desc id="d">bootcmd runs on every boot, after a new instance ID and after cloud-init clean. runcmd runs on the first boot, is skipped on a reboot, and runs again for a new instance ID or after cloud-init clean. cloud-init-per once is skipped on reboot and for a new instance ID, and runs again only after cloud-init clean. cloud-init-per instance runs again for a new instance ID or after clean. cloud-init-per always runs every time. cloud-init-per writes its semaphore even when the command fails, so a failed once command is not retried.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="434" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What runs again</text>
+  <text class="sub" x="20" y="48">Ubuntu 24.04 (cloud-init 26.2) and RHEL 9 (cloud-init 24.4) gave the same results</text>
+  <text class="tb" x="302.5" y="82" text-anchor="middle">first boot</text>
+  <text class="tb" x="447.5" y="82" text-anchor="middle">reboot</text>
+  <text class="tb" x="592.5" y="82" text-anchor="middle">new instance ID</text>
+  <text class="tb" x="737.5" y="82" text-anchor="middle">cloud-init clean + reboot</text>
+  <text class="mb" x="20" y="117">bootcmd</text>
+  <rect class="g" x="236" y="96" width="133" height="30" rx="4"/>
+  <text class="c" x="302.5" y="115" text-anchor="middle">runs</text>
+  <rect class="g" x="381" y="96" width="133" height="30" rx="4"/>
+  <text class="c" x="447.5" y="115" text-anchor="middle">runs</text>
+  <rect class="g" x="526" y="96" width="133" height="30" rx="4"/>
+  <text class="c" x="592.5" y="115" text-anchor="middle">runs</text>
+  <rect class="g" x="671" y="96" width="133" height="30" rx="4"/>
+  <text class="c" x="737.5" y="115" text-anchor="middle">runs</text>
+  <text class="mb" x="20" y="157">runcmd</text>
+  <rect class="g" x="236" y="136" width="133" height="30" rx="4"/>
+  <text class="c" x="302.5" y="155" text-anchor="middle">runs</text>
+  <rect class="s" x="381" y="136" width="133" height="30" rx="4"/>
+  <text class="d" x="447.5" y="155" text-anchor="middle">skipped</text>
+  <rect class="g" x="526" y="136" width="133" height="30" rx="4"/>
+  <text class="c" x="592.5" y="155" text-anchor="middle">runs</text>
+  <rect class="g" x="671" y="136" width="133" height="30" rx="4"/>
+  <text class="c" x="737.5" y="155" text-anchor="middle">runs</text>
+  <text class="mb" x="20" y="197">cloud-init-per once</text>
+  <rect class="g" x="236" y="176" width="133" height="30" rx="4"/>
+  <text class="c" x="302.5" y="195" text-anchor="middle">runs</text>
+  <rect class="s" x="381" y="176" width="133" height="30" rx="4"/>
+  <text class="d" x="447.5" y="195" text-anchor="middle">skipped</text>
+  <rect class="s" x="526" y="176" width="133" height="30" rx="4"/>
+  <text class="d" x="592.5" y="195" text-anchor="middle">skipped</text>
+  <rect class="g" x="671" y="176" width="133" height="30" rx="4"/>
+  <text class="c" x="737.5" y="195" text-anchor="middle">runs</text>
+  <text class="mb" x="20" y="237">cloud-init-per instance</text>
+  <rect class="g" x="236" y="216" width="133" height="30" rx="4"/>
+  <text class="c" x="302.5" y="235" text-anchor="middle">runs</text>
+  <rect class="s" x="381" y="216" width="133" height="30" rx="4"/>
+  <text class="d" x="447.5" y="235" text-anchor="middle">skipped</text>
+  <rect class="g" x="526" y="216" width="133" height="30" rx="4"/>
+  <text class="c" x="592.5" y="235" text-anchor="middle">runs</text>
+  <rect class="g" x="671" y="216" width="133" height="30" rx="4"/>
+  <text class="c" x="737.5" y="235" text-anchor="middle">runs</text>
+  <text class="mb" x="20" y="277">cloud-init-per always</text>
+  <rect class="g" x="236" y="256" width="133" height="30" rx="4"/>
+  <text class="c" x="302.5" y="275" text-anchor="middle">runs</text>
+  <rect class="g" x="381" y="256" width="133" height="30" rx="4"/>
+  <text class="c" x="447.5" y="275" text-anchor="middle">runs</text>
+  <rect class="g" x="526" y="256" width="133" height="30" rx="4"/>
+  <text class="c" x="592.5" y="275" text-anchor="middle">runs</text>
+  <rect class="g" x="671" y="256" width="133" height="30" rx="4"/>
+  <text class="c" x="737.5" y="275" text-anchor="middle">runs</text>
+  <text class="lb" x="20" y="312">SEMAPHORES</text>
+  <text class="ms" x="20" y="330">runcmd: /var/lib/cloud/instance/sem/config_runcmd</text>
+  <text class="ms" x="20" y="346">once: /var/lib/cloud/sem/bootper.&lt;name&gt;.once (kept for a new instance ID)</text>
+  <text class="ms" x="20" y="362">instance: /var/lib/cloud/instance/sem/bootper.&lt;name&gt;.instance (new directory per instance ID)</text>
+  <rect class="x" x="20" y="386" width="800" height="32" rx="4"/>
+  <text class="c" x="32" y="406">cloud-init-per writes its semaphore even when the command fails (it stores the exit code), so a failed once command is not retried.</text>
+</svg>
