@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.167.0
+      DART_SASS_VERSION: 1.107.0
       HUGO_ENVIRONMENT: production
       TZ: UTC
     steps:
@@ -37,6 +38,15 @@ jobs:
             "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
           sudo dpkg -i "${{ runner.temp }}/hugo.deb"
           hugo version
+
+      # css.Sass uses the dartsass transpiler (layouts/_partials/head.html), LibSass is deprecated
+      - name: Install Dart Sass
+        run: |
+          wget -q -O "${{ runner.temp }}/dart-sass.tar.gz" \
+            "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          tar -C "${{ runner.temp }}" -xzf "${{ runner.temp }}/dart-sass.tar.gz"
+          echo "${{ runner.temp }}/dart-sass" >> "${GITHUB_PATH}"
+          "${{ runner.temp }}/dart-sass/sass" --version
 
       - name: Checkout
         uses: actions/checkout@v4
