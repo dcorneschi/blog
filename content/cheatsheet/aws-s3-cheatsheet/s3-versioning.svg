@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 430" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Versions and delete markers of one key</title>
+  <desc id="d">The key v.txt in a versioned bucket over four steps. Put v1 creates a version with an opaque ID. Put v2 adds a second version, which becomes the latest. aws s3 rm adds a delete marker as the latest version: aws s3 ls no longer shows the object, but both versions remain. Deleting the delete marker by its version ID makes v2 the latest again and the object is back. Deleting a version by its ID removes that version for good. aws s3 rb --force deletes only current objects, so the versions and markers stay and the bucket is not empty; delete all Versions, then all DeleteMarkers, then remove the bucket.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10px; fill: #495057; }
+      .mc  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lt  { font-size: 10px; font-weight: 700; fill: #2b7a4b; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .col { fill: #f8f9fa; stroke: #dee2e6; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="430" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Versions and delete markers of one key</text>
+  <text class="sub" x="20" y="48">Key v.txt in a versioned bucket; IDs are opaque strings (shortened here), the newest entry is on top</text>
+
+  <!-- column 1 -->
+  <rect class="col" x="20" y="64" width="185" height="250" rx="6"/>
+  <text class="lb" x="32" y="84">1 · PUT V1</text>
+  <text class="mc" x="32" y="102">aws s3 cp v.txt s3://…</text>
+  <rect class="r" x="32" y="258" width="161" height="44" rx="5"/>
+  <text class="mb" x="44" y="278">v1</text><text class="ms" x="70" y="278">5aa84458…</text>
+  <text class="lt" x="44" y="294">LATEST</text>
+
+  <!-- column 2 -->
+  <rect class="col" x="225" y="64" width="185" height="250" rx="6"/>
+  <text class="lb" x="237" y="84">2 · PUT V2</text>
+  <text class="mc" x="237" y="102">aws s3 cp v.txt s3://…</text>
+  <rect class="r" x="237" y="206" width="161" height="44" rx="5"/>
+  <text class="mb" x="249" y="226">v2</text><text class="ms" x="275" y="226">81524ced…</text>
+  <text class="lt" x="249" y="242">LATEST</text>
+  <rect class="s" x="237" y="258" width="161" height="44" rx="5"/>
+  <text class="mb" x="249" y="278">v1</text><text class="ms" x="275" y="278">5aa84458…</text>
+  <text class="ms" x="249" y="294">noncurrent</text>
+
+  <!-- column 3 -->
+  <rect class="col" x="430" y="64" width="185" height="250" rx="6"/>
+  <text class="lb" x="442" y="84">3 · DELETE</text>
+  <text class="mc" x="442" y="102">aws s3 rm s3://…/v.txt</text>
+  <text class="d" x="442" y="124">aws s3 ls: object is gone</text>
+  <rect class="x" x="442" y="154" width="161" height="44" rx="5"/>
+  <text class="mb" x="454" y="174">delete marker</text><text class="ms" x="454" y="190">cf048236…  LATEST</text>
+  <rect class="s" x="442" y="206" width="161" height="44" rx="5"/>
+  <text class="mb" x="454" y="226">v2</text><text class="ms" x="480" y="226">81524ced…</text>
+  <rect class="s" x="442" y="258" width="161" height="44" rx="5"/>
+  <text class="mb" x="454" y="278">v1</text><text class="ms" x="480" y="278">5aa84458…</text>
+
+  <!-- column 4 -->
+  <rect class="col" x="635" y="64" width="185" height="250" rx="6"/>
+  <text class="lb" x="647" y="84">4 · UNDELETE</text>
+  <text class="mc" x="647" y="102">delete-object</text>
+  <text class="mc" x="647" y="116">--version-id cf048236…</text>
+  <text class="d" x="647" y="138">marker removed: v.txt is back</text>
+  <rect class="g" x="647" y="206" width="161" height="44" rx="5"/>
+  <text class="mb" x="659" y="226">v2</text><text class="ms" x="685" y="226">81524ced…</text>
+  <text class="lt" x="659" y="242">LATEST</text>
+  <rect class="s" x="647" y="258" width="161" height="44" rx="5"/>
+  <text class="mb" x="659" y="278">v1</text><text class="ms" x="685" y="278">5aa84458…</text>
+
+  <path class="lne" d="M205,190 L223,190"/>
+  <path class="lne" d="M410,190 L428,190"/>
+  <path class="lne" d="M615,190 L633,190"/>
+
+  <!-- notes -->
+  <rect class="w" x="20" y="330" width="390" height="84" rx="6"/>
+  <text class="tb" x="32" y="350">Deleting a version is permanent</text>
+  <text class="mc" x="32" y="370">delete-object --version-id 5aa84458…</text>
+  <text class="d" x="32" y="390">removes v1 for good; only a delete with a</text>
+  <text class="d" x="32" y="405">version ID skips the delete marker</text>
+  <rect class="x" x="430" y="330" width="390" height="84" rx="6"/>
+  <text class="tb" x="442" y="350">Why rb --force fails: BucketNotEmpty</text>
+  <text class="d" x="442" y="370">--force deletes current objects only, which adds more</text>
+  <text class="d" x="442" y="385">delete markers. Delete all Versions, then all</text>
+  <text class="d" x="442" y="400">DeleteMarkers (One-Liners), then rb.</text>
+</svg>

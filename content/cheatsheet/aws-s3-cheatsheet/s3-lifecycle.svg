@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The example lifecycle.json on a timeline</title>
+  <desc id="d">Rule one, for keys under logs/: objects stay in STANDARD from day 0, move to STANDARD_IA on day 30, to GLACIER (Flexible Retrieval) on day 90 and expire on day 365. STANDARD and STANDARD_IA can be read at once, STANDARD_IA with a per-GB retrieval fee; GLACIER objects must first be restored with restore-object, which takes minutes to hours. Rule two, for the whole bucket: incomplete multipart uploads are aborted 7 days after they were started.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .ax  { font-size: 11px; font-weight: 700; fill: #495057; text-anchor: middle; }
+      .tick{ stroke: #adb5bd; stroke-width: 1; stroke-dasharray: 3 3; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The example lifecycle.json on a timeline</text>
+  <text class="sub" x="20" y="48">Days since the object was created (not to scale)</text>
+
+  <!-- axis ticks -->
+  <path class="tick" d="M170,86 V96 M330,86 V96 M490,86 V96 M720,86 V96 M330,144 V154 M490,144 V154 M720,144 V154"/>
+  <text class="ax" x="170" y="80">day 0</text>
+  <text class="ax" x="330" y="80">30</text>
+  <text class="ax" x="490" y="80">90</text>
+  <text class="ax" x="720" y="80">365</text>
+
+  <!-- rule 1 -->
+  <text class="lb" x="20" y="112">RULE 1</text>
+  <text class="ms" x="20" y="128">prefix logs/</text>
+  <rect class="r" x="170" y="96" width="160" height="48" rx="5"/>
+  <text class="mb" x="250" y="117" text-anchor="middle">STANDARD</text>
+  <text class="d" x="250" y="134" text-anchor="middle">read at once</text>
+  <rect class="w" x="330" y="96" width="160" height="48" rx="5"/>
+  <text class="mb" x="410" y="117" text-anchor="middle">STANDARD_IA</text>
+  <text class="d" x="410" y="134" text-anchor="middle">at once, per-GB fee</text>
+  <rect class="rw" x="490" y="96" width="230" height="48" rx="5"/>
+  <text class="mb" x="605" y="117" text-anchor="middle">GLACIER</text>
+  <text class="d" x="605" y="134" text-anchor="middle">restore-object first: minutes to hours</text>
+  <rect class="x" x="720" y="96" width="100" height="48" rx="5"/>
+  <text class="tb" x="770" y="125" text-anchor="middle">expired</text>
+
+  <text class="d" x="330" y="166" text-anchor="middle">Transitions[0]</text>
+  <text class="d" x="490" y="166" text-anchor="middle">Transitions[1]</text>
+  <text class="d" x="720" y="166" text-anchor="middle">Expiration</text>
+
+  <!-- rule 2 -->
+  <text class="lb" x="20" y="208">RULE 2</text>
+  <text class="ms" x="20" y="224">whole bucket</text>
+  <rect class="n" x="170" y="192" width="70" height="48" rx="5"/>
+  <text class="d" x="205" y="212" text-anchor="middle">upload</text>
+  <text class="d" x="205" y="227" text-anchor="middle">started</text>
+  <rect class="x" x="240" y="192" width="80" height="48" rx="5"/>
+  <text class="tb" x="280" y="213" text-anchor="middle">aborted</text>
+  <text class="d" x="280" y="229" text-anchor="middle">day 7</text>
+  <text class="d" x="336" y="221">incomplete multipart uploads stop costing money</text>
+
+  <text class="d" x="20" y="296">Classes you transition into have minimum storage durations (30 days for STANDARD_IA, 90 for GLACIER):</text>
+  <text class="d" x="20" y="312">objects removed earlier are billed for the rest of that minimum.</text>
+</svg>
