@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Elastic Volumes: modify a volume online</title>
+  <desc id="d">modify-volume moves the volume through modifying, optimizing and completed. The new size is usable as soon as optimizing starts, usually within seconds; the rest of the change finishes in the background, from minutes to hours (a 1 TiB volume can take up to six hours). Inside the instance, from that point: lsblk shows the new size, growpart grows the partition on partitioned disks, then xfs_growfs or resize2fs grows the file system. The next modification can start only after completed, and a volume allows at most four modifications in a rolling 24-hour window; a fifth fails with an error that says when the next one is allowed. Volumes can't be shrunk and a modification can't be cancelled.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .dr  { font-size: 11px; fill: #dc3545; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Elastic Volumes: modify a volume online</text>
+  <text class="sub" x="20" y="48">aws ec2 modify-volume --volume-id vol-0abc123 --size 200</text>
+
+  <!-- state timeline -->
+  <text class="lb" x="20" y="88">VOLUME</text>
+  <path class="lne" d="M96,104 L118,104"/>
+  <rect class="rw" x="120" y="84" width="130" height="40" rx="6"/>
+  <text class="tb" x="185" y="109" text-anchor="middle">modifying</text>
+  <rect class="r" x="252" y="84" width="390" height="40" rx="6"/>
+  <text class="tb" x="447" y="109" text-anchor="middle">optimizing</text>
+  <rect class="g" x="644" y="84" width="176" height="40" rx="6"/>
+  <text class="tb" x="732" y="109" text-anchor="middle">completed</text>
+
+  <path class="dash" d="M252,76 L252,212"/>
+  <text class="d" x="258" y="142">new size usable here (usually seconds)</text>
+  <text class="d" x="258" y="158">IOPS, throughput and type changes finish in the background:</text>
+  <text class="d" x="258" y="174">minutes to hours (a 1 TiB volume can take up to 6 h)</text>
+  <path class="dash" d="M644,76 L644,212"/>
+  <text class="d" x="650" y="142">next modification</text>
+  <text class="d" x="650" y="158">allowed from here</text>
+
+  <!-- inside the instance -->
+  <text class="lb" x="20" y="232">INSIDE THE INSTANCE</text>
+  <rect class="s" x="252" y="214" width="150" height="48" rx="6"/>
+  <text class="ms" x="327" y="235" text-anchor="middle">lsblk</text>
+  <text class="d" x="327" y="252" text-anchor="middle">disk shows 200G</text>
+  <path class="lne" d="M402,238 L428,238"/>
+  <rect class="s" x="430" y="214" width="176" height="48" rx="6"/>
+  <text class="ms" x="518" y="235" text-anchor="middle">growpart /dev/nvme0n1 1</text>
+  <text class="d" x="518" y="252" text-anchor="middle">partitioned disks only</text>
+  <path class="lne" d="M606,238 L632,238"/>
+  <rect class="s" x="634" y="214" width="186" height="48" rx="6"/>
+  <text class="ms" x="727" y="235" text-anchor="middle">xfs_growfs / resize2fs</text>
+  <text class="d" x="727" y="252" text-anchor="middle">grow the file system</text>
+
+  <!-- 24 h window -->
+  <text class="lb" x="20" y="300">ROLLING 24 H</text>
+  <rect class="n" x="120" y="284" width="700" height="40" rx="6"/>
+  <rect class="g" x="134" y="292" width="96" height="24" rx="4"/><text class="ms" x="182" y="308" text-anchor="middle">change 1</text>
+  <rect class="g" x="242" y="292" width="96" height="24" rx="4"/><text class="ms" x="290" y="308" text-anchor="middle">change 2</text>
+  <rect class="g" x="350" y="292" width="96" height="24" rx="4"/><text class="ms" x="398" y="308" text-anchor="middle">change 3</text>
+  <rect class="g" x="458" y="292" width="96" height="24" rx="4"/><text class="ms" x="506" y="308" text-anchor="middle">change 4</text>
+  <rect class="x" x="566" y="292" width="96" height="24" rx="4"/><text class="ms" x="614" y="308" text-anchor="middle">change 5</text>
+  <text class="dr" x="672" y="302">error: tells you when</text>
+  <text class="dr" x="672" y="316">the next one is allowed</text>
+  <text class="d" x="120" y="346">Size can only grow, a request can't be cancelled, and each change must reach completed before the next.</text>
+</svg>

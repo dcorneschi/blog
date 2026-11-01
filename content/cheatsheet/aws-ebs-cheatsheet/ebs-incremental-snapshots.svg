@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Incremental snapshots</title>
+  <desc id="d">A volume with five block positions and three snapshots. Snapshot 1 stores blocks A, B, C and D. After block B changes, snapshot 2 stores only B prime and refers to A, C and D. After D changes and block E is written, snapshot 3 stores D prime and E and refers to A, B prime and C. Restoring snapshot 3 gives the full volume A, B prime, C, D prime, E. Deleting snapshot 1 frees only B and D, because A and C are still used by snapshots 2 and 3. Archiving snapshot 3 stores it as a full copy of all five blocks.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 14px; font-weight: 700; fill: #212529; }
+      .mg  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 14px; fill: #868e96; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .ref { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .emp { fill: #f8f9fa; stroke: #dee2e6; }
+      .fr  { fill: none; stroke: #dc3545; stroke-width: 2; stroke-dasharray: 5 3; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Incremental snapshots</text>
+  <text class="sub" x="20" y="48">Each snapshot stores only the blocks that changed since the previous one; the rest are references</text>
+
+  <!-- column headers -->
+  <text class="lb" x="20" y="82">BLOCK</text>
+  <text class="ms" x="205" y="82" text-anchor="middle">1</text>
+  <text class="ms" x="285" y="82" text-anchor="middle">2</text>
+  <text class="ms" x="365" y="82" text-anchor="middle">3</text>
+  <text class="ms" x="445" y="82" text-anchor="middle">4</text>
+  <text class="ms" x="525" y="82" text-anchor="middle">5</text>
+
+  <!-- snapshot 1 -->
+  <text class="tb" x="20" y="116">Snap 1</text>
+  <text class="d" x="20" y="132">first, full</text>
+  <rect class="w" x="170" y="96" width="70" height="44" rx="5"/><text class="mb" x="205" y="123" text-anchor="middle">A</text>
+  <rect class="w" x="250" y="96" width="70" height="44" rx="5"/><text class="mb" x="285" y="123" text-anchor="middle">B</text>
+  <rect class="w" x="330" y="96" width="70" height="44" rx="5"/><text class="mb" x="365" y="123" text-anchor="middle">C</text>
+  <rect class="w" x="410" y="96" width="70" height="44" rx="5"/><text class="mb" x="445" y="123" text-anchor="middle">D</text>
+  <rect class="emp" x="490" y="96" width="70" height="44" rx="5"/><text class="mg" x="525" y="123" text-anchor="middle">–</text>
+  <rect class="fr" x="246" y="92" width="78" height="52" rx="7"/>
+  <rect class="fr" x="406" y="92" width="78" height="52" rx="7"/>
+  <text class="c" x="574" y="116">4 blocks stored</text>
+
+  <!-- snapshot 2 -->
+  <text class="tb" x="20" y="176">Snap 2</text>
+  <text class="d" x="20" y="192">B changed</text>
+  <rect class="ref" x="170" y="156" width="70" height="44" rx="5"/><text class="mg" x="205" y="183" text-anchor="middle">A</text>
+  <rect class="w" x="250" y="156" width="70" height="44" rx="5"/><text class="mb" x="285" y="183" text-anchor="middle">B′</text>
+  <rect class="ref" x="330" y="156" width="70" height="44" rx="5"/><text class="mg" x="365" y="183" text-anchor="middle">C</text>
+  <rect class="ref" x="410" y="156" width="70" height="44" rx="5"/><text class="mg" x="445" y="183" text-anchor="middle">D</text>
+  <rect class="emp" x="490" y="156" width="70" height="44" rx="5"/><text class="mg" x="525" y="183" text-anchor="middle">–</text>
+  <text class="c" x="574" y="176">1 block stored</text>
+
+  <!-- snapshot 3 -->
+  <text class="tb" x="20" y="236">Snap 3</text>
+  <text class="d" x="20" y="252">D changed, E new</text>
+  <rect class="ref" x="170" y="216" width="70" height="44" rx="5"/><text class="mg" x="205" y="243" text-anchor="middle">A</text>
+  <rect class="ref" x="250" y="216" width="70" height="44" rx="5"/><text class="mg" x="285" y="243" text-anchor="middle">B′</text>
+  <rect class="ref" x="330" y="216" width="70" height="44" rx="5"/><text class="mg" x="365" y="243" text-anchor="middle">C</text>
+  <rect class="w" x="410" y="216" width="70" height="44" rx="5"/><text class="mb" x="445" y="243" text-anchor="middle">D′</text>
+  <rect class="w" x="490" y="216" width="70" height="44" rx="5"/><text class="mb" x="525" y="243" text-anchor="middle">E</text>
+  <text class="c" x="574" y="236">2 blocks stored</text>
+
+  <!-- legend -->
+  <rect class="w" x="170" y="280" width="18" height="14" rx="3"/><text class="d" x="194" y="291">stored in this snapshot</text>
+  <rect class="ref" x="330" y="280" width="18" height="14" rx="3"/><text class="d" x="354" y="291">reference to an earlier snapshot</text>
+  <rect class="fr" x="170" y="304" width="18" height="14" rx="3"/><text class="d" x="194" y="315">freed when Snap 1 is deleted</text>
+
+  <!-- outcomes -->
+  <rect class="x" x="20" y="332" width="260" height="38" rx="6"/>
+  <text class="ms" x="32" y="348">delete-snapshot Snap 1</text>
+  <text class="d" x="32" y="362">frees B and D only; A and C are still used</text>
+  <rect class="g" x="290" y="332" width="260" height="38" rx="6"/>
+  <text class="ms" x="302" y="348">create-volume from Snap 3</text>
+  <text class="d" x="302" y="362">full volume: A B′ C D′ E</text>
+  <rect class="n" x="560" y="332" width="260" height="38" rx="6"/>
+  <text class="ms" x="572" y="348">modify-snapshot-tier Snap 3</text>
+  <text class="d" x="572" y="362">archive keeps a full copy: 5 blocks</text>
+</svg>

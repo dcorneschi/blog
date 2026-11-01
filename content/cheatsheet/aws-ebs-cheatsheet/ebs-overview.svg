@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 500" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where EBS data lives</title>
+  <desc id="d">Inside one Region, a volume lives in one Availability Zone and attaches only to instances in that AZ; attaching it to an instance in another AZ is not possible. copy-volumes makes a copy in the same AZ. create-snapshot stores a snapshot in S3 at Region scope; create-volume restores it in any AZ of the Region, fully initialized with fast snapshot restore or at a provisioned initialization rate. Snapshots move to the archive tier with modify-snapshot-tier and back with restore-snapshot-tier, go to the Recycle Bin when deleted under a retention rule, are copied to another Region with copy-snapshot and shared with another account with modify-snapshot-attribute.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mr  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #dc3545; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); marker-start: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .att { stroke: #868e96; stroke-width: 2; fill: none; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+    </style>
+  </defs>
+  <rect width="840" height="500" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where EBS data lives</text>
+  <text class="sub" x="20" y="48">Volumes belong to one Availability Zone, snapshots to the Region</text>
+
+  <!-- Region -->
+  <rect class="sd" x="20" y="64" width="604" height="420" rx="8"/>
+  <text class="lb" x="34" y="84">REGION us-east-1</text>
+
+  <!-- AZ a -->
+  <rect class="n" x="36" y="96" width="280" height="160" rx="6"/>
+  <text class="lb" x="48" y="114">AZ us-east-1a</text>
+  <rect class="s" x="52" y="126" width="120" height="40" rx="6"/>
+  <text class="tb" x="112" y="151" text-anchor="middle">EC2 instance</text>
+  <path class="att" d="M112,166 L112,192"/>
+  <rect class="r" x="52" y="192" width="120" height="48" rx="6"/>
+  <text class="tb" x="112" y="212" text-anchor="middle">volume</text>
+  <text class="ms" x="112" y="229" text-anchor="middle">gp3, 100 GiB</text>
+  <path class="lne" d="M172,216 L204,216"/>
+  <rect class="r" x="206" y="192" width="98" height="48" rx="6"/>
+  <text class="tb" x="255" y="212" text-anchor="middle">copy</text>
+  <text class="ms" x="255" y="229" text-anchor="middle">copy-volumes</text>
+
+  <!-- AZ b -->
+  <rect class="n" x="334" y="96" width="274" height="160" rx="6"/>
+  <text class="lb" x="346" y="114">AZ us-east-1b</text>
+  <rect class="s" x="350" y="126" width="120" height="40" rx="6"/>
+  <text class="tb" x="410" y="151" text-anchor="middle">EC2 instance</text>
+  <path class="att" d="M410,166 L410,192"/>
+  <rect class="g" x="350" y="192" width="120" height="48" rx="6"/>
+  <text class="tb" x="410" y="212" text-anchor="middle">restored volume</text>
+  <text class="ms" x="410" y="229" text-anchor="middle">from the snapshot</text>
+  <text class="d" x="486" y="140">attach only within</text>
+  <text class="d" x="486" y="154">the same AZ</text>
+
+  <!-- cross-AZ attach: not possible -->
+  <path class="lnx" d="M172,200 C230,170 290,150 348,148"/>
+  <text class="mr" x="196" y="148">attach across</text>
+  <text class="mr" x="196" y="161">AZs: no</text>
+
+  <!-- snapshots -->
+  <rect class="w" x="334" y="300" width="274" height="168" rx="6"/>
+  <text class="tb" x="350" y="322">Snapshots</text>
+  <text class="d" x="350" y="342">stored in S3, usable in every AZ of the Region</text>
+  <text class="d" x="350" y="360">incremental, crash-consistent</text>
+  <text class="ms" x="350" y="384">create-snapshots</text>
+  <text class="d" x="462" y="384">all volumes at once</text>
+  <text class="ms" x="350" y="404">lock-snapshot</text>
+  <text class="d" x="462" y="404">nobody can delete it</text>
+  <text class="ms" x="350" y="430">fast snapshot</text>
+  <text class="d" x="462" y="430">restores fully initialized</text>
+  <text class="ms" x="350" y="456">DLM / AWS Backup</text>
+  <text class="d" x="462" y="456">schedules and retention</text>
+
+  <!-- volume -> snapshot, snapshot -> restored volume -->
+  <path class="lne" d="M112,240 L112,276 L380,276 L380,298"/>
+  <text class="ms" x="124" y="270">create-snapshot</text>
+  <path class="lne" d="M560,300 L560,272 L440,272 L440,242"/>
+  <text class="ms" x="470" y="266">create-volume</text>
+  <text class="d" x="462" y="290">FSR / init rate</text>
+
+  <!-- archive and recycle bin -->
+  <rect class="n" x="36" y="300" width="230" height="78" rx="6"/>
+  <text class="tb" x="50" y="320">Archive tier</text>
+  <text class="d" x="50" y="338">full copy, up to 75% cheaper</text>
+  <text class="d" x="50" y="354">90-day minimum, restore first</text>
+  <text class="ms" x="50" y="370">restore-snapshot-tier</text>
+  <path class="lnb" d="M268,330 L332,330"/>
+  <text class="ms" x="270" y="322">modify-</text>
+  <text class="ms" x="270" y="348">snapshot-</text>
+  <text class="ms" x="270" y="361">tier</text>
+
+  <rect class="rw" x="36" y="392" width="230" height="76" rx="6"/>
+  <text class="tb" x="50" y="412">Recycle Bin</text>
+  <text class="d" x="50" y="430">deleted snapshots 1–365 days,</text>
+  <text class="d" x="50" y="446">volumes 1–7 days (rbin rule)</text>
+  <text class="ms" x="50" y="462">restore-…-from-recycle-bin</text>
+  <path class="lnb" d="M268,430 L332,430"/>
+  <text class="ms" x="276" y="422">delete</text>
+
+  <!-- outside the region -->
+  <rect class="s" x="640" y="300" width="186" height="70" rx="6"/>
+  <text class="tb" x="650" y="320">Other Region</text>
+  <text class="ms" x="650" y="338">copy-snapshot</text>
+  <text class="d" x="650" y="356">first copy full, then incremental</text>
+  <path class="lne" d="M608,335 L638,335"/>
+
+  <rect class="s" x="640" y="398" width="186" height="70" rx="6"/>
+  <text class="tb" x="650" y="418">Other account</text>
+  <text class="ms" x="650" y="436">modify-snapshot-attribute</text>
+  <text class="d" x="650" y="454">encrypted: customer managed key</text>
+  <path class="lne" d="M608,433 L638,433"/>
+</svg>
