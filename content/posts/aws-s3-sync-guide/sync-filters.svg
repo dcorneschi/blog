@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 424" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Include and exclude: the last matching filter wins</title>
+  <desc id="d">Five files, a.jpg, b.webp, c.png, sub/d.jpg and sub/e.webp, run through three filter chains. With --exclude '*' --include '*.jpg' --include '*.webp', the last match for the jpg and webp files is an include, so four files are uploaded and c.png is skipped. With --include '*.jpg' --exclude '*', the last match for every file is --exclude '*', so nothing is uploaded. With --exclude '[!*.webp]', the pattern is a one-character class that no path matches, so all five files are uploaded.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; fill: #212529; }
+      .mh  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .ok  { font-size: 12px; font-weight: 700; fill: #2b7a4b; }
+      .no  { font-size: 12px; font-weight: 700; fill: #c92a2a; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="840" height="424" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Include and exclude: the last matching filter wins</text>
+  <text class="sub" x="20" y="48">Filters are checked in order for every path; with no match the file is included</text>
+
+  <!-- column headers -->
+  <text class="lb" x="20" y="96">FILE</text>
+  <rect class="n" x="150" y="62" width="250" height="56" rx="6"/>
+  <text class="mh" x="162" y="80">--exclude '*'</text>
+  <text class="mh" x="162" y="95">--include '*.jpg'</text>
+  <text class="mh" x="162" y="110">--include '*.webp'</text>
+  <rect class="n" x="414" y="62" width="200" height="56" rx="6"/>
+  <text class="mh" x="426" y="87">--include '*.jpg'</text>
+  <text class="mh" x="426" y="102">--exclude '*'</text>
+  <rect class="n" x="626" y="62" width="194" height="56" rx="6"/>
+  <text class="mh" x="638" y="94">--exclude '[!*.webp]'</text>
+  <text class="m" x="20" y="151">a.jpg</text>
+  <rect class="g" x="150" y="130" width="250" height="34" rx="5"/><text class="ok" x="162" y="151">upload</text><text class="ms" x="388" y="151" text-anchor="end">--include '*.jpg'</text>
+  <rect class="x" x="414" y="130" width="200" height="34" rx="5"/><text class="no" x="426" y="151">skip</text><text class="ms" x="602" y="151" text-anchor="end">--exclude '*'</text>
+  <rect class="g" x="626" y="130" width="194" height="34" rx="5"/><text class="ok" x="638" y="151">upload</text><text class="ms" x="808" y="151" text-anchor="end">no match</text>
+  <text class="m" x="20" y="193">b.webp</text>
+  <rect class="g" x="150" y="172" width="250" height="34" rx="5"/><text class="ok" x="162" y="193">upload</text><text class="ms" x="388" y="193" text-anchor="end">--include '*.webp'</text>
+  <rect class="x" x="414" y="172" width="200" height="34" rx="5"/><text class="no" x="426" y="193">skip</text><text class="ms" x="602" y="193" text-anchor="end">--exclude '*'</text>
+  <rect class="g" x="626" y="172" width="194" height="34" rx="5"/><text class="ok" x="638" y="193">upload</text><text class="ms" x="808" y="193" text-anchor="end">no match</text>
+  <text class="m" x="20" y="235">c.png</text>
+  <rect class="x" x="150" y="214" width="250" height="34" rx="5"/><text class="no" x="162" y="235">skip</text><text class="ms" x="388" y="235" text-anchor="end">--exclude '*'</text>
+  <rect class="x" x="414" y="214" width="200" height="34" rx="5"/><text class="no" x="426" y="235">skip</text><text class="ms" x="602" y="235" text-anchor="end">--exclude '*'</text>
+  <rect class="g" x="626" y="214" width="194" height="34" rx="5"/><text class="ok" x="638" y="235">upload</text><text class="ms" x="808" y="235" text-anchor="end">no match</text>
+  <text class="m" x="20" y="277">sub/d.jpg</text>
+  <rect class="g" x="150" y="256" width="250" height="34" rx="5"/><text class="ok" x="162" y="277">upload</text><text class="ms" x="388" y="277" text-anchor="end">'*' matches '/' too</text>
+  <rect class="x" x="414" y="256" width="200" height="34" rx="5"/><text class="no" x="426" y="277">skip</text><text class="ms" x="602" y="277" text-anchor="end">--exclude '*'</text>
+  <rect class="g" x="626" y="256" width="194" height="34" rx="5"/><text class="ok" x="638" y="277">upload</text><text class="ms" x="808" y="277" text-anchor="end">no match</text>
+  <text class="m" x="20" y="319">sub/e.webp</text>
+  <rect class="g" x="150" y="298" width="250" height="34" rx="5"/><text class="ok" x="162" y="319">upload</text><text class="ms" x="388" y="319" text-anchor="end">--include '*.webp'</text>
+  <rect class="x" x="414" y="298" width="200" height="34" rx="5"/><text class="no" x="426" y="319">skip</text><text class="ms" x="602" y="319" text-anchor="end">--exclude '*'</text>
+  <rect class="g" x="626" y="298" width="194" height="34" rx="5"/><text class="ok" x="638" y="319">upload</text><text class="ms" x="808" y="319" text-anchor="end">no match</text>
+  <text class="lb" x="20" y="358">RESULT</text>
+  <text class="tb" x="275" y="358" text-anchor="middle">4 files</text>
+  <text class="d" x="275" y="376" text-anchor="middle">exclude all first, then add back</text>
+  <text class="tb" x="514" y="358" text-anchor="middle">nothing</text>
+  <text class="d" x="514" y="376" text-anchor="middle">the final exclude matches all</text>
+  <text class="tb" x="723" y="358" text-anchor="middle">all 5 files</text>
+  <text class="d" x="723" y="376" text-anchor="middle">[!...] is one character</text>
+  <text class="d" x="20" y="408">Cell notes show the last filter that matched. Paths are relative to the source folder; all three chains ran with --dryrun on AWS CLI 2.39.3.</text>
+</svg>

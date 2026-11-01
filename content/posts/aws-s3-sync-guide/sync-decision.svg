@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How aws s3 sync decides, per file</title>
+  <desc id="d">For each file at the source: if it does not exist at the destination it is copied; if the size differs it is copied. Same size: for uploads and S3-to-S3 copies it is copied when the source is newer than the destination, otherwise skipped. For downloads it is downloaded only when the local file is newer than the object, which overwrites a local edit; when the S3 object is newer it is skipped, even if it changed. --no-overwrite skips every existing file, --size-only skips every same-size file, --exact-timestamps downloads same-size files whose times differ at all, and --delete removes files that exist only at the destination unless a filter excludes them.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .yn  { font-size: 11px; font-weight: 700; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .ln  { stroke: #495057; stroke-width: 1.6; fill: none; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+    </style>
+  </defs>
+  <rect width="840" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How aws s3 sync decides, per file</text>
+  <text class="sub" x="20" y="48">Only size and time are compared (local mtime, object LastModified), never content or checksums</text>
+
+  <!-- start -->
+  <rect class="s" x="20" y="64" width="210" height="36" rx="6"/>
+  <text class="tb" x="125" y="87" text-anchor="middle">file at the source</text>
+  <path class="lne" d="M125,100 L125,114"/>
+
+  <!-- 1 exists -->
+  <rect class="n" x="20" y="116" width="210" height="44" rx="6"/>
+  <text class="tb" x="125" y="143" text-anchor="middle">1 · exists at destination?</text>
+  <path class="lne" d="M230,138 L278,138"/><text class="yn" x="242" y="131">no</text>
+  <rect class="g" x="280" y="116" width="110" height="44" rx="6"/>
+  <text class="tb" x="335" y="143" text-anchor="middle">copy</text>
+  <path class="lne" d="M125,160 L125,182"/><text class="yn" x="131" y="175">yes</text>
+
+  <!-- 2 size -->
+  <rect class="n" x="20" y="184" width="210" height="44" rx="6"/>
+  <text class="tb" x="125" y="211" text-anchor="middle">2 · same size?</text>
+  <path class="lne" d="M230,206 L278,206"/><text class="yn" x="242" y="199">no</text>
+  <rect class="g" x="280" y="184" width="110" height="44" rx="6"/>
+  <text class="tb" x="335" y="211" text-anchor="middle">copy</text>
+  <path class="ln" d="M125,228 L125,246 M125,246 L480,246"/><text class="yn" x="131" y="241">yes</text>
+  <path class="lne" d="M125,246 L125,262"/>
+  <path class="lne" d="M480,246 L480,262"/>
+
+  <!-- 3a upload / s3->s3 -->
+  <rect class="n" x="20" y="264" width="210" height="50" rx="6"/>
+  <text class="tb" x="125" y="284" text-anchor="middle">3 · upload, S3 → S3</text>
+  <text class="d" x="125" y="302" text-anchor="middle">source newer than destination?</text>
+  <path class="lne" d="M70,314 L70,342"/><text class="yn" x="76" y="332">yes</text>
+  <path class="lne" d="M180,314 L180,342"/><text class="yn" x="186" y="332">no</text>
+  <rect class="g" x="20" y="344" width="100" height="40" rx="6"/>
+  <text class="tb" x="70" y="369" text-anchor="middle">copy</text>
+  <rect class="s" x="130" y="344" width="100" height="40" rx="6"/>
+  <text class="tb" x="180" y="369" text-anchor="middle">skip</text>
+
+  <!-- 3b download -->
+  <rect class="w" x="370" y="264" width="220" height="50" rx="6"/>
+  <text class="tb" x="480" y="284" text-anchor="middle">3 · download</text>
+  <text class="d" x="480" y="302" text-anchor="middle">local file newer than the object?</text>
+  <path class="lne" d="M425,314 L425,342"/><text class="yn" x="431" y="332">yes</text>
+  <path class="lne" d="M535,314 L535,342"/><text class="yn" x="541" y="332">no</text>
+  <rect class="w" x="370" y="344" width="108" height="56" rx="6"/>
+  <text class="tb" x="424" y="366" text-anchor="middle">download</text>
+  <text class="d" x="424" y="384" text-anchor="middle">overwrites local edit</text>
+  <rect class="x" x="484" y="344" width="106" height="56" rx="6"/>
+  <text class="tb" x="537" y="366" text-anchor="middle">skip</text>
+  <text class="d" x="537" y="384" text-anchor="middle">even if S3 changed</text>
+
+  <!-- options -->
+  <text class="lb" x="620" y="78">OPTIONS THAT CHANGE IT</text>
+  <rect class="rw" x="620" y="88" width="200" height="56" rx="6"/>
+  <text class="mb" x="632" y="108">--no-overwrite</text>
+  <text class="d" x="632" y="128">at 1: every existing file is skipped</text>
+  <rect class="rw" x="620" y="154" width="200" height="56" rx="6"/>
+  <text class="mb" x="632" y="174">--size-only</text>
+  <text class="d" x="632" y="194">at 2: every same-size file is skipped</text>
+  <rect class="rw" x="620" y="220" width="200" height="72" rx="6"/>
+  <text class="mb" x="632" y="240">--exact-timestamps</text>
+  <text class="d" x="632" y="260">download only: same size, times</text>
+  <text class="d" x="632" y="276">differ at all → download</text>
+  <rect class="rw" x="620" y="302" width="200" height="72" rx="6"/>
+  <text class="mb" x="632" y="322">--delete</text>
+  <text class="d" x="632" y="342">files only at the destination are</text>
+  <text class="d" x="632" y="358">deleted (not those a filter excludes)</text>
+
+  <text class="d" x="20" y="436">A download sets the local mtime to the object's LastModified, so a same-size change made later in S3 looks "not newer".</text>
+  <text class="d" x="20" y="454">Files that exist only at the destination are kept unless --delete is given.</text>
+</svg>

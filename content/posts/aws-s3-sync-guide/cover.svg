@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS S3 Sync</title>
+  <desc id="d">AWS S3 Sync: What it copies, filters, --delete and the download trap. Small drawings: upload, download and copy; a terminal running aws s3 sync with --dryrun --delete and a (dryrun) delete line; a folder and a bucket joined by two sync arrows; icons for filters, --delete and timestamps; small icons for size and mtime, --exact-timestamps, include and exclude, --delete, --dryrun, case conflicts and exit codes.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #f59f00; }
+      .a2  { fill: #232f3e; }
+      .al  { stroke: #f59f00; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .pn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .td  { fill: #ff8787; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .a2  { fill: #8b949e; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .pn  { fill: #0d1117; stroke: #484f58; }
+        .pb  { fill: #0c2340; stroke: #3d6fb8; }
+        .pg  { fill: #0f2a1d; stroke: #3d8b63; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: the three verbs and a terminal -->
+  <g class="mono" font-size="34" font-weight="700" text-anchor="middle">
+    <rect class="pb" x="131" y="194" width="200" height="74" rx="37"/><text class="ink" x="231" y="243">upload</text>
+    <rect class="pg" x="355" y="194" width="230" height="74" rx="37"/><text class="ink" x="470" y="243">download</text>
+    <rect class="pn" x="609" y="194" width="170" height="74" rx="37"/><text class="ink" x="694" y="243">copy</text>
+  </g>
+  <text class="n mono" x="455" y="322" text-anchor="middle" font-size="30">only new or changed files</text>
+  <rect class="term" x="131" y="400" width="880" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="880" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="880" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws s3 sync ./site s3://demo --dryrun --delete</text>
+  <text class="td mono" x="163" y="558" font-size="28">(dryrun) delete: s3://demo/x.tmp<tspan class="a">█</tspan></text>
+
+  <!-- center: folder <-> bucket -->
+  <g transform="translate(1376,0)">
+    <path class="a" d="M-250,300 H-180 L-160,280 H-90 V420 H-250 Z" opacity=".55"/>
+    <rect class="a" x="-250" y="310" width="160" height="110" rx="12"/>
+    <path class="a" d="M110,300 H250 L230,450 H130 Z"/>
+    <ellipse class="a" cx="180" cy="300" rx="70" ry="20"/>
+    <ellipse cx="180" cy="300" rx="70" ry="20" fill="#fff" opacity=".35"/>
+    <text x="180" y="395" text-anchor="middle" font-size="44" font-weight="700" fill="#fff" class="mono">S3</text>
+    <path class="al" stroke-width="14" d="M-70,330 C-30,300 30,300 82,328"/>
+    <path class="al" stroke-width="14" d="M60,316 L84,330 L62,350"/>
+    <path class="al" stroke-width="14" d="M82,410 C40,440 -30,440 -70,412"/>
+    <path class="al" stroke-width="14" d="M-48,398 L-72,412 L-50,432"/>
+    <text class="n" x="0" y="540" text-anchor="middle" font-size="34">size + mtime, no checksums</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1795,190) scale(1.15)">
+    <path class="a" d="M24,40 H176 L118,108 V170 L82,150 V108 Z"/>
+  </g>
+  <text class="n" x="1910" y="470" text-anchor="middle" font-size="36">filters</text>
+  <g transform="translate(2065,190) scale(1.15)">
+    <rect class="a" x="40" y="64" width="120" height="120" rx="12"/>
+    <rect class="a" x="24" y="40" width="152" height="18" rx="6"/>
+    <rect class="a" x="78" y="22" width="44" height="22" rx="6"/>
+    <path d="M78,90 V160 M100,90 V160 M122,90 V160" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <text class="n" x="2180" y="470" text-anchor="middle" font-size="36">--delete</text>
+  <g transform="translate(2335,190) scale(1.15)">
+    <circle class="al" cx="100" cy="104" r="76" stroke-width="18"/>
+    <path class="al" stroke-width="18" d="M100,58 V104 L136,126"/>
+  </g>
+  <text class="n" x="2450" y="470" text-anchor="middle" font-size="36">timestamps</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="150">AWS S3 Sync</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="94">What it copies, filters, --delete and the download trap</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">--exact-timestamps · include/exclude · --delete · --dryrun · --case-conflict · exit codes · CLI 2.39.3</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><path class="al" stroke-width="18" d="M100,170 V40 M50,90 L100,40 L150,90"/><path class="al" stroke-width="18" d="M30,180 H170"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">upload</text>
+  <g transform="translate(806,1290) scale(0.5)"><path class="al" stroke-width="18" d="M100,30 V150 M50,100 L100,150 L150,100"/><path class="al" stroke-width="18" d="M30,180 H170"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">download</text>
+  <g transform="translate(1066,1290) scale(0.5)"><path class="a" d="M24,40 H176 L118,108 V170 L82,150 V108 Z"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">filters</text>
+  <g transform="translate(1326,1290) scale(0.5)"><rect class="a" x="40" y="64" width="120" height="120" rx="12"/><rect class="a" x="24" y="40" width="152" height="18" rx="6"/><rect class="a" x="78" y="22" width="44" height="22" rx="6"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">--delete</text>
+  <g transform="translate(1586,1290) scale(0.5)"><path class="al" stroke-width="16" d="M14,100 C50,40 150,40 186,100 C150,160 50,160 14,100 Z"/><circle class="a" cx="100" cy="100" r="30"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">--dryrun</text>
+  <g transform="translate(1846,1290) scale(0.5)"><text x="100" y="140" text-anchor="middle" font-size="120" font-weight="700" class="a">Aa</text></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">case conflict</text>
+  <g transform="translate(2106,1290) scale(0.5)"><rect class="a" x="30" y="40" width="140" height="120" rx="18"/><text x="100" y="135" text-anchor="middle" font-size="88" font-weight="700" fill="#fff" class="mono">2</text></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">exit codes</text>
+</svg>

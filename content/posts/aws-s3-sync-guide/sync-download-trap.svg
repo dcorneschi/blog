@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 356" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The download trap</title>
+  <desc id="d">Step 1: the object a.txt in S3 holds b, 2 bytes, LastModified 09:44:36 UTC; a download sync copies it and sets the local mtime to 09:44:36. Step 2: someone changes the object in S3 to z, still 2 bytes, with a later LastModified. Step 3: a plain download sync sees the same size and a local file that is not newer, skips it, and the local file still holds b. Step 4: with --exact-timestamps the times differ, so sync downloads it and the local file holds z.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 16px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .dr  { font-size: 11px; font-weight: 700; fill: #dc3545; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .lane{ fill: #f8f9fa; stroke: #dee2e6; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="840" height="356" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The download trap</text>
+  <text class="sub" x="20" y="48">A same-size change in S3 is not downloaded, because the local copy carries the object's old time</text>
+
+  <!-- step headers -->
+  <text class="lb" x="150" y="78" text-anchor="middle">1 · DOWNLOAD</text>
+  <text class="lb" x="330" y="78" text-anchor="middle">2 · CHANGE IN S3</text>
+  <text class="lb" x="520" y="78" text-anchor="middle">3 · PLAIN SYNC</text>
+  <text class="lb" x="720" y="78" text-anchor="middle">4 · --EXACT-TIMESTAMPS</text>
+
+  <g transform="translate(0,28)">
+  <!-- lanes -->
+  <rect class="lane" x="20" y="64" width="800" height="76" rx="6"/>
+  <text class="lb" x="30" y="82">S3</text>
+  <text class="ms" x="30" y="98">a.txt</text>
+  <rect class="lane" x="20" y="190" width="800" height="76" rx="6"/>
+  <text class="lb" x="30" y="208">LOCAL</text>
+  <text class="ms" x="30" y="224">dl/a.txt</text>
+
+  <!-- step 1 -->
+  <rect class="r" x="90" y="74" width="120" height="56" rx="6"/>
+  <text class="mb" x="150" y="98" text-anchor="middle">b</text>
+  <text class="ms" x="150" y="118" text-anchor="middle">2 B · 09:44:36</text>
+  <path class="lne" d="M150,130 L150,198"/>
+  <rect class="r" x="90" y="200" width="120" height="56" rx="6"/>
+  <text class="mb" x="150" y="224" text-anchor="middle">b</text>
+  <text class="ms" x="150" y="244" text-anchor="middle">mtime 09:44:36</text>
+
+  <!-- step 2 -->
+  <path class="lne" d="M210,102 L268,102"/>
+  <rect class="w" x="270" y="74" width="120" height="56" rx="6"/>
+  <text class="mb" x="330" y="98" text-anchor="middle">z</text>
+  <text class="ms" x="330" y="118" text-anchor="middle">2 B · later</text>
+  <text class="d" x="330" y="186" text-anchor="middle">same size, new content</text>
+
+  <!-- step 3 -->
+  <path class="lnx" d="M390,118 C440,150 470,170 498,198"/>
+  <rect class="x" x="460" y="200" width="120" height="56" rx="6"/>
+  <text class="mb" x="520" y="224" text-anchor="middle">b</text>
+  <text class="ms" x="520" y="244" text-anchor="middle">skipped</text>
+  <text class="dr" x="520" y="284" text-anchor="middle">same size, local not newer</text>
+
+  <!-- step 4 -->
+  <path class="lne" d="M390,96 C520,96 680,110 712,198"/>
+  <rect class="g" x="660" y="200" width="120" height="56" rx="6"/>
+  <text class="mb" x="720" y="224" text-anchor="middle">z</text>
+  <text class="ms" x="720" y="244" text-anchor="middle">downloaded</text>
+  <text class="d" x="720" y="284" text-anchor="middle">times differ → download</text>
+
+  </g>
+  <text class="d" x="20" y="344">Values from the test: AWS CLI 2.39.3 against a moto emulator; the object's LastModified and the local mtime were both 09:44:36 UTC after step 1.</text>
+</svg>
