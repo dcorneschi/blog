@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">S3 File Gateway: writes, reads and the bucket listing</title>
+  <desc id="d">A client writes a file over NFS or SMB; the gateway stores it in the local cache and acknowledges at once, then uploads it to the S3 bucket asynchronously. CachePercentDirty is the share of the cache not uploaded yet. notify-when-uploaded sends an EventBridge event when everything written before the call is in S3, and a notification policy sends one event per file. A read is served from the cache when the data is there (CacheHitPercent) and fetched from S3 otherwise. An object that another tool writes straight into the bucket is not visible on the share until refresh-cache runs or the CacheStaleTimeoutInSeconds time to live expires and the directory is listed again.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnd { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 4 3; marker-end: url(#a); }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .gw  { fill: #fff8f0; stroke: #fd9843; stroke-width: 1.5; }
+      .c   { fill: #ffe5cc; stroke: #fd9843; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .n   { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">S3 File Gateway: writes, reads and the bucket listing</text>
+  <text class="sub" x="20" y="48">The cache answers the client; S3 is updated in the background</text>
+
+  <!-- client -->
+  <rect class="s" x="20" y="96" width="150" height="150" rx="6"/>
+  <text class="tb" x="32" y="118">NFS / SMB client</text>
+  <text class="ms" x="32" y="138">mount -o nolock,hard</text>
+  <text class="d" x="32" y="160">sees files and folders</text>
+  <text class="d" x="32" y="176">from the gateway's</text>
+  <text class="d" x="32" y="192">cached bucket listing</text>
+
+  <!-- gateway -->
+  <rect class="gw" x="240" y="72" width="270" height="200" rx="8"/>
+  <text class="lb" x="254" y="92">S3 FILE GATEWAY</text>
+  <rect class="c" x="254" y="102" width="242" height="70" rx="6"/>
+  <text class="tb" x="266" y="122">Local cache</text>
+  <text class="d" x="266" y="140">recently written and read data</text>
+  <text class="ms" x="266" y="158">CachePercentDirty · CacheHitPercent</text>
+  <rect class="s" x="254" y="186" width="242" height="72" rx="6"/>
+  <text class="tb" x="266" y="206">Bucket listing (metadata)</text>
+  <text class="d" x="266" y="224">refreshed by refresh-cache or when</text>
+  <text class="ms" x="266" y="242">CacheStaleTimeoutInSeconds expires</text>
+
+  <!-- s3 -->
+  <rect class="r" x="610" y="72" width="210" height="200" rx="8"/>
+  <text class="tb" x="622" y="96">S3 bucket</text>
+  <text class="ms" x="622" y="116">s3://corp-file-share/reports/</text>
+  <text class="d" x="622" y="140">one object per file, metadata</text>
+  <text class="d" x="622" y="156">(owner, mode, times) in object</text>
+  <text class="d" x="622" y="172">metadata</text>
+
+  <!-- arrows -->
+  <circle class="n" cx="182" cy="112" r="8"/><text x="182" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1</text>
+  <path class="lne" d="M170,124 L252,124"/>
+  <text class="d" x="196" y="140">write</text>
+  <path class="lne" d="M252,150 L172,150"/>
+  <text class="d" x="190" y="166">ack at once</text>
+
+  <circle class="n" cx="560" cy="104" r="8"/><text x="560" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2</text>
+  <path class="lne" d="M496,120 L608,120"/>
+  <text class="d" x="512" y="138">async upload</text>
+
+  <circle class="n" cx="182" cy="214" r="8"/><text x="182" y="218" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">3</text>
+  <path class="lne" d="M252,228 L172,228"/>
+  <text class="d" x="190" y="244">read: hit, or</text>
+  <path class="lnd" d="M608,160 L498,160"/>
+  <text class="d" x="514" y="176">miss: fetch</text>
+
+  <!-- direct write -->
+  <rect class="x" x="610" y="300" width="210" height="56" rx="6"/>
+  <text class="tb" x="622" y="321">Other tool writes to S3</text>
+  <text class="ms" x="622" y="339">aws s3 cp, a Lambda, ...</text>
+  <circle class="n" cx="598" cy="290" r="8"/><text x="598" y="294" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">4</text>
+  <path class="lne" d="M715,300 L715,274"/>
+  <path class="lnd" d="M608,328 L440,328 L440,262"/>
+  <text class="d" x="450" y="346">invisible on the share</text>
+  <text class="d" x="450" y="360">until the listing refreshes</text>
+
+  <!-- notify -->
+  <rect class="rw" x="20" y="300" width="250" height="56" rx="6"/>
+  <circle class="n" cx="186" cy="290" r="8"/><text x="186" y="294" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">5</text>
+  <text class="mb" x="32" y="321">notify-when-uploaded</text>
+  <text class="d" x="32" y="339">EventBridge event once data is in S3</text>
+  <path class="lnd" d="M200,300 V284 H300 V274"/>
+
+  <text class="d" x="20" y="384">CachePercentDirty must reach 0 before a shutdown. Files whose upload fails show in FilesFailingUpload and in a cache report.</text>
+</svg>

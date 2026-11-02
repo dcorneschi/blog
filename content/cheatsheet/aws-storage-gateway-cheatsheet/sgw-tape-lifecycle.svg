@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Tape Gateway: from virtual tape to archive and back</title>
+  <desc id="d">Backup software connects over iSCSI to the gateway's virtual tape library, a medium changer and tape drives. Tapes created with create-tapes or the automatic tape creation policy are AVAILABLE in the library; data written to them goes through the cache and upload buffer to S3. When the backup software ejects a tape, its status becomes IN TRANSIT TO VTS and then ARCHIVED in its pool: S3 Glacier Flexible Retrieval, typically retrieved in 3 to 5 hours, or S3 Glacier Deep Archive, typically within 12 hours. A custom pool can add a Governance or Compliance retention lock of up to 100 years. retrieve-tape-archive brings an archived tape to a gateway as RETRIEVED and read-only.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnd { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 4 3; marker-end: url(#a); }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .gw  { fill: #fff8f0; stroke: #fd9843; stroke-width: 1.5; }
+      .t   { fill: #ffe5cc; stroke: #fd9843; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Tape Gateway: from virtual tape to archive and back</text>
+  <text class="sub" x="20" y="48">Ejecting a tape in the backup software is what archives it</text>
+
+  <!-- backup server -->
+  <rect class="s" x="20" y="72" width="150" height="104" rx="6"/>
+  <text class="tb" x="32" y="94">Backup software</text>
+  <text class="d" x="32" y="112">sees a tape library:</text>
+  <text class="d" x="32" y="128">medium changer and</text>
+  <text class="d" x="32" y="144">tape drives</text>
+  <text class="ms" x="32" y="164">iSCSI 3260</text>
+  <path class="lne" d="M170,124 L218,124"/>
+
+  <!-- gateway VTL -->
+  <rect class="gw" x="220" y="62" width="300" height="124" rx="8"/>
+  <text class="lb" x="234" y="82">VIRTUAL TAPE LIBRARY (GATEWAY + S3)</text>
+  <g text-anchor="middle">
+    <rect class="t" x="234" y="94" width="62" height="34" rx="4"/><text class="mb" x="265" y="115">BKP001</text>
+    <rect class="t" x="304" y="94" width="62" height="34" rx="4"/><text class="mb" x="335" y="115">BKP002</text>
+    <rect class="t" x="374" y="94" width="62" height="34" rx="4"/><text class="mb" x="405" y="115">BKP003</text>
+    <rect class="t" x="444" y="94" width="62" height="34" rx="4" opacity=".5"/><text class="mb" x="475" y="115">AUTO..</text>
+  </g>
+  <text class="ms" x="234" y="148">status AVAILABLE · 100 GiB to 15 TiB</text>
+  <text class="d" x="234" y="168">create-tapes, or an automatic tape creation policy</text>
+
+  <!-- eject -->
+  <path class="lne" d="M520,124 L578,124"/>
+  <text class="d" x="549" y="114" text-anchor="middle">eject</text>
+  <rect class="s" x="580" y="94" width="240" height="60" rx="6"/>
+  <text class="mb" x="592" y="116">IN TRANSIT TO VTS</text>
+  <text class="d" x="592" y="136">remaining data uploaded, then archived</text>
+  <path class="lne" d="M700,154 V196 H250 V230 M415,196 V230 M690,196 V230"/>
+
+  <!-- pools -->
+  <text class="lb" x="20" y="206">ARCHIVED, IN THE TAPE'S POOL</text>
+  <rect class="r" x="20" y="232" width="250" height="70" rx="6"/>
+  <text class="mb" x="32" y="254">GLACIER</text>
+  <text class="d" x="32" y="272">S3 Glacier Flexible Retrieval</text>
+  <text class="d" x="32" y="288">retrieval typically 3 to 5 hours</text>
+  <rect class="rw" x="290" y="232" width="250" height="70" rx="6"/>
+  <text class="mb" x="302" y="254">DEEP_ARCHIVE</text>
+  <text class="d" x="302" y="272">S3 Glacier Deep Archive</text>
+  <text class="d" x="302" y="288">retrieval typically within 12 hours</text>
+  <rect class="x" x="560" y="232" width="260" height="94" rx="6"/>
+  <text class="tb" x="572" y="254">Custom pool + retention lock</text>
+  <text class="d" x="572" y="272">GOVERNANCE or COMPLIANCE,</text>
+  <text class="d" x="572" y="288">up to 100 years: the tape can't be</text>
+  <text class="d" x="572" y="304">deleted or moved to another pool</text>
+  <text class="ms" x="572" y="320">create-tape-pool</text>
+  <path class="lnd" d="M290,267 L270,267"/>
+  <text class="d" x="280" y="320" text-anchor="middle">assign-tape-pool: Glacier → Deep Archive</text>
+
+  <!-- retrieve -->
+  <rect class="g" x="20" y="330" width="250" height="40" rx="6"/>
+  <text class="mb" x="32" y="355">RETRIEVED · read-only</text>
+  <path class="lnd" d="M145,302 L145,328"/>
+  <text class="ms" x="290" y="355">retrieve-tape-archive --gateway-arn &lt;tape-gateway-arn&gt;</text>
+</svg>

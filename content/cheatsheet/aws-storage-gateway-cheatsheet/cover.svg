@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS Storage Gateway Cheatsheet</title>
+  <desc id="d">AWS Storage Gateway Cheatsheet: File, volume and tape gateways from the AWS CLI. Small drawings: NFS, SMB and iSCSI protocol pills; a terminal running aws storagegateway refresh-cache and list-file-shares; a gateway with a local cache sending data to the cloud; icons for file shares, volumes and tapes; small icons for the cache, S3 buckets, EBS snapshots, Glacier archives, retention lock, CloudWatch and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #f59f00; }
+      .al  { stroke: #f59f00; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .pn  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+      .pv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .frm { fill: none; stroke: #adb5bd; stroke-width: 6; stroke-dasharray: 18 12; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .pn  { fill: #0d1117; stroke: #484f58; }
+        .pv  { fill: #1f1830; stroke: #7d63b0; }
+        .pg  { fill: #0f2a1d; stroke: #3d8b63; }
+        .pb  { fill: #0c2140; stroke: #3d6fb8; }
+        .frm { stroke: #484f58; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: protocols and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pb" x="131" y="198" width="130" height="66" rx="33"/><text class="ink" x="196" y="241">NFS</text>
+    <rect class="pb" x="281" y="198" width="130" height="66" rx="33"/><text class="ink" x="346" y="241">SMB</text>
+    <rect class="pg" x="431" y="198" width="160" height="66" rx="33"/><text class="ink" x="511" y="241">iSCSI</text>
+    <rect class="pv" x="611" y="198" width="130" height="66" rx="33"/><text class="ink" x="676" y="241">VTL</text>
+  </g>
+  <text class="n mono" x="436" y="318" text-anchor="middle" font-size="30">cache 150 GiB to 64 TiB</text>
+  <rect class="term" x="131" y="400" width="705" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="705" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="705" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws storagegateway refresh-cache</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ aws storagegateway list-file-shares<tspan class="a">█</tspan></text>
+
+  <!-- center: gateway with cache, uploading to the cloud -->
+  <g transform="translate(1250,0)">
+    <rect class="frm" x="-230" y="250" width="300" height="290" rx="30"/>
+    <rect class="a" x="-190" y="290" width="220" height="44" rx="10"/>
+    <rect class="a" x="-190" y="350" width="220" height="44" rx="10" opacity=".7"/>
+    <rect class="a" x="-190" y="410" width="220" height="44" rx="10" opacity=".45"/>
+    <g fill="#fff"><circle cx="-160" cy="312" r="8"/><circle cx="-160" cy="372" r="8"/><circle cx="-160" cy="432" r="8"/></g>
+    <text class="n mono" x="-80" y="505" text-anchor="middle" font-size="30">cache</text>
+    <path class="al" stroke-width="16" d="M100,395 H190 M160,365 L190,395 L160,425"/>
+    <path class="al" stroke-width="16" d="M232,440 A62,62 0 0 1 250,320 A86,86 0 0 1 410,300 A66,66 0 0 1 430,440 Z"/>
+    <text class="n mono" x="40" y="590" text-anchor="middle" font-size="32">HTTPS 443 · async upload</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <path class="al" stroke-width="16" d="M24,52 H76 L92,70 H176 V170 H24 Z"/>
+    <path class="al" stroke-width="10" d="M56,112 H144 M56,140 H120"/>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">file shares</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <ellipse class="al" stroke-width="16" cx="100" cy="46" rx="66" ry="22"/>
+    <path class="al" stroke-width="16" d="M34,46 V154 A66,22 0 0 0 166,154 V46 M34,100 A66,22 0 0 0 166,100"/>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">volumes</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <rect class="al" stroke-width="16" x="20" y="44" width="160" height="112" rx="14"/>
+    <circle class="al" stroke-width="12" cx="66" cy="96" r="22"/>
+    <circle class="al" stroke-width="12" cx="134" cy="96" r="22"/>
+    <path class="al" stroke-width="10" d="M66,118 H134"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">tapes</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">AWS Storage Gateway Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="88">File, volume and tape gateways from the AWS CLI</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">S3 File Gateway · cached and stored volumes · tape pools · refresh-cache · CLI 2.39.3</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><rect class="al" x="24" y="40" width="152" height="40" rx="10" stroke-width="12"/><rect class="al" x="24" y="96" width="152" height="40" rx="10" stroke-width="12"/><rect class="a" x="24" y="152" width="152" height="36" rx="10"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">cache</text>
+  <g transform="translate(806,1290) scale(0.5)"><path class="al" stroke-width="14" d="M30,50 L50,176 H150 L170,50"/><ellipse class="al" stroke-width="14" cx="100" cy="50" rx="70" ry="22"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">S3 bucket</text>
+  <g transform="translate(1066,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="100" cy="104" r="62"/><path class="al" stroke-width="14" d="M100,104 V64 M100,104 L132,124"/><path class="a" d="M24,40 L70,40 L46,72 Z"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">EBS snapshots</text>
+  <g transform="translate(1326,1290) scale(0.5)"><path class="a" d="M100,20 L180,64 V136 L100,180 L20,136 V64 Z"/><path d="M100,52 V148 M58,76 L142,124 M142,76 L58,124" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">Glacier archive</text>
+  <g transform="translate(1586,1290) scale(0.5)"><rect class="a" x="40" y="90" width="120" height="96" rx="14"/><path class="al" stroke-width="16" d="M64,90 V64 A36,36 0 0 1 136,64 V90"/><circle cx="100" cy="134" r="12" fill="#fff"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">retention lock</text>
+  <g transform="translate(1846,1290) scale(0.5)"><path class="al" stroke-width="14" d="M20,170 H180 M40,150 L80,90 L115,120 L170,40"/><circle class="a" cx="170" cy="40" r="14"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">CloudWatch</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>

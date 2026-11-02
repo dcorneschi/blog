@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 430" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS Storage Gateway types</title>
+  <desc id="d">On premises, file clients use NFS or SMB with an S3 File Gateway, application servers use iSCSI block volumes on a Volume Gateway, and backup software uses an iSCSI virtual tape library on a Tape Gateway. Each gateway runs as a VM on VMware, Hyper-V or KVM, or on EC2, with a local cache, and talks to AWS over HTTPS on port 443. In AWS, S3 File Gateway stores one S3 object per file in your bucket; Volume Gateway keeps cached volumes in S3 and creates EBS snapshots; Tape Gateway keeps virtual tapes in S3 and archives ejected tapes to S3 Glacier Flexible Retrieval or Deep Archive.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .zone{ fill: #f8f9fa; stroke: #dee2e6; }
+      .aws { fill: #fff8f0; stroke: #fd9843; stroke-width: 1.5; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .gw  { fill: #ffe5cc; stroke: #fd9843; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+    </style>
+  </defs>
+  <rect width="840" height="430" fill="#ffffff"/>
+  <text class="h" x="20" y="28">AWS Storage Gateway types</text>
+  <text class="sub" x="20" y="48">Local protocols on one side, AWS storage on the other, a cache in between</text>
+
+  <rect class="zone" x="20" y="62" width="468" height="306" rx="8"/>
+  <text class="lb" x="32" y="82">ON PREMISES (OR EC2)</text>
+  <rect class="aws" x="560" y="62" width="260" height="306" rx="8"/>
+  <text class="lb" x="572" y="82">AWS REGION</text>
+
+  <!-- row 1: file -->
+  <rect class="s" x="32" y="94" width="160" height="78" rx="6"/>
+  <text class="tb" x="44" y="116">File clients</text>
+  <text class="d" x="44" y="134">Linux, macOS, Windows</text>
+  <text class="ms" x="44" y="152">NFS 2049 · SMB 445</text>
+  <path class="lne" d="M192,133 L226,133"/>
+  <rect class="gw" x="228" y="94" width="180" height="78" rx="6"/>
+  <text class="tb" x="240" y="116">S3 File Gateway</text>
+  <text class="ms" x="240" y="134">FILE_S3</text>
+  <text class="d" x="240" y="152">cache 150 GiB to 64 TiB</text>
+  <path class="lne" d="M408,133 L570,133"/>
+  <rect class="r" x="572" y="94" width="236" height="78" rx="6"/>
+  <text class="tb" x="584" y="116">S3 bucket</text>
+  <text class="d" x="584" y="134">one object per file, readable</text>
+  <text class="d" x="584" y="152">by any S3 tool</text>
+
+  <!-- row 2: volume -->
+  <rect class="s" x="32" y="186" width="160" height="78" rx="6"/>
+  <text class="tb" x="44" y="208">Application servers</text>
+  <text class="d" x="44" y="226">block devices (LUNs)</text>
+  <text class="ms" x="44" y="244">iSCSI 3260</text>
+  <path class="lne" d="M192,225 L226,225"/>
+  <rect class="gw" x="228" y="186" width="180" height="78" rx="6"/>
+  <text class="tb" x="240" y="208">Volume Gateway</text>
+  <text class="ms" x="240" y="226">CACHED · STORED</text>
+  <text class="d" x="240" y="244">cache + upload buffer</text>
+  <path class="lne" d="M408,225 L570,225"/>
+  <rect class="g" x="572" y="186" width="236" height="78" rx="6"/>
+  <text class="tb" x="584" y="208">Volumes in S3, EBS snapshots</text>
+  <text class="d" x="584" y="226">cached: primary data in AWS</text>
+  <text class="d" x="584" y="244">stored: primary data local</text>
+
+  <!-- row 3: tape -->
+  <rect class="s" x="32" y="278" width="160" height="78" rx="6"/>
+  <text class="tb" x="44" y="300">Backup software</text>
+  <text class="d" x="44" y="318">changer and tape drives</text>
+  <text class="ms" x="44" y="336">iSCSI VTL 3260</text>
+  <path class="lne" d="M192,317 L226,317"/>
+  <rect class="gw" x="228" y="278" width="180" height="78" rx="6"/>
+  <text class="tb" x="240" y="300">Tape Gateway</text>
+  <text class="ms" x="240" y="318">VTL</text>
+  <text class="d" x="240" y="336">cache + upload buffer</text>
+  <path class="lne" d="M408,317 L570,317"/>
+  <rect class="rw" x="572" y="278" width="236" height="78" rx="6"/>
+  <text class="tb" x="584" y="300">Virtual tapes in S3</text>
+  <text class="d" x="584" y="318">ejected tapes archived to Glacier</text>
+  <text class="d" x="584" y="336">Flexible Retrieval or Deep Archive</text>
+
+  <text class="ms" x="524" y="124" text-anchor="middle">HTTPS 443</text>
+  <text class="ms" x="524" y="216" text-anchor="middle">HTTPS 443</text>
+  <text class="ms" x="524" y="308" text-anchor="middle">HTTPS 443</text>
+
+  <text class="d" x="20" y="392">Gateways run as a VM on VMware ESXi, Hyper-V or KVM, or on EC2 (x86). The type is set at activation and cannot change.</text>
+  <text class="d" x="20" y="410">FSx File Gateway (SMB to FSx for Windows) and the hardware appliance are closed to new customers.</text>
+</svg>
