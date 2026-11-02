@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Lifecycle hooks: the instance states</title>
+  <desc id="d">Scale out: Pending, then Pending:Wait while the launch hook runs (one hour by default), Pending:Proceed when it finishes, registration with the target group, then InService where the health check grace period starts. Scale in: the chosen InService instance is first deregistered from the load balancer and drained (deregistration delay, 300 seconds by default), then Terminating, Terminating:Wait while the termination hook runs, Terminating:Proceed and Terminated. In a wait state, complete-lifecycle-action with CONTINUE or ABANDON ends the wait, record-lifecycle-action-heartbeat restarts the heartbeat timeout up to 48 hours or 100 times the heartbeat timeout, and when the timeout expires the default result is applied, ABANDON unless set.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="840" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Lifecycle hooks: the instance states</text>
+  <text class="sub" x="20" y="48">Purple states are where a hook holds the instance until you finish it or the timeout ends</text>
+
+  <!-- scale out -->
+  <text class="lb" x="12" y="80">SCALE OUT</text>
+  <g text-anchor="middle">
+    <rect class="s" x="12" y="88" width="125" height="56" rx="5"/>
+    <text class="mb" x="74" y="111">Pending</text><text class="d" x="74" y="129">launching</text>
+    <rect class="rw" x="149" y="88" width="125" height="56" rx="5"/>
+    <text class="mb" x="211" y="111">Pending:Wait</text><text class="d" x="211" y="129">launch hook runs</text>
+    <rect class="s" x="286" y="88" width="125" height="56" rx="5"/>
+    <text class="mb" x="348" y="111">Pending:Proceed</text><text class="d" x="348" y="129">hook finished</text>
+    <rect class="r" x="423" y="88" width="125" height="56" rx="5"/>
+    <text class="tb" x="485" y="111">Register</text><text class="d" x="485" y="129">target group checks</text>
+    <rect class="g" x="560" y="88" width="125" height="56" rx="5"/>
+    <text class="mb" x="622" y="111">InService</text><text class="d" x="622" y="129">grace period starts</text>
+  </g>
+  <path class="lne" d="M137,116 L147,116 M274,116 L284,116 M411,116 L421,116 M548,116 L558,116"/>
+
+  <!-- scale in -->
+  <text class="lb" x="12" y="176">SCALE IN</text>
+  <g text-anchor="middle">
+    <rect class="g" x="12" y="184" width="125" height="56" rx="5"/>
+    <text class="mb" x="74" y="207">InService</text><text class="d" x="74" y="225">chosen for scale in</text>
+    <rect class="r" x="149" y="184" width="125" height="56" rx="5"/>
+    <text class="tb" x="211" y="207">Deregister</text><text class="d" x="211" y="225">draining, 300 s default</text>
+    <rect class="s" x="286" y="184" width="125" height="56" rx="5"/>
+    <text class="mb" x="348" y="207">Terminating</text><text class="d" x="348" y="225">leaving the group</text>
+    <rect class="rw" x="423" y="184" width="125" height="56" rx="5"/>
+    <text class="mb" x="485" y="207">Terminating:Wait</text><text class="d" x="485" y="225">termination hook runs</text>
+    <rect class="s" x="560" y="184" width="125" height="56" rx="5"/>
+    <text class="mb" x="622" y="207" font-size="9.5">Terminating:Proceed</text><text class="d" x="622" y="225">hook finished</text>
+    <rect class="x" x="697" y="184" width="125" height="56" rx="5"/>
+    <text class="mb" x="759" y="207">Terminated</text><text class="d" x="759" y="225">instance gone</text>
+  </g>
+  <path class="lne" d="M137,212 L147,212 M274,212 L284,212 M411,212 L421,212 M548,212 L558,212 M685,212 L695,212"/>
+
+  <!-- wait-state actions -->
+  <text class="lb" x="12" y="276">IN A WAIT STATE</text>
+  <rect class="g" x="12" y="284" width="262" height="64" rx="6"/>
+  <text class="mb" x="24" y="304">complete-lifecycle-action</text>
+  <text class="d" x="24" y="322">Ends the wait now, with CONTINUE or ABANDON</text>
+  <text class="d" x="24" y="338">(by instance ID or lifecycle action token)</text>
+  <rect class="r" x="290" y="284" width="262" height="64" rx="6"/>
+  <text class="mb" x="302" y="304">record-lifecycle-action-heartbeat</text>
+  <text class="d" x="302" y="322">Restarts the heartbeat timeout, at most</text>
+  <text class="d" x="302" y="338">48 h or 100 × the heartbeat in total</text>
+  <rect class="w" x="568" y="284" width="254" height="64" rx="6"/>
+  <text class="tb" x="580" y="304">Heartbeat timeout</text>
+  <text class="d" x="580" y="322">30 to 7,200 s, default 3,600 s, then the</text>
+  <text class="d" x="580" y="338">DefaultResult applies (ABANDON unless set)</text>
+
+  <text class="d" x="12" y="372">ABANDON on launch terminates and replaces the instance. On termination the instance still terminates, but remaining hooks are skipped.</text>
+  <text class="d" x="12" y="390">Hooks do not run for attach, detach, standby or --force-delete. Waiting instances pause activities from simple scaling policies.</text>
+</svg>

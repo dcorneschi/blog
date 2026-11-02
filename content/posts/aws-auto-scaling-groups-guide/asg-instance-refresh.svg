@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 390" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Instance refresh with checkpoints and auto rollback</title>
+  <desc id="d">Example group of 10 instances refreshed from launch template version 3 to version 4 with MinHealthyPercentage 90, InstanceWarmup 300, CheckpointPercentages 20, 50 and 100, CheckpointDelay 600 and AutoRollback true. With 90 percent minimum healthy, at most one of ten instances is replaced at a time, and a new instance counts as healthy after its 300 second warmup. The refresh replaces 20 percent, waits 600 seconds at the checkpoint, continues to 50 percent, waits again, then finishes at 100 percent with status Successful. If the CloudWatch alarm goes into ALARM or replacements fail, auto rollback moves the group back to version 3 (status RollbackInProgress, then RollbackSuccessful). Rollback needs a pinned template version and a desired configuration.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .old { fill: #f1f3f5; stroke: #adb5bd; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .bar { fill: #dee2e6; }
+      .barf{ fill: #75b798; }
+      .cp  { fill: #6f42c1; }
+    </style>
+  </defs>
+  <rect width="840" height="390" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Instance refresh with checkpoints and auto rollback</text>
+  <text class="sub" x="20" y="48">10 instances, launch template version 3 → 4, with the preferences from the CLI cheatsheet</text>
+
+  <!-- fleet -->
+  <text class="lb" x="20" y="78">THE FLEET DURING THE FIRST BATCH</text>
+  <g text-anchor="middle">
+    <rect class="g" x="20" y="88" width="46" height="34" rx="5"/><text class="mb" x="43" y="109">v4</text>
+    <rect class="w" x="74" y="88" width="46" height="34" rx="5"/><text class="mb" x="97" y="109">v4</text>
+    <rect class="old" x="128" y="88" width="46" height="34" rx="5"/><text class="mb" x="151" y="109">v3</text>
+    <rect class="old" x="182" y="88" width="46" height="34" rx="5"/><text class="mb" x="205" y="109">v3</text>
+    <rect class="old" x="236" y="88" width="46" height="34" rx="5"/><text class="mb" x="259" y="109">v3</text>
+    <rect class="old" x="290" y="88" width="46" height="34" rx="5"/><text class="mb" x="313" y="109">v3</text>
+    <rect class="old" x="344" y="88" width="46" height="34" rx="5"/><text class="mb" x="367" y="109">v3</text>
+    <rect class="old" x="398" y="88" width="46" height="34" rx="5"/><text class="mb" x="421" y="109">v3</text>
+    <rect class="old" x="452" y="88" width="46" height="34" rx="5"/><text class="mb" x="475" y="109">v3</text>
+    <rect class="old" x="506" y="88" width="46" height="34" rx="5"/><text class="mb" x="529" y="109">v3</text>
+  </g>
+  <text class="d" x="20" y="140">green: replaced and healthy · orange: in warmup · gray: still on version 3</text>
+  <rect class="r" x="580" y="70" width="240" height="78" rx="6"/>
+  <text class="ms" x="592" y="90">MinHealthyPercentage 90</text>
+  <text class="d" x="592" y="105">at most 1 of 10 replaced at a time</text>
+  <text class="ms" x="592" y="124">InstanceWarmup 300</text>
+  <text class="d" x="592" y="139">a new instance counts after 300 s</text>
+
+  <!-- progress -->
+  <text class="lb" x="20" y="180">PROGRESS (PERCENTAGE OF INSTANCES REPLACED)</text>
+  <rect class="bar" x="20" y="192" width="800" height="14" rx="7"/>
+  <rect class="barf" x="20" y="192" width="160" height="14" rx="7"/>
+  <rect class="cp" x="176" y="186" width="8" height="26" rx="2"/>
+  <rect class="cp" x="416" y="186" width="8" height="26" rx="2"/>
+  <rect class="cp" x="812" y="186" width="8" height="26" rx="2"/>
+  <text class="ms" x="20" y="228">0%</text>
+  <text class="mb" x="180" y="228" text-anchor="middle">20%</text>
+  <text class="mb" x="420" y="228" text-anchor="middle">50%</text>
+  <text class="mb" x="816" y="228" text-anchor="end">100%</text>
+  <text class="d" x="180" y="244" text-anchor="middle">checkpoint: wait 600 s</text>
+  <text class="d" x="420" y="244" text-anchor="middle">checkpoint: wait 600 s</text>
+  <text class="d" x="816" y="244" text-anchor="end">last checkpoint: Successful</text>
+
+  <!-- rollback -->
+  <text class="lb" x="20" y="278">IF SOMETHING GOES WRONG (AutoRollback true)</text>
+  <rect class="x" x="20" y="288" width="230" height="56" rx="6"/>
+  <text class="tb" x="32" y="309">Alarm or failed launches</text>
+  <text class="d" x="32" y="327">CloudWatch alarm in ALARM, or</text>
+  <text class="d" x="32" y="341" font-size="10.5">new instances do not become healthy</text>
+  <path class="lne" d="M250,316 L278,316"/>
+  <rect class="w" x="280" y="288" width="270" height="56" rx="6"/>
+  <text class="mb" x="292" y="309">RollbackInProgress</text>
+  <text class="d" x="292" y="327">replaced instances go back to v3,</text>
+  <text class="d" x="292" y="341">one batch at a time, as before</text>
+  <path class="lne" d="M550,316 L578,316"/>
+  <rect class="g" x="580" y="288" width="240" height="56" rx="6"/>
+  <text class="mb" x="592" y="309">RollbackSuccessful</text>
+  <text class="d" x="592" y="327">the group is on its previous</text>
+  <text class="d" x="592" y="341">launch template version again</text>
+
+  <text class="d" x="20" y="370">Rollback needs a pinned template version (not $Latest or $Default), no SSM parameter AMI and a desired configuration.</text>
+</svg>

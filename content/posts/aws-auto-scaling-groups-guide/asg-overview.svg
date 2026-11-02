@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">An EC2 Auto Scaling group</title>
+  <desc id="d">A launch template (AMI, instance type, user data, pinned version) defines the instances. The Auto Scaling group keeps desired capacity between min 2 and max 10 and spreads instances evenly over two Availability Zones. CloudWatch metrics feed target tracking, step and scheduled policies that change desired capacity. A target group sends traffic to the instances and reports ELB health checks; unhealthy instances are replaced. Lifecycle hooks pause new instances in Pending:Wait and leaving instances in Terminating:Wait until complete-lifecycle-action or the heartbeat timeout. A warm pool keeps stopped, pre-initialized instances that join the group quickly. Instance refresh replaces instances with a new template version.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnd { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 4 3; marker-end: url(#a); }
+      .grp { fill: #fff8f0; stroke: #fd9843; stroke-width: 1.5; }
+      .az  { fill: #f8f9fa; stroke: #dee2e6; }
+      .i   { fill: #ffe5cc; stroke: #fd9843; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #dee2e6; }
+      .barf{ fill: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">An EC2 Auto Scaling group</text>
+  <text class="sub" x="20" y="48">Keeps desired capacity between min and max, across AZs, from one launch template</text>
+
+  <!-- launch template -->
+  <rect class="r" x="20" y="72" width="170" height="92" rx="6"/>
+  <text class="tb" x="32" y="94">Launch template</text>
+  <text class="ms" x="32" y="114">AMI, instance type</text>
+  <text class="ms" x="32" y="130">user data, profile</text>
+  <text class="ms" x="32" y="148">Version=3 (pinned)</text>
+  <path class="lne" d="M190,118 L228,118"/>
+
+  <!-- group -->
+  <rect class="grp" x="230" y="64" width="400" height="300" rx="8"/>
+  <text class="lb" x="244" y="84">AUTO SCALING GROUP</text>
+  <!-- capacity bar -->
+  <rect class="bar" x="244" y="96" width="372" height="12" rx="6"/>
+  <rect class="barf" x="244" y="96" width="74" height="12" rx="6"/>
+  <text class="ms" x="244" y="124">min 2</text>
+  <text class="ms" x="318" y="124" text-anchor="middle">desired 2</text>
+  <text class="ms" x="616" y="124" text-anchor="end">max 10</text>
+
+  <!-- AZs -->
+  <rect class="az" x="244" y="136" width="180" height="126" rx="6"/>
+  <text class="lb" x="256" y="154">AZ us-east-1a</text>
+  <rect class="i" x="256" y="164" width="72" height="34" rx="5"/><text class="mb" x="292" y="185" text-anchor="middle">EC2</text>
+  <rect class="sd" x="340" y="164" width="72" height="34" rx="5"/><text class="ms" x="376" y="185" text-anchor="middle">+ more</text>
+  <text class="d" x="256" y="222">InService</text>
+
+  <rect class="az" x="436" y="136" width="180" height="126" rx="6"/>
+  <text class="lb" x="448" y="154">AZ us-east-1b</text>
+  <rect class="i" x="448" y="164" width="72" height="34" rx="5"/><text class="mb" x="484" y="185" text-anchor="middle">EC2</text>
+  <rect class="sd" x="532" y="164" width="72" height="34" rx="5"/><text class="ms" x="568" y="185" text-anchor="middle">+ more</text>
+  <text class="d" x="448" y="222">balanced evenly across AZs</text>
+
+  <!-- lifecycle -->
+  <text class="lb" x="244" y="284">LIFECYCLE HOOKS</text>
+  <rect class="rw" x="244" y="292" width="110" height="56" rx="5"/>
+  <text class="mb" x="299" y="314" text-anchor="middle">Pending:Wait</text>
+  <text class="d" x="299" y="332" text-anchor="middle">bootstrap, checks</text>
+  <path class="lne" d="M354,320 L376,320"/>
+  <rect class="g" x="378" y="292" width="96" height="56" rx="5"/>
+  <text class="mb" x="426" y="314" text-anchor="middle">InService</text>
+  <text class="d" x="426" y="332" text-anchor="middle">grace period</text>
+  <path class="lne" d="M474,320 L490,320"/>
+  <rect class="rw" x="492" y="292" width="124" height="56" rx="5"/>
+  <text class="mb" x="554" y="314" text-anchor="middle" font-size="10.5">Terminating:Wait</text>
+  <text class="d" x="554" y="332" text-anchor="middle">drain, push logs</text>
+
+  <!-- scaling inputs (right) -->
+  <rect class="s" x="660" y="72" width="160" height="56" rx="6"/>
+  <text class="tb" x="672" y="94">CloudWatch</text>
+  <text class="d" x="672" y="112">CPU, requests per target</text>
+  <path class="lne" d="M740,128 L740,146"/>
+  <rect class="s" x="660" y="148" width="160" height="88" rx="6"/>
+  <text class="tb" x="672" y="170">Scaling policies</text>
+  <text class="d" x="672" y="188">target tracking, step,</text>
+  <text class="d" x="672" y="203">scheduled, predictive</text>
+  <text class="d" x="672" y="222">→ change desired capacity</text>
+  <path class="lne" d="M660,170 L632,140"/>
+  
+  <!-- target group -->
+  <rect class="g" x="660" y="256" width="160" height="70" rx="6"/>
+  <text class="tb" x="672" y="278">Target group</text>
+  <text class="d" x="672" y="296">ALB / NLB traffic</text>
+  <text class="d" x="672" y="311">ELB health checks</text>
+  <path class="lnd" d="M660,285 L618,240"/>
+
+  <!-- warm pool -->
+  <rect class="sd" x="20" y="200" width="170" height="80" rx="6"/>
+  <text class="tb" x="32" y="222">Warm pool</text>
+  <text class="d" x="32" y="240">stopped, pre-initialized</text>
+  <text class="d" x="32" y="256">instances, not counted</text>
+  <text class="d" x="32" y="271">in metrics</text>
+  <path class="lne" d="M190,240 L242,206"/>
+
+  <!-- instance refresh -->
+  <rect class="s" x="20" y="296" width="170" height="68" rx="6"/>
+  <text class="tb" x="32" y="318">Instance refresh</text>
+  <text class="d" x="32" y="336">rolling replace with a new</text>
+  <text class="d" x="32" y="351">template version, rollback</text>
+  <path class="lnd" d="M190,330 L228,330"/>
+
+  <!-- bottom notes -->
+  <text class="d" x="20" y="396">Unhealthy instances (EC2 or ELB checks) are replaced; on scale in, zonal balance comes first, then the termination policy.</text>
+  <text class="d" x="20" y="414">Hooks wait for complete-lifecycle-action or the heartbeat timeout (default 3,600 s, result ABANDON).</text>
+  <text class="d" x="20" y="432">The health check grace period defaults to 0 from the CLI and 300 seconds in the console.</text>
+</svg>

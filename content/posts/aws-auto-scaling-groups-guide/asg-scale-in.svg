@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which instance is removed on scale in</title>
+  <desc id="d">Step one: unhealthy instances are removed first and bypass the termination policy. Step two: Auto Scaling picks the Availability Zone with the most instances and at least one unprotected instance. Step three: instances with scale-in protection are skipped. Step four: the termination policy chooses inside the zone; the default order is an instance from a launch configuration, then from a different launch template, then from the oldest version of the current template, then the one closest to the next billing hour, then random. Example: desired capacity goes from 5 to 4; us-east-1a has three instances and us-east-1b two, so the instance in us-east-1a launched from template version 2 is removed.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .az  { fill: #f8f9fa; stroke: #dee2e6; }
+      .i   { fill: #ffe5cc; stroke: #fd9843; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which instance is removed on scale in</text>
+  <text class="sub" x="20" y="48">Zonal balance comes before the termination policy</text>
+
+  <!-- steps -->
+  <rect class="x" x="20" y="66" width="182" height="72" rx="6"/>
+  <text class="tb" x="32" y="88">1. Unhealthy first</text>
+  <text class="d" x="32" y="106">Unhealthy instances are</text>
+  <text class="d" x="32" y="121">removed, no policy applied</text>
+  <rect class="r" x="224" y="66" width="182" height="72" rx="6"/>
+  <text class="tb" x="236" y="88">2. Pick the zone</text>
+  <text class="d" x="236" y="106">The AZ with the most instances</text>
+  <text class="d" x="236" y="121">and one unprotected at least</text>
+  <rect class="g" x="428" y="66" width="182" height="72" rx="6"/>
+  <text class="tb" x="440" y="88">3. Skip protected</text>
+  <text class="d" x="440" y="106">Scale-in protection keeps</text>
+  <text class="d" x="440" y="121">an instance out of the choice</text>
+  <rect class="rw" x="632" y="66" width="188" height="72" rx="6"/>
+  <text class="tb" x="644" y="88">4. Termination policy</text>
+  <text class="d" x="644" y="106">Chooses inside that zone,</text>
+  <text class="d" x="644" y="121">Default unless you set one</text>
+  <path class="lne" d="M202,102 L222,102 M406,102 L426,102 M610,102 L630,102"/>
+
+  <!-- default order -->
+  <text class="lb" x="20" y="172">DEFAULT POLICY, IN ORDER</text>
+  <g>
+    <rect class="s" x="20" y="180" width="152" height="50" rx="5"/>
+    <text class="mb" x="30" y="200">1. launch config</text><text class="d" x="30" y="218">legacy configuration</text>
+    <rect class="s" x="182" y="180" width="152" height="50" rx="5"/>
+    <text class="mb" x="192" y="200">2. other template</text><text class="d" x="192" y="218">not the group's template</text>
+    <rect class="s" x="344" y="180" width="152" height="50" rx="5"/>
+    <text class="mb" x="354" y="200">3. oldest version</text><text class="d" x="354" y="218">of the current template</text>
+    <rect class="s" x="506" y="180" width="152" height="50" rx="5"/>
+    <text class="mb" x="516" y="200">4. billing hour</text><text class="d" x="516" y="218">closest to the next hour</text>
+    <rect class="s" x="668" y="180" width="152" height="50" rx="5"/>
+    <text class="mb" x="678" y="200">5. random</text><text class="d" x="678" y="218">if still a tie</text>
+  </g>
+
+  <!-- example -->
+  <text class="lb" x="20" y="264">EXAMPLE: DESIRED 5 → 4, TEMPLATE AT VERSION 3</text>
+  <rect class="az" x="20" y="272" width="390" height="64" rx="6"/>
+  <text class="lb" x="32" y="290">us-east-1a · 3 instances</text>
+  <rect class="i" x="32" y="298" width="90" height="28" rx="5"/><text class="mb" x="77" y="316" text-anchor="middle">v3</text>
+  <rect class="i" x="132" y="298" width="90" height="28" rx="5"/><text class="mb" x="177" y="316" text-anchor="middle">v3</text>
+  <rect class="x" x="232" y="298" width="166" height="28" rx="5"/><text class="mb" x="315" y="316" text-anchor="middle">v2 → removed</text>
+  <rect class="az" x="430" y="272" width="390" height="64" rx="6"/>
+  <text class="lb" x="442" y="290">us-east-1b · 2 instances</text>
+  <rect class="i" x="442" y="298" width="90" height="28" rx="5"/><text class="mb" x="487" y="316" text-anchor="middle">v3</text>
+  <rect class="i" x="542" y="298" width="90" height="28" rx="5"/><text class="mb" x="587" y="316" text-anchor="middle">v3</text>
+  <text class="d" x="644" y="316">not touched: fewer instances</text>
+
+  <text class="d" x="20" y="362">Other policies (NewestInstance, OldestInstance, AllocationStrategy, a Lambda function) replace step 4, but steps 1 to 3 still come first.</text>
+</svg>
