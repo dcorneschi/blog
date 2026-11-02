@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 430" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">S3 Object Lock: what protects a version</title>
+  <desc id="d">An object version in a bucket with Object Lock and versioning can carry a retention period with a retain-until-date in governance or compliance mode, and independently a legal hold. Governance: delete, overwrite, shorten or remove only by principals with s3:BypassGovernanceRetention who send the x-amz-bypass-governance-retention header; the console sends it automatically. Compliance: nobody, including the root user, can delete, overwrite, shorten or change the mode until the date; it can only be extended; the only way out earlier is closing the account. Legal hold: no date, blocks deletion in both modes until someone with s3:PutObjectLegalHold removes it, and the governance bypass does not override it. All of them apply immediately, with no grace period.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+    </style>
+  </defs>
+  <rect width="840" height="430" fill="#ffffff"/>
+  <text class="h" x="20" y="28">S3 Object Lock: what protects a version</text>
+  <text class="sub" x="20" y="48">Versioning on · each version has its own lock · new versions and delete markers are still allowed</text>
+
+  <!-- version -->
+  <rect class="n" x="20" y="62" width="800" height="44" rx="6"/>
+  <text class="mb" x="32" y="80">sec/trade-log.csv · version 5f00cebe...</text>
+  <text class="ms" x="32" y="97">ObjectLockMode · ObjectLockRetainUntilDate · ObjectLockLegalHoldStatus · ObjectLockEventHold</text>
+
+  <!-- governance -->
+  <rect class="w" x="20" y="122" width="390" height="176" rx="8"/>
+  <text class="lb" x="34" y="144">RETENTION: GOVERNANCE</text>
+  <text class="tb" x="34" y="166">Locked for most users</text>
+  <text class="d" x="34" y="188">Delete, overwrite, shorten, remove or change mode:</text>
+  <text class="d" x="34" y="204">only with s3:BypassGovernanceRetention</text>
+  <text class="ms" x="34" y="222">+ x-amz-bypass-governance-retention: true</text>
+  <text class="d" x="34" y="244">The console sends the header for you.</text>
+  <text class="d" x="34" y="262">Extend: anyone with s3:PutObjectRetention.</text>
+  <text class="d" x="34" y="282">Use it to test settings and against accidents.</text>
+
+  <!-- compliance -->
+  <rect class="x" x="430" y="122" width="390" height="176" rx="8"/>
+  <text class="lb" x="444" y="144">RETENTION: COMPLIANCE</text>
+  <text class="tb" x="444" y="166">Locked for everybody, root user included</text>
+  <text class="d" x="444" y="188">No delete, overwrite, shortening or mode change</text>
+  <text class="d" x="444" y="204">until the retain-until-date. The bypass flag</text>
+  <text class="d" x="444" y="220">changes nothing.</text>
+  <text class="d" x="444" y="244">Extend only: a later retain-until-date.</text>
+  <text class="d" x="444" y="262">Only way out earlier: close the AWS account.</text>
+  <text class="d" x="444" y="282">Use it for SEC 17a-4, CFTC, FINRA records.</text>
+
+  <!-- legal hold -->
+  <rect class="rw" x="20" y="314" width="800" height="62" rx="8"/>
+  <text class="lb" x="34" y="336">LEGAL HOLD (INDEPENDENT, BOTH MODES)</text>
+  <text class="d" x="34" y="356">No date: blocks delete and overwrite until someone with s3:PutObjectLegalHold sets it OFF. The governance bypass does not override it.</text>
+
+  <rect class="g" x="20" y="390" width="800" height="30" rx="6"/>
+  <text class="d" x="34" y="409">All of these apply immediately. There is no grace or cooling-off period in S3 Object Lock (that is AWS Backup Vault Lock).</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Variable retention with an event hold</title>
+  <desc id="d">Example with a one-year event hold duration and a minimum retain-until-date of 1 January 2029. The object is uploaded with the event hold on; while the hold is on the retain-until-date is the current time plus one year, so on 1 January 2027 it reads 1 January 2028 and on 1 February 2027 it reads 1 February 2028. Released on 1 June 2028, the computed date would be 1 June 2029, later than the minimum, so it is fixed at 1 June 2029. Released on 1 January 2027 instead, the computed date 1 January 2028 is earlier than the minimum, so the minimum, 1 January 2029, applies. After that date the version can be deleted.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .on  { fill: #ffe5cc; stroke: #fd9843; }
+      .fx  { fill: #f8d7da; stroke: #e35d6a; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .tick{ stroke: #adb5bd; stroke-width: 1; stroke-dasharray: 3 3; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Variable retention with an event hold</text>
+  <text class="sub" x="20" y="48">EventHoldDuration 1 year · minimum RetainUntilDate 2029-01-01 (optional)</text>
+
+  <!-- axis: 2027-01 at x=140, one year = 160 px -->
+  <path class="tick" d="M140,70 V250 M300,70 V250 M460,70 V250 M620,70 V250 M780,70 V250"/>
+  <text class="ms" x="140" y="66" text-anchor="middle">2027</text>
+  <text class="ms" x="300" y="66" text-anchor="middle">2028</text>
+  <text class="ms" x="460" y="66" text-anchor="middle">2029</text>
+  <text class="ms" x="620" y="66" text-anchor="middle">2030</text>
+
+  <!-- case A -->
+  <text class="lb" x="20" y="104">RELEASED</text>
+  <text class="lb" x="20" y="118">2028-06-01</text>
+  <rect class="on" x="140" y="90" width="234" height="34" rx="4"/>
+  <text class="d" x="150" y="111">event hold ON: date = now + 1 year, moving</text>
+  <rect class="fx" x="374" y="90" width="160" height="34" rx="4"/>
+  <text class="d" x="384" y="111">fixed: 2029-06-01</text>
+  <rect class="g" x="534" y="90" width="120" height="34" rx="4"/>
+  <text class="d" x="544" y="111">deletable</text>
+
+  <!-- case B -->
+  <text class="lb" x="20" y="164">RELEASED</text>
+  <text class="lb" x="20" y="178">2027-01-01</text>
+  <rect class="fx" x="140" y="150" width="320" height="34" rx="4"/>
+  <text class="d" x="150" y="171">computed 2028-01-01 &lt; minimum: fixed at 2029-01-01</text>
+  <rect class="g" x="460" y="150" width="120" height="34" rx="4"/>
+  <text class="d" x="470" y="171">deletable</text>
+
+  <!-- reading while on -->
+  <text class="lb" x="20" y="224">WHILE ON</text>
+  <text class="d" x="140" y="216">read on 2027-01-01 → retain-until 2028-01-01</text>
+  <text class="d" x="140" y="234">read on 2027-02-01 → retain-until 2028-02-01</text>
+  <text class="d" x="460" y="216">Inventory reports can show an older computed</text>
+  <text class="d" x="460" y="234">date; ask head-object for the current one</text>
+
+  <text class="ms" x="20" y="276">put-object ... --object-lock-mode COMPLIANCE --object-lock-event-hold ON --object-lock-event-hold-duration-days 30</text>
+  <text class="ms" x="20" y="294">put-object-retention ... --retention '{"Mode":"COMPLIANCE","EventHold":"OFF"}'</text>
+  <text class="d" x="20" y="316">Durations: 1-36,500 days or 1-100 years. Shortening the duration while ON never moves the date earlier.</text>
+</svg>
