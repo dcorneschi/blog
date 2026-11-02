@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 420" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Noncurrent versions and delete markers</title>
+  <desc id="d">Left: the versions of docs/report.pdf under a rule with NoncurrentVersionExpiration NoncurrentDays 30 and NewerNoncurrentVersions 2. Version 5 is current and kept. Version 4, noncurrent for 5 days, and version 3, noncurrent for 40 days, are the two newer noncurrent versions and are kept. Versions 2 and 1, noncurrent for 55 and 70 days, are beyond the two newest and older than 30 days, so they are deleted for good. NoncurrentDays counts from when a newer version replaced the version. Right: in a versioned bucket Expiration on the current version adds a delete marker and makes the old current version noncurrent; noncurrent rules later delete the versions; when only the delete marker is left it is an expired object delete marker, and a rule with ExpiredObjectDeleteMarker true removes it.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+    </style>
+  </defs>
+  <rect width="840" height="420" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Noncurrent versions and delete markers</text>
+  <text class="sub" x="20" y="48">The clock for a noncurrent version starts when a newer version replaces it</text>
+
+  <!-- left: version stack -->
+  <rect class="n" x="20" y="62" width="400" height="44" rx="6"/>
+  <text class="ms" x="32" y="80">NoncurrentVersionExpiration:</text>
+  <text class="mb" x="32" y="97">NoncurrentDays 30 · NewerNoncurrentVersions 2</text>
+  <text class="lb" x="20" y="128">VERSIONS OF docs/report.pdf (NEWEST FIRST)</text>
+
+  <rect class="g" x="20" y="136" width="400" height="40" rx="5"/>
+  <text class="mb" x="32" y="160">v5</text><text class="d" x="70" y="160">current</text><text class="tb" x="408" y="160" text-anchor="end">kept</text>
+  <rect class="rw" x="20" y="182" width="400" height="40" rx="5"/>
+  <text class="mb" x="32" y="206">v4</text><text class="d" x="70" y="206">noncurrent 5 days · 1st newer noncurrent</text><text class="tb" x="408" y="206" text-anchor="end">kept</text>
+  <rect class="rw" x="20" y="228" width="400" height="40" rx="5"/>
+  <text class="mb" x="32" y="252">v3</text><text class="d" x="70" y="252">noncurrent 40 days · 2nd newer noncurrent</text><text class="tb" x="408" y="252" text-anchor="end">kept</text>
+  <rect class="x" x="20" y="274" width="400" height="40" rx="5"/>
+  <text class="mb" x="32" y="298">v2</text><text class="d" x="70" y="298">noncurrent 55 days · beyond 2, over 30 days</text><text class="tb" x="408" y="298" text-anchor="end">deleted</text>
+  <rect class="x" x="20" y="320" width="400" height="40" rx="5"/>
+  <text class="mb" x="32" y="344">v1</text><text class="d" x="70" y="344">noncurrent 70 days · beyond 2, over 30 days</text><text class="tb" x="408" y="344" text-anchor="end">deleted</text>
+  <text class="d" x="20" y="384">v3 is older than 30 days but stays: it is one of the 2 newer noncurrent versions.</text>
+  <text class="d" x="20" y="400">Kept in total: the current version plus NewerNoncurrentVersions.</text>
+
+  <!-- right: delete marker path -->
+  <text class="lb" x="460" y="80">EXPIRATION IN A VERSIONED BUCKET</text>
+  <rect class="s" x="460" y="90" width="360" height="52" rx="6"/>
+  <text class="tb" x="472" y="111">1. Expiration (Days) on v5</text>
+  <text class="d" x="472" y="129">adds a delete marker, v5 becomes noncurrent</text>
+  <path class="lne" d="M640,142 L640,158"/>
+  <rect class="rw" x="460" y="160" width="360" height="52" rx="6"/>
+  <text class="tb" x="472" y="181">2. Noncurrent rules</text>
+  <text class="d" x="472" y="199">delete v5 ... v1 when their turn comes</text>
+  <path class="lne" d="M640,212 L640,228"/>
+  <rect class="x" x="460" y="230" width="360" height="52" rx="6"/>
+  <text class="tb" x="472" y="251">3. Only the delete marker is left</text>
+  <text class="d" x="472" y="269">an expired object delete marker; it slows LIST</text>
+  <path class="lne" d="M640,282 L640,298"/>
+  <rect class="g" x="460" y="300" width="360" height="52" rx="6"/>
+  <text class="mb" x="472" y="321">ExpiredObjectDeleteMarker: true</text>
+  <text class="d" x="472" y="339">removes it; own rule, no Days or Date</text>
+  <text class="d" x="460" y="384">Unversioned bucket: Expiration deletes the object for good,</text>
+  <text class="d" x="460" y="400">there are no versions or delete markers.</text>
+</svg>

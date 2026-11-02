@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">When a lifecycle action really happens</title>
+  <desc id="d">An object created on 2 November 2026 at 14:20 UTC under a rule with Days 30 becomes eligible at the creation time plus 30 days rounded up to the next midnight UTC, 3 December 2026 00:00 UTC. Billing changes at that moment, except for transitions to Intelligent-Tiering, which are billed at the new rate only after the move. S3 evaluates rules once a day and queues the action, which runs asynchronously, often a day or more later. For tag-based rules the tags are checked again when the action runs. When it is done, a Lifecycle event notification, a CloudTrail lifecycle data event and a server access log record can confirm it. Rule changes take up to 15 minutes to propagate.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .b1  { fill: #9ec5fe; }
+      .b2  { fill: #c5b3e6; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">When a lifecycle action really happens</text>
+  <text class="sub" x="20" y="48">Rule: Transitions Days 30 → STANDARD_IA, object created 2026-11-02 14:20 UTC</text>
+
+  <rect class="s" x="20" y="70" width="180" height="84" rx="6"/>
+  <text class="tb" x="32" y="92">1. Created</text>
+  <text class="ms" x="32" y="112">2026-11-02 14:20Z</text>
+  <text class="d" x="32" y="132">+ 30 days = Dec 2 14:20</text>
+  <path class="lne" d="M200,112 L218,112"/>
+
+  <rect class="r" x="220" y="70" width="190" height="84" rx="6"/>
+  <text class="tb" x="232" y="92">2. Eligible</text>
+  <text class="ms" x="232" y="112">2026-12-03 00:00Z</text>
+  <text class="d" x="232" y="132">rounded up to next midnight</text>
+  <text class="d" x="232" y="146">UTC; billing changes here</text>
+  <path class="lne" d="M410,112 L428,112"/>
+
+  <rect class="w" x="430" y="70" width="180" height="84" rx="6"/>
+  <text class="tb" x="442" y="92">3. Queued</text>
+  <text class="d" x="442" y="112">daily evaluation picks it up;</text>
+  <text class="d" x="442" y="128">tag rules: tags checked again</text>
+  <text class="d" x="442" y="144">when the action runs</text>
+  <path class="lne" d="M610,112 L628,112"/>
+
+  <rect class="g" x="630" y="70" width="190" height="84" rx="6"/>
+  <text class="tb" x="642" y="92">4. Done, asynchronously</text>
+  <text class="d" x="642" y="112">often a day or more later</text>
+  <text class="d" x="642" y="128">event notification, CloudTrail</text>
+  <text class="d" x="642" y="144">data event, access log</text>
+
+  <!-- billing bar -->
+  <text class="lb" x="20" y="190">WHAT YOU ARE BILLED FOR</text>
+  <rect class="b1" x="20" y="200" width="300" height="26" rx="4"/>
+  <text class="d" x="32" y="217" fill="#212529">STANDARD rate</text>
+  <rect class="b2" x="320" y="200" width="500" height="26" rx="4"/>
+  <text class="d" x="332" y="217" fill="#212529">STANDARD_IA rate from eligibility, even while the transition is still queued</text>
+  <path d="M320,194 V234" stroke="#212529" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+  <text class="d" x="20" y="262">Exception: a transition to INTELLIGENT_TIERING is billed at the new rate only after the object has moved.</text>
+  <text class="d" x="20" y="280">Glacier classes: the new rate, the 40 KB overhead and the minimum-duration clock all start at eligibility. Expired objects: no storage billed after it.</text>
+  <text class="d" x="20" y="298">head-object shows the expiry of the current version (Expiration field); nothing shows a planned transition.</text>
+  <text class="d" x="20" y="316">A changed rule takes up to 15 minutes to propagate. A new rule applies to existing objects at the next evaluation.</text>
+  <text class="d" x="20" y="334">Not a hard deadline: confirm deletions that must happen by a date with notifications, CloudTrail or S3 Inventory.</text>
+</svg>

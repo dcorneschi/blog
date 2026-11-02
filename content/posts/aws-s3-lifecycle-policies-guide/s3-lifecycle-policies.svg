@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">S3 Lifecycle: rules, the transition waterfall and versions</title>
+  <desc id="d">A lifecycle rule has an ID, a status, a filter (prefix, tags, object size, or empty for the whole bucket) and actions at an age in days or on a date. Current versions transition only down the waterfall: Standard, Standard-IA (30 days minimum), Intelligent-Tiering, One Zone-IA (30 days), Glacier Instant Retrieval (90 days), Glacier Flexible Retrieval (90 days, restore first) and Glacier Deep Archive (180 days, restore first), and objects under 128 KB do not transition by default. Expiration permanently deletes in an unversioned bucket and adds a delete marker in a versioned one. Noncurrent versions have their own transition and expiration actions with NoncurrentDays and NewerNoncurrentVersions. ExpiredObjectDeleteMarker removes lone delete markers and AbortIncompleteMultipartUpload removes unfinished uploads.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+    </style>
+  </defs>
+  <rect width="840" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">S3 Lifecycle: rules, the transition waterfall and versions</text>
+  <text class="sub" x="20" y="48">One configuration per bucket, up to 1,000 rules; evaluated once a day</text>
+
+  <!-- rule -->
+  <rect class="n" x="20" y="64" width="800" height="54" rx="6"/>
+  <text class="lb" x="32" y="84">A RULE</text>
+  <text class="mb" x="100" y="84">ID · Status · Filter · Actions</text>
+  <text class="d" x="32" y="104">Filter: Prefix, Tag, ObjectSizeGreaterThan / LessThan, an And of them, or {} for the whole bucket. Trigger: Days since creation (or noncurrent), or a Date.</text>
+
+  <!-- waterfall -->
+  <text class="lb" x="20" y="146">CURRENT VERSIONS: TRANSITIONS ONLY GO DOWN (MINIMUM STORAGE DURATION)</text>
+  <g>
+    <rect class="r" x="20" y="156" width="104" height="46" rx="5"/>
+    <text class="mb" x="72" y="176" text-anchor="middle">STANDARD</text><text class="d" x="72" y="193" text-anchor="middle">none</text>
+    <rect class="r" x="136" y="170" width="104" height="46" rx="5"/>
+    <text class="mb" x="188" y="190" text-anchor="middle">STANDARD_IA</text><text class="d" x="188" y="207" text-anchor="middle">30 days</text>
+    <rect class="g" x="252" y="184" width="104" height="46" rx="5"/>
+    <text class="mb" x="304" y="200" text-anchor="middle" style="font-size:8.5px">INTELLIGENT_TIERING</text><text class="d" x="304" y="221" text-anchor="middle">none</text>
+    <rect class="r" x="368" y="198" width="104" height="46" rx="5"/>
+    <text class="mb" x="420" y="218" text-anchor="middle">ONEZONE_IA</text><text class="d" x="420" y="235" text-anchor="middle">30 days</text>
+    <rect class="w" x="484" y="212" width="104" height="46" rx="5"/>
+    <text class="mb" x="536" y="232" text-anchor="middle">GLACIER_IR</text><text class="d" x="536" y="249" text-anchor="middle">90 days</text>
+    <rect class="rw" x="600" y="226" width="104" height="46" rx="5"/>
+    <text class="mb" x="652" y="246" text-anchor="middle">GLACIER</text><text class="d" x="652" y="263" text-anchor="middle">90 d · restore</text>
+    <rect class="rw" x="716" y="240" width="104" height="46" rx="5"/>
+    <text class="mb" x="768" y="260" text-anchor="middle">DEEP_ARCHIVE</text><text class="d" x="768" y="277" text-anchor="middle">180 d · restore</text>
+  </g>
+  <path class="lne" d="M124,182 L134,190 M240,196 L250,204 M356,210 L366,218 M472,224 L482,232 M588,238 L598,246 M704,252 L714,260"/>
+  <text class="d" x="20" y="232">Under 128 KB: no transition by default.</text>
+  <text class="d" x="20" y="248">IA classes: not before day 30.</text>
+  <text class="d" x="20" y="264">Back up: restore, then copy.</text>
+
+  <!-- expiration -->
+  <text class="lb" x="20" y="310">EXPIRATION OF THE CURRENT VERSION</text>
+  <rect class="x" x="20" y="318" width="250" height="52" rx="6"/>
+  <text class="tb" x="32" y="339">Unversioned bucket</text>
+  <text class="d" x="32" y="357">permanent delete, cannot be undone</text>
+  <rect class="s" x="284" y="318" width="250" height="52" rx="6"/>
+  <text class="tb" x="296" y="339">Versioned bucket</text>
+  <text class="d" x="296" y="357">adds a delete marker, nothing freed yet</text>
+  <rect class="n" x="548" y="318" width="272" height="52" rx="6"/>
+  <text class="d" x="560" y="339">Leaving a class early is billed for the rest</text>
+  <text class="d" x="560" y="357">of its minimum duration, expiration included</text>
+
+  <!-- noncurrent and cleanup -->
+  <text class="lb" x="20" y="398">VERSIONED BUCKETS AND CLEANUP</text>
+  <rect class="rw" x="20" y="406" width="250" height="52" rx="6"/>
+  <text class="mb" x="32" y="426" font-size="10">NoncurrentVersionTransitions</text>
+  <text class="mb" x="32" y="444" font-size="10">NoncurrentVersionExpiration</text>
+  <rect class="s" x="284" y="406" width="250" height="52" rx="6"/>
+  <text class="d" x="296" y="427">NoncurrentDays from when replaced;</text>
+  <text class="d" x="296" y="444">keep NewerNoncurrentVersions (1-100)</text>
+  <rect class="g" x="548" y="406" width="272" height="52" rx="6"/>
+  <text class="mb" x="560" y="426" font-size="10">ExpiredObjectDeleteMarker: true</text>
+  <text class="mb" x="560" y="444" font-size="10">AbortIncompleteMultipartUpload</text>
+  <path class="lne" d="M270,432 L282,432"/>
+</svg>

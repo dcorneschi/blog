@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Why small objects should not go to the archive classes</title>
+  <desc id="d">Every object archived to S3 Glacier Flexible Retrieval or Deep Archive carries about 40 KB of overhead: 8 KB of name and metadata billed at S3 Standard rates and 32 KB of index billed at the archive rate. For a 64 KB object that is 62 percent extra storage; for a 1 MB object about 4 percent. Each transition is also one request billed per object. Since September 2024 objects under 128 KB do not transition by default; an object size filter overrides that, and the setting varies_by_storage_class restores the older default that let them go to Glacier Flexible Retrieval and Deep Archive.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .data{ fill: #c5b3e6; }
+      .std { fill: #9ec5fe; }
+      .idx { fill: #e2d9f3; stroke: #a98eda; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Why small objects should not go to the archive classes</text>
+  <text class="sub" x="20" y="48">Glacier Flexible Retrieval and Deep Archive add about 40 KB to every object (bars to scale, 1 px = 0.5 KB)</text>
+
+  <!-- 64 KB -->
+  <text class="lb" x="20" y="84">64 KB OBJECT</text>
+  <rect class="data" x="140" y="70" width="128" height="26" rx="3"/>
+  <rect class="std" x="268" y="70" width="16" height="26"/>
+  <rect class="idx" x="284" y="70" width="64" height="26"/>
+  <text class="tb" x="360" y="89">+62% storage</text>
+  <text class="d" x="140" y="112">data 64 KB</text>
+  <text class="d" x="268" y="112">+8 KB at Standard rates, +32 KB index at the archive rate</text>
+
+  <!-- 1 MB -->
+  <text class="lb" x="20" y="154">1 MB OBJECT</text>
+  <rect class="data" x="140" y="140" width="600" height="26" rx="3"/>
+  <text class="d" x="150" y="157" fill="#212529">data 1,024 KB (bar cut at 600 px)</text>
+  <rect class="std" x="740" y="140" width="16" height="26"/>
+  <rect class="idx" x="756" y="140" width="64" height="26"/>
+  <text class="tb" x="740" y="186">+4% storage</text>
+
+  <!-- rules -->
+  <rect class="x" x="20" y="212" width="250" height="100" rx="6"/>
+  <text class="tb" x="32" y="234">Per-object request fee</text>
+  <text class="d" x="32" y="254">each transition is one request:</text>
+  <text class="d" x="32" y="270">10 million objects, 10 million</text>
+  <text class="d" x="32" y="286">requests. Small objects may never</text>
+  <text class="d" x="32" y="302">earn the fee back</text>
+
+  <rect class="s" x="290" y="212" width="250" height="100" rx="6"/>
+  <text class="tb" x="302" y="234">Default since September 2024</text>
+  <text class="d" x="302" y="254">objects under 128 KB do not</text>
+  <text class="d" x="302" y="270">transition to any class</text>
+  <text class="ms" x="302" y="292">all_storage_classes_128K</text>
+
+  <rect class="g" x="560" y="212" width="260" height="100" rx="6"/>
+  <text class="tb" x="572" y="234">Ways around it</text>
+  <text class="d" x="572" y="254">a size filter in the rule always wins;</text>
+  <text class="ms" x="572" y="274">varies_by_storage_class</text>
+  <text class="d" x="572" y="292">lets them go to GLACIER, DEEP_ARCHIVE</text>
+
+  <text class="d" x="20" y="340">Better: combine small files into bigger ones (tar, zip, Parquet) before they reach an archive class.</text>
+</svg>
