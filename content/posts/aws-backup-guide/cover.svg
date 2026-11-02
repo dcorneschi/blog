@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS Backup</title>
+  <desc id="d">AWS Backup: plans, vaults, copies, Vault Lock and restore testing. Small drawings: PLAN, VAULT and COPY pills; a terminal running aws backup create-backup-plan and start-restore-job; a vault with a padlock and stacked recovery points; icons for schedules, cross-Region copies and restore testing; small icons for opt-in, tags, cold storage, air-gapped vault, legal hold, Audit Manager and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #f59f00; }
+      .al  { stroke: #f59f00; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .pw  { fill: #fff3e0; stroke: #fd9843; stroke-width: 5; }
+      .px  { fill: #fdecee; stroke: #e35d6a; stroke-width: 5; }
+      .pv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .pw  { fill: #2a1e0c; stroke: #b9701f; }
+        .px  { fill: #2c1418; stroke: #a8414c; }
+        .pv  { fill: #1f1830; stroke: #7d63b0; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: modes and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pw" x="131" y="198" width="250" height="66" rx="33"/><text class="ink" x="256" y="241">PLAN</text>
+    <rect class="px" x="401" y="198" width="250" height="66" rx="33"/><text class="ink" x="526" y="241">VAULT</text>
+    <rect class="pv" x="671" y="198" width="230" height="66" rx="33"/><text class="ink" x="786" y="241">COPY</text>
+  </g>
+  <text class="n mono" x="516" y="318" text-anchor="middle" font-size="30">cron · lifecycle · retention</text>
+  <rect class="term" x="131" y="400" width="590" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="590" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="590" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws backup create-backup-plan</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ aws backup start-restore-job<tspan class="a">█</tspan></text>
+
+  <!-- center: versions with a padlock -->
+  <g transform="translate(1180,0)">
+    <rect class="al" stroke-width="12" x="80" y="230" width="220" height="280" rx="18"/>
+    <rect class="al" stroke-width="12" x="50" y="260" width="220" height="280" rx="18" opacity=".7"/>
+    <rect class="a" x="20" y="290" width="220" height="280" rx="18"/>
+    <rect fill="#ffffff" x="130" y="400" width="190" height="150" rx="20"/>
+    <rect class="a" x="146" y="416" width="158" height="118" rx="14"/>
+    <path class="al" stroke-width="16" d="M180,400 V380 A45,45 0 0 1 270,380 V400"/>
+    <circle cx="225" cy="468" r="16" fill="#ffffff"/>
+    <text class="n mono" x="150" y="620" text-anchor="middle" font-size="32">recovery points</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <circle class="al" stroke-width="16" cx="100" cy="100" r="70"/>
+    <path class="al" stroke-width="14" d="M100,100 V58 M100,100 L130,118"/>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">schedules</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <rect class="al" stroke-width="14" x="20" y="40" width="70" height="90" rx="10"/>
+    <rect class="a" x="110" y="70" width="70" height="90" rx="10"/>
+    <path class="al" stroke-width="12" d="M90,85 C110,85 120,70 140,60 M128,48 L142,60 L128,74"/>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">copies</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <path class="al" stroke-width="16" d="M100,24 L170,52 V100 C170,140 140,166 100,180 C60,166 30,140 30,100 V52 Z"/>
+    <path class="al" stroke-width="14" d="M70,104 L94,128 L134,84"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">restore tests</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">AWS Backup</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="88">Plans, vaults, copies, Vault Lock and restores</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">tag selection · cold storage · PITR · air-gapped vaults · CLI 2.39.3</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><rect class="al" stroke-width="14" x="20" y="64" width="160" height="72" rx="36"/><circle class="a" cx="144" cy="100" r="26"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">opt-in</text>
+  <g transform="translate(806,1290) scale(0.5)"><path class="al" stroke-width="14" d="M30,40 H110 L176,106 L110,172 L30,92 Z"/><circle class="a" cx="66" cy="76" r="14"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">tags</text>
+  <g transform="translate(1066,1290) scale(0.5)"><path class="al" stroke-width="14" d="M100,20 V180 M30,60 L170,140 M170,60 L30,140 M82,32 L100,50 L118,32 M82,168 L100,150 L118,168"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">cold storage</text>
+  <g transform="translate(1326,1290) scale(0.5)"><rect class="al" stroke-width="14" x="20" y="50" width="64" height="100" rx="10"/><rect class="a" x="116" y="50" width="64" height="100" rx="10"/><path class="al" stroke-width="10" d="M100,40 V160" stroke-dasharray="14 12"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">air-gapped</text>
+  <g transform="translate(1586,1290) scale(0.5)"><rect class="a" x="40" y="90" width="120" height="96" rx="14"/><path class="al" stroke-width="16" d="M64,90 V64 A36,36 0 0 1 136,64 V90"/><circle cx="100" cy="134" r="12" fill="#fff"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">legal hold</text>
+  <g transform="translate(1846,1290) scale(0.5)"><path class="al" stroke-width="14" d="M50,30 H150 V170 H50 Z"/><path class="al" stroke-width="14" d="M74,100 L94,122 L128,80"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">Audit Manager</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>

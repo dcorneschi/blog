@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 460" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS Backup building blocks</title>
+  <desc id="d">A backup plan holds rules: schedule, start and completion windows, lifecycle with cold storage and deletion, recovery point tags, copy actions and continuous backup. A resource assignment selects resources by ARN, tag and conditions and names the IAM role. Backup jobs read EC2, EBS, RDS, EFS, DynamoDB, S3 and other resources and write recovery points into a backup vault encrypted with a KMS key, protected by a vault access policy and Vault Lock. Copy jobs send recovery points to a vault in another Region or another account, such as a logically air-gapped vault shared through AWS RAM. Legal holds stop recovery points from expiring. Restore jobs and restore testing create new resources from recovery points.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnd { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 4 3; marker-end: url(#a); }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .v   { fill: #fff8f0; stroke: #fd9843; stroke-width: 1.5; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+    </style>
+  </defs>
+  <rect width="840" height="460" fill="#ffffff"/>
+  <text class="h" x="20" y="28">AWS Backup building blocks</text>
+  <text class="sub" x="20" y="48">What (assignment) · when and how long (plan) · where (vault) · elsewhere (copies)</text>
+
+  <!-- plan -->
+  <rect class="r" x="20" y="64" width="250" height="132" rx="6"/>
+  <text class="tb" x="32" y="86">Backup plan</text>
+  <text class="d" x="32" y="106">rules: schedule (cron, time zone),</text>
+  <text class="d" x="32" y="122">start window ≥ 60 min, completion</text>
+  <text class="d" x="32" y="138">lifecycle: cold after N days (≥ 90 in</text>
+  <text class="d" x="32" y="154">cold), delete after up to 100 years</text>
+  <text class="d" x="32" y="170">copy actions · continuous (PITR 35 d)</text>
+  <text class="ms" x="32" y="188">create-backup-plan</text>
+
+  <!-- selection -->
+  <rect class="s" x="20" y="212" width="250" height="88" rx="6"/>
+  <text class="tb" x="32" y="234">Resource assignment</text>
+  <text class="d" x="32" y="254">ARNs, wildcards, tags, conditions,</text>
+  <text class="d" x="32" y="270">NotResources; IAM role for the jobs</text>
+  <text class="ms" x="32" y="290">tag backup=daily</text>
+
+  <!-- resources -->
+  <rect class="n" x="20" y="316" width="250" height="88" rx="6"/>
+  <text class="lb" x="32" y="336">RESOURCES (OPTED IN)</text>
+  <text class="d" x="32" y="356">EC2 · EBS · S3 · RDS · Aurora · EFS · FSx</text>
+  <text class="d" x="32" y="372">DynamoDB · DocumentDB · Neptune · EKS</text>
+  <text class="d" x="32" y="388">Storage Gateway · VMware · SAP HANA</text>
+
+  <path class="lne" d="M270,130 L318,170"/>
+  <path class="lne" d="M270,256 L318,220"/>
+  <path class="lne" d="M270,360 L318,250"/>
+  <text class="d" x="276" y="300">backup jobs</text>
+
+  <!-- vault -->
+  <rect class="v" x="320" y="64" width="250" height="250" rx="8"/>
+  <text class="lb" x="334" y="86">BACKUP VAULT · eu-central-1</text>
+  <rect class="w" x="334" y="96" width="222" height="96" rx="5"/>
+  <text class="tb" x="346" y="116">Recovery points</text>
+  <text class="d" x="346" y="136">EBS / RDS snapshots, AWS Backup</text>
+  <text class="d" x="346" y="152">backups (EFS, S3, DynamoDB ...)</text>
+  <text class="d" x="346" y="168">warm → cold → deleted</text>
+  <text class="ms" x="346" y="184">plan=prod-daily</text>
+  <rect class="s" x="334" y="202" width="222" height="32" rx="5"/>
+  <text class="d" x="346" y="222">KMS key · access policy · notifications</text>
+  <rect class="x" x="334" y="242" width="222" height="58" rx="5"/>
+  <text class="tb" x="346" y="262">Vault Lock</text>
+  <text class="d" x="346" y="280">min / max retention; governance or</text>
+  <text class="d" x="346" y="294">compliance (grace time ≥ 72 h)</text>
+
+  <!-- copies -->
+  <path class="lne" d="M570,120 L618,120"/>
+  <path class="lne" d="M570,220 L618,220"/>
+  <text class="d" x="574" y="112">copy</text>
+  <rect class="r" x="620" y="64" width="200" height="104" rx="6"/>
+  <text class="tb" x="632" y="86">Other Region</text>
+  <text class="ms" x="632" y="104">eu-west-1 · prod-vault-dr</text>
+  <text class="d" x="632" y="124">own lifecycle; continuous</text>
+  <text class="d" x="632" y="140">copies become snapshots</text>
+  <text class="d" x="632" y="156">(no PITR on copies)</text>
+  <rect class="rw" x="620" y="182" width="200" height="132" rx="6"/>
+  <text class="tb" x="632" y="204">Other account</text>
+  <text class="d" x="632" y="224">Organizations, vault access</text>
+  <text class="d" x="632" y="240">policy, customer managed KMS key</text>
+  <text class="tb" x="632" y="264">Logically air-gapped</text>
+  <text class="d" x="632" y="282">locked by default, shared with</text>
+  <text class="d" x="632" y="298">AWS RAM, multi-party approval</text>
+
+  <!-- bottom -->
+  <rect class="g" x="320" y="330" width="250" height="74" rx="6"/>
+  <text class="tb" x="332" y="352">Restore / restore testing</text>
+  <text class="d" x="332" y="370">creates a new resource from a</text>
+  <text class="d" x="332" y="386">recovery point; tests on a schedule</text>
+  <path class="lnd" d="M445,314 L445,328"/>
+  <rect class="x" x="620" y="330" width="200" height="74" rx="6"/>
+  <text class="tb" x="632" y="352">Legal hold</text>
+  <text class="d" x="632" y="370">matching recovery points cannot</text>
+  <text class="d" x="632" y="386">expire or be deleted until released</text>
+
+  <text class="d" x="20" y="430">Organizations backup policies deploy plans to every account; Backup Audit Manager checks frameworks of controls and writes reports.</text>
+  <text class="d" x="20" y="448">Restores never overwrite the original resource (S3 can restore into the same bucket).</text>
+</svg>

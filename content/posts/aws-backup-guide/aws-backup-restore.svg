@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Restores and restore testing</title>
+  <desc id="d">Manual restore: get-recovery-point-restore-metadata returns the settings of the original resource; start-restore-job creates a new resource from the recovery point with those or changed values, and describe-restore-job shows the status and the new resource ARN. Restore testing: a restore testing plan runs on a schedule and selects a recovery point per protected resource, the latest or a random one within a selection window; the restore testing selection says which resource type and resources to restore with which role; AWS Backup restores, keeps the test resource for the validation window while your own check can report a result, then deletes it and records the outcome.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Restores and restore testing</text>
+  <text class="sub" x="20" y="48">A restore always creates a new resource; testing does that on a schedule and cleans up</text>
+
+  <text class="lb" x="20" y="78">MANUAL RESTORE</text>
+  <rect class="w" x="20" y="86" width="170" height="58" rx="6"/>
+  <text class="tb" x="32" y="108">Recovery point</text>
+  <text class="ms" x="32" y="128">snap-0123... in vault</text>
+  <path class="lne" d="M190,115 L210,115"/>
+  <rect class="s" x="212" y="86" width="190" height="58" rx="6"/>
+  <text class="ms" x="224" y="108">get-recovery-point-</text>
+  <text class="ms" x="224" y="124">restore-metadata</text>
+  <text class="d" x="224" y="138">original settings</text>
+  <path class="lne" d="M402,115 L422,115"/>
+  <rect class="r" x="424" y="86" width="190" height="58" rx="6"/>
+  <text class="ms" x="436" y="108">start-restore-job</text>
+  <text class="d" x="436" y="126">same or changed values</text>
+  <text class="d" x="436" y="140">(AZ, type, PITR time ...)</text>
+  <path class="lne" d="M614,115 L634,115"/>
+  <rect class="g" x="636" y="86" width="184" height="58" rx="6"/>
+  <text class="tb" x="648" y="108">New resource</text>
+  <text class="d" x="648" y="126">describe-restore-job shows</text>
+  <text class="d" x="648" y="140">CreatedResourceArn</text>
+
+  <text class="lb" x="20" y="182">RESTORE TESTING</text>
+  <rect class="rw" x="20" y="190" width="190" height="84" rx="6"/>
+  <text class="tb" x="32" y="212">Testing plan</text>
+  <text class="d" x="32" y="230">schedule, start window,</text>
+  <text class="d" x="32" y="246">LATEST or RANDOM point</text>
+  <text class="d" x="32" y="262">within N days, vaults</text>
+  <path class="lne" d="M210,232 L230,232"/>
+  <rect class="s" x="232" y="190" width="190" height="84" rx="6"/>
+  <text class="tb" x="244" y="212">Testing selection</text>
+  <text class="d" x="244" y="230">resource type and ARNs or</text>
+  <text class="d" x="244" y="246">tag conditions, IAM role,</text>
+  <text class="d" x="244" y="262">metadata overrides</text>
+  <path class="lne" d="M422,232 L442,232"/>
+  <rect class="r" x="444" y="190" width="170" height="84" rx="6"/>
+  <text class="tb" x="456" y="212">Restore + wait</text>
+  <text class="d" x="456" y="230">validation window: your</text>
+  <text class="d" x="456" y="246">check runs, reports with</text>
+  <text class="ms" x="456" y="262">put-restore-validation-</text>
+  <path class="lne" d="M614,232 L634,232"/>
+  <rect class="g" x="636" y="190" width="184" height="84" rx="6"/>
+  <text class="tb" x="648" y="212">Delete + record</text>
+  <text class="d" x="648" y="230">test resource removed;</text>
+  <text class="d" x="648" y="246">job result kept (and in</text>
+  <text class="d" x="648" y="262">Audit Manager reports)</text>
+
+  <text class="d" x="20" y="300">You pay for the restored test resources while they exist. Restore testing is not available for every resource type (feature table).</text>
+  <text class="d" x="20" y="318">Restore into a clean recovery account after a security incident, not back into the affected one.</text>
+</svg>
