@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which ACM certificate to use</title>
+  <desc id="d">Start from where TLS ends. On an AWS service such as a load balancer, CloudFront or API Gateway: a public ACM certificate, free, renewed and deployed by ACM. On your own server, container or on-premises host: an exportable public certificate, paid per name, valid 198 days, and you deploy each renewal; or ACME with a standard client, paid per name, valid at most 45 days, renewed by the client. For internal names only: a private certificate from AWS Private CA, valid 395 days, clients must trust your CA. For a certificate you already have from another CA: import it, free, but you renew and re-import it.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .free{ fill: #e8f5ee; stroke: #75b798; }
+      .paid{ fill: #fff3e0; stroke: #fd9843; }
+      .prv { fill: #f3effc; stroke: #a98eda; }
+      .imp { fill: #e7f1ff; stroke: #6ea8fe; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which ACM certificate to use</text>
+  <text class="sub" x="20" y="48">Decide by where TLS ends; green: free, orange: paid per name, purple: your own CA</text>
+
+  <rect class="q" x="320" y="62" width="200" height="40" rx="20"/><text class="tb" x="420" y="87" text-anchor="middle">Where does TLS end?</text>
+  <path class="lne" d="M340,102 L115,136"/>
+  <path class="lne" d="M400,102 L320,136"/>
+  <path class="lne" d="M440,102 L525,136"/>
+  <path class="lne" d="M500,102 L730,136"/>
+
+  <!-- questions -->
+  <rect class="q" x="20" y="138" width="190" height="50" rx="5"/><text class="tb" x="32" y="158">AWS service</text><text class="d" x="32" y="176">ALB, NLB, CloudFront, API GW</text>
+  <rect class="q" x="225" y="138" width="190" height="50" rx="5"/><text class="tb" x="237" y="158">Your own host</text><text class="d" x="237" y="176">EC2, container, on-premises</text>
+  <rect class="q" x="430" y="138" width="190" height="50" rx="5"/><text class="tb" x="442" y="158">Internal names only</text><text class="d" x="442" y="176">app.corp.internal</text>
+  <rect class="q" x="635" y="138" width="185" height="50" rx="5"/><text class="tb" x="647" y="158">Have one already</text><text class="d" x="647" y="176">bought from another CA</text>
+
+  <path class="lne" d="M115,188 L115,214"/>
+  <path class="lne" d="M320,188 L320,214"/>
+  <path class="lne" d="M525,188 L525,214"/>
+  <path class="lne" d="M727,188 L727,214"/>
+
+  <!-- answers -->
+  <rect class="free" x="20" y="216" width="190" height="66" rx="5"/><text class="tb" x="32" y="236">Public certificate</text><text class="d" x="32" y="254">free, 198 days</text><text class="d" x="32" y="270">ACM renews and deploys it</text>
+  <rect class="paid" x="225" y="216" width="190" height="66" rx="5"/><text class="tb" x="237" y="236">Exportable public</text><text class="d" x="237" y="254">$7 a name, $79 a wildcard</text><text class="d" x="237" y="270">198 days, you redeploy</text>
+  <rect class="paid" x="225" y="292" width="190" height="66" rx="5"/><text class="tb" x="237" y="312">or ACME</text><text class="d" x="237" y="330">any ACME client, from $1 a name</text><text class="d" x="237" y="346">≤ 45 days, client renews</text>
+  <rect class="prv" x="430" y="216" width="190" height="66" rx="5"/><text class="tb" x="442" y="236">Private certificate</text><text class="d" x="442" y="254">from AWS Private CA, 395 days</text><text class="d" x="442" y="270">clients must trust your CA</text>
+  <rect class="imp" x="635" y="216" width="185" height="66" rx="5"/><text class="tb" x="647" y="236">Import it</text><text class="d" x="647" y="254">free in ACM</text><text class="d" x="647" y="270">you renew and re-import</text>
+
+  <text class="d" x="430" y="318">Only public certificates are trusted by browsers;</text>
+  <text class="d" x="430" y="334">only ACM-issued ones renew without your help;</text>
+  <text class="d" x="430" y="350">the key of a plain public certificate never leaves AWS.</text>
+</svg>

@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS Certificate Manager</title>
+  <desc id="d">AWS Certificate Manager: free TLS certificates, DNS validation and renewal. Small drawings: PUBLIC, PRIVATE and IMPORTED pills; a terminal running aws acm request-certificate and wait certificate-validated; a certificate with a padlock and a rosette; icons for DNS validation, auto renewal and the us-east-1 rule; small icons for wildcards, CloudFront, load balancers, export, ACME, expiry alarms and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #dd344c; }
+      .al  { stroke: #dd344c; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .doc { fill: #ffffff; stroke: #dd344c; stroke-width: 12; }
+      .ln  { stroke: #ced4da; stroke-width: 12; stroke-linecap: round; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .pv  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .pw  { fill: #fff3e0; stroke: #fd9843; stroke-width: 5; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .doc { fill: #0d1117; }
+        .ln  { stroke: #30363d; }
+        .pg  { fill: #10241a; stroke: #4f8f6f; }
+        .pv  { fill: #1f1830; stroke: #7d63b0; }
+        .pw  { fill: #2a1e0c; stroke: #b9701f; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: types and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pg" x="131" y="198" width="220" height="66" rx="33"/><text class="ink" x="241" y="241">PUBLIC</text>
+    <rect class="pv" x="371" y="198" width="230" height="66" rx="33"/><text class="ink" x="486" y="241">PRIVATE</text>
+    <rect class="pw" x="621" y="198" width="250" height="66" rx="33"/><text class="ink" x="746" y="241">IMPORTED</text>
+  </g>
+  <text class="n mono" x="501" y="318" text-anchor="middle" font-size="30">198 days · renews by itself</text>
+  <rect class="term" x="131" y="400" width="690" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="690" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="690" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws acm request-certificate</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ aws acm wait certificate-validated<tspan class="a">█</tspan></text>
+
+  <!-- center: certificate with padlock and rosette -->
+  <g transform="translate(1150,0)">
+    <rect class="doc" x="20" y="200" width="420" height="320" rx="20"/>
+    <line class="ln" x1="70" y1="270" x2="330" y2="270"/>
+    <line class="ln" x1="70" y1="320" x2="270" y2="320"/>
+    <line class="ln" x1="70" y1="370" x2="300" y2="370"/>
+    <rect class="a" x="70" y="430" width="90" height="62" rx="10"/>
+    <path class="al" stroke-width="12" d="M92,430 V414 A23,23 0 0 1 138,414 V430"/>
+    <circle cx="115" cy="461" r="9" fill="#ffffff"/>
+    <path class="a" d="M330,470 L310,560 L345,538 L370,566 L380,476 Z"/>
+    <path class="a" d="M370,470 L360,566 L392,540 L420,560 L410,474 Z" opacity=".75"/>
+    <circle class="a" cx="365" cy="440" r="56"/>
+    <path stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" d="M341,440 L359,458 L391,424"/>
+    <text class="n mono" x="230" y="620" text-anchor="middle" font-size="32">example.com · *.example.com</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <rect class="al" stroke-width="14" x="24" y="40" width="152" height="120" rx="14"/>
+    <text class="a mono" x="100" y="116" text-anchor="middle" font-size="40" font-weight="700">CNAME</text>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">DNS validation</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <path class="al" stroke-width="16" d="M160,92 A62,62 0 0 0 46,62 M40,108 A62,62 0 0 0 154,138"/>
+    <path class="al" stroke-width="14" d="M30,40 L44,64 L70,52 M170,160 L156,136 L130,148"/>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">auto renewal</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <circle class="al" stroke-width="14" cx="100" cy="100" r="72"/>
+    <path class="al" stroke-width="10" d="M28,100 H172 M100,28 C64,60 64,140 100,172 M100,28 C136,60 136,140 100,172"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">us-east-1 rule</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">AWS Certificate Manager</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="88">Free TLS certificates, DNS validation and renewal</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">import · export · ACME · expiry alarms · quotas · CLI 2.39.3</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><path class="al" stroke-width="16" d="M100,30 V170 M40,65 L160,135 M160,65 L40,135"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">wildcards</text>
+  <g transform="translate(806,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="100" cy="100" r="70"/><circle class="a" cx="100" cy="100" r="26"/><circle class="a" cx="100" cy="30" r="14"/><circle class="a" cx="161" cy="135" r="14"/><circle class="a" cx="39" cy="135" r="14"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">CloudFront</text>
+  <g transform="translate(1066,1290) scale(0.5)"><circle class="a" cx="40" cy="100" r="22"/><path class="al" stroke-width="14" d="M62,100 L150,40 M62,100 H150 M62,100 L150,160"/><circle class="al" stroke-width="12" cx="164" cy="40" r="12"/><circle class="al" stroke-width="12" cx="164" cy="100" r="12"/><circle class="al" stroke-width="12" cx="164" cy="160" r="12"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">load balancers</text>
+  <g transform="translate(1326,1290) scale(0.5)"><path class="al" stroke-width="14" d="M40,120 V170 H160 V120"/><path class="al" stroke-width="14" d="M100,30 V130 M62,92 L100,130 L138,92"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">export</text>
+  <g transform="translate(1586,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="64" cy="100" r="40"/><path class="al" stroke-width="14" d="M104,100 H176 M150,100 V136 M176,100 V128"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">ACME</text>
+  <g transform="translate(1846,1290) scale(0.5)"><path class="al" stroke-width="14" d="M60,140 V96 A40,40 0 0 1 140,96 V140 H40 H160 M86,166 H114"/><circle class="a" cx="100" cy="40" r="12"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">expiry alarms</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>

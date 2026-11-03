@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Renewal over 198 days</title>
+  <desc id="d">An ACM public certificate is valid 198 days. When it is in use and its CNAME is in place, ACM renews it at day 153, 45 days before expiry, and it keeps the same ARN with another 198 days. When renewal is blocked, ACM sends events 30, 15, 7, 3 and 1 day before expiry and the certificate expires at day 198. An imported certificate never renews: ACM sends a daily approaching-expiration event from 45 days before its expiry, and you must re-import a new certificate before the end.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .ax  { stroke: #adb5bd; stroke-width: 1.2; }
+      .gl  { stroke: #adb5bd; stroke-width: 1; stroke-dasharray: 3 3; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .nw  { fill: #d1e7dd; stroke: #75b798; }
+      .pen { fill: #fff3e0; stroke: #fd9843; }
+      .imp { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ev  { stroke: #dd344c; stroke-width: 2.4; }
+      .dy  { stroke: #6ea8fe; stroke-width: 1.2; }
+      .ex  { font-size: 11px; font-weight: 700; fill: #dd344c; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Renewal over 198 days</text>
+  <text class="sub" x="20" y="48">The renewal check is 45 days before expiry; without it you get warnings, then an outage</text>
+
+  <path class="ax" d="M70,80 H790 M70,74 V86 M626.4,74 V86 M790,74 V86"/>
+  <text class="ms" x="70" y="68">day 0: issued</text>
+  <text class="ms" x="626.4" y="68" text-anchor="middle">day 153 (−45)</text>
+  <text class="ms" x="790" y="68" text-anchor="end">day 198</text>
+  <path class="gl" d="M626.4,88 V300"/>
+
+  <text class="tb" x="70" y="110">In use, CNAME in place</text>
+  <rect class="ok" x="70" y="118" width="556.4" height="26" rx="3"/><text class="d" x="80" y="135">valid</text>
+  <rect class="nw" x="626.4" y="118" width="163.60000000000002" height="26" rx="3"/><text class="d" x="634.4" y="135">renewed, same ARN</text>
+
+  <text class="tb" x="70" y="176">Renewal blocked: CNAME deleted, not in use, CAA</text>
+  <rect class="pen" x="70" y="184" width="720" height="26" rx="3"/><text class="d" x="80" y="201">valid, nobody notices</text>
+  <path class="ev" d="M680.9,182 V212 M735.5,182 V212 M764.5,182 V212 M779.1,182 V212 M786.4,182 V212"/>
+  <text class="d" x="674.9" y="201" text-anchor="end">events at 30, 15, 7, 3, 1 days</text>
+  <text class="ex" x="790" y="228" text-anchor="end">EXPIRED</text>
+
+  <text class="tb" x="70" y="258">Imported (any validity)</text>
+  <rect class="imp" x="70" y="266" width="720" height="26" rx="3"/><text class="d" x="80" y="283">valid until its own end date</text>
+  <path class="dy" d="M626.4,266 V292 M630.0,266 V292 M633.6,266 V292 M637.3,266 V292 M640.9,266 V292 M644.5,266 V292 M648.2,266 V292 M651.8,266 V292 M655.5,266 V292 M659.1,266 V292 M662.7,266 V292 M666.4,266 V292 M670.0,266 V292 M673.6,266 V292 M677.3,266 V292 M680.9,266 V292 M684.5,266 V292 M688.2,266 V292 M691.8,266 V292 M695.5,266 V292 M699.1,266 V292 M702.7,266 V292 M706.4,266 V292 M710.0,266 V292 M713.6,266 V292 M717.3,266 V292 M720.9,266 V292 M724.5,266 V292 M728.2,266 V292 M731.8,266 V292 M735.5,266 V292 M739.1,266 V292 M742.7,266 V292 M746.4,266 V292 M750.0,266 V292 M753.6,266 V292 M757.3,266 V292 M760.9,266 V292 M764.5,266 V292 M768.2,266 V292 M771.8,266 V292 M775.5,266 V292 M779.1,266 V292 M782.7,266 V292 M786.4,266 V292"/>
+  <text class="d" x="620.4" y="283" text-anchor="end">daily events from 45 days</text>
+
+  <text class="d" x="20" y="326">ACM-issued public certificates get expiry events from 30 days before, imported and private ones from 45 (put-account-configuration changes it).</text>
+  <text class="d" x="20" y="344">Certificates issued with 395-day validity before the change renew 60 days before expiry and come back with 198 days.</text>
+</svg>

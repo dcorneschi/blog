@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which Region holds the certificate</title>
+  <desc id="d">In us-east-1, an ACM certificate for example.com and *.example.com is used by the CloudFront distribution and by API Gateway edge-optimized custom domains. In eu-west-1, a second certificate for the same names is used by the Application Load Balancer and by API Gateway Regional custom domains. CloudFront sends requests to the load balancer, its origin. One CNAME record in the Route 53 public zone validates both certificates, and each renews on its own.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .val { stroke: #dd344c; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .reg { fill: #f8f9fa; stroke: #dee2e6; }
+      .svc { fill: #e7f1ff; stroke: #6ea8fe; }
+      .crt { fill: #fdecee; stroke: #dd344c; }
+      .dns { fill: #e8f5ee; stroke: #75b798; }
+    </style>
+  </defs>
+  <rect width="840" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which Region holds the certificate</text>
+  <text class="sub" x="20" y="48">Certificates are Regional; CloudFront and edge-optimized APIs only look in us-east-1</text>
+
+  <!-- us-east-1 -->
+  <rect class="reg" x="20" y="64" width="390" height="210" rx="8"/>
+  <text class="lb" x="34" y="84">US-EAST-1 (N. VIRGINIA)</text>
+  <rect class="svc" x="34" y="98" width="166" height="46" rx="5"/><text class="tb" x="46" y="117">API Gateway</text><text class="d" x="46" y="134">edge-optimized domain</text>
+  <rect class="svc" x="230" y="98" width="166" height="46" rx="5"/><text class="tb" x="242" y="117">CloudFront</text><text class="d" x="242" y="134">global, cert from us-east-1</text>
+  <path class="lne" d="M117,144 L117,180"/>
+  <path class="lne" d="M313,144 L313,180"/>
+  <rect class="crt" x="34" y="182" width="362" height="52" rx="5"/>
+  <text class="tb" x="48" y="203">ACM certificate</text>
+  <text class="ms" x="48" y="222">example.com, *.example.com</text>
+  <text class="d" x="396" y="258" text-anchor="end">CloudFront serves it everywhere</text>
+
+  <!-- eu-west-1 -->
+  <rect class="reg" x="430" y="64" width="390" height="210" rx="8"/>
+  <text class="lb" x="444" y="84">EU-WEST-1 (IRELAND)</text>
+  <rect class="svc" x="444" y="98" width="166" height="46" rx="5"/><text class="tb" x="456" y="117">Load balancer</text><text class="d" x="456" y="134">HTTPS listener, origin</text>
+  <rect class="svc" x="640" y="98" width="166" height="46" rx="5"/><text class="tb" x="652" y="117">API Gateway</text><text class="d" x="652" y="134">Regional domain</text>
+  <path class="lne" d="M527,144 L527,180"/>
+  <path class="lne" d="M723,144 L723,180"/>
+  <rect class="crt" x="444" y="182" width="362" height="52" rx="5"/>
+  <text class="tb" x="458" y="203">ACM certificate (a second one)</text>
+  <text class="ms" x="458" y="222">example.com, *.example.com</text>
+  <text class="d" x="806" y="258" text-anchor="end">same names, own ARN, renews on its own</text>
+
+  <!-- origin -->
+  <path class="lne" d="M396,112 C418,112 422,112 442,112"/>
+
+  <!-- Route 53 -->
+  <rect class="dns" x="230" y="302" width="380" height="50" rx="6"/>
+  <text class="tb" x="244" y="322">Route 53 public zone: one CNAME</text>
+  <text class="ms" x="244" y="340">_d930…example.com → _c9ed…acm-validations.aws</text>
+  <path class="val" d="M280,302 L150,236"/>
+  <path class="val" d="M560,302 L480,236"/>
+  <text class="d" x="205" y="292" text-anchor="end">validates</text>
+  <text class="d" x="515" y="292" text-anchor="end">validates</text>
+
+  <text class="d" x="20" y="384">CloudFront in front of a load balancer means two certificates for the same names; DNS validation makes the second one free of extra work.</text>
+</svg>

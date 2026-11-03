@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 350" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Life of an ACM public certificate</title>
+  <desc id="d">request-certificate leads to PENDING_VALIDATION. When ACM finds the CNAME the certificate becomes ISSUED, and once a service uses it, it is in use. 45 days before expiry ACM checks that it is still in use and the CNAME is still in public DNS; if so it renews it with the same ARN and another 198 days. If the request has a problem it becomes FAILED; after 72 hours without validation it becomes VALIDATION_TIMED_OUT. If the renewal check fails, ACM sends events 30, 15, 7, 3 and 1 day before expiry and the certificate ends as EXPIRED.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .ok  { stroke: #198754; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .bad { stroke: #dd344c; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .st  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .pen { fill: #fff3e0; stroke: #fd9843; }
+      .gd  { fill: #e8f5ee; stroke: #75b798; }
+      .er  { fill: #fdecee; stroke: #dd344c; }
+    </style>
+  </defs>
+  <rect width="840" height="350" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Life of an ACM public certificate</text>
+  <text class="sub" x="20" y="48">Validation once, then a renewal check 45 days before every expiry</text>
+
+  <!-- main row -->
+  <rect class="st" x="20" y="74" width="130" height="50" rx="5"/><text class="ms" x="32" y="95">request-</text><text class="ms" x="32" y="111">certificate</text>
+  <rect class="pen" x="175" y="74" width="150" height="50" rx="5"/><text class="ms" x="187" y="95">PENDING_VALIDATION</text><text class="d" x="187" y="112">add the CNAME</text>
+  <rect class="gd" x="350" y="74" width="100" height="50" rx="5"/><text class="ms" x="362" y="95">ISSUED</text><text class="d" x="362" y="112">CNAME found</text>
+  <rect class="gd" x="475" y="74" width="140" height="50" rx="5"/><text class="tb" x="487" y="95">in use</text><text class="d" x="487" y="112">attached to a service</text>
+  <rect class="st" x="640" y="74" width="180" height="50" rx="5"/><text class="tb" x="652" y="95">renewal check</text><text class="d" x="652" y="112">45 days before expiry</text>
+  <path class="lne" d="M150,99 L173,99"/>
+  <path class="lne" d="M325,99 L348,99"/>
+  <path class="lne" d="M450,99 L473,99"/>
+  <path class="lne" d="M615,99 L638,99"/>
+
+  <!-- renewal loop -->
+  <path class="ok" d="M690,124 L690,152 L400,152 L400,127"/>
+  <text class="d" x="545" y="168" text-anchor="middle">in use and CNAME in DNS: renewed, same ARN, another 198 days</text>
+
+  <!-- failures -->
+  <path class="bad" d="M85,124 L85,238"/>
+  <path class="bad" d="M250,124 L250,238"/>
+  <path class="bad" d="M790,124 L790,204 L580,204 L580,238"/>
+  <text class="d" x="782" y="198" text-anchor="end">no: CNAME gone, not in use, CAA</text>
+
+  <rect class="er" x="20" y="240" width="130" height="50" rx="5"/><text class="ms" x="32" y="261">FAILED</text><text class="d" x="32" y="278">bad name, CAA, email</text>
+  <rect class="er" x="175" y="240" width="150" height="50" rx="5"/><text class="ms" x="187" y="261">VALIDATION_TIMED_OUT</text><text class="d" x="187" y="278">no CNAME after 72 h</text>
+  <rect class="pen" x="500" y="240" width="160" height="50" rx="5"/><text class="tb" x="512" y="261">events and Health</text><text class="d" x="512" y="278">30, 15, 7, 3, 1 days left</text>
+  <rect class="er" x="690" y="240" width="130" height="50" rx="5"/><text class="ms" x="702" y="261">EXPIRED</text><text class="d" x="702" y="278">browsers refuse it</text>
+  <path class="bad" d="M660,265 L688,265"/>
+
+  <text class="d" x="20" y="318">FAILED and VALIDATION_TIMED_OUT cannot be retried: delete the request and make a new one.</text>
+  <text class="d" x="20" y="336">Exported certificates can also end as REVOKED; imported ones never enter the renewal check.</text>
+</svg>
