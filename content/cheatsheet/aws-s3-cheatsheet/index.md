@@ -2,7 +2,7 @@
 title: "AWS S3 Cheatsheet"
 date: 2026-11-01T23:00:00+02:00
 draft: false
-description: "AWS CLI reference for Amazon S3: buckets and naming rules, cp/mv/rm/sync, filters, presigned URLs, storage class minimums and restore times, versioning, encryption (SSE-C off by default since April 2026), tags, conditional writes, Requester Pays, access control, Object Ownership, Object Lock, account regional namespace, lifecycle, storage classes, multipart uploads, website, CORS, logging, notifications, replication and fixed one-liners. Commands run with AWS CLI 2.39.3 against a moto S3 emulator."
+description: "AWS CLI reference for Amazon S3: buckets and naming rules, cp/mv/rm/sync, filters, presigned URLs, storage classes compared (availability, minimums, retrieval fees and us-east-1 prices) and restore times, cost checks, versioning, encryption (SSE-C off by default since April 2026), tags, conditional writes, Requester Pays, access control, Object Ownership, Object Lock, account regional namespace, lifecycle, storage classes, multipart uploads, website, CORS, logging, notifications, replication and fixed one-liners. Commands run with AWS CLI 2.39.3 against a moto S3 emulator."
 tags: ["aws", "s3", "cli"]
 categories: ["Cheatsheet"]
 ---
@@ -718,22 +718,76 @@ aws s3api delete-bucket-lifecycle --bucket my-bucket
 
 ## Storage Classes
 
-| Class | Use Case | Retrieval | Min duration | Min billable size | AZs |
-|-------|----------|-----------|--------------|-------------------|-----|
-| `STANDARD` | Frequently accessed data | Instant | – | – | ≥3 |
-| `INTELLIGENT_TIERING` | Unknown or changing access patterns | Instant (no retrieval fee) | – | – (objects < 128 KB are never moved) | ≥3 |
-| `STANDARD_IA` | Infrequent access, still needs fast retrieval | Instant, per-GB fee | 30 days | 128 KB | ≥3 |
-| `ONEZONE_IA` | Infrequent, re-creatable data | Instant, per-GB fee | 30 days | 128 KB | 1 |
-| `GLACIER_IR` | Archive read about once a quarter | Instant, per-GB fee | 90 days | 128 KB | ≥3 |
-| `GLACIER` | Glacier Flexible Retrieval, archive read once a year | After `restore-object` (table below) | 90 days | 40 KB metadata overhead | ≥3 |
-| `DEEP_ARCHIVE` | Archive read less than once a year | After `restore-object` (table below) | 180 days | 40 KB metadata overhead | ≥3 |
-| `REDUCED_REDUNDANCY` | Legacy, do not use for new data | Instant | – | – | ≥3 |
+| Class (API name) | Best for | First byte | Min duration | Min billable size | Availability (designed / SLA) | AZs |
+|------------------|----------|------------|--------------|-------------------|-------------------------------|-----|
+| `STANDARD` | Frequently accessed, active data | ms | – | – | 99.99% / 99.9% | ≥3 |
+| `INTELLIGENT_TIERING` | Unknown or changing access patterns | ms (optional archive tiers: after restore) | – | – (objects < 128 KB are never moved) | 99.9% / 99% | ≥3 |
+| `EXPRESS_ONEZONE` | Latency-sensitive apps, directory buckets only | single-digit ms | 1 hour | – | 99.95% / 99.9% | 1, chosen by you |
+| `STANDARD_IA` | Long-lived data read about once a month | ms | 30 days | 128 KB | 99.9% / 99% | ≥3 |
+| `ONEZONE_IA` | Re-creatable infrequent data, replica copies | ms | 30 days | 128 KB | 99.5% / 99% | 1 |
+| `GLACIER_IR` | Archive read about once a quarter, needed at once | ms | 90 days | 128 KB | 99.9% / 99% | ≥3 |
+| `GLACIER` | Glacier Flexible Retrieval: backups read 1–2 times a year | minutes to hours, after `restore-object` | 90 days | 40 KB metadata overhead | 99.99% / 99.9% (after restore) | ≥3 |
+| `DEEP_ARCHIVE` | Compliance archives read less than once a year | 12–48 hours, after `restore-object` | 180 days | 40 KB metadata overhead | 99.99% / 99.9% (after restore) | ≥3 |
+| `REDUCED_REDUNDANCY` | Legacy, do not use for new data | ms | – | – | 99.99% / – | ≥3 |
 
-Objects deleted, overwritten or transitioned before the minimum duration are billed for the rest of it, and smaller
-objects are billed as 128 KB, so many small files in `STANDARD_IA` can cost more than in `STANDARD`.
+Every class except `REDUCED_REDUNDANCY` (99.99%) is designed for **99.999999999% durability**; `ONEZONE_IA` and
+`EXPRESS_ONEZONE` keep data in one AZ, so it is lost if that AZ is destroyed. **Availability** is whether you can read
+the data when you ask for it: the design target, and the SLA below which AWS gives service credits.
+`EXPRESS_ONEZONE` comes with the directory bucket: `s3api put-object --storage-class` accepts the name, but
+`aws s3 cp --storage-class` rejects it.
 
-- **Durability** — how likely data is to be lost (99.999999999% for all classes except RRS; `ONEZONE_IA` data is lost if its AZ is destroyed)
-- **Availability** — the data is there to retrieve when you request it (varies by class)
+**Cost** in us-east-1 (on-demand rates from the AWS price list of October 2026; other Regions differ, and requests and
+data transfer out are charged on top):
+
+| Class | Storage per GB-month | Retrieval per GB | 1 TB for a month |
+|-------|----------------------|------------------|------------------|
+| `STANDARD` | $0.023 (first 50 TB) | – | $23.55 |
+| `INTELLIGENT_TIERING` | $0.023, $0.0125 or $0.004 by tier, + $0.0025 per 1,000 objects monitored | none | $4.10–$23.55 + monitoring |
+| `EXPRESS_ONEZONE` | $0.11 | $0.0006, + $0.0032 per GB uploaded | $112.64 |
+| `STANDARD_IA` | $0.0125 | $0.01 | $12.80 |
+| `ONEZONE_IA` | $0.01 | $0.01 | $10.24 |
+| `GLACIER_IR` | $0.004 | $0.03 | $4.10 |
+| `GLACIER` | $0.0036 | Expedited $0.03, Standard $0.01, Bulk free | $3.69 |
+| `DEEP_ARCHIVE` | $0.00099 | Standard $0.02, Bulk $0.0025 | $1.01 |
+| `REDUCED_REDUNDANCY` | $0.024 (more than `STANDARD`) | – | $24.58 |
+
+> **What "minimum storage duration" means.** It is not a lock and not a waiting time: you can delete, overwrite or
+> move the object whenever you like. It is a **billing floor**: S3 charges each object for at least that many days in
+> the class, so leaving early costs the remaining days anyway, as a pro-rated *early delete* charge (it shows on the
+> bill as `EarlyDelete-SIA`, `EarlyDelete-GIR`, `EarlyDelete-ByteHrs` and so on). In us-east-1:
+>
+> - 1 GB in `STANDARD_IA` deleted after 10 days: 10 days of storage + 20 days early delete = 30 days, $0.0125.
+> - 1 GB in `GLACIER` deleted after 30 days: 90 days billed, about $0.0108 instead of $0.0036.
+> - **Overwriting counts as deleting.** A file rewritten every day under the same key in `STANDARD_IA` pays 30 days
+>   for each daily version, about 30 times the storage you see. (With versioning on, the old versions are not deleted
+>   at all: they stay and are billed until a lifecycle rule expires them.)
+> - A lifecycle transition is an exit too: moving an object from `STANDARD_IA` to `GLACIER` after 10 days pays the
+>   other 20 days of `STANDARD_IA`.
+>
+> **Minimum billable size** works the same way for size: a 10 KB object in `STANDARD_IA`, `ONEZONE_IA` or `GLACIER_IR`
+> is billed as 128 KB. Both rules make these classes a bad fit for small or short-lived objects; keep those in
+> `STANDARD` or `INTELLIGENT_TIERING` (no minimum duration, no minimum size).
+
+A `GLACIER` or `DEEP_ARCHIVE` object also pays for 40 KB of metadata (8 KB at the `STANDARD` rate), which outweighs the saving for
+objects of a few KB. Restoring creates a temporary copy billed at the `STANDARD` rate for the days you ask for.
+
+Rules of thumb from the same prices: `STANDARD_IA` saves $0.0105/GB-month and charges $0.01/GB read, so it only pays
+when you read less than about all of the data once a month; `GLACIER_IR` against `STANDARD` breaks even at reading
+roughly 60% of the data a month. When you cannot predict access, `INTELLIGENT_TIERING` makes that choice per object
+with no retrieval fee.
+
+**Which class?** Typical scenarios (and exam questions):
+
+| Scenario | Class |
+|----------|-------|
+| Active data, read many times a month | `STANDARD` |
+| Access you cannot predict, or that changes over time | `INTELLIGENT_TIERING` |
+| Single-digit ms reads, storage next to the compute in one AZ | `EXPRESS_ONEZONE` |
+| Only copy of the data, read about once a month | `STANDARD_IA` |
+| Data you can re-create (thumbnails, transcodes), or the copy in a Cross-Region Replication destination | `ONEZONE_IA` |
+| Read about once a quarter but needed at once (medical images, news archives) | `GLACIER_IR` |
+| Backups read once or twice a year, minutes to hours is fine | `GLACIER` |
+| Kept 7–10 years for compliance, retrieval within 12 hours is fine | `DEEP_ARCHIVE` |
 
 **Restore times** for `restore-object` (the `Tier` in `GlacierJobParameters`):
 
@@ -741,6 +795,28 @@ objects are billed as 128 KB, so many small files in `STANDARD_IA` can cost more
 |-------|-----------|--------------------|------|
 | `GLACIER` (Flexible Retrieval) | 1–5 minutes | 3–5 hours | 5–12 hours |
 | `DEEP_ARCHIVE` | not available | within 12 hours | within 48 hours |
+
+**After a restore** the object keeps its class: `restore-object` makes a temporary copy next to the archive, and
+`head-object` shows both:
+
+```bash
+aws s3api head-object --bucket my-bucket --key file.txt --query '[StorageClass,Restore]'
+```
+
+```json
+[
+    "GLACIER",
+    "ongoing-request=\"false\", expiry-date=\"Tue, 10 Nov 2026 21:47:52 GMT\""
+]
+```
+
+- `ongoing-request="true"` while the restore runs; once it is `false`, a normal GET reads the copy.
+- The copy expires at **midnight UTC** after the number of days you asked for, rounded up to the next day.
+- To keep it longer, send `restore-object` again with the new `Days` (counted from the new request); it does not
+  retrieve the data again.
+- Until it expires you pay for both: the archive at its own rate and the copy at the `STANDARD` rate.
+- To really move the object out of the archive, copy it onto itself with a new class once the restore is done
+  (`aws s3 cp s3://my-bucket/file.txt s3://my-bucket/file.txt --storage-class STANDARD --force-glacier-transfer`).
 
 **Intelligent-Tiering** moves each object by itself: to Infrequent Access after 30 days without access, to Archive
 Instant Access after 90, and back to Frequent Access on the next read. Two archive tiers are optional and need
@@ -750,7 +826,17 @@ Instant Access after 90, and back to Frequent Access on the next read. Two archi
 # Turn on the Archive Access (90 days) and Deep Archive Access (180 days) tiers
 aws s3api put-bucket-intelligent-tiering-configuration --bucket my-bucket --id archive-all \
   --intelligent-tiering-configuration '{"Id":"archive-all","Status":"Enabled","Tierings":[{"Days":90,"AccessTier":"ARCHIVE_ACCESS"},{"Days":180,"AccessTier":"DEEP_ARCHIVE_ACCESS"}]}'
+
+# Later archiving for one prefix: a year without access, then two years (730 days is the maximum)
+aws s3api put-bucket-intelligent-tiering-configuration --bucket my-bucket --id archive-late \
+  --intelligent-tiering-configuration '{"Id":"archive-late","Status":"Enabled","Filter":{"Prefix":"logs/"},"Tierings":[{"Days":365,"AccessTier":"ARCHIVE_ACCESS"},{"Days":730,"AccessTier":"DEEP_ARCHIVE_ACCESS"}]}'
 ```
+
+- `Days` is at least 90 for Archive Access and 180 for Deep Archive Access, at most **730** for both.
+- Archive Access at 90 days takes objects there instead of Archive Instant Access, which is a little cheaper but no
+  longer instant. Use a larger value to keep the instant tier in between.
+- Restore times: Archive Access 3–5 hours (Standard) or 1–5 minutes (Expedited, paid); Deep Archive Access within
+  12 hours. Standard and Bulk restores are free, and a restored object goes back to the Frequent Access tier.
 
 ```bash
 # Change storage class of existing object (copy in place)
@@ -762,6 +848,83 @@ aws s3api head-object --bucket my-bucket --key file.txt --query 'StorageClass'
 
 A copy onto itself must change something (storage class, metadata, encryption); otherwise S3 refuses it:
 `InvalidRequest ... trying to copy an object to itself without changing the object's metadata, storage class, website redirect location or encryption attributes.`
+
+### Express One Zone (Directory Buckets)
+
+`EXPRESS_ONEZONE` lives only in **directory buckets**, which sit in one Availability Zone and have names ending in
+`--<zone-id>--x-s3`:
+
+```bash
+# Directory bucket in use1-az4 (a zone ID, not a zone name like us-east-1a)
+aws s3api create-bucket --bucket my-bucket--use1-az4--x-s3 \
+  --create-bucket-configuration 'Location={Type=AvailabilityZone,Name=use1-az4},Bucket={DataRedundancy=SingleAvailabilityZone,Type=Directory}'
+
+# List directory buckets (list-buckets shows general purpose buckets only)
+aws s3api list-directory-buckets --query 'Buckets[].Name'
+
+# Append to an existing object: the offset must equal its current size
+aws s3api put-object --bucket my-bucket--use1-az4--x-s3 --key app.log --body more.log --write-offset-bytes 6
+```
+
+- Appends are for logs or media written over time: up to 5 GB per append and 10,000 parts per object (`TooManyParts`
+  after that; copy the object to reset the count).
+- Only directory buckets support appends and `RenameObject`; they do not support lifecycle transitions to other
+  classes, so data stays in `EXPRESS_ONEZONE` until you copy it to a general purpose bucket.
+- Put the compute in the **same zone ID** to get the single-digit-ms latency; from other zones it still works, slower.
+
+### Reduced Redundancy and Outposts
+
+- `REDUCED_REDUNDANCY` (RRS) is kept for old data only: it is designed for 99.99% durability and now costs more than
+  `STANDARD`. A lost RRS object returns **405**, and S3 can tell you when it happens:
+
+  ```bash
+  aws s3api put-bucket-notification-configuration --bucket my-bucket --notification-configuration \
+    '{"TopicConfigurations":[{"TopicArn":"arn:aws:sns:us-east-1:123456789012:s3-alerts","Events":["s3:ReducedRedundancyLostObject"]}]}'
+  ```
+
+  Move such data to `STANDARD`, or to `ONEZONE_IA` if it is re-creatable and rarely read.
+- `OUTPOSTS` is the only class on S3 on Outposts buckets, and works nowhere else: in a Region bucket it fails with
+  `InvalidStorageClass: The storage class you specified is not valid`. Objects there are encrypted with SSE-S3 or
+  SSE-C; SSE-KMS is not supported.
+
+### Cost Checks
+
+The usual waste: incomplete multipart uploads (abort them with the lifecycle rule above), noncurrent versions that pile
+up in versioned buckets, and data that sits in `STANDARD` long after anyone reads it.
+
+```bash
+# Expire noncurrent versions after 30 days, but always keep the 3 newest ones
+aws s3api put-bucket-lifecycle-configuration --bucket my-bucket --lifecycle-configuration '{
+  "Rules": [{
+    "ID": "expire-noncurrent",
+    "Status": "Enabled",
+    "Filter": {},
+    "NoncurrentVersionExpiration": {"NoncurrentDays": 30, "NewerNoncurrentVersions": 3}
+  }]
+}'
+
+# Bytes per storage class from CloudWatch (free daily metric; StorageType: StandardStorage,
+# StandardIAStorage, GlacierInstantRetrievalStorage, GlacierStorage, DeepArchiveStorage, ...)
+aws cloudwatch get-metric-statistics --namespace AWS/S3 --metric-name BucketSizeBytes \
+  --dimensions Name=BucketName,Value=my-bucket Name=StorageType,Value=StandardStorage \
+  --start-time 2026-11-01T00:00:00Z --end-time 2026-11-03T00:00:00Z --period 86400 --statistics Average
+
+# Storage Class Analysis: watches how often objects under logs/ are read, to pick the transition day
+aws s3api put-bucket-analytics-configuration --bucket my-bucket --id logs \
+  --analytics-configuration '{"Id":"logs","Filter":{"Prefix":"logs/"},"StorageClassAnalysis":{}}'
+
+# S3 Storage Lens dashboards (every account has default-account-dashboard)
+aws s3control list-storage-lens-configurations --account-id 123456789012
+
+# Monthly budget for S3 with an email at 80% of the forecast
+aws budgets create-budget --account-id 123456789012 \
+  --budget '{"BudgetName":"s3-monthly","BudgetLimit":{"Amount":"100","Unit":"USD"},"TimeUnit":"MONTHLY","BudgetType":"COST","CostFilters":{"Service":["Amazon Simple Storage Service"]}}' \
+  --notifications-with-subscribers '[{"Notification":{"NotificationType":"FORECASTED","ComparisonOperator":"GREATER_THAN","Threshold":80,"ThresholdType":"PERCENTAGE"},"Subscribers":[{"SubscriptionType":"EMAIL","Address":"ops@example.com"}]}]'
+```
+
+Storage Class Analysis only recommends transitions from `STANDARD` to `STANDARD_IA`, and it is a paid feature. Storage
+Lens has a **Cost optimization** view with the bytes in incomplete multipart uploads older than 7 days and in
+noncurrent versions, per bucket: the first two things to clean up.
 
 ---
 
