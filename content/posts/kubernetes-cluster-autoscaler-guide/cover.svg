@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Kubernetes Cluster Autoscaler</title>
+  <desc id="d">Kubernetes Cluster Autoscaler: scale-up, scale-down, expanders and EKS setup. Small drawings: Pending, TriggeredScaleUp and ScaleDown pills; a terminal running helm upgrade --install cluster-autoscaler and kubectl get events; three nodes with pods and a dashed new node being added; icons for scale-up, scale-down and expanders; small icons for requests, PodDisruptionBudgets, node groups, overprovisioning, EKS, metrics and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #326ce5; }
+      .al  { stroke: #326ce5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .pw  { fill: #fff3e0; stroke: #fd9843; stroke-width: 5; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .nd  { fill: #ffffff; stroke: #326ce5; stroke-width: 10; }
+      .nn  { fill: none; stroke: #326ce5; stroke-width: 10; stroke-dasharray: 26 16; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .a   { fill: #6f9cf0; }
+        .al  { stroke: #6f9cf0; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .pw  { fill: #2a1e0c; stroke: #b9701f; }
+        .pb  { fill: #0c2140; stroke: #3d6fb8; }
+        .pg  { fill: #0f2a1d; stroke: #3d8b63; }
+        .nd  { fill: #0d1117; stroke: #6f9cf0; }
+        .nn  { stroke: #6f9cf0; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: events and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pw" x="131" y="198" width="190" height="66" rx="33"/><text class="ink" x="226" y="241">Pending</text>
+    <rect class="pb" x="341" y="198" width="330" height="66" rx="33"/><text class="ink" x="506" y="241">TriggeredScaleUp</text>
+    <rect class="pg" x="691" y="198" width="230" height="66" rx="33"/><text class="ink" x="806" y="241">ScaleDown</text>
+  </g>
+  <text class="n mono" x="526" y="318" text-anchor="middle" font-size="30">requests, not CPU usage</text>
+  <rect class="term" x="131" y="400" width="795" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="795" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="795" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ helm upgrade --install cluster-autoscaler</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ kubectl get events -A<tspan fill="#326ce5">█</tspan></text>
+
+  <!-- center: nodes and a new node -->
+  <g transform="translate(1110,0)">
+    <rect class="nd" x="0" y="250" width="150" height="240" rx="22"/>
+    <rect class="a" x="25" y="280" width="100" height="50" rx="8"/><rect class="a" x="25" y="345" width="100" height="50" rx="8"/><rect class="a" x="25" y="410" width="100" height="50" rx="8"/>
+    <rect class="nd" x="180" y="250" width="150" height="240" rx="22"/>
+    <rect class="a" x="205" y="280" width="100" height="50" rx="8"/><rect class="a" x="205" y="345" width="100" height="50" rx="8"/><rect class="a" x="205" y="410" width="100" height="50" rx="8"/>
+    <rect class="nn" x="360" y="250" width="150" height="240" rx="22"/>
+    <rect class="a" x="385" y="280" width="100" height="50" rx="8" opacity=".45"/>
+    <path class="al" stroke-width="14" d="M435,370 V440 M400,405 H470"/>
+    <text class="n mono" x="255" y="560" text-anchor="middle" font-size="32">node group +1</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <rect class="al" stroke-width="14" x="30" y="70" width="100" height="100" rx="14"/>
+    <path class="al" stroke-width="16" d="M160,150 V40 M128,72 L160,40 L192,72"/>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">scale-up</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <rect class="al" stroke-width="14" x="30" y="30" width="100" height="100" rx="14"/>
+    <path class="al" stroke-width="16" d="M160,50 V160 M128,128 L160,160 L192,128"/>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">scale-down</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <circle class="a" cx="40" cy="100" r="22"/>
+    <path class="al" stroke-width="12" d="M62,100 H90 M90,100 C110,100 110,50 140,50 M90,100 H140 M90,100 C110,100 110,150 140,150"/>
+    <rect class="al" stroke-width="10" x="140" y="34" width="36" height="32" rx="6"/>
+    <rect class="a" x="140" y="84" width="36" height="32" rx="6"/>
+    <rect class="al" stroke-width="10" x="140" y="134" width="36" height="32" rx="6"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">expanders</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">Kubernetes Cluster Autoscaler</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="88">Scale-up, scale-down, expanders and EKS setup</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">node templates · what blocks scale-down · overprovisioning · chart 9.59.0</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><path class="al" stroke-width="14" d="M30,170 H170 M50,170 V110 M90,170 V70 M130,170 V40"/><circle class="a" cx="130" cy="40" r="14"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">requests</text>
+  <g transform="translate(806,1290) scale(0.5)"><path class="al" stroke-width="14" d="M100,24 L170,52 V100 C170,140 140,166 100,180 C60,166 30,140 30,100 V52 Z"/><path class="al" stroke-width="12" d="M70,100 H130"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">PDBs</text>
+  <g transform="translate(1066,1290) scale(0.5)"><rect class="al" stroke-width="12" x="20" y="60" width="44" height="80" rx="8"/><rect class="al" stroke-width="12" x="78" y="60" width="44" height="80" rx="8"/><rect class="a" x="136" y="60" width="44" height="80" rx="8"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">node groups</text>
+  <g transform="translate(1326,1290) scale(0.5)"><rect class="al" stroke-width="12" x="30" y="40" width="140" height="120" rx="14" stroke-dasharray="20 14"/><rect class="a" x="60" y="70" width="80" height="60" rx="8" opacity=".5"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">overprovisioning</text>
+  <g transform="translate(1586,1290) scale(0.5)"><path class="a" d="M100,20 L170,60 V140 L100,180 L30,140 V60 Z"/><path d="M75,70 V130 M75,100 L125,70 M75,100 L125,130" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">EKS</text>
+  <g transform="translate(1846,1290) scale(0.5)"><path class="al" stroke-width="14" d="M20,170 H180 M40,150 L80,90 L115,120 L170,40"/><circle class="a" cx="170" cy="40" r="14"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">metrics</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>

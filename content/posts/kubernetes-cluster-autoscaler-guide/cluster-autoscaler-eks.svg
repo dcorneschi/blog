@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Cluster Autoscaler on EKS</title>
+  <desc id="d">The cluster-autoscaler Deployment runs in kube-system with priority system-cluster-critical. Its service account is linked to an IAM role through EKS Pod Identity or IRSA. It discovers Auto Scaling groups tagged k8s.io/cluster-autoscaler/enabled and k8s.io/cluster-autoscaler/prod, one per Availability Zone, kept even with balance-similar-node-groups. It reads launch templates, instance types and node-template tags with Describe calls, and changes groups only with SetDesiredCapacity and TerminateInstanceInAutoScalingGroup, within each group's min and max. EKS managed node groups create such Auto Scaling groups with the tags already set. No scaling policies should be attached to these groups.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .k8s { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 1.5; }
+      .aws { fill: #fff8f0; stroke: #fd9843; stroke-width: 1.5; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .i   { fill: #ffd8a8; stroke: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Cluster Autoscaler on EKS</text>
+  <text class="sub" x="20" y="48">Auto-discovery by ASG tags, IAM through Pod Identity or IRSA, one ASG per Availability Zone</text>
+
+  <rect class="k8s" x="20" y="64" width="280" height="250" rx="8"/>
+  <text class="lb" x="34" y="84">EKS CLUSTER prod · kube-system</text>
+  <rect class="s" x="34" y="94" width="252" height="92" rx="6"/>
+  <text class="tb" x="46" y="116">Deployment cluster-autoscaler</text>
+  <text class="ms" x="46" y="134">image v1.35.2 (= k8s 1.35)</text>
+  <text class="ms" x="46" y="150">--node-group-auto-discovery=</text>
+  <text class="ms" x="46" y="164">asg:tag=...enabled,...prod</text>
+  <text class="d" x="46" y="180">system-cluster-critical, PDB</text>
+  <rect class="rw" x="34" y="196" width="252" height="54" rx="6"/>
+  <text class="tb" x="46" y="218">ServiceAccount</text>
+  <text class="d" x="46" y="236">Pod Identity association or IRSA</text>
+  <rect class="s" x="34" y="260" width="252" height="42" rx="6"/>
+  <text class="ms" x="46" y="278">cluster-autoscaler-status</text>
+  <text class="ms" x="46" y="294">...-priority-expander</text>
+
+  <path class="lne" d="M300,140 L338,140"/>
+  <text class="d" x="309" y="132">IAM</text>
+
+  <rect class="aws" x="340" y="64" width="480" height="250" rx="8"/>
+  <text class="lb" x="354" y="84">AWS · eu-central-1</text>
+  <rect class="w" x="354" y="94" width="452" height="58" rx="6"/>
+  <text class="d" x="366" y="114">Read: describe ASGs, instances, launch templates, instance types, node groups</text>
+  <text class="d" x="366" y="132">Write: SetDesiredCapacity, TerminateInstanceInAutoScalingGroup</text>
+  <text class="d" x="366" y="146">within each ASG's min and max; no scaling policies on these ASGs</text>
+
+  <rect class="s" x="354" y="164" width="140" height="138" rx="6"/>
+  <text class="tb" x="366" y="184">ASG general-1a</text>
+  <rect class="i" x="366" y="196" width="52" height="26" rx="4"/><rect class="i" x="428" y="196" width="52" height="26" rx="4"/>
+  <text class="ms" x="366" y="242">enabled</text><text class="ms" x="366" y="258">prod</text>
+  <text class="d" x="366" y="278">min 1 · max 10</text>
+  <rect class="s" x="510" y="164" width="140" height="138" rx="6"/>
+  <text class="tb" x="522" y="184">ASG general-1b</text>
+  <rect class="i" x="522" y="196" width="52" height="26" rx="4"/><rect class="i" x="584" y="196" width="52" height="26" rx="4"/>
+  <text class="ms" x="522" y="242">enabled</text><text class="ms" x="522" y="258">prod</text>
+  <text class="d" x="522" y="278">min 1 · max 10</text>
+  <rect class="s" x="666" y="164" width="140" height="138" rx="6"/>
+  <text class="tb" x="678" y="184">ASG gpu-spot-1a</text>
+  <text class="d" x="678" y="212">0 nodes (scale from</text>
+  <text class="d" x="678" y="228">zero): template tags</text>
+  <text class="ms" x="678" y="248">.../label/gpu: true</text>
+  <text class="ms" x="678" y="264">.../taint/gpu:</text>
+  <text class="ms" x="678" y="278">true:NoSchedule</text>
+
+  <text class="d" x="20" y="344">--balance-similar-node-groups keeps general-1a and general-1b the same size on scale-up (same type and labels, apart from the zone).</text>
+  <text class="d" x="20" y="362">EKS managed node groups create the ASGs with both discovery tags. Tag prefix: k8s.io/cluster-autoscaler/ (node-template/... for scale from zero).</text>
+  <text class="d" x="20" y="380">Expander priority,least-waste with a ConfigMap: spot groups first, catch-all .* for the rest.</text>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 420" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The Cluster Autoscaler loop</title>
+  <desc id="d">Every 10 seconds Cluster Autoscaler runs one loop. Scale-up: the scheduler marks a pod Unschedulable; CA builds a template node per node group from its capacity, labels, taints and DaemonSets, simulates the pending pods on them, lets the expander (least-waste by default) choose a group, and raises that group's desired size in the cloud provider within its min and max; the new machine boots and registers within 15 minutes and the scheduler places the pod. Scale-down, when no scale-up is needed: nodes whose pods request less than 50 percent of allocatable and can all move elsewhere are unneeded; after 10 minutes CA drains and terminates them.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+    </style>
+  </defs>
+  <rect width="840" height="420" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The Cluster Autoscaler loop</text>
+  <text class="sub" x="20" y="48">Every 10 s (--scan-interval): scale up if pods are pending, otherwise look for nodes to remove</text>
+
+  <text class="lb" x="20" y="80">SCALE UP</text>
+  <rect class="x" x="20" y="88" width="150" height="80" rx="6"/>
+  <text class="tb" x="32" y="110">Pending pod</text>
+  <text class="ms" x="32" y="130">PodScheduled=False</text>
+  <text class="ms" x="32" y="146">Unschedulable</text>
+  <text class="d" x="32" y="162">(by its requests)</text>
+  <path class="lne" d="M170,128 L188,128"/>
+  <rect class="r" x="190" y="88" width="150" height="80" rx="6"/>
+  <text class="tb" x="202" y="110">Simulate</text>
+  <text class="d" x="202" y="130">template node per group:</text>
+  <text class="d" x="202" y="146">capacity, labels, taints,</text>
+  <text class="d" x="202" y="162">DaemonSet pods</text>
+  <path class="lne" d="M340,128 L358,128"/>
+  <rect class="rw" x="360" y="88" width="150" height="80" rx="6"/>
+  <text class="tb" x="372" y="110">Expander</text>
+  <text class="d" x="372" y="130">picks one group:</text>
+  <text class="ms" x="372" y="148">least-waste</text>
+  <text class="d" x="372" y="162">priority, most-pods ...</text>
+  <path class="lne" d="M510,128 L528,128"/>
+  <rect class="w" x="530" y="88" width="140" height="80" rx="6"/>
+  <text class="tb" x="542" y="110">Desired size +N</text>
+  <text class="d" x="542" y="130">cloud provider API,</text>
+  <text class="d" x="542" y="146">within min / max</text>
+  <text class="d" x="542" y="162">(ASG, MIG, VMSS ...)</text>
+  <path class="lne" d="M670,128 L688,128"/>
+  <rect class="g" x="690" y="88" width="130" height="80" rx="6"/>
+  <text class="tb" x="702" y="110">Node joins</text>
+  <text class="d" x="702" y="130">within 15 min</text>
+  <text class="d" x="702" y="146">scheduler places</text>
+  <text class="d" x="702" y="162">the pod</text>
+
+  <text class="lb" x="20" y="214">SCALE DOWN (WHEN NO SCALE-UP IS NEEDED)</text>
+  <rect class="s" x="20" y="222" width="230" height="96" rx="6"/>
+  <text class="tb" x="32" y="244">Unneeded node</text>
+  <text class="d" x="32" y="264">requests &lt; 50% of allocatable</text>
+  <text class="d" x="32" y="280">(CPU and memory), all pods can</text>
+  <text class="d" x="32" y="296">move, nothing blocks it</text>
+  <text class="ms" x="32" y="312">threshold 0.5 (flag)</text>
+  <path class="lne" d="M250,270 L278,270"/>
+  <rect class="w" x="280" y="222" width="250" height="96" rx="6"/>
+  <text class="tb" x="292" y="244">Wait</text>
+  <text class="d" x="292" y="264">unneeded for 10 min, and no scale-up</text>
+  <text class="d" x="292" y="280">in the last 10 min</text>
+  <text class="ms" x="292" y="300">--scale-down-unneeded-time</text>
+  <text class="ms" x="292" y="314">--scale-down-delay-after-add</text>
+  <path class="lne" d="M530,270 L558,270"/>
+  <rect class="x" x="560" y="222" width="260" height="96" rx="6"/>
+  <text class="tb" x="572" y="244">Drain and terminate</text>
+  <text class="d" x="572" y="264">taint, evict (PDBs respected, grace</text>
+  <text class="d" x="572" y="280">up to 10 min), terminate instance;</text>
+  <text class="d" x="572" y="296">empty nodes in bulk, others one at</text>
+  <text class="d" x="572" y="312">a time</text>
+
+  <text class="d" x="20" y="352">CA reads requests, not CPU usage. Pods with priority below -10 neither trigger scale-up nor block scale-down.</text>
+  <text class="d" x="20" y="370">It does not register nodes or delete Node objects: node bootstrap and the cloud node controller do that.</text>
+  <text class="d" x="20" y="388">Typical spike to running pod with HPA + CA: about 5 minutes, mostly node boot time.</text>
+</svg>

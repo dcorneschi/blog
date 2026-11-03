@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 300" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How overprovisioning works</title>
+  <desc id="d">1: a node runs real pods plus a placeholder pause pod with priority -10 that reserves room. 2: a real pod with priority 0 needs room; the scheduler preempts a placeholder and the real pod starts at once. 3: the evicted placeholder is now Pending, and because its priority is not below the -10 cutoff it triggers Cluster Autoscaler, which adds a node. 4: the placeholder runs on the new node, so the headroom is back for the next spike.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .node{ fill: #ffffff; stroke: #6ea8fe; stroke-width: 1.5; }
+      .new { fill: #ffffff; stroke: #6ea8fe; stroke-width: 1.5; stroke-dasharray: 5 3; }
+      .pod { fill: #326ce5; }
+      .ph  { fill: #ced4da; stroke: #868e96; stroke-dasharray: 3 2; }
+      .hot { fill: #75b798; }
+      .pen { fill: #fff3e0; stroke: #fd9843; stroke-dasharray: 3 2; }
+    </style>
+  </defs>
+  <rect width="840" height="300" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How overprovisioning works</text>
+  <text class="sub" x="20" y="48">Placeholder pods (priority -10) keep a node's worth of room; real pods take it at once</text>
+
+  <!-- step 1 -->
+  <text class="tb" x="20" y="80">1. Headroom held</text>
+  <rect class="node" x="20" y="90" width="80" height="110" rx="6"/><rect class="pod" x="30" y="100" width="60" height="26" rx="3"/><rect class="pod" x="30" y="132" width="60" height="26" rx="3"/><rect class="ph" x="30" y="164" width="60" height="26" rx="3"/>
+  <path class="lne" d="M106,145 L214,145"/>
+
+  <!-- step 2 -->
+  <text class="tb" x="220" y="80">2. Real pod preempts</text>
+  <rect class="node" x="220" y="90" width="80" height="110" rx="6"/><rect class="pod" x="230" y="100" width="60" height="26" rx="3"/><rect class="pod" x="230" y="132" width="60" height="26" rx="3"/><rect class="hot" x="230" y="164" width="60" height="26" rx="3"/>
+  <path class="lne" d="M306,145 L414,145"/>
+
+  <!-- step 3 -->
+  <text class="tb" x="420" y="80">3. Placeholder pending</text>
+  <rect class="node" x="420" y="90" width="80" height="110" rx="6"/><rect class="pod" x="430" y="100" width="60" height="26" rx="3"/><rect class="pod" x="430" y="132" width="60" height="26" rx="3"/><rect class="hot" x="430" y="164" width="60" height="26" rx="3"/>
+  <rect class="pen" x="510" y="132" width="90" height="26" rx="3"/><text class="d" x="518" y="149">placeholder</text>
+  <rect class="new" x="510" y="166" width="90" height="34" rx="6"/><text class="d" x="518" y="187">CA: +1 node</text>
+  <path class="lne" d="M606,145 L624,145"/>
+
+  <!-- step 4 -->
+  <text class="tb" x="630" y="80">4. Headroom back</text>
+  <rect class="node" x="630" y="90" width="80" height="110" rx="6"/><rect class="pod" x="640" y="100" width="60" height="26" rx="3"/><rect class="pod" x="640" y="132" width="60" height="26" rx="3"/><rect class="hot" x="640" y="164" width="60" height="26" rx="3"/>
+  <rect class="node" x="720" y="90" width="100" height="110" rx="6"/><rect class="ph" x="730" y="100" width="80" height="26" rx="3"/>
+
+  <rect class="pod" x="20" y="226" width="18" height="14" rx="2"/><text class="d" x="44" y="237">existing pod</text>
+  <rect class="hot" x="150" y="226" width="18" height="14" rx="2"/><text class="d" x="174" y="237">new real pod (priority 0)</text>
+  <rect class="ph" x="330" y="226" width="18" height="14" rx="2"/><text class="d" x="354" y="237">pause placeholder (priority -10)</text>
+  <text class="d" x="20" y="268">Priority -10 is the lowest that still triggers a scale-up (pods below the cutoff are ignored). Real workloads need priority 0 or higher to preempt.</text>
+  <text class="d" x="20" y="286">The headroom costs money all the time; size it as the burst you need to absorb while a node boots.</text>
+</svg>

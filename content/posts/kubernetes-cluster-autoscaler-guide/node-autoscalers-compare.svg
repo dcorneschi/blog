@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Three ways to scale nodes on EKS</title>
+  <desc id="d">Cluster Autoscaler: you run the controller in the cluster; it raises the desired capacity of Auto Scaling groups or managed node groups you defined, and the ASG launches instances of the group's instance types. Karpenter: you run the controller; it reads NodePools and an EC2NodeClass and launches EC2 instances directly with EC2 Fleet, choosing the instance type per scale-up, and consolidates, replaces drifted nodes and expires old ones. EKS Auto Mode: AWS runs the Karpenter-based controller outside your cluster; you write NodePools with an Auto Mode NodeClass; nodes are Bottlerocket and live at most 21 days. In all three the trigger is a pod the scheduler could not place.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .col { fill: #f8f9fa; stroke: #dee2e6; }
+      .you { fill: #e7f1ff; stroke: #6ea8fe; }
+      .aws { fill: #ffe5cc; stroke: #fd9843; }
+      .ec2 { fill: #ffffff; stroke: #adb5bd; }
+      .pen { fill: #fff3e0; stroke: #fd9843; stroke-dasharray: 3 2; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Three ways to scale nodes on EKS</text>
+  <text class="sub" x="20" y="48">Same trigger (an unschedulable pod), different owners and layers; blue: you run it, orange: AWS runs it</text>
+
+  <rect class="pen" x="300" y="60" width="240" height="30" rx="5"/><text class="d" x="420" y="80" text-anchor="middle">Pending pod: no node has room</text>
+
+  <!-- CA -->
+  <rect class="col" x="20" y="100" width="260" height="230" rx="8"/>
+  <text class="tb" x="34" y="122">Cluster Autoscaler</text>
+  <rect class="you" x="34" y="132" width="232" height="44" rx="5"/><text class="d" x="46" y="150">controller in your cluster,</text><text class="d" x="46" y="166">node groups you define</text>
+  <path class="lne" d="M150,176 L150,192"/>
+  <rect class="aws" x="34" y="194" width="232" height="44" rx="5"/><text class="d" x="46" y="212">Auto Scaling group: desired +N</text><text class="d" x="46" y="228">(fixed instance types per group)</text>
+  <path class="lne" d="M150,238 L150,254"/>
+  <rect class="ec2" x="34" y="256" width="232" height="30" rx="5"/><text class="d" x="46" y="275">EC2 instances join the group</text>
+  <text class="d" x="34" y="306">scale-down after 10 min unneeded</text>
+  <text class="d" x="34" y="322">any cloud; Cluster API on-premises</text>
+
+  <!-- Karpenter -->
+  <rect class="col" x="290" y="100" width="260" height="230" rx="8"/>
+  <text class="tb" x="304" y="122">Karpenter</text>
+  <rect class="you" x="304" y="132" width="232" height="44" rx="5"/><text class="d" x="316" y="150">controller in your cluster,</text><text class="d" x="316" y="166">NodePool + EC2NodeClass</text>
+  <path class="lne" d="M420,176 L420,254"/>
+  <text class="d" x="428" y="206">direct launch,</text><text class="d" x="428" y="222">type chosen per</text><text class="d" x="428" y="238">scale-up</text>
+  <rect class="ec2" x="304" y="256" width="232" height="30" rx="5"/><text class="d" x="316" y="275">EC2 instances (EC2 Fleet)</text>
+  <text class="d" x="304" y="306">consolidation, drift, expireAfter</text>
+  <text class="d" x="304" y="322">AWS, Azure, Alibaba Cloud</text>
+
+  <!-- Auto Mode -->
+  <rect class="col" x="560" y="100" width="260" height="230" rx="8"/>
+  <text class="tb" x="574" y="122">EKS Auto Mode</text>
+  <rect class="aws" x="574" y="132" width="232" height="44" rx="5"/><text class="d" x="586" y="150">Karpenter-based controller</text><text class="d" x="586" y="166">run by AWS, outside the cluster</text>
+  <path class="lne" d="M690,176 L690,192"/>
+  <rect class="you" x="574" y="194" width="232" height="44" rx="5"/><text class="d" x="586" y="212">you write NodePools</text><text class="d" x="586" y="228">(Auto Mode NodeClass)</text>
+  <path class="lne" d="M690,238 L690,254"/>
+  <rect class="ec2" x="574" y="256" width="232" height="30" rx="5"/><text class="d" x="586" y="275">Bottlerocket nodes, max 21 days</text>
+  <text class="d" x="574" y="306">management fee on top of EC2</text>
+  <text class="d" x="574" y="322">built-in system, general-purpose</text>
+
+  <path class="lne" d="M330,90 L150,128"/>
+  <path class="lne" d="M420,90 L420,128"/>
+  <path class="lne" d="M510,90 L690,128"/>
+  <text class="d" x="20" y="358">Run one of them per set of nodes. All three decide from pod requests and respect PDBs; a controller you run yourself must not run on nodes it manages.</text>
+</svg>

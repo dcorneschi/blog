@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Can this node be removed?</title>
+  <desc id="d">Three example nodes. Node A: requests 30 percent, its pods are a Deployment replica and DaemonSets, which fit elsewhere: unneeded, removed after 10 minutes. Node B: requests 35 percent, but runs a pod with an emptyDir volume, a bare pod without a controller, or a pod annotated safe-to-evict false: kept. Node C: requests 70 percent, above the 50 percent threshold: kept. Other blockers: a PodDisruptionBudget that allows no disruption, kube-system pods without a PDB (evicted only after one hour by default), the node annotation scale-down-disabled, and pods that fit no other node.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .node{ fill: #f8f9fa; stroke: #adb5bd; }
+      .p   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ds  { fill: #e9ecef; stroke: #ced4da; }
+      .bad { fill: #f8d7da; stroke: #e35d6a; }
+      .bar { fill: #dee2e6; }
+      .low { fill: #75b798; }
+      .hi  { fill: #fd9843; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .no  { fill: #f8d7da; stroke: #e35d6a; }
+      .tick{ stroke: #212529; stroke-width: 1.5; stroke-dasharray: 3 2; }
+    </style>
+  </defs>
+  <rect width="840" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Can this node be removed?</text>
+  <text class="sub" x="20" y="48">Requests below 50% of allocatable, every pod movable, nothing blocking, for 10 minutes</text>
+
+  <!-- node A -->
+  <rect class="node" x="20" y="64" width="250" height="210" rx="8"/>
+  <text class="tb" x="32" y="86">Node A</text>
+  <rect class="bar" x="32" y="96" width="226" height="12" rx="6"/><rect class="low" x="32" y="96" width="68" height="12" rx="6"/>
+  <path class="tick" d="M145,92 V112"/>
+  <text class="ms" x="32" y="124">requests 30%</text><text class="ms" x="150" y="124">50%</text>
+  <rect class="p" x="32" y="136" width="226" height="30" rx="4"/><text class="d" x="42" y="155">web-6f9c... (Deployment)</text>
+  <rect class="ds" x="32" y="172" width="108" height="30" rx="4"/><text class="d" x="42" y="191">aws-node (DS)</text>
+  <rect class="ds" x="150" y="172" width="108" height="30" rx="4"/><text class="d" x="160" y="191">kube-proxy (DS)</text>
+  <rect class="ok" x="32" y="214" width="226" height="48" rx="5"/>
+  <text class="tb" x="42" y="235">Unneeded → removed</text>
+  <text class="d" x="42" y="252">pod fits on another node</text>
+
+  <!-- node B -->
+  <rect class="node" x="295" y="64" width="250" height="210" rx="8"/>
+  <text class="tb" x="307" y="86">Node B</text>
+  <rect class="bar" x="307" y="96" width="226" height="12" rx="6"/><rect class="low" x="307" y="96" width="79" height="12" rx="6"/>
+  <path class="tick" d="M420,92 V112"/>
+  <text class="ms" x="307" y="124">requests 35%</text><text class="ms" x="425" y="124">50%</text>
+  <rect class="bad" x="307" y="136" width="226" height="30" rx="4"/><text class="d" x="317" y="155">cache-0: emptyDir (local storage)</text>
+  <rect class="bad" x="307" y="172" width="226" height="30" rx="4"/><text class="d" x="317" y="191">debug pod: no controller</text>
+  <rect class="no" x="307" y="214" width="226" height="48" rx="5"/>
+  <text class="tb" x="317" y="235">Kept</text>
+  <text class="d" x="317" y="252">low use, but pods cannot be moved</text>
+
+  <!-- node C -->
+  <rect class="node" x="570" y="64" width="250" height="210" rx="8"/>
+  <text class="tb" x="582" y="86">Node C</text>
+  <rect class="bar" x="582" y="96" width="226" height="12" rx="6"/><rect class="hi" x="582" y="96" width="158" height="12" rx="6"/>
+  <path class="tick" d="M695,92 V112"/>
+  <text class="ms" x="582" y="124">requests 70%</text><text class="ms" x="700" y="124">50%</text>
+  <rect class="p" x="582" y="136" width="108" height="30" rx="4"/><text class="d" x="592" y="155">api-1</text>
+  <rect class="p" x="700" y="136" width="108" height="30" rx="4"/><text class="d" x="710" y="155">worker-3</text>
+  <rect class="ds" x="582" y="172" width="226" height="30" rx="4"/><text class="d" x="592" y="191">DaemonSets</text>
+  <rect class="no" x="582" y="214" width="226" height="48" rx="5"/>
+  <text class="tb" x="592" y="235">Kept</text>
+  <text class="d" x="592" y="252">above the utilization threshold</text>
+
+  <text class="lb" x="20" y="304">ALSO BLOCKS SCALE-DOWN</text>
+  <text class="d" x="20" y="324">PDB that allows no disruption · kube-system pod without a PDB (evicted only after 1 h by default) · pod fits no other node (hostPort, selector, anti-affinity)</text>
+  <text class="ms" x="20" y="344">pod:  cluster-autoscaler.kubernetes.io/safe-to-evict: "false"   (or "true" to allow local storage / no controller)</text>
+  <text class="ms" x="20" y="362">node: cluster-autoscaler.kubernetes.io/scale-down-disabled: "true"</text>
+  <text class="d" x="20" y="384">Utilization is from requests (DaemonSet and mirror pods included by default), not from measured CPU or memory use.</text>
+</svg>

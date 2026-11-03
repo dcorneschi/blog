@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Scale-down over time</title>
+  <desc id="d">Five nodes. At t = 0 three of them, B, C and D, are half used and marked unneeded; the simulation plans that their pods move to A and E. At t = 10 min node B is drained and terminated, and C goes right after it because its pods were planned for E, which B did not touch. D had planned to use the room on A that B's pod took, so it is no longer unneeded; at t = 20 min it finds a new place and becomes unneeded again, and it goes at t = 30 min. Empty nodes would all have gone together at t = 10 min.</desc>
+  <defs>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .node{ fill: #ffffff; stroke: #6ea8fe; stroke-width: 1.5; }
+      .un  { fill: #fff3e0; stroke: #fd9843; stroke-width: 1.5; stroke-dasharray: 5 3; }
+      .gone{ fill: #f8f9fa; stroke: #dee2e6; stroke-dasharray: 3 3; }
+      .pod { fill: #326ce5; }
+      .mv  { fill: #9ec5fe; }
+      .tick{ stroke: #adb5bd; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Scale-down over time</text>
+  <text class="sub" x="20" y="48">Non-empty nodes go one at a time; each removal changes where the remaining pods would fit</text>
+
+  <!-- column labels -->
+  <g class="lb">
+    <text x="20" y="80">TIME</text>
+    <text x="110" y="80">A</text><text x="250" y="80">B</text><text x="390" y="80">C</text><text x="530" y="80">D</text><text x="670" y="80">E</text>
+  </g>
+
+  <!-- row t=0 -->
+  <text class="tb" x="20" y="116">t = 0</text>
+  <rect class="node" x="110" y="92" width="120" height="44" rx="5"/><rect class="pod" x="118" y="100" width="24" height="28" rx="3"/><rect class="pod" x="146" y="100" width="24" height="28" rx="3"/>
+  <rect class="un" x="250" y="92" width="120" height="44" rx="5"/><rect class="pod" x="258" y="100" width="24" height="28" rx="3"/>
+  <rect class="un" x="390" y="92" width="120" height="44" rx="5"/><rect class="pod" x="398" y="100" width="24" height="28" rx="3"/>
+  <rect class="un" x="530" y="92" width="120" height="44" rx="5"/><rect class="pod" x="538" y="100" width="24" height="28" rx="3"/><rect class="pod" x="566" y="100" width="24" height="28" rx="3"/>
+  <rect class="node" x="670" y="92" width="120" height="44" rx="5"/><rect class="pod" x="678" y="100" width="24" height="28" rx="3"/>
+  <text class="d" x="110" y="152">B, C, D marked unneeded; simulation: B → A, C → E, D → A + E</text>
+
+  <!-- row t=10 -->
+  <text class="tb" x="20" y="190">t = 10m</text>
+  <rect class="node" x="110" y="166" width="120" height="44" rx="5"/><rect class="pod" x="118" y="174" width="24" height="28" rx="3"/><rect class="pod" x="146" y="174" width="24" height="28" rx="3"/><rect class="mv" x="174" y="174" width="24" height="28" rx="3"/>
+  <rect class="gone" x="250" y="166" width="120" height="44" rx="5"/><text class="d" x="262" y="193">B removed</text>
+  <rect class="gone" x="390" y="166" width="120" height="44" rx="5"/><text class="d" x="402" y="193">C removed</text>
+  <rect class="node" x="530" y="166" width="120" height="44" rx="5"/><rect class="pod" x="538" y="174" width="24" height="28" rx="3"/><rect class="pod" x="566" y="174" width="24" height="28" rx="3"/>
+  <rect class="node" x="670" y="166" width="120" height="44" rx="5"/><rect class="pod" x="678" y="174" width="24" height="28" rx="3"/><rect class="mv" x="706" y="174" width="24" height="28" rx="3"/>
+  <text class="d" x="110" y="226">B goes, then C right after (its plan did not use A); D's planned room on A is gone</text>
+
+  <!-- row t=20 -->
+  <text class="tb" x="20" y="264">t = 20m</text>
+  <rect class="node" x="110" y="240" width="120" height="44" rx="5"/><rect class="pod" x="118" y="248" width="24" height="28" rx="3"/><rect class="pod" x="146" y="248" width="24" height="28" rx="3"/><rect class="pod" x="174" y="248" width="24" height="28" rx="3"/>
+  <rect class="gone" x="250" y="240" width="120" height="44" rx="5"/>
+  <rect class="gone" x="390" y="240" width="120" height="44" rx="5"/>
+  <rect class="un" x="530" y="240" width="120" height="44" rx="5"/><rect class="pod" x="538" y="248" width="24" height="28" rx="3"/><rect class="pod" x="566" y="248" width="24" height="28" rx="3"/>
+  <rect class="node" x="670" y="240" width="120" height="44" rx="5"/><rect class="pod" x="678" y="248" width="24" height="28" rx="3"/><rect class="pod" x="706" y="248" width="24" height="28" rx="3"/>
+  <text class="d" x="110" y="300">D finds a new place for its pods (A + E) and is unneeded again: its 10-minute clock restarts</text>
+
+  <!-- row t=30 -->
+  <text class="tb" x="20" y="338">t = 30m</text>
+  <rect class="node" x="110" y="314" width="120" height="44" rx="5"/><rect class="pod" x="118" y="322" width="24" height="28" rx="3"/><rect class="pod" x="146" y="322" width="24" height="28" rx="3"/><rect class="pod" x="174" y="322" width="24" height="28" rx="3"/><rect class="mv" x="202" y="322" width="24" height="28" rx="3"/>
+  <rect class="gone" x="250" y="314" width="120" height="44" rx="5"/>
+  <rect class="gone" x="390" y="314" width="120" height="44" rx="5"/>
+  <rect class="gone" x="530" y="314" width="120" height="44" rx="5"/><text class="d" x="542" y="341">D removed</text>
+  <rect class="node" x="670" y="314" width="120" height="44" rx="5"/><rect class="pod" x="678" y="322" width="24" height="28" rx="3"/><rect class="pod" x="706" y="322" width="24" height="28" rx="3"/><rect class="mv" x="734" y="322" width="24" height="28" rx="3"/>
+  <text class="ms" x="800" y="376" text-anchor="end">dashed orange: unneeded · light blue: moved pod</text>
+</svg>
