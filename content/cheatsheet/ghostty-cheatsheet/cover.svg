@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Ghostty Cheatsheet</title>
+  <desc id="d">Ghostty terminal cheatsheet: shortcuts, config, keybinds, themes and SSH. Small drawings: TABS, SPLITS and THEMES pills; a terminal running ghostty +list-keybinds --default and ghostty +validate-config; a window divided into three split panes; icons for keybinds, themes and the quick terminal; small icons for config, shortcuts, splits, themes, fonts, SSH and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #4263eb; }
+      .al  { stroke: #4263eb; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pp  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .win { fill: #ffffff; stroke: #adb5bd; stroke-width: 6; }
+      .pane{ fill: #212529; }
+      .sel { fill: #4263eb; opacity: .35; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .a   { fill: #748ffc; }
+        .al  { stroke: #748ffc; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .pb  { fill: #0c1d33; stroke: #4a78b8; }
+        .pp  { fill: #1f1633; stroke: #8a6fc0; }
+        .pg  { fill: #10241a; stroke: #4f8f6f; }
+        .win { fill: #0d1117; stroke: #484f58; }
+        .pane{ fill: #21262d; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: pills and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pb" x="131" y="198" width="140" height="66" rx="33"/><text class="ink" x="201" y="241">TABS</text>
+    <rect class="pp" x="291" y="198" width="170" height="66" rx="33"/><text class="ink" x="376" y="241">SPLITS</text>
+    <rect class="pg" x="481" y="198" width="170" height="66" rx="33"/><text class="ink" x="566" y="241">THEMES</text>
+  </g>
+  <text class="n mono" x="131" y="318" font-size="30">one file · no defaults to fight</text>
+  <rect class="term" x="131" y="400" width="660" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="660" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="660" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ ghostty +list-keybinds --default</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ ghostty +validate-config<tspan class="a">█</tspan></text>
+
+  <!-- center: a window with three split panes -->
+  <g transform="translate(1100,0)">
+    <rect class="win" x="0" y="200" width="560" height="400" rx="22"/>
+    <rect class="pane" x="20" y="240" width="300" height="340" rx="10"/>
+    <rect class="pane" x="336" y="240" width="204" height="160" rx="10"/>
+    <rect class="pane" x="336" y="416" width="204" height="164" rx="10"/>
+    <circle cx="36" cy="221" r="8" fill="#ff5f57"/><circle cx="62" cy="221" r="8" fill="#febc2e"/><circle cx="88" cy="221" r="8" fill="#28c840"/>
+    <g class="mono" font-size="24" font-weight="700">
+      <text class="tx" x="44" y="290">$ vim</text>
+      <rect class="sel" x="40" y="306" width="220" height="30" rx="4"/>
+      <text class="tx" x="44" y="330">~ main.go</text>
+      <text class="tx" x="356" y="290">$ top</text>
+      <text class="tx" x="356" y="466">$ ssh</text>
+      <rect class="a" x="44" y="350" width="14" height="28"/>
+    </g>
+    <text class="n mono" x="280" y="660" text-anchor="middle" font-size="32">cmd+d · cmd+shift+d</text>
+  </g>
+
+  <!-- top right: keybinds, themes, quick terminal -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <rect class="al" stroke-width="12" x="20" y="50" width="160" height="110" rx="14"/>
+    <path class="al" stroke-width="10" d="M50,82 H62 M86,82 H98 M122,82 H134 M150,82 H152 M50,108 H62 M86,108 H98 M122,108 H134 M150,108 H152 M64,134 H136"/>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">keybinds</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <circle class="al" stroke-width="12" cx="100" cy="105" r="68"/>
+    <circle class="a" cx="72" cy="80" r="13"/><circle class="a" cx="112" cy="68" r="13"/><circle class="a" cx="140" cy="100" r="13"/>
+    <path class="a" d="M100,105 L100,173 A68,68 0 0 1 36,128 Z" opacity=".5"/>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">themes</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <path class="al" stroke-width="12" d="M30,40 H170 M40,40 V110 A12,12 0 0 0 52,122 H148 A12,12 0 0 0 160,110 V40"/>
+    <path class="al" stroke-width="12" d="M100,140 V180 M80,162 L100,182 L120,162"/>
+    <path class="al" stroke-width="8" d="M62,70 L78,82 L62,94 M88,96 H112"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">quick terminal</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">Ghostty Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="84">Shortcuts, Config, Keybinds, Themes and SSH</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">macOS and Linux · key tables · quick terminal · Ghostty 1.4.0</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><rect class="al" stroke-width="14" x="40" y="30" width="120" height="140" rx="12"/><path class="al" stroke-width="12" d="M70,70 H130 M70,100 H130 M70,130 H110"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">Config</text>
+  <g transform="translate(806,1290) scale(0.5)"><rect class="al" stroke-width="14" x="20" y="50" width="160" height="110" rx="14"/><path class="al" stroke-width="12" d="M60,105 H140"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">Shortcuts</text>
+  <g transform="translate(1066,1290) scale(0.5)"><rect class="al" stroke-width="14" x="20" y="30" width="160" height="140" rx="12"/><path class="al" stroke-width="14" d="M100,30 V170 M100,100 H180"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">Splits</text>
+  <g transform="translate(1326,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="100" cy="100" r="70"/><circle class="a" cx="80" cy="76" r="14"/><circle class="a" cx="124" cy="88" r="14"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">Themes</text>
+  <g transform="translate(1586,1290) scale(0.5)"><text class="a" x="100" y="150" text-anchor="middle" font-size="140" font-weight="700">Aa</text></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">Fonts</text>
+  <g transform="translate(1846,1290) scale(0.5)"><rect class="al" stroke-width="14" x="20" y="60" width="60" height="80" rx="10"/><rect class="al" stroke-width="14" x="120" y="60" width="60" height="80" rx="10"/><path class="al" stroke-width="12" d="M80,100 H120"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">SSH</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>
