@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Getting capacity in a cluster group</title>
+  <desc id="d">Launching all instances in one request with one instance type is the way most likely to fit them together. Adding instances later or mixing instance types makes InsufficientInstanceCapacity more likely; to recover, stop and start every instance in the group so EC2 can place them all together again, or retry later because EC2 adds hardware over time. To avoid the problem, create an On-Demand Capacity Reservation in the cluster group; launches that match it use the held capacity.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .az  { fill: #f8f9fa; stroke: #dee2e6; }
+      .rk  { fill: #ffffff; stroke: #adb5bd; }
+      .seg { fill: none; stroke: #6ea8fe; stroke-width: 1.5; stroke-dasharray: 5 3; }
+      .i1  { fill: #6ea8fe; }
+      .i2  { fill: #75b798; }
+      .i3  { fill: #fd9843; }
+      .i4  { fill: #a98eda; }
+      .bad { fill: #fdecee; stroke: #dc3545; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .blu { fill: #e7f1ff; stroke: #6ea8fe; }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .x   { stroke: #dc3545; stroke-width: 2.4; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+
+  <text class="h" x="20" y="28">Getting capacity in a cluster group</text>
+  <text class="sub" x="20" y="48">All instances must fit close together in one AZ; how you launch decides whether they do</text>
+
+  <rect class="q" x="20" y="70" width="260" height="50" rx="6"/><text class="tb" x="32" y="91">One request, one instance type</text><text class="ms" x="32" y="109">run-instances --count 8</text>
+  <rect class="ok" x="330" y="70" width="210" height="50" rx="6"/><text class="tb" x="342" y="91">Placed together</text><text class="d" x="342" y="109">best chance to fit</text>
+  <path class="lne" d="M280,95 L328,95"/>
+  <rect class="q" x="20" y="160" width="260" height="50" rx="6"/><text class="tb" x="32" y="181">Add instances later,</text><text class="d" x="32" y="199">or mix instance types</text>
+  <rect class="bad" x="330" y="160" width="210" height="50" rx="6"/><text class="ms" x="342" y="181" fill="#212529">InsufficientInstance</text><text class="ms" x="342" y="197" fill="#212529">Capacity</text>
+  <path class="lne" d="M280,185 L328,185"/>
+  <rect class="blu" x="590" y="140" width="230" height="40" rx="6"/><text class="tb" x="602" y="158">Stop and start every</text><text class="d" x="602" y="173">instance in the group, then retry</text>
+  <rect class="q" x="590" y="192" width="230" height="40" rx="6"/><text class="tb" x="602" y="210">Retry later</text><text class="d" x="602" y="225">EC2 adds hardware over time</text>
+  <path class="lne" d="M540,180 L588,162"/><path class="lne" d="M540,192 L588,210"/>
+  <rect class="blu" x="20" y="256" width="260" height="50" rx="6"/><text class="tb" x="32" y="277">Capacity Reservation in the group</text><text class="ms" x="32" y="295">--placement-group-arn</text>
+  <rect class="ok" x="330" y="256" width="210" height="50" rx="6"/><text class="tb" x="342" y="277">Room is held</text><text class="d" x="342" y="295">matching launches use it</text>
+  <path class="lne" d="M280,281 L328,281"/>
+  <text class="lb" x="590" y="270">AVOID IT</text><text class="d" x="590" y="288">Reserve before you need it;</text><text class="d" x="590" y="304">zonal RIs cannot reserve in a group.</text>
+  <text class="d" x="20" y="340">A stopped instance keeps its place in the group, but its start fails if there is no room for it at that moment.</text>
+</svg>

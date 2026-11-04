@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Partitions and replicas</title>
+  <desc id="d">A partition placement group with three partitions and a replication factor of 3. Each partition sits on its own racks and holds two brokers. Every topic has three copies, one in each partition. When the racks of partition 2 fail, each topic loses one copy and keeps two, so no data is lost. Match the partition count to the replication factor and tell the software which partition each node is in.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .az  { fill: #f8f9fa; stroke: #dee2e6; }
+      .rk  { fill: #ffffff; stroke: #adb5bd; }
+      .seg { fill: none; stroke: #6ea8fe; stroke-width: 1.5; stroke-dasharray: 5 3; }
+      .i1  { fill: #6ea8fe; }
+      .i2  { fill: #75b798; }
+      .i3  { fill: #fd9843; }
+      .i4  { fill: #a98eda; }
+      .bad { fill: #fdecee; stroke: #dc3545; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .blu { fill: #e7f1ff; stroke: #6ea8fe; }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .x   { stroke: #dc3545; stroke-width: 2.4; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+
+  <text class="h" x="20" y="28">Partitions and replicas</text>
+  <text class="sub" x="20" y="48">3 partitions, replication factor 3: every copy of a topic lands in a different partition</text>
+
+  <rect class="az" x="20" y="66" width="254" height="170" rx="8"/><text class="tb" x="32" y="88">Partition 1</text><text class="ms" x="262" y="88" text-anchor="end">racks 1-2</text>
+  <rect class="rk" x="32" y="100" width="110" height="96" rx="5"/><text class="d" x="42" y="118">broker 1</text>
+  <rect class="i1" x="42" y="128" width="90" height="20" rx="3"/><text class="ms" x="50" y="142" fill="#212529">topic A copy</text>
+  <rect class="i2" x="42" y="156" width="90" height="20" rx="3"/><text class="ms" x="50" y="170" fill="#212529">topic B copy</text>
+  <rect class="rk" x="154" y="100" width="110" height="96" rx="5"/><text class="d" x="164" y="118">broker 2</text>
+  <rect class="i3" x="164" y="128" width="90" height="20" rx="3"/><text class="ms" x="172" y="142" fill="#212529">topic C copy</text>
+  <rect class="bad" x="293" y="66" width="254" height="170" rx="8"/><text class="tb" x="305" y="88">Partition 2</text><text class="ms" x="535" y="88" text-anchor="end">racks 3-4</text>
+  <rect class="rk" x="305" y="100" width="110" height="96" rx="5"/><text class="d" x="315" y="118">broker 3</text>
+  <rect class="i2" x="315" y="128" width="90" height="20" rx="3"/><text class="ms" x="323" y="142" fill="#212529">topic B copy</text>
+  <rect class="i3" x="315" y="156" width="90" height="20" rx="3"/><text class="ms" x="323" y="170" fill="#212529">topic C copy</text>
+  <rect class="rk" x="427" y="100" width="110" height="96" rx="5"/><text class="d" x="437" y="118">broker 4</text>
+  <rect class="i1" x="437" y="128" width="90" height="20" rx="3"/><text class="ms" x="445" y="142" fill="#212529">topic A copy</text>
+  <rect class="az" x="566" y="66" width="254" height="170" rx="8"/><text class="tb" x="578" y="88">Partition 3</text><text class="ms" x="808" y="88" text-anchor="end">racks 5-6</text>
+  <rect class="rk" x="578" y="100" width="110" height="96" rx="5"/><text class="d" x="588" y="118">broker 5</text>
+  <rect class="i3" x="588" y="128" width="90" height="20" rx="3"/><text class="ms" x="596" y="142" fill="#212529">topic C copy</text>
+  <rect class="i1" x="588" y="156" width="90" height="20" rx="3"/><text class="ms" x="596" y="170" fill="#212529">topic A copy</text>
+  <rect class="rk" x="700" y="100" width="110" height="96" rx="5"/><text class="d" x="710" y="118">broker 6</text>
+  <rect class="i2" x="710" y="128" width="90" height="20" rx="3"/><text class="ms" x="718" y="142" fill="#212529">topic B copy</text>
+  <text class="d" x="420" y="224" text-anchor="middle" fill="#dc3545">racks fail: partition 2 is lost</text>
+  <text class="d" x="20" y="262">Each topic still has 2 of its 3 copies, in partitions 1 and 3: one rack failure costs one replica, never two.</text>
+  <text class="d" x="20" y="280">Kafka and Cassandra only place copies like this if they know the rack: give each node its partition as the rack name (section 4).</text>
+  <text class="d" x="20" y="298">Up to 7 partitions per AZ, and a group can have partitions in several AZs of the Region; add the AZ to the rack name then.</text>
+</svg>

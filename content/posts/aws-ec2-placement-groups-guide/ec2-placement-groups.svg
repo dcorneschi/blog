@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">EC2 placement group strategies</title>
+  <desc id="d">Four Availability Zones side by side, each with four racks. Cluster: all instances packed into two neighbouring racks inside one network segment, for the lowest latency and the highest throughput, in one Availability Zone only. Partition: three partitions, each on its own racks, so partitions never share a rack; up to seven partitions per Availability Zone. Spread: one instance per rack, at most seven running instances per Availability Zone. Precision time: instances on hardware with a high-precision time source, for microsecond-accurate clocks.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .az  { fill: #f8f9fa; stroke: #dee2e6; }
+      .rk  { fill: #ffffff; stroke: #adb5bd; }
+      .seg { fill: none; stroke: #6ea8fe; stroke-width: 1.5; stroke-dasharray: 5 3; }
+      .i1  { fill: #6ea8fe; }
+      .i2  { fill: #75b798; }
+      .i3  { fill: #fd9843; }
+      .i4  { fill: #a98eda; }
+      .bad { fill: #fdecee; stroke: #dc3545; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .blu { fill: #e7f1ff; stroke: #6ea8fe; }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .x   { stroke: #dc3545; stroke-width: 2.4; }
+    </style>
+  </defs>
+  <rect width="840" height="400" fill="#ffffff"/>
+
+  <text class="h" x="20" y="28">EC2 placement group strategies</text>
+  <text class="sub" x="20" y="48">Same Availability Zone, four racks each: where EC2 puts the instances</text>
+
+  <rect class="az" x="20" y="64" width="185" height="246" rx="8"/><text class="lb" x="32" y="84">CLUSTER</text>
+  <rect class="rk" x="32" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="74" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="116" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="158" y="100" width="34" height="150" rx="3"/>
+  <rect class="az" x="225" y="64" width="185" height="246" rx="8"/><text class="lb" x="237" y="84">PARTITION</text>
+  <rect class="rk" x="237" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="279" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="321" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="363" y="100" width="34" height="150" rx="3"/>
+  <rect class="az" x="430" y="64" width="185" height="246" rx="8"/><text class="lb" x="442" y="84">SPREAD</text>
+  <rect class="rk" x="442" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="484" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="526" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="568" y="100" width="34" height="150" rx="3"/>
+  <rect class="az" x="635" y="64" width="185" height="246" rx="8"/><text class="lb" x="647" y="84">PRECISION TIME</text>
+  <rect class="rk" x="647" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="689" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="731" y="100" width="34" height="150" rx="3"/>
+  <rect class="rk" x="773" y="100" width="34" height="150" rx="3"/>
+  <rect class="i1" x="38" y="108" width="22" height="14" rx="2"/>
+  <rect class="i1" x="38" y="128" width="22" height="14" rx="2"/>
+  <rect class="i1" x="38" y="148" width="22" height="14" rx="2"/>
+  <rect class="i1" x="38" y="168" width="22" height="14" rx="2"/>
+  <rect class="i1" x="38" y="188" width="22" height="14" rx="2"/>
+  <rect class="i1" x="38" y="208" width="22" height="14" rx="2"/>
+  <rect class="i1" x="38" y="228" width="22" height="14" rx="2"/>
+  <rect class="i1" x="80" y="108" width="22" height="14" rx="2"/>
+  <rect class="i1" x="80" y="128" width="22" height="14" rx="2"/>
+  <rect class="i1" x="80" y="148" width="22" height="14" rx="2"/>
+  <rect class="i1" x="80" y="168" width="22" height="14" rx="2"/>
+  <rect class="i1" x="80" y="188" width="22" height="14" rx="2"/>
+  <rect class="i1" x="80" y="208" width="22" height="14" rx="2"/>
+  <rect class="i1" x="80" y="228" width="22" height="14" rx="2"/>
+  <rect class="seg" x="26" y="94" width="88" height="162" rx="6"/>
+  <rect class="i1" x="243" y="108" width="22" height="14" rx="2"/>
+  <rect class="i1" x="243" y="128" width="22" height="14" rx="2"/>
+  <rect class="i1" x="243" y="148" width="22" height="14" rx="2"/>
+  <rect class="i1" x="243" y="168" width="22" height="14" rx="2"/>
+  <text class="ms" x="254" y="266" text-anchor="middle">P1</text>
+  <rect class="i2" x="285" y="108" width="22" height="14" rx="2"/>
+  <rect class="i2" x="285" y="128" width="22" height="14" rx="2"/>
+  <rect class="i2" x="285" y="148" width="22" height="14" rx="2"/>
+  <rect class="i2" x="285" y="168" width="22" height="14" rx="2"/>
+  <text class="ms" x="296" y="266" text-anchor="middle">P2</text>
+  <rect class="i3" x="327" y="108" width="22" height="14" rx="2"/>
+  <rect class="i3" x="327" y="128" width="22" height="14" rx="2"/>
+  <rect class="i3" x="327" y="148" width="22" height="14" rx="2"/>
+  <rect class="i3" x="327" y="168" width="22" height="14" rx="2"/>
+  <text class="ms" x="338" y="266" text-anchor="middle">P3</text>
+  <rect class="i1" x="369" y="108" width="22" height="14" rx="2"/>
+  <rect class="i1" x="369" y="128" width="22" height="14" rx="2"/>
+  <rect class="i1" x="369" y="148" width="22" height="14" rx="2"/>
+  <rect class="i1" x="369" y="168" width="22" height="14" rx="2"/>
+  <text class="ms" x="380" y="266" text-anchor="middle">P1</text>
+  <rect class="i2" x="448" y="108" width="22" height="14" rx="2"/>
+  <rect class="i2" x="490" y="108" width="22" height="14" rx="2"/>
+  <rect class="i2" x="532" y="108" width="22" height="14" rx="2"/>
+  <rect class="i2" x="574" y="108" width="22" height="14" rx="2"/>
+  <circle cx="664" cy="240" r="9" fill="none" stroke="#a98eda" stroke-width="2"/><path d="M664,240 V234 M664,240 L668,242" stroke="#a98eda" stroke-width="1.6"/>
+  <rect class="i4" x="653" y="108" width="22" height="14" rx="2"/>
+  <rect class="i4" x="653" y="128" width="22" height="14" rx="2"/>
+  <circle cx="706" cy="240" r="9" fill="none" stroke="#a98eda" stroke-width="2"/><path d="M706,240 V234 M706,240 L710,242" stroke="#a98eda" stroke-width="1.6"/>
+  <rect class="i4" x="695" y="108" width="22" height="14" rx="2"/>
+  <rect class="i4" x="695" y="128" width="22" height="14" rx="2"/>
+  <circle cx="748" cy="240" r="9" fill="none" stroke="#a98eda" stroke-width="2"/><path d="M748,240 V234 M748,240 L752,242" stroke="#a98eda" stroke-width="1.6"/>
+  <rect class="i4" x="737" y="108" width="22" height="14" rx="2"/>
+  <rect class="i4" x="737" y="128" width="22" height="14" rx="2"/>
+  <circle cx="790" cy="240" r="9" fill="none" stroke="#a98eda" stroke-width="2"/><path d="M790,240 V234 M790,240 L794,242" stroke="#a98eda" stroke-width="1.6"/>
+  <rect class="i4" x="779" y="108" width="22" height="14" rx="2"/>
+  <rect class="i4" x="779" y="128" width="22" height="14" rx="2"/>
+  <text class="d" x="32" y="284">one AZ, one network segment</text><text class="d" x="32" y="300">fastest between instances</text>
+  <text class="d" x="237" y="284">partitions never share racks</text><text class="d" x="237" y="300">up to 7 per AZ</text>
+  <text class="d" x="442" y="284">one instance per rack</text><text class="d" x="442" y="300">up to 7 running per AZ</text>
+  <text class="d" x="647" y="284">hardware with precise clocks</text><text class="d" x="647" y="300">PHC, hardware timestamps</text>
+  <text class="d" x="20" y="336">Blue dashed: the high-bisection network segment. P1 to P3: partitions (a partition can own several racks, like P1 here).</text>
+  <text class="d" x="20" y="354">Cluster trades fault isolation for speed; partition and spread trade capacity for isolation. No group gives both.</text>
+  <text class="d" x="20" y="372">A precision time group can be the parent of a cluster group, so a cluster also lands on precision-time hardware.</text>
+</svg>
