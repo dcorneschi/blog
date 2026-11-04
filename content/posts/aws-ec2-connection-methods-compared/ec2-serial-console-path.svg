@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 340" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The EC2 Serial Console path</title>
+  <desc id="d">After IAM allows SendSerialConsoleSSHPublicKey, your SSH client or the browser client connects to the serial console endpoint of the Region, serial-console.ec2-instance-connect.region.aws, with the user name instance-id.port0. The service reaches the instance's serial port, ttyS0 on Linux or COM1 on Windows, through the Nitro host, where getty shows a login prompt for a password user. The VPC, security group, network ACL, the instance's network interface, its network stack and sshd are not used, so the session works even when the instance network or sshd is broken.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .you { fill: #f8f9fa; stroke: #adb5bd; }
+      .ep  { fill: #fff3e0; stroke: #fd9843; }
+      .hst { fill: #f3effc; stroke: #a98eda; }
+      .ins { fill: #ffffff; stroke: #495057; }
+      .ser { fill: #e8f5ee; stroke: #75b798; }
+      .off { fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 4 3; }
+      .offt{ font-size: 11px; fill: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="840" height="340" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The EC2 Serial Console path</text>
+  <text class="sub" x="20" y="48">Through the Nitro host to the serial port: no VPC, no security group, no sshd</text>
+
+  <rect class="you" x="20" y="110" width="170" height="70" rx="6"/><text class="tb" x="32" y="132">Your computer</text><text class="d" x="32" y="150">SSH client, or the</text><text class="d" x="32" y="166">browser client in EC2</text>
+  <text class="d" x="20" y="204">1 push a key (IAM, 60 s)</text>
+  <text class="ms" x="20" y="222">2 ssh &lt;instance-id&gt;.port0@</text>
+  <text class="ms" x="20" y="238">  serial-console.ec2-…</text>
+
+  <rect class="ep" x="250" y="110" width="200" height="70" rx="6"/><text class="tb" x="262" y="132">Serial console endpoint</text><text class="ms" x="262" y="152">serial-console.ec2-</text><text class="ms" x="262" y="168">instance-connect.&lt;region&gt;.aws</text>
+  <path class="lne" d="M190,145 L248,145"/><text class="d" x="219" y="138" text-anchor="middle">SSH</text>
+
+  <rect class="hst" x="520" y="66" width="300" height="210" rx="10"/>
+  <text class="lb" x="534" y="86">NITRO HOST</text>
+  <rect class="ins" x="540" y="96" width="260" height="164" rx="6"/>
+  <text class="tb" x="552" y="116">Instance</text>
+  <rect class="ser" x="552" y="126" width="104" height="40" rx="5"/><text class="ms" x="562" y="150">ttyS0 / COM1</text>
+  <rect class="ser" x="676" y="126" width="112" height="40" rx="5"/><text class="d" x="686" y="143">getty: login with</text><text class="d" x="686" y="158">a password user</text>
+  <path class="lne" d="M656,146 L674,146"/>
+  <rect class="off" x="552" y="182" width="236" height="64" rx="5"/>
+  <text class="offt" x="564" y="202">not used: network interface,</text>
+  <text class="offt" x="564" y="218">network stack, sshd, security</text>
+  <text class="offt" x="564" y="234">group, network ACL, VPC routes</text>
+  <path class="lne" d="M450,145 L550,145"/><text class="d" x="500" y="138" text-anchor="middle">serial link</text>
+
+  <text class="d" x="20" y="306">One session per instance, about an hour each, 30 seconds before the next. Nitro instance types only; access is off until you enable it per Region.</text>
+  <text class="d" x="20" y="324">Set a password for a user while the instance still works: it is the only way to log in at the prompt.</text>
+</svg>

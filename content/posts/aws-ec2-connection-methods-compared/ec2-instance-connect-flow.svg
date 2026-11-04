@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How EC2 Instance Connect works</title>
+  <desc id="d">Direct mode: the CLI or console pushes a temporary public key with SendSSHPublicKey, authorized by IAM; the key stays in the instance metadata for 60 seconds; then SSH connects to the public IP on port 22, and sshd finds the key through AuthorizedKeysCommand. Endpoint mode: the CLI opens a WebSocket tunnel to the EC2 Instance Connect Endpoint, authorized by IAM before traffic reaches the VPC; the endpoint forwards TCP port 22 to the private IP of the instance, so no public IP or internet gateway is needed.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .key { stroke: #fd9843; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .you { fill: #f8f9fa; stroke: #adb5bd; }
+      .api { fill: #fff3e0; stroke: #fd9843; }
+      .ec2 { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ep  { fill: #e8f5ee; stroke: #75b798; }
+      .vpc { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How EC2 Instance Connect works</text>
+  <text class="sub" x="20" y="48">IAM decides who connects; no long-lived key is shared</text>
+
+  <!-- direct -->
+  <text class="lb" x="20" y="80">DIRECT (PUBLIC IP)</text>
+  <rect class="you" x="20" y="92" width="150" height="68" rx="6"/><text class="tb" x="32" y="114">Your computer</text><text class="d" x="32" y="132">aws ec2-instance-connect</text><text class="d" x="32" y="148">ssh, or the console</text>
+  <rect class="api" x="300" y="70" width="200" height="44" rx="6"/><text class="tb" x="312" y="90">Instance Connect API</text><text class="ms" x="312" y="106">SendSSHPublicKey</text>
+  <rect class="ec2" x="640" y="92" width="180" height="68" rx="6"/><text class="tb" x="652" y="114">Instance (public IP)</text><text class="d" x="652" y="132">sshd reads the key from IMDS</text><text class="d" x="652" y="148">via AuthorizedKeysCommand</text>
+  <path class="key" d="M170,104 L298,92"/><text class="d" x="200" y="88">1 push key (IAM)</text>
+  <path class="key" d="M500,92 L638,104"/><text class="d" x="520" y="88">key in metadata, 60 s</text>
+  <path class="lne" d="M170,146 L638,146"/><text class="d" x="404" y="140" text-anchor="middle">2 ssh to the public IP, TCP 22</text>
+
+  <!-- eice -->
+  <text class="lb" x="20" y="226">ENDPOINT (PRIVATE IP)</text>
+  <rect class="vpc" x="430" y="212" width="400" height="120" rx="10"/>
+  <text class="lb" x="444" y="230">VPC, NO INTERNET GATEWAY NEEDED</text>
+  <rect class="you" x="20" y="238" width="150" height="68" rx="6"/><text class="tb" x="32" y="260">Your computer</text><text class="d" x="32" y="278">ssh --connection-type eice</text><text class="d" x="32" y="294">or open-tunnel</text>
+  <rect class="ep" x="444" y="246" width="160" height="52" rx="6"/><text class="tb" x="456" y="266">Instance Connect</text><text class="tb" x="456" y="284">Endpoint</text>
+  <rect class="ec2" x="640" y="238" width="180" height="68" rx="6"/><text class="tb" x="652" y="260">Instance</text><text class="d" x="652" y="278">private IP only</text><text class="d" x="652" y="294">SG allows 22 from endpoint</text>
+  <path class="lne" d="M170,272 L442,272"/><text class="d" x="306" y="264" text-anchor="middle">WebSocket tunnel, IAM checked first</text>
+  <path class="lne" d="M604,272 L638,272"/><text class="d" x="622" y="322" text-anchor="middle">TCP 22</text>
+  <path stroke="#adb5bd" stroke-width="1" d="M622,276 L622,312"/>
+
+  <text class="d" x="20" y="364">Direct: the instance needs the EC2 Instance Connect package and port 22 open to you (or the service prefix list for the console).</text>
+  <text class="d" x="20" y="382">Endpoint: with your own key any Linux AMI works; tunnels last at most 1 hour and every attempt is logged in CloudTrail.</text>
+</svg>

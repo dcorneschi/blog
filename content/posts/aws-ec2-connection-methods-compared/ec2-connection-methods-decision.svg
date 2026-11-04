@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 430" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Choosing how to connect to an EC2 instance</title>
+  <desc id="d">Four questions in order. Does the instance boot, with a working network? If not, use the EC2 Serial Console. Does it run SSM Agent with an instance profile and a route to Systems Manager? If yes, use Session Manager. Is a public IP with port 22 reachable from you? If not, use an EC2 Instance Connect Endpoint. Otherwise use EC2 Instance Connect over the public IP, and classic SSH with a long-lived key pair when the instance cannot run the EC2 Instance Connect package. Tools such as scp, rsync and Ansible work with your own key over EC2 Instance Connect, an endpoint tunnel or SSH over Session Manager.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .ser { fill: #fdecee; stroke: #e35d6a; }
+      .ssm { fill: #e8f5ee; stroke: #75b798; }
+      .eic { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ssh { fill: #fff3e0; stroke: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="430" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Choosing how to connect to an EC2 instance</text>
+  <text class="sub" x="20" y="48">Ask the questions in order; the first answer that fits wins</text>
+
+  <!-- questions -->
+  <rect class="q" x="20" y="66" width="360" height="54" rx="6"/><text class="tb" x="34" y="89">1. Does it boot, with a working network?</text><text class="d" x="34" y="107">broken sshd_config, bad network setup, boot failure</text>
+  <rect class="q" x="20" y="152" width="360" height="54" rx="6"/><text class="tb" x="34" y="175">2. SSM Agent and an instance profile?</text><text class="d" x="34" y="193">and a route to Systems Manager (NAT or VPC endpoints)</text>
+  <rect class="q" x="20" y="238" width="360" height="54" rx="6"/><text class="tb" x="34" y="261">3. Public IP with port 22 reachable?</text><text class="d" x="34" y="279">from you, or from the Instance Connect prefix list</text>
+  <rect class="eic" x="20" y="324" width="360" height="54" rx="6"/><text class="tb" x="34" y="347">EC2 Instance Connect (direct)</text><text class="d" x="34" y="365">IAM pushes a 60-second key, no keys to share</text>
+
+  <path class="lne" d="M200,120 L200,150"/><text class="d" x="208" y="140">yes</text>
+  <path class="lne" d="M200,206 L200,236"/><text class="d" x="208" y="226">no</text>
+  <path class="lne" d="M200,292 L200,322"/><text class="d" x="208" y="312">yes</text>
+
+  <!-- answers -->
+  <rect class="ser" x="470" y="66" width="350" height="54" rx="6"/><text class="tb" x="484" y="89">EC2 Serial Console</text><text class="d" x="484" y="107">Nitro, account setting, password user; last resort</text>
+  <rect class="ssm" x="470" y="152" width="350" height="54" rx="6"/><text class="tb" x="484" y="175">Session Manager</text><text class="d" x="484" y="193">no open port, IAM only, sessions logged</text>
+  <rect class="eic" x="470" y="238" width="350" height="54" rx="6"/><text class="tb" x="484" y="261">EC2 Instance Connect Endpoint</text><text class="d" x="484" y="279">private IP is enough, no bastion, no agent</text>
+  <rect class="ssh" x="470" y="324" width="350" height="54" rx="6"/><text class="tb" x="484" y="347">Classic SSH with a key pair</text><text class="d" x="484" y="365">legacy tooling; long-lived keys to rotate</text>
+
+  <path class="lne" d="M380,93 L468,93"/><text class="d" x="424" y="86" text-anchor="middle">no</text>
+  <path class="lne" d="M380,179 L468,179"/><text class="d" x="424" y="172" text-anchor="middle">yes</text>
+  <path class="lne" d="M380,265 L468,265"/><text class="d" x="424" y="258" text-anchor="middle">no</text>
+  <path class="lne" d="M380,351 L468,351"/><text class="d" x="424" y="344" text-anchor="middle">no package</text>
+
+  <text class="d" x="20" y="404">scp, rsync or Ansible: use SSH with your own key over EC2 Instance Connect, an endpoint tunnel or SSH over Session Manager.</text>
+  <text class="d" x="20" y="420">VPN, Direct Connect and bastion hosts only change the network path; one of these methods still opens the shell.</text>
+</svg>

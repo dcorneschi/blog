@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 370" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How a Session Manager session flows</title>
+  <desc id="d">SSM Agent on the instance connects outbound on HTTPS port 443 to the Systems Manager ssm and ssmmessages endpoints, through a NAT gateway or interface VPC endpoints, using the instance profile. You call StartSession with your IAM identity; Systems Manager joins your side and the agent's side, and the Session Manager plugin on your computer carries the shell over a WebSocket. Nothing connects inbound to the instance. Shell sessions can be logged to S3 or CloudWatch Logs; SSH and port forwarding sessions cannot, because Session Manager only carries their encrypted bytes.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .out { stroke: #198754; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .log { stroke: #6c757d; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .no  { stroke: #dc3545; stroke-width: 2; }
+      .you { fill: #f8f9fa; stroke: #adb5bd; }
+      .svc { fill: #fff3e0; stroke: #fd9843; }
+      .ep  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ins { fill: #e8f5ee; stroke: #75b798; }
+      .lg  { fill: #f3effc; stroke: #a98eda; }
+      .vpc { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="370" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How a Session Manager session flows</text>
+  <text class="sub" x="20" y="48">Both sides connect out to Systems Manager; nothing connects in to the instance</text>
+
+  <rect class="svc" x="300" y="70" width="240" height="60" rx="6"/><text class="tb" x="314" y="94">Systems Manager</text><text class="ms" x="314" y="114">ssm, ssmmessages</text>
+
+  <rect class="you" x="20" y="160" width="180" height="76" rx="6"/><text class="tb" x="32" y="182">Your computer</text><text class="ms" x="32" y="202">aws ssm start-session</text><text class="d" x="32" y="222">+ Session Manager plugin</text>
+  <path class="lne" d="M200,166 L298,96"/>
+  <path class="lne" d="M298,122 L202,206"/>
+  <text class="d" x="20" y="148">1 StartSession (your IAM identity)</text>
+  <text class="d" x="20" y="256">2 the shell, over a WebSocket</text>
+
+  <rect class="vpc" x="580" y="150" width="240" height="190" rx="10"/>
+  <text class="lb" x="594" y="170">PRIVATE SUBNET</text>
+  <rect class="ep" x="600" y="180" width="200" height="46" rx="6"/><text class="tb" x="612" y="200">NAT gateway or</text><text class="d" x="612" y="217">VPC endpoints (ssm, ssmmessages)</text>
+  <rect class="ins" x="600" y="256" width="200" height="70" rx="6"/><text class="tb" x="612" y="277">Instance</text><text class="d" x="612" y="295">SSM Agent + instance profile</text><text class="d" x="612" y="313">security group: no inbound rule</text>
+  <path class="out" d="M700,256 L700,228"/><text class="d" x="708" y="246">443 out</text>
+  <path class="out" d="M600,190 L542,118"/><text class="d" x="556" y="150" text-anchor="end">HTTPS</text>
+
+  <rect class="lg" x="300" y="270" width="240" height="50" rx="6"/><text class="tb" x="314" y="291">S3 or CloudWatch Logs</text><text class="d" x="314" y="308">shell sessions only</text>
+  <path class="log" d="M420,130 L420,268"/><text class="d" x="428" y="204">session logs</text>
+
+  <text class="d" x="20" y="352">SSH and port forwarding through Session Manager are not logged: it only carries their encrypted bytes. Use a plain shell session for an audit trail.</text>
+</svg>
