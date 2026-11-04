@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 340" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Route 53 routing policies</title>
+  <desc id="d">Eight routing policies. Simple: one record with one or more values. Weighted: split by weight, for canaries and blue/green. Latency: the Region with the lowest latency to the resolver. Failover: the primary while its health check passes, otherwise the secondary. Geolocation: by continent or country, with a default record for everyone else. Geoproximity: by distance, with a bias that grows or shrinks a Region. IP-based: by the CIDR block of the client or its resolver, with a default location. Multivalue answer: up to eight healthy values per answer. Failover and multivalue are built on health checks; the others can use them to drop unhealthy records.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .r53 { fill: #f3effc; stroke: #a98eda; }
+      .res { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="340" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Route 53 routing policies</text>
+  <text class="sub" x="20" y="48">Same name, several records (each with a SetIdentifier); the policy decides which ones answer</text>
+  <rect class="res" x="20" y="66" width="190" height="96" rx="6"/>
+  <text class="tb" x="32" y="90">Simple</text>
+  <text class="d" x="32" y="112">one record, one or more values</text>
+  <text class="ms" x="32" y="142">www → 192.0.2.10</text>
+  <rect class="res" x="222" y="66" width="190" height="96" rx="6"/>
+  <text class="tb" x="234" y="90">Weighted</text>
+  <text class="d" x="234" y="112">split by weight: canary, blue/green</text>
+  <text class="ms" x="234" y="142">api → 80% A, 20% B</text>
+  <rect class="res" x="424" y="66" width="190" height="96" rx="6"/>
+  <text class="tb" x="436" y="90">Latency</text>
+  <text class="d" x="436" y="112">closest Region by measured latency</text>
+  <text class="ms" x="436" y="142">app → eu-west-1 | us-east-1</text>
+  <rect class="r53" x="626" y="66" width="190" height="96" rx="6"/>
+  <text class="tb" x="638" y="90">Failover</text>
+  <text class="d" x="638" y="112">primary if healthy, else secondary</text>
+  <text class="ms" x="638" y="142">shop → primary | standby</text>
+  <rect class="res" x="20" y="176" width="190" height="96" rx="6"/>
+  <text class="tb" x="32" y="200">Geolocation</text>
+  <text class="d" x="32" y="222">by continent or country + default</text>
+  <text class="ms" x="32" y="252">geo → DE, EU, * (default)</text>
+  <rect class="res" x="222" y="176" width="190" height="96" rx="6"/>
+  <text class="tb" x="234" y="200">Geoproximity</text>
+  <text class="d" x="234" y="222">by distance, bias grows a Region</text>
+  <text class="ms" x="234" y="252">bias +25 pulls more users</text>
+  <rect class="r53" x="424" y="176" width="190" height="96" rx="6"/>
+  <text class="tb" x="436" y="200">Multivalue</text>
+  <text class="d" x="436" y="222">up to 8 healthy values per answer</text>
+  <text class="ms" x="436" y="252">web → 192.0.2.10, .20 …</text>
+  <rect class="res" x="626" y="176" width="194" height="96" rx="6"/><text class="tb" x="638" y="200">IP-based</text><text class="d" x="638" y="222">by the client's CIDR block</text><text class="ms" x="638" y="252">office → 203.0.113.0/24</text>
+  <text class="d" x="20" y="306">Geolocation and IP-based without a default (*) leave unmatched users with no answer. Policies nest through alias records.</text>
+  <text class="d" x="20" y="326">Purple: built on health checks. The others can use health checks to drop an unhealthy record.</text>
+</svg>

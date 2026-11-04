@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS Route 53 Cheatsheet</title>
+  <desc id="d">AWS Route 53 cheatsheet: hosted zones, records, routing policies, health checks, DNSSEC and Resolver. Small drawings: A, ALIAS and CNAME pills; a terminal running aws route53 change-resource-record-sets and aws route53 test-dns-answer; a DNS tree from the root to .com to example.com; icons for routing, health checks and Resolver; small icons for zones, records, routing, health checks, DNSSEC, Resolver and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #6f42c1; }
+      .al  { stroke: #6f42c1; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .gl  { stroke: #adb5bd; stroke-width: 8; fill: none; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pp  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .pw  { fill: #fff3e0; stroke: #fd9843; stroke-width: 5; }
+      .nd  { fill: #ffffff; stroke: #adb5bd; stroke-width: 5; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .a   { fill: #a98eda; }
+        .al  { stroke: #a98eda; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .gl  { stroke: #484f58; }
+        .pb  { fill: #0c1d33; stroke: #4a78b8; }
+        .pp  { fill: #1f1633; stroke: #8a6fc0; }
+        .pw  { fill: #2a1e0c; stroke: #b9701f; }
+        .nd  { fill: #0d1117; stroke: #484f58; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: record types and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pb" x="131" y="198" width="100" height="66" rx="33"/><text class="ink" x="181" y="241">A</text>
+    <rect class="pp" x="251" y="198" width="160" height="66" rx="33"/><text class="ink" x="331" y="241">ALIAS</text>
+    <rect class="pw" x="431" y="198" width="160" height="66" rx="33"/><text class="ink" x="511" y="241">CNAME</text>
+  </g>
+  <text class="n mono" x="131" y="318" font-size="30">zones · records · routing</text>
+  <rect class="term" x="131" y="400" width="760" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="760" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="760" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws route53 change-resource-record-sets</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ aws route53 test-dns-answer<tspan class="a">█</tspan></text>
+
+  <!-- center: DNS tree -->
+  <g transform="translate(1110,0)">
+    <path class="gl" d="M240,250 L100,400 M240,250 L380,400 M380,400 L280,550 M380,400 L470,550"/>
+    <circle class="nd" cx="240" cy="230" r="44"/><text class="ink mono" x="240" y="242" text-anchor="middle" font-size="34" font-weight="700">.</text>
+    <rect class="nd" x="40" y="370" width="120" height="60" rx="30"/><text class="ink mono" x="100" y="410" text-anchor="middle" font-size="28" font-weight="700">.org</text>
+    <rect class="nd" x="320" y="370" width="120" height="60" rx="30"/><text class="ink mono" x="380" y="410" text-anchor="middle" font-size="28" font-weight="700">.com</text>
+    <rect class="a" x="160" y="520" width="240" height="64" rx="32"/><text x="280" y="562" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff" class="mono">example</text>
+    <rect class="nd" x="420" y="520" width="110" height="64" rx="32"/><text class="ink mono" x="475" y="562" text-anchor="middle" font-size="28" font-weight="700">aws</text>
+    <text class="n mono" x="285" y="650" text-anchor="middle" font-size="32">root → TLD → your zone</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <path class="al" stroke-width="14" d="M30,100 H80 M80,100 L150,50 M80,100 L150,150"/>
+    <circle class="a" cx="160" cy="45" r="16"/><circle class="a" cx="160" cy="155" r="16"/>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">routing</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <path class="al" stroke-width="14" d="M100,170 C20,110 20,40 70,40 C90,40 100,60 100,60 C100,60 110,40 130,40 C180,40 180,110 100,170 Z"/>
+    <path class="al" stroke-width="10" d="M50,100 H80 L92,80 L108,122 L120,100 H150"/>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">health checks</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <rect class="al" stroke-width="14" x="20" y="60" width="60" height="80" rx="10"/>
+    <rect class="al" stroke-width="14" x="120" y="60" width="60" height="80" rx="10"/>
+    <path class="al" stroke-width="12" d="M80,85 H116 M120,115 H84"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">resolver</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">AWS Route 53 Cheatsheet</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="84">Zones, Records, Routing, Health Checks and Resolver</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">alias vs CNAME · DNSSEC · query logging · pricing · CLI 2.39.3</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="100" cy="100" r="70"/><path class="al" stroke-width="10" d="M30,100 H170 M100,30 C60,70 60,130 100,170 M100,30 C140,70 140,130 100,170"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">Zones</text>
+  <g transform="translate(806,1290) scale(0.5)"><rect class="al" stroke-width="14" x="40" y="30" width="120" height="140" rx="12"/><path class="al" stroke-width="12" d="M70,70 H130 M70,100 H130 M70,130 H130"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">Records</text>
+  <g transform="translate(1066,1290) scale(0.5)"><path class="al" stroke-width="14" d="M30,100 H80 M80,100 L150,50 M80,100 L150,150"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">Routing</text>
+  <g transform="translate(1326,1290) scale(0.5)"><path class="al" stroke-width="14" d="M30,100 H70 L90,60 L115,140 L135,100 H170"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">Health</text>
+  <g transform="translate(1586,1290) scale(0.5)"><rect class="a" x="40" y="90" width="120" height="96" rx="14"/><path class="al" stroke-width="16" d="M64,90 V64 A36,36 0 0 1 136,64 V90"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">DNSSEC</text>
+  <g transform="translate(1846,1290) scale(0.5)"><rect class="al" stroke-width="14" x="20" y="60" width="60" height="80" rx="10"/><rect class="al" stroke-width="14" x="120" y="60" width="60" height="80" rx="10"/><path class="al" stroke-width="12" d="M80,100 H120"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">Resolver</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>

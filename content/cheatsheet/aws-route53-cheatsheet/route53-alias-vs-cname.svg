@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Alias record versus CNAME</title>
+  <desc id="d">With a CNAME, Route 53 answers app.example.com with another name, my-alb-123.eu-west-1.elb.amazonaws.com, so the resolver needs a second lookup to get the addresses; a CNAME cannot sit at the zone apex, cannot share its name with other records, and its queries are charged. With an alias, Route 53 looks up the AWS resource itself and answers example.com directly with its A records; it works at the apex, follows the resource when its IP addresses change, and queries to AWS resources are free.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .r53 { fill: #f3effc; stroke: #a98eda; }
+      .res { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Alias record versus CNAME</text>
+  <text class="sub" x="20" y="48">Both point a name at a load balancer; only one works at the apex and saves a lookup</text>
+  <text class="lb" x="20" y="80">CNAME</text>
+  <rect class="res" x="20" y="90" width="150" height="46" rx="6"/><text class="tb" x="32" y="110">Resolver</text><text class="ms" x="32" y="126">app.example.com?</text>
+  <rect class="r53" x="240" y="90" width="250" height="46" rx="6"/><text class="tb" x="252" y="110">Route 53</text><text class="ms" x="252" y="126">CNAME my-alb-123.eu-west-1…</text>
+  <rect class="q" x="560" y="90" width="260" height="46" rx="6"/><text class="tb" x="572" y="110">2nd lookup: elb.amazonaws.com</text><text class="ms" x="572" y="126">A 203.0.113.5, 203.0.113.6</text>
+  <path class="lne" d="M170,113 L238,113"/><path class="dsh" d="M490,113 L558,113"/>
+  <rect class="wrn" x="20" y="146" width="800" height="30" rx="5"/><text class="d" x="32" y="165">not at the apex (example.com) · no other record with the same name · queries charged · its own TTL</text>
+  <text class="lb" x="20" y="212">ALIAS (A RECORD)</text>
+  <rect class="res" x="20" y="222" width="150" height="46" rx="6"/><text class="tb" x="32" y="242">Resolver</text><text class="ms" x="32" y="258">example.com?</text>
+  <rect class="r53" x="240" y="222" width="580" height="46" rx="6"/><text class="tb" x="252" y="242">Route 53 resolves the target itself</text><text class="ms" x="252" y="258">A 203.0.113.5, 203.0.113.6</text>
+  <path class="lne" d="M170,245 L238,245"/>
+  <rect class="ok" x="20" y="278" width="800" height="30" rx="5"/><text class="d" x="32" y="297">works at the apex · one lookup · follows the target's IP changes · free queries to AWS resources · target's TTL</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How a DNS query is answered</title>
+  <desc id="d">The client asks its recursive resolver for www.example.com. If the answer is not cached, the resolver asks a root server, which refers it to the .com servers; the .com servers refer it to the four Route 53 name servers of the example.com hosted zone, which are the names set at the registrar; Route 53 answers with the record. The resolver returns the answer to the client and caches it for the record TTL, so later queries do not reach Route 53 until the TTL expires.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .r53 { fill: #f3effc; stroke: #a98eda; }
+      .res { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How a DNS query is answered</text>
+  <text class="sub" x="20" y="48">The resolver walks the delegation once, then serves the answer from cache until the TTL expires</text>
+  <rect class="q" x="20" y="150" width="140" height="56" rx="6"/><text class="tb" x="32" y="172">Client</text><text class="ms" x="32" y="192">www.example.com?</text>
+  <rect class="res" x="230" y="140" width="190" height="76" rx="6"/><text class="tb" x="242" y="162">Recursive resolver</text><text class="d" x="242" y="180">ISP, 8.8.8.8, or the VPC</text><text class="d" x="242" y="196">Resolver at VPC+2</text><text class="ms" x="242" y="210">cache: TTL 300 s</text>
+  <path class="lne" d="M160,170 L228,170"/><text class="d" x="194" y="164" text-anchor="middle">1</text>
+  <path class="lne" d="M228,192 L162,192"/><text class="d" x="194" y="206" text-anchor="middle">6</text>
+  <rect class="q" x="560" y="66" width="260" height="56" rx="6"/><text class="tb" x="572" y="88">Root servers</text><text class="d" x="572" y="106">“ask the .com servers”</text>
+  <rect class="q" x="560" y="150" width="260" height="56" rx="6"/><text class="tb" x="572" y="172">.com TLD servers</text><text class="d" x="572" y="190">“ask ns-2048.awsdns-64.com …”</text>
+  <rect class="r53" x="560" y="234" width="260" height="60" rx="6"/><text class="tb" x="572" y="256">Route 53 name servers</text><text class="ms" x="572" y="274">www.example.com A 192.0.2.10</text><text class="d" x="572" y="288">the four NS set at the registrar</text>
+  <path class="lne" d="M420,150 L558,96"/><text class="d" x="470" y="114">2 referral</text>
+  <path class="lne" d="M420,178 L558,178"/><text class="d" x="470" y="172">3 referral</text>
+  <path class="lne" d="M420,206 L558,262"/><text class="d" x="436" y="252">4 query, 5 answer</text>
+  <text class="d" x="20" y="326">Steps 2 to 4 happen only on a cache miss. Lower the TTL before a change, so old answers expire quickly; raise it afterwards.</text>
+  <text class="d" x="20" y="344">If the registrar lists other name servers than the hosted zone's, step 3 points elsewhere and Route 53 is never asked.</text>
+</svg>

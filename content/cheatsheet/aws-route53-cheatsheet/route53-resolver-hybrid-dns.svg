@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Route 53 Resolver for hybrid DNS</title>
+  <desc id="d">On the left, on-premises DNS servers at 10.0.0.53 and 10.0.1.53; on the right, a VPC with the Route 53 Resolver, a private hosted zone internal.example.com, an inbound endpoint and an outbound endpoint, each with network interfaces in two subnets. On-premises servers forward internal.example.com queries over VPN or Direct Connect to the inbound endpoint, and the Resolver answers from the private zone. In the other direction, a forwarding rule for corp.internal, associated with the VPC, sends instance queries through the outbound endpoint to the on-premises DNS servers.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .r53 { fill: #f3effc; stroke: #a98eda; }
+      .res { fill: #e7f1ff; stroke: #6ea8fe; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Route 53 Resolver for hybrid DNS</text>
+  <text class="sub" x="20" y="48">Inbound: on-premises asks AWS. Outbound: AWS asks on-premises, for the domains in a forwarding rule</text>
+  <rect class="box" x="20" y="66" width="220" height="270" rx="10"/><text class="lb" x="34" y="86">ON-PREMISES</text>
+  <rect class="q" x="36" y="104" width="188" height="70" rx="6"/><text class="tb" x="48" y="126">DNS servers</text><text class="ms" x="48" y="144">10.0.0.53, 10.0.1.53</text><text class="d" x="48" y="162">zone corp.internal</text>
+  <rect class="q" x="36" y="230" width="188" height="56" rx="6"/><text class="tb" x="48" y="252">Conditional forwarder</text><text class="ms" x="48" y="270">internal.example.com</text>
+  <text class="d" x="300" y="200" text-anchor="middle">VPN or</text><text class="d" x="300" y="214" text-anchor="middle">Direct</text><text class="d" x="300" y="228" text-anchor="middle">Connect</text>
+  <rect class="box" x="360" y="66" width="460" height="270" rx="10"/><text class="lb" x="374" y="86">VPC (ENABLE DNS SUPPORT + HOSTNAMES)</text>
+  <rect class="res" x="380" y="230" width="170" height="56" rx="6"/><text class="tb" x="392" y="252">Inbound endpoint</text><text class="d" x="392" y="270">2 ENIs, 2 subnets</text>
+  <rect class="res" x="380" y="104" width="170" height="70" rx="6"/><text class="tb" x="392" y="126">Outbound endpoint</text><text class="d" x="392" y="144">2 ENIs, 2 subnets</text><text class="d" x="392" y="162">+ rule FORWARD</text>
+  <rect class="r53" x="620" y="160" width="184" height="70" rx="6"/><text class="tb" x="632" y="182">Route 53 Resolver</text><text class="ms" x="632" y="200">VPC+2 (10.1.0.2)</text><text class="d" x="632" y="218">used by instances</text>
+  <rect class="ok" x="620" y="256" width="184" height="56" rx="6"/><text class="tb" x="632" y="278">Private hosted zone</text><text class="ms" x="632" y="296">internal.example.com</text>
+  <rect class="q" x="620" y="96" width="184" height="44" rx="6"/><text class="tb" x="632" y="116">EC2 instances</text><text class="ms" x="632" y="132">db.corp.internal?</text>
+  <path class="lne" d="M224,258 L378,258"/><text class="d" x="300" y="252" text-anchor="middle">1</text>
+  <path class="lne" d="M550,258 L618,214"/>
+  <path class="lne" d="M712,230 L712,254"/>
+  <path class="lne" d="M712,140 L712,158"/>
+  <path class="lne" d="M620,178 L552,150"/>
+  <path class="lne" d="M378,139 L226,139"/><text class="d" x="300" y="133" text-anchor="middle">2</text>
+  <text class="d" x="20" y="358">1 Inbound: on-premises forwards internal.example.com to the inbound IPs. 2 Outbound: the rule for corp.internal, associated with the VPC, forwards to 10.0.0.53.</text>
+  <text class="d" x="20" y="374">Security groups on both endpoints must allow TCP and UDP 53. Each endpoint IP is billed by the hour.</text>
+</svg>
