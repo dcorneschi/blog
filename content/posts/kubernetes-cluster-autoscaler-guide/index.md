@@ -396,14 +396,30 @@ spec:
 # CA's own log: why it did or did not scale
 kubectl -n kube-system logs deploy/cluster-autoscaler --tail=100
 
-# Status: health, node groups with min/max/ready/unready counts, last scale-up and scale-down
+# Check health: cluster-wide and per node group, with min/max/ready/unready counts, last scale-up and scale-down
 kubectl -n kube-system get configmap cluster-autoscaler-status -o yaml
+
+# Just the status text, and when CA last wrote it
+kubectl -n kube-system get cm cluster-autoscaler-status -o jsonpath='{.data.status}'
+kubectl -n kube-system get cm cluster-autoscaler-status \
+  -o jsonpath='{.metadata.annotations.cluster-autoscaler\.kubernetes\.io/last-updated}{"\n"}'
+
+# Scale-ups and scale-downs CA recorded on the ConfigMap (ScaledUpGroup, ScaleDownEmpty, ScaleDown)
+kubectl -n kube-system get events --field-selector involvedObject.name=cluster-autoscaler-status --sort-by=.lastTimestamp
 
 # Events from CA: TriggeredScaleUp / NotTriggerScaleUp on pods, ScaleDown / ScaleDownFailed on nodes
 kubectl get events -A --field-selector source=cluster-autoscaler --sort-by=.lastTimestamp
 kubectl describe pod web-6f9c8d7b5-x2k4p | sed -n '/Events:/,$p'
 ```
 
+- The status ConfigMap is written to **CA's own namespace**: `kube-system` with the install above, but a chart installed with `--namespace cluster-autoscaler`
+  puts it there (`kubectl get cm cluster-autoscaler-status -n cluster-autoscaler -o yaml`). `--status-config-map-name` renames it, and
+  `--write-status-configmap=false` turns it off.
+- **Is CA alive?** The `last-updated` annotation changes on every loop, usually every 10 seconds. If it is more than about 3 minutes old, CA is stuck or
+  not running: check the pod and its log.
+- **Is it healthy?** The status shows `Healthy` or `Unhealthy` for the cluster and for each node group, with the ready, unready, not-started and (CA 1.24
+  and later) `resourceUnready` node counts. Nodes that are `Ready` in Kubernetes but counted as `resourceUnready` usually wait for a device driver
+  (GPU) that failed to install.
 - **`TriggeredScaleUp`** on a pending pod names the group and the sizes (current/new). **`NotTriggerScaleUp`** says no group could help, usually with the reason (max size reached, a node selector no group
   satisfies, a taint not tolerated, insufficient resources even on an empty node).
 - CA deduplicates similar events in a 5-minute window; `--record-duplicated-events` shows them all.
