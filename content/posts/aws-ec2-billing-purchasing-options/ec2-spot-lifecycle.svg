@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The life of a Spot Instance</title>
+  <desc id="d">A Spot Instance runs at the Spot price, which EC2 changes gradually. When its capacity pool is at elevated risk, EC2 may send a rebalance recommendation. When EC2 needs the capacity, it posts an interruption notice in instance metadata two minutes before it stops, hibernates or terminates the instance. If EC2 interrupts a Linux or Windows Spot Instance in its first hour there is no charge; after that it is billed per second. A Spot request without capacity waits instead of failing.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .v   { font-size: 11px; font-weight: 700; fill: #212529; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .spot{ fill: #fff3e0; stroke: #fd9843; }
+      .cap { fill: #e7f1ff; stroke: #6ea8fe; }
+      .sp  { fill: #e8f5ee; stroke: #75b798; }
+      .ded { fill: #f3effc; stroke: #a98eda; }
+      .od  { fill: #ffffff; stroke: #495057; }
+      .bad { fill: #fdecee; stroke: #dc3545; }
+      .bar { fill: #4c8be8; }
+      .barg{ fill: #adb5bd; }
+      .grid{ stroke: #e9ecef; stroke-width: 1; }
+      .ax  { stroke: #adb5bd; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+
+  <text class="h" x="20" y="28">The life of a Spot Instance</text>
+  <text class="sub" x="20" y="48">Cheap until EC2 needs the capacity back; you get at least two minutes</text>
+  <path class="ax" d="M40,170 H800" stroke-width="2"/>
+  <rect class="sp" x="40" y="130" width="440" height="40" rx="6"/><text class="tb" x="52" y="150">running at the Spot price</text><text class="d" x="52" y="164">price moves gradually with supply and demand</text>
+  <rect class="spot" x="480" y="130" width="160" height="40" rx="6"/><text class="tb" x="492" y="150">elevated risk</text><text class="d" x="492" y="164">rebalance signal</text>
+  <rect class="bad" x="640" y="130" width="120" height="40" rx="6"/><text class="tb" x="652" y="150">2 minutes</text><text class="d" x="652" y="164">notice posted</text>
+  <path d="M760,124 V178" stroke="#dc3545" stroke-width="3"/><text class="tb" x="766" y="150">stop /</text><text class="tb" x="766" y="164">end</text>
+  <path class="lne" d="M480,110 L480,128"/><text class="ms" x="480" y="104" text-anchor="middle">events/recommendations/rebalance</text>
+  <path class="lne" d="M640,92 L640,128"/><text class="ms" x="640" y="86" text-anchor="middle">spot/instance-action (404 before)</text>
+  <text class="lb" x="40" y="206">WHAT TO DO</text>
+  <text class="d" x="40" y="224">On the rebalance signal: start a replacement elsewhere.</text>
+  <text class="d" x="40" y="242">On the notice: stop taking work, checkpoint,</text>
+  <text class="d" x="40" y="258">deregister from the load balancer, flush logs.</text>
+  <text class="lb" x="460" y="206">BILLING (LINUX, WINDOWS)</text>
+  <text class="d" x="460" y="224">EC2 interrupts in the first hour: no charge.</text>
+  <text class="d" x="460" y="242">Later, or you stop it: per second.</text>
+  <text class="d" x="40" y="280">No capacity when you ask? A Spot request keeps waiting, where On-Demand fails with an insufficient capacity error.</text>
+  <text class="d" x="40" y="298">Many instance types and AZs mean many capacity pools, and fewer interruptions. Savings Plans never cover Spot.</text>
+</svg>

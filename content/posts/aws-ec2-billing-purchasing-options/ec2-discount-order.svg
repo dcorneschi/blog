@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 340" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which discount applies first</title>
+  <desc id="d">Every hour, EC2 usage is covered in this order: first Reserved Instances that match it; then EC2 Instance Savings Plans, the narrower plans; then Compute Savings Plans; inside each plan the usage with the highest savings percentage is covered first until the hour's commitment is used; whatever is left is billed at On-Demand rates. Spot usage is billed separately at the Spot price and is never covered by Savings Plans. An unused hour of commitment is lost.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .v   { font-size: 11px; font-weight: 700; fill: #212529; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .spot{ fill: #fff3e0; stroke: #fd9843; }
+      .cap { fill: #e7f1ff; stroke: #6ea8fe; }
+      .sp  { fill: #e8f5ee; stroke: #75b798; }
+      .ded { fill: #f3effc; stroke: #a98eda; }
+      .od  { fill: #ffffff; stroke: #495057; }
+      .bad { fill: #fdecee; stroke: #dc3545; }
+      .bar { fill: #4c8be8; }
+      .barg{ fill: #adb5bd; }
+      .grid{ stroke: #e9ecef; stroke-width: 1; }
+      .ax  { stroke: #adb5bd; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="840" height="340" fill="#ffffff"/>
+
+  <text class="h" x="20" y="28">Which discount applies first</text>
+  <text class="sub" x="20" y="48">One hour of usage, covered layer by layer; what is left is On-Demand</text>
+  <rect class="ded" x="20" y="66" width="360" height="44" rx="6"/><text class="tb" x="32" y="85">1. Reserved Instances</text><text class="d" x="32" y="101">exact match on type, Region, OS, tenancy</text>
+  <path class="lne" d="M200,110 L200,122"/>
+  <rect class="sp" x="20" y="124" width="360" height="44" rx="6"/><text class="tb" x="32" y="143">2. EC2 Instance Savings Plans</text><text class="d" x="32" y="159">narrower plan first</text>
+  <path class="lne" d="M200,168 L200,180"/>
+  <rect class="sp" x="20" y="182" width="360" height="44" rx="6"/><text class="tb" x="32" y="201">3. Compute Savings Plans</text><text class="d" x="32" y="217">what the others left</text>
+  <path class="lne" d="M200,226 L200,238"/>
+  <rect class="od" x="20" y="240" width="360" height="44" rx="6"/><text class="tb" x="32" y="259">4. On-Demand</text><text class="d" x="32" y="275">everything still uncovered</text>
+  <rect class="spot" x="440" y="66" width="380" height="44" rx="6"/><text class="tb" x="452" y="85">Spot: billed apart, at the Spot price</text><text class="d" x="452" y="101">never covered by Savings Plans, never uses their commitment</text>
+  <rect class="q" x="440" y="124" width="380" height="102" rx="6"/><text class="tb" x="452" y="144">Inside a plan</text>
+  <text class="d" x="452" y="164">Usage with the highest savings percentage goes first,</text><text class="d" x="452" y="180">until the hour's commitment is used up.</text>
+  <text class="d" x="452" y="200">An hour's commitment covers only that hour:</text><text class="d" x="452" y="216">unused commitment is lost, not carried over.</text>
+  <rect class="cap" x="440" y="240" width="380" height="44" rx="6"/><text class="tb" x="452" y="259">Capacity Reservations</text><text class="d" x="452" y="275">discounts go to running instances first, then unused capacity</text>
+  <text class="d" x="20" y="318">In an Organization with sharing on, plans cover the owning account first, then the others.</text>
+</svg>

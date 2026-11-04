@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">m7i.large: effective price per hour</title>
+  <desc id="d">Effective hourly price of an m7i.large Linux instance in eu-west-1 from the AWS price lists of 4 November 2026, upfront payments spread over the term. Dedicated Instance On-Demand 0.12359 dollars plus 2 dollars per hour per Region; On-Demand 0.11235; Compute Savings Plan 1 year No Upfront 0.08528, 24 percent off; EC2 Instance Savings Plan or Standard Reserved Instance 1 year No Upfront 0.07432, 34 percent off; Spot at 08:27 0.0674, 40 percent off; Compute Savings Plan 3 years All Upfront 0.05356, 52 percent off; EC2 Instance Savings Plan 3 years All Upfront 0.04436, 61 percent off.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .v   { font-size: 11px; font-weight: 700; fill: #212529; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .spot{ fill: #fff3e0; stroke: #fd9843; }
+      .cap { fill: #e7f1ff; stroke: #6ea8fe; }
+      .sp  { fill: #e8f5ee; stroke: #75b798; }
+      .ded { fill: #f3effc; stroke: #a98eda; }
+      .od  { fill: #ffffff; stroke: #495057; }
+      .bad { fill: #fdecee; stroke: #dc3545; }
+      .bar { fill: #4c8be8; }
+      .barg{ fill: #adb5bd; }
+      .grid{ stroke: #e9ecef; stroke-width: 1; }
+      .ax  { stroke: #adb5bd; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="840" height="380" fill="#ffffff"/>
+
+  <text class="h" x="20" y="28">m7i.large in eu-west-1: effective price per hour</text>
+  <text class="sub" x="20" y="48">Linux, shared tenancy, AWS price lists of 4 November 2026; upfront spread over the term</text>
+  <line class="grid" x1="300.0" y1="68" x2="300.0" y2="322"/><text class="ms" x="300.0" y="338" text-anchor="middle">$0.00</text>
+  <line class="grid" x1="357.1" y1="68" x2="357.1" y2="322"/><text class="ms" x="357.1" y="338" text-anchor="middle">$0.02</text>
+  <line class="grid" x1="414.3" y1="68" x2="414.3" y2="322"/><text class="ms" x="414.3" y="338" text-anchor="middle">$0.04</text>
+  <line class="grid" x1="471.4" y1="68" x2="471.4" y2="322"/><text class="ms" x="471.4" y="338" text-anchor="middle">$0.06</text>
+  <line class="grid" x1="528.6" y1="68" x2="528.6" y2="322"/><text class="ms" x="528.6" y="338" text-anchor="middle">$0.08</text>
+  <line class="grid" x1="585.7" y1="68" x2="585.7" y2="322"/><text class="ms" x="585.7" y="338" text-anchor="middle">$0.10</text>
+  <line class="grid" x1="642.9" y1="68" x2="642.9" y2="322"/><text class="ms" x="642.9" y="338" text-anchor="middle">$0.12</text>
+  <line class="grid" x1="700.0" y1="68" x2="700.0" y2="322"/><text class="ms" x="700.0" y="338" text-anchor="middle">$0.14</text>
+  <text class="d" x="290" y="90" text-anchor="end">Dedicated Instance, On-Demand</text>
+  <path class="barg" d="M300,74 H649.7 Q653.1,74 653.1,78 V92 Q653.1,96 649.7,96 H300 Z"/>
+  <text class="v" x="659.1" y="90">$0.12359</text><text class="d" x="715.1" y="90">+$2/h Region fee</text>
+  <text class="d" x="290" y="126" text-anchor="end">On-Demand</text>
+  <path class="barg" d="M300,110 H617.5 Q621.0,110 621.0,114 V128 Q621.0,132 617.5,132 H300 Z"/>
+  <text class="v" x="627.0" y="126">$0.11235</text>
+  <text class="d" x="290" y="162" text-anchor="end">Compute SP, 1 yr, No Upfront</text>
+  <path class="bar" d="M300,146 H540.2 Q543.7,146 543.7,150 V164 Q543.7,168 540.2,168 H300 Z"/>
+  <text class="v" x="549.7" y="162">$0.08528</text><text class="d" x="605.7" y="162">−24%</text>
+  <text class="d" x="290" y="198" text-anchor="end">EC2 Instance SP or Std RI, 1 yr, No Upfront</text>
+  <path class="bar" d="M300,182 H508.9 Q512.3,182 512.3,186 V200 Q512.3,204 508.9,204 H300 Z"/>
+  <text class="v" x="518.3" y="198">$0.07432</text><text class="d" x="574.3" y="198">−34%</text>
+  <text class="d" x="290" y="234" text-anchor="end">Spot, 08:27 that day</text>
+  <path class="bar" d="M300,218 H489.1 Q492.6,218 492.6,222 V236 Q492.6,240 489.1,240 H300 Z"/>
+  <text class="v" x="498.6" y="234">$0.0674</text><text class="d" x="554.6" y="234">−40%</text>
+  <text class="d" x="290" y="270" text-anchor="end">Compute SP, 3 yr, All Upfront</text>
+  <path class="bar" d="M300,254 H449.6 Q453.0,254 453.0,258 V272 Q453.0,276 449.6,276 H300 Z"/>
+  <text class="v" x="459.0" y="270">$0.05356</text><text class="d" x="515.0" y="270">−52%</text>
+  <text class="d" x="290" y="306" text-anchor="end">EC2 Instance SP, 3 yr, All Upfront</text>
+  <path class="bar" d="M300,290 H423.3 Q426.8,290 426.8,294 V308 Q426.8,312 423.3,312 H300 Z"/>
+  <text class="v" x="432.8" y="306">$0.04436</text><text class="d" x="488.8" y="306">−61%</text>
+  <line class="ax" x1="300" y1="68" x2="300" y2="322"/>
+  <text class="d" x="20" y="362">Grey: no discount. Blue: commitment or Spot. EC2 Instance Savings Plans and Standard RIs have the same rates; Compute Savings Plans match Convertible RIs.</text>
+</svg>

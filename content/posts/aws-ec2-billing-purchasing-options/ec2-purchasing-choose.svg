@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 420" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Choosing how to pay for EC2</title>
+  <desc id="d">Questions in order. Can the work be interrupted? Then Spot. Do you need guaranteed capacity in one Availability Zone? Then a Capacity Reservation, or a Capacity Block for GPU training of days or weeks. Is usage steady for one or three years? Then a Compute Savings Plan for flexibility, or an EC2 Instance Savings Plan for the deepest discount on one family. Do licences or compliance need dedicated hardware? Then Dedicated Hosts for per-socket or per-core licences, Dedicated Instances otherwise. Everything else: On-Demand. Capacity and discount combine: a Capacity Reservation is billed at On-Demand rates, and Savings Plans apply to it.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .v   { font-size: 11px; font-weight: 700; fill: #212529; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .spot{ fill: #fff3e0; stroke: #fd9843; }
+      .cap { fill: #e7f1ff; stroke: #6ea8fe; }
+      .sp  { fill: #e8f5ee; stroke: #75b798; }
+      .ded { fill: #f3effc; stroke: #a98eda; }
+      .od  { fill: #ffffff; stroke: #495057; }
+      .bad { fill: #fdecee; stroke: #dc3545; }
+      .bar { fill: #4c8be8; }
+      .barg{ fill: #adb5bd; }
+      .grid{ stroke: #e9ecef; stroke-width: 1; }
+      .ax  { stroke: #adb5bd; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="840" height="420" fill="#ffffff"/>
+
+  <text class="h" x="20" y="28">Choosing how to pay for EC2</text>
+  <text class="sub" x="20" y="48">Price and capacity are separate questions; answer both</text>
+  <rect class="q" x="20" y="66" width="330" height="52" rx="6"/><text class="tb" x="32" y="88">1. Can the work be interrupted?</text><text class="d" x="32" y="106">batch, CI, stateless workers</text>
+  <rect class="spot" x="470" y="66" width="350" height="52" rx="6"/><text class="tb" x="482" y="88">Spot</text><text class="d" x="482" y="106">up to 90% off, 2-minute notice</text>
+  <path class="lne" d="M350,92 L468,92"/><text class="d" x="409" y="85" text-anchor="middle">yes</text>
+  <path class="lne" d="M185,118 L185,140"/><text class="d" x="193" y="133">no</text>
+  <rect class="q" x="20" y="142" width="330" height="52" rx="6"/><text class="tb" x="32" y="164">2. Must capacity be guaranteed?</text><text class="d" x="32" y="182">one AZ, a launch, DR, GPU training</text>
+  <rect class="cap" x="470" y="142" width="350" height="52" rx="6"/><text class="tb" x="482" y="164">Capacity Reservation</text><text class="d" x="482" y="182">or a Capacity Block for GPUs</text>
+  <path class="lne" d="M350,168 L468,168"/><text class="d" x="409" y="161" text-anchor="middle">yes</text>
+  <path class="lne" d="M185,194 L185,216"/><text class="d" x="193" y="209">no</text>
+  <rect class="q" x="20" y="218" width="330" height="52" rx="6"/><text class="tb" x="32" y="240">3. Steady usage for 1 or 3 years?</text><text class="d" x="32" y="258">the baseline you never go below</text>
+  <rect class="sp" x="470" y="218" width="350" height="52" rx="6"/><text class="tb" x="482" y="240">Savings Plan</text><text class="d" x="482" y="258">Compute (flexible) or EC2 Instance</text>
+  <path class="lne" d="M350,244 L468,244"/><text class="d" x="409" y="237" text-anchor="middle">yes</text>
+  <path class="lne" d="M185,270 L185,292"/><text class="d" x="193" y="285">no</text>
+  <rect class="q" x="20" y="294" width="330" height="52" rx="6"/><text class="tb" x="32" y="316">4. Dedicated hardware required?</text><text class="d" x="32" y="334">licences, compliance</text>
+  <rect class="ded" x="470" y="294" width="350" height="52" rx="6"/><text class="tb" x="482" y="316">Dedicated Hosts or Instances</text><text class="d" x="482" y="334">BYOL per core / single tenant</text>
+  <path class="lne" d="M350,320 L468,320"/><text class="d" x="409" y="313" text-anchor="middle">yes</text>
+  <path class="lne" d="M185,346 L185,368"/><text class="d" x="193" y="361">no</text>
+  <rect class="od" x="20" y="370" width="330" height="40" rx="6"/><text class="tb" x="32" y="395">On-Demand: no commitment, per second</text>
+  <text class="d" x="470" y="384">Answers combine: a Capacity Reservation is billed at</text><text class="d" x="470" y="400">On-Demand rates, and a Savings Plan discounts it.</text>
+</svg>

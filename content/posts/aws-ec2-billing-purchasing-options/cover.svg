@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">EC2 Billing and Purchasing</title>
+  <desc id="d">Amazon EC2 billing and purchasing options: On-Demand, Savings Plans, Reserved Instances, Spot and Capacity Reservations. Small drawings: ON-DEMAND, SAVINGS and SPOT pills; a terminal running aws ec2 describe-spot-price-history and aws ce get-savings-plans-coverage; a bar chart of falling prices with a dollar tag; icons for per-second billing, commitments and reserved capacity; small icons for On-Demand, Savings Plans, Reserved Instances, Spot, Dedicated Hosts, Capacity Blocks and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #2b8a3e; }
+      .al  { stroke: #2b8a3e; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .gb  { fill: #ced4da; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .pw  { fill: #fff3e0; stroke: #fd9843; stroke-width: 5; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .gb  { fill: #484f58; }
+        .pb  { fill: #0c1d33; stroke: #4a78b8; }
+        .pg  { fill: #10241a; stroke: #4f8f6f; }
+        .pw  { fill: #2a1e0c; stroke: #b9701f; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: options and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pb" x="131" y="198" width="230" height="66" rx="33"/><text class="ink" x="246" y="241">ON-DEMAND</text>
+    <rect class="pg" x="381" y="198" width="200" height="66" rx="33"/><text class="ink" x="481" y="241">SAVINGS</text>
+    <rect class="pw" x="601" y="198" width="140" height="66" rx="33"/><text class="ink" x="671" y="241">SPOT</text>
+  </g>
+  <text class="n mono" x="436" y="318" text-anchor="middle" font-size="30">price · commitment · capacity</text>
+  <rect class="term" x="131" y="400" width="690" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="690" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="690" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws ec2 describe-spot-price-history</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ aws ce get-savings-plans-coverage<tspan class="a">█</tspan></text>
+
+  <!-- center: falling price bars with a dollar tag -->
+  <g transform="translate(1110,0)">
+    <rect class="gb" x="20" y="220" width="80" height="360" rx="10"/>
+    <rect class="a" x="130" y="300" width="80" height="280" rx="10" opacity=".55"/>
+    <rect class="a" x="240" y="360" width="80" height="220" rx="10" opacity=".75"/>
+    <rect class="a" x="350" y="430" width="80" height="150" rx="10"/>
+    <path class="al" stroke-width="10" d="M0,590 H460"/>
+    <g transform="translate(400,190)">
+      <path class="a" d="M0,40 L40,0 H150 V110 H40 Z"/>
+      <circle cx="38" cy="55" r="12" fill="#ffffff"/>
+      <text x="100" y="78" text-anchor="middle" font-size="64" font-weight="700" fill="#ffffff">$</text>
+    </g>
+    <text class="n mono" x="225" y="650" text-anchor="middle" font-size="32">on-demand → 3-yr plan</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <circle class="al" stroke-width="14" cx="100" cy="100" r="70"/>
+    <path class="al" stroke-width="12" d="M100,100 V52 M100,100 L130,118"/>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">per second</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <rect class="al" stroke-width="14" x="30" y="40" width="140" height="130" rx="14"/>
+    <path class="al" stroke-width="14" d="M30,82 H170 M70,24 V56 M130,24 V56"/>
+    <text class="a mono" x="100" y="150" text-anchor="middle" font-size="48" font-weight="700">1-3y</text>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">commitments</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <rect class="a" x="40" y="90" width="120" height="96" rx="14"/>
+    <path class="al" stroke-width="16" d="M64,90 V64 A36,36 0 0 1 136,64 V90"/>
+    <circle cx="100" cy="134" r="12" fill="#fff"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">capacity</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">EC2 Billing and Purchasing</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="84">On-Demand, Savings Plans, RIs, Spot and Capacity</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">per-second billing · real prices · discount order · CLI 2.39.3</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="100" cy="100" r="70"/><path class="al" stroke-width="14" d="M100,60 V100 L128,118"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">On-Demand</text>
+  <g transform="translate(806,1290) scale(0.5)"><path class="al" stroke-width="14" d="M30,60 L80,110 L115,80 L170,150 M130,150 H170 V110"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">Savings Plans</text>
+  <g transform="translate(1066,1290) scale(0.5)"><rect class="al" stroke-width="14" x="30" y="50" width="140" height="110" rx="12"/><path class="al" stroke-width="14" d="M30,90 H170 M70,30 V60 M130,30 V60"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">Reserved</text>
+  <g transform="translate(1326,1290) scale(0.5)"><path class="a" d="M112,22 L52,112 H96 L84,178 L148,82 H104 Z"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">Spot</text>
+  <g transform="translate(1586,1290) scale(0.5)"><rect class="al" stroke-width="14" x="40" y="30" width="120" height="140" rx="12"/><path class="al" stroke-width="12" d="M70,70 H130 M70,100 H130 M70,130 H130"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">Dedicated</text>
+  <g transform="translate(1846,1290) scale(0.5)"><rect class="a" x="40" y="90" width="120" height="96" rx="14"/><path class="al" stroke-width="16" d="M64,90 V64 A36,36 0 0 1 136,64 V90"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">Capacity</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>
