@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Kustomize vs Helm</title>
+  <desc id="d">Kustomize vs Helm: overlays, charts, merge rules and using both. Small drawings: BASE, OVERLAY and CHART pills; a terminal running kubectl kustomize overlays/prod and helm upgrade --install my-app ./chart; a base layer and two overlay layers stacked on the left, a chart package on the right, both producing a YAML document; icons for patches, packages and release history; small icons for overlays, charts, merge rules, components, OCI, GitOps and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #326ce5; }
+      .al  { stroke: #326ce5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .p   { fill: #7048e8; }
+      .pl  { stroke: #7048e8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .gl  { stroke: #adb5bd; stroke-width: 8; fill: none; stroke-linecap: round; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pp  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .doc { fill: #ffffff; stroke: #adb5bd; stroke-width: 6; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .a   { fill: #6e9cf5; }
+        .al  { stroke: #6e9cf5; }
+        .p   { fill: #9775fa; }
+        .pl  { stroke: #9775fa; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .gl  { stroke: #484f58; }
+        .pb  { fill: #0c1d33; stroke: #4a78b8; }
+        .pp  { fill: #1f1633; stroke: #8a6fc0; }
+        .pg  { fill: #10241a; stroke: #4f8f6f; }
+        .doc { fill: #0d1117; stroke: #484f58; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: pills and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pg" x="131" y="198" width="130" height="66" rx="33"/><text class="ink" x="196" y="241">BASE</text>
+    <rect class="pb" x="281" y="198" width="180" height="66" rx="33"/><text class="ink" x="371" y="241">OVERLAY</text>
+    <rect class="pp" x="481" y="198" width="150" height="66" rx="33"/><text class="ink" x="556" y="241">CHART</text>
+  </g>
+  <text class="n mono" x="131" y="318" font-size="30">patch YAML · render templates</text>
+  <rect class="term" x="131" y="400" width="740" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="740" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="740" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ kubectl kustomize overlays/prod</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ helm upgrade --install my-app ./chart<tspan class="a">█</tspan></text>
+
+  <!-- center: layers (Kustomize) and a package (Helm) both producing YAML -->
+  <g transform="translate(1040,0)">
+    <path class="pg" d="M20,470 L150,410 L280,470 L150,530 Z"/>
+    <path class="pb" d="M20,410 L150,350 L280,410 L150,470 Z" opacity=".95"/>
+    <path class="pb" d="M20,350 L150,290 L280,350 L150,410 Z" opacity=".9"/>
+    <text class="n mono" x="150" y="580" text-anchor="middle" font-size="28">base + overlays</text>
+    <path class="gl" d="M300,400 H360 M345,385 L362,400 L345,415"/>
+    <rect class="doc" x="380" y="270" width="180" height="250" rx="14"/>
+    <path class="gl" d="M412,320 H528 M412,360 H500 M412,400 H528 M412,440 H480 M412,480 H516"/>
+    <text class="n mono" x="470" y="580" text-anchor="middle" font-size="28">plain YAML</text>
+    <path class="gl" d="M640,400 H580 M595,385 L578,400 L595,415"/>
+    <g transform="translate(660,290)">
+      <path class="pp" d="M0,60 L110,0 L220,60 L220,180 L110,240 L0,180 Z"/>
+      <path class="pl" stroke-width="8" d="M0,60 L110,120 L220,60 M110,120 V240"/>
+    </g>
+    <text class="n mono" x="770" y="580" text-anchor="middle" font-size="28">chart + values</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1995,190) scale(1.15)">
+    <rect class="al" stroke-width="12" x="30" y="40" width="110" height="130" rx="12"/>
+    <rect class="a" x="80" y="90" width="90" height="90" rx="12" opacity=".85"/>
+    <path stroke="#ffffff" stroke-width="10" stroke-linecap="round" d="M125,110 V160 M100,135 H150"/>
+  </g>
+  <text class="n" x="2110" y="470" text-anchor="middle" font-size="32">patches</text>
+  <g transform="translate(2245,190) scale(1.15)">
+    <path class="pl" stroke-width="12" d="M30,60 L100,25 L170,60 L170,140 L100,175 L30,140 Z M30,60 L100,95 L170,60 M100,95 V175"/>
+  </g>
+  <text class="n" x="2360" y="470" text-anchor="middle" font-size="32">charts</text>
+  <g transform="translate(2495,190) scale(1.15)">
+    <circle class="pl" stroke-width="12" cx="100" cy="100" r="70"/>
+    <path class="pl" stroke-width="12" d="M100,100 V60 M100,100 L130,118"/>
+    <path class="p" d="M22,64 L46,40 L52,76 Z"/>
+  </g>
+  <text class="n" x="2610" y="470" text-anchor="middle" font-size="32">history</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">Kustomize vs Helm</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="84">Overlays, Charts, Merge Rules and Using Both</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">Kustomize v5.8.1 · Helm 4.3.1 · real output on k3s 1.35</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><path class="al" stroke-width="14" d="M20,130 L100,90 L180,130 L100,170 Z M20,90 L100,50 L180,90"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">Overlays</text>
+  <g transform="translate(806,1290) scale(0.5)"><path class="pl" stroke-width="14" d="M30,60 L100,25 L170,60 L170,140 L100,175 L30,140 Z M30,60 L100,95 L170,60 M100,95 V175"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">Charts</text>
+  <g transform="translate(1066,1290) scale(0.5)"><path class="al" stroke-width="14" d="M40,40 V160 M160,40 V160 M40,100 C90,100 110,60 160,60"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">Merge rules</text>
+  <g transform="translate(1326,1290) scale(0.5)"><rect class="al" stroke-width="14" x="30" y="30" width="60" height="60" rx="8"/><rect class="al" stroke-width="14" x="110" y="30" width="60" height="60" rx="8"/><rect class="a" x="30" y="110" width="60" height="60" rx="8"/><rect class="al" stroke-width="14" x="110" y="110" width="60" height="60" rx="8"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">Components</text>
+  <g transform="translate(1586,1290) scale(0.5)"><rect class="pl" stroke-width="14" x="30" y="50" width="140" height="110" rx="12"/><path class="pl" stroke-width="12" d="M60,90 H140 M60,120 H120"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">OCI</text>
+  <g transform="translate(1846,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="60" cy="60" r="24"/><circle class="al" stroke-width="14" cx="60" cy="150" r="24"/><circle class="al" stroke-width="14" cx="150" cy="105" r="24"/><path class="al" stroke-width="12" d="M60,84 V126 M60,84 C60,105 120,105 126,105"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">GitOps</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>

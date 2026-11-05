@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Choosing between Kustomize and Helm</title>
+  <desc id="d">Choosing between Kustomize and Helm. For third-party software, use the vendor Helm chart, patched with Kustomize if needed. For software you distribute to others, write a Helm chart. For in-house apps with small differences between environments, use Kustomize overlays, with components for optional features. If you need loops, many conditionals or computed values, use Helm. If you need release history and rollback without GitOps, use Helm. With GitOps either works, and Git is the history.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Kustomize or Helm?</text>
+  <text class="sub" x="20" y="48">Most teams end up with both: charts for other people's software, overlays for their own</text>
+  <rect class="q" x="20" y="70" width="230" height="40" rx="6"/><text class="tb" x="32" y="95">Who wrote the software?</text>
+  <rect class="hm" x="320" y="66" width="250" height="48" rx="6"/><text class="tb" x="332" y="86">Vendor or open source</text><text class="d" x="332" y="104">use their Helm chart, pin the version</text>
+  <rect class="k" x="610" y="66" width="210" height="48" rx="6"/><text class="tb" x="622" y="86">Need to change it?</text><text class="d" x="622" y="104">helmCharts + patches</text>
+  <path class="lne" d="M250,90 L318,90"/><text class="d" x="258" y="84">others</text><path class="dsh" d="M570,90 L608,90"/>
+  <path class="lne" d="M135,110 L135,140"/><text class="d" x="142" y="130">you</text>
+  <rect class="q" x="20" y="142" width="230" height="40" rx="6"/><text class="tb" x="32" y="167">Distributed to others?</text>
+  <rect class="hm" x="320" y="138" width="250" height="48" rx="6"/><text class="tb" x="332" y="158">Write a Helm chart</text><text class="d" x="332" y="176">versioned, OCI registry, values</text>
+  <path class="lne" d="M250,162 L318,162"/><text class="d" x="270" y="156">yes</text>
+  <path class="lne" d="M135,182 L135,212"/><text class="d" x="142" y="202">no</text>
+  <rect class="q" x="20" y="214" width="230" height="40" rx="6"/><text class="tb" x="32" y="239">Loops, many conditionals?</text>
+  <rect class="hm" x="320" y="210" width="250" height="48" rx="6"/><text class="tb" x="332" y="230">Helm</text><text class="d" x="332" y="248">range, if, computed values</text>
+  <path class="lne" d="M250,234 L318,234"/><text class="d" x="270" y="228">yes</text>
+  <path class="lne" d="M135,254 L135,284"/><text class="d" x="142" y="274">no</text>
+  <rect class="k" x="20" y="286" width="550" height="48" rx="6"/><text class="tb" x="32" y="306">Kustomize overlays</text><text class="d" x="32" y="324">base + dev/prod overlays, components for optional parts, GitOps keeps the history</text>
+  <rect class="q" x="610" y="210" width="210" height="124" rx="6"/><text class="tb" x="622" y="232">No GitOps?</text><text class="d" x="622" y="252">Helm gives you release</text><text class="d" x="622" y="268">history and rollback;</text><text class="d" x="622" y="284">with Kustomize alone,</text><text class="d" x="622" y="300">rollback is git revert</text><text class="d" x="622" y="316">and apply again</text>
+</svg>

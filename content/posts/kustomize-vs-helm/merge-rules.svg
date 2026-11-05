@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What a strategic merge patch replaces and what it merges</title>
+  <desc id="d">Strategic merge patch rules. Maps are merged key by key, so a patch that adds a label keeps the existing labels. Plain lists such as args are replaced as a whole, so a patch with one argument removes the others. Lists with a merge key, such as containers, env, ports and volumes, are merged item by item by name. A JSON patch with a path ending in slash dash appends to any list. Helm values files follow the same rule for maps and plain lists.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What a patch replaces and what it merges</text>
+  <text class="sub" x="20" y="48">The rule depends on the field type, not on Kustomize: the same base, three kinds of field</text>
+  <text class="lb" x="20" y="80">BASE</text><text class="lb" x="300" y="80">PATCH</text><text class="lb" x="560" y="80">RESULT</text>
+  <rect class="ok" x="20" y="90" width="800" height="70" rx="6"/>
+  <text class="tb" x="32" y="110">Map: labels</text><text class="ms" x="32" y="130">app: my-app</text><text class="ms" x="32" y="146">version: v1</text>
+  <text class="ms" x="300" y="130">env: dev</text>
+  <text class="ms" x="560" y="114">app: my-app</text><text class="ms" x="560" y="130">version: v1</text><text class="ms" x="560" y="146">env: dev</text><text class="d" x="740" y="130">merged</text>
+  <rect class="wrn" x="20" y="170" width="800" height="70" rx="6"/>
+  <text class="tb" x="32" y="190">Plain list: args</text><text class="ms" x="32" y="210">--secure-port=10250</text><text class="ms" x="32" y="226">--cert-dir=/tmp</text>
+  <text class="ms" x="300" y="210">--kubelet-insecure-tls</text>
+  <text class="ms" x="560" y="210">--kubelet-insecure-tls</text><text class="d" x="740" y="210">replaced</text><text class="d" x="560" y="230">append instead: JSON patch path …/args/-</text>
+  <rect class="k" x="20" y="250" width="800" height="70" rx="6"/>
+  <text class="tb" x="32" y="270">Keyed list: env (key: name)</text><text class="ms" x="32" y="290">- name: A</text>
+  <text class="ms" x="300" y="290">- name: B</text>
+  <text class="ms" x="560" y="282">- name: B</text><text class="ms" x="560" y="298">- name: A</text><text class="d" x="730" y="290">merged by name</text><text class="d" x="300" y="310">also containers, ports, volumes, volumeMounts</text>
+  <text class="d" x="20" y="344">Helm values files work the same way: maps merge across -f files and --set, lists are replaced as a whole.</text>
+</svg>

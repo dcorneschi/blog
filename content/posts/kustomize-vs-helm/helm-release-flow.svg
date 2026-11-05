@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How Helm installs and tracks a release</title>
+  <desc id="d">A chart is templates plus default values. helm install and helm upgrade render the templates with values.yaml and any -f files or --set flags, send the result to the cluster and store a new release revision as a Secret. helm history lists the revisions. helm rollback renders an older revision again and stores it as a new revision, so rolling back from revision 2 to 1 creates revision 3.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How Helm installs and tracks a release</text>
+  <text class="sub" x="20" y="48">Every install, upgrade and rollback is rendered, applied and stored as a numbered revision</text>
+  <rect class="hm" x="20" y="70" width="180" height="100" rx="6"/><text class="tb" x="32" y="92">Chart</text><text class="ms" x="32" y="112">templates/*.yaml</text><text class="ms" x="32" y="128">_helpers.tpl</text><text class="ms" x="32" y="144">values.yaml (defaults)</text><text class="ms" x="32" y="160">Chart.yaml, charts/</text>
+  <rect class="q" x="20" y="190" width="180" height="64" rx="6"/><text class="tb" x="32" y="212">Your values</text><text class="ms" x="32" y="230">-f values-prod.yaml</text><text class="ms" x="32" y="246">--set image.tag=1.29</text>
+  <rect class="q" x="260" y="120" width="170" height="84" rx="6"/><text class="tb" x="272" y="142">helm install /</text><text class="tb" x="272" y="158">helm upgrade</text><text class="d" x="272" y="178">merge values, render</text><text class="d" x="272" y="194">templates, apply</text>
+  <path class="lne" d="M200,120 L258,148"/><path class="lne" d="M200,222 L258,182"/>
+  <rect class="ok" x="490" y="80" width="150" height="54" rx="6"/><text class="tb" x="502" y="102">Kubernetes objects</text><text class="ms" x="502" y="122">Deployment, Service</text>
+  <path class="lne" d="M430,148 L488,110"/>
+  <rect class="box" x="490" y="160" width="330" height="140" rx="10"/><text class="lb" x="504" y="180">RELEASE HISTORY (SECRETS IN THE NAMESPACE)</text>
+  <rect class="q" x="504" y="192" width="96" height="62" rx="6"/><text class="tb" x="514" y="212">v1</text><text class="d" x="514" y="230">install</text><text class="d" x="514" y="246">superseded</text>
+  <rect class="q" x="612" y="192" width="96" height="62" rx="6"/><text class="tb" x="622" y="212">v2</text><text class="d" x="622" y="230">upgrade</text><text class="d" x="622" y="246">superseded</text>
+  <rect class="ok" x="720" y="192" width="88" height="62" rx="6"/><text class="tb" x="730" y="212">v3</text><text class="d" x="730" y="230">rollback</text><text class="d" x="730" y="246">to 1</text>
+  <path class="dsh" d="M552,254 C552,290 760,290 762,256"/><text class="d" x="606" y="290">helm rollback my-app 1</text>
+  <path class="lne" d="M430,182 L488,212"/>
+  <text class="d" x="20" y="326">Each revision is a Secret sh.helm.release.v1.my-app.vN with the rendered manifests and values; --history-max (10) keeps the newest.</text>
+  <text class="d" x="20" y="344">helm uninstall deletes the objects and the history; deleting the Secrets only makes Helm forget the release.</text>
+</svg>

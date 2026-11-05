@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How Kustomize builds an overlay</title>
+  <desc id="d">A base directory holds plain manifests and a kustomization.yaml. Each overlay, such as dev and prod, points at the base and adds patches, an image tag, a namespace, labels, extra resources and optional components. kubectl kustomize builds an overlay into plain YAML, and kubectl apply -k sends it to the cluster. Nothing about the build is stored in the cluster.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How Kustomize builds an overlay</text>
+  <text class="sub" x="20" y="48">Plain YAML in, plain YAML out: the overlay only says what differs from the base</text>
+  <rect class="q" x="20" y="120" width="170" height="110" rx="6"/><text class="tb" x="32" y="142">base/</text><text class="ms" x="32" y="162">deployment.yaml</text><text class="ms" x="32" y="178">service.yaml</text><text class="ms" x="32" y="194">kustomization.yaml</text><text class="d" x="32" y="216">no environment details</text>
+  <rect class="k" x="250" y="66" width="200" height="104" rx="6"/><text class="tb" x="262" y="88">overlays/prod/</text><text class="ms" x="262" y="108">resources: [../../base, hpa]</text><text class="ms" x="262" y="124">namespace: production</text><text class="ms" x="262" y="140">images: newTag v1.2.3</text><text class="ms" x="262" y="156">patches, labels, components</text>
+  <rect class="k" x="250" y="190" width="200" height="64" rx="6"/><text class="tb" x="262" y="212">overlays/dev/</text><text class="ms" x="262" y="232">resources: [../../base]</text><text class="d" x="262" y="246">fewer replicas, debug logs</text>
+  <path class="lne" d="M190,160 L248,120"/><path class="lne" d="M190,190 L248,218"/>
+  <rect class="q" x="510" y="66" width="140" height="104" rx="6"/><text class="tb" x="522" y="88">kubectl</text><text class="tb" x="522" y="104">kustomize</text><text class="d" x="522" y="126">merge, patch,</text><text class="d" x="522" y="142">set tag, namespace,</text><text class="d" x="522" y="158">labels, hash names</text>
+  <path class="lne" d="M450,118 L508,118"/>
+  <rect class="ok" x="700" y="66" width="120" height="104" rx="6"/><text class="tb" x="712" y="88">Plain YAML</text><text class="ms" x="712" y="108">Deployment</text><text class="ms" x="712" y="124">Service</text><text class="ms" x="712" y="140">HPA</text><text class="d" x="712" y="158">namespace set</text>
+  <path class="lne" d="M650,118 L698,118"/>
+  <rect class="q" x="700" y="200" width="120" height="54" rx="6"/><text class="tb" x="712" y="222">Cluster</text><text class="ms" x="712" y="240">apply -k</text>
+  <path class="lne" d="M760,170 L760,198"/>
+  <text class="d" x="20" y="290">The cluster keeps no record of the build: history is Git, and a rollback is a git revert followed by apply.</text>
+  <text class="d" x="20" y="308">kubectl diff -k compares the build with the live objects first; it needs the namespace to exist.</text>
+</svg>

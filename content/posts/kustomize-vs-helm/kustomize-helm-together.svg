@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Two ways to use Kustomize and Helm together</title>
+  <desc id="d">Using Kustomize and Helm together. In the first way, the helmCharts field of a kustomization runs helm template on a chart with values, then Kustomize patches, labels and overlays apply to the rendered output before kubectl apply, and there is no Helm release. In the second way, helm install renders the chart and passes it through a post-renderer plugin that runs kubectl kustomize, so the patched output is installed as a normal Helm release with history and rollback.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Two ways to use Kustomize and Helm together</text>
+  <text class="sub" x="20" y="48">Who drives decides whether there is a Helm release</text>
+  <rect class="box" x="20" y="66" width="800" height="120" rx="10"/><text class="lb" x="34" y="86">1. KUSTOMIZE DRIVES: helmCharts</text>
+  <rect class="hm" x="40" y="100" width="140" height="64" rx="6"/><text class="tb" x="52" y="122">Chart + values</text><text class="ms" x="52" y="140">helmCharts:</text><text class="ms" x="52" y="154">valuesInline</text>
+  <rect class="q" x="230" y="100" width="150" height="64" rx="6"/><text class="tb" x="242" y="122">helm template</text><text class="d" x="242" y="142">called by kustomize</text><text class="ms" x="242" y="156">--enable-helm</text>
+  <rect class="k" x="430" y="100" width="150" height="64" rx="6"/><text class="tb" x="442" y="122">Kustomize</text><text class="d" x="442" y="142">patches, labels,</text><text class="d" x="442" y="156">components</text>
+  <rect class="ok" x="630" y="100" width="170" height="64" rx="6"/><text class="tb" x="642" y="122">kubectl apply / GitOps</text><text class="d" x="642" y="142">no Helm release,</text><text class="d" x="642" y="156">history is Git</text>
+  <path class="lne" d="M180,132 L228,132"/><path class="lne" d="M380,132 L428,132"/><path class="lne" d="M580,132 L628,132"/>
+  <rect class="box" x="20" y="206" width="800" height="120" rx="10"/><text class="lb" x="34" y="226">2. HELM DRIVES: POST-RENDERER PLUGIN (HELM 4)</text>
+  <rect class="hm" x="40" y="240" width="140" height="64" rx="6"/><text class="tb" x="52" y="262">helm install</text><text class="ms" x="52" y="280">--post-renderer</text><text class="ms" x="52" y="294">kustomize</text>
+  <rect class="q" x="230" y="240" width="150" height="64" rx="6"/><text class="tb" x="242" y="262">Rendered chart</text><text class="d" x="242" y="282">on stdin of the</text><text class="d" x="242" y="296">postrenderer/v1 plugin</text>
+  <rect class="k" x="430" y="240" width="150" height="64" rx="6"/><text class="tb" x="442" y="262">kubectl kustomize</text><text class="d" x="442" y="282">patched YAML</text><text class="d" x="442" y="296">on stdout</text>
+  <rect class="ok" x="630" y="240" width="170" height="64" rx="6"/><text class="tb" x="642" y="262">Helm release</text><text class="d" x="642" y="282">history, rollback,</text><text class="d" x="642" y="296">hooks still Helm</text>
+  <path class="lne" d="M180,272 L228,272"/><path class="lne" d="M380,272 L428,272"/><path class="lne" d="M580,272 L628,272"/>
+  <text class="d" x="20" y="348">Use 1 with GitOps tools that render charts anyway; use 2 when you want helm history and helm rollback to keep working.</text>
+</svg>
