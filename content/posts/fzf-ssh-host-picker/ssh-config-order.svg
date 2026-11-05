@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How ssh reads ~/.ssh/config</title>
+  <desc id="d">How ssh reads ~/.ssh/config: it goes through the file from top to bottom, and for each Host or Match block that matches the host you typed it takes every option not set yet. The first value found for an option wins and later ones are ignored, so specific Host blocks go at the top and Host * with the defaults goes at the bottom. Command-line options with -o win over the file.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How ssh reads ~/.ssh/config: the first value wins</text>
+  <text class="sub" x="20" y="48">ssh app, with this file; each option is taken from the first matching block that sets it</text>
+  <rect class="q" x="20" y="66" width="250" height="38" rx="6"/><text class="tb" x="32" y="90">ssh -o Port=2200 app</text>
+  <text class="lb" x="20" y="132">FILE, TOP TO BOTTOM</text>
+  <rect class="ok" x="20" y="142" width="250" height="56" rx="6"/><text class="ms" x="32" y="162">Host app</text><text class="ms" x="44" y="178">HostName ssht</text><text class="ms" x="44" y="192">User deploy</text>
+  <rect class="q" x="20" y="206" width="250" height="40" rx="6"/><text class="ms" x="32" y="224">Host db-*</text><text class="d" x="44" y="238">does not match: skipped</text>
+  <rect class="k" x="20" y="254" width="250" height="56" rx="6"/><text class="ms" x="32" y="274">Host *</text><text class="ms" x="44" y="290">User root</text><text class="ms" x="44" y="304">ServerAliveInterval 30</text>
+  <text class="lb" x="340" y="132">RESULT (ssh -G app)</text>
+  <rect class="q" x="340" y="142" width="300" height="168" rx="6"/>
+  <text class="ms" x="352" y="166">port 2200</text><text class="d" x="500" y="166">from -o: wins over the file</text>
+  <text class="ms" x="352" y="192">hostname ssht</text><text class="d" x="500" y="192">from Host app</text>
+  <text class="ms" x="352" y="218">user deploy</text><text class="d" x="500" y="218">Host app, first</text>
+  <text class="ms" x="352" y="244">serveraliveinterval 30</text><text class="d" x="510" y="244">from Host *</text>
+  <text class="d" x="352" y="276">User root in Host * is ignored:</text><text class="d" x="352" y="292">User was already set</text>
+  <path class="lne" d="M270,170 L338,190"/><path class="lne" d="M270,282 L338,244"/>
+  <rect class="wrn" x="670" y="142" width="150" height="168" rx="6"/><text class="tb" x="682" y="164">Rule of thumb</text><text class="d" x="682" y="186">specific Host blocks</text><text class="d" x="682" y="202">at the top,</text><text class="d" x="682" y="226">Host * defaults</text><text class="d" x="682" y="242">at the bottom,</text><text class="d" x="682" y="266">Include lines</text><text class="d" x="682" y="282">at the very top</text>
+</svg>

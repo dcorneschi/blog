@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 300" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How fssh works</title>
+  <desc id="d">How fssh works: awk reads the Host lines of ~/.ssh/config and skips patterns containing *, ? or !; sort -u removes duplicates; fzf shows the list and you type a few letters to filter it; the chosen name goes to ssh, which reads ~/.ssh/config again to find the real host name, user, port, key and jump host, then connects.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="300" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How fssh works</text>
+  <text class="sub" x="20" y="48">The function only picks a name; ssh reads the config again and does the rest</text>
+  <rect class="q" x="20" y="70" width="160" height="120" rx="6"/><text class="tb" x="32" y="92">~/.ssh/config</text><text class="ms" x="32" y="112">Host bastion</text><text class="ms" x="32" y="128">Host web1 web2</text><text class="ms" x="32" y="144">Host *.internal</text><text class="ms" x="32" y="160">Host *</text><text class="d" x="32" y="180">v2: + config.d/ files</text>
+  <rect class="k" x="220" y="70" width="150" height="120" rx="6"/><text class="tb" x="232" y="92">awk</text><text class="d" x="232" y="112">first word "Host"</text><text class="d" x="232" y="128">print each name</text><text class="d" x="232" y="144">skip *, ?, !</text><text class="ms" x="232" y="174">| sort -u</text>
+  <rect class="hm" x="410" y="70" width="170" height="120" rx="6"/><text class="tb" x="422" y="92">fzf</text><text class="ms" x="422" y="112">&gt; web</text><text class="ms" x="422" y="128">  web1</text><text class="ms" x="422" y="144">&gt; web2</text><text class="d" x="422" y="174">Enter: print the name</text>
+  <rect class="ok" x="620" y="70" width="200" height="120" rx="6"/><text class="tb" x="632" y="92">ssh web2</text><text class="d" x="632" y="112">reads ~/.ssh/config again:</text><text class="ms" x="632" y="130">HostName 192.0.2.%h</text><text class="ms" x="632" y="146">User deploy</text><text class="d" x="632" y="166">key, port, ProxyJump,</text><text class="d" x="632" y="180">multiplexing</text>
+  <path class="lne" d="M180,130 L218,130"/><path class="lne" d="M370,130 L408,130"/><path class="lne" d="M580,130 L618,130"/>
+  <rect class="wrn" x="20" y="210" width="560" height="40" rx="6"/><text class="d" x="32" y="234">Esc or Ctrl-C in fzf: nothing is printed, fzf fails, and the &amp;&amp; chain stops before ssh.</text>
+  <text class="d" x="20" y="280">Patterns such as Host *.internal still apply to the chosen host; they are just not offered as names to pick.</text>
+</svg>

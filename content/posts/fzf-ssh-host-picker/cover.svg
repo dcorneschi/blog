@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">fssh: SSH Host Picker</title>
+  <desc id="d">fssh: pick an SSH host from ~/.ssh/config with fzf. Small drawings: HOST, FZF and SSH pills; a terminal running fssh with a filtered host list; an fzf-style list with web2 selected; icons for the ssh config, the jump host and connection reuse; small icons for the config file, Include, fzf, ProxyJump, multiplexing, ssh -G and the shell.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #0b7285; }
+      .al  { stroke: #0b7285; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .gl  { stroke: #adb5bd; stroke-width: 8; fill: none; stroke-linecap: round; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pp  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .pg  { fill: #e3fafc; stroke: #66d9e8; stroke-width: 5; }
+      .win { fill: #ffffff; stroke: #adb5bd; stroke-width: 6; }
+      .sel { fill: #0b7285; opacity: .18; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .a   { fill: #3bc9db; }
+        .al  { stroke: #3bc9db; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .gl  { stroke: #484f58; }
+        .pb  { fill: #0c1d33; stroke: #4a78b8; }
+        .pp  { fill: #1f1633; stroke: #8a6fc0; }
+        .pg  { fill: #0b2a2e; stroke: #3b9aa6; }
+        .win { fill: #0d1117; stroke: #484f58; }
+        .sel { fill: #3bc9db; opacity: .22; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: pills and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pg" x="131" y="198" width="130" height="66" rx="33"/><text class="ink" x="196" y="241">HOST</text>
+    <rect class="pp" x="281" y="198" width="110" height="66" rx="33"/><text class="ink" x="336" y="241">FZF</text>
+    <rect class="pb" x="411" y="198" width="110" height="66" rx="33"/><text class="ink" x="466" y="241">SSH</text>
+  </g>
+  <text class="n mono" x="131" y="318" font-size="30">~/.ssh/config · one keystroke</text>
+  <rect class="term" x="131" y="400" width="560" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="560" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="560" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ fssh</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ ssh -G app | grep user<tspan class="a">█</tspan></text>
+
+  <!-- center: fzf-style host list -->
+  <g transform="translate(1060,0)">
+    <rect class="win" x="0" y="200" width="560" height="400" rx="22"/>
+    <g class="mono" font-size="30">
+      <text class="ink" x="40" y="268">&gt; web</text>
+      <text class="n" x="380" y="268">3/9</text>
+      <path class="gl" d="M40,290 H520" stroke-width="4"/>
+      <text class="ink" x="70" y="350">web1</text>
+      <rect class="sel" x="30" y="370" width="500" height="50" rx="8"/>
+      <text class="a" x="40" y="405" font-weight="700">▌</text>
+      <text class="ink" x="70" y="405" font-weight="700">web2</text>
+      <text class="ink" x="70" y="460">web-staging</text>
+      <text class="n" x="40" y="530" font-size="26">ssh host</text>
+    </g>
+    <text class="n mono" x="280" y="660" text-anchor="middle" font-size="32">type · Enter · connected</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1855,190) scale(1.15)">
+    <rect class="al" stroke-width="12" x="40" y="30" width="120" height="140" rx="12"/>
+    <path class="al" stroke-width="10" d="M64,70 H136 M64,100 H120 M64,130 H136"/>
+  </g>
+  <text class="n" x="1970" y="470" text-anchor="middle" font-size="32">ssh config</text>
+  <g transform="translate(2105,190) scale(1.15)">
+    <circle class="a" cx="30" cy="100" r="18"/><circle class="al" stroke-width="12" cx="100" cy="100" r="22"/><circle class="a" cx="170" cy="100" r="18"/>
+    <path class="al" stroke-width="10" d="M48,100 H76 M124,100 H150"/>
+  </g>
+  <text class="n" x="2220" y="470" text-anchor="middle" font-size="32">ProxyJump</text>
+  <g transform="translate(2355,190) scale(1.15)">
+    <path class="al" stroke-width="12" d="M30,70 H130 M110,50 L132,70 L110,90 M170,130 H70 M90,110 L68,130 L90,150"/>
+  </g>
+  <text class="n" x="2470" y="470" text-anchor="middle" font-size="32">reuse</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">fssh: SSH Host Picker</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="84">Pick a Host from ~/.ssh/config with fzf</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">Include · ProxyJump · ControlMaster · ssh -G · like lssh</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><rect class="al" stroke-width="14" x="40" y="30" width="120" height="140" rx="12"/><path class="al" stroke-width="12" d="M70,70 H130 M70,100 H130 M70,130 H110"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">Config</text>
+  <g transform="translate(806,1290) scale(0.5)"><rect class="al" stroke-width="14" x="30" y="50" width="100" height="120" rx="10"/><rect class="al" stroke-width="14" x="70" y="30" width="100" height="120" rx="10"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">Include</text>
+  <g transform="translate(1066,1290) scale(0.5)"><path class="al" stroke-width="16" d="M40,60 H160 L115,110 V160 L85,145 V110 Z"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">fzf</text>
+  <g transform="translate(1326,1290) scale(0.5)"><circle class="a" cx="30" cy="100" r="18"/><circle class="al" stroke-width="14" cx="100" cy="100" r="22"/><circle class="a" cx="170" cy="100" r="18"/><path class="al" stroke-width="12" d="M48,100 H76 M124,100 H150"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">ProxyJump</text>
+  <g transform="translate(1586,1290) scale(0.5)"><path class="al" stroke-width="14" d="M30,70 H130 M110,50 L132,70 L110,90 M170,130 H70 M90,110 L68,130 L90,150"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">Multiplexing</text>
+  <g transform="translate(1846,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="85" cy="85" r="50"/><path class="al" stroke-width="16" d="M122,122 L165,165"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">ssh -G</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">Shell</text>
+</svg>
