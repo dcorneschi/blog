@@ -241,7 +241,7 @@ Every alias and function below has its own block, so you can copy only the ones 
 | `fgs` | function | Browse stashes with a diff preview, then show the chosen one |
 | `faws` | function | Pick an AWS CLI profile and export `AWS_PROFILE` for the current shell |
 | `fkc` | function | Switch the current kubectl context |
-| `fssh` | function | Pick a host from `~/.ssh/config` (wildcard entries skipped) and connect |
+| `fssh` | function | Pick a host from `~/.ssh/config` and `~/.ssh/config.d/` (wildcard entries skipped) and connect |
 | `fport` | function | List listening TCP ports and print the chosen line (the PID is the second column) |
 | `fsys [action]` | function | Pick a systemd service: show its status, follow its logs (`fsys logs`) or run an action (`fsys restart`) |
 | `fjl [priority]` | function | Search this boot's journal at a priority or worse (default `warning`), newest first |
@@ -398,13 +398,19 @@ fkc() { local c; c=$(kubectl config get-contexts -o name | fzf --header 'kubectl
 #### fssh: connect to a host from ~/.ssh/config
 
 ```bash
-# fssh: pick a host from ~/.ssh/config and connect
-fssh() {
-  local h
-  h=$(awk 'tolower($1)=="host" { for (i=2; i<=NF; i++) if ($i !~ /[*?!]/) print $i }' ~/.ssh/config 2>/dev/null | sort -u | fzf --header 'ssh host') \
-    && [ -n "$h" ] && ssh "$h"
+# fssh: pick a host from ~/.ssh/config and ~/.ssh/config.d/ and connect
+fssh ()
+{
+    local h;
+    h=$({ cat ~/.ssh/config; find ~/.ssh/config.d -type f -exec cat {} +; } 2>/dev/null | awk 'tolower($1)=="host" { for (i=2; i<=NF; i++) if ($i !~ /[*?!]/) print $i }' | sort -u | fzf --header 'ssh host') && [ -n "$h" ] && ssh "$h"
 }
 ```
+
+It lists every name on a `Host` line of `~/.ssh/config` and of every file in `~/.ssh/config.d/`, and skips patterns (`*`, `?`, `!`), so
+`Host web1 web2` gives two entries and `Host *.internal` none. Includes from other directories and `Host=name` lines are not read. `find` instead of
+`~/.ssh/config.d/*` keeps zsh from failing with `no matches found` when the directory does not exist. Ctrl+G can start it:
+`bindkey -s '^G' 'fssh\n'` in zsh, `bind '"\C-g": "fssh\n"'` in bash. How it works line by line, and the `~/.ssh/config` that makes it useful:
+[fssh: Pick an SSH Host from ~/.ssh/config with fzf](/posts/fzf-ssh-host-picker/).
 
 #### fport: list listening ports
 
@@ -598,11 +604,11 @@ faws() {
 # fkc: switch the current kubectl context (this edits your kubeconfig for every terminal)
 fkc() { local c; c=$(kubectl config get-contexts -o name | fzf --header 'kubectl context') && [ -n "$c" ] && kubectl config use-context "$c"; }
 
-# fssh: pick a host from ~/.ssh/config and connect
-fssh() {
-  local h
-  h=$(awk 'tolower($1)=="host" { for (i=2; i<=NF; i++) if ($i !~ /[*?!]/) print $i }' ~/.ssh/config 2>/dev/null | sort -u | fzf --header 'ssh host') \
-    && [ -n "$h" ] && ssh "$h"
+# fssh: pick a host from ~/.ssh/config and ~/.ssh/config.d/ and connect
+fssh ()
+{
+    local h;
+    h=$({ cat ~/.ssh/config; find ~/.ssh/config.d -type f -exec cat {} +; } 2>/dev/null | awk 'tolower($1)=="host" { for (i=2; i<=NF; i++) if ($i !~ /[*?!]/) print $i }' | sort -u | fzf --header 'ssh host') && [ -n "$h" ] && ssh "$h"
 }
 
 # fport: list listening TCP ports and print the chosen line (PID is column 2)
