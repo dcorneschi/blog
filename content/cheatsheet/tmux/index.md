@@ -46,6 +46,42 @@ Tested: the same steps built both `3.4` and `3.7c` on Ubuntu 24.04 (`./configure
 tmux -V
 ```
 
+## Sessions, Windows and Panes
+
+[![One tmux server holds every session; session work has window 0 editor split into three panes, %0 on the left and %1 and %2 stacked on the right, and window 1 shell with one pane %3; session logs has one window tail with pane %4; each window is a tab in the status bar; a client is a terminal attached to a session and detaching leaves the session running; targets are written session:window.pane, so work:0.2 is pane %2](tmux-session-window-pane.svg)](tmux-session-window-pane.svg "Open the diagram full size")
+
+- **Server**: one background process per socket. It starts with the first session and holds all of them; `tmux kill-server` ends everything.
+- **Session**: a named set of windows. It keeps running after you detach (`Ctrl+a d`), so you can attach again later or from another terminal.
+- **Window**: a full-screen tab inside a session, shown in the status bar as `index:name`.
+- **Pane**: a split of a window; each pane runs its own shell. Pane IDs like `%2` are unique on the server, pane indexes start at 0 in each window.
+- **Target**: commands address them as `session:window.pane`, for example `tmux select-pane -t work:0.2`.
+
+The layout in the diagram, built and listed on tmux 3.4:
+
+```bash
+tmux new -d -s work -n editor -x 200 -y 50   # detached, so give it a size
+tmux split-window -h -t work:editor       # pane 1 to the right of pane 0
+tmux split-window -v -t work:editor.1     # pane 2 below pane 1
+tmux new-window -d -t work -n shell
+tmux new -d -s logs -n tail
+```
+
+```console
+$ tmux ls
+logs: 1 windows (created Thu Nov  5 14:07:34 2026)
+work: 2 windows (created Thu Nov  5 14:07:34 2026)
+$ tmux list-windows -a
+logs:0: tail* (1 panes) [80x24]
+work:0: editor* (3 panes) [200x50]
+work:1: shell (1 panes) [200x50]
+$ tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} #{pane_id} window=#{window_name} #{pane_width}x#{pane_height}'
+logs:0.0 %4 window=tail 80x24
+work:0.0 %0 window=editor 100x50
+work:0.1 %1 window=editor 99x25
+work:0.2 %2 window=editor 99x24
+work:1.0 %3 window=shell 200x50
+```
+
 ## Custom Configuration (Based on .tmux.conf)
 
 The key bindings in this section assume the reference `~/.tmux.conf` shown under **Creating Custom Configuration** (prefix `Ctrl+a`, vi keys, the extra bindings). Rows marked *(reference config)* are not tmux defaults. Everything was tested with that file on tmux 3.4 and 3.7c.

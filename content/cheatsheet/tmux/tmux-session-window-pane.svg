@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 490" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">tmux server, sessions, windows and panes</title>
+  <desc id="d">One tmux server holds every session. Session work has two windows: window 0 editor is split into three panes, %0 on the left and %1 and %2 stacked on the right, and window 1 shell has one pane, %3. Session logs has one window, tail, with one pane, %4. Each window is a tab in the status bar. A client is a terminal attached to a session; detaching closes the client and the session keeps running. Targets are written session:window.pane, so work:0.2 is pane %2.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .wt  { font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .sb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #e9ecef; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .act { fill: #f3effc; stroke: #7950c8; stroke-width: 2.4; }
+      .win { fill: #ffffff; stroke: #adb5bd; }
+      .bar { fill: #343a40; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="490" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Server, sessions, windows and panes</text>
+  <text class="sub" x="20" y="48">A server holds sessions, a session holds windows, a window is split into panes</text>
+
+  <!-- server -->
+  <rect class="box" x="20" y="66" width="540" height="330" rx="8"/>
+  <text class="lb" x="32" y="84">TMUX SERVER</text>
+
+  <!-- session work -->
+  <rect class="k" x="34" y="92" width="380" height="292" rx="6"/>
+  <text class="lb" x="46" y="111">SESSION  work</text>
+  <rect class="win" x="48" y="120" width="352" height="186" rx="4"/>
+  <text class="wt" x="58" y="139">window 0: editor (3 panes)</text>
+  <rect class="hm" x="58" y="150" width="164" height="146" rx="3"/>
+  <text class="tb" x="140" y="216" text-anchor="middle">pane 0  %0</text>
+  <text class="ms" x="140" y="234" text-anchor="middle">work:0.0</text>
+  <rect class="hm" x="226" y="150" width="164" height="71" rx="3"/>
+  <text class="tb" x="308" y="181" text-anchor="middle">pane 1  %1</text>
+  <text class="ms" x="308" y="199" text-anchor="middle">work:0.1</text>
+  <rect class="act" x="226" y="225" width="164" height="71" rx="3"/>
+  <text class="tb" x="308" y="256" text-anchor="middle">pane 2  %2</text>
+  <text class="ms" x="308" y="274" text-anchor="middle">work:0.2 (active)</text>
+  <rect class="bar" x="48" y="314" width="352" height="24" rx="3"/>
+  <text class="sb" x="58" y="330">[work] 0:editor*  1:shell</text>
+  <text class="d" x="48" y="356">status bar: one tab per window, * marks the current one</text>
+  <text class="d" x="48" y="372">window 1: shell (1 pane, %3) is the second tab</text>
+
+  <!-- session logs -->
+  <rect class="k" x="424" y="92" width="124" height="292" rx="6"/>
+  <text class="lb" x="434" y="111">SESSION  logs</text>
+  <rect class="win" x="434" y="120" width="104" height="186" rx="4"/>
+  <text class="wt" x="442" y="139">window 0: tail</text>
+  <rect class="act" x="442" y="150" width="88" height="146" rx="3"/>
+  <text class="tb" x="486" y="216" text-anchor="middle">pane 0  %4</text>
+  <text class="ms" x="486" y="234" text-anchor="middle">logs:0.0</text>
+  <rect class="bar" x="434" y="314" width="104" height="24" rx="3"/>
+  <text class="sb" x="442" y="330">[logs] 0:tail*</text>
+
+  <!-- clients -->
+  <rect class="q" x="124" y="420" width="200" height="30" rx="5"/>
+  <text class="ms" x="224" y="439" text-anchor="middle">client: tmux a -t work</text>
+  <path class="lne" d="M224,420 V386"/>
+  <rect class="q" x="400" y="420" width="160" height="30" rx="5"/>
+  <text class="ms" x="480" y="439" text-anchor="middle">client: tmux a -t logs</text>
+  <path class="lne" d="M486,420 V386"/>
+  <text class="d" x="20" y="474">A client is a terminal attached to a session. Ctrl+a d detaches it; the session keeps running.</text>
+
+  <!-- definitions -->
+  <rect class="q" x="580" y="66" width="240" height="86" rx="6"/>
+  <text class="tb" x="592" y="86">Server</text>
+  <text class="d" x="592" y="104">Background process, owns all sessions</text>
+  <text class="ms" x="592" y="122">tmux ls</text>
+  <text class="ms" x="592" y="138">tmux kill-server</text>
+
+  <rect class="k" x="580" y="158" width="240" height="86" rx="6"/>
+  <text class="tb" x="592" y="178">Session</text>
+  <text class="d" x="592" y="196">Named set of windows, survives detach</text>
+  <text class="ms" x="592" y="214">tmux new -s work · tmux a -t work</text>
+  <text class="ms" x="592" y="230">Ctrl+a d detach · Ctrl+a s switch</text>
+
+  <rect class="win" x="580" y="250" width="240" height="86" rx="6"/>
+  <text class="tb" x="592" y="270">Window</text>
+  <text class="d" x="592" y="288">Full-screen tab, listed in the status bar</text>
+  <text class="ms" x="592" y="306">Ctrl+a c new · Ctrl+a n / p</text>
+  <text class="ms" x="592" y="322">Ctrl+a 0-9 · Ctrl+a , rename</text>
+
+  <rect class="hm" x="580" y="342" width="240" height="86" rx="6"/>
+  <text class="tb" x="592" y="362">Pane</text>
+  <text class="d" x="592" y="380">A split of a window, runs one shell</text>
+  <text class="ms" x="592" y="398">Ctrl+a % · Ctrl+a " split</text>
+  <text class="ms" x="592" y="414">Ctrl+a h/j/k/l · Ctrl+a z zoom</text>
+
+  <text class="tb" x="580" y="456">Target: session:window.pane</text>
+  <text class="ms" x="580" y="474">work:0.2 is pane %2</text>
+</svg>
