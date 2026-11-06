@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 456" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Valid and invalid capacity settings</title>
+  <desc id="d">Valid settings: min 2 desired 4 max 8, the normal case; 2/2/2, a fixed fleet; 0/0/20, empty until there is work; 2/8/8, at the ceiling. Invalid settings rejected with ValidationError: desired 1 below min 2; desired 9 above max 8; min 6 above max 3, where no value fits. Your own requests outside the range are rejected and nothing changes. Automatic scaling is clamped without an error: target tracking that wants 11 with max 8 gets 8, scale-in that wants 0 with min 2 gets 2, raising min to 4 with desired 2 raises desired to 4, lowering max to 3 with desired 4 lowers desired to 3.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .ax  { stroke: #ced4da; stroke-width: 1; }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .bad { fill: #fdecec; stroke: #e35d6a; }
+      .band{ fill: #b8e0c9; stroke: #479f76; }
+      .bandx{ fill: #f5c2c7; stroke: #dc3545; stroke-dasharray: 3 2; }
+      .dot { fill: #0d6efd; stroke: #ffffff; stroke-width: 1.5; }
+      .dotx{ fill: #dc3545; stroke: #ffffff; stroke-width: 1.5; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="456" fill="#ffffff"/>
+  <text class="h" x="20" y="28">min ≤ desired ≤ max: valid, invalid and clamped</text>
+  <text class="sub" x="20" y="48">Your requests are rejected when they break the rule; automatic scaling is held at the limit</text>
+  <text class="lb" x="20" y="78">VALID</text>
+  <text class="ms" x="250" y="78" text-anchor="middle">0</text>
+  <text class="ms" x="322" y="78" text-anchor="middle">4</text>
+  <text class="ms" x="394" y="78" text-anchor="middle">8</text>
+  <text class="ms" x="466" y="78" text-anchor="middle">12</text>
+  <rect class="ok" x="20" y="88" width="480" height="40" rx="5"/>
+  <text class="mb" x="32" y="105">2 / 4 / 8</text>
+  <text class="d" x="32" y="120">normal: room to scale both ways</text>
+  <line class="ax" x1="250" y1="108" x2="466" y2="108"/>
+  <rect class="band" x="286" y="103" width="108" height="10" rx="3"/>
+  <circle class="dot" cx="322" cy="108" r="6"/>
+  <rect class="ok" x="20" y="134" width="480" height="40" rx="5"/>
+  <text class="mb" x="32" y="151">2 / 2 / 2</text>
+  <text class="d" x="32" y="166">fixed fleet: scaling is off</text>
+  <line class="ax" x1="250" y1="154" x2="466" y2="154"/>
+  <rect class="band" x="284" y="149" width="4" height="10" rx="3"/>
+  <circle class="dot" cx="286" cy="154" r="6"/>
+  <rect class="ok" x="20" y="180" width="480" height="40" rx="5"/>
+  <text class="mb" x="32" y="197">0 / 0 / 20</text>
+  <text class="d" x="32" y="212">empty until there is work (scale to 20)</text>
+  <line class="ax" x1="250" y1="200" x2="466" y2="200"/>
+  <rect class="band" x="250" y="195" width="216" height="10" rx="3"/>
+  <circle class="dot" cx="250" cy="200" r="6"/>
+  <rect class="ok" x="20" y="226" width="480" height="40" rx="5"/>
+  <text class="mb" x="32" y="243">2 / 8 / 8</text>
+  <text class="d" x="32" y="258">at the ceiling: policies can only scale in</text>
+  <line class="ax" x1="250" y1="246" x2="466" y2="246"/>
+  <rect class="band" x="286" y="241" width="108" height="10" rx="3"/>
+  <circle class="dot" cx="394" cy="246" r="6"/>
+  <text class="lb" x="20" y="290">INVALID · ValidationError</text>
+  <rect class="bad" x="20" y="300" width="480" height="40" rx="5"/>
+  <text class="mb" x="32" y="317">2 / 1 / 8</text>
+  <text class="d" x="32" y="332">desired below min</text>
+  <line class="ax" x1="250" y1="320" x2="466" y2="320"/>
+  <rect class="band" x="286" y="315" width="108" height="10" rx="3"/>
+  <circle class="dotx" cx="268" cy="320" r="6"/>
+  <rect class="bad" x="20" y="346" width="480" height="40" rx="5"/>
+  <text class="mb" x="32" y="363">2 / 9 / 8</text>
+  <text class="d" x="32" y="378">desired above max</text>
+  <line class="ax" x1="250" y1="366" x2="466" y2="366"/>
+  <rect class="band" x="286" y="361" width="108" height="10" rx="3"/>
+  <circle class="dotx" cx="412" cy="366" r="6"/>
+  <rect class="bad" x="20" y="392" width="480" height="40" rx="5"/>
+  <text class="mb" x="32" y="409">6 / – / 3</text>
+  <text class="d" x="32" y="424">min above max: no value fits</text>
+  <line class="ax" x1="250" y1="412" x2="466" y2="412"/>
+  <rect class="bandx" x="304" y="407" width="54" height="10" rx="3"/>
+  <text class="d" x="20" y="446">Bar: min to max. Dot: desired. The 0/0/20 bar is cut at 12.</text>
+  <text class="lb" x="520" y="78">YOUR REQUESTS</text>
+  <rect class="bad" x="520" y="88" width="300" height="120" rx="6"/>
+  <text class="ms" x="532" y="108">create-auto-scaling-group</text>
+  <text class="ms" x="532" y="124">update-auto-scaling-group</text>
+  <text class="ms" x="532" y="140">set-desired-capacity</text>
+  <text class="tb" x="532" y="166">outside min..max: ValidationError</text>
+  <text class="d" x="532" y="184">The request is rejected and nothing changes.</text>
+  <text class="d" x="532" y="199">The API doesn't guess which value you meant.</text>
+  <text class="lb" x="520" y="236">AUTOMATIC SCALING: CLAMPED, NO ERROR</text>
+  <rect class="ok" x="520" y="246" width="300" height="190" rx="6"/>
+  <text class="tb" x="532" y="268">Target tracking wants 11, max 8</text>
+  <text class="d" x="532" y="285">desired becomes 8, no 9th instance</text>
+  <text class="tb" x="532" y="310">Scale-in wants 0, min 2</text>
+  <text class="d" x="532" y="327">desired stops at 2</text>
+  <text class="tb" x="532" y="352">Only --min-size 4, desired 2</text>
+  <text class="d" x="532" y="369">desired is raised to 4, two instances launch</text>
+  <text class="tb" x="532" y="394">Only --max-size 3, desired 4</text>
+  <text class="d" x="532" y="411">desired is lowered to 3, one instance ends</text>
+</svg>

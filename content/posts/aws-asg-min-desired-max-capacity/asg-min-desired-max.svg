@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 320" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Minimum, desired and maximum on one scale</title>
+  <desc id="d">A scale from 0 to 10 instances. Min 2 is the floor: scale-in stops there and failed instances are replaced. Desired 4 is the target: four instances are running and the group launches or terminates instances to match it. Max 8 is the ceiling: scale-out stops there, set from cost, quotas and subnets. Desired moves between min and max; values 9 and 10 are never used.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="#f8f9fa"/><line x1="0" y1="0" x2="0" y2="8" stroke="#ced4da" stroke-width="3"/>
+    </pattern>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); marker-start: url(#a); }
+      .ax  { stroke: #adb5bd; stroke-width: 1.4; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .run { fill: #6ea8fe; stroke: #3d8bfd; }
+      .room{ fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .no  { fill: url(#hatch); stroke: #ced4da; }
+      .mmin{ stroke: #479f76; stroke-width: 2.4; }
+      .mdes{ stroke: #0d6efd; stroke-width: 2.4; }
+      .mmax{ stroke: #fd7e14; stroke-width: 2.4; }
+    </style>
+  </defs>
+  <rect width="840" height="320" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Minimum, desired and maximum</text>
+  <text class="sub" x="20" y="48">Min and max are limits; only desired makes the group launch or terminate instances</text>
+
+  <!-- markers -->
+  <rect class="ok" x="176" y="66" width="80" height="24" rx="12"/><text class="tb" x="216" y="83" text-anchor="middle">min 2</text>
+  <rect class="k" x="302" y="66" width="100" height="24" rx="12"/><text class="tb" x="352" y="83" text-anchor="middle">desired 4</text>
+  <rect class="wrn" x="584" y="66" width="80" height="24" rx="12"/><text class="tb" x="624" y="83" text-anchor="middle">max 8</text>
+
+  <!-- cells: one per instance slot -->
+  <rect class="run" x="82" y="106" width="64" height="40" rx="4"/>
+  <rect class="run" x="150" y="106" width="64" height="40" rx="4"/>
+  <rect class="run" x="218" y="106" width="64" height="40" rx="4"/>
+  <rect class="run" x="286" y="106" width="64" height="40" rx="4"/>
+  <rect class="room" x="354" y="106" width="64" height="40" rx="4"/>
+  <rect class="room" x="422" y="106" width="64" height="40" rx="4"/>
+  <rect class="room" x="490" y="106" width="64" height="40" rx="4"/>
+  <rect class="room" x="558" y="106" width="64" height="40" rx="4"/>
+  <rect class="no" x="626" y="106" width="64" height="40" rx="4"/>
+  <rect class="no" x="694" y="106" width="64" height="40" rx="4"/>
+
+  <line class="mmin" x1="216" y1="92" x2="216" y2="164"/>
+  <line class="mdes" x1="352" y1="92" x2="352" y2="164"/>
+  <line class="mmax" x1="624" y1="92" x2="624" y2="164"/>
+
+  <!-- axis -->
+  <line class="ax" x1="80" y1="166" x2="760" y2="166"/>
+  <g class="ms" text-anchor="middle">
+    <text x="80" y="182">0</text><text x="148" y="182">1</text><text x="216" y="182">2</text><text x="284" y="182">3</text><text x="352" y="182">4</text>
+    <text x="420" y="182">5</text><text x="488" y="182">6</text><text x="556" y="182">7</text><text x="624" y="182">8</text><text x="692" y="182">9</text><text x="760" y="182">10</text>
+  </g>
+  <text class="d" x="770" y="170">instances</text>
+
+  <path class="lne" d="M222,200 H618"/>
+  <text class="d" x="420" y="196" text-anchor="middle">desired moves between min and max</text>
+
+  <!-- legend -->
+  <rect class="run" x="80" y="210" width="14" height="12" rx="2"/><text class="d" x="100" y="220">running (4)</text>
+  <rect class="room" x="190" y="210" width="14" height="12" rx="2"/><text class="d" x="210" y="220">room to scale out</text>
+  <rect class="no" x="330" y="210" width="14" height="12" rx="2"/><text class="d" x="350" y="220">never used: above max</text>
+
+  <!-- cards -->
+  <rect class="ok" x="20" y="238" width="260" height="66" rx="6"/>
+  <text class="tb" x="32" y="258">Minimum: the floor</text>
+  <text class="d" x="32" y="276">Scale-in stops here; a failed instance is</text>
+  <text class="d" x="32" y="292">always replaced. Pick it from availability.</text>
+  <rect class="k" x="290" y="238" width="260" height="66" rx="6"/>
+  <text class="tb" x="302" y="258">Desired: the target</text>
+  <text class="d" x="302" y="276">The group launches or terminates until</text>
+  <text class="d" x="302" y="292">running = desired. Defaults to min.</text>
+  <rect class="wrn" x="560" y="238" width="260" height="66" rx="6"/>
+  <text class="tb" x="572" y="258">Maximum: the ceiling</text>
+  <text class="d" x="572" y="276">Scale-out stops here. Pick it from cost,</text>
+  <text class="d" x="572" y="292">quotas, subnet IPs and downstream limits.</text>
+</svg>

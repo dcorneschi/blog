@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 392" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Who moves desired capacity</title>
+  <desc id="d">Five sources write desired capacity: you with set-desired-capacity or the console; scaling policies (target tracking, step, simple, predictive); scheduled actions; Cluster Autoscaler on EKS from pending pods; and standby, detach or terminate with the decrement option. Every value is clamped between min and max. The group then compares desired with the running instances: fewer running means launch, more running means terminate, equal means nothing. A failed health check, a Spot reclaim or an instance terminated by hand lowers the running count, so the group launches a replacement.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11.5px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dsh { stroke: #495057; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#a); }
+      .ax  { stroke: #ced4da; stroke-width: 1; }
+      .q   { fill: #f8f9fa; stroke: #adb5bd; }
+      .k   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .hm  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .wrn { fill: #fff3e0; stroke: #fd9843; }
+      .bad { fill: #fdecec; stroke: #e35d6a; }
+      .band{ fill: #b8e0c9; stroke: #479f76; }
+      .bandx{ fill: #f5c2c7; stroke: #dc3545; stroke-dasharray: 3 2; }
+      .dot { fill: #0d6efd; stroke: #ffffff; stroke-width: 1.5; }
+      .dotx{ fill: #dc3545; stroke: #ffffff; stroke-width: 1.5; }
+      .box { fill: none; stroke: #adb5bd; stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+  <rect width="840" height="392" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Who moves desired, and what the group does with it</text>
+  <text class="sub" x="20" y="48">Many writers, one value, clamped to min..max; the group only ever chases desired</text>
+  <rect class="q" x="20" y="66" width="250" height="44" rx="6"/>
+  <text class="tb" x="32" y="85">You</text>
+  <text class="d" x="32" y="101">set-desired-capacity, console Edit</text>
+  <path class="lne" d="M270,88 C300,88 300,190 326,190"/>
+  <rect class="q" x="20" y="120" width="250" height="44" rx="6"/>
+  <text class="tb" x="32" y="139">Scaling policies</text>
+  <text class="d" x="32" y="155">target tracking, step, simple, predictive</text>
+  <path class="lne" d="M270,142 C300,142 300,190 326,190"/>
+  <rect class="q" x="20" y="174" width="250" height="44" rx="6"/>
+  <text class="tb" x="32" y="193">Scheduled actions</text>
+  <text class="d" x="32" y="209">recurrence, --time-zone</text>
+  <path class="lne" d="M270,196 C300,196 300,190 326,190"/>
+  <rect class="q" x="20" y="228" width="250" height="44" rx="6"/>
+  <text class="tb" x="32" y="247">Cluster Autoscaler</text>
+  <text class="d" x="32" y="263">EKS node groups, from pending pods</text>
+  <path class="lne" d="M270,250 C300,250 300,190 326,190"/>
+  <rect class="q" x="20" y="282" width="250" height="44" rx="6"/>
+  <text class="tb" x="32" y="301">Standby / detach / terminate</text>
+  <text class="d" x="32" y="317">with --should-decrement-desired-capacity</text>
+  <path class="lne" d="M270,304 C300,304 300,190 326,190"/>
+  <rect class="k" x="328" y="140" width="180" height="100" rx="8"/>
+  <text class="lb" x="418" y="164" text-anchor="middle">DESIRED</text>
+  <text class="mb" x="418" y="192" text-anchor="middle">min 2 ≤ 4 ≤ max 8</text>
+  <text class="d" x="418" y="214" text-anchor="middle">every write is clamped</text>
+  <text class="d" x="418" y="229" text-anchor="middle">(requests outside: error)</text>
+  <path class="lne" d="M508,190 H556"/>
+  <rect class="ok" x="558" y="110" width="262" height="160" rx="8"/>
+  <text class="lb" x="572" y="132">THE GROUP RECONCILES</text>
+  <text class="d" x="572" y="152">compares desired with running instances</text>
+  <text class="tb" x="572" y="180">running &lt; desired</text><text class="d" x="704" y="180">launch</text>
+  <text class="tb" x="572" y="206">running &gt; desired</text><text class="d" x="704" y="206">terminate</text>
+  <text class="tb" x="572" y="232">running = desired</text><text class="d" x="704" y="232">nothing to do</text>
+  <text class="d" x="572" y="256">order of scale-in: termination policy</text>
+  <rect class="wrn" x="558" y="300" width="262" height="58" rx="8"/>
+  <text class="tb" x="572" y="320">An instance fails or disappears</text>
+  <text class="d" x="572" y="337">health check, Spot reclaim, terminated</text>
+  <text class="d" x="572" y="351">by hand: running drops, desired stays</text>
+  <path class="dsh" d="M689,300 V272"/>
+  <text class="d" x="20" y="358">Min and max never launch or terminate anything by themselves:</text>
+  <text class="d" x="20" y="374">they only change desired when it falls outside the new range.</text>
+</svg>

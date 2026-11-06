@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Auto Scaling Group Capacity</title>
+  <desc id="d">Auto Scaling group capacity: minimum, desired and maximum, and why min ≤ desired ≤ max. Small drawings: MIN, DESIRED and MAX pills; a terminal running aws autoscaling set-desired-capacity and describe-auto-scaling-groups; a row of ten instance slots with four running and markers at min 2, desired 4 and max 8; icons for the floor, the target and the ceiling; small icons for scheduled actions, standby, weights, warm pools, predictive scaling, alarms and the CLI.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #f59f00; }
+      .al  { stroke: #f59f00; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .pg  { fill: #e8f5ee; stroke: #75b798; stroke-width: 5; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .po  { fill: #fff3e0; stroke: #fd9843; stroke-width: 5; }
+      .slot{ fill: none; stroke: #adb5bd; stroke-width: 5; stroke-dasharray: 12 8; }
+      .no  { fill: #e9ecef; }
+      .mg  { stroke: #479f76; stroke-width: 8; stroke-linecap: round; }
+      .mb  { stroke: #3d8bfd; stroke-width: 8; stroke-linecap: round; }
+      .mo  { stroke: #fd7e14; stroke-width: 8; stroke-linecap: round; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .pg  { fill: #0f2a1d; stroke: #3d8b63; }
+        .pb  { fill: #0c1d33; stroke: #4a78b8; }
+        .po  { fill: #2e1f0a; stroke: #b86e2a; }
+        .slot{ stroke: #484f58; }
+        .no  { fill: #21262d; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: pills and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="pg" x="131" y="198" width="110" height="66" rx="33"/><text class="ink" x="186" y="241">MIN</text>
+    <text class="n" x="266" y="241">≤</text>
+    <rect class="pb" x="291" y="198" width="180" height="66" rx="33"/><text class="ink" x="381" y="241">DESIRED</text>
+    <text class="n" x="496" y="241">≤</text>
+    <rect class="po" x="521" y="198" width="110" height="66" rx="33"/><text class="ink" x="576" y="241">MAX</text>
+  </g>
+  <text class="n mono" x="131" y="318" font-size="30">limits, and one target the group chases</text>
+  <rect class="term" x="131" y="400" width="860" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="860" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="860" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws autoscaling set-desired-capacity</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ aws autoscaling describe-auto-scaling-groups<tspan class="a">█</tspan></text>
+
+  <!-- center: ten slots, four running, markers -->
+  <g transform="translate(1420,0)">
+    <rect class="a" x="-320" y="290" width="56" height="90" rx="8"/>
+    <rect class="a" x="-256" y="290" width="56" height="90" rx="8"/>
+    <rect class="a" x="-192" y="290" width="56" height="90" rx="8"/>
+    <rect class="a" x="-128" y="290" width="56" height="90" rx="8"/>
+    <rect class="slot" x="-64" y="290" width="56" height="90" rx="8"/>
+    <rect class="slot" x="0" y="290" width="56" height="90" rx="8"/>
+    <rect class="slot" x="64" y="290" width="56" height="90" rx="8"/>
+    <rect class="slot" x="128" y="290" width="56" height="90" rx="8"/>
+    <rect class="no" x="192" y="290" width="56" height="90" rx="8"/>
+    <rect class="no" x="256" y="290" width="56" height="90" rx="8"/>
+    <line class="mg" x1="-196" y1="274" x2="-196" y2="398"/>
+    <line class="mb" x1="-68" y1="250" x2="-68" y2="398"/>
+    <line class="mo" x1="188" y1="274" x2="188" y2="398"/>
+    <g class="mono" font-size="30" font-weight="700" text-anchor="middle">
+      <text class="ink" x="-68" y="236">desired 4</text>
+      <text class="ink" x="-196" y="440">min 2</text>
+      <text class="ink" x="188" y="440">max 8</text>
+    </g>
+    <text class="n mono" x="0" y="530" text-anchor="middle" font-size="40">min ≤ desired ≤ max</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1795,190) scale(1.15)">
+    <path class="al" stroke-width="16" d="M20,170 H180"/>
+    <path class="al" stroke-width="14" d="M100,140 V40 M64,76 L100,40 L136,76"/>
+  </g>
+  <text class="n" x="1910" y="470" text-anchor="middle" font-size="32">floor</text>
+  <g transform="translate(2065,190) scale(1.15)">
+    <circle class="al" stroke-width="14" cx="100" cy="100" r="76"/>
+    <circle class="al" stroke-width="14" cx="100" cy="100" r="40"/>
+    <circle class="a" cx="100" cy="100" r="14"/>
+  </g>
+  <text class="n" x="2180" y="470" text-anchor="middle" font-size="32">target</text>
+  <g transform="translate(2335,190) scale(1.15)">
+    <path class="al" stroke-width="16" d="M20,30 H180"/>
+    <path class="al" stroke-width="14" d="M100,60 V160 M64,124 L100,160 L136,124"/>
+  </g>
+  <text class="n" x="2450" y="470" text-anchor="middle" font-size="32">ceiling</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">Auto Scaling Group Capacity</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="84">Minimum, Desired and Maximum, and Why min ≤ desired ≤ max</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">clamping · scheduled actions · standby · weights · warm pools · predictive max · CLI 2.39.3</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><rect class="al" x="24" y="40" width="152" height="140" rx="16" stroke-width="14"/><path class="al" stroke-width="14" d="M24,84 H176 M64,20 V56 M136,20 V56"/><rect class="a" x="56" y="110" width="30" height="26" rx="4"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">scheduled</text>
+  <g transform="translate(806,1290) scale(0.5)"><rect class="a" x="50" y="30" width="36" height="140" rx="10"/><rect class="a" x="114" y="30" width="36" height="140" rx="10"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">standby</text>
+  <g transform="translate(1066,1290) scale(0.5)"><path class="al" stroke-width="14" d="M100,30 V170 M40,170 H160 M30,60 H170"/><path class="al" stroke-width="12" d="M30,60 L10,120 H50 Z M170,60 L150,120 H190 Z"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">weights</text>
+  <g transform="translate(1326,1290) scale(0.5)"><path class="a" d="M100,20 C140,70 160,100 160,130 A60,60 0 0 1 40,130 C40,100 70,80 80,50 C95,80 100,90 112,100 C112,70 106,45 100,20 Z"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">warm pool</text>
+  <g transform="translate(1586,1290) scale(0.5)"><path class="al" stroke-width="14" d="M20,170 H180 M20,170 V30"/><path class="al" stroke-width="14" d="M40,140 L80,100 L110,120 L150,60"/><path class="al" stroke-width="10" stroke-dasharray="4 14" d="M150,60 L180,30"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">predictive</text>
+  <g transform="translate(1846,1290) scale(0.5)"><path class="al" stroke-width="14" d="M50,140 V96 A50,50 0 0 1 150,96 V140 L166,160 H34 Z"/><circle class="a" cx="100" cy="178" r="14"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">alarm</text>
+  <g transform="translate(2106,1290) scale(0.5)"><path class="al" stroke-width="18" d="M40,60 L90,100 L40,140 M110,150 H170"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">CLI</text>
+</svg>
