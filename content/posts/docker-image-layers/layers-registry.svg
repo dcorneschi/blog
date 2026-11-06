@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 440" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">From a tag to the layer blobs</title>
+  <desc id="d">The tag demo:1 points to the image index cc0792a79c2f, which is also the image ID and the push digest. The index lists the linux/arm64 image manifest 3e42f029f7db and an attestation manifest f2099f3219bf. The image manifest points to the config 359d13ebd14b and six gzipped layer blobs, named by the sha256 of the file; the config's rootfs.diff_ids are the sha256 of the same layers uncompressed. The attestation manifest points to a config shared by every image and an SLSA provenance blob. The registry serves the index and manifests under /v2/demo/manifests and everything else under /v2/demo/blobs.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; font-weight: 700; fill: #495057; letter-spacing: .03em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .bus { stroke: #495057; stroke-width: 1.4; fill: none; }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 3 3; fill: none; marker-end: url(#a); }
+      .tag { fill: #fff3cd; stroke: #ffc107; }
+      .ix  { fill: #f3effc; stroke: #a98eda; }
+      .mf  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .cf  { fill: #e8f5ee; stroke: #75b798; }
+      .ly  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="900" height="440" fill="#ffffff"/>
+  <text class="h" x="20" y="28">From a tag to the layer blobs</text>
+  <text class="sub" x="20" y="48">demo:1 as docker save writes it and the registry stores it; every arrow is a sha256 digest</text>
+
+  <!-- column headers -->
+  <text class="ths" x="560" y="70">DIGEST · SHA256 OF THE FILE</text>
+  <text class="ths" x="752" y="70">DIFFID · OF THE TAR</text>
+
+  <!-- tag and index -->
+  <rect class="tag" x="20" y="94" width="96" height="34" rx="17"/>
+  <text class="mb" x="68" y="115" text-anchor="middle">demo:1</text>
+  <path class="lne" d="M116,111 H138"/>
+  <rect class="ix" x="140" y="78" width="180" height="66" rx="5"/>
+  <text class="tb" x="152" y="97">Image index</text>
+  <text class="m" x="152" y="115">cc0792a79c2f</text>
+  <text class="d" x="152" y="134">= image ID and push digest</text>
+
+  <!-- index to manifests -->
+  <path class="bus" d="M320,111 H335 V383"/>
+  <path class="lne" d="M335,201 H348"/>
+  <path class="lne" d="M335,383 H348"/>
+
+  <rect class="mf" x="350" y="168" width="180" height="66" rx="5"/>
+  <text class="tb" x="362" y="187">Image manifest</text>
+  <text class="m" x="362" y="205">3e42f029f7db</text>
+  <text class="d" x="362" y="224">platform linux/arm64</text>
+
+  <rect class="n" x="350" y="350" width="180" height="66" rx="5"/>
+  <text class="tb" x="362" y="369">Attestation manifest</text>
+  <text class="m" x="362" y="387">f2099f3219bf</text>
+  <text class="d" x="362" y="406">platform unknown/unknown</text>
+
+  <!-- manifest to config and layers -->
+  <path class="bus" d="M530,201 H545 M545,93 V309"/>
+  <path class="lne" d="M545,93 H558"/>
+  <path class="lne" d="M545,129 H558"/>
+  <path class="lne" d="M545,165 H558"/>
+  <path class="lne" d="M545,201 H558"/>
+  <path class="lne" d="M545,237 H558"/>
+  <path class="lne" d="M545,273 H558"/>
+  <path class="lne" d="M545,309 H558"/>
+
+  <rect class="cf" x="560" y="78" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="97">config 359d13ebd14b</text>
+  <rect class="ly" x="560" y="114" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="133">3f26bc2dec0b</text><text class="d" x="720" y="133" text-anchor="end">4.1 MB</text>
+  <rect class="ly" x="560" y="150" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="169">852e5c2c4274</text><text class="d" x="720" y="169" text-anchor="end">91 B</text>
+  <rect class="ly" x="560" y="186" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="205">f2598d6c3631</text><text class="d" x="720" y="205" text-anchor="end">21.0 MB</text>
+  <rect class="ly" x="560" y="222" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="241">a154432b8f6e</text><text class="d" x="720" y="241" text-anchor="end">10.5 MB</text>
+  <rect class="ly" x="560" y="258" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="277">c6790288bf70</text><text class="d" x="720" y="277" text-anchor="end">171 B</text>
+  <rect class="ly" x="560" y="294" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="313">ffa370ca117e</text><text class="d" x="720" y="313" text-anchor="end">167 B</text>
+
+  <!-- diff ids -->
+  <text class="d" x="752" y="97">rootfs.diff_ids in the config:</text>
+  <path class="dash" d="M732,129 H750"/><text class="m" x="754" y="133">88b4fba61c4c</text>
+  <path class="dash" d="M732,165 H750"/><text class="m" x="754" y="169">97fdd42e43c5</text>
+  <path class="dash" d="M732,201 H750"/><text class="m" x="754" y="205">c0c515e59d6a</text>
+  <path class="dash" d="M732,237 H750"/><text class="m" x="754" y="241">313d29a0cf15</text>
+  <path class="dash" d="M732,273 H750"/><text class="m" x="754" y="277">0189e5ca4eb5</text>
+  <path class="dash" d="M732,309 H750"/><text class="m" x="754" y="313">82be4c81a3f5</text>
+  <text class="d" x="754" y="336">gunzip, then sha256sum</text>
+
+  <!-- attestation blobs -->
+  <path class="bus" d="M530,383 H545 M545,365 V401"/>
+  <path class="lne" d="M545,365 H558"/>
+  <path class="lne" d="M545,401 H558"/>
+  <rect class="n" x="560" y="350" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="369">config 44136fa355b3</text>
+  <rect class="n" x="560" y="386" width="170" height="30" rx="4"/>
+  <text class="m" x="570" y="405">7cc3635db6dd</text>
+  <text class="d" x="752" y="369">same in every image</text>
+  <text class="d" x="752" y="405">SLSA provenance (in-toto)</text>
+
+  <!-- left cards -->
+  <rect class="s" x="20" y="168" width="300" height="94" rx="6"/>
+  <text class="tb" x="32" y="188">Where the registry serves them</text>
+  <text class="m" x="32" y="208">GET /v2/demo/manifests/1</text>
+  <text class="d" x="308" y="208" text-anchor="end">index</text>
+  <text class="m" x="32" y="227">GET /v2/demo/manifests/&lt;digest&gt;</text>
+  <text class="d" x="308" y="227" text-anchor="end">manifests</text>
+  <text class="m" x="32" y="246">GET /v2/demo/blobs/&lt;digest&gt;</text>
+  <text class="d" x="308" y="246" text-anchor="end">config, layers</text>
+
+  <rect class="s" x="20" y="278" width="300" height="138" rx="6"/>
+  <text class="tb" x="32" y="298">Content-addressed</text>
+  <text class="d" x="32" y="318">One changed byte in a layer gives a new digest,</text>
+  <text class="d" x="32" y="334">so a new manifest and a new index above it.</text>
+  <text class="d" x="32" y="358">Push: blobs first, the manifest last.</text>
+  <text class="d" x="32" y="378">Pull: tag → index → the manifest for your</text>
+  <text class="d" x="32" y="394">platform → config and layers, each checked</text>
+  <text class="d" x="32" y="410">against its digest.</text>
+</svg>
