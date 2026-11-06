@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">An anonymous token for tags/list</title>
+  <desc id="d">1. curl asks registry-1.docker.io for /v2/library/nginx/tags/list and gets 401 with www-authenticate: Bearer realm https://auth.docker.io/token, service registry.docker.io, scope repository:library/nginx:pull. 2. curl asks auth.docker.io/token with that service and scope and gets a JSON token, no login needed for a public image. 3. curl repeats the request with Authorization: Bearer token and gets 200 with name library/nginx and 1381 tags. The token is valid for this one repository; skopeo and crane do these steps themselves.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .ret { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); stroke-dasharray: 4 3; }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .c   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .r   { fill: #f3effc; stroke: #a98eda; }
+      .t   { fill: #fff3cd; stroke: #ffc107; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+    </style>
+  </defs>
+  <rect width="960" height="380" fill="#ffffff"/>
+  <text class="h" x="20" y="28">An anonymous token for tags/list</text>
+  <text class="sub" x="20" y="48">What curl does by hand on Docker Hub; GHCR works the same with ghcr.io/token</text>
+
+  <rect class="c" x="60" y="66" width="160" height="40" rx="6"/>
+  <text class="tb" x="140" y="91" text-anchor="middle">curl</text>
+  <rect class="r" x="430" y="66" width="200" height="40" rx="6"/>
+  <text class="tb" x="530" y="91" text-anchor="middle">registry-1.docker.io</text>
+  <rect class="t" x="740" y="66" width="180" height="40" rx="6"/>
+  <text class="tb" x="830" y="91" text-anchor="middle">auth.docker.io</text>
+  <line class="dash" x1="140" y1="106" x2="140" y2="360"/>
+  <line class="dash" x1="530" y1="106" x2="530" y2="360"/>
+  <line class="dash" x1="830" y1="106" x2="830" y2="360"/>
+
+  <!-- 1 -->
+  <circle cx="112" cy="140" r="11" fill="#495057"/><text class="num" x="112" y="144">1</text>
+  <path class="lne" d="M140,140 H526"/>
+  <text class="m" x="152" y="132">GET /v2/library/nginx/tags/list</text>
+  <path class="ret" d="M530,166 H144"/>
+  <rect class="x" x="152" y="174" width="32" height="18" rx="3"/>
+  <text class="m" x="168" y="187" text-anchor="middle">401</text>
+  <text class="m" x="192" y="187">www-authenticate: Bearer realm="https://auth.docker.io/token",</text>
+  <text class="m" x="192" y="203">service="registry.docker.io",scope="repository:library/nginx:pull"</text>
+
+  <!-- 2 -->
+  <circle cx="112" cy="236" r="11" fill="#495057"/><text class="num" x="112" y="240">2</text>
+  <path class="lne" d="M140,236 H826"/>
+  <text class="m" x="152" y="228">GET /token?service=registry.docker.io&amp;scope=repository:library/nginx:pull</text>
+  <path class="ret" d="M830,262 H144"/>
+  <text class="m" x="818" y="256" text-anchor="end">200 {"token":"eyJ…"}</text>
+  <text class="d" x="818" y="278" text-anchor="end">no login for a public image; one repository, pull only</text>
+
+  <!-- 3 -->
+  <circle cx="112" cy="306" r="11" fill="#495057"/><text class="num" x="112" y="310">3</text>
+  <path class="lne" d="M140,306 H526"/>
+  <text class="m" x="152" y="298">GET …/tags/list · Authorization: Bearer eyJ…</text>
+  <path class="ret" d="M530,332 H144"/>
+  <rect class="g" x="152" y="340" width="32" height="18" rx="3"/>
+  <text class="m" x="168" y="353" text-anchor="middle">200</text>
+  <text class="m" x="192" y="353">{"name":"library/nginx","tags":["1","1-alpine",…]} · 1381 tags</text>
+
+  <rect class="n" x="640" y="300" width="300" height="58" rx="6"/>
+  <text class="d" x="652" y="320">The same token gets 401 on library/mediawiki:</text>
+  <text class="d" x="652" y="336">ask for one per repository. skopeo and crane</text>
+  <text class="d" x="652" y="352">do steps 1 to 3 themselves.</text>
+</svg>
