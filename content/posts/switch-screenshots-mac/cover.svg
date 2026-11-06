@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Switch Screenshots on a Mac</title>
+  <desc id="d">A handheld game console connected by a USB-C cable to a laptop, above the title Switch Screenshots on a Mac and the subtitle One Python script, gphoto2 and a USB-C cable, with three steps: open Copy to PC over USB, push ptpcamerad aside, copy only what is new.</desc>
+  <defs>
+    <style>
+      .bg   { fill: #f8f9fa; }
+      .body { fill: #343a40; }
+      .scr  { fill: #74c0fc; }
+      .ctl  { fill: #868e96; }
+      .btn  { fill: #dee2e6; }
+      .lap  { fill: #495057; }
+      .lscr { fill: #ffffff; stroke: #495057; stroke-width: 10; }
+      .pic  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 4; }
+      .cab  { stroke: #495057; stroke-width: 14; fill: none; stroke-linecap: round; }
+      .h    { font-size: 180px; font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s    { font-size: 80px; fill: #495057; }
+      .card { fill: #ffffff; stroke: #dee2e6; stroke-width: 4; }
+      .ct   { font-size: 60px; font-weight: 700; fill: #212529; }
+      .cs   { font-size: 42px; fill: #868e96; }
+      .num  { font-size: 52px; font-weight: 700; fill: #ffffff; }
+      .dot  { fill: #e35d6a; }
+      .mono { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 40px; fill: #495057; }
+      .arr  { stroke: #adb5bd; stroke-width: 12; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      @media (prefers-color-scheme: dark) {
+        .bg   { fill: #161b22; }
+        .h    { fill: #f0f6fc; }
+        .s    { fill: #c9d1d9; }
+        .card { fill: #0d1117; stroke: #30363d; }
+        .ct   { fill: #f0f6fc; }
+        .cs   { fill: #8b949e; }
+        .mono { fill: #c9d1d9; }
+        .arr  { stroke: #484f58; }
+        .cab  { stroke: #adb5bd; }
+        .lap  { fill: #adb5bd; }
+        .lscr { stroke: #adb5bd; fill: #0d1117; }
+        .body { fill: #495057; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- handheld console -->
+  <g>
+    <rect class="ctl" x="760" y="170" width="120" height="320" rx="56"/>
+    <rect class="ctl" x="1300" y="170" width="120" height="320" rx="56"/>
+    <rect class="body" x="860" y="170" width="460" height="320" rx="24"/>
+    <rect class="scr" x="890" y="200" width="400" height="260" rx="10"/>
+    <circle class="btn" cx="820" cy="250" r="26"/>
+    <circle class="btn" cx="1360" cy="330" r="18"/><circle class="btn" cx="1360" cy="390" r="18"/>
+    <rect class="pic" x="960" y="250" width="120" height="80" rx="8"/>
+    <rect class="pic" x="1100" y="250" width="120" height="80" rx="8"/>
+    <rect class="pic" x="960" y="350" width="120" height="80" rx="8"/>
+    <rect class="pic" x="1100" y="350" width="120" height="80" rx="8"/>
+  </g>
+  <!-- cable from the bottom port -->
+  <path class="cab" d="M1090,490 V506 C1090,526 1110,532 1150,532 H1590 C1626,532 1640,518 1640,500 V494"/>
+  <!-- laptop -->
+  <g>
+    <rect class="lscr" x="1600" y="180" width="420" height="280" rx="16"/>
+    <rect class="lap" x="1540" y="460" width="540" height="34" rx="12"/>
+    <rect class="pic" x="1650" y="230" width="100" height="70" rx="6"/>
+    <rect class="pic" x="1765" y="230" width="100" height="70" rx="6"/>
+    <rect class="pic" x="1880" y="230" width="100" height="70" rx="6"/>
+    <rect class="pic" x="1650" y="320" width="100" height="70" rx="6"/>
+    <rect class="pic" x="1765" y="320" width="100" height="70" rx="6"/>
+  </g>
+
+  <text class="h" x="1376" y="700" text-anchor="middle">Switch Screenshots on a Mac</text>
+  <text class="s" x="1376" y="806" text-anchor="middle">One Python script, gphoto2 and a USB-C cable</text>
+
+  <rect class="card" x="136" y="900" width="720" height="440" rx="28"/>
+  <circle class="dot" cx="206" cy="970" r="40"/>
+  <text class="num" x="206" y="988" text-anchor="middle">1</text>
+  <text class="mono" x="496" y="1080" text-anchor="middle">Copy to PC over USB</text>
+  <text class="ct" x="496" y="1230" text-anchor="middle">Open the copy screen</text>
+  <text class="cs" x="496" y="1290" text-anchor="middle">bottom USB-C port, no dock</text>
+  <path class="arr" d="M886,1120 H986 M956,1090 L986,1120 L956,1150"/>
+
+  <rect class="card" x="1016" y="900" width="720" height="440" rx="28"/>
+  <circle class="dot" cx="1086" cy="970" r="40"/>
+  <text class="num" x="1086" y="988" text-anchor="middle">2</text>
+  <text class="mono" x="1376" y="1080" text-anchor="middle">pkill ptpcamerad</text>
+  <text class="ct" x="1376" y="1230" text-anchor="middle">Free the USB port</text>
+  <text class="cs" x="1376" y="1290" text-anchor="middle">once before each gphoto2 call</text>
+  <path class="arr" d="M1766,1120 H1866 M1836,1090 L1866,1120 L1836,1150"/>
+
+  <rect class="card" x="1896" y="900" width="720" height="440" rx="28"/>
+  <circle class="dot" cx="1966" cy="970" r="40"/>
+  <text class="num" x="1966" y="988" text-anchor="middle">3</text>
+  <text class="mono" x="2256" y="1080" text-anchor="middle">manifest + SHA-256</text>
+  <text class="ct" x="2256" y="1230" text-anchor="middle">Copy only what's new</text>
+  <text class="cs" x="2256" y="1290" text-anchor="middle">safe to run again any time</text>
+</svg>

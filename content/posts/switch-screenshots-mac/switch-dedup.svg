@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Three dedup checks</title>
+  <desc id="d">For every file on the console: if its name is in manifest.json, or a file of that name is already in ~/switch-screenshots, it is skipped before downloading. Otherwise it is downloaded to staging and hashed with SHA-256. If the hash is already in the manifest's hashes, it is recorded as duplicate_of the existing file and deleted from staging. Otherwise it is moved to ~/switch-screenshots, gets its capture time as modification time, and is recorded in transferred and hashes. The manifest is written after every batch.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .q   { fill: #fff3cd; stroke: #ffc107; }
+      .sk  { fill: #f8f9fa; stroke: #adb5bd; }
+      .dl  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .dup { fill: #f8d7da; stroke: #e35d6a; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+    </style>
+  </defs>
+  <rect width="1000" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Three dedup checks</text>
+  <text class="sub" x="20" y="48">Two by name before downloading, one by content after</text>
+
+  <rect class="dl" x="20" y="80" width="130" height="50" rx="6"/>
+  <text class="tb" x="32" y="101">File on the</text>
+  <text class="tb" x="32" y="118">console</text>
+  <path class="lne" d="M150,105 H178"/>
+
+  <rect class="q" x="180" y="74" width="170" height="62" rx="6"/>
+  <circle cx="180" cy="74" r="11" fill="#495057"/><text class="num" x="180" y="78">1</text>
+  <text class="tb" x="192" y="96">Name in</text>
+  <text class="m" x="192" y="114">manifest.json?</text>
+  <path class="lne" d="M350,105 H378"/>
+  <text class="lb" x="356" y="98">no</text>
+
+  <rect class="q" x="380" y="74" width="190" height="62" rx="6"/>
+  <circle cx="380" cy="74" r="11" fill="#495057"/><text class="num" x="380" y="78">2</text>
+  <text class="tb" x="392" y="96">Name already in</text>
+  <text class="m" x="392" y="114">~/switch-screenshots/?</text>
+  <path class="lne" d="M570,105 H598"/>
+  <text class="lb" x="576" y="98">no</text>
+
+  <rect class="dl" x="600" y="74" width="150" height="62" rx="6"/>
+  <text class="tb" x="612" y="96">Download to</text>
+  <text class="m" x="612" y="114">staging/</text>
+  <path class="lne" d="M750,105 H778"/>
+
+  <rect class="q" x="780" y="74" width="160" height="62" rx="6"/>
+  <circle cx="780" cy="74" r="11" fill="#495057"/><text class="num" x="780" y="78">3</text>
+  <text class="tb" x="792" y="96">SHA-256 in</text>
+  <text class="m" x="792" y="114">hashes?</text>
+
+  <!-- yes from 1 and 2 -->
+  <path class="lne" d="M265,136 V178"/>
+  <text class="lb" x="272" y="160">yes</text>
+  <path class="lne" d="M475,136 V178"/>
+  <text class="lb" x="482" y="160">yes</text>
+  <rect class="sk" x="180" y="182" width="390" height="56" rx="6"/>
+  <text class="tb" x="192" y="204">Skipped, nothing downloaded</text>
+  <text class="d" x="192" y="222">works even if the manifest was deleted (check 2)</text>
+
+  <!-- from 3 -->
+  <path class="lne" d="M820,136 V178"/>
+  <text class="lb" x="827" y="160">yes</text>
+  <rect class="dup" x="600" y="182" width="340" height="56" rx="6"/>
+  <text class="tb" x="612" y="204">Duplicate: same content, other name</text>
+  <text class="d" x="612" y="222">recorded with duplicate_of, deleted from staging</text>
+
+  <path class="lne" d="M940,105 H972 V294 H944"/>
+  <text class="lb" x="978" y="200">no</text>
+  <rect class="ok" x="600" y="254" width="340" height="80" rx="6"/>
+  <text class="tb" x="612" y="276">Moved to ~/switch-screenshots/</text>
+  <text class="d" x="612" y="294">mtime set to the capture time</text>
+  <text class="d" x="612" y="310">transferred[name] = {sha256, size_kb, mtime, game, dest}</text>
+  <text class="d" x="612" y="326">hashes[sha256] = file name</text>
+
+  <rect class="sk" x="20" y="254" width="550" height="80" rx="6" style="fill:#ffffff"/>
+  <text class="tb" x="32" y="276">manifest.json</text>
+  <text class="m" x="32" y="296">{"version": 1, "transferred": {…}, "hashes": {…}}</text>
+  <text class="d" x="32" y="316">~/.local/share/switch-screenshots/manifest.json, written to a .tmp file</text>
+  <text class="d" x="32" y="330">and renamed after every batch of 8</text>
+</svg>

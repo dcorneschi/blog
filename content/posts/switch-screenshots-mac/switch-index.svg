@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Global numbers vs per-folder indexes</title>
+  <desc id="d">An example album with two game folders: Game A holds three files and Game B two. gphoto2 --list-files numbers them #1 to #5 across both folders, but --folder F --get-file n counts from 1 inside folder F. The script therefore renumbers each folder from 1 in listing order: the fourth file overall is index 1 of Game B. Using the global number 4 with --folder Game B would ask for a file that doesn't exist there.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .ths { font-size: 10.5px; font-weight: 700; fill: #495057; letter-spacing: .03em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; text-anchor: middle; }
+      .d   { font-size: 11px; fill: #495057; }
+      .fa  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .fb  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #f8f9fa; stroke: #dee2e6; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .no  { fill: #f8d7da; stroke: #e35d6a; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+    </style>
+  </defs>
+  <rect width="900" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Global numbers vs per-folder indexes</text>
+  <text class="sub" x="20" y="48">An album with two game folders, as gphoto2 lists it and as --get-file needs it</text>
+
+  <text class="ths" x="20" y="80">FOLDER</text>
+  <text class="ths" x="200" y="80">FILE</text>
+  <text class="ths" x="470" y="80">--list-files</text>
+  <text class="ths" x="600" y="80">INDEX THE SCRIPT USES</text>
+
+  <rect class="g" x="20" y="92" width="160" height="112" rx="6"/>
+  <text class="tb" x="32" y="114">Game A</text>
+  <text class="d" x="32" y="132">folder 1</text>
+  <rect class="fa" x="200" y="94" width="250" height="30" rx="4"/><text class="m" x="212" y="113">screenshot 1</text>
+  <rect class="fa" x="200" y="130" width="250" height="30" rx="4"/><text class="m" x="212" y="149">screenshot 2</text>
+  <rect class="fa" x="200" y="166" width="250" height="30" rx="4"/><text class="m" x="212" y="185">clip 1</text>
+  <text class="mb" x="500" y="113">#1</text><text class="mb" x="500" y="149">#2</text><text class="mb" x="500" y="185">#3</text>
+  <rect class="ok" x="600" y="94" width="110" height="30" rx="4"/><text class="mb" x="655" y="113">1</text>
+  <rect class="ok" x="600" y="130" width="110" height="30" rx="4"/><text class="mb" x="655" y="149">2</text>
+  <rect class="ok" x="600" y="166" width="110" height="30" rx="4"/><text class="mb" x="655" y="185">3</text>
+
+  <rect class="g" x="20" y="214" width="160" height="76" rx="6"/>
+  <text class="tb" x="32" y="236">Game B</text>
+  <text class="d" x="32" y="254">folder 2</text>
+  <rect class="fb" x="200" y="216" width="250" height="30" rx="4"/><text class="m" x="212" y="235">screenshot 3</text>
+  <rect class="fb" x="200" y="252" width="250" height="30" rx="4"/><text class="m" x="212" y="271">screenshot 4</text>
+  <text class="mb" x="500" y="235">#4</text><text class="mb" x="500" y="271">#5</text>
+  <rect class="ok" x="600" y="216" width="110" height="30" rx="4"/><text class="mb" x="655" y="235">1</text>
+  <rect class="ok" x="600" y="252" width="110" height="30" rx="4"/><text class="mb" x="655" y="271">2</text>
+  <path class="lne" d="M522,231 H596"/>
+
+  <rect class="no" x="730" y="208" width="150" height="82" rx="6"/>
+  <text class="m" x="742" y="228">--folder "Game B"</text>
+  <text class="m" x="742" y="244">--get-file 4</text>
+  <text class="d" x="742" y="264">no 4th file there:</text>
+  <text class="d" x="742" y="280">error or wrong file</text>
+
+  <text class="d" x="20" y="316">The script resets its counter at every folder line of the listing and ignores gphoto2's global #.</text>
+</svg>

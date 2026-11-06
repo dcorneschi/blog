@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">From the console to ~/switch-screenshots</title>
+  <desc id="d">The Switch in Copy to PC over USB mode is an MTP device on its bottom USB-C port. On the Mac, the ptpcamerad agent claims the USB interface first, so the script kills it once before each gphoto2 call and launchd restarts it later on demand. gphoto2 --auto-detect finds the console, --list-files reads the album, and new files are downloaded one game folder per session in batches of 8 with up to 3 retries into the staging folder. Each staged file is hashed with SHA-256 and moved to ~/switch-screenshots with its capture time, and the manifest is saved after every batch.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .num { font-size: 12px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .x   { stroke: #e35d6a; stroke-width: 1.6; fill: none; marker-end: url(#a); stroke-dasharray: 4 3; }
+      .con { fill: #f8d7da; stroke: #e35d6a; }
+      .mac { fill: #f8f9fa; stroke: #dee2e6; }
+      .ag  { fill: #fff3cd; stroke: #ffc107; }
+      .gp  { fill: #e7f1ff; stroke: #6ea8fe; }
+      .st  { fill: #f3effc; stroke: #a98eda; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+    </style>
+  </defs>
+  <rect width="960" height="420" fill="#ffffff"/>
+  <text class="h" x="20" y="28">From the console to ~/switch-screenshots</text>
+  <text class="sub" x="20" y="48">What get-switch-screenshots.py does on each run</text>
+
+  <!-- console -->
+  <rect class="con" x="20" y="80" width="170" height="120" rx="8"/>
+  <text class="tb" x="34" y="102">Switch / Switch 2</text>
+  <text class="d" x="34" y="122">Copy to PC over USB</text>
+  <text class="d" x="34" y="138">screen open</text>
+  <text class="d" x="34" y="160">MTP device</text>
+  <text class="d" x="34" y="176">(PTP + Nintendo extension)</text>
+  <text class="d" x="34" y="192">bottom USB-C port</text>
+
+  <path class="lne" d="M190,140 H228"/>
+  <text class="d" x="194" y="132">USB</text>
+
+  <!-- mac box -->
+  <rect class="mac" x="230" y="66" width="710" height="334" rx="8"/>
+  <text class="tb" x="244" y="88">Mac</text>
+
+  <!-- ptpcamerad -->
+  <rect class="ag" x="250" y="102" width="200" height="72" rx="6"/>
+  <text class="tb" x="262" y="122">ptpcamerad</text>
+  <text class="d" x="262" y="140">your LaunchAgent: grabs any</text>
+  <text class="d" x="262" y="156">PTP interface on arrival</text>
+  <circle cx="250" cy="102" r="11" fill="#495057"/><text class="num" x="250" y="106">1</text>
+  <text class="m" x="262" y="196">pkill -9 -f …/ptpcamerad</text>
+  <text class="d" x="262" y="212">once before every gphoto2 call;</text>
+  <text class="d" x="262" y="228">launchd restarts it on demand</text>
+
+  <!-- gphoto2 -->
+  <rect class="gp" x="490" y="102" width="200" height="126" rx="6"/>
+  <text class="tb" x="502" y="122">gphoto2 (libusb)</text>
+  <circle cx="490" cy="102" r="11" fill="#495057"/><text class="num" x="490" y="106">2</text>
+  <text class="m" x="502" y="144">--auto-detect</text>
+  <text class="d" x="502" y="160">6 tries, needs "nintendo"/"switch"</text>
+  <text class="m" x="502" y="182">--list-files</text>
+  <text class="d" x="502" y="198">one folder per game</text>
+  <text class="m" x="502" y="218">--folder F --get-file n …</text>
+  <path class="lne" d="M452,138 H486"/>
+
+  <!-- batches -->
+  <rect class="s" x="490" y="252" width="200" height="72" rx="6"/>
+  <circle cx="490" cy="252" r="11" fill="#495057"/><text class="num" x="490" y="256">3</text>
+  <text class="tb" x="502" y="272">Batches</text>
+  <text class="d" x="502" y="290">one folder per session, 8 files,</text>
+  <text class="d" x="502" y="306">600 s ceiling, up to 3 retries</text>
+  <path class="lne" d="M590,228 V248"/>
+
+  <!-- staging -->
+  <rect class="st" x="730" y="102" width="190" height="72" rx="6"/>
+  <text class="tb" x="742" y="122">staging/</text>
+  <text class="d" x="742" y="140">~/.local/share/</text>
+  <text class="d" x="742" y="156">switch-screenshots/staging</text>
+  <path class="lne" d="M692,288 H710 V138 H726"/>
+
+  <!-- dedup + dest -->
+  <rect class="s" x="730" y="194" width="190" height="56" rx="6"/>
+  <circle cx="730" cy="194" r="11" fill="#495057"/><text class="num" x="730" y="198">4</text>
+  <text class="tb" x="742" y="214">SHA-256 check</text>
+  <text class="d" x="742" y="232">known hash → duplicate, deleted</text>
+  <path class="lne" d="M825,174 V190"/>
+
+  <rect class="ok" x="730" y="270" width="190" height="56" rx="6"/>
+  <text class="tb" x="742" y="290">~/switch-screenshots/</text>
+  <text class="d" x="742" y="308">flat, mtime = capture time</text>
+  <path class="lne" d="M825,250 V266"/>
+
+  <rect class="ok" x="730" y="336" width="190" height="52" rx="6"/>
+  <text class="m" x="742" y="356">manifest.json</text>
+  <text class="d" x="742" y="374">saved after every batch</text>
+
+  <rect class="n" x="250" y="252" width="200" height="136" rx="6" style="fill:#f8f9fa;stroke:#dee2e6"/>
+  <text class="tb" x="262" y="272">If it breaks</text>
+  <text class="d" x="262" y="292">Cable pulled or Ctrl-C: only the</text>
+  <text class="d" x="262" y="308">batch in flight is lost.</text>
+  <text class="d" x="262" y="330">Run again: names in the manifest</text>
+  <text class="d" x="262" y="346">or the folder are skipped before</text>
+  <text class="d" x="262" y="362">anything is downloaded.</text>
+  <text class="d" x="262" y="380">Stuck: unplug, replug, run again.</text>
+</svg>
