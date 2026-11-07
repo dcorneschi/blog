@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2752" height="1536" viewBox="0 0 2752 1536" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">AWS Network Firewall</title>
+  <desc id="d">AWS Network Firewall: rules, routing, logging and cost. Small drawings: SNI, HOST and 5-TUPLE pills; a terminal with describe-firewall and create-rule-group; a packet passing a stateless and a stateful engine to pass or drop; icons for the firewall, domain lists and logs; small icons for rules, domains, rule order, routing, logs, limits and cost.</desc>
+  <defs>
+    <style>
+      .bg  { fill: #f8f9fa; }
+      .a   { fill: #f08c00; }
+      .al  { stroke: #f08c00; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .ink { fill: #343a40; }
+      .h   { font-weight: 700; fill: #212529; letter-spacing: -2px; }
+      .s   { fill: #495057; }
+      .n   { fill: #868e96; }
+      .r   { stroke: #dee2e6; stroke-width: 2; }
+      .gl  { stroke: #adb5bd; stroke-width: 8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .pb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 5; }
+      .pp  { fill: #f3effc; stroke: #a98eda; stroke-width: 5; }
+      .po  { fill: #fff3cd; stroke: #ffc107; stroke-width: 5; }
+      .eb  { fill: #e7f1ff; stroke: #6ea8fe; stroke-width: 6; }
+      .ef  { fill: #fff3cd; stroke: #ffc107; stroke-width: 6; }
+      .ok  { fill: #e8f5ee; stroke: #75b798; stroke-width: 6; }
+      .no  { fill: #f8d7da; stroke: #e35d6a; stroke-width: 6; }
+      .term{ fill: #212529; }
+      .tbar{ fill: #343a40; }
+      .tx  { fill: #e9ecef; }
+      .mono{ font-family: Menlo, Consolas, 'Liberation Mono', monospace; }
+      @media (prefers-color-scheme: dark) {
+        .bg  { fill: #161b22; }
+        .a   { fill: #ffa94d; }
+        .al  { stroke: #ffa94d; }
+        .ink { fill: #c9d1d9; }
+        .h   { fill: #f0f6fc; }
+        .s   { fill: #c9d1d9; }
+        .n   { fill: #8b949e; }
+        .r   { stroke: #30363d; }
+        .gl  { stroke: #6e7681; }
+        .pb, .eb { fill: #0c1d33; stroke: #4a78b8; }
+        .pp  { fill: #1f1633; stroke: #8a6fc0; }
+        .po, .ef { fill: #2b2210; stroke: #b08a2e; }
+        .ok  { fill: #0f2a1d; stroke: #4f9a74; }
+        .no  { fill: #2d1517; stroke: #c25b5b; }
+        .term{ fill: #0d1117; stroke: #30363d; stroke-width: 4; }
+        .tbar{ fill: #21262d; }
+      }
+    </style>
+  </defs>
+  <rect class="bg" width="2752" height="1536"/>
+
+  <!-- top left: pills and terminal -->
+  <g class="mono" font-size="28" font-weight="700" text-anchor="middle">
+    <rect class="po" x="131" y="198" width="100" height="66" rx="33"/><text class="ink" x="181" y="241">SNI</text>
+    <rect class="pb" x="251" y="198" width="120" height="66" rx="33"/><text class="ink" x="311" y="241">HOST</text>
+    <rect class="pp" x="391" y="198" width="180" height="66" rx="33"/><text class="ink" x="481" y="241">5-TUPLE</text>
+  </g>
+  <text class="n mono" x="131" y="318" font-size="30">pass · drop · reject · alert</text>
+  <rect class="term" x="131" y="400" width="800" height="190" rx="20"/>
+  <rect class="tbar" x="131" y="400" width="800" height="50" rx="20"/>
+  <rect class="tbar" x="131" y="430" width="800" height="20"/>
+  <circle cx="171" cy="425" r="11" fill="#ff5f57"/><circle cx="211" cy="425" r="11" fill="#febc2e"/><circle cx="251" cy="425" r="11" fill="#28c840"/>
+  <text class="tx mono" x="163" y="505" font-size="28">$ aws network-firewall create-rule-group</text>
+  <text class="tx mono" x="163" y="558" font-size="28">$ aws network-firewall describe-firewall<tspan class="a">█</tspan></text>
+
+  <!-- center: two engines -->
+  <g transform="translate(1010,0)">
+    <rect class="gl" x="0" y="300" width="70" height="56" rx="10" stroke-width="6"/>
+    <path class="gl" d="M74,328 H118 M104,314 L120,328 L104,342"/>
+    <rect class="eb" x="126" y="250" width="200" height="156" rx="16"/>
+    <text class="ink mono" x="226" y="318" text-anchor="middle" font-size="28" font-weight="700">stateless</text>
+    <text class="n mono" x="226" y="358" text-anchor="middle" font-size="24">priority</text>
+    <path class="gl" d="M330,328 H374 M360,314 L376,328 L360,342"/>
+    <rect class="ef" x="382" y="250" width="200" height="156" rx="16"/>
+    <text class="ink mono" x="482" y="318" text-anchor="middle" font-size="28" font-weight="700">stateful</text>
+    <text class="n mono" x="482" y="358" text-anchor="middle" font-size="24">Suricata</text>
+    <path class="gl" d="M586,300 L640,262 M586,356 L640,394"/>
+    <rect class="ok" x="644" y="226" width="110" height="62" rx="12"/><text class="ink mono" x="699" y="267" text-anchor="middle" font-size="26" font-weight="700">pass</text>
+    <rect class="no" x="644" y="368" width="110" height="62" rx="12"/><text class="ink mono" x="699" y="409" text-anchor="middle" font-size="26" font-weight="700">drop</text>
+    <text class="n mono" x="377" y="660" text-anchor="middle" font-size="32">route · inspect · log</text>
+  </g>
+
+  <!-- top right: three feature icons -->
+  <g transform="translate(1905,190) scale(1.15)">
+    <path class="al" stroke-width="12" d="M100,24 L166,48 V100 C166,140 136,166 100,180 C64,166 34,140 34,100 V48 Z"/>
+    <path class="al" stroke-width="10" d="M64,92 H136 M64,122 H136 M100,60 V150"/>
+  </g>
+  <text class="n" x="2020" y="470" text-anchor="middle" font-size="32">firewall</text>
+  <g transform="translate(2135,190) scale(1.15)">
+    <circle class="al" stroke-width="12" cx="100" cy="100" r="70"/>
+    <path class="al" stroke-width="10" d="M30,100 H170 M100,30 C70,60 70,140 100,170 M100,30 C130,60 130,140 100,170"/>
+  </g>
+  <text class="n" x="2250" y="470" text-anchor="middle" font-size="32">domains</text>
+  <g transform="translate(2365,190) scale(1.15)">
+    <rect class="al" stroke-width="12" x="40" y="24" width="120" height="152" rx="12"/>
+    <path class="al" stroke-width="10" d="M66,64 H134 M66,96 H134 M66,128 H112"/>
+  </g>
+  <text class="n" x="2480" y="470" text-anchor="middle" font-size="32">logs</text>
+
+  <text class="h" x="1376" y="880" text-anchor="middle" font-size="140">AWS Network Firewall</text>
+  <text class="s" x="1376" y="1030" text-anchor="middle" font-size="84">Rules, Routing, Logging and Cost</text>
+  <line class="r" x1="776" y1="1105" x2="1976" y2="1105"/>
+  <text class="n" x="1376" y="1210" text-anchor="middle" font-size="47">strict order · domain lists · drop vs reject · NAT · Transit Gateway · Suricata 8</text>
+
+  <!-- bottom row: small icons -->
+  <g transform="translate(546,1290) scale(0.5)"><rect class="al" stroke-width="14" x="40" y="30" width="120" height="140" rx="12"/><path class="al" stroke-width="12" d="M70,70 H130 M70,100 H130 M70,130 H110"/></g>
+  <text class="n" x="596" y="1450" text-anchor="middle" font-size="34">Rules</text>
+  <g transform="translate(806,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="100" cy="100" r="70"/><path class="al" stroke-width="12" d="M30,100 H170 M100,30 C70,60 70,140 100,170 M100,30 C130,60 130,140 100,170"/></g>
+  <text class="n" x="856" y="1450" text-anchor="middle" font-size="34">Domains</text>
+  <g transform="translate(1066,1290) scale(0.5)"><path class="al" stroke-width="16" d="M40,50 H160 M40,100 H130 M40,150 H100"/></g>
+  <text class="n" x="1116" y="1450" text-anchor="middle" font-size="34">Order</text>
+  <g transform="translate(1326,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="40" cy="100" r="22"/><circle class="al" stroke-width="14" cx="160" cy="50" r="22"/><circle class="al" stroke-width="14" cx="160" cy="150" r="22"/><path class="al" stroke-width="12" d="M62,92 L138,58 M62,108 L138,142"/></g>
+  <text class="n" x="1376" y="1450" text-anchor="middle" font-size="34">Routing</text>
+  <g transform="translate(1586,1290) scale(0.5)"><rect class="al" stroke-width="14" x="40" y="24" width="120" height="152" rx="12"/><path class="al" stroke-width="12" d="M66,64 H134 M66,96 H134 M66,128 H112"/></g>
+  <text class="n" x="1636" y="1450" text-anchor="middle" font-size="34">Logs</text>
+  <g transform="translate(1846,1290) scale(0.5)"><path class="al" stroke-width="16" d="M30,160 A80,80 0 0 1 170,160"/><path class="al" stroke-width="16" d="M100,160 L140,100"/></g>
+  <text class="n" x="1896" y="1450" text-anchor="middle" font-size="34">Limits</text>
+  <g transform="translate(2106,1290) scale(0.5)"><circle class="al" stroke-width="14" cx="100" cy="100" r="70"/><path class="al" stroke-width="12" d="M124,70 C114,58 80,56 78,78 C76,98 124,98 122,122 C120,144 86,144 76,130 M100,46 V60 M100,140 V154"/></g>
+  <text class="n" x="2156" y="1450" text-anchor="middle" font-size="34">Cost</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The two engines</title>
+  <desc id="d">A packet first meets the stateless engine, which evaluates rules by priority and stops at the first match: pass sends it on uninspected and unlogged, drop discards it unlogged, forward sends it to the stateful engine. Packets that match no stateless rule get the stateless default action, usually forward. The stateful engine tracks the connection and parses protocols, evaluates rules in action order or strict order, applies the strict-order default actions to unmatched traffic, and writes alert and flow logs.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#212529}
+      .lb{font-size:11px;font-weight:700;fill:#495057}
+      .lne{stroke:#495057;stroke-width:1.5;fill:none;marker-end:url(#a)}
+      .sl{fill:#e7f1ff;stroke:#6ea8fe}.sf{fill:#fff3cd;stroke:#ffc107}
+      .ok{fill:#e8f5ee;stroke:#75b798}.no{fill:#f8d7da;stroke:#e35d6a}.n{fill:#f8f9fa;stroke:#dee2e6}.lg{fill:#f3effc;stroke:#a98eda}
+    </style>
+  </defs>
+  <rect width="960" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The two engines</text>
+  <text class="sub" x="20" y="48">Every packet that reaches a firewall endpoint</text>
+
+  <rect class="n" x="20" y="150" width="90" height="44" rx="6"/><text class="tb" x="65" y="177" text-anchor="middle">Packet</text>
+  <path class="lne" d="M110,172 H146"/>
+
+  <rect class="sl" x="150" y="80" width="250" height="184" rx="8"/>
+  <text class="tb" x="164" y="102">Stateless engine</text>
+  <text class="d" x="164" y="122">each packet on its own, like a network ACL</text>
+  <text class="d" x="164" y="140">rules by priority, first match wins</text>
+  <text class="m" x="164" y="166">pass</text><text class="d" x="240" y="166">→ on its way, not logged</text>
+  <text class="m" x="164" y="186">drop</text><text class="d" x="240" y="186">→ gone, not logged</text>
+  <text class="m" x="164" y="206">forward</text><text class="d" x="240" y="206">→ stateful engine</text>
+  <text class="d" x="164" y="232">no match: stateless default action,</text>
+  <text class="d" x="164" y="248">usually aws:forward_to_sfe</text>
+
+  <path class="lne" d="M400,206 H446"/>
+  <text class="lb" x="404" y="198">forward</text>
+
+  <rect class="sf" x="450" y="80" width="300" height="184" rx="8"/>
+  <text class="tb" x="464" y="102">Stateful engine (Suricata)</text>
+  <text class="d" x="464" y="122">tracks the connection, parses TLS, HTTP, DNS …</text>
+  <text class="d" x="464" y="140">domain lists, Suricata rules, 5-tuple rules</text>
+  <text class="d" x="464" y="166">action order: pass → drop → reject → alert</text>
+  <text class="d" x="464" y="184">strict order: groups by priority, rules as written</text>
+  <text class="d" x="464" y="210">no match (strict order): default actions,</text>
+  <text class="d" x="464" y="226">e.g. drop established + alert established</text>
+  <text class="d" x="464" y="248">no match (action order): passes</text>
+
+  <path class="lne" d="M750,130 H796"/>
+  <rect class="ok" x="800" y="108" width="140" height="44" rx="6"/><text class="tb" x="870" y="135" text-anchor="middle">pass</text>
+  <path class="lne" d="M750,200 H796"/>
+  <rect class="no" x="800" y="178" width="140" height="44" rx="6"/><text class="tb" x="870" y="198" text-anchor="middle">drop / reject</text><text class="d" x="870" y="214" text-anchor="middle">reject: TCP reset</text>
+
+  <path class="lne" d="M600,264 V300"/>
+  <rect class="lg" x="450" y="304" width="300" height="70" rx="8"/>
+  <text class="tb" x="464" y="326">Logs</text>
+  <text class="d" x="464" y="344">ALERT: drop, reject, alert matches</text>
+  <text class="d" x="464" y="362">FLOW: one netflow record per direction</text>
+
+  <rect class="n" x="150" y="304" width="250" height="70" rx="8"/>
+  <text class="tb" x="164" y="326">Not logged</text>
+  <text class="d" x="164" y="344">anything the stateless engine passes</text>
+  <text class="d" x="164" y="362">or drops by itself; forward it to log it</text>
+</svg>

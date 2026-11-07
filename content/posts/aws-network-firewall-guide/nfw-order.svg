@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Action order vs strict order</title>
+  <desc id="d">The same rule group has a drop rule for SNI example.com written first and a pass rule for it written second. In action order, Suricata evaluates all pass rules before drop rules, so the pass matches, inspection of the flow stops, and curl gets 200 with no alert. In strict order, rules run in the order written, so the drop matches first and the connection is dropped with an alert.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#212529}
+      .ths{font-size:10.5px;font-weight:700;fill:#495057;letter-spacing:.03em}
+      .lne{stroke:#495057;stroke-width:1.5;fill:none;marker-end:url(#a)}
+      .dr{fill:#f8d7da;stroke:#e35d6a}.ps{fill:#e8f5ee;stroke:#75b798}.n{fill:#f8f9fa;stroke:#dee2e6}.g{fill:#ffffff;stroke:#adb5bd}
+      .num{font-size:12px;font-weight:700;fill:#fff;text-anchor:middle}
+    </style>
+  </defs>
+  <rect width="960" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Action order vs strict order</text>
+  <text class="sub" x="20" y="48">One rule group, two rules for the same TLS connection to example.com</text>
+
+  <rect class="g" x="20" y="70" width="920" height="64" rx="6"/>
+  <text class="ths" x="34" y="90">RULES AS WRITTEN</text>
+  <text class="m" x="34" y="108">1  drop tls … (tls.sni; content:"example.com"; … sid:10;)</text>
+  <text class="m" x="34" y="124">2  pass tls … (tls.sni; content:"example.com"; … sid:11;)</text>
+
+  <rect class="n" x="20" y="150" width="450" height="160" rx="8"/>
+  <text class="tb" x="34" y="172">Action order (default)</text>
+  <text class="d" x="34" y="190">all pass rules first, then drop, reject, alert</text>
+  <rect class="ps" x="34" y="202" width="190" height="30" rx="4"/><circle cx="34" cy="202" r="10" fill="#495057"/><text class="num" x="34" y="206">1</text><text class="m" x="46" y="221">pass sid:11 matches</text>
+  <path class="lne" d="M224,217 H252"/>
+  <rect class="ps" x="256" y="202" width="200" height="30" rx="4"/><text class="d" x="266" y="221">flow no longer inspected</text>
+  <text class="d" x="34" y="258">drop sid:10 is never reached</text>
+  <text class="m" x="34" y="286">curl https://example.com → 200</text>
+  <text class="d" x="34" y="302">no alert written (measured in Suricata 8.0.3)</text>
+
+  <rect class="n" x="490" y="150" width="450" height="160" rx="8"/>
+  <text class="tb" x="504" y="172">Strict order</text>
+  <text class="d" x="504" y="190">rule groups by priority, rules in the order written</text>
+  <rect class="dr" x="504" y="202" width="190" height="30" rx="4"/><circle cx="504" cy="202" r="10" fill="#495057"/><text class="num" x="504" y="206">1</text><text class="m" x="516" y="221">drop sid:10 matches</text>
+  <path class="lne" d="M694,217 H722"/>
+  <rect class="dr" x="726" y="202" width="200" height="30" rx="4"/><text class="d" x="736" y="221">connection dropped, alert</text>
+  <text class="d" x="504" y="258">pass sid:11 is never reached</text>
+  <text class="m" x="504" y="286">curl https://example.com → timeout</text>
+  <text class="d" x="504" y="302">put pass rules above the drops you mean to override</text>
+</svg>

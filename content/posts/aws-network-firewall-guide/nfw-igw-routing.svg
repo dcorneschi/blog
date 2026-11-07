@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Routing through the firewall with an internet gateway</title>
+  <desc id="d">VPC 10.0.0.0/16 in one Availability Zone. The internet gateway has an edge route table that sends 10.0.2.0/24 to the firewall endpoint. The firewall subnet's route table sends 0.0.0.0/0 to the internet gateway. The workload subnet 10.0.2.0/24 sends 0.0.0.0/0 to the firewall endpoint. Inbound traffic goes internet gateway, firewall endpoint, workload; outbound goes workload, firewall endpoint, internet gateway; both directions cross the same endpoint.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8590c"/></marker>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#212529}
+      .in{stroke:#1c7ed6;stroke-width:2.2;fill:none;marker-end:url(#b)}
+      .out{stroke:#e8590c;stroke-width:2.2;fill:none;marker-end:url(#c);stroke-dasharray:6 4}
+      .vpc{fill:#f8f9fa;stroke:#dee2e6}.fw{fill:#fff3cd;stroke:#ffc107}.wl{fill:#e7f1ff;stroke:#6ea8fe}.gw{fill:#f3effc;stroke:#a98eda}.rt{fill:#ffffff;stroke:#adb5bd}
+      .lgi{font-size:11px;font-weight:700;fill:#1c7ed6}.lgo{font-size:11px;font-weight:700;fill:#e8590c}
+    </style>
+  </defs>
+  <rect width="960" height="390" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Routing through the firewall with an internet gateway</text>
+  <text class="sub" x="20" y="48">VPC 10.0.0.0/16, one Availability Zone; three route tables</text>
+
+  <rect class="gw" x="20" y="150" width="130" height="64" rx="8"/>
+  <text class="tb" x="34" y="176">Internet</text><text class="tb" x="34" y="194">gateway</text>
+
+  <rect class="vpc" x="190" y="70" width="750" height="300" rx="10"/>
+  <text class="tb" x="204" y="92">VPC 10.0.0.0/16</text>
+
+  <rect class="fw" x="330" y="120" width="210" height="124" rx="8"/>
+  <text class="tb" x="344" y="142">Firewall subnet</text>
+  <text class="d" x="344" y="160">firewall endpoint vpce-…</text>
+  <text class="d" x="344" y="176">nothing else in this subnet</text>
+  <rect class="rt" x="344" y="186" width="182" height="48" rx="4"/>
+  <text class="m" x="352" y="204">10.0.0.0/16 → local</text>
+  <text class="m" x="352" y="222">0.0.0.0/0   → igw</text>
+
+  <rect class="wl" x="690" y="120" width="230" height="124" rx="8"/>
+  <text class="tb" x="704" y="142">Workload subnet</text>
+  <text class="d" x="704" y="160">10.0.2.0/24</text>
+  <rect class="rt" x="704" y="186" width="202" height="48" rx="4"/>
+  <text class="m" x="712" y="204">10.0.0.0/16 → local</text>
+  <text class="m" x="712" y="222">0.0.0.0/0   → vpce-…</text>
+
+  <rect class="rt" x="20" y="250" width="290" height="56" rx="6"/>
+  <text class="tb" x="32" y="270">Edge route table (on the gateway)</text>
+  <text class="m" x="32" y="292">10.0.2.0/24 → vpce-…</text>
+
+  <path class="in" d="M150,168 H326"/>
+  <path class="in" d="M540,168 H686"/>
+  <path class="out" d="M686,196 H544"/>
+  <path class="out" d="M326,196 H154"/>
+  <text class="lgi" x="560" y="160">inbound</text>
+  <text class="lgo" x="560" y="214">outbound</text>
+
+  <text class="d" x="330" y="290">Both directions of a connection cross the same endpoint,</text>
+  <text class="d" x="330" y="306">so the stateful engine sees the whole flow. A route that skips</text>
+  <text class="d" x="330" y="322">the endpoint in one direction leaves it half a connection.</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Firewall with NAT gateways in two zones</title>
+  <desc id="d">Two Availability Zones, each with three subnets. The private workload subnet sends 0.0.0.0/0 to the firewall endpoint in its own zone. The firewall subnet sends 0.0.0.0/0 to the NAT gateway in its own zone. The public subnet holding the NAT gateway sends 0.0.0.0/0 to the internet gateway and the private subnet's CIDR back to the same zone's firewall endpoint. Each zone uses only its own endpoint and NAT gateway.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:10.5px;fill:#212529}
+      .ths{font-size:10.5px;font-weight:700;fill:#495057;letter-spacing:.03em}
+      .lne{stroke:#495057;stroke-width:1.6;fill:none;marker-end:url(#a)}
+      .az{fill:#f8f9fa;stroke:#dee2e6}.fw{fill:#fff3cd;stroke:#ffc107}.wl{fill:#e7f1ff;stroke:#6ea8fe}.pub{fill:#e8f5ee;stroke:#75b798}.gw{fill:#f3effc;stroke:#a98eda}
+    </style>
+  </defs>
+  <rect width="960" height="420" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Firewall with NAT gateways in two zones</text>
+  <text class="sub" x="20" y="48">The firewall sits between the workloads and the NAT gateway, so it sees the workloads' own addresses</text>
+
+  <!-- zone A -->
+  <rect class="az" x="20" y="66" width="800" height="150" rx="8"/>
+  <text class="ths" x="34" y="86">AVAILABILITY ZONE A</text>
+  <rect class="wl" x="34" y="98" width="230" height="104" rx="6"/>
+  <text class="tb" x="46" y="118">Private workload subnet</text>
+  <text class="m" x="46" y="142">0.0.0.0/0 → firewall endpoint A</text>
+  <rect class="fw" x="300" y="98" width="230" height="104" rx="6"/>
+  <text class="tb" x="312" y="118">Firewall subnet</text>
+  <text class="d" x="312" y="136">endpoint A</text>
+  <text class="m" x="312" y="160">0.0.0.0/0 → NAT gateway A</text>
+  <rect class="pub" x="566" y="98" width="240" height="104" rx="6"/>
+  <text class="tb" x="578" y="118">Public subnet</text>
+  <text class="d" x="578" y="136">NAT gateway A</text>
+  <text class="m" x="578" y="160">0.0.0.0/0 → internet gateway</text>
+  <text class="m" x="578" y="178">private CIDR A → endpoint A</text>
+  <path class="lne" d="M264,150 H296"/><path class="lne" d="M530,150 H562"/>
+
+  <!-- zone B -->
+  <rect class="az" x="20" y="232" width="800" height="150" rx="8"/>
+  <text class="ths" x="34" y="252">AVAILABILITY ZONE B</text>
+  <rect class="wl" x="34" y="264" width="230" height="104" rx="6"/>
+  <text class="tb" x="46" y="284">Private workload subnet</text>
+  <text class="m" x="46" y="308">0.0.0.0/0 → firewall endpoint B</text>
+  <rect class="fw" x="300" y="264" width="230" height="104" rx="6"/>
+  <text class="tb" x="312" y="284">Firewall subnet</text>
+  <text class="d" x="312" y="302">endpoint B</text>
+  <text class="m" x="312" y="326">0.0.0.0/0 → NAT gateway B</text>
+  <rect class="pub" x="566" y="264" width="240" height="104" rx="6"/>
+  <text class="tb" x="578" y="284">Public subnet</text>
+  <text class="d" x="578" y="302">NAT gateway B</text>
+  <text class="m" x="578" y="326">0.0.0.0/0 → internet gateway</text>
+  <text class="m" x="578" y="344">private CIDR B → endpoint B</text>
+  <path class="lne" d="M264,316 H296"/><path class="lne" d="M530,316 H562"/>
+
+  <rect class="gw" x="850" y="190" width="96" height="64" rx="8"/>
+  <text class="tb" x="898" y="216" text-anchor="middle">Internet</text><text class="tb" x="898" y="234" text-anchor="middle">gateway</text>
+  <path class="lne" d="M806,150 H830 V210 H846"/><path class="lne" d="M806,316 H830 V236 H846"/>
+
+  <text class="d" x="20" y="404">Each zone uses only its own endpoint and NAT gateway: no cross-zone charges, and one zone's failure leaves the other's egress alone.</text>
+</svg>
