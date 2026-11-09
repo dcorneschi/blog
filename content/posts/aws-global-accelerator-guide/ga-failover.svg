@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Failover: health checks vs DNS</title>
+  <desc id="d">Timeline from the moment an EC2 endpoint fails. With Global Accelerator and a 10-second interval and threshold of 3, three failed checks over about 30 seconds mark it unhealthy, and from then on new connections go to the next healthy endpoint group with the same IP addresses. With DNS failover, the same kind of detection is followed by the record's TTL and client and resolver caches, so clients keep using the old address until their cached answer expires. Existing connections are not moved in either case.</desc>
+  <defs>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#212529}
+      .ax{stroke:#adb5bd;stroke-width:1}.tk{font-size:10.5px;fill:#868e96}
+      .det{fill:#fff3cd;stroke:#ffc107}.mv{fill:#e8f5ee;stroke:#75b798}.wait{fill:#f8d7da;stroke:#e35d6a}.x{stroke:#e35d6a;stroke-width:2}
+    </style>
+  </defs>
+  <rect width="960" height="330" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Failover: health checks vs DNS</text>
+  <text class="sub" x="20" y="48">From the moment an endpoint fails; 1 second = 6 px</text>
+
+  <!-- axis: x = 200 + 6*t -->
+  <line class="ax" x1="200" y1="270" x2="920" y2="270"/>
+  <g class="tk"><text x="196" y="286">0 s</text><text x="374" y="286">30 s</text><text x="554" y="286">60 s</text><text x="734" y="286">90 s</text><text x="904" y="286">120 s</text></g>
+  <line class="ax" x1="380" y1="80" x2="380" y2="270" stroke-dasharray="3 3"/>
+  <line class="ax" x1="560" y1="80" x2="560" y2="270" stroke-dasharray="3 3"/>
+  <line class="ax" x1="740" y1="80" x2="740" y2="270" stroke-dasharray="3 3"/>
+  <path class="x" d="M194,74 L206,86 M206,74 L194,86"/>
+  <text class="d" x="212" y="84">endpoint fails</text>
+
+  <text class="tb" x="20" y="124">Global Accelerator</text>
+  <text class="d" x="20" y="140">EC2 endpoint, interval 10 s,</text>
+  <text class="d" x="20" y="154">threshold 3</text>
+  <rect class="det" x="200" y="108" width="180" height="40" rx="4"/>
+  <text class="d" x="210" y="125">3 failed checks, 10 s apart</text>
+  <text class="d" x="210" y="140">→ unhealthy at about 30 s</text>
+  <rect class="mv" x="380" y="108" width="540" height="40" rx="4"/>
+  <text class="d" x="390" y="125">new connections go to the next healthy endpoint group</text>
+  <text class="d" x="390" y="140">same two IP addresses, nothing for clients to re-resolve</text>
+
+  <text class="tb" x="20" y="204">DNS failover</text>
+  <text class="d" x="20" y="220">health check, then a new</text>
+  <text class="d" x="20" y="234">answer with a TTL</text>
+  <rect class="det" x="200" y="188" width="180" height="40" rx="4"/>
+  <text class="d" x="210" y="205">health check detects</text>
+  <text class="d" x="210" y="220">the failure</text>
+  <rect class="wait" x="380" y="188" width="360" height="40" rx="4"/>
+  <text class="d" x="390" y="205">clients use the cached answer until the TTL (60 s here) expires,</text>
+  <text class="d" x="390" y="220">longer if resolvers or apps cache past it</text>
+  <rect class="mv" x="740" y="188" width="180" height="40" rx="4"/>
+  <text class="d" x="750" y="205">clients move</text>
+  <text class="d" x="750" y="220">to the new address</text>
+
+  <text class="d" x="20" y="310">Load balancer endpoints use their own target group health checks for the detection step. In both cases established connections stay where they are.</text>
+</svg>

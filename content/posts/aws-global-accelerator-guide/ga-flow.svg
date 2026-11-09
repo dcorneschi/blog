@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How traffic reaches an endpoint</title>
+  <desc id="d">Clients in North America, Europe and Asia connect to the same two static IP addresses. Each enters the AWS network at its nearest edge location because the addresses are anycast, then travels over the AWS backbone to the closest healthy endpoint group: us-east-1 for North America, eu-west-1 for Europe and Asia, where the dial and weights choose an endpoint. If eu-west-1 becomes unhealthy, new connections from Europe go to us-east-1.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#e8590c"/></marker>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#212529}
+      .ths{font-size:10.5px;font-weight:700;fill:#495057;letter-spacing:.03em}
+      .net{stroke:#adb5bd;stroke-width:1.4;fill:none;stroke-dasharray:4 4;marker-end:url(#a)}
+      .bb{stroke:#1c7ed6;stroke-width:2.4;fill:none;marker-end:url(#a)}
+      .fo{stroke:#e8590c;stroke-width:2;fill:none;stroke-dasharray:6 4;marker-end:url(#f)}
+      .cl{fill:#f8f9fa;stroke:#dee2e6}.edge{fill:#fff3cd;stroke:#ffc107}.rg{fill:#e7f1ff;stroke:#6ea8fe}.ip{fill:#f3effc;stroke:#a98eda}.ep{fill:#e8f5ee;stroke:#75b798}
+      .lb{font-size:11px;font-weight:700;fill:#1c7ed6}.lf{font-size:11px;font-weight:700;fill:#e8590c}
+    </style>
+  </defs>
+  <rect width="960" height="400" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How traffic reaches an endpoint</text>
+  <text class="sub" x="20" y="48">One pair of anycast addresses everywhere; the AWS backbone from the nearest edge onwards</text>
+
+  <text class="ths" x="20" y="80">CLIENTS</text>
+  <text class="ths" x="230" y="80">NEAREST EDGE LOCATION</text>
+  <text class="ths" x="650" y="80">ENDPOINT GROUPS (REGIONS)</text>
+
+  <rect class="cl" x="20" y="96" width="150" height="50" rx="6"/><text class="tb" x="32" y="118">North America</text><text class="d" x="32" y="136">client</text>
+  <rect class="cl" x="20" y="186" width="150" height="50" rx="6"/><text class="tb" x="32" y="208">Europe</text><text class="d" x="32" y="226">client</text>
+  <rect class="cl" x="20" y="276" width="150" height="50" rx="6"/><text class="tb" x="32" y="298">Asia</text><text class="d" x="32" y="316">client</text>
+
+  <rect class="edge" x="230" y="96" width="150" height="50" rx="6"/><text class="tb" x="242" y="118">Edge, US</text><text class="d" x="242" y="136">announces both IPs</text>
+  <rect class="edge" x="230" y="186" width="150" height="50" rx="6"/><text class="tb" x="242" y="208">Edge, Europe</text><text class="d" x="242" y="226">announces both IPs</text>
+  <rect class="edge" x="230" y="276" width="150" height="50" rx="6"/><text class="tb" x="242" y="298">Edge, Asia</text><text class="d" x="242" y="316">announces both IPs</text>
+
+  <path class="net" d="M170,121 H226"/><path class="net" d="M170,211 H226"/><path class="net" d="M170,301 H226"/>
+  <text class="d" x="174" y="160">internet,</text><text class="d" x="174" y="174">short hop</text>
+
+  <rect class="ip" x="230" y="346" width="150" height="40" rx="6"/>
+  <text class="m" x="242" y="362">75.2.x.x</text><text class="m" x="242" y="378">99.83.x.x</text>
+  <text class="d" x="392" y="370">the same two static IPs, whichever edge answers</text>
+
+  <rect class="rg" x="650" y="96" width="290" height="96" rx="8"/>
+  <text class="tb" x="664" y="118">us-east-1 endpoint group</text>
+  <text class="d" x="664" y="136">dial 100</text>
+  <rect class="ep" x="664" y="146" width="120" height="34" rx="4"/><text class="d" x="674" y="167">ALB, weight 128</text>
+  <rect class="ep" x="796" y="146" width="130" height="34" rx="4"/><text class="d" x="806" y="167">ALB, weight 128</text>
+
+  <rect class="rg" x="650" y="226" width="290" height="96" rx="8"/>
+  <text class="tb" x="664" y="248">eu-west-1 endpoint group</text>
+  <text class="d" x="664" y="266">dial 100</text>
+  <rect class="ep" x="664" y="276" width="120" height="34" rx="4"/><text class="d" x="674" y="297">NLB, weight 128</text>
+  <rect class="ep" x="796" y="276" width="130" height="34" rx="4"/><text class="d" x="806" y="297">EC2, weight 64</text>
+
+  <path class="bb" d="M380,121 H646"/>
+  <path class="bb" d="M380,211 H520 V258 H646"/>
+  <path class="bb" d="M380,301 H540 V282 H646"/>
+  <text class="lb" x="420" y="113">AWS backbone</text>
+
+  <path class="fo" d="M560,258 V160 H646"/>
+  <text class="lf" x="566" y="196">eu-west-1 unhealthy:</text>
+  <text class="lf" x="566" y="210">new connections</text>
+</svg>

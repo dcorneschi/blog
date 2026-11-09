@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Traffic dial vs endpoint weight</title>
+  <desc id="d">Example: 1,000 new connections would go to eu-west-1 by proximity. Its traffic dial is 50, so 500 stay in eu-west-1 and 500 spill to the next Region, us-east-1. Inside eu-west-1 two endpoints have weights 128 and 64, so they get 128/192 and 64/192 of the 500: about 333 and 167. A weight of 0 would give an endpoint nothing.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#212529}
+      .big{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:15px;font-weight:700;fill:#212529}
+      .ths{font-size:10.5px;font-weight:700;fill:#495057;letter-spacing:.03em}
+      .lne{stroke:#495057;stroke-width:1.5;fill:none;marker-end:url(#a)}
+      .in{fill:#f8f9fa;stroke:#dee2e6}.rg{fill:#e7f1ff;stroke:#6ea8fe}.dial{fill:#fff3cd;stroke:#ffc107}.ep{fill:#e8f5ee;stroke:#75b798}.sp{fill:#f3effc;stroke:#a98eda}
+    </style>
+  </defs>
+  <rect width="960" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Traffic dial vs endpoint weight</text>
+  <text class="sub" x="20" y="48">The dial decides how much a Region keeps; the weights split that among its endpoints</text>
+
+  <text class="ths" x="20" y="80">TRAFFIC FOR THE REGION</text>
+  <text class="ths" x="260" y="80">TRAFFIC DIAL (PER ENDPOINT GROUP)</text>
+  <text class="ths" x="620" y="80">ENDPOINT WEIGHTS (PER ENDPOINT)</text>
+
+  <rect class="in" x="20" y="130" width="200" height="70" rx="8"/>
+  <text class="big" x="32" y="158">1,000</text>
+  <text class="d" x="32" y="178">new connections nearest</text>
+  <text class="d" x="32" y="192">to eu-west-1</text>
+  <path class="lne" d="M220,165 H256"/>
+
+  <rect class="dial" x="260" y="110" width="300" height="110" rx="8"/>
+  <text class="tb" x="274" y="132">eu-west-1, dial 50</text>
+  <rect x="274" y="146" width="272" height="22" rx="4" fill="#ffffff" stroke="#adb5bd"/>
+  <rect x="274" y="146" width="136" height="22" rx="4" fill="#ffc107" opacity=".55"/>
+  <text class="m" x="282" y="161">500 stay</text>
+  <text class="m" x="418" y="161">500 spill over</text>
+  <text class="d" x="274" y="190">applies to traffic already headed here;</text>
+  <text class="d" x="274" y="206">new connections only</text>
+
+  <path class="lne" d="M560,150 H616"/>
+  <rect class="rg" x="620" y="96" width="320" height="140" rx="8"/>
+  <text class="tb" x="634" y="118">eu-west-1 endpoints (500)</text>
+  <rect class="ep" x="634" y="130" width="292" height="44" rx="6"/>
+  <text class="m" x="646" y="148">NLB-a  weight 128</text>
+  <text class="d" x="646" y="166">128 / 192 ≈ 333 connections</text>
+  <rect class="ep" x="634" y="182" width="292" height="44" rx="6"/>
+  <text class="m" x="646" y="200">NLB-b  weight 64</text>
+  <text class="d" x="646" y="218">64 / 192 ≈ 167 connections</text>
+
+  <path class="lne" d="M560,196 H588 V284 H616"/>
+  <rect class="sp" x="620" y="256" width="320" height="56" rx="8"/>
+  <text class="tb" x="634" y="278">Next closest Region, us-east-1</text>
+  <text class="d" x="634" y="296">takes the 500 that eu-west-1 dialled away</text>
+
+  <rect class="in" x="20" y="256" width="540" height="88" rx="8"/>
+  <text class="tb" x="32" y="278">Rules of thumb</text>
+  <text class="d" x="32" y="298">Dial: between Regions, 0 to 100, default 100. Dial 0 still receives failover traffic.</text>
+  <text class="d" x="32" y="316">Weight: within a Region, 0 to 255, default 128. Weight 0 gets no new traffic</text>
+  <text class="d" x="32" y="332">and is skipped by failover.</text>
+</svg>

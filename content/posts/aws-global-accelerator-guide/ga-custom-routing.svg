@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Custom routing port mapping</title>
+  <desc id="d">A custom routing accelerator has a listener port range, for example 10000 to 20000, and an endpoint group with a VPC subnet and an endpoint port range, for example 7777 to 7778. Global Accelerator maps every accelerator port to one private IP and port in the subnet: port 10000 to 10.0.1.10:7777, 10001 to 10.0.1.10:7778, 10002 to 10.0.1.11:7777. The matchmaking service reads the mapping with list-custom-routing-port-mappings and gives the player the static IP and port 10001. Destinations are denied until allowed.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h{font-size:15px;font-weight:700;fill:#212529}.sub{font-size:12px;fill:#495057}
+      .tb{font-size:13px;font-weight:700;fill:#212529}.d{font-size:11px;fill:#495057}
+      .m{font-family:Menlo,Consolas,'Liberation Mono',monospace;font-size:11px;fill:#212529}
+      .ths{font-size:10.5px;font-weight:700;fill:#495057;letter-spacing:.03em}
+      .lne{stroke:#495057;stroke-width:1.4;fill:none;marker-end:url(#a)}
+      .ga{fill:#f3effc;stroke:#a98eda}.sn{fill:#e7f1ff;stroke:#6ea8fe}.ok{fill:#e8f5ee;stroke:#75b798}.no{fill:#f8d7da;stroke:#e35d6a}.n{fill:#f8f9fa;stroke:#dee2e6}.mm{fill:#fff3cd;stroke:#ffc107}
+    </style>
+  </defs>
+  <rect width="960" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Custom routing port mapping</text>
+  <text class="sub" x="20" y="48">Every accelerator port leads to exactly one private IP and port</text>
+
+  <rect class="mm" x="20" y="76" width="200" height="98" rx="8"/>
+  <text class="tb" x="32" y="98">Matchmaking service</text>
+  <text class="d" x="32" y="116">reads the mapping once,</text>
+  <text class="d" x="32" y="132">picks a free server, hands</text>
+  <text class="d" x="32" y="148">the player IP + port</text>
+  <text class="m" x="32" y="166">→ 75.2.x.x:10001</text>
+
+  <rect class="n" x="20" y="214" width="200" height="56" rx="8"/>
+  <text class="tb" x="32" y="236">Player</text>
+  <text class="m" x="32" y="256">connects to :10001</text>
+  <path class="lne" d="M120,174 V210"/>
+
+  <rect class="ga" x="270" y="76" width="300" height="194" rx="8"/>
+  <text class="tb" x="284" y="98">Custom routing accelerator</text>
+  <text class="d" x="284" y="116">listener ports 10000–20000</text>
+  <text class="ths" x="284" y="142">ACCELERATOR PORT → DESTINATION</text>
+  <text class="m" x="284" y="164">10000 → 10.0.1.10:7777</text>
+  <rect x="280" y="172" width="280" height="22" rx="4" fill="#a98eda" opacity=".25"/>
+  <text class="m" x="284" y="188">10001 → 10.0.1.10:7778</text>
+  <text class="m" x="284" y="212">10002 → 10.0.1.11:7777</text>
+  <text class="m" x="284" y="236">10003 → 10.0.1.11:7778</text>
+  <text class="d" x="284" y="258">… static, from list-custom-routing-port-mappings</text>
+  <path class="lne" d="M220,242 H266"/>
+
+  <rect class="sn" x="620" y="76" width="320" height="194" rx="8"/>
+  <text class="tb" x="634" y="98">VPC subnet endpoint</text>
+  <text class="d" x="634" y="116">endpoint ports 7777–7778, UDP and/or TCP</text>
+  <rect class="ok" x="634" y="130" width="292" height="50" rx="6"/>
+  <text class="m" x="646" y="150">10.0.1.10  game server</text>
+  <text class="d" x="646" y="168">allowed (allow-custom-routing-traffic)</text>
+  <rect class="no" x="634" y="192" width="292" height="50" rx="6"/>
+  <text class="m" x="646" y="212">10.0.1.11  game server</text>
+  <text class="d" x="646" y="230">not yet allowed: traffic denied</text>
+  <path class="lne" d="M560,183 H630 V155"/>
+
+  <rect class="n" x="20" y="294" width="920" height="50" rx="8"/>
+  <text class="d" x="32" y="314">Only EC2 instances in the subnet receive traffic (no load balancers). Client IP is always preserved. Allow and deny changes take time to</text>
+  <text class="d" x="32" y="330">propagate: check describe-custom-routing-accelerator. The client needs no change; it just connects to the IP and port it was given.</text>
+</svg>
