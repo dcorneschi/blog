@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 388" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where each value is used</title>
+  <desc id="d">requests.cpu 500m is counted by the scheduler and becomes cpu.shares 512 (cpu.weight 59 on cgroup v2): a share of CPU when CPUs are busy. limits.cpu 1 is not used by the scheduler and becomes a quota of 100000 microseconds per 100000: the container is throttled when it runs out. requests.memory 256Mi is counted by the scheduler but sets no cgroup file; it decides the eviction order and gives oom_score_adj 985. limits.memory 512Mi becomes memory.limit_in_bytes or memory.max 536870912: going over it means OOMKilled, exit code 137.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc3545"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .ax  { font-size: 10.5px; fill: #495057; text-anchor: middle; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #dc3545; stroke-width: 1.6; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .bar { fill: #cfe2ff; }
+      .kil { fill: #dc3545; }
+      .sig { fill: #495057; }
+    </style>
+  </defs>
+  <rect width="840" height="388" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where each value is used</text>
+  <text class="sub" x="20" y="48">A container with requests cpu 500m, memory 256Mi and limits cpu 1, memory 512Mi</text>
+  <text class="lb" x="20" y="80">FIELD</text>
+  <text class="lb" x="168" y="80">SCHEDULER</text>
+  <text class="lb" x="356" y="80">CGROUP ON THE NODE (v1 / v2)</text>
+  <text class="lb" x="616" y="80">WHAT IT DOES</text>
+  <rect class="s" x="20" y="92" width="130" height="52" rx="6"/>
+  <text class="mb" x="32" y="114">requests.cpu</text>
+  <text class="m" x="32" y="132">500m</text>
+  <path class="lne" d="M150,118 L164,118"/>
+  <rect class="s" x="168" y="92" width="172" height="52" rx="6"/>
+  <text class="c" x="180" y="115">counted against</text>
+  <text class="c" x="180" y="131">allocatable CPU</text>
+  <path class="lne" d="M340,118 L352,118"/>
+  <rect class="s" x="356" y="92" width="244" height="52" rx="6"/>
+  <text class="ms" x="368" y="114">cpu.shares 512</text>
+  <text class="ms" x="368" y="132">cpu.weight 59</text>
+  <path class="lne" d="M600,118 L612,118"/>
+  <rect class="g" x="616" y="92" width="204" height="52" rx="6"/>
+  <text class="c" x="628" y="123">its CPU share under contention</text>
+  <rect class="s" x="20" y="156" width="130" height="52" rx="6"/>
+  <text class="mb" x="32" y="178">limits.cpu</text>
+  <text class="m" x="32" y="196">1</text>
+  <path class="lne" d="M150,182 L164,182"/>
+  <rect class="n" x="168" y="156" width="172" height="52" rx="6"/>
+  <text class="c" x="180" y="187">not used</text>
+  <path class="lne" d="M340,182 L352,182"/>
+  <rect class="s" x="356" y="156" width="244" height="52" rx="6"/>
+  <text class="ms" x="368" y="178">cfs_quota_us 100000 / period 100000</text>
+  <text class="ms" x="368" y="196">cpu.max 100000 100000</text>
+  <path class="lne" d="M600,182 L612,182"/>
+  <rect class="w" x="616" y="156" width="204" height="52" rx="6"/>
+  <text class="c" x="628" y="187">throttled when the quota runs out</text>
+  <rect class="s" x="20" y="220" width="130" height="52" rx="6"/>
+  <text class="mb" x="32" y="242">requests.memory</text>
+  <text class="m" x="32" y="260">256Mi</text>
+  <path class="lne" d="M150,246 L164,246"/>
+  <rect class="s" x="168" y="220" width="172" height="52" rx="6"/>
+  <text class="c" x="180" y="243">counted against</text>
+  <text class="c" x="180" y="259">allocatable memory</text>
+  <path class="lne" d="M340,246 L352,246"/>
+  <rect class="s" x="356" y="220" width="244" height="52" rx="6"/>
+  <text class="ms" x="368" y="242">no file: soft limit stays unset</text>
+  <text class="ms" x="368" y="260">memory.min / memory.low stay 0</text>
+  <path class="lne" d="M600,246 L612,246"/>
+  <rect class="rw" x="616" y="220" width="204" height="52" rx="6"/>
+  <text class="c" x="628" y="251">eviction order, oom_score_adj 985</text>
+  <rect class="s" x="20" y="284" width="130" height="52" rx="6"/>
+  <text class="mb" x="32" y="306">limits.memory</text>
+  <text class="m" x="32" y="324">512Mi</text>
+  <path class="lne" d="M150,310 L164,310"/>
+  <rect class="n" x="168" y="284" width="172" height="52" rx="6"/>
+  <text class="c" x="180" y="315">not used</text>
+  <path class="lne" d="M340,310 L352,310"/>
+  <rect class="s" x="356" y="284" width="244" height="52" rx="6"/>
+  <text class="ms" x="368" y="306">memory.limit_in_bytes 536870912</text>
+  <text class="ms" x="368" y="324">memory.max 536870912</text>
+  <path class="lne" d="M600,310 L612,310"/>
+  <rect class="x" x="616" y="284" width="204" height="52" rx="6"/>
+  <text class="c" x="628" y="315">OOMKilled, exit code 137</text>
+  <text class="d" x="20" y="358">v1 values read in the container on a k3s v1.34.1 node with runc 1.5.2; the v2 weight is runc's conversion of 512 shares.</text>
+  <text class="d" x="20" y="374">The scheduler reads only requests. A container with a limit and no request gets a request equal to the limit.</text>
+</svg>
