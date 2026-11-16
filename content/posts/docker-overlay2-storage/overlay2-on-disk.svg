@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 522" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where layers and containers live on disk</title>
+  <desc id="d">Classic overlay2 store under /var/lib/docker: image/overlay2/layerdb/sha256/&lt;chain-id&gt;/ holds diff (the layer DiffID from docker image inspect) and cache-id (the overlay2 directory name); layerdb/mounts/&lt;container-id&gt;/ holds mount-id and init-id for containers. overlay2/&lt;cache-id&gt;/ holds diff, link, lower, work, committed and, while a container runs, merged; overlay2/&lt;id&gt;-init/ is a container&#x27;s init layer; overlay2/l/ holds 26-character symlinks to each diff directory. containerd image store under /var/lib/docker/containerd/daemon: io.containerd.content.v1.content/blobs/sha256 holds the compressed layer blobs, io.containerd.snapshotter.v1.overlayfs/snapshots/&lt;n&gt;/fs and work hold the unpacked layers and container layers, the snapshotter metadata.db maps snapshot names to those numbers; the container root is mounted at /var/lib/docker/rootfs/overlayfs/&lt;container-id&gt;. Find them with /proc/self/mountinfo or ctr -n moby snapshots ls.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c92a2a"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #c92a2a; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.4; fill: none; marker-end: url(#ag); }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .hl  { fill: #fff3bf; stroke: #fab005; }
+    </style>
+  </defs>
+  <rect width="840" height="522" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where layers and containers live on disk</text>
+  <text class="sub" x="20" y="48">Docker 29.9.2 data root /var/lib/docker, listed with ls in both lab daemons</text>
+  <text class="lb" x="20" y="80">CLASSIC OVERLAY2 STORE</text>
+  <rect class="rw" x="20" y="90" width="390" height="166" rx="6"/>
+  <text class="tb" x="32" y="110">image/overlay2/layerdb/</text>
+  <text class="m" x="32" y="130">sha256/&lt;chain-id&gt;/</text>
+  <text class="m" x="46" y="152">diff</text>
+  <text class="d" x="398" y="152" text-anchor="end">DiffID from inspect</text>
+  <text class="m" x="46" y="174">cache-id</text>
+  <text class="d" x="398" y="174" text-anchor="end">name of the overlay2/ dir</text>
+  <text class="m" x="46" y="196">parent, size, tar-split.json.gz</text>
+  <text class="m" x="32" y="218">mounts/&lt;container-id&gt;/</text>
+  <text class="m" x="46" y="240">mount-id, init-id</text>
+  <text class="d" x="398" y="240" text-anchor="end">container dir names</text>
+  <rect class="g" x="20" y="270" width="390" height="232" rx="6"/>
+  <text class="tb" x="32" y="290">overlay2/</text>
+  <text class="m" x="32" y="310">&lt;cache-id&gt;/</text>
+  <text class="d" x="398" y="310" text-anchor="end">one per layer</text>
+  <text class="m" x="46" y="332">diff/</text>
+  <text class="d" x="398" y="332" text-anchor="end">the files</text>
+  <text class="m" x="46" y="354">link</text>
+  <text class="d" x="398" y="354" text-anchor="end">short name</text>
+  <text class="m" x="46" y="376">lower</text>
+  <text class="d" x="398" y="376" text-anchor="end">layers below</text>
+  <text class="m" x="46" y="398">work/   committed</text>
+  <text class="m" x="32" y="420">&lt;container dir&gt;/</text>
+  <text class="m" x="46" y="442">diff/  work/  merged/</text>
+  <text class="d" x="398" y="442" text-anchor="end">merged only when running</text>
+  <text class="m" x="32" y="464">&lt;container dir&gt;-init/</text>
+  <text class="d" x="398" y="464" text-anchor="end">-init layer</text>
+  <text class="m" x="32" y="486">l/&lt;26 chars&gt; -&gt; ../&lt;dir&gt;/diff</text>
+  <text class="d" x="398" y="486" text-anchor="end">relative links</text>
+  <text class="lb" x="430" y="80">CONTAINERD IMAGE STORE</text>
+  <rect class="r" x="430" y="90" width="390" height="188" rx="6"/>
+  <text class="tb" x="442" y="110">containerd/daemon/</text>
+  <text class="m" x="442" y="130">io.containerd.content.v1.content/</text>
+  <text class="m" x="456" y="152">blobs/sha256/</text>
+  <text class="d" x="808" y="152" text-anchor="end">compressed layers</text>
+  <text class="m" x="442" y="174">io.containerd.snapshotter.v1.overlayfs/</text>
+  <text class="m" x="456" y="196">metadata.db</text>
+  <text class="d" x="808" y="196" text-anchor="end">names → numbers</text>
+  <text class="m" x="456" y="218">snapshots/&lt;n&gt;/fs</text>
+  <text class="d" x="808" y="218" text-anchor="end">image and container layers</text>
+  <text class="m" x="456" y="240">snapshots/&lt;n&gt;/work</text>
+  <text class="m" x="442" y="262">io.containerd.metadata.v1.bolt/</text>
+  <text class="d" x="808" y="262" text-anchor="end">containerd metadata</text>
+  <rect class="n" x="430" y="292" width="390" height="56" rx="6"/>
+  <text class="tb" x="442" y="312">rootfs/overlayfs/</text>
+  <text class="m" x="442" y="332">&lt;container-id&gt;/</text>
+  <text class="d" x="808" y="332" text-anchor="end">mount point = container /</text>
+  <rect class="s" x="430" y="362" width="390" height="100" rx="6"/>
+  <text class="tb" x="442" y="382">Find a container&#x27;s layers</text>
+  <text class="m" x="442" y="402">grep &lt;id&gt; /proc/self/mountinfo</text>
+  <text class="d" x="808" y="402" text-anchor="end">upperdir=, lowerdir=</text>
+  <text class="m" x="442" y="424">ctr -n moby snapshots ls</text>
+  <text class="d" x="808" y="424" text-anchor="end">key = container ID</text>
+  <text class="m" x="442" y="446">ctr -n moby snapshots usage &lt;id&gt;</text>
+  <text class="d" x="808" y="446" text-anchor="end">size, inodes</text>
+</svg>

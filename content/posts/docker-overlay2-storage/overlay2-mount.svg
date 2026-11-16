@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 620" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The overlay mount of the web container</title>
+  <desc id="d">The web container from nginx:1.29-alpine on the classic overlay2 store. merged/ is the mount point and the container&#x27;s root. Below it the upper directory diff/ holds custom.conf (added), a full copy of nginx.conf (changed) and a whiteout character device 0,0 for 50x.html (deleted). work/ is overlayfs scratch space. The nine lower directories, top first, are the -init layer with placeholders for /etc/hosts, /etc/hostname and /etc/resolv.conf, then the eight image layers: 7ee301105b06 (49M), d61dc8ae93f3, 41b64ccf1849, 479ec2385d56, 6a7efbcde9bd, 58fc66845c36, 80209f06d80e (5.6M, installs nginx and nginx.conf) and 6eebd7adeb26 (9.0M, the Alpine base). A lookup goes down from the top and stops at the first match: custom.conf and nginx.conf are found in the upper directory, 50x.html stops at the whiteout so it appears deleted, and mime.types falls through to layer 80209f06d80e.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c92a2a"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #c92a2a; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.4; fill: none; marker-end: url(#ag); }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .sd  { fill: #ffffff; stroke: #adb5bd; stroke-dasharray: 4 3; }
+      .hl  { fill: #fff3bf; stroke: #fab005; }
+    </style>
+  </defs>
+  <rect width="840" height="620" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The overlay mount of the web container (nginx:1.29-alpine)</text>
+  <text class="sub" x="20" y="48">Classic overlay2 store, Docker 29.9.2; directory names shortened to 12 characters</text>
+  <rect class="r" x="20" y="72" width="470" height="46" rx="6"/>
+  <text class="tb" x="32" y="91">merged/</text><text class="d" x="100" y="91">MergedDir: the mount point, the container's /</text>
+  <text class="ms" x="32" y="108">exists only while the container runs; runc pivot_roots into it</text>
+  <rect class="g" x="20" y="132" width="470" height="96" rx="6"/>
+  <text class="tb" x="32" y="151">152dcc436cb6/diff</text><text class="d" x="162" y="151">UpperDir: read-write, this container only</text>
+  <text class="mb" x="34" y="170">A</text><text class="m" x="52" y="170">etc/nginx/custom.conf</text><text class="d" x="270" y="170">new file</text>
+  <text class="mb" x="34" y="188">C</text><text class="m" x="52" y="188">etc/nginx/nginx.conf</text><text class="d" x="270" y="188">whole file copied up, then changed</text>
+  <text class="mb" x="34" y="206">D</text><text class="m" x="52" y="206">usr/share/nginx/html/50x.html</text><text class="d" x="270" y="206">whiteout: char device 0, 0</text>
+  <rect class="n" x="20" y="236" width="470" height="26" rx="6"/>
+  <text class="tb" x="32" y="253">152dcc436cb6/work</text><text class="d" x="162" y="253">WorkDir: scratch space for atomic copy-up and rename</text>
+  <text class="lb" x="20" y="272">LOWERDIR: READ-ONLY, TOP FIRST</text>
+  <rect class="w" x="20" y="280" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="296">152dcc436cb6-init/diff</text>
+  <text class="ms" x="190" y="296"></text>
+  <text class="d" x="226" y="296">-init: empty /etc/hosts, hostname, resolv.conf</text>
+  <rect class="s" x="20" y="310" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="326">7ee301105b06/diff</text>
+  <text class="ms" x="190" y="326">49M</text>
+  <text class="d" x="226" y="326">top image layer: the 48.3MB RUN in docker history</text>
+  <rect class="s" x="20" y="340" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="356">d61dc8ae93f3/diff</text>
+  <text class="ms" x="190" y="356">16K</text>
+  <text class="d" x="226" y="356">docker-entrypoint.d/30-tune-worker-processes.sh</text>
+  <rect class="s" x="20" y="370" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="386">41b64ccf1849/diff</text>
+  <text class="ms" x="190" y="386">12K</text>
+  <text class="d" x="226" y="386"></text>
+  <rect class="s" x="20" y="400" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="416">479ec2385d56/diff</text>
+  <text class="ms" x="190" y="416">12K</text>
+  <text class="d" x="226" y="416"></text>
+  <rect class="s" x="20" y="430" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="446">6a7efbcde9bd/diff</text>
+  <text class="ms" x="190" y="446">12K</text>
+  <text class="d" x="226" y="446"></text>
+  <rect class="s" x="20" y="460" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="476">58fc66845c36/diff</text>
+  <text class="ms" x="190" y="476">8K</text>
+  <text class="d" x="226" y="476">docker-entrypoint.sh</text>
+  <rect class="hl" x="20" y="490" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="506">80209f06d80e/diff</text>
+  <text class="ms" x="190" y="506">5.6M</text>
+  <text class="d" x="226" y="506">installs nginx: nginx.conf, mime.types, 50x.html</text>
+  <rect class="s" x="20" y="520" width="470" height="24" rx="5"/>
+  <text class="m" x="32" y="536">6eebd7adeb26/diff</text>
+  <text class="ms" x="190" y="536">9.0M</text>
+  <text class="d" x="226" y="536">base layer: Alpine</text>
+  <text class="lb" x="540" y="80">A LOOKUP STOPS AT THE FIRST MATCH</text>
+  <rect class="s" x="540" y="96" width="280" height="40" rx="6"/>
+  <text class="m" x="550" y="112">cat /etc/nginx/custom.conf</text>
+  <text class="d" x="550" y="128">found in the upper dir</text>
+  <path class="lng" d="M540,116 C510,116 520,166 492,166"/>
+  <rect class="s" x="540" y="152" width="280" height="40" rx="6"/>
+  <text class="m" x="550" y="168">cat /etc/nginx/nginx.conf</text>
+  <text class="d" x="550" y="184">the upper copy hides the image&#x27;s</text>
+  <path class="lng" d="M540,172 C510,172 520,184 492,184"/>
+  <rect class="s" x="540" y="208" width="280" height="40" rx="6"/>
+  <text class="m" x="550" y="224">ls html/50x.html</text>
+  <text class="d" x="550" y="240">whiteout: No such file or directory</text>
+  <path class="lnx" d="M540,228 C510,228 520,202 492,202"/>
+  <rect class="s" x="540" y="384" width="280" height="40" rx="6"/>
+  <text class="m" x="550" y="400">cat /etc/nginx/mime.types</text>
+  <text class="d" x="550" y="416">found in 80209f06d80e, the 8th lower dir</text>
+  <path class="lng" d="M540,404 C510,404 520,502 492,502"/>
+  <rect class="n" x="20" y="560" width="800" height="44" rx="6"/>
+  <text class="c" x="32" y="578">The mount passes the lower directories as short links (lowerdir=/var/lib/docker/overlay2/l/LKBO26AKYGKX…) to keep the option string</text>
+  <text class="c" x="32" y="594">under the kernel's limit; docker inspect shows the full paths. 127 image layers is the most a container can start from.</text>
+</svg>
