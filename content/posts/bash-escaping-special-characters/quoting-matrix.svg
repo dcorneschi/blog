@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 604" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which characters stay special in each quoting context</title>
+  <desc id="d">Unquoted, every listed character is special. Inside double quotes only $, backtick, backslash (before $, backtick, double quote, backslash and newline only), the closing double quote and, in an interactive shell, ! stay special. Inside single quotes everything is literal and the next single quote ends the string. Inside ANSI-C $&#x27;...&#x27; quotes only the backslash escapes and the closing single quote are special.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#adb5bd"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; text-anchor: middle; }
+      .cs  { font-size: 9.5px; fill: #495057; text-anchor: middle; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .lne { stroke: #adb5bd; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="840" height="604" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which characters stay special in each quoting context</text>
+  <text class="sub" x="20" y="48">Every cell checked in bash 5.2.21 (Ubuntu 24.04); bash 3.2.57 behaves the same apart from \u in $'...'</text>
+  <text class="lb" x="20" y="98">CHARACTER</text>
+  <text class="lb" x="362" y="98" text-anchor="middle">UNQUOTED</text>
+  <text class="lb" x="492" y="98" text-anchor="middle">&quot;...&quot;</text>
+  <text class="lb" x="622" y="98" text-anchor="middle">&#x27;...&#x27;</text>
+  <text class="lb" x="752" y="98" text-anchor="middle">$&#x27;...&#x27;</text>
+  <text class="mb" x="20" y="133">$</text>
+  <text class="d" x="150" y="133">expansion</text>
+  <rect class="x" x="300" y="114" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="134.0">expands</text>
+  <rect class="x" x="430" y="114" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="134.0">expands</text>
+  <rect class="g" x="560" y="114" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="134.0">literal</text>
+  <rect class="g" x="690" y="114" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="134.0">literal</text>
+  <text class="mb" x="20" y="173">`</text>
+  <text class="d" x="150" y="173">command substitution</text>
+  <rect class="x" x="300" y="154" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="174.0">runs</text>
+  <rect class="x" x="430" y="154" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="174.0">runs</text>
+  <rect class="g" x="560" y="154" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="174.0">literal</text>
+  <rect class="g" x="690" y="154" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="174.0">literal</text>
+  <text class="mb" x="20" y="213">\</text>
+  <text class="d" x="150" y="213">escape</text>
+  <rect class="x" x="300" y="194" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="208.0">escapes</text>
+  <text class="cs" x="362.0" y="221.0">any next char</text>
+  <rect class="w" x="430" y="194" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="208.0">escapes</text>
+  <text class="cs" x="492.0" y="221.0">only $ ` &quot; \ newline</text>
+  <rect class="g" x="560" y="194" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="214.0">literal</text>
+  <rect class="x" x="690" y="194" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="208.0">escapes</text>
+  <text class="cs" x="752.0" y="221.0">\n \t \&#x27; \xHH \uHHHH</text>
+  <text class="mb" x="20" y="253">&quot;</text>
+  <text class="d" x="150" y="253">double quote</text>
+  <rect class="x" x="300" y="234" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="254.0">opens</text>
+  <rect class="x" x="430" y="234" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="254.0">ends string</text>
+  <rect class="g" x="560" y="234" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="254.0">literal</text>
+  <rect class="g" x="690" y="234" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="254.0">literal</text>
+  <text class="mb" x="20" y="293">&#x27;</text>
+  <text class="d" x="150" y="293">single quote</text>
+  <rect class="x" x="300" y="274" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="294.0">opens</text>
+  <rect class="g" x="430" y="274" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="294.0">literal</text>
+  <rect class="x" x="560" y="274" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="288.0">ends string</text>
+  <text class="cs" x="622.0" y="301.0">no escape</text>
+  <rect class="x" x="690" y="274" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="288.0">ends string</text>
+  <text class="cs" x="752.0" y="301.0">\&#x27; gives a &#x27;</text>
+  <text class="mb" x="20" y="333">!</text>
+  <text class="d" x="150" y="333">history</text>
+  <rect class="w" x="300" y="314" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="328.0">expands</text>
+  <text class="cs" x="362.0" y="341.0">interactive</text>
+  <rect class="w" x="430" y="314" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="328.0">expands</text>
+  <text class="cs" x="492.0" y="341.0">interactive</text>
+  <rect class="g" x="560" y="314" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="334.0">literal</text>
+  <rect class="g" x="690" y="314" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="334.0">literal</text>
+  <text class="mb" x="20" y="373">* ? [ ]</text>
+  <text class="d" x="150" y="373">globs</text>
+  <rect class="x" x="300" y="354" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="374.0">match files</text>
+  <rect class="g" x="430" y="354" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="374.0">literal</text>
+  <rect class="g" x="560" y="354" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="374.0">literal</text>
+  <rect class="g" x="690" y="354" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="374.0">literal</text>
+  <text class="mb" x="20" y="413">{ }  ~</text>
+  <text class="d" x="150" y="413">brace, tilde</text>
+  <rect class="x" x="300" y="394" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="414.0">expand</text>
+  <rect class="g" x="430" y="394" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="414.0">literal</text>
+  <rect class="g" x="560" y="394" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="414.0">literal</text>
+  <rect class="g" x="690" y="394" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="414.0">literal</text>
+  <text class="mb" x="20" y="453">| &amp; ; &lt; &gt; ( )</text>
+  <text class="d" x="150" y="453">operators</text>
+  <rect class="x" x="300" y="434" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="454.0">syntax</text>
+  <rect class="g" x="430" y="434" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="454.0">literal</text>
+  <rect class="g" x="560" y="434" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="454.0">literal</text>
+  <rect class="g" x="690" y="434" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="454.0">literal</text>
+  <text class="mb" x="20" y="493">#</text>
+  <text class="d" x="150" y="493">comment</text>
+  <rect class="x" x="300" y="474" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="488.0">comment</text>
+  <text class="cs" x="362.0" y="501.0">at word start</text>
+  <rect class="g" x="430" y="474" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="494.0">literal</text>
+  <rect class="g" x="560" y="474" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="494.0">literal</text>
+  <rect class="g" x="690" y="474" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="494.0">literal</text>
+  <text class="mb" x="20" y="533">space, tab</text>
+  <text class="d" x="150" y="533">word splitting</text>
+  <rect class="x" x="300" y="514" width="124" height="32" rx="5"/>
+  <text class="c" x="362.0" y="534.0">splits</text>
+  <rect class="g" x="430" y="514" width="124" height="32" rx="5"/>
+  <text class="c" x="492.0" y="534.0">literal</text>
+  <rect class="g" x="560" y="514" width="124" height="32" rx="5"/>
+  <text class="c" x="622.0" y="534.0">literal</text>
+  <rect class="g" x="690" y="514" width="124" height="32" rx="5"/>
+  <text class="c" x="752.0" y="534.0">literal</text>
+  <rect class="x" x="20" y="570" width="16" height="14" rx="5"/>
+  <text class="c" x="28.0" y="581.0"></text>
+  <text class="d" x="42" y="581">special</text>
+  <rect class="w" x="115" y="570" width="16" height="14" rx="5"/>
+  <text class="c" x="123.0" y="581.0"></text>
+  <text class="d" x="137" y="581">special in some cases</text>
+  <rect class="g" x="308" y="570" width="16" height="14" rx="5"/>
+  <text class="c" x="316.0" y="581.0"></text>
+  <text class="d" x="330" y="581">literal</text>
+</svg>

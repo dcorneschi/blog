@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 542" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">The SSH steps of one ad-hoc command</title>
+  <desc id="d">Without pipelining, ansible web01 -m ping runs seven SSH commands: find the remote home, create a private temp dir, discover Python, upload AnsiballZ_ping.py over SFTP, chmod it, run it with the host Python, which prints JSON, and remove the temp dir. With pipelining = True it runs two: discover Python, then run the Python interpreter with the module sent on stdin, so nothing is written to disk. Both reuse one SSH master connection (ControlMaster=auto, ControlPersist=60s).</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="542" fill="#ffffff"/>
+  <text class="h" x="20" y="28">The SSH steps of one ad-hoc command: ansible web01 -m ping</text>
+  <text class="sub" x="20" y="48">The EXEC and PUT lines of -vvv, ansible-core 2.21.4 against Ubuntu 24.04</text>
+  <text class="lb" x="20" y="90">DEFAULT: PIPELINING OFF, 7 SSH COMMANDS</text>
+  <rect class="n" x="20" y="108" width="380" height="40" rx="6"/>
+  <circle class="num" cx="38" cy="128" r="10"/>
+  <text class="numt" x="38" y="132">1</text>
+  <text class="tb" x="56" y="124">Find the remote home</text>
+  <text class="ms" x="56" y="140">echo ~root</text>
+  <path class="lne" d="M38,148 L38,160"/>
+  <rect class="n" x="20" y="160" width="380" height="40" rx="6"/>
+  <circle class="num" cx="38" cy="180" r="10"/>
+  <text class="numt" x="38" y="184">2</text>
+  <text class="tb" x="56" y="176">Create a private temp dir</text>
+  <text class="ms" x="56" y="192">umask 77 &amp;&amp; mkdir ~/.ansible/tmp/ansible-tmp-…</text>
+  <path class="lne" d="M38,200 L38,212"/>
+  <rect class="n" x="20" y="212" width="380" height="40" rx="6"/>
+  <circle class="num" cx="38" cy="232" r="10"/>
+  <text class="numt" x="38" y="236">3</text>
+  <text class="tb" x="56" y="228">Discover Python (first module per host)</text>
+  <text class="ms" x="56" y="244">command -v python3.14 python3.13 …</text>
+  <path class="lne" d="M38,252 L38,264"/>
+  <rect class="w" x="20" y="264" width="380" height="40" rx="6"/>
+  <circle class="num" cx="38" cy="284" r="10"/>
+  <text class="numt" x="38" y="288">4</text>
+  <text class="tb" x="56" y="280">Upload the module over SFTP</text>
+  <text class="ms" x="56" y="296">PUT AnsiballZ_ping.py</text>
+  <path class="lne" d="M38,304 L38,316"/>
+  <rect class="n" x="20" y="316" width="380" height="40" rx="6"/>
+  <circle class="num" cx="38" cy="336" r="10"/>
+  <text class="numt" x="38" y="340">5</text>
+  <text class="tb" x="56" y="332">Make it executable</text>
+  <text class="ms" x="56" y="348">chmod u+rwx …/AnsiballZ_ping.py</text>
+  <path class="lne" d="M38,356 L38,368"/>
+  <rect class="g" x="20" y="368" width="380" height="40" rx="6"/>
+  <circle class="num" cx="38" cy="388" r="10"/>
+  <text class="numt" x="38" y="392">6</text>
+  <text class="tb" x="56" y="384">Run it; it prints JSON</text>
+  <text class="ms" x="56" y="400">/usr/bin/python3.12 …/AnsiballZ_ping.py</text>
+  <path class="lne" d="M38,408 L38,420"/>
+  <rect class="n" x="20" y="420" width="380" height="40" rx="6"/>
+  <circle class="num" cx="38" cy="440" r="10"/>
+  <text class="numt" x="38" y="444">7</text>
+  <text class="tb" x="56" y="436">Remove the temp dir</text>
+  <text class="ms" x="56" y="452">rm -f -r ~/.ansible/tmp/ansible-tmp-…</text>
+  <text class="lb" x="440" y="90">PIPELINING = TRUE, 2 SSH COMMANDS</text>
+  <rect class="n" x="440" y="108" width="380" height="40" rx="6"/>
+  <circle class="num" cx="458" cy="128" r="10"/>
+  <text class="numt" x="458" y="132">1</text>
+  <text class="tb" x="476" y="124">Discover Python (first module per host)</text>
+  <text class="ms" x="476" y="140">command -v python3.14 python3.13 …</text>
+  <path class="lne" d="M458,148 L458,160"/>
+  <rect class="g" x="440" y="160" width="380" height="40" rx="6"/>
+  <circle class="num" cx="458" cy="180" r="10"/>
+  <text class="numt" x="458" y="184">2</text>
+  <text class="tb" x="476" y="176">Send the module on stdin and run it</text>
+  <text class="ms" x="476" y="192">/bin/sh -c /usr/bin/python3.12  &lt; AnsiballZ_ping.py</text>
+  <text class="d" x="440" y="232">Nothing is written to the host: no temp dir,</text>
+  <text class="d" x="440" y="248">no upload, no chmod, no cleanup.</text>
+  <text class="d" x="440" y="264"></text>
+  <text class="d" x="440" y="280">With become, sudo must not require a tty</text>
+  <text class="d" x="440" y="296">(requiretty); Ubuntu 24.04 and Rocky 9 don&#x27;t set it.</text>
+  <text class="d" x="440" y="312"></text>
+  <text class="d" x="440" y="328">Enable: [ssh_connection] pipelining = True</text>
+  <text class="ms" x="440" y="344">or -e ansible_ssh_pipelining=true</text>
+  <rect class="r" x="20" y="480" width="800" height="40" rx="6"/>
+  <text class="c" x="34" y="497">Every step reuses one SSH master connection: Ansible runs ssh with ControlMaster=auto and ControlPersist=60s by default,</text>
+  <text class="c" x="34" y="512">so only the first command pays for the TCP and key exchange. The upload (step 4) is the PUT line in -vvv output.</text>
+</svg>

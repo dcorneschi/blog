@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 486" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">command, shell, raw or script</title>
+  <desc id="d">Decision chart. Is the script a file on the control node? Yes: use script, which copies it, runs it and removes it, and accepts arguments, chdir and executable. No: does the host have Python? No: use raw, which sends the command over plain SSH with no module, so there is no creates or removes, and check mode skips it; use it to bootstrap Python. Yes: does the command need pipes, redirects, &amp;&amp;, globs or VAR=value assignments? Yes: use shell, which runs /bin/sh (dash on Ubuntu) or executable=/bin/bash. No: use command, the default without -m, which runs the program directly with no shell, so pipes and redirects become plain arguments. Before any of them, check whether a dedicated module such as apt, service, copy or user does the job, because those are idempotent and support check mode.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 13px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.6; fill: none; marker-end: url(#a); }
+      .dash{ stroke: #868e96; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="486" fill="#ffffff"/>
+  <text class="h" x="20" y="28">command, shell, raw or script?</text>
+  <text class="sub" x="20" y="48">Behaviour checked with ansible-core 2.21.4 against Ubuntu 24.04 and Rocky Linux 9</text>
+  <rect class="rw" x="20" y="66" width="800" height="40" rx="6"/>
+  <text class="tb" x="34" y="83">First: is there a module for it?</text>
+  <text class="d" x="34" y="98">apt, dnf, service, copy, user, cron… are idempotent, report changed correctly and support --check. The four below are for everything else.</text>
+  <rect class="s" x="20" y="130" width="330" height="56" rx="6"/>
+  <text class="tb" x="34" y="154">Is the script a file on the control node?</text>
+  <text class="ms" x="34" y="172">./scripts/setup.sh, ./scripts/setup.py</text>
+  <path class="lne" d="M350,158.0 L468,158.0"/>
+  <text class="yes" x="364" y="152.0">YES</text>
+  <rect class="g" x="470" y="122" width="350" height="72" rx="6"/>
+  <text class="mb" x="484" y="142">script</text>
+  <text class="d" x="550" y="142">copies the file, runs it, removes it</text>
+  <text class="ms" x="484" y="162">script -a &quot;./setup.sh arg1 chdir=/opt&quot;</text>
+  <text class="d" x="484" y="180">executable=python3 picks the interpreter</text>
+  <path class="lne" d="M80,186 L80,230"/>
+  <text class="no" x="90" y="201">NO</text>
+  <rect class="s" x="20" y="230" width="330" height="56" rx="6"/>
+  <text class="tb" x="34" y="254">Does the host have Python?</text>
+  <text class="ms" x="34" y="272">minimal images, network devices, fresh installs</text>
+  <path class="lne" d="M350,258.0 L468,258.0"/>
+  <text class="no" x="364" y="252.0">NO</text>
+  <rect class="w" x="470" y="222" width="350" height="72" rx="6"/>
+  <text class="mb" x="484" y="242">raw</text>
+  <text class="d" x="523" y="242">plain SSH, no module, no Python needed</text>
+  <text class="ms" x="484" y="262">raw -a &quot;dnf install -y python3&quot;</text>
+  <text class="d" x="484" y="280">no creates/removes; skipped in --check</text>
+  <path class="lne" d="M80,286 L80,330"/>
+  <text class="yes" x="90" y="301">YES</text>
+  <rect class="s" x="20" y="330" width="330" height="56" rx="6"/>
+  <text class="tb" x="34" y="354">Pipes, redirects, &amp;&amp;, globs, VAR=value?</text>
+  <text class="ms" x="34" y="372">ps aux | grep sshd, echo hi &gt; /tmp/f, *.log</text>
+  <path class="lne" d="M350,358.0 L468,358.0"/>
+  <text class="yes" x="364" y="352.0">YES</text>
+  <rect class="x" x="470" y="322" width="350" height="72" rx="6"/>
+  <text class="mb" x="484" y="342">shell</text>
+  <text class="d" x="541" y="342">runs through /bin/sh (dash on Ubuntu)</text>
+  <text class="ms" x="484" y="362">shell -a &#x27;ps aux | grep [n]ginx&#x27;</text>
+  <text class="d" x="484" y="380">executable=/bin/bash for bash syntax</text>
+  <path class="lne" d="M80,386 L80,422"/>
+  <text class="no" x="90" y="401">NO</text>
+  <rect class="r" x="20" y="424" width="800" height="56" rx="6"/>
+  <text class="mb" x="34" y="444">command</text>
+  <text class="d" x="120" y="444">the default without -m: runs the program directly, no shell: | and &gt; are passed as plain arguments</text>
+  <text class="ms" x="34" y="464">ansible web01 -a 'echo $HOME | wc -c'   prints   /root | wc -c</text>
+  <text class="d" x="480" y="464">creates= / removes= make it skip a second run</text>
+</svg>
