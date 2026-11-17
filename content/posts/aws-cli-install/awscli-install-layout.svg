@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 516" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What the AWS CLI installer puts on disk</title>
+  <desc id="d">The installer zip unpacks to aws/install and aws/dist. sudo ./aws/install copies dist into /usr/local/aws-cli/v2/&lt;version&gt;, points the symlink /usr/local/aws-cli/v2/current at it, and creates /usr/local/bin/aws and /usr/local/bin/aws_completer as symlinks through current. Each version keeps its own directory of about 270 MB. Timeline: install 2.40.4; --update with the 2.31.0 zip adds 2.31.0 and moves current to it while 2.40.4 stays; --update with the 2.40.4 zip again prints Found same AWS CLI version and skips, because the 2.40.4 directory exists, so 2.31.0 stays active; deleting /usr/local/aws-cli/v2/2.40.4 and running --update again installs it and moves current back.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c92a2a"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #c92a2a; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="840" height="516" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What the AWS CLI installer puts on disk</text>
+  <text class="sub" x="20" y="48">Official installer, AWS CLI 2.40.4 and 2.31.0, Ubuntu 24.04 and Rocky Linux 9</text>
+  <rect class="n" x="20" y="72" width="190" height="92" rx="6"/>
+  <text class="tb" x="32" y="91">awscliv2.zip (73-75 MB)</text>
+  <text class="m" x="32" y="108">aws/install</text>
+  <text class="m" x="32" y="125">aws/dist/aws</text>
+  <text class="m" x="32" y="142">aws/dist/aws_completer</text>
+  <path class="lne" d="M210,118 L262,118"/>
+  <text class="ms" x="214" y="110">install</text>
+  <rect class="g" x="264" y="72" width="290" height="128" rx="6"/>
+  <text class="tb" x="276" y="91">/usr/local/aws-cli/v2/</text>
+  <text class="m" x="286" y="108">2.31.0/</text>
+  <text class="m" x="286" y="125">2.40.4/</text>
+  <text class="m" x="286" y="142">current -&gt; 2.40.4</text>
+  <text class="d" x="276" y="159">one directory per version, ~270 MB each</text>
+  <text class="d" x="276" y="176">never deleted by --update</text>
+  <path class="lne" d="M554,140 L596,140"/>
+  <rect class="r" x="598" y="72" width="222" height="92" rx="6"/>
+  <text class="tb" x="610" y="91">/usr/local/bin/</text>
+  <text class="m" x="610" y="108">aws -&gt; …/v2/current/bin/aws</text>
+  <text class="m" x="610" y="125">aws_completer -&gt; …</text>
+  <text class="d" x="610" y="142">on PATH; follows current</text>
+  <text class="d" x="598" y="188">-i sets the v2 directory, -b the bin directory</text>
+  <text class="lb" x="20" y="236">--UPDATE ONLY CHECKS WHETHER THE VERSION DIRECTORY EXISTS</text>
+  <text class="lb" x="40" y="262">COMMAND</text><text class="lb" x="348" y="262">ZIP</text><text class="lb" x="430" y="262">VERSION DIRS</text><text class="lb" x="560" y="262">CURRENT</text><text class="lb" x="640" y="262">RESULT</text>
+  <rect class="g" x="20" y="274" width="800" height="42" rx="6"/>
+  <circle class="num" cx="38" cy="295" r="10"/><text class="numt" x="38" y="299">1</text>
+  <text class="m" x="56" y="299">sudo ./aws/install</text>
+  <text class="m" x="348" y="299">2.40.4 zip</text>
+  <text class="m" x="430" y="299">2.40.4</text>
+  <text class="mb" x="560" y="299">2.40.4</text>
+  <text class="d" x="640" y="299">installed</text>
+  <rect class="w" x="20" y="326" width="800" height="42" rx="6"/>
+  <circle class="num" cx="38" cy="347" r="10"/><text class="numt" x="38" y="351">2</text>
+  <text class="m" x="56" y="351">sudo ./aws/install --update</text>
+  <text class="m" x="348" y="351">2.31.0 zip</text>
+  <text class="m" x="430" y="351">2.31.0  2.40.4</text>
+  <text class="mb" x="560" y="351">2.31.0</text>
+  <text class="d" x="640" y="351">rolled back</text>
+  <rect class="x" x="20" y="378" width="800" height="42" rx="6"/>
+  <circle class="num" cx="38" cy="399" r="10"/><text class="numt" x="38" y="403">3</text>
+  <text class="m" x="56" y="403">sudo ./aws/install --update</text>
+  <text class="m" x="348" y="403">2.40.4 zip</text>
+  <text class="m" x="430" y="403">2.31.0  2.40.4</text>
+  <text class="mb" x="560" y="403">2.31.0</text>
+  <text class="d" x="640" y="396">Found same AWS CLI version</text><text class="d" x="640" y="411">… Skipping install.</text>
+  <rect class="g" x="20" y="430" width="800" height="42" rx="6"/>
+  <circle class="num" cx="38" cy="451" r="10"/><text class="numt" x="38" y="455">4</text>
+  <text class="m" x="56" y="455">rm -rf …/v2/2.40.4; ./aws/install --update</text>
+  <text class="m" x="348" y="455">2.40.4 zip</text>
+  <text class="m" x="430" y="455">2.31.0  2.40.4</text>
+  <text class="mb" x="560" y="455">2.40.4</text>
+  <text class="d" x="640" y="455">installed again</text>
+  <text class="c" x="20" y="498">Step 3 leaves the old version active without an error. Clean up afterwards: delete every directory in v2/ except the one current points to.</text>
+</svg>

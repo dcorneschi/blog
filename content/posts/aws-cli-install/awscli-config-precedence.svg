@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 446" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where the AWS CLI takes credentials and region from</title>
+  <desc id="d">Sources from highest to lowest priority: 1, command-line options such as --profile and --region; 2, environment variables: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, AWS_REGION which wins over AWS_DEFAULT_REGION, and AWS_PROFILE which only picks the profile; 3, the profile section in ~/.aws/credentials for keys; 4, the profile section in ~/.aws/config for region, output, SSO and credential_process; 5, when none of these has keys, IAM Identity Center, credential_process, the container role and the EC2 instance role. Checked with aws configure list: environment keys beat the profile picked with AWS_PROFILE, --profile beats environment keys, and AWS_REGION beats AWS_DEFAULT_REGION.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c92a2a"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #c92a2a; stroke-width: 1.4; fill: none; stroke-dasharray: 5 3; marker-end: url(#ax); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="840" height="446" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where the AWS CLI takes credentials and region from</text>
+  <text class="sub" x="20" y="48">Highest priority first; the right column is what aws configure list showed in the lab (AWS CLI 2.40.4)</text>
+  <rect class="r" x="20" y="72" width="456" height="58" rx="6"/>
+  <circle class="num" cx="38" cy="90" r="10"/><text class="numt" x="38" y="94">1</text>
+  <text class="tb" x="56" y="94">Command line</text>
+  <text class="m" x="200" y="93">--profile production</text>
+  <text class="m" x="200" y="109">--region eu-west-1</text>
+  <path class="lne" d="M38,130 L38,142"/>
+  <rect class="g" x="20" y="142" width="456" height="74" rx="6"/>
+  <circle class="num" cx="38" cy="160" r="10"/><text class="numt" x="38" y="164">2</text>
+  <text class="tb" x="56" y="164">Environment variables</text>
+  <text class="m" x="200" y="163">AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY</text>
+  <text class="m" x="200" y="179">AWS_REGION, then AWS_DEFAULT_REGION</text>
+  <text class="m" x="200" y="195">AWS_PROFILE only picks the profile</text>
+  <path class="lne" d="M38,216 L38,228"/>
+  <rect class="rw" x="20" y="228" width="456" height="42" rx="6"/>
+  <circle class="num" cx="38" cy="246" r="10"/><text class="numt" x="38" y="250">3</text>
+  <text class="tb" x="56" y="250">~/.aws/credentials</text>
+  <text class="m" x="200" y="249">[production] keys</text>
+  <path class="lne" d="M38,270 L38,282"/>
+  <rect class="rw" x="20" y="282" width="456" height="58" rx="6"/>
+  <circle class="num" cx="38" cy="300" r="10"/><text class="numt" x="38" y="304">4</text>
+  <text class="tb" x="56" y="304">~/.aws/config</text>
+  <text class="m" x="200" y="303">[profile production] region, output,</text>
+  <text class="m" x="200" y="319">sso_*, credential_process, role_arn</text>
+  <path class="lne" d="M38,340 L38,352"/>
+  <rect class="n" x="20" y="352" width="456" height="58" rx="6"/>
+  <circle class="num" cx="38" cy="370" r="10"/><text class="numt" x="38" y="374">5</text>
+  <text class="tb" x="56" y="374">Rest of the chain</text>
+  <text class="m" x="200" y="373">IAM Identity Center, credential_process,</text>
+  <text class="m" x="200" y="389">container role, EC2 instance role</text>
+  <rect class="s" x="500" y="72" width="320" height="58" rx="6"/>
+  <text class="c" x="512" y="90">AWS_PROFILE=production + env keys</text>
+  <text class="m" x="512" y="107">access_key  ****4567  env</text>
+  <text class="d" x="512" y="123">env keys beat the profile</text>
+  <path class="lng" d="M500,101 C488,101 488,179.0 478,179.0"/>
+  <rect class="s" x="500" y="142" width="320" height="58" rx="6"/>
+  <text class="c" x="512" y="160">--profile production + env keys</text>
+  <text class="m" x="512" y="177">access_key  ****MPLE  shared-credentials-file</text>
+  <text class="d" x="512" y="193">--profile beats env keys</text>
+  <path class="lng" d="M500,171 C488,171 488,101.0 478,101.0"/>
+  <rect class="s" x="500" y="212" width="320" height="58" rx="6"/>
+  <text class="c" x="512" y="230">AWS_REGION + AWS_DEFAULT_REGION</text>
+  <text class="m" x="512" y="247">region  sa-east-1  env</text>
+  <text class="d" x="512" y="263">AWS_REGION wins</text>
+  <path class="lng" d="M500,241 C488,241 488,179.0 478,179.0"/>
+  <rect class="s" x="500" y="282" width="320" height="58" rx="6"/>
+  <text class="c" x="512" y="300">no options, no env</text>
+  <text class="m" x="512" y="317">region  us-east-1  config-file</text>
+  <text class="d" x="512" y="333">the config file</text>
+  <path class="lng" d="M500,311 C488,311 488,311.0 478,311.0"/>
+  <text class="d" x="20" y="434">Run aws configure list to see each value with its TYPE (env, config-file, shared-credentials-file, manual) and LOCATION.</text>
+</svg>
