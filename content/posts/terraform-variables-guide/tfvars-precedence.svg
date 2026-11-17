@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 458" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Terraform variable precedence</title>
+  <desc id="d">From highest to lowest priority, tested with one variable set in every source at once on Terraform 1.17.1: -var and -var-file on the command line, in order, the last wins; *.auto.tfvars and *.auto.tfvars.json files sorted together by file name, so c.auto.tfvars wins over b.auto.tfvars.json which wins over a.auto.tfvars; terraform.tfvars.json; terraform.tfvars; TF_VAR_ environment variables; the default in the variable block.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect width="840" height="458" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Terraform variable precedence: which source wins</text>
+  <text class="sub" x="20" y="48">Highest first; one variable "who" set in every source, Terraform 1.17.1</text>
+  <text class="lb" x="20" y="80">SOURCE</text><text class="lb" x="400" y="80">TEST</text><text class="lb" x="640" y="80">WHO =</text>
+  <rect class="r" x="20" y="90" width="800" height="48" rx="6"/>
+  <circle class="num" cx="40" cy="114" r="10"/><text class="numt" x="40" y="118">6</text>
+  <text class="tb" x="60" y="110">-var and -var-file</text>
+  <text class="d" x="60" y="127">in command-line order: the last one wins</text>
+  <text class="ms" x="400" y="118">-var-file=x.tfvars -var who=cli</text>
+  <text class="mb" x="640" y="118">&quot;cli&quot;</text>
+  <rect class="g" x="20" y="146" width="800" height="48" rx="6"/>
+  <circle class="num" cx="40" cy="170" r="10"/><text class="numt" x="40" y="174">5</text>
+  <text class="tb" x="60" y="166">*.auto.tfvars, *.auto.tfvars.json</text>
+  <text class="d" x="60" y="183">sorted together by file name</text>
+  <text class="ms" x="400" y="174">a.auto.tfvars … c.auto.tfvars</text>
+  <text class="mb" x="640" y="174">&quot;c.auto.tfvars&quot;</text>
+  <rect class="g" x="20" y="202" width="800" height="48" rx="6"/>
+  <circle class="num" cx="40" cy="226" r="10"/><text class="numt" x="40" y="230">4</text>
+  <text class="tb" x="60" y="222">terraform.tfvars.json</text>
+  <text class="ms" x="400" y="230">+ terraform.tfvars, no auto files</text>
+  <text class="mb" x="640" y="230">&quot;terraform.tfvars.json&quot;</text>
+  <rect class="g" x="20" y="258" width="800" height="48" rx="6"/>
+  <circle class="num" cx="40" cy="282" r="10"/><text class="numt" x="40" y="286">3</text>
+  <text class="tb" x="60" y="278">terraform.tfvars</text>
+  <text class="ms" x="400" y="286">+ TF_VAR_who, no other files</text>
+  <text class="mb" x="640" y="286">&quot;terraform.tfvars&quot;</text>
+  <rect class="w" x="20" y="314" width="800" height="48" rx="6"/>
+  <circle class="num" cx="40" cy="338" r="10"/><text class="numt" x="40" y="342">2</text>
+  <text class="tb" x="60" y="334">TF_VAR_who environment variable</text>
+  <text class="d" x="60" y="351">string, or HCL for lists, maps, objects</text>
+  <text class="ms" x="400" y="342">TF_VAR_who=env, no files</text>
+  <text class="mb" x="640" y="342">&quot;env&quot;</text>
+  <rect class="n" x="20" y="370" width="800" height="48" rx="6"/>
+  <circle class="num" cx="40" cy="394" r="10"/><text class="numt" x="40" y="398">1</text>
+  <text class="tb" x="60" y="390">default in the variable block</text>
+  <text class="d" x="60" y="407">used when nothing else sets a value</text>
+  <text class="ms" x="400" y="398">nothing set</text>
+  <text class="mb" x="640" y="398">&quot;default&quot;</text>
+  <text class="d" x="20" y="440">A value in a file for an undeclared variable is a warning; with -var it is an error. -var x=null passes the string "null".</text>
+</svg>
