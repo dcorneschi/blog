@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 412" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">A troubleshooting order</title>
+  <desc id="d">Step 1: kubectl get pod, for status, restarts and node. If the pod is Pending or a container never started (ImagePullBackOff, CreateContainerConfigError), go to kubectl describe pod and read the events at the bottom. If a container started and failed or restarts, read kubectl logs, then kubectl logs --previous once it runs again, and check State and Last State in describe for exit codes and OOMKilled. If it runs but is not ready, describe shows the probe failures in the events. If no pod exists, describe the Deployment, ReplicaSet or node, or list kubectl get events sorted by lastTimestamp. For anything older than an hour, use your log collector and event exporter.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.6; fill: none; marker-end: url(#ab); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+      .barb{ fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="412" fill="#ffffff"/>
+  <text class="h" x="20" y="28">A troubleshooting order</text>
+  <text class="sub" x="20" y="48">Start with the status; it tells you which command has the answer</text>
+  <rect class="s" x="20" y="70" width="260" height="50" rx="6"/>
+  <text class="mb" x="32" y="90">kubectl get pod -o wide</text>
+  <text class="d" x="32" y="106">status, restarts, node</text>
+  <rect class="n" x="330" y="76" width="210" height="50" rx="6"/>
+  <text class="c" x="342" y="96">Pending, ImagePullBackOff,</text>
+  <text class="c" x="342" y="112">CreateContainerConfigError</text>
+  <rect class="r" x="570" y="76" width="250" height="50" rx="6"/>
+  <text class="mb" x="582" y="96">kubectl describe pod</text>
+  <text class="d" x="582" y="112">events at the bottom</text>
+  <path class="lne" d="M540,94 L568,94"/>
+  <path class="lne" d="M280,95 C305,95 305,94 328,94"/>
+  <rect class="n" x="330" y="160" width="210" height="50" rx="6"/>
+  <text class="c" x="342" y="180">Error, CrashLoopBackOff,</text>
+  <text class="c" x="342" y="196">OOMKilled, restarts &gt; 0</text>
+  <rect class="g" x="570" y="160" width="250" height="50" rx="6"/>
+  <text class="mb" x="582" y="180">kubectl logs  /  --previous</text>
+  <text class="d" x="582" y="196">then State + Last State in describe</text>
+  <path class="lne" d="M540,178 L568,178"/>
+  <path class="lne" d="M280,95 C305,95 305,178 328,178"/>
+  <rect class="n" x="330" y="244" width="210" height="36" rx="6"/>
+  <text class="c" x="342" y="264">Running but 0/1 ready</text>
+  <rect class="r" x="570" y="244" width="250" height="50" rx="6"/>
+  <text class="mb" x="582" y="264">kubectl describe pod</text>
+  <text class="d" x="582" y="280">events: probe failed</text>
+  <path class="lne" d="M540,262 L568,262"/>
+  <path class="lne" d="M280,95 C305,95 305,262 328,262"/>
+  <rect class="n" x="330" y="316" width="210" height="36" rx="6"/>
+  <text class="c" x="342" y="336">No pod at all</text>
+  <rect class="w" x="570" y="316" width="250" height="50" rx="6"/>
+  <text class="mb" x="582" y="336">describe deploy / rs / node</text>
+  <text class="d" x="582" y="352">kubectl get events --sort-by=...</text>
+  <path class="lne" d="M540,334 L568,334"/>
+  <path class="lne" d="M280,95 C305,95 305,334 328,334"/>
+  <text class="d" x="20" y="396">Older than the event TTL or the last log rotation: only a log collector and an event exporter still have it.</text>
+</svg>

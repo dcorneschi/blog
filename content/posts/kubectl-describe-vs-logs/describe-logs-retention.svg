@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 428" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How long events and container logs are kept</title>
+  <desc id="d">Events: kept for the event TTL after their last update, 1 hour by default, even after the pod is deleted; a repeating event is updated and stays. Pod spec and status: until the pod is deleted. Current container log: until the file is rotated at 10Mi or the pod is deleted; kubectl logs reads only the current file, so after a rotation it can show nothing although the lines are still on the node. Previous container log: until the next restart. Rotated files: up to containerLogMaxFiles, 5 by default, on the node only. After the pod is deleted, kubectl logs and describe both return NotFound, while kubectl get events still lists the events until the TTL.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.6; fill: none; marker-end: url(#ab); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+      .barb{ fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="428" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How long each piece is kept</text>
+  <text class="sub" x="20" y="48">Defaults: --event-ttl 1h, containerLogMaxSize 10Mi, containerLogMaxFiles 5</text>
+  <line class="tick" x1="550" y1="70" x2="550" y2="360"/>
+  <text class="lb" x="556" y="82">POD DELETED</text>
+  <text class="c" x="20" y="112">Events (describe, get events)</text>
+  <rect class="barb" x="250" y="100" width="380" height="16" rx="3"/>
+  <text class="d" x="250" y="132">until 1 h after the last update, also after deletion</text>
+  <text class="c" x="20" y="164">Pod spec, status, exit codes</text>
+  <rect class="barb" x="250" y="152" width="300" height="16" rx="3"/>
+  <text class="d" x="250" y="184">until the pod is deleted</text>
+  <text class="c" x="20" y="216">Current container log</text>
+  <rect class="barg" x="310" y="204" width="240" height="16" rx="3"/>
+  <text class="d" x="310" y="236">until rotation at 10Mi</text>
+  <text class="c" x="20" y="268">Previous run (--previous)</text>
+  <rect class="barg" x="250" y="256" width="130" height="16" rx="3"/>
+  <text class="d" x="250" y="288">until the next restart</text>
+  <text class="c" x="20" y="320">Rotated log files</text>
+  <rect class="barw" x="270" y="308" width="280" height="16" rx="3"/>
+  <text class="d" x="270" y="340">on the node only; kubectl logs never reads them</text>
+  <rect class="s" x="20" y="364" width="800" height="48" rx="6"/>
+  <text class="c" x="32" y="384">Test with 64Ki files: a container printed 6000 lines (490 KB); 0.log was rotated to 0.log.20261118-152022 and</text>
+  <text class="c" x="32" y="400">kubectl logs printed 0 lines. Anything older or deleted needs a log collector and an event exporter.</text>
+</svg>

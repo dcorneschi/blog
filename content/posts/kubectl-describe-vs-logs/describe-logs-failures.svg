@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 402" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which command shows the cause of each pod failure</title>
+  <desc id="d">ImagePullBackOff: logs says waiting to start, describe events show Failed to pull image NotFound. CreateContainerConfigError: logs says waiting to start, describe events show configmap not found. Pending, unschedulable: logs prints nothing, describe events show FailedScheduling Insufficient cpu. Error or CrashLoopBackOff: logs show the application error, describe shows exit code 1 and BackOff. OOMKilled: logs stop mid-way, describe shows Reason OOMKilled and exit code 137. Running but not ready: logs show the probe requests only if the app logs them, describe events show Readiness probe failed with status 404. Init:Error: logs need -c with the init container name, describe shows its exit code 3.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.6; fill: none; marker-end: url(#ab); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+      .barb{ fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="402" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Which command shows the cause</text>
+  <text class="sub" x="20" y="48">Real output, Kubernetes 1.36; green = where the cause is</text>
+  <text class="lb" x="20" y="82">STATUS</text><text class="lb" x="230" y="82">KUBECTL LOGS</text><text class="lb" x="530" y="82">KUBECTL DESCRIBE</text>
+  <text class="mb" x="20" y="113">ImagePullBackOff</text>
+  <rect class="n" x="230" y="92" width="285" height="32" rx="6"/>
+  <text class="m" x="242" y="112">waiting to start</text>
+  <rect class="g" x="530" y="92" width="290" height="32" rx="6"/>
+  <text class="m" x="542" y="112">Failed to pull image ... NotFound</text>
+  <text class="mb" x="20" y="153">CreateContainerConfigError</text>
+  <rect class="n" x="230" y="132" width="285" height="32" rx="6"/>
+  <text class="m" x="242" y="152">waiting to start</text>
+  <rect class="g" x="530" y="132" width="290" height="32" rx="6"/>
+  <text class="m" x="542" y="152">configmap &quot;does-not-exist&quot; not found</text>
+  <text class="mb" x="20" y="193">Pending (unschedulable)</text>
+  <rect class="n" x="230" y="172" width="285" height="32" rx="6"/>
+  <text class="m" x="242" y="192">(prints nothing)</text>
+  <rect class="g" x="530" y="172" width="290" height="32" rx="6"/>
+  <text class="m" x="542" y="192">FailedScheduling: 1 Insufficient cpu</text>
+  <text class="mb" x="20" y="233">Error / CrashLoopBackOff</text>
+  <rect class="g" x="230" y="212" width="285" height="32" rx="6"/>
+  <text class="m" x="242" y="232">ERROR: cannot connect to db:5432</text>
+  <rect class="n" x="530" y="212" width="290" height="32" rx="6"/>
+  <text class="m" x="542" y="232">Exit Code: 1, BackOff</text>
+  <text class="mb" x="20" y="273">OOMKilled</text>
+  <rect class="n" x="230" y="252" width="285" height="32" rx="6"/>
+  <text class="m" x="242" y="272">allocating   (then nothing)</text>
+  <rect class="g" x="530" y="252" width="290" height="32" rx="6"/>
+  <text class="m" x="542" y="272">Reason: OOMKilled, Exit Code: 137</text>
+  <text class="mb" x="20" y="313">Running, 0/1 ready</text>
+  <rect class="n" x="230" y="292" width="285" height="32" rx="6"/>
+  <text class="m" x="242" y="312">probe requests, if the app logs them</text>
+  <rect class="g" x="530" y="292" width="290" height="32" rx="6"/>
+  <text class="m" x="542" y="312">Readiness probe failed: statuscode: 404</text>
+  <text class="mb" x="20" y="353">Init:Error</text>
+  <rect class="g" x="230" y="332" width="285" height="32" rx="6"/>
+  <text class="m" x="242" y="352">only with -c migrate</text>
+  <rect class="n" x="530" y="332" width="290" height="32" rx="6"/>
+  <text class="m" x="542" y="352">init container Exit Code: 3</text>
+  <text class="d" x="20" y="386">Never started: only describe helps. Started and failed: logs has the reason, describe the exit code.</text>
+</svg>

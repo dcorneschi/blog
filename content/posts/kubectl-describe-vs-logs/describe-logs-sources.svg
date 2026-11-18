@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 474" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Where kubectl describe and kubectl logs get their data</title>
+  <desc id="d">kubectl describe pod sends two requests to the API server: GET the Pod object, for spec, status, container states and conditions, and LIST Event objects with a field selector on the pod name, namespace and UID. Both come from etcd. Events are written by the scheduler, the kubelet and controllers, and expire after the event TTL, 1 hour by default. kubectl logs sends GET pods/name/log to the API server, which forwards it to the kubelet on the pod node. The kubelet reads the container log file under /var/log/pods, written by the container runtime from the container stdout and stderr. Logs never go through etcd.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.6; fill: none; marker-end: url(#ab); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+      .barb{ fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="474" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Where kubectl describe and kubectl logs get their data</text>
+  <text class="sub" x="20" y="48">Requests from kubectl -v=6, Kubernetes 1.36</text>
+  <rect class="n" x="20" y="80" width="200" height="60" rx="6"/>
+  <text class="mb" x="32" y="100">kubectl describe pod</text>
+  <text class="d" x="32" y="116">GET pod + LIST events</text>
+  <rect class="n" x="20" y="300" width="200" height="60" rx="6"/>
+  <text class="mb" x="32" y="320">kubectl logs</text>
+  <text class="d" x="32" y="336">GET pods/&lt;name&gt;/log</text>
+  <rect class="r" x="300" y="150" width="200" height="110" rx="6"/>
+  <text class="tb" x="312" y="170">API server</text>
+  <text class="d" x="312" y="186">serves Pod and Event</text>
+  <text class="d" x="312" y="202">objects from etcd;</text>
+  <text class="d" x="312" y="218">forwards /log to the</text>
+  <text class="d" x="312" y="234">kubelet on the node</text>
+  <rect class="rw" x="580" y="70" width="240" height="92" rx="6"/>
+  <text class="tb" x="592" y="90">etcd</text>
+  <text class="m" x="592" y="105">Pod: spec, status, states</text>
+  <text class="m" x="592" y="120">Events: TTL 1h by default</text>
+  <text class="d" x="592" y="135">written by scheduler, kubelet,</text>
+  <text class="d" x="592" y="150">controllers</text>
+  <rect class="g" x="580" y="260" width="240" height="126" rx="6"/>
+  <text class="tb" x="592" y="280">Node: kubelet + runtime</text>
+  <text class="m" x="592" y="297">/var/log/pods/&lt;ns&gt;_&lt;pod&gt;_&lt;uid&gt;/</text>
+  <text class="m" x="592" y="314">  &lt;container&gt;/0.log, 1.log</text>
+  <text class="d" x="592" y="331">stdout and stderr of the</text>
+  <text class="d" x="592" y="348">container, rotated at 10Mi,</text>
+  <text class="d" x="592" y="365">deleted with the pod</text>
+  <path class="lnb" d="M220,110 C260,110 260,180 298,180"/>
+  <path class="lng" d="M220,330 C260,330 260,235 298,235"/>
+  <path class="lnb" d="M500,180 C540,180 540,116 578,116"/>
+  <path class="lng" d="M500,235 C540,235 540,320 578,320"/>
+  <text class="ms" x="510" y="150">describe</text><text class="ms" x="516" y="285">logs</text>
+  <rect class="s" x="20" y="410" width="800" height="48" rx="6"/>
+  <text class="c" x="32" y="430">describe: what Kubernetes recorded about the pod (works before the container exists). logs: what the application wrote</text>
+  <text class="c" x="32" y="446">to stdout/stderr (needs a container that started; files on one node, never in etcd).</text>
+</svg>

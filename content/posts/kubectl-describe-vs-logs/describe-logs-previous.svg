@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 410" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How kubectl logs and --previous map to log files</title>
+  <desc id="d">A container that runs 15 seconds, then exits with code 2. Run 1 writes 0.log: run started at 15:19:37, giving up. The container restarts; run 2 writes 1.log: run started at 15:19:52. While run 2 is running, kubectl logs shows 1.log and kubectl logs --previous shows 0.log. A container that exits immediately spends its time waiting in back-off: then the last run is the current container, kubectl logs shows its output, and --previous failed with unable to retrieve container logs.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.6; fill: none; marker-end: url(#ab); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+      .barb{ fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+    </style>
+  </defs>
+  <rect width="840" height="410" fill="#ffffff"/>
+  <text class="h" x="20" y="28">kubectl logs and --previous: one file per run</text>
+  <text class="sub" x="20" y="48">/var/log/pods/dbg_slow_&lt;uid&gt;/slow/ on the node; a container that runs 15 s, then exits 2</text>
+  <rect class="n" x="20" y="76" width="360" height="72" rx="6"/>
+  <text class="mb" x="32" y="96">run 1  -&gt;  0.log</text>
+  <text class="m" x="32" y="114">stdout F run started at 15:19:37</text>
+  <text class="m" x="32" y="132">stderr F giving up       exit 2</text>
+  <path class="lne" d="M380,112 L438,112"/><text class="d" x="384" y="104">restart</text>
+  <rect class="g" x="440" y="76" width="380" height="72" rx="6"/>
+  <text class="mb" x="452" y="96">run 2  -&gt;  1.log   (running)</text>
+  <text class="m" x="452" y="114">stdout F run started at 15:19:52</text>
+  <text class="d" x="452" y="132">RESTARTS 1, STATUS Running</text>
+  <rect class="rw" x="440" y="170" width="380" height="40" rx="6"/>
+  <text class="m" x="452" y="190">kubectl logs slow                 -&gt; 1.log</text>
+  <rect class="rw" x="20" y="170" width="400" height="40" rx="6"/>
+  <text class="m" x="32" y="190">kubectl logs slow --previous   -&gt; 0.log</text>
+  <path class="lne" d="M630,170 L630,150"/><path class="lne" d="M200,170 L200,150"/>
+  <text class="lb" x="20" y="250">A CONTAINER THAT EXITS IMMEDIATELY (CRASHLOOPBACKOFF)</text>
+  <rect class="n" x="20" y="262" width="360" height="52" rx="6"/>
+  <text class="mb" x="32" y="282">last run (terminated)</text>
+  <text class="m" x="32" y="298">ERROR: cannot connect to db:5432</text>
+  <rect class="w" x="440" y="262" width="380" height="52" rx="6"/>
+  <text class="tb" x="452" y="282">waiting in back-off</text>
+  <text class="d" x="452" y="298">no newer container exists yet</text>
+  <path class="lne" d="M380,288 L438,288"/>
+  <rect class="g" x="20" y="330" width="360" height="40" rx="6"/>
+  <text class="m" x="32" y="350">kubectl logs crash  -&gt; the last run</text>
+  <rect class="x" x="440" y="330" width="380" height="40" rx="6"/>
+  <text class="m" x="452" y="350">--previous: unable to retrieve container logs</text>
+  <text class="d" x="20" y="394">In CrashLoopBackOff, try kubectl logs first; use --previous once the container is running again.</text>
+</svg>
