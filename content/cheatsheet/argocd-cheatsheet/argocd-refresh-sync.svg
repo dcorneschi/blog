@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 360" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Refresh, hard refresh, sync and self-heal</title>
+  <desc id="d">Normal refresh: re-reads Git, uses cached rendered manifests when the commit has not changed, compares, does not change the cluster; triggered periodically, by a webhook, the refresh annotation or argocd app get --refresh. Hard refresh: same but clears the manifest cache and renders again. Sync: applies the rendered manifests to the cluster, the only one that deploys; triggered by argocd app sync, the operation field, or automated sync on a new commit. Self-heal: automated sync triggered by drift in the cluster, for example kubectl scale, reverted within seconds.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="360" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Refresh, hard refresh, sync and self-heal</text>
+  <text class="sub" x="20" y="48">Only sync and self-heal change the cluster</text>
+  <rect class="r" x="20" y="70" width="190" height="42" rx="6"/>
+  <text class="tb" x="32" y="90">Normal refresh</text>
+  <rect class="s" x="20" y="120" width="190" height="96" rx="6"/>
+  <text class="c" x="32" y="140">re-reads Git</text>
+  <text class="c" x="32" y="156">cached manifests if</text>
+  <text class="c" x="32" y="172">the commit is the same</text>
+  <text class="c" x="32" y="188">compares, sets status</text>
+  <text class="lb" x="20" y="238">CHANGES THE CLUSTER</text>
+  <text class="tb" x="20" y="256">no</text>
+  <text class="lb" x="20" y="284">TRIGGERED BY</text>
+  <text class="ms" x="20" y="302">periodic, webhook,</text>
+  <text class="ms" x="20" y="318">refresh=normal,</text>
+  <text class="ms" x="20" y="334">app get --refresh</text>
+  <rect class="r" x="225" y="70" width="190" height="42" rx="6"/>
+  <text class="tb" x="237" y="90">Hard refresh</text>
+  <rect class="s" x="225" y="120" width="190" height="96" rx="6"/>
+  <text class="c" x="237" y="140">re-reads Git</text>
+  <text class="c" x="237" y="156">clears manifest cache,</text>
+  <text class="c" x="237" y="172">renders again</text>
+  <text class="c" x="237" y="188">compares, sets status</text>
+  <text class="lb" x="225" y="238">CHANGES THE CLUSTER</text>
+  <text class="tb" x="225" y="256">no</text>
+  <text class="lb" x="225" y="284">TRIGGERED BY</text>
+  <text class="ms" x="225" y="302">refresh=hard,</text>
+  <text class="ms" x="225" y="318">app get --hard-refresh</text>
+  <text class="ms" x="225" y="334"></text>
+  <rect class="g" x="430" y="70" width="190" height="42" rx="6"/>
+  <text class="tb" x="442" y="90">Sync</text>
+  <rect class="s" x="430" y="120" width="190" height="96" rx="6"/>
+  <text class="c" x="442" y="140">renders, then applies</text>
+  <text class="c" x="442" y="156">in phases and waves</text>
+  <text class="c" x="442" y="172">prunes with --prune</text>
+  <text class="c" x="442" y="188">records history</text>
+  <text class="lb" x="430" y="238">CHANGES THE CLUSTER</text>
+  <text class="ok" x="430" y="256">yes</text>
+  <text class="lb" x="430" y="284">TRIGGERED BY</text>
+  <text class="ms" x="430" y="302">argocd app sync,</text>
+  <text class="ms" x="430" y="318">operation field,</text>
+  <text class="ms" x="430" y="334">auto-sync: new commit</text>
+  <rect class="w" x="635" y="70" width="190" height="42" rx="6"/>
+  <text class="tb" x="647" y="90">Self-heal</text>
+  <rect class="s" x="635" y="120" width="190" height="96" rx="6"/>
+  <text class="c" x="647" y="140">auto-sync on drift</text>
+  <text class="c" x="647" y="156">in the cluster</text>
+  <text class="c" x="647" y="172">(kubectl scale, edit)</text>
+  <text class="c" x="647" y="188">reverted in seconds</text>
+  <text class="lb" x="635" y="238">CHANGES THE CLUSTER</text>
+  <text class="ok" x="635" y="256">yes</text>
+  <text class="lb" x="635" y="284">TRIGGERED BY</text>
+  <text class="ms" x="635" y="302">selfHeal: true,</text>
+  <text class="ms" x="635" y="318">any live change</text>
+  <text class="ms" x="635" y="334"></text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 420" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Sync phases and waves</title>
+  <desc id="d">One sync of the waves app: PreSync hook Job db-migrate created at 21:32:54 and succeeded at 21:33:10; wave -1 ConfigMap app-config applied at 21:33:10; wave 0 Deployment app applied at 21:33:10 and healthy at 21:33:12; wave 1 Service app applied at 21:33:14; PostSync hook Job smoke-test created at 21:33:14 and succeeded at 21:33:22. Each wave waits for the previous one to be healthy. 28 seconds in total.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="420" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Sync phases and waves</text>
+  <text class="sub" x="20" y="48">One real sync, 28 s in total: each step waits for the previous one to be healthy</text>
+  <circle class="num" cx="34" cy="94" r="11"/><text class="numt" x="34" y="98">1</text>
+  <rect class="rw" x="54" y="70" width="200" height="48" rx="6"/>
+  <text class="tb" x="66" y="90">PreSync hook</text>
+  <rect class="s" x="266" y="70" width="554" height="48" rx="6"/>
+  <text class="mb" x="278" y="90">Job/db-migrate</text>
+  <text class="ms" x="278" y="106">hook: PreSync   21:32:54 created, 21:33:10 Succeeded</text>
+  <path class="lne" d="M154,118 L154,132"/>
+  <circle class="num" cx="34" cy="158" r="11"/><text class="numt" x="34" y="162">2</text>
+  <rect class="r" x="54" y="134" width="200" height="48" rx="6"/>
+  <text class="tb" x="66" y="154">Sync, wave -1</text>
+  <rect class="s" x="266" y="134" width="554" height="48" rx="6"/>
+  <text class="mb" x="278" y="154">ConfigMap/app-config</text>
+  <text class="ms" x="278" y="170">sync-wave: &quot;-1&quot;   21:33:10 created</text>
+  <path class="lne" d="M154,182 L154,196"/>
+  <circle class="num" cx="34" cy="222" r="11"/><text class="numt" x="34" y="226">3</text>
+  <rect class="g" x="54" y="198" width="200" height="48" rx="6"/>
+  <text class="tb" x="66" y="218">Sync, wave 0</text>
+  <rect class="s" x="266" y="198" width="554" height="48" rx="6"/>
+  <text class="mb" x="278" y="218">Deployment/app</text>
+  <text class="ms" x="278" y="234">sync-wave: &quot;0&quot; (default)   21:33:10 created, 21:33:12 Healthy</text>
+  <path class="lne" d="M154,246 L154,260"/>
+  <circle class="num" cx="34" cy="286" r="11"/><text class="numt" x="34" y="290">4</text>
+  <rect class="r" x="54" y="262" width="200" height="48" rx="6"/>
+  <text class="tb" x="66" y="282">Sync, wave 1</text>
+  <rect class="s" x="266" y="262" width="554" height="48" rx="6"/>
+  <text class="mb" x="278" y="282">Service/app</text>
+  <text class="ms" x="278" y="298">sync-wave: &quot;1&quot;   21:33:14 created</text>
+  <path class="lne" d="M154,310 L154,324"/>
+  <circle class="num" cx="34" cy="350" r="11"/><text class="numt" x="34" y="354">5</text>
+  <rect class="rw" x="54" y="326" width="200" height="48" rx="6"/>
+  <text class="tb" x="66" y="346">PostSync hook</text>
+  <rect class="s" x="266" y="326" width="554" height="48" rx="6"/>
+  <text class="mb" x="278" y="346">Job/smoke-test</text>
+  <text class="ms" x="278" y="362">hook: PostSync   21:33:14 created, 21:33:22 Succeeded</text>
+  <text class="d" x="20" y="400">Hooks run on every sync. smoke-test (HookSucceeded) was deleted after passing; db-migrate (BeforeHookCreation) stayed until the next sync.</text>
+</svg>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 470" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Argo CD architecture</title>
+  <desc id="d">Users reach argocd-server through the web UI, the argocd CLI or kubectl on the Application resources. The repo-server clones Git and renders Helm, Kustomize or plain YAML into manifests, cached in Redis. The application-controller compares the rendered manifests with the live cluster, sets sync and health status on each Application, and applies changes during a sync or self-heal. The applicationset-controller generates Applications from ApplicationSets. Dex handles SSO. All state is in Kubernetes resources: Applications, AppProjects and Secrets for repositories and clusters.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="470" fill="#ffffff"/>
+  <text class="h" x="20" y="28">How Argo CD is built</text>
+  <text class="sub" x="20" y="48">Argo CD v3.6.1 in the argocd namespace; arrows show who calls whom</text>
+  <rect class="n" x="20" y="76" width="170" height="66" rx="6"/>
+  <text class="mb" x="32" y="96">You</text>
+  <text class="d" x="32" y="112">web UI, argocd CLI,</text>
+  <text class="d" x="32" y="128">kubectl on Applications</text>
+  <rect class="rw" x="20" y="330" width="170" height="66" rx="6"/>
+  <text class="mb" x="32" y="350">Git / Helm repo</text>
+  <text class="d" x="32" y="366">desired state</text>
+  <text class="d" x="32" y="382">repo Secrets: credentials</text>
+  <rect class="area" x="214" y="66" width="400" height="384" rx="10"/>
+  <text class="lb" x="230" y="88">NAMESPACE argocd</text>
+  <rect class="r" x="230" y="100" width="170" height="58" rx="6"/>
+  <text class="tb" x="242" y="120">argocd-server</text>
+  <text class="d" x="242" y="136">API, UI, login, RBAC</text>
+  <rect class="n" x="428" y="100" width="170" height="58" rx="6"/>
+  <text class="tb" x="440" y="120">argocd-dex-server</text>
+  <text class="d" x="440" y="136">SSO (OIDC, GitHub, LDAP)</text>
+  <rect class="g" x="230" y="196" width="368" height="58" rx="6"/>
+  <text class="tb" x="242" y="216">argocd-application-controller (StatefulSet)</text>
+  <text class="d" x="242" y="232">compare desired vs live, sync and health status, sync, self-heal</text>
+  <rect class="g" x="230" y="292" width="170" height="74" rx="6"/>
+  <text class="tb" x="242" y="312">argocd-repo-server</text>
+  <text class="d" x="242" y="328">clone Git, render Helm,</text>
+  <text class="d" x="242" y="344">Kustomize, Jsonnet, YAML</text>
+  <rect class="n" x="428" y="292" width="170" height="74" rx="6"/>
+  <text class="tb" x="440" y="312">argocd-redis</text>
+  <text class="d" x="440" y="328">cache: manifests,</text>
+  <text class="d" x="440" y="344">cluster state</text>
+  <rect class="g" x="230" y="384" width="368" height="52" rx="6"/>
+  <text class="tb" x="242" y="404">argocd-applicationset-controller</text>
+  <text class="d" x="242" y="420">ApplicationSet -&gt; Applications</text>
+  <rect class="w" x="640" y="160" width="180" height="150" rx="6"/>
+  <text class="tb" x="652" y="180">Kubernetes cluster</text>
+  <text class="d" x="652" y="198">Application, AppProject,</text>
+  <text class="d" x="652" y="216">ApplicationSet resources</text>
+  <text class="d" x="652" y="234"></text>
+  <text class="tb" x="652" y="252">your workloads</text>
+  <text class="d" x="652" y="270">Deployments, Services...</text>
+  <text class="d" x="652" y="288">tracking-id annotation</text>
+  <path class="lne" d="M190,118 L228,126"/>
+  <path class="lne" d="M400,129 L426,129"/>
+  <path class="lne" d="M315,254 L315,290"/>
+  <path class="lne" d="M400,329 L426,329"/>
+  <path class="lne" d="M228,342 L192,356"/><text class="ms" x="196" y="320">clone</text>
+  <path class="lnb" d="M598,225 L638,225"/><text class="ms" x="600" y="216">apply</text>
+  <path class="lne" d="M400,150 C430,176 600,176 638,184"/>
+  <path class="lne" d="M598,410 C630,410 640,340 680,312"/>
+</svg>

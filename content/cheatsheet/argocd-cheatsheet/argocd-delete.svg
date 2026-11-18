@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 392" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Deleting an Application</title>
+  <desc id="d">With the resources finalizer, deleting the Application deletes every managed resource first, then the Application; the namespace created by CreateNamespace stays. Without the finalizer, only the Application object is deleted and the workloads keep running. If a managed resource cannot be deleted, for example it has its own finalizer, the Application stays with a deletionTimestamp; removing the Application finalizer releases it and leaves the resources behind.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="392" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Deleting an Application</text>
+  <text class="sub" x="20" y="48">kubectl -n argocd delete app &lt;app&gt;; the finalizer decides what happens to the workloads</text>
+  <rect class="x" x="20" y="70" width="320" height="92" rx="6"/>
+  <text class="tb" x="32" y="90">With resources-finalizer.argocd.argoproj.io</text>
+  <rect class="s" x="356" y="70" width="464" height="92" rx="6"/>
+  <text class="c" x="368" y="90">controller deletes every managed resource</text>
+  <text class="c" x="368" y="108">then removes the finalizer, app is gone</text>
+  <text class="c" x="368" y="126">namespace from CreateNamespace stays</text>
+  <text class="mb" x="368" y="144">Deployment, Service: deleted</text>
+  <rect class="g" x="20" y="176" width="320" height="92" rx="6"/>
+  <text class="tb" x="32" y="196">Without the finalizer</text>
+  <rect class="s" x="356" y="176" width="464" height="92" rx="6"/>
+  <text class="c" x="368" y="196">only the Application object is deleted</text>
+  <text class="c" x="368" y="214">workloads keep running, now unmanaged</text>
+  <text class="c" x="368" y="232">(argocd app delete --cascade=false)</text>
+  <text class="mb" x="368" y="250">Deployment, Service: kept</text>
+  <rect class="w" x="20" y="282" width="320" height="92" rx="6"/>
+  <text class="tb" x="32" y="302">Stuck: a resource cannot be deleted</text>
+  <rect class="s" x="356" y="282" width="464" height="92" rx="6"/>
+  <text class="c" x="368" y="302">ConfigMap with finalizer example.com/never-finishes</text>
+  <text class="c" x="368" y="320">app and ConfigMap both keep a deletionTimestamp</text>
+  <text class="c" x="368" y="338">remove the app finalizer: app released, CM left</text>
+  <text class="mb" x="368" y="356">fix the blocker, or release the app</text>
+</svg>
