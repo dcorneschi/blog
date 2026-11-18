@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 342" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What each check catches</title>
+  <desc id="d">Three broken files. A typo replica: 3 passes yamllint and the client dry run; the server dry run fails with strict decoding error unknown field spec.replica and kubeconform -strict reports additional properties replica not allowed. A duplicate name key is caught by yamllint and kubeconform, while both kubectl dry runs pass and silently use the second name. A tab fails every check as a YAML syntax error.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="342" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What each check catches</text>
+  <text class="sub" x="20" y="48">The same three broken files through every check</text>
+  <text class="lb" x="250" y="80">TYPO replica: 3</text>
+  <text class="lb" x="440" y="80">DUPLICATE name: KEY</text>
+  <text class="lb" x="650" y="80">TAB INDENT</text>
+  <rect class="n" x="20" y="92" width="210" height="44" rx="6"/>
+  <text class="mb" x="32" y="112">yamllint</text>
+  <text class="bad" x="250" y="119">missed</text>
+  <text class="ok" x="440" y="119">caught</text>
+  <text class="ok" x="650" y="119">caught</text>
+  <rect class="n" x="20" y="146" width="210" height="44" rx="6"/>
+  <text class="mb" x="32" y="166">kubectl --dry-run=client</text>
+  <text class="bad" x="250" y="173">missed</text>
+  <text class="bad" x="440" y="173">missed, used 2nd name</text>
+  <text class="ok" x="650" y="173">caught</text>
+  <rect class="r" x="20" y="200" width="210" height="44" rx="6"/>
+  <text class="mb" x="32" y="220">kubectl --dry-run=server</text>
+  <text class="ok" x="250" y="227">caught</text>
+  <text class="bad" x="440" y="227">missed, used 2nd name</text>
+  <text class="ok" x="650" y="227">caught</text>
+  <rect class="g" x="20" y="254" width="210" height="44" rx="6"/>
+  <text class="mb" x="32" y="274">kubeconform -strict</text>
+  <text class="ok" x="250" y="281">caught</text>
+  <text class="ok" x="440" y="281">caught</text>
+  <text class="ok" x="650" y="281">caught</text>
+  <text class="d" x="20" y="322">Missed = the check said OK. A duplicate key got through both kubectl dry runs; only yamllint and kubeconform saw it.</text>
+</svg>

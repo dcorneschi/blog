@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 290" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Generate, adjust, combine, validate, apply</title>
+  <desc id="d">Step 1 generate with kubectl create and --dry-run=client -o yaml, works offline for most kinds. Step 2 adjust with kubectl set resources, env and image or kubectl patch --local, offline. Step 3 combine the objects with --- lines or use Helm or Kustomize, offline. Step 4 validate: yamllint and kubeconform offline, server-side dry run and kubectl diff need a cluster. Step 5 apply with kubectl apply or commit for GitOps, needs a cluster.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="290" fill="#ffffff"/>
+  <text class="h" x="20" y="28">From nothing to a validated manifest</text>
+  <text class="sub" x="20" y="48">kubectl 1.37: every step up to the schema check works without a cluster</text>
+  <rect class="r" x="20" y="70" width="150" height="40" rx="6"/>
+  <text class="tb" x="32" y="90">1  generate</text>
+  <rect class="s" x="20" y="118" width="150" height="70" rx="6"/>
+  <text class="d" x="32" y="138">kubectl create ... &quot;${do[@]}&quot;</text>
+  <text class="d" x="32" y="154">labels and selector match</text>
+  <path class="lne" d="M170,90 L182,90"/>
+  <rect class="g" x="184" y="70" width="150" height="40" rx="6"/>
+  <text class="tb" x="196" y="90">2  adjust</text>
+  <rect class="s" x="184" y="118" width="150" height="70" rx="6"/>
+  <text class="d" x="196" y="138">kubectl set resources,</text>
+  <text class="d" x="196" y="154">env, image; patch --local</text>
+  <path class="lne" d="M334,90 L346,90"/>
+  <rect class="g" x="348" y="70" width="150" height="40" rx="6"/>
+  <text class="tb" x="360" y="90">3  combine</text>
+  <rect class="s" x="348" y="118" width="150" height="70" rx="6"/>
+  <text class="d" x="360" y="138">objects joined with ---</text>
+  <text class="d" x="360" y="154">or Helm / Kustomize</text>
+  <path class="lne" d="M498,90 L510,90"/>
+  <rect class="rw" x="512" y="70" width="150" height="40" rx="6"/>
+  <text class="tb" x="524" y="90">4  validate</text>
+  <rect class="s" x="512" y="118" width="150" height="70" rx="6"/>
+  <text class="d" x="524" y="138">yamllint, kubeconform,</text>
+  <text class="d" x="524" y="154">server dry run, diff</text>
+  <path class="lne" d="M662,90 L674,90"/>
+  <rect class="w" x="676" y="70" width="150" height="40" rx="6"/>
+  <text class="tb" x="688" y="90">5  apply</text>
+  <rect class="s" x="676" y="118" width="150" height="70" rx="6"/>
+  <text class="d" x="688" y="138">kubectl apply -f app.yaml</text>
+  <text class="d" x="688" y="154">or commit for GitOps</text>
+  <rect class="g" x="20" y="206" width="560" height="30" rx="6"/><text class="c" x="32" y="226">offline: generators (most), kubectl set/patch --local, yamllint, kubeconform</text>
+  <rect class="w" x="512" y="246" width="308" height="30" rx="6"/><text class="c" x="524" y="266">needs a cluster: server dry run, diff, apply</text>
+</svg>
