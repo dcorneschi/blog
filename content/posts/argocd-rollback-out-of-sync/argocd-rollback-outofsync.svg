@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 404" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What argocd app rollback changes</title>
+  <desc id="d">The Git branch has two commits: 6865767 with image argocd-e2e-container:0.2 and the newer 8088f4c with image gb-frontend:v5, which is the branch tip. The Application spec says targetRevision HEAD, which resolves to 8088f4c: the desired state, recorded in status.sync.revision. argocd app rollback guestbook 0 runs a one-off sync of history entry 0 and deploys 6865767 to the cluster, recorded in status.operationState.syncResult.revision and as a new history entry 2. The spec is not changed. Argo CD compares the live cluster, running 6865767, with the desired state at 8088f4c, finds a difference in the image, and reports OutOfSync from HEAD (8088f4c) while the operation phase is Succeeded.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c92a2a"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #c92a2a; stroke-width: 1.6; fill: none; marker-end: url(#ax); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .red { font-size: 12px; font-weight: 700; fill: #c92a2a; }
+      .grn { font-size: 12px; font-weight: 700; fill: #2b8a3e; }
+    </style>
+  </defs>
+  <rect width="840" height="404" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What argocd app rollback changes, and why the app turns OutOfSync</text>
+  <text class="sub" x="20" y="48">guestbook from argoproj/argocd-example-apps, Argo CD v3.6.1</text>
+  <text class="lb" x="20" y="80">GIT BRANCH</text>
+  <rect class="n" x="20" y="90" width="230" height="50" rx="6"/>
+  <text class="mb" x="32" y="110">6865767</text>
+  <text class="ms" x="32" y="127">image argocd-e2e-container:0.2</text>
+  <path class="lne" d="M135,140 L135,160"/>
+  <rect class="n" x="20" y="162" width="230" height="50" rx="6"/>
+  <text class="mb" x="32" y="182">8088f4c  (branch tip)</text>
+  <text class="ms" x="32" y="199">image gb-frontend:v5</text>
+  <text class="lb" x="300" y="80">APPLICATION SPEC (UNCHANGED)</text>
+  <rect class="r" x="300" y="90" width="250" height="66" rx="6"/>
+  <text class="m" x="312" y="110">spec.source.targetRevision: HEAD</text>
+  <text class="d" x="312" y="127">resolves to 8088f4c: desired state</text>
+  <text class="ms" x="312" y="144">status.sync.revision = 8088f4c</text>
+  <path class="lne" d="M300,123 C270,123 275,187 252,187"/>
+  <text class="lb" x="300" y="200">ROLLBACK</text>
+  <rect class="w" x="300" y="210" width="250" height="66" rx="6"/>
+  <text class="m" x="312" y="230">argocd app rollback guestbook 0</text>
+  <text class="d" x="312" y="247">one-off sync of history entry 0</text>
+  <text class="ms" x="312" y="264">new history entry 2 = 6865767</text>
+  <path class="lne" d="M252,115 C276,115 276,243 298,243"/>
+  <text class="lb" x="600" y="200">LIVE CLUSTER</text>
+  <rect class="g" x="600" y="210" width="220" height="66" rx="6"/>
+  <text class="mb" x="612" y="230">runs 6865767</text>
+  <text class="ms" x="612" y="247">argocd-e2e-container:0.2</text>
+  <text class="ms" x="612" y="264">syncResult.revision = 6865767</text>
+  <path class="lne" d="M550,243 L598,243"/>
+  <rect class="x" x="600" y="90" width="220" height="66" rx="6"/>
+  <text class="red" x="612" y="110">OutOfSync from HEAD (8088f4c)</text>
+  <text class="d" x="612" y="127">operation phase: Succeeded</text>
+  <text class="d" x="612" y="144">refresh changes nothing</text>
+  <path class="lnx" d="M550,123 L598,123"/>
+  <path class="lnx" d="M710,210 L710,158"/>
+  <text class="d" x="718" y="190">compare</text>
+  <text class="ms" x="300" y="306">argocd app diff:  &lt; live image: …argocd-e2e-container:0.2</text>
+  <text class="ms" x="420" y="322">&gt; Git   image: gcr.io/google-samples/gb-frontend:v5</text>
+  <rect class="n" x="20" y="344" width="800" height="44" rx="6"/>
+  <text class="c" x="32" y="364">The rollback changes the cluster, never the spec or Git. The next sync to the spec, auto-sync turned back on, or a rollback</text>
+  <text class="c" x="32" y="381">without an ID brings 8088f4c back. A git revert or a pinned targetRevision makes the old version the desired state.</text>
+</svg>

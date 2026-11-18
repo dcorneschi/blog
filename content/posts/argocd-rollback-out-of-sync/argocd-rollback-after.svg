@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 444" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">After an Argo CD rollback</title>
+  <desc id="d">History of the guestbook app: entry 0 at 6865767, entry 1 at HEAD 8088f4c, entry 2 the rollback to 6865767, state OutOfSync from HEAD. Paths that undo the rollback and bring 8088f4c back: argocd app sync or the Sync button; turning auto-sync back on; argocd app rollback without an ID, which went to entry 1 and added entry 3 HEAD 8088f4c. kubectl rollout undo with self-heal on is reverted in under a second by a partial sync that adds no history entry. Paths that make the rollback stick: git revert of the bad commit and push, after which the app showed Synced to HEAD 889240a and auto-sync can go back on; or pinning targetRevision to the good commit, after which the app is Synced.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#c92a2a"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2b8a3e"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnx { stroke: #c92a2a; stroke-width: 1.6; fill: none; marker-end: url(#ax); }
+      .lng { stroke: #2b8a3e; stroke-width: 1.6; fill: none; marker-end: url(#ag); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .red { font-size: 12px; font-weight: 700; fill: #c92a2a; }
+      .grn { font-size: 12px; font-weight: 700; fill: #2b8a3e; }
+    </style>
+  </defs>
+  <rect width="840" height="444" fill="#ffffff"/>
+  <text class="h" x="20" y="28">After a rollback: what undoes it, what makes it stick</text>
+  <text class="sub" x="20" y="48">History entries and status as observed on Argo CD v3.6.1</text>
+  <text class="lb" x="20" y="80">STATUS.HISTORY</text>
+  <rect class="n" x="20" y="90" width="330" height="32" rx="5"/>
+  <circle class="num" cx="38" cy="106" r="10"/><text class="numt" x="38" y="110">0</text>
+  <text class="mb" x="56" y="111">6865767</text><text class="d" x="190" y="111">first sync</text>
+  <rect class="n" x="20" y="128" width="330" height="32" rx="5"/>
+  <circle class="num" cx="38" cy="144" r="10"/><text class="numt" x="38" y="148">1</text>
+  <text class="mb" x="56" y="149">HEAD (8088f4c)</text><text class="d" x="190" y="149">bad version</text>
+  <rect class="w" x="20" y="166" width="330" height="32" rx="5"/>
+  <circle class="num" cx="38" cy="182" r="10"/><text class="numt" x="38" y="186">2</text>
+  <text class="mb" x="56" y="187">6865767</text><text class="d" x="190" y="187">rollback to entry 0</text>
+  <rect class="x" x="20" y="208" width="330" height="44" rx="6"/>
+  <text class="red" x="32" y="228">OutOfSync from HEAD (8088f4c)</text>
+  <text class="d" x="32" y="245">live 6865767, desired 8088f4c</text>
+  <text class="lb" x="420" y="80">UNDOES THE ROLLBACK: 8088F4C IS BACK</text>
+  <rect class="x" x="420" y="90" width="400" height="44" rx="6"/>
+  <text class="m" x="432" y="110">argocd app sync, or Sync in the UI</text>
+  <text class="d" x="432" y="127">new entry: HEAD (8088f4c)</text>
+  <path class="lnx" d="M352,230 C385,230 385,112 418,112"/>
+  <rect class="x" x="420" y="142" width="400" height="44" rx="6"/>
+  <text class="m" x="432" y="162">argocd app set --sync-policy automated</text>
+  <text class="d" x="432" y="179">synced to HEAD within seconds</text>
+  <path class="lnx" d="M352,230 C385,230 385,164 418,164"/>
+  <rect class="x" x="420" y="194" width="400" height="44" rx="6"/>
+  <text class="m" x="432" y="214">argocd app rollback guestbook   (no ID)</text>
+  <text class="d" x="432" y="231">goes to entry 1: entry 3 = HEAD (8088f4c)</text>
+  <path class="lnx" d="M352,230 C385,230 385,216 418,216"/>
+  <rect class="x" x="420" y="246" width="400" height="44" rx="6"/>
+  <text class="m" x="432" y="266">kubectl rollout undo, self-heal on</text>
+  <text class="d" x="432" y="283">reverted in 0.4 s, no history entry</text>
+  <path class="lnx" d="M352,230 C385,230 385,268 418,268"/>
+  <text class="lb" x="420" y="318">MAKES IT STICK: THE OLD VERSION BECOMES DESIRED</text>
+  <rect class="g" x="420" y="328" width="400" height="44" rx="6"/>
+  <text class="m" x="432" y="348">git revert &lt;bad-commit&gt; &amp;&amp; git push</text>
+  <text class="d" x="432" y="365">Synced to HEAD (889240a); auto-sync can go back on</text>
+  <path class="lng" d="M352,230 C385,230 385,350 418,350"/>
+  <rect class="g" x="420" y="380" width="400" height="44" rx="6"/>
+  <text class="m" x="432" y="400">argocd app set --revision &lt;good-commit&gt;</text>
+  <text class="d" x="432" y="417">Synced; in Git too if a parent manages the app</text>
+  <path class="lng" d="M352,230 C385,230 385,402 418,402"/>
+</svg>
