@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 372" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">What still works when a component stops</title>
+  <desc id="d">kube-apiserver stopped: kubectl fails with connection refused; the app still answers on its pod IP and its Service IP; the scheduler and controller manager restart after Leaderelection lost. etcd stopped: kubectl times out and readyz reports etcd failed; the app still answers on pod and Service IP; no changes are possible. kubelet stopped on one worker: kubectl works; the container keeps running and answering; the node becomes NotReady after about a minute and gets the unreachable taints, and pods are evicted only after their 300 second toleration.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="372" fill="#ffffff"/>
+  <text class="h" x="20" y="28">What still works when a component stops</text>
+  <text class="sub" x="20" y="48">Checked from another node with curl to the pod IP and the Service IP</text>
+  <text class="lb" x="260" y="80">KUBECTL</text>
+  <text class="lb" x="420" y="80">POD IP</text>
+  <text class="lb" x="530" y="80">SERVICE IP</text>
+  <text class="lb" x="640" y="80">WHAT STOPS</text>
+  <rect class="x" x="20" y="92" width="225" height="56" rx="6"/>
+  <text class="mb" x="32" y="112">kube-apiserver</text>
+  <text class="d" x="32" y="128">stopped</text>
+  <text class="bad" x="260" y="116">fails</text>
+  <text class="ms" x="260" y="132">connection refused</text>
+  <text class="ok" x="420" y="116">answers</text><text class="ok" x="530" y="116">answers</text>
+  <text class="d" x="640" y="116">changes; scheduler and controllers</text><text class="d" x="640" y="132">restart (Leaderelection lost)</text>
+  <rect class="x" x="20" y="162" width="225" height="56" rx="6"/>
+  <text class="mb" x="32" y="182">etcd</text>
+  <text class="d" x="32" y="198">stopped</text>
+  <text class="bad" x="260" y="186">fails</text>
+  <text class="ms" x="260" y="202">Client.Timeout exceeded</text>
+  <text class="ok" x="420" y="186">answers</text><text class="ok" x="530" y="186">answers</text>
+  <text class="d" x="640" y="186">changes; /readyz: [-]etcd failed</text><text class="d" x="640" y="202"></text>
+  <rect class="w" x="20" y="232" width="225" height="56" rx="6"/>
+  <text class="mb" x="32" y="252">kubelet on one worker</text>
+  <text class="d" x="32" y="268">stopped</text>
+  <text class="ok" x="260" y="256">works</text>
+  <text class="ok" x="420" y="256">answers</text><text class="ok" x="530" y="256">answers</text>
+  <text class="d" x="640" y="256">node NotReady after ~1 min;</text><text class="d" x="640" y="272">eviction after 300 s toleration</text>
+  <rect class="g" x="20" y="308" width="800" height="48" rx="6"/>
+  <text class="c" x="32" y="328">Running containers, pod networking and the iptables rules for Services live on the nodes. The control plane is needed</text>
+  <text class="c" x="32" y="344">to change, heal or reschedule anything; HA for the API server and etcd protects that, not the running apps.</text>
+</svg>

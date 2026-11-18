@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 604" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Kubernetes architecture</title>
+  <desc id="d">Control plane node: kube-apiserver in the centre, etcd behind it, kube-scheduler and kube-controller-manager as clients of the API server, and optionally a cloud-controller-manager that also talks to the cloud provider API. These run as static pods from /etc/kubernetes/manifests, started by the kubelet on that node. Users and kubectl talk to the API server on port 6443. Two worker nodes, each with the kubelet and containerd as systemd services, kube-proxy and the CNI plugin as DaemonSet pods, and application pods made of a pause sandbox and containers. The kubelet watches the API server for pods bound to its node and calls containerd over CRI; kube-proxy watches Services and writes iptables rules; the API server calls the kubelet on port 10250 for logs and exec. Only the API server talks to etcd.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="604" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Kubernetes architecture</text>
+  <text class="sub" x="20" y="48">As found on a kubeadm cluster (Kubernetes 1.37): every arrow is a watch or a request to the API server</text>
+  <rect class="area" x="205" y="66" width="615" height="232" rx="10"/>
+  <text class="lb" x="220" y="88">CONTROL PLANE NODE (STATIC PODS FROM /etc/kubernetes/manifests)</text>
+  <text class="d" x="220" y="106">also runs kubelet, containerd, kube-proxy and Flannel, like a worker</text>
+  <rect class="n" x="20" y="120" width="160" height="52" rx="6"/>
+  <text class="mb" x="32" y="140">kubectl, users</text>
+  <text class="d" x="32" y="156">CI, operators</text>
+  <rect class="r" x="300" y="120" width="240" height="74" rx="6"/>
+  <text class="tb" x="312" y="140">kube-apiserver  :6443</text>
+  <text class="d" x="312" y="156">authn, RBAC, admission,</text>
+  <text class="d" x="312" y="172">validation; the only door to etcd</text>
+  <rect class="rw" x="640" y="120" width="164" height="74" rx="6"/>
+  <text class="tb" x="652" y="140">etcd</text>
+  <text class="d" x="652" y="156">all cluster state</text>
+  <text class="d" x="652" y="172">/registry/... keys</text>
+  <rect class="g" x="222" y="228" width="170" height="52" rx="6"/>
+  <text class="tb" x="234" y="248">kube-scheduler</text>
+  <text class="d" x="234" y="264">assigns pods to nodes</text>
+  <rect class="g" x="410" y="228" width="200" height="52" rx="6"/>
+  <text class="tb" x="422" y="248">kube-controller-manager</text>
+  <text class="d" x="422" y="264">Deployment, ReplicaSet, Node...</text>
+  <rect class="n" x="630" y="228" width="174" height="52" rx="6"/>
+  <text class="tb" x="642" y="248">cloud-controller-mgr</text>
+  <text class="d" x="642" y="264">only on a cloud</text>
+  <path class="lne" d="M180,146 L298,150"/>
+  <path class="lne" d="M540,157 L638,157"/><text class="ms" x="548" y="150">only client</text>
+  <path class="lne" d="M305,228 L305,196"/>
+  <path class="lne" d="M510,228 L510,196"/>
+  <path class="lne" d="M717,228 L520,196"/>
+  <text class="d" x="20" y="200">scheduler and controllers</text><text class="d" x="20" y="214">watch the API and write</text><text class="d" x="20" y="228">their decisions back to it</text>
+  <rect class="area" x="20" y="330" width="395" height="258" rx="10"/>
+  <text class="lb" x="36" y="352">WORKER NODE: K8S-W1</text>
+  <rect class="w" x="36" y="364" width="175" height="66" rx="6"/>
+  <text class="tb" x="48" y="384">kubelet (systemd)</text>
+  <text class="d" x="48" y="400">watches pods for its node,</text>
+  <text class="d" x="48" y="416">probes, volumes, status</text>
+  <rect class="w" x="224" y="364" width="175" height="66" rx="6"/>
+  <text class="tb" x="236" y="384">containerd (systemd)</text>
+  <text class="d" x="236" y="400">CRI: sandboxes and</text>
+  <text class="d" x="236" y="416">containers</text>
+  <rect class="g" x="36" y="442" width="175" height="52" rx="6"/>
+  <text class="tb" x="48" y="462">kube-proxy (DaemonSet)</text>
+  <text class="d" x="48" y="478">Service IPs -&gt; iptables</text>
+  <rect class="g" x="224" y="442" width="175" height="52" rx="6"/>
+  <text class="tb" x="236" y="462">Flannel CNI (DaemonSet)</text>
+  <text class="d" x="236" y="478">pod IPs, VXLAN between nodes</text>
+  <rect class="s" x="36" y="506" width="363" height="66" rx="6"/>
+  <text class="tb" x="48" y="526">Pod</text>
+  <text class="m" x="48" y="542">pause sandbox: network namespace, pod IP</text>
+  <text class="m" x="48" y="558">app containers share it</text>
+  <path class="lne" d="M211,397 L222,397"/>
+  <path class="lnb" d="M120,364 C120,320 380,230 360,196"/>
+  <rect class="area" x="425" y="330" width="395" height="258" rx="10"/>
+  <text class="lb" x="441" y="352">WORKER NODE: K8S-W2</text>
+  <rect class="w" x="441" y="364" width="175" height="66" rx="6"/>
+  <text class="tb" x="453" y="384">kubelet (systemd)</text>
+  <text class="d" x="453" y="400">watches pods for its node,</text>
+  <text class="d" x="453" y="416">probes, volumes, status</text>
+  <rect class="w" x="629" y="364" width="175" height="66" rx="6"/>
+  <text class="tb" x="641" y="384">containerd (systemd)</text>
+  <text class="d" x="641" y="400">CRI: sandboxes and</text>
+  <text class="d" x="641" y="416">containers</text>
+  <rect class="g" x="441" y="442" width="175" height="52" rx="6"/>
+  <text class="tb" x="453" y="462">kube-proxy (DaemonSet)</text>
+  <text class="d" x="453" y="478">Service IPs -&gt; iptables</text>
+  <rect class="g" x="629" y="442" width="175" height="52" rx="6"/>
+  <text class="tb" x="641" y="462">Flannel CNI (DaemonSet)</text>
+  <text class="d" x="641" y="478">pod IPs, VXLAN between nodes</text>
+  <rect class="s" x="441" y="506" width="363" height="66" rx="6"/>
+  <text class="tb" x="453" y="526">Pod</text>
+  <text class="m" x="453" y="542">pause sandbox: network namespace, pod IP</text>
+  <text class="m" x="453" y="558">app containers share it</text>
+  <path class="lne" d="M616,397 L627,397"/>
+  <path class="lnb" d="M525,364 C525,320 460,230 480,196"/>
+  <text class="ms" x="250" y="318">watch</text><text class="ms" x="490" y="318">watch</text>
+</svg>

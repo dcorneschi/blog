@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 520" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">kubeadm init and kubeadm join</title>
+  <desc id="d">kubeadm init on the control plane node runs phases in order: preflight, certs (CA and component certificates in /etc/kubernetes/pki), kubeconfig (admin.conf, controller-manager.conf, scheduler.conf, kubelet.conf), etcd and control-plane (static pod manifests), kubelet-start, wait-control-plane, upload-config (the kubeadm-config and kubelet-config ConfigMaps), mark-control-plane (label and NoSchedule taint), bootstrap-token, and addon (CoreDNS and kube-proxy). kubeadm join on a worker uses the bootstrap token to read cluster-info from kube-public, checks the CA against the discovery hash, writes the kubelet config, and starts the kubelet, which sends a certificate signing request; the controller manager approves it automatically and the kubelet gets its own certificate, CN system:node:name.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="520" fill="#ffffff"/>
+  <text class="h" x="20" y="28">kubeadm init and kubeadm join</text>
+  <text class="sub" x="20" y="48">Phases as printed by kubeadm 1.37.2; what each one leaves on the node or in the API</text>
+  <rect class="area" x="20" y="64" width="400" height="436" rx="10"/>
+  <text class="lb" x="36" y="86">kubeadm init (CONTROL PLANE NODE)</text>
+  <rect class="r" x="36" y="98" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="118">preflight</text>
+  <text class="d" x="190" y="120">checks, pulls images</text>
+  <rect class="r" x="36" y="142" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="162">certs</text>
+  <text class="d" x="190" y="164">/etc/kubernetes/pki: CA + certs</text>
+  <rect class="r" x="36" y="186" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="206">kubeconfig</text>
+  <text class="d" x="190" y="208">*.conf for admin and components</text>
+  <rect class="r" x="36" y="230" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="250">etcd, control-plane</text>
+  <text class="d" x="190" y="252">static pod manifests</text>
+  <rect class="r" x="36" y="274" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="294">kubelet-start</text>
+  <text class="d" x="190" y="296">kubelet starts the static pods</text>
+  <rect class="r" x="36" y="318" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="338">upload-config</text>
+  <text class="d" x="190" y="340">kubeadm-config, kubelet-config CMs</text>
+  <rect class="r" x="36" y="362" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="382">mark-control-plane</text>
+  <text class="d" x="190" y="384">label + NoSchedule taint</text>
+  <rect class="r" x="36" y="406" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="426">bootstrap-token</text>
+  <text class="d" x="190" y="428">join token, cluster-info (for join)</text>
+  <rect class="g" x="36" y="450" width="368" height="36" rx="6"/>
+  <text class="m" x="48" y="470">addon</text>
+  <text class="d" x="190" y="472">CoreDNS, kube-proxy</text>
+  <rect class="area" x="440" y="64" width="380" height="436" rx="10"/>
+  <text class="lb" x="456" y="86">kubeadm join (EACH WORKER)</text>
+  <rect class="n" x="456" y="98" width="348" height="62" rx="6"/>
+  <text class="mb" x="468" y="118">kubeadm join 192.168.104.1:6443</text>
+  <text class="d" x="468" y="134">--token &lt;token&gt;</text>
+  <text class="d" x="468" y="150">--discovery-token-ca-cert-hash sha256:...</text>
+  <path class="lne" d="M630,160 L630,176"/>
+  <rect class="r" x="456" y="178" width="348" height="62" rx="6"/>
+  <text class="mb" x="468" y="198">discovery</text>
+  <text class="d" x="468" y="214">token reads cluster-info (kube-public),</text>
+  <text class="d" x="468" y="230">CA checked against the hash</text>
+  <path class="lne" d="M630,240 L630,256"/>
+  <rect class="w" x="456" y="258" width="348" height="62" rx="6"/>
+  <text class="mb" x="468" y="278">kubelet-start</text>
+  <text class="d" x="468" y="294">config.yaml from kubelet-config,</text>
+  <text class="d" x="468" y="310">bootstrap-kubelet.conf</text>
+  <path class="lne" d="M630,320 L630,336"/>
+  <rect class="g" x="456" y="338" width="348" height="62" rx="6"/>
+  <text class="mb" x="468" y="358">TLS bootstrap</text>
+  <text class="d" x="468" y="374">kubelet sends a CSR as system:bootstrap:...</text>
+  <text class="d" x="468" y="390">controller manager approves and signs</text>
+  <path class="lne" d="M630,400 L630,416"/>
+  <rect class="w" x="456" y="418" width="348" height="62" rx="6"/>
+  <text class="mb" x="468" y="438">node joined</text>
+  <text class="d" x="468" y="454">kubelet-client-current.pem</text>
+  <text class="d" x="468" y="470">CN=system:node:k8s-w1</text>
+  <path class="lnb" d="M404,424 C430,424 430,209 454,209"/>
+</svg>

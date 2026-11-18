@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 492" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How a Deployment travels through the components</title>
+  <desc id="d">kubectl sends the Deployment to the API server, which authenticates, authorizes, admits and stores it in etcd. The deployment controller sees it and creates a ReplicaSet, event ScalingReplicaSet. The ReplicaSet controller creates two pods without a node, event SuccessfulCreate. The scheduler binds one pod to each worker, event Scheduled. The kubelet on each worker sees a pod bound to its node and asks containerd for a pause sandbox, the CNI plugin gives it an IP, and the nginx container starts. The kubelet reports the status: both pods Running 4 seconds after the command. Every step goes through the API server; no component calls another directly.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="492" fill="#ffffff"/>
+  <text class="h" x="20" y="28">A Deployment, step by step</text>
+  <text class="sub" x="20" y="48">kubectl create deployment shop --image=nginx:1.29-alpine --replicas=2; events from the cluster, all at 21:06:40Z</text>
+  <circle class="num" cx="34" cy="92" r="11"/><text class="numt" x="34" y="96">1</text>
+  <rect class="n" x="54" y="70" width="220" height="44" rx="6"/>
+  <text class="mb" x="66" y="90">kubectl</text>
+  <rect class="s" x="286" y="70" width="534" height="44" rx="6"/>
+  <text class="c" x="298" y="90">kubectl create deployment shop --replicas=2</text>
+  <text class="m" x="298" y="106">POST Deployment</text>
+  <path class="lne" d="M164,114 L164,126"/>
+  <circle class="num" cx="34" cy="148" r="11"/><text class="numt" x="34" y="152">2</text>
+  <rect class="r" x="54" y="126" width="220" height="44" rx="6"/>
+  <text class="mb" x="66" y="146">kube-apiserver</text>
+  <rect class="s" x="286" y="126" width="534" height="44" rx="6"/>
+  <text class="c" x="298" y="146">authn, RBAC, admission, store in etcd</text>
+  <text class="m" x="298" y="162">Deployment saved</text>
+  <path class="lne" d="M164,170 L164,182"/>
+  <circle class="num" cx="34" cy="204" r="11"/><text class="numt" x="34" y="208">3</text>
+  <rect class="g" x="54" y="182" width="220" height="44" rx="6"/>
+  <text class="mb" x="66" y="202">deployment-controller</text>
+  <rect class="s" x="286" y="182" width="534" height="44" rx="6"/>
+  <text class="c" x="298" y="202">ScalingReplicaSet</text>
+  <text class="m" x="298" y="218">Scaled up replica set shop-55b8c88c8 from 0 to 2</text>
+  <path class="lne" d="M164,226 L164,238"/>
+  <circle class="num" cx="34" cy="260" r="11"/><text class="numt" x="34" y="264">4</text>
+  <rect class="g" x="54" y="238" width="220" height="44" rx="6"/>
+  <text class="mb" x="66" y="258">replicaset-controller</text>
+  <rect class="s" x="286" y="238" width="534" height="44" rx="6"/>
+  <text class="c" x="298" y="258">SuccessfulCreate (x2)</text>
+  <text class="m" x="298" y="274">Created pod: shop-55b8c88c8-88gdj, -k4qzw (no node)</text>
+  <path class="lne" d="M164,282 L164,294"/>
+  <circle class="num" cx="34" cy="316" r="11"/><text class="numt" x="34" y="320">5</text>
+  <rect class="g" x="54" y="294" width="220" height="44" rx="6"/>
+  <text class="mb" x="66" y="314">default-scheduler</text>
+  <rect class="s" x="286" y="294" width="534" height="44" rx="6"/>
+  <text class="c" x="298" y="314">Scheduled (x2)</text>
+  <text class="m" x="298" y="330">assigned ...-88gdj to k8s-w1, ...-k4qzw to k8s-w2</text>
+  <path class="lne" d="M164,338 L164,350"/>
+  <circle class="num" cx="34" cy="372" r="11"/><text class="numt" x="34" y="376">6</text>
+  <rect class="w" x="54" y="350" width="220" height="44" rx="6"/>
+  <text class="mb" x="66" y="370">kubelet (each worker)</text>
+  <rect class="s" x="286" y="350" width="534" height="44" rx="6"/>
+  <text class="c" x="298" y="370">sees a pod bound to its node</text>
+  <text class="m" x="298" y="386">containerd: pause sandbox, CNI IP, nginx container</text>
+  <path class="lne" d="M164,394 L164,406"/>
+  <circle class="num" cx="34" cy="428" r="11"/><text class="numt" x="34" y="432">7</text>
+  <rect class="w" x="54" y="406" width="220" height="44" rx="6"/>
+  <text class="mb" x="66" y="426">kubelet</text>
+  <rect class="s" x="286" y="406" width="534" height="44" rx="6"/>
+  <text class="c" x="298" y="426">status update</text>
+  <text class="m" x="298" y="442">pods Running 4 s after the command</text>
+  <text class="d" x="20" y="476">Each component only watches the API server and writes back to it; nothing calls another component directly.</text>
+</svg>
