@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 426" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Which job each tool does</title>
+  <desc id="d">Three columns. Write the manifests: plain YAML, Kustomize overlays, a Helm chart with values files. Install and track: kubectl apply with an ApplySet, a Helm release stored as Secrets, Helmfile running Helm for many releases. Keep the cluster equal to Git: Argo CD, which renders Kustomize or Helm itself and applies the YAML, so its Helm apps are not Helm releases; and Flux, whose Kustomization applies Kustomize output and whose HelmRelease runs a real Helm release. Run from CI: kubectl, Helm, Helmfile. Running in the cluster: Argo CD and Flux.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .axis{ stroke: #868e96; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .bar { fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+      .barx{ fill: #e35d6a; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="426" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Three different jobs</text>
+  <text class="sub" x="20" y="48">Helm and Kustomize produce manifests; Argo CD and Flux deliver them</text>
+  <text class="lb" x="20" y="80">WRITE THE MANIFESTS</text>
+  <rect class="n" x="20" y="92" width="240" height="52" rx="6"/>
+  <text class="tb" x="32" y="112">plain YAML</text>
+  <text class="d" x="32" y="128">a full copy per environment</text>
+  <rect class="n" x="20" y="156" width="240" height="52" rx="6"/>
+  <text class="tb" x="32" y="176">Kustomize</text>
+  <text class="d" x="32" y="192">base + overlays, patches</text>
+  <rect class="n" x="20" y="220" width="240" height="52" rx="6"/>
+  <text class="tb" x="32" y="240">Helm chart</text>
+  <text class="d" x="32" y="256">templates + values files</text>
+  <text class="lb" x="300" y="80">INSTALL AND TRACK</text>
+  <rect class="w" x="300" y="92" width="240" height="52" rx="6"/>
+  <text class="tb" x="312" y="112">kubectl apply</text>
+  <text class="d" x="312" y="128">+ ApplySet to prune</text>
+  <rect class="w" x="300" y="156" width="240" height="52" rx="6"/>
+  <text class="tb" x="312" y="176">Helm release</text>
+  <text class="d" x="312" y="192">one Secret per revision</text>
+  <rect class="w" x="300" y="220" width="240" height="52" rx="6"/>
+  <text class="tb" x="312" y="240">Helmfile</text>
+  <text class="d" x="312" y="256">many Helm releases, one file</text>
+  <text class="lb" x="580" y="80">KEEP CLUSTER = GIT</text>
+  <rect class="g" x="580" y="92" width="240" height="52" rx="6"/>
+  <text class="tb" x="592" y="112">Argo CD</text>
+  <text class="d" x="592" y="128">renders Kustomize or Helm itself</text>
+  <rect class="g" x="580" y="156" width="240" height="52" rx="6"/>
+  <text class="tb" x="592" y="176">Flux</text>
+  <text class="d" x="592" y="192">Kustomization or HelmRelease</text>
+  <path class="lne" d="M260,118 C282,118 278,118 298,118"/>
+  <path class="lne" d="M260,182 C282,182 278,126 298,126"/>
+  <path class="lne" d="M260,246 C282,246 278,182 298,182"/>
+  <path class="lne" d="M260,254 C282,254 278,246 298,246"/>
+  <rect class="g" x="580" y="220" width="240" height="72" rx="6"/>
+  <text class="c" x="592" y="240">Both read Kustomize overlays and</text>
+  <text class="c" x="592" y="256">Helm charts straight from Git.</text>
+  <text class="d" x="592" y="272">Argo CD: helm template, no release;</text>
+  <text class="d" x="592" y="288">Flux HelmRelease: a real release</text>
+  <rect class="n" x="20" y="340" width="520" height="44" rx="6"/>
+  <text class="c" x="32" y="360">Run from CI or a laptop: kubectl, Helm, Helmfile. Nothing in the cluster watches</text>
+  <text class="c" x="32" y="376">for changes; a manual edit stays until the next deploy.</text>
+  <rect class="g" x="580" y="340" width="240" height="44" rx="6"/>
+  <text class="c" x="592" y="360">Run in the cluster: watch Git and</text>
+  <text class="c" x="592" y="376">the cluster, revert manual edits.</text>
+  <text class="d" x="20" y="410">Arrows: what feeds what when you deploy from CI.</text>
+</svg>

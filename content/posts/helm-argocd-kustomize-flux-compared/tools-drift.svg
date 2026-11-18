@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 362" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">How fast each tool undid a manual kubectl scale</title>
+  <desc id="d">After kubectl scale --replicas=5 on a Deployment that should have 3 replicas: Argo CD with self-heal reverted both its Kustomize and its Helm app in 2 seconds. Flux Kustomization with a 1 minute interval reverted it at 15 seconds, which can be anywhere from 0 to 60 seconds. Flux HelmRelease with drift detection enabled reverted it after 28 seconds; with the default settings it was not reverted after 90 seconds. kubectl apply only resets it at the next apply. With Helm 4 the next helm upgrade fails with a server-side apply conflict on .spec.replicas.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .axis{ stroke: #868e96; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .bar { fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+      .barx{ fill: #e35d6a; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="362" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Who undoes a manual kubectl scale --replicas=5, and when</text>
+  <text class="sub" x="20" y="48">Desired replicas 3; seconds until the Deployment was back at 3, sampled every 2 s</text>
+  <line class="tick" x1="300.0" y1="70" x2="300.0" y2="322"/>
+  <text class="d" x="300.0" y="336" text-anchor="middle">0 s</text>
+  <line class="tick" x1="383.3333333333333" y1="70" x2="383.3333333333333" y2="322"/>
+  <text class="d" x="383.3333333333333" y="336" text-anchor="middle">10 s</text>
+  <line class="tick" x1="466.66666666666663" y1="70" x2="466.66666666666663" y2="322"/>
+  <text class="d" x="466.66666666666663" y="336" text-anchor="middle">20 s</text>
+  <line class="tick" x1="550.0" y1="70" x2="550.0" y2="322"/>
+  <text class="d" x="550.0" y="336" text-anchor="middle">30 s</text>
+  <line class="tick" x1="633.3333333333333" y1="70" x2="633.3333333333333" y2="322"/>
+  <text class="d" x="633.3333333333333" y="336" text-anchor="middle">40 s</text>
+  <line class="tick" x1="716.6666666666667" y1="70" x2="716.6666666666667" y2="322"/>
+  <text class="d" x="716.6666666666667" y="336" text-anchor="middle">50 s</text>
+  <line class="tick" x1="800.0" y1="70" x2="800.0" y2="322"/>
+  <text class="d" x="800.0" y="336" text-anchor="middle">60 s</text>
+  <text class="c" x="20" y="92">Argo CD, Kustomize app (self-heal)</text>
+  <rect class="bar" x="300" y="80" width="16.666666666666686" height="16" rx="3"/>
+  <text class="d" x="324.6666666666667" y="92">2 s</text>
+  <text class="c" x="20" y="128">Argo CD, Helm app (self-heal)</text>
+  <rect class="bar" x="300" y="116" width="16.666666666666686" height="16" rx="3"/>
+  <text class="d" x="324.6666666666667" y="128">2 s</text>
+  <text class="c" x="20" y="164">Flux Kustomization (interval 1m)</text>
+  <rect class="barg" x="300" y="152" width="125.0" height="16" rx="3"/>
+  <text class="d" x="433.0" y="164">15 s (anywhere 0-60 s)</text>
+  <text class="c" x="20" y="200">Flux HelmRelease, driftDetection enabled</text>
+  <rect class="barg" x="300" y="188" width="233.33333333333337" height="16" rx="3"/>
+  <text class="d" x="541.3333333333334" y="200">28 s, DriftCorrected</text>
+  <text class="c" x="20" y="236">Flux HelmRelease, default</text>
+  <rect class="barx" x="300" y="230" width="500" height="4" rx="2" opacity=".6"/>
+  <text class="d" x="308" y="226">not reverted after 90 s</text>
+  <text class="c" x="20" y="272">kubectl apply / apply -k</text>
+  <rect class="barw" x="300" y="266" width="500" height="4" rx="2" opacity=".6"/>
+  <text class="d" x="308" y="262">only at the next apply</text>
+  <text class="c" x="20" y="308">Helm 4 (server-side apply)</text>
+  <rect class="barx" x="300" y="302" width="500" height="4" rx="2" opacity=".6"/>
+  <text class="d" x="308" y="298">next upgrade fails: conflict on .spec.replicas</text>
+</svg>

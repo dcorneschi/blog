@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 416" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Choosing a combination of tools</title>
+  <desc id="d">Two questions. How do you write the manifests: for third-party software use the vendor Helm chart; for your own app with small differences between environments use Kustomize overlays; for an app shipped to others or with many options use a Helm chart. How do they reach the cluster: if the cluster must stay equal to Git, use Argo CD, which adds a UI and app-level controls, or Flux, which is all Kubernetes objects; both render Kustomize and Helm. Otherwise deploy from CI: kubectl apply -k with --prune --applyset, helm upgrade --install with --force-conflicts on Helm 4, or Helmfile for many Helm releases.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .tick{ stroke: #dee2e6; stroke-width: 1; }
+      .axis{ stroke: #868e96; stroke-width: 1; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .bar { fill: #6ea8fe; }
+      .barg{ fill: #75b798; }
+      .barw{ fill: #fd9843; }
+      .barx{ fill: #e35d6a; }
+      .yes { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .no  { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="416" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Choosing: two separate questions</text>
+  <text class="sub" x="20" y="48">Pick one answer from each side; Argo CD and Flux work with both Kustomize and Helm</text>
+  <text class="lb" x="20" y="82">1. HOW DO YOU WRITE THE MANIFESTS?</text>
+  <rect class="s" x="20" y="94" width="220" height="52" rx="6"/>
+  <text class="c" x="32" y="114">Third-party software</text>
+  <text class="d" x="32" y="130">ingress, cert-manager, databases</text>
+  <path class="lne" d="M240,120 L256,120"/>
+  <rect class="w" x="258" y="102" width="160" height="36" rx="6"/>
+  <text class="mb" x="270" y="122">vendor Helm chart</text>
+  <rect class="s" x="20" y="160" width="220" height="52" rx="6"/>
+  <text class="c" x="32" y="180">Your own app, small env differences</text>
+  <text class="d" x="32" y="196">replicas, image tag, a few values</text>
+  <path class="lne" d="M240,186 L256,186"/>
+  <rect class="g" x="258" y="168" width="160" height="36" rx="6"/>
+  <text class="mb" x="270" y="188">Kustomize overlays</text>
+  <rect class="s" x="20" y="226" width="220" height="52" rx="6"/>
+  <text class="c" x="32" y="246">Shipped to others, many options</text>
+  <text class="d" x="32" y="262">users set values you can&#x27;t predict</text>
+  <path class="lne" d="M240,252 L256,252"/>
+  <rect class="w" x="258" y="234" width="160" height="36" rx="6"/>
+  <text class="mb" x="270" y="254">Helm chart</text>
+  <text class="lb" x="440" y="82">2. HOW DO THEY REACH THE CLUSTER?</text>
+  <rect class="s" x="440" y="94" width="380" height="52" rx="6"/>
+  <text class="c" x="452" y="114">Must the cluster stay equal to Git, with changes</text>
+  <text class="c" x="452" y="130">reviewed in pull requests and manual edits reverted?</text>
+  <path class="lne" d="M540,146 L540,176"/><text class="yes" x="548" y="166">YES</text>
+  <rect class="g" x="440" y="178" width="180" height="66" rx="6"/>
+  <text class="mb" x="452" y="198">Argo CD</text>
+  <text class="d" x="452" y="214">UI, app-level RBAC,</text>
+  <text class="d" x="452" y="230">self-heal in seconds</text>
+  <rect class="g" x="640" y="178" width="180" height="66" rx="6"/>
+  <text class="mb" x="652" y="198">Flux</text>
+  <text class="d" x="652" y="214">Kubernetes objects only,</text>
+  <text class="d" x="652" y="230">reconciles at an interval</text>
+  <path class="lne" d="M720,146 L720,176"/><text class="yes" x="728" y="166">YES</text>
+  <path class="lne" d="M800,146 C830,200 830,270 812,290"/><text class="no" x="826" y="200" text-anchor="end">NO</text>
+  <rect class="w" x="440" y="292" width="380" height="104" rx="6"/>
+  <text class="c" x="452" y="312">Deploy from CI:</text>
+  <text class="m" x="452" y="328">kubectl apply -k ... --prune --applyset=&lt;name&gt;</text>
+  <text class="m" x="452" y="344">helm upgrade --install ... --force-conflicts</text>
+  <text class="m" x="452" y="360">helmfile -e prod apply</text>
+  <text class="d" x="452" y="376">manual edits stay until the next deploy</text>
+  <rect class="n" x="20" y="300" width="390" height="96" rx="6"/>
+  <text class="c" x="32" y="320">Common combinations</text>
+  <text class="d" x="32" y="336">Argo CD or Flux + Kustomize for in-house apps</text>
+  <text class="d" x="32" y="352">Argo CD or Flux + vendor Helm charts</text>
+  <text class="d" x="32" y="368">often both in the same repository</text>
+  <text class="d" x="32" y="384">CI + Helmfile when nothing may run in the cluster</text>
+</svg>
