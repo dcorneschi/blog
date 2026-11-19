@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 476" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Troubleshooting order</title>
+  <desc id="d">Start with kubectl get pods and read the STATUS. Pending: look at FailedScheduling events and the PVC. ErrImagePull or ImagePullBackOff: the Failed to pull image event tells not found, no credentials or wrong credentials. Error or CrashLoopBackOff: read the exit code, then kubectl logs; 137 means SIGKILL, usually the memory limit, confirmed in the node kernel log. Running but 0/1: readiness probe failed. Running and ready but the Service does not answer: EndpointSlices and selector, then DNS. Many pods Pending or Evicted, or a node NotReady: describe node conditions and the kubelet journal.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="476" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Read the STATUS, then go to one place</text>
+  <text class="sub" x="20" y="48">kubectl get pods -o wide is always the first command</text>
+  <rect class="n" x="300" y="64" width="240" height="40" rx="6"/>
+  <text class="mb" x="312" y="84">kubectl get pods -o wide</text>
+  <rect class="r" x="20" y="122" width="230" height="50" rx="6"/>
+  <text class="tb" x="32" y="142">Pending</text>
+  <rect class="s" x="262" y="122" width="558" height="50" rx="6"/>
+  <text class="m" x="274" y="142">kubectl events --for pod/&lt;pod&gt;</text>
+  <text class="d" x="274" y="158">FailedScheduling: requests, taints, selector, PVC</text>
+  <path class="lne" d="M250,147 L260,147"/>
+  <rect class="rw" x="20" y="180" width="230" height="50" rx="6"/>
+  <text class="tb" x="32" y="200">ErrImagePull / ImagePullBackOff</text>
+  <rect class="s" x="262" y="180" width="558" height="50" rx="6"/>
+  <text class="m" x="274" y="200">describe pod: Failed to pull image</text>
+  <text class="d" x="274" y="216">not found / anonymous token / oauth token</text>
+  <path class="lne" d="M250,205 L260,205"/>
+  <rect class="x" x="20" y="238" width="230" height="50" rx="6"/>
+  <text class="tb" x="32" y="258">Error / CrashLoopBackOff</text>
+  <rect class="s" x="262" y="238" width="558" height="50" rx="6"/>
+  <text class="m" x="274" y="258">Exit Code, then kubectl logs</text>
+  <text class="d" x="274" y="274">exit 1: app config; 137: memory limit</text>
+  <path class="lne" d="M250,263 L260,263"/>
+  <rect class="w" x="20" y="296" width="230" height="50" rx="6"/>
+  <text class="tb" x="32" y="316">Running, 0/1</text>
+  <rect class="s" x="262" y="296" width="558" height="50" rx="6"/>
+  <text class="m" x="274" y="316">describe pod: Readiness probe failed</text>
+  <text class="d" x="274" y="332">endpoint ready=false, no traffic</text>
+  <path class="lne" d="M250,321 L260,321"/>
+  <rect class="g" x="20" y="354" width="230" height="50" rx="6"/>
+  <text class="tb" x="32" y="374">Running, Service fails</text>
+  <rect class="s" x="262" y="354" width="558" height="50" rx="6"/>
+  <text class="m" x="274" y="374">get endpointslices, describe svc</text>
+  <text class="d" x="274" y="390">selector mismatch, then nslookup</text>
+  <path class="lne" d="M250,379 L260,379"/>
+  <rect class="n" x="20" y="412" width="230" height="50" rx="6"/>
+  <text class="tb" x="32" y="432">Pods Evicted / node NotReady</text>
+  <rect class="s" x="262" y="412" width="558" height="50" rx="6"/>
+  <text class="m" x="274" y="432">describe node, journalctl -u kubelet</text>
+  <text class="d" x="274" y="448">DiskPressure evicts, NotReady after ~50 s</text>
+  <path class="lne" d="M250,437 L260,437"/>
+  <path class="dash" d="M420,104 L420,120"/>
+</svg>

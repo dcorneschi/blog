@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 282" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">kubectl debug modes</title>
+  <desc id="d">Ephemeral container: kubectl debug pod -it --image --target adds a container to the running pod, shares its network and, with target, its processes; no restart; stays in the pod spec. Copy: kubectl debug pod --copy-to with a new command creates a new pod with the same spec, no labels, so no Service traffic. Node: kubectl debug node creates a privileged pod with host PID and network and the host filesystem under /host; chroot /host to use systemctl, journalctl and crictl; the pod is left behind.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="282" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Three ways to get a shell with tools</text>
+  <text class="sub" x="20" y="48">kubectl debug, Kubernetes 1.37</text>
+  <rect class="g" x="20" y="66" width="252" height="40" rx="6"/>
+  <text class="tb" x="32" y="86">Ephemeral container</text>
+  <rect class="s" x="20" y="114" width="252" height="124" rx="6"/>
+  <text class="m" x="32" y="134">kubectl debug &lt;pod&gt; --target</text>
+  <text class="c" x="32" y="156">added to the running pod</text>
+  <text class="c" x="32" y="178">same network; with --target</text>
+  <text class="c" x="32" y="200">same processes, /proc/1/root</text>
+  <text class="c" x="32" y="222">no restart; stays in spec</text>
+  <rect class="r" x="294" y="66" width="252" height="40" rx="6"/>
+  <text class="tb" x="306" y="86">Copy of the pod</text>
+  <rect class="s" x="294" y="114" width="252" height="124" rx="6"/>
+  <text class="m" x="306" y="134">kubectl debug &lt;pod&gt; --copy-to=&lt;new&gt;</text>
+  <text class="c" x="306" y="156">same image and env</text>
+  <text class="c" x="306" y="178">new command (sleep 1d)</text>
+  <text class="c" x="306" y="200">no labels: no Service traffic</text>
+  <text class="c" x="306" y="222">delete it when done</text>
+  <rect class="w" x="568" y="66" width="252" height="40" rx="6"/>
+  <text class="tb" x="580" y="86">Node</text>
+  <rect class="s" x="568" y="114" width="252" height="124" rx="6"/>
+  <text class="m" x="580" y="134">kubectl debug node/&lt;node&gt; -it</text>
+  <text class="c" x="580" y="156">privileged, host PID + network</text>
+  <text class="c" x="580" y="178">host filesystem at /host</text>
+  <text class="c" x="580" y="200">chroot /host; journalctl</text>
+  <text class="c" x="580" y="222">pod is left behind</text>
+  <text class="d" x="20" y="262">Use when: no shell in the image (ephemeral), crash at startup (copy), node or kubelet problem without SSH (node).</text>
+</svg>

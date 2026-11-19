@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 336" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">NotReady versus DiskPressure</title>
+  <desc id="d">Kubelet stopped: the node stops posting status, becomes NotReady after about 50 seconds, all conditions Unknown, taints node.kubernetes.io/unreachable NoSchedule and NoExecute, pods replaced after 300 seconds. DiskPressure: the kubelet is fine and the node stays Ready, condition DiskPressure True, taint node.kubernetes.io/disk-pressure NoSchedule, and the kubelet evicts pods with The node had condition DiskPressure.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="336" fill="#ffffff"/>
+  <text class="h" x="20" y="28">NotReady is not the same as DiskPressure</text>
+  <text class="sub" x="20" y="48">Both tested on a kind worker: kubelet stopped, then eviction threshold raised</text>
+  <rect class="x" x="20" y="66" width="390" height="40" rx="6"/>
+  <text class="tb" x="32" y="86">Kubelet stopped</text>
+  <rect class="s" x="20" y="116" width="390" height="36" rx="6"/>
+  <text class="lb" x="32" y="139">STATUS</text><text class="c" x="140" y="139">NotReady after 52 s</text>
+  <rect class="s" x="20" y="158" width="390" height="36" rx="6"/>
+  <text class="lb" x="32" y="181">CONDITIONS</text><text class="c" x="140" y="181">all Unknown: stopped posting status</text>
+  <rect class="s" x="20" y="200" width="390" height="36" rx="6"/>
+  <text class="lb" x="32" y="223">TAINT</text><text class="c" x="140" y="223">unreachable: NoSchedule, NoExecute</text>
+  <rect class="s" x="20" y="242" width="390" height="36" rx="6"/>
+  <text class="lb" x="32" y="265">PODS</text><text class="c" x="140" y="265">keep running; replaced after 300 s</text>
+  <rect class="s" x="20" y="284" width="390" height="36" rx="6"/>
+  <text class="lb" x="32" y="307">LOOK AT</text><text class="c" x="140" y="307">systemctl status kubelet, journalctl</text>
+  <rect class="w" x="430" y="66" width="390" height="40" rx="6"/>
+  <text class="tb" x="442" y="86">DiskPressure</text>
+  <rect class="s" x="430" y="116" width="390" height="36" rx="6"/>
+  <text class="lb" x="442" y="139">STATUS</text><text class="c" x="550" y="139">stays Ready</text>
+  <rect class="s" x="430" y="158" width="390" height="36" rx="6"/>
+  <text class="lb" x="442" y="181">CONDITIONS</text><text class="c" x="550" y="181">DiskPressure True</text>
+  <rect class="s" x="430" y="200" width="390" height="36" rx="6"/>
+  <text class="lb" x="442" y="223">TAINT</text><text class="c" x="550" y="223">disk-pressure: NoSchedule</text>
+  <rect class="s" x="430" y="242" width="390" height="36" rx="6"/>
+  <text class="lb" x="442" y="265">PODS</text><text class="c" x="550" y="265">Evicted: node had condition</text>
+  <rect class="s" x="430" y="284" width="390" height="36" rx="6"/>
+  <text class="lb" x="442" y="307">LOOK AT</text><text class="c" x="550" y="307">df, du /var/lib/containerd, crictl rmi</text>
+</svg>
