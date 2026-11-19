@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 418" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Strategies measured</title>
+  <desc id="d">Four replicas. Defaults: up to 5 pods, minimum 3 ready, 8 seconds, 4 of 392 requests failed. maxSurge 1 maxUnavailable 0: 5 pods, 4 ready, 16 seconds, 3 of 621 failed. maxSurge 0 maxUnavailable 1: 4 pods, 3 ready, 17 seconds, 6 of 656 failed. maxSurge 100 percent: 8 pods, 4 ready, 5 seconds, 4 of 298 failed. Recreate: 4 pods, 0 ready, 5 seconds, 14 of 186 failed. maxSurge 1 maxUnavailable 0 with preStop sleep 5: 0 of 382 failed.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="418" fill="#ffffff"/>
+  <text class="h" x="20" y="28">Six rollouts of the same 4-replica Deployment</text>
+  <text class="sub" x="20" y="48">Green: ready pods at the lowest point; grey: extra pods at the peak; one request every 50 ms</text>
+  <text class="lb" x="330" y="76">PODS (MIN READY / MAX)</text>
+  <text class="lb" x="610" y="76">TIME</text>
+  <text class="lb" x="680" y="76">FAILED</text>
+  <rect class="r" x="20" y="88" width="300" height="40" rx="6"/>
+  <text class="c" x="32" y="108">Defaults 25% / 25%</text>
+  <rect class="g" x="330" y="96" width="28" height="24" rx="4"/>
+  <rect class="g" x="362" y="96" width="28" height="24" rx="4"/>
+  <rect class="g" x="394" y="96" width="28" height="24" rx="4"/>
+  <rect class="n" x="426" y="96" width="28" height="24" rx="4"/>
+  <rect class="n" x="458" y="96" width="28" height="24" rx="4"/>
+  <text class="mb" x="610" y="114">8 s</text><text class="bad" x="680" y="114">4 / 392</text>
+  <rect class="g" x="20" y="138" width="300" height="40" rx="6"/>
+  <text class="c" x="32" y="158">maxSurge 1, maxUnavailable 0</text>
+  <rect class="g" x="330" y="146" width="28" height="24" rx="4"/>
+  <rect class="g" x="362" y="146" width="28" height="24" rx="4"/>
+  <rect class="g" x="394" y="146" width="28" height="24" rx="4"/>
+  <rect class="g" x="426" y="146" width="28" height="24" rx="4"/>
+  <rect class="n" x="458" y="146" width="28" height="24" rx="4"/>
+  <text class="mb" x="610" y="164">16 s</text><text class="bad" x="680" y="164">3 / 621</text>
+  <rect class="rw" x="20" y="188" width="300" height="40" rx="6"/>
+  <text class="c" x="32" y="208">maxSurge 0, maxUnavailable 1</text>
+  <rect class="g" x="330" y="196" width="28" height="24" rx="4"/>
+  <rect class="g" x="362" y="196" width="28" height="24" rx="4"/>
+  <rect class="g" x="394" y="196" width="28" height="24" rx="4"/>
+  <rect class="n" x="426" y="196" width="28" height="24" rx="4"/>
+  <text class="mb" x="610" y="214">17 s</text><text class="bad" x="680" y="214">6 / 656</text>
+  <rect class="w" x="20" y="238" width="300" height="40" rx="6"/>
+  <text class="c" x="32" y="258">maxSurge 100%, maxUnavailable 0</text>
+  <rect class="g" x="330" y="246" width="28" height="24" rx="4"/>
+  <rect class="g" x="362" y="246" width="28" height="24" rx="4"/>
+  <rect class="g" x="394" y="246" width="28" height="24" rx="4"/>
+  <rect class="g" x="426" y="246" width="28" height="24" rx="4"/>
+  <rect class="n" x="458" y="246" width="28" height="24" rx="4"/>
+  <rect class="n" x="490" y="246" width="28" height="24" rx="4"/>
+  <rect class="n" x="522" y="246" width="28" height="24" rx="4"/>
+  <rect class="n" x="554" y="246" width="28" height="24" rx="4"/>
+  <text class="mb" x="610" y="264">5 s</text><text class="bad" x="680" y="264">4 / 298</text>
+  <rect class="x" x="20" y="288" width="300" height="40" rx="6"/>
+  <text class="c" x="32" y="308">Recreate</text>
+  <rect class="n" x="330" y="296" width="28" height="24" rx="4"/>
+  <rect class="n" x="362" y="296" width="28" height="24" rx="4"/>
+  <rect class="n" x="394" y="296" width="28" height="24" rx="4"/>
+  <rect class="n" x="426" y="296" width="28" height="24" rx="4"/>
+  <text class="mb" x="610" y="314">5 s</text><text class="bad" x="680" y="314">14 / 186</text>
+  <rect class="g" x="20" y="338" width="300" height="40" rx="6"/>
+  <text class="c" x="32" y="358">maxSurge 1, maxUnavailable 0 + preStop sleep 5</text>
+  <rect class="g" x="330" y="346" width="28" height="24" rx="4"/>
+  <rect class="g" x="362" y="346" width="28" height="24" rx="4"/>
+  <rect class="g" x="394" y="346" width="28" height="24" rx="4"/>
+  <rect class="g" x="426" y="346" width="28" height="24" rx="4"/>
+  <rect class="n" x="458" y="346" width="28" height="24" rx="4"/>
+  <text class="mb" x="610" y="364">16 s</text><text class="ok" x="680" y="364">0 / 382</text>
+  <text class="d" x="20" y="400">Green: pods ready at the lowest point. Grey: extra pods that existed at the peak. Only the preStop run lost nothing.</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 230" font-family="Roboto, 'Helvetica Neue', Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">StatefulSet partition</title>
+  <desc id="d">StatefulSet with 3 pods and partition 2: after the update, db-2 runs v2, db-0 and db-1 keep v1. Setting partition to 0 updates db-1 then db-0, in reverse ordinal order, one at a time, each after the previous is Ready. With sleep as PID 1 ignoring SIGTERM the full update took 94 seconds, with a TERM trap 3 seconds.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#495057"/></marker>
+    <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1c7ed6"/></marker>
+    <style>
+      .h   { font-size: 15px; font-weight: 700; fill: #212529; }
+      .sub { font-size: 12px; fill: #495057; }
+      .lb  { font-size: 11px; font-weight: 700; fill: #495057; letter-spacing: .04em; }
+      .tb  { font-size: 13px; font-weight: 700; fill: #212529; }
+      .d   { font-size: 11px; fill: #495057; }
+      .c   { font-size: 11px; fill: #212529; }
+      .m   { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 11px; fill: #212529; }
+      .mb  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 12px; font-weight: 700; fill: #212529; }
+      .ms  { font-family: Menlo, Consolas, 'Liberation Mono', monospace; font-size: 10.5px; fill: #495057; }
+      .lne { stroke: #495057; stroke-width: 1.4; fill: none; marker-end: url(#a); }
+      .lnb { stroke: #1c7ed6; stroke-width: 1.4; fill: none; marker-end: url(#ab); }
+      .dash{ stroke: #868e96; stroke-width: 1.2; stroke-dasharray: 4 3; fill: none; }
+      .area{ fill: #f8f9fa; stroke: #ced4da; stroke-dasharray: 5 4; }
+      .r   { fill: #e7f1ff; stroke: #6ea8fe; }
+      .g   { fill: #e8f5ee; stroke: #75b798; }
+      .w   { fill: #ffe5cc; stroke: #fd9843; }
+      .rw  { fill: #f3effc; stroke: #a98eda; }
+      .x   { fill: #f8d7da; stroke: #e35d6a; }
+      .n   { fill: #f8f9fa; stroke: #dee2e6; }
+      .s   { fill: #ffffff; stroke: #adb5bd; }
+      .num { fill: #495057; }
+      .numt{ font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .ok  { font-size: 11px; font-weight: 700; fill: #2b8a3e; }
+      .bad { font-size: 11px; font-weight: 700; fill: #c92a2a; }
+    </style>
+  </defs>
+  <rect width="840" height="230" fill="#ffffff"/>
+  <text class="h" x="20" y="28">StatefulSet: partition as a built-in canary</text>
+  <text class="sub" x="20" y="48">3 replicas, updated in reverse order, one pod at a time, same names</text>
+  <rect class="n" x="20" y="70" width="150" height="50" rx="6"/>
+  <text class="mb" x="32" y="90">partition: 2</text>
+  <rect class="r" x="190" y="70" width="108" height="50" rx="6"/>
+  <text class="mb" x="202" y="90">db-0</text>
+  <text class="c" x="202" y="106">v1</text>
+  <rect class="r" x="310" y="70" width="108" height="50" rx="6"/>
+  <text class="mb" x="322" y="90">db-1</text>
+  <text class="c" x="322" y="106">v1</text>
+  <rect class="g" x="430" y="70" width="108" height="50" rx="6"/>
+  <text class="mb" x="442" y="90">db-2</text>
+  <text class="c" x="442" y="106">v2</text>
+  <text class="d" x="560" y="100">only ordinals &gt;= 2 update</text>
+  <rect class="n" x="20" y="136" width="150" height="50" rx="6"/>
+  <text class="mb" x="32" y="156">partition: 0</text>
+  <rect class="g" x="190" y="136" width="108" height="50" rx="6"/>
+  <text class="mb" x="202" y="156">db-0</text>
+  <text class="c" x="202" y="172">v2</text>
+  <rect class="g" x="310" y="136" width="108" height="50" rx="6"/>
+  <text class="mb" x="322" y="156">db-1</text>
+  <text class="c" x="322" y="172">v2</text>
+  <rect class="g" x="430" y="136" width="108" height="50" rx="6"/>
+  <text class="mb" x="442" y="156">db-2</text>
+  <text class="c" x="442" y="172">v2</text>
+  <text class="d" x="560" y="166">db-1, then db-0 (reverse order)</text>
+  <text class="d" x="20" y="212">Shutdown time dominates: sleep as PID 1 ignored SIGTERM, 94 s for 3 pods; with a TERM trap, 3 s.</text>
+</svg>
